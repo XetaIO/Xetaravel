@@ -1,7 +1,8 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "xeta/laravel",
+    "description": "A light version of Xeta's website using Laravel.",
+    "keywords": ["Xeta", "framework", "laravel"],
+    "homepage": "https://github.com/XetaIO/XetaLaravel",
     "license": "MIT",
     "type": "project",
     "require": {
