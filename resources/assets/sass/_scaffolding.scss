@@ -1,0 +1,27 @@
+html {
+    position: relative;
+    min-height: 100%;
+    word-wrap: break-word;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+
+    & > .container {
+        padding: 60px 15px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        margin-bottom: 120px;
+
+        &  > .container {
+            padding: 0px 15px 30px;
+        }
+    }
+    .pos-f-t {
+        position: static;
+    }
+}
