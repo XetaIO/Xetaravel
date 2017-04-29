@@ -20,7 +20,7 @@
     <div class="container" style="padding: 250px 0;">
         <div class="row">
             <div class="col-xs-12">
-                <h1>Welcome to Xeta !</h1>
+                <h1>Welcome on <span class="font-xeta">Xeta</span> !</h1>
                 <p class="description">
                     Welcome to my personal website ! I use this site as my personal blog and for try my experiences in development.
                 </p>

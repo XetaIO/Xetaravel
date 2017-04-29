@@ -23,7 +23,7 @@
                 {!! Form::bsCheckbox("remember", null, old('remember'), "Remember Me") !!}
 
                 <div class="form-group text-xs-center">
-                    {!! Form::submit('Login', ['class' => 'btn btn-outline-primary']) !!}
+                    {!! Form::button('<i class="fa fa-sign-in" aria-hidden="true"></i> Login', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>

@@ -6,11 +6,13 @@ use App\Utility\UserUtility;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Eloquence\Behaviours\Sluggable;
 
 class User extends Authenticatable
 {
     use Notifiable,
-        SoftDeletes;
+        SoftDeletes,
+        Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +49,16 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     /**
+     * Return the field to slug.
+     *
+     * @return string
+     */
+    public function slugStrategy()
+    {
+        return 'username';
+    }
+
+    /**
      * Get the comments for the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -66,6 +78,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Article');
     }
 
+    /**
+     * Get the porofile background.
+     *
+     * @return string
+     */
     public function getProfileBackgroundAttribute()
     {
         return UserUtility::getProfileBackground();
@@ -80,5 +97,4 @@ class User extends Authenticatable
     {
         return $this->is_admin;
     }
-
 }

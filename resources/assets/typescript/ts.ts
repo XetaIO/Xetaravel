@@ -2,7 +2,6 @@ declare function $(jQuery): any;
 
 class Xeta
 {
-
     /**
      * The CSRF token used in the application.
      *
@@ -52,7 +51,7 @@ class Xeta
     }
 
     /**
-     * Laught the application initialization.
+     * Launch the application initialization.
      *
      * @method initialize
      *
@@ -60,14 +59,6 @@ class Xeta
      */
     protected initialize(): void
     {
-        $("body").tooltip({
-            selector : "[data-toggle=tooltip]"
-        });
-
-        $("body").popover({
-            selector : "[data-toggle=popover]"
-        });
-
         this.handleScroll();
     }
 

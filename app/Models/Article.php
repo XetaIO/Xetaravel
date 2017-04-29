@@ -15,7 +15,8 @@ class Article extends Model
      *
      * @return array
      */
-    public function countCaches() {
+    public function countCaches()
+    {
         return [
             User::class,
             Category::class

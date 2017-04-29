@@ -3,9 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Eloquence\Behaviours\Sluggable;
 
 class Category extends Model
 {
+    use Sluggable;
+
+    /**
+     * Return the field to slug.
+     *
+     * @return string
+     */
+    public function slugStrategy()
+    {
+        return 'title';
+    }
+
     /**
      * Get the articles for the category.
      */

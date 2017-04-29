@@ -1,6 +1,14 @@
 $(document).ready(function() {
     "use strict";
 
+    $("body").tooltip({
+        selector: "[data-toggle=tooltip]"
+    });
+
+    $("body").popover({
+        selector: "[data-toggle=popover]"
+    });
+
     /**
      * Navbar
      */
@@ -13,7 +21,7 @@ $(document).ready(function() {
         $(document).scroll(function() {
             var scrollStart = $(this).scrollTop();
             if(scrollStart > offset.top) {
-                $(".navbar").attr('style', 'background-color: #9A54B1 !important; border-bottom: 4px solid rgba(0,0,0,0.3);');
+                $(".navbar").attr('style', 'background-color: #f4645f !important; border-bottom: 4px solid rgba(0,0,0,0.3);');
             } else {
                 $('.navbar').attr('style', 'background-color: transparent !important; border-bottom: none;');
             }
@@ -44,5 +52,3 @@ $(document).ready(function() {
         });
     }
 });
-
-//# sourceMappingURL=app.js.map

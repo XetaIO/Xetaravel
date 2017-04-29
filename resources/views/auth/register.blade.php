@@ -32,11 +32,11 @@
 
                 {!! Recaptcha::render() !!}
 
-                {!! Form::bsCheckbox("remember", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
+                {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
 
                 <div class="form-group text-xs-center">
                     <div class="col-md-12">
-                        {!! Form::submit('Register', ['class' => 'btn btn-outline-primary']) !!}
+                        {!! Form::button('<i class="fa fa-user-plus" aria-hidden="true"></i> Register', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                     </div>
                     <div class="col-md-12">
                         <a class="btn btn-link" href="{{ route('users_auth_login') }}">

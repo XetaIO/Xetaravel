@@ -1,5 +1,6 @@
 <?php
 namespace App\Utility;
+
 use Carbon\Carbon;
 
 class UserUtility
@@ -9,21 +10,21 @@ class UserUtility
      *
      * @var string
      */
-    protected static $_prefix = 'images/profile/bg_profile_';
+    protected static $prefix = 'images/profile/bg_profile_';
 
     /**
      * The extension of the background images.
      *
      * @var string
      */
-    protected static $_extension = '.jpg';
+    protected static $extension = '.jpg';
 
     /**
      * The days references with the images name.
      *
      * @var array
      */
-    protected static $_daysReferences = [
+    protected static $daysReferences = [
         '1' => '1',
         '2' => '2',
         '3' => '3',
@@ -67,10 +68,10 @@ class UserUtility
         $now = Carbon::now();
         $day = $now->day;
 
-        if (isset(static::$_daysReferences[$day])) {
-            return static::$_prefix . static::$_daysReferences[$day] . static::$_extension;
+        if (isset(static::$daysReferences[$day])) {
+            return static::$prefix . static::$daysReferences[$day] . static::$extension;
         }
 
-        return static::$_prefix . '1' . static::$_extension;
+        return static::$prefix . '1' . static::$extension;
     }
 }

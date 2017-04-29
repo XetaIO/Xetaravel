@@ -1,0 +1,5 @@
+// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
+{
+    // Optional. The name or path of the coding standard to use. Defaults to the one set in phpcs global config.
+    "phpcs.standard": "PSR2"
+}

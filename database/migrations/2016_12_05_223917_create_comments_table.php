@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\App;
 
 class CreateCommentsTable extends Migration
 {
@@ -19,10 +20,17 @@ class CreateCommentsTable extends Migration
             $table->integer('article_id')->unsigned()->index();
             $table->longText('content');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('article_id')->references('id')->on('articles');
         });
+
+        /**
+         * Only create foreign key on production/development.
+         */
+        if (App::environment() == 'testing') {
+            Schema::table('comments', function (Blueprint $table) {
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('article_id')->references('id')->on('articles');
+            });
+        }
     }
 
     /**
@@ -32,6 +40,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('comments');
     }
 }

@@ -20,6 +20,7 @@ class UserController extends Controller
      */
     public function show(Request $request, $slug, $id)
     {
+        
         // Check if the article exist and if its display.
         $user = User::with('articles', 'comments')
             ->where('id', $id)
@@ -30,8 +31,6 @@ class UserController extends Controller
                 ->route('page_index')
                 ->with('danger', 'This user doesn\'t exist or has been deleted !');
         }
-
-        //dd($user->articles->toArray());
 
         return view('user.show', ['user' => $user]);
     }

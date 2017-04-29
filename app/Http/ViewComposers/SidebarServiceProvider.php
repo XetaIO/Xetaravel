@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-
 class SidebarServiceProvider extends ServiceProvider
 {
     /**

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,13 +51,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $rules = [
             'username' => 'required|min:4|max:20|unique:users',
             'email' => 'required|email|max:50|unique:users',
             'password' => 'required|min:6|confirmed',
-            'remember' => 'required|min:1',
-            'g-recaptcha-response' => 'required|recaptcha'
-        ]);
+            'terms' => 'required|min:1'
+        ];
+
+        // Bipass the captcha for the unit testing.
+        if (App::environment() != 'testing') {
+            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|recaptcha']);
+        }
+
+        return Validator::make($data, $rules);
     }
 
     /**
@@ -74,7 +81,6 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'slug' => str_slug($data['username'], '-'),
             'register_ip' => $ip,
             'last_login_ip' => $ip,
             'last_login' => new \DateTime()
