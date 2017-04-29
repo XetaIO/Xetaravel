@@ -1,5 +1,5 @@
 {
-    "name": "xetaio/xaravel",
+    "name": "xetaio/xetaravel",
     "description": "A light version of Xeta's website using Laravel.",
     "keywords": [
         "Xeta",
@@ -9,12 +9,12 @@
         "blog",
         "administration"
     ],
-    "homepage": "https://github.com/XetaIO/Xaravel",
+    "homepage": "https://github.com/XetaIO/Xetaravel",
     "license": "MIT",
     "type": "project",
     "support": {
-        "source": "https://github.com/XetaIO/Xaravel",
-        "issues": "https://github.com/XetaIO/Xaravel/issues"
+        "source": "https://github.com/XetaIO/Xetaravel",
+        "issues": "https://github.com/XetaIO/Xetaravel/issues"
     },
     "authors": [
         {
