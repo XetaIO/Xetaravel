@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\App;
 
 class CreateArticlesTable extends Migration
 {
@@ -23,10 +24,17 @@ class CreateArticlesTable extends Migration
             $table->integer('comment_count')->unsigned()->default(0);
             $table->boolean('is_display')->default(true);
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('categories');
         });
+
+        /**
+         * Only create foreign key on production/development.
+         */
+        if (App::environment() == 'testing') {
+            Schema::table('articles', function (Blueprint $table) {
+                $table->foreign('user_id')->references('id')->on('users');
+                $table->foreign('category_id')->references('id')->on('categories');
+            });
+        }
     }
 
     /**
@@ -36,6 +44,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('articles');
     }
 }

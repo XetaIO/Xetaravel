@@ -26,7 +26,8 @@ class Comment extends Model
      *
      * @return array
      */
-    public function countCaches() {
+    public function countCaches()
+    {
         return [
             User::class,
             Article::class

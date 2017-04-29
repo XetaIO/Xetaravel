@@ -13,6 +13,10 @@ body {
     }
 }
 
+.font-xeta {
+    font-family: $font-family-xeta;
+}
+
 @media (max-width: 768px) {
     body {
         margin-bottom: 120px;

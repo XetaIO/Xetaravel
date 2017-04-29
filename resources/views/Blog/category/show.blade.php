@@ -15,6 +15,10 @@
     </div>
 </div>
 <hr />
+<div class="container pt-0 pb-0">
+    {!! $breadcrumbs->render() !!}
+</div>
+<hr />
 <div class="container pt-2">
     <div class="row">
         <div class="col-md-9">

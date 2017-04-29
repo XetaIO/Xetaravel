@@ -74,7 +74,7 @@
   padding-top: $navbar-brand-padding-y;
   padding-bottom: $navbar-brand-padding-y;
   margin-right: 1rem;
-  font-size: $font-size-lg;
+  font-size: $navbar-brand-font-size;
   line-height: inherit;
 
   @include hover-focus {
@@ -175,6 +175,39 @@
     float: left;
   }
 
+  .nav-link-menu {
+    display: inline-block;
+    margin: 10px 0 0;
+    padding: 0 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    overflow: hidden;
+
+    &:hover span {
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
+    }
+
+    span {
+      position: relative;
+      display: inline-block;
+      -webkit-transition: -webkit-transform .3s;
+      transition: -webkit-transform .3s;
+      transition: transform .3s;
+      transition: transform .3s, -webkit-transform .3s;
+
+      &::before {
+        position: absolute;
+        top: 100%;
+        content: attr(data-hover);
+        font-weight: 700;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+
   .nav-link {
     display: block;
     padding-top:    .425rem;
@@ -242,6 +275,13 @@
   }
 
   .navbar-nav {
+    .nav-link-menu {
+      color: $navbar-dark-color;
+
+      @include hover-focus {
+        color: darken($navbar-dark-color, 15%);
+      }
+    }
     .nav-link {
       color: $navbar-dark-color;
 
@@ -256,6 +296,15 @@
     .nav-link.active {
       @include plain-hover-focus {
         color: $navbar-dark-active-color;
+      }
+    }
+
+    .open > .nav-link-menu,
+    .active > .nav-link-menu,
+    .nav-link-menu.open,
+    .nav-link-menu.active {
+      @include hover-focus {
+        color: darken($navbar-dark-color, 15%);
       }
     }
   }

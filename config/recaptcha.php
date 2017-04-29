@@ -60,7 +60,6 @@ return [
     | Set which version of ReCaptcha to use.
     |
     */
-
     'version'     => 2,
 
 ];

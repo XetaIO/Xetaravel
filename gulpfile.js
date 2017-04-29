@@ -14,7 +14,7 @@ const elixirTypscript = require('elixir-typescript');
  |
  */
 
-//elixir.config.sourcemaps = false;
+elixir.config.sourcemaps = false;
 
 elixir((mix) => {
     mix
@@ -26,15 +26,15 @@ elixir((mix) => {
             'font-awesome/font-awesome.scss'
         ], 'public/css/font-awesome.min.css')
         .scripts([
-            'jquery-3.1.1.min.js',
-            'jquery.easing.1.3.min.js',
-            'tether.min.js',
-            'bootstrap.min.js',
-            'particles.min.js',
-            'prism.min.js',
-            'scrollup.min.js',
-            'sidebar-1.0.0.min.js'
-        ], 'public/js/lib.js')
+            'libs/jquery.min.js',
+            'libs/jquery.easing.min.js',
+            'libs/tether.min.js',
+            'libs/bootstrap.min.js',
+            'libs/particles.min.js',
+            'libs/prism.min.js',
+            'libs/scrollup.min.js',
+            'libs/sidebar.min.js'
+        ], 'public/js/lib.min.js')
         .scripts([
             'prettify.js',
         ], 'public/js/prettify.min.js')

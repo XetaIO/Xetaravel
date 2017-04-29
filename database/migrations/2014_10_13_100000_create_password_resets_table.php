@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\App;
 
 class CreatePasswordResetsTable extends Migration
 {
@@ -13,15 +14,23 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
+
         Schema::create('password_resets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
+
+        /**
+         * Only create foreign key on production/development.
+         */
+        if (App::environment() == 'testing') {
+            Schema::table('password_resets', function (Blueprint $table) {
+                $table->foreign('user_id')->references('id')->on('users');
+            });
+        }
     }
 
     /**

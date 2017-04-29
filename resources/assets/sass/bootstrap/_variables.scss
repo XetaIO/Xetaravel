@@ -48,8 +48,8 @@ $gray-light:                #818a91 !default;
 $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
-//$brand-primary:             #e9573f !default;
-$brand-primary:             #9A54B1 !default;
+//$brand-primary:             #9A54B1 !default;
+$brand-primary:             #f4645f !default;
 $brand-success:             #5ccc5c !default;
 $brand-info:                #00c5ff !default;
 $brand-warning:             #ffa422 !default;
@@ -177,6 +177,7 @@ $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:       $font-family-sans-serif !default;
+$font-family-xeta:       'Leckerli One',cursive !default;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
 $font-size-root: 16px !default;
@@ -509,7 +510,8 @@ $navbar-border-radius:              0 !default;
 $navbar-padding-x:                  $spacer !default;
 $navbar-padding-y:                  .375rem !default;
 
-$navbar-brand-padding-y:            .25rem !default;
+$navbar-brand-font-size:            1.5rem !default;
+$navbar-brand-padding-y:            0 !default;
 
 $navbar-divider-padding-y:          .425rem !default;
 
@@ -622,7 +624,7 @@ $state-danger-border:            $state-danger-text !default;
 // Cards
 $card-spacer-x:            1.25rem !default;
 $card-spacer-y:            .75rem !default;
-$card-border-width:        1px !default;
+$card-border-width:        2px !default;
 $card-border-radius:       $border-radius !default;
 $card-border-color:        rgba(0,0,0,.125) !default;
 $card-border-radius-inner: calc(#{$card-border-radius} - #{$card-border-width}) !default;
@@ -817,7 +819,7 @@ $breadcrumb-padding-x:          1rem !default;
 $breadcrumb-item-padding:       .5rem !default;
 
 $breadcrumb-border-color:       #e1e8ed !default;
-$breadcrumb-divider-color:      inherit !default;
+$breadcrumb-divider-color:      $body-color !default;
 $breadcrumb-active-color:       inherit !default;
 $breadcrumb-divider:            "/" !default;
 

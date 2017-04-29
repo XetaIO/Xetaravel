@@ -37,19 +37,13 @@ var Xeta = (function () {
         this.initialize();
     }
     /**
-     * Laught the application initialization.
+     * Launch the application initialization.
      *
      * @method initialize
      *
      * @return {void}
      */
     Xeta.prototype.initialize = function () {
-        $("body").tooltip({
-            selector: "[data-toggle=tooltip]"
-        });
-        $("body").popover({
-            selector: "[data-toggle=popover]"
-        });
         this.handleScroll();
     };
     /**
@@ -74,5 +68,3 @@ var Xeta = (function () {
     };
     return Xeta;
 }());
-
-//# sourceMappingURL=ts.js.map

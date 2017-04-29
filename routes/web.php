@@ -12,7 +12,7 @@ Route::get('/', 'PageController@index')->name('page_index');
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'users'], function () {
-    Route::group(['namespace' => 'Auth'], function() {
+    Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes
         Route::get('login', 'LoginController@showLoginForm')->name('users_auth_login');
         Route::post('login', 'LoginController@login');
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('profile/{slug}.{id}', 'UserController@show')->name('users_user_show');
 
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth']], function () {
         // Users Routes
         Route::get('account', 'UserController@index')->name('users_user_index');
         Route::put('account', 'UserController@update')->name('users_user_update');
@@ -43,7 +43,7 @@ Route::group(['prefix' => 'users'], function () {
 | Blog Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function() {
+Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
 
     // Article Routes
     Route::get('/', 'ArticleController@index')
@@ -55,7 +55,7 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function() {
     Route::get('/category/{slug}.{id}', 'CategoryController@show')
         ->name('blog_category_show');
 
-    Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['auth']], function () {
         // Comment Routes
         Route::post('/comment/create', 'CommentController@create')
         ->name('blog_comment_create');
@@ -72,5 +72,6 @@ Route::group([
         'prefix' => 'admin',
         'middleware' => ['auth', 'admin']
     ], function () {
-    Route::get('/', 'PageController@index')->name('admin_page_index');
-});
+        Route::get('/', 'PageController@index')->name('admin_page_index');
+    }
+);

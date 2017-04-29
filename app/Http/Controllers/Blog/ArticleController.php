@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->breadcrumbs->addCrumb('Blog', route('blog_article_index'));
+    }
+
     /**
      * Show the list of all articles.
      *
@@ -17,7 +24,7 @@ class ArticleController extends Controller
     {
         $articles = Article::with('category', 'user')->paginate(10);
 
-        return view('Blog::article.index', ['articles' => $articles]);
+        return view('Blog::article.index', ['articles' => $articles, 'breadcrumbs' => $this->breadcrumbs]);
     }
 
     /**
@@ -39,6 +46,17 @@ class ArticleController extends Controller
 
         $comments = $article->comments()->paginate(10);
 
-        return view('Blog::article.show', ['article' => $article, 'comments' => $comments]);
+        $this->breadcrumbs->addCrumb(
+            "Article : " . e($article->title),
+            route(
+                'blog_article_show',
+                ['slug' => $article->category->slug, 'id' => $article->category->id]
+            )
+        );
+
+        return view(
+            'Blog::article.show',
+            ['article' => $article, 'comments' => $comments, 'breadcrumbs' => $this->breadcrumbs]
+        );
     }
 }

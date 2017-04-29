@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->breadcrumbs->addCrumb('Blog', route('blog_article_index'));
+    }
+
     /**
      * Show the article by his id.
      *
@@ -27,6 +34,17 @@ class CategoryController extends Controller
 
         $articles = $category->articles()->paginate(10);
 
-        return view('Blog::category.show', ['articles' => $articles, 'category' => $category]);
+        $this->breadcrumbs->addCrumb(
+            "Category : " . e($category->title),
+            route(
+                'blog_article_show',
+                ['slug' => $category->slug, 'id' => $category->id]
+            )
+        );
+
+        return view(
+            'Blog::category.show',
+            ['articles' => $articles, 'category' => $category, 'breadcrumbs' => $this->breadcrumbs]
+        );
     }
 }

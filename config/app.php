@@ -171,6 +171,7 @@ return [
         Mews\Purifier\PurifierServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Eloquence\EloquenceServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
 
         /*
          * Application Service Providers

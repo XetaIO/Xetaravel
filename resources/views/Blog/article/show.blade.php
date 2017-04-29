@@ -22,6 +22,10 @@
     </div>
 </div>
 <hr />
+<div class="container pt-0 pb-0">
+    {!! $breadcrumbs->render() !!}
+</div>
+<hr />
 <div class="container pt-2">
     @include('elements.flash')
 

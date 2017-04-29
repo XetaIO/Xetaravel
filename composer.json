@@ -1,23 +1,49 @@
 {
-    "name": "xeta/laravel",
+    "name": "xetaio/xaravel",
     "description": "A light version of Xeta's website using Laravel.",
-    "keywords": ["Xeta", "framework", "laravel"],
-    "homepage": "https://github.com/XetaIO/XetaLaravel",
+    "keywords": [
+        "Xeta",
+        "framework",
+        "laravel",
+        "website",
+        "blog",
+        "administration"
+    ],
+    "homepage": "https://github.com/XetaIO/Xaravel",
     "license": "MIT",
     "type": "project",
+    "support": {
+        "source": "https://github.com/XetaIO/Xaravel",
+        "issues": "https://github.com/XetaIO/Xaravel/issues"
+    },
+    "authors": [
+        {
+            "name": "Xety",
+            "email": "zoro.fmt@gmail.com",
+            "homepage": "https://github.com/Xety"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/XetaIO/breadcrumbs"
+        }
+    ],
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
+        "laravel/framework": "5.4.*",
+        "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.3.0",
         "filp/whoops": "^2.1",
         "mews/purifier": "~2.0",
         "greggilbert/recaptcha": "~2.0",
-        "kirkbushell/eloquence": "~2.0"
+        "kirkbushell/eloquence": "~2.0",
+        "creitive/breadcrumbs": "dev-bootstrap4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.0",
+        "phpunit/phpunit": "~5.7",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "squizlabs/php_codesniffer": "3.0.x-dev",
@@ -32,9 +58,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
