@@ -1,9 +1,28 @@
 {
     "name": "xetaio/xaravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "A light version of Xeta's website using Laravel.",
+    "keywords": [
+        "Xeta",
+        "framework",
+        "laravel",
+        "website",
+        "blog",
+        "administration"
+    ],
+    "homepage": "https://github.com/XetaIO/Xaravel",
     "license": "MIT",
     "type": "project",
+    "support": {
+        "source": "https://github.com/XetaIO/Xaravel",
+        "issues": "https://github.com/XetaIO/Xaravel/issues"
+    },
+    "authors": [
+        {
+            "name": "Xety",
+            "email": "zoro.fmt@gmail.com",
+            "homepage": "https://github.com/Xety"
+        }
+    ],
     "repositories": [
         {
             "type": "vcs",
