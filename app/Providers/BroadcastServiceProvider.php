@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Providers;
+namespace Xetaravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
@@ -19,7 +18,7 @@ class BroadcastServiceProvider extends ServiceProvider
         /*
          * Authenticate the user's personal channel...
          */
-        Broadcast::channel('App.User.*', function ($user, $userId) {
+        Broadcast::channel('Xetaravel.User.*', function ($user, $userId) {
             return (int) $user->id === (int) $userId;
         });
     }

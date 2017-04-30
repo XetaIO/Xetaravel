@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
+$factory->define(Xetaravel\Models\Article::class, function (Faker\Generator $faker) {
     $title = $faker->sentence;
     
     return [
@@ -14,7 +14,7 @@ $factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->state(App\Models\Article::class, 'notDisplay', function (Faker\Generator $faker) {
+$factory->state(Xetaravel\Models\Article::class, 'notDisplay', function (Faker\Generator $faker) {
     return [
         'is_display' => 0,
     ];

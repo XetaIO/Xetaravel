@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Http\Controllers\Admin;
 
-use App\Models\User;
+use Xetaravel\Models\User;
 use Tests\TestCase;
 
 class PageControllerTest extends TestCase

@@ -1,5 +1,5 @@
 <?php
-namespace App\Utility;
+namespace Xetaravel\Utility;
 
 use Carbon\Carbon;
 

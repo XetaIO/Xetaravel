@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace Xetaravel\Providers;
 
 use Collective\Html\FormFacade as Form;
 use Illuminate\Support\ServiceProvider;

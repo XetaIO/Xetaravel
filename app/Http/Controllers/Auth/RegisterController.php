@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Xetaravel\Http\Controllers\Auth;
 
-use App\Models\User;
-use App\Http\Controllers\Controller;
+use Xetaravel\Models\User;
+use Xetaravel\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -71,7 +71,7 @@ class RegisterController extends Controller
      *
      * @param array $data The data used to create the user.
      *
-     * @return \App\Models\User
+     * @return \Xetaravel\Models\User
      */
     protected function create(array $data)
     {

@@ -1,9 +1,8 @@
 <?php
+namespace Xetaravel\Models;
 
-namespace App\Models;
-
-use App\Models\Article;
-use App\Models\User;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\User;
 use Eloquence\Behaviours\CountCache\Countable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +40,7 @@ class Comment extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('Xetaravel\Models\User');
     }
 
     /**
@@ -51,7 +50,7 @@ class Comment extends Model
      */
     public function article()
     {
-        return $this->belongsTo('App\Models\Article');
+        return $this->belongsTo('Xetaravel\Models\Article');
     }
 
     /**
@@ -73,9 +72,9 @@ class Comment extends Model
      * Create a new comment instance after a valid validation.
      *
      * @param array $data The data used to create the comment.
-     * @param \App\Models\User $user The current user.
+     * @param \Xetaravel\Models\User $user The current user.
      *
-     * @return \App\Models\Comment
+     * @return \Xetaravel\Models\Comment
      */
     public static function createComment(array $data, $user)
     {

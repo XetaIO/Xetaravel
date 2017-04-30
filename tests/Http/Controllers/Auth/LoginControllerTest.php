@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Http\Controllers\Auth;
 
-use App\Models\User;
+use Xetaravel\Models\User;
 use Tests\TestCase;
 
 class LoginControllerTest extends TestCase
