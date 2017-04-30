@@ -5,7 +5,6 @@
 .env
 .env.testing
 .directory
-/config/recaptcha.php
 Homestead.json
 Homestead.yaml
 composer.lock
