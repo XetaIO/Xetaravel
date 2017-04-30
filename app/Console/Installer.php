@@ -78,13 +78,13 @@ class Installer
         $databaseName = $io->ask('What is the database host ? ', 'localhost');
         $content = str_replace('__XETARAVEL_DATABASE_HOST__', $databaseName, $content, $count);
 
-        $databaseName = $io->ask('What is the database name ? ', 'xetaravel_test');
+        $databaseName = $io->ask('What is the database name ? ', 'xetaravel_dev');
         $content = str_replace('__XETARAVEL_DATABASE_NAME__', $databaseName, $content, $count);
 
         $databaseName = $io->ask('What is the database username ? ', 'xetaravel');
         $content = str_replace('__XETARAVEL_DATABASE_USERNAME__', $databaseName, $content, $count);
 
-        $databaseName = $io->ask('What is the database password ? ', 'xetaravel');
+        $databaseName = $io->ask('What is the database password ? ', 'secret');
         $content = str_replace('__XETARAVEL_DATABASE_PASSWORD__', $databaseName, $content, $count);
 
         if ($count == 0) {
