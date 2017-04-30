@@ -54,7 +54,8 @@
             "database"
         ],
         "psr-4": {
-            "Xetaravel\\": "app/"
+            "Xetaravel\\": "app/",
+            "XetaravelInstaller\\": "install/"
         }
     },
     "autoload-dev": {
@@ -72,7 +73,7 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "Xetaravel\\Console\\Installer::postInstall"
+            "XetaravelInstaller\\Installer::postInstall"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",

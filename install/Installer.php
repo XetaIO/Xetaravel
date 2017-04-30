@@ -1,5 +1,5 @@
 <?php
-namespace Xetaravel\Console;
+namespace XetaravelInstaller;
 
 use Composer\Script\Event;
 use Exception;
