@@ -3,10 +3,11 @@
 .env
 .env.testing
 .vscode
+Homestead.json
+Homestead.yaml
+composer.lock
 /node_modules
 /public/storage
 /public/coverage
 /storage/*.key
 /vendor
-Homestead.json
-Homestead.yaml

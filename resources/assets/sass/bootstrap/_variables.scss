@@ -55,6 +55,7 @@ $brand-info:                #00c5ff !default;
 $brand-warning:             #ffa422 !default;
 $brand-danger:              #ef3c3c !default;
 $brand-inverse:             $gray-dark !default;
+$brand-white:               #ffffff !default;
 
 
 // Options
@@ -124,7 +125,7 @@ $footer-border-color:   #283645 !default;
 $link-color:            $brand-primary !default;
 $link-decoration:       none !default;
 $link-hover-color:      darken($link-color, 15%) !default;
-$link-hover-decoration: underline !default;
+$link-hover-decoration: none !default;
 
 
 // Grid breakpoints
@@ -177,7 +178,7 @@ $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:       $font-family-sans-serif !default;
-$font-family-xeta:       'Leckerli One',cursive !default;
+$font-family-xeta:       'Miriam Libre', sans-serif !default;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
 $font-size-root: 16px !default;
@@ -504,14 +505,14 @@ $zindex-modal:             1050 !default;
 // Navbar
 
 $navbar-border-bottom:              4px !default;
-$navbar-border-bottom-color:        rgba(0,0,0,.3) !default;
+$navbar-border-bottom-color:        $body-color !default;
 $navbar-border-radius:              0 !default;
 
 $navbar-padding-x:                  $spacer !default;
 $navbar-padding-y:                  .375rem !default;
 
-$navbar-brand-font-size:            1.5rem !default;
-$navbar-brand-padding-y:            0 !default;
+$navbar-brand-font-size:            1.3rem !default;
+$navbar-brand-padding-y:            6px !default;
 
 $navbar-divider-padding-y:          .425rem !default;
 
@@ -529,10 +530,10 @@ $navbar-dark-disabled-color:        rgba(255,255,255,.25) !default;
 $navbar-dark-toggler-bg: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-dark-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !default;
 $navbar-dark-toggler-border:        rgba(255,255,255,.8) !default;
 
-$navbar-light-color:                rgba(0,0,0,.5) !default;
-$navbar-light-hover-color:          rgba(0,0,0,.7) !default;
-$navbar-light-active-color:         rgba(0,0,0,.9) !default;
-$navbar-light-disabled-color:       rgba(0,0,0,.3) !default;
+$navbar-light-color:                $body-color !default;
+$navbar-light-hover-color:          $link-hover-color !default;
+$navbar-light-active-color:         $body-color !default;
+$navbar-light-disabled-color:       $body-color !default;
 $navbar-light-toggler-bg: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-light-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !default;
 $navbar-light-toggler-border:       rgba(0,0,0,.1) !default;
 

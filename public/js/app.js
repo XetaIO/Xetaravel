@@ -20,10 +20,14 @@ $(document).ready(function() {
     if (navbar.length && width >= minWidth){
         $(document).scroll(function() {
             var scrollStart = $(this).scrollTop();
-            if(scrollStart > offset.top) {
-                $(".navbar").attr('style', 'background-color: #f4645f !important; border-bottom: 4px solid rgba(0,0,0,0.3);');
+            if (scrollStart > (offset.top - 60)) {
+                $('.navbar').attr('style', 'background-color: #fff !important; border-bottom: 4px solid #506a85;');
+                $('.navbar-hello-text').removeClass('text-white').attr('style', 'color: #506a85 !important;');
+                $('.navbar-brand').removeClass('text-white').attr('style', 'color: #506a85 !important;');
             } else {
                 $('.navbar').attr('style', 'background-color: transparent !important; border-bottom: none;');
+                $('.navbar-hello-text').addClass('text-white').removeAttr('style');
+                $('.navbar-brand').addClass('text-white').removeAttr('style');
             }
         });
     }

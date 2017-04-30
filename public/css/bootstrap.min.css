@@ -4,6 +4,13 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@font-face {
+  font-family: "Miriam Libre";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/MiriamLibre-Regular.eot?") format("eot"), url("../fonts/MiriamLibre-Regular.woff2") format("woff2"), url("../fonts/MiriamLibre-Regular.woff") format("woff"), url("../fonts/MiriamLibre-Regular.ttf") format("truetype"), url("../fonts/MiriamLibre-Regular.svg#MiriamLibre") format("svg");
+}
+
 /*! normalize.css v4.2.0 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -388,7 +395,7 @@ a {
 
 a:focus, a:hover {
   color: #ef1f17;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:focus {
@@ -2982,7 +2989,7 @@ fieldset[disabled] a.btn {
 
 .btn-link:focus, .btn-link:hover {
   color: #ef1f17;
-  text-decoration: underline;
+  text-decoration: none;
   background-color: transparent;
 }
 
@@ -3848,7 +3855,7 @@ tbody.collapse.in {
 .navbar {
   position: relative;
   padding: 0.375rem 1rem;
-  border-bottom: 4px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 4px solid #506a85;
   -webkit-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in;
 }
@@ -3914,10 +3921,10 @@ tbody.collapse.in {
 
 .navbar-brand {
   float: left;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
   margin-right: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   line-height: inherit;
 }
 
@@ -4157,21 +4164,21 @@ tbody.collapse.in {
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.9);
+  color: #506a85;
 }
 
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover,
 .navbar-light .navbar-toggler:focus,
 .navbar-light .navbar-toggler:hover {
-  color: rgba(0, 0, 0, 0.9);
+  color: #506a85;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: #506a85;
 }
 
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-  color: rgba(0, 0, 0, 0.7);
+  color: #ef1f17;
 }
 
 .navbar-light .navbar-nav .open > .nav-link, .navbar-light .navbar-nav .open > .nav-link:focus, .navbar-light .navbar-nav .open > .nav-link:hover,
@@ -4184,11 +4191,11 @@ tbody.collapse.in {
 .navbar-light .navbar-nav .nav-link.active,
 .navbar-light .navbar-nav .nav-link.active:focus,
 .navbar-light .navbar-nav .nav-link.active:hover {
-  color: rgba(0, 0, 0, 0.9);
+  color: #506a85;
 }
 
 .navbar-light .navbar-toggler {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#506a85' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
   border-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -6166,6 +6173,14 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 a.bg-inverse:focus, a.bg-inverse:hover {
   background-color: #1f2021 !important;
+}
+
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+a.bg-white:focus, a.bg-white:hover {
+  background-color: #e6e6e6 !important;
 }
 
 .rounded {

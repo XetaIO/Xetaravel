@@ -2455,7 +2455,7 @@ body > .container {
 }
 
 .font-xeta {
-  font-family: "Leckerli One", cursive;
+  font-family: "Miriam Libre", sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -2981,7 +2981,6 @@ body > .container {
 }
 
 .profile-container .profile-header-navbar {
-  background-color: #fff;
   border-bottom: 1px solid #e1e8ed;
   box-sizing: border-box;
   height: 60px;

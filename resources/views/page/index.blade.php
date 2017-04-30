@@ -4,11 +4,17 @@
 @push('style')
     <style>
     @media (min-width: 768px) {
+        .bg-white {
+            background-color: transparent !important;
+        }
         .navbar {
             border-bottom: none;
         }
-        .bg-primary {
-            background: transparent !important;
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+        .navbar-hello-text {
+            color: #ffffff !important;
         }
     }
     </style>
@@ -20,9 +26,9 @@
     <div class="container" style="padding: 250px 0;">
         <div class="row">
             <div class="col-xs-12">
-                <h1>Welcome on <span class="font-xeta">Xeta</span> !</h1>
+                <h1>Welcome on <span class="text-primary font-xeta">Xetaravel</span> !</h1>
                 <p class="description">
-                    Welcome to my personal website ! I use this site as my personal blog and for try my experiences in development.
+                    This version is a light version of the <a class="font-weight-bold" href="https://github.com/XetaIO/Xeta" target="_blank">Xeta</a> project made with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and with <i class="fa fa-heart" style="color: #fa6c65"></i>.
                 </p>
                 <a class="btn btn-outline-primary-inverse" href="{{ route('blog_article_index') }}">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
@@ -39,7 +45,7 @@
         <div class="col-md-4">
             <div class="features-box">
                 <i class="fa fa-code text-primary" aria-hidden="true"></i>
-                <h4>Open Source</h4>
+                <h4 class="font-xeta">Open Source</h4>
                 <p class="text-muted">
                     The code source of this website is open source and available on <a href="https://github.com/Xety/Xeta" target="_blank">Github</a>. If you want to contribute, feel free to do a PR.
                 </p>
@@ -48,7 +54,7 @@
         <div class="col-md-4">
             <div class="features-box">
                 <i class="fa fa-flask text-primary" aria-hidden="true"></i>
-                <h4>Experiences</h4>
+                <h4 class="font-xeta">Experiences</h4>
                 <p class="text-muted">
                 I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
                 </p>
@@ -57,7 +63,7 @@
         <div class="col-md-4">
             <div class="features-box">
                 <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>
-                <h4>Interact</h4>
+                <h4 class="font-xeta">Interact</h4>
                 <p class="text-muted">
                 You can interact with Xeta's members in the blog or directly with me in the comments of an article.
                 </p>
@@ -66,7 +72,7 @@
     </div>
 
     <hr/>
-    <h1 class="text-xs-center mt-3 mb-3">Latest Articles</h1>
+    <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Articles</h1>
 
     <div class="row">
 
@@ -117,7 +123,7 @@
     </div>
 
     <hr/>
-    <h1 class="text-xs-center mt-3 mb-3">Latest Comments</h1>
+    <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Comments</h1>
 
     <div class="row mb-3">
         @foreach ($comments as $comment)

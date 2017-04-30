@@ -17,3 +17,5 @@
 @include bg-variant('.bg-danger', $brand-danger);
 
 @include bg-variant('.bg-inverse', $brand-inverse);
+
+@include bg-variant('.bg-white', $brand-white);
