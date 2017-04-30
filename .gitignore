@@ -1,8 +1,10 @@
 .idea
 .vscode
+.settings
+.brackets.json
 .env
 .env.testing
-.vscode
+.directory
 Homestead.json
 Homestead.yaml
 composer.lock
