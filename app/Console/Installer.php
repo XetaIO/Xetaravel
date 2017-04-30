@@ -13,6 +13,7 @@ class Installer
 {
     public static function postInstall(Event $event)
     {
+        $io = $event->getIO();
         $io->write("<info>
   __          __  _
   \ \        / / | |
@@ -36,7 +37,6 @@ class Installer
   /_/ \_\___|\__\__,_|_|  \__,_| \_/ \___|_|
 
         </info>");
-        $io = $event->getIO();
         $rootDir = dirname(dirname(__DIR__));
         
         static::createEnvTesting($rootDir, $io);
