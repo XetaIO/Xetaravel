@@ -16,7 +16,7 @@ class PageController extends Controller
     {
         $articles = Article::with('category', 'user')
             ->latest()
-            ->limit(4)
+            ->limit(6)
             ->get();
 
         $comments = Comment::with('article', 'user')

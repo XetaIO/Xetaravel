@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->breadcrumbs->addCrumb('Users', route('users_user_index'));
+    }
+
     public function index()
     {
         return view('user.index');
@@ -32,6 +39,15 @@ class UserController extends Controller
                 ->with('danger', 'This user doesn\'t exist or has been deleted !');
         }
 
-        return view('user.show', ['user' => $user]);
+        $this->breadcrumbs->addCrumb(
+            e($user->username),
+            route(
+                'users_user_show',
+                ['slug' => $user->slug, 'id' => $user->id]
+            )
+        );
+        $this->breadcrumbs->setCssClasses('breadcrumb');
+
+        return view('user.show', ['user' => $user, 'breadcrumbs' => $this->breadcrumbs]);
     }
 }

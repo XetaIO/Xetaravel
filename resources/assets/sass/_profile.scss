@@ -44,7 +44,7 @@
         li {
             background: rgba(0,0,0,0.3);
             padding: 15px 30px;
-            border-radius: 3px;
+            border-radius: $border-radius;
 
             img {
                 border: 8px solid rgba(255,255,255,0.3);
@@ -120,13 +120,14 @@
     .section {
         padding: 25px 30px;
         border: 1px solid #e1e8ed;
+        border-radius: $border-radius;
     }
 
     .sidebar-profile {
         text-align: center;
         padding: 30px 60px 20px;
         border: 1px solid #e1e8ed;
-        border-radius: 3px;
+        border-radius: $border-radius;
 
         img {
             width: 120px;

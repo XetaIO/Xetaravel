@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'Reset your password']) !!}
+{!! config(['app.title' => 'Reset your password']) !!}
 
 @section('content')
 <div class="container">

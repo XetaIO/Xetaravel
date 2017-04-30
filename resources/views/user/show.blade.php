@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => $user->username . ' profile']) !!}
+{!! config(['app.title' => $user->username . ' profile']) !!}
 
 @section('content')
 <div class="profile-container">
@@ -56,7 +56,7 @@
                         @endif
                         @if ($user->id == Auth::user()->id)
                             <li class="list-inline-item" style="padding: 10px;">
-                                {!! Html::link(route('users_user_index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
+                                {!! Html::link(route('users_account_index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
                             </li>
                         @endif
                     </ul>
@@ -69,11 +69,7 @@
 <div class="container pt-1">
     <div class="row">
         <div class="col-md-12">
-            <nav class="breadcrumb">
-                {!! Html::link(route('page_index'), 'Home', ['class' => 'breadcrumb-item']) !!}
-                {!! Html::link(route('page_index'), 'Users', ['class' => 'breadcrumb-item']) !!}
-                <span class="breadcrumb-item active">{{ $user->username }}</span>
-            </nav>
+            {!! $breadcrumbs->render() !!}
         </div>
     </div>
     <div class="row profile">
@@ -119,7 +115,7 @@
 
                 @if (!empty($user->articles->toArray()))
                     <div class="hr-divider">
-                        <h4 class="text-xs-center">
+                        <h4 class="font-xeta text-xs-center">
                             @if ($user->id == Auth::user()->id)
                                 Your lastest Articles in the Blog
                             @else
@@ -150,7 +146,7 @@
 
                 @if (!empty($user->comments->toArray()))
                     <div class="hr-divider">
-                        <h4 class="text-xs-center">
+                        <h4 class="font-xeta text-xs-center">
                             @if ($user->id == Auth::user()->id)
                                 Your lastest Comments in the Blog
                             @else

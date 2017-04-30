@@ -26,10 +26,10 @@
 
         @if (Auth::guest())
             <div class="float-sm-right">
-                <a class="btn btn-outline-primary-inverse" href="{{ route('users_auth_register') }}">
+                <a class="btn btn-header-register-login btn-outline-primary" href="{{ route('users_auth_register') }}">
                     <i class="fa fa-user-plus" aria-hidden="true"></i> Register
                 </a>
-                <a class="btn btn-outline-primary-inverse" href="{{ route('users_auth_login') }}">
+                <a class="btn btn-header-register-login btn-outline-primary" href="{{ route('users_auth_login') }}">
                     <i class="fa fa-sign-in" aria-hidden="true"></i> Login
                 </a>
             </div>

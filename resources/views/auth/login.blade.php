@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'Login into your account']) !!}
+{!! config(['app.title' => 'Login into your account']) !!}
 
 @section('content')
 <div class="container">

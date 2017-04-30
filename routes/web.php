@@ -30,11 +30,12 @@ Route::group(['prefix' => 'users'], function () {
     });
 
     Route::get('profile/{slug}.{id}', 'UserController@show')->name('users_user_show');
+    Route::get('/', 'UserController@index')->name('users_user_index');
 
     Route::group(['middleware' => ['auth']], function () {
         // Users Routes
-        Route::get('account', 'UserController@index')->name('users_user_index');
-        Route::put('account', 'UserController@update')->name('users_user_update');
+        Route::get('account', 'AccountController@index')->name('users_account_index');
+        Route::put('account', 'AccountController@update')->name('users_account_update');
     });
 });
 

@@ -11,8 +11,7 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
     */
-
-    'name' => 'Xetaravel',
+    //'name' => 'Xetaravel',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,6 +171,7 @@ return [
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Eloquence\EloquenceServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+        Xetaravel\Ckeditor\Providers\CkeditorServiceProvider::class,
 
         /*
          * Application Service Providers

@@ -18,7 +18,7 @@ elixir.config.sourcemaps = false;
 
 elixir((mix) => {
     mix
-        .sass('app.scss')
+        .sass('xetaravel.scss')
         .sass([
             'bootstrap/bootstrap.scss'
         ], 'public/css/bootstrap.min.css')

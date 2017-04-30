@@ -101,6 +101,19 @@ $spacers: (
 ) !default;
 $border-width: 2px !default;
 
+// ScrollBar
+//
+// Settings for the scrollbar element
+$scrollbar-bar-background:  $brand-primary !default;
+$scrollbar-background:      #ddd !default;
+$scrollbar-width:           13px !default;
+
+// Selection
+//
+// Settings for the selection element
+$selection-background:      #f7a5a2 !default;
+$selection-color:           #506A85 !default;
+
 
 // Body
 //

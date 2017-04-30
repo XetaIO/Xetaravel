@@ -1,4 +1,5 @@
 @extends('layouts.app')
+{!! config(['app.title' => 'Administration']) !!}
 
 @section('content')
 <div class="container">

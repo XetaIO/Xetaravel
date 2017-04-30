@@ -32,7 +32,7 @@ class CategoryController extends Controller
                 ->with('danger', 'This category doesn\'t exist or has been deleted !');
         }
 
-        $articles = $category->articles()->paginate(10);
+        $articles = $category->articles()->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
         $this->breadcrumbs->addCrumb(
             "Category : " . e($category->title),

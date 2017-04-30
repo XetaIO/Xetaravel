@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'Welcome !']) !!}
+{!! config(['app.title' => 'Welcome !']) !!}
 
 @push('style')
     <style>
@@ -47,7 +47,7 @@
                 <i class="fa fa-code text-primary" aria-hidden="true"></i>
                 <h4 class="font-xeta">Open Source</h4>
                 <p class="text-muted">
-                    The code source of this website is open source and available on <a href="https://github.com/Xety/Xeta" target="_blank">Github</a>. If you want to contribute, feel free to do a PR.
+                    The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank">Github</a>. If you want to contribute, feel free to do a PR.
                 </p>
             </div>
         </div>
@@ -164,7 +164,12 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.btn-header-register-login').removeClass('btn-outline-primary').addClass('btn-outline-primary-inverse');
+        });
+    </script>
+    <script type="text/javascript">
     particlesJS("particles", {
       "particles": {
         "number": {
