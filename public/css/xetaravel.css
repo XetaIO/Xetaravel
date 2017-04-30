@@ -2998,7 +2998,7 @@ body > .container {
 .profile-container .profile-information li {
   background: rgba(0, 0, 0, 0.3);
   padding: 15px 30px;
-  border-radius: 3px;
+  border-radius: 0.18rem;
 }
 
 .profile-container .profile-information li img {
@@ -3072,13 +3072,14 @@ body > .container {
 .profile .section {
   padding: 25px 30px;
   border: 1px solid #e1e8ed;
+  border-radius: 0.18rem;
 }
 
 .profile .sidebar-profile {
   text-align: center;
   padding: 30px 60px 20px;
   border: 1px solid #e1e8ed;
-  border-radius: 3px;
+  border-radius: 0.18rem;
 }
 
 .profile .sidebar-profile img {

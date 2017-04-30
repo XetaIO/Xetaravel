@@ -20,12 +20,12 @@
             @endif
 
             <li>
-                <a href="{{ route('users_user_index') }}" class="hidden-xs-down" title="Manage your account settings." data-toggle="tooltip" data-placement="left" data-container="body">
+                <a href="{{ route('users_account_index') }}" class="hidden-xs-down" title="Manage your account settings." data-toggle="tooltip" data-placement="left" data-container="body">
                     <i class="fa fa-cogs"></i>
                     <small class="sidebar-text">My Account</small>
                 </a>
                 <!-- Responsive link -->
-                <a href="{{ route('users_user_index') }}" class="hidden-sm-up">
+                <a href="{{ route('users_account_index') }}" class="hidden-sm-up">
                     <i class="fa fa-cogs"></i>
                     <small class="sidebar-text">My Account</small>
                 </a>

@@ -171,6 +171,7 @@ return [
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Eloquence\EloquenceServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+        Xetaravel\Ckeditor\Providers\CkeditorServiceProvider::class,
 
         /*
          * Application Service Providers

@@ -10,8 +10,8 @@ class DisplayScope implements Scope
     /**
      * Display scope for Eloquent Models.
      *
-     * @param \Illuminate\Database\Eloquent\Builder  $builder
-     * @param \Illuminate\Database\Eloquent\Model  $model
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param \Illuminate\Database\Eloquent\Model $model
      *
      * @return void
      */

@@ -2,8 +2,16 @@
 {!! config(['app.title' => $article->title]) !!}
 
 @push('scripts')
+    {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
     {!! Html::script('js/prettify.min.js')!!}
-    <script>
+    <script type="text/javascript">
+        /**
+         * CKEditor
+         */
+        CKEDITOR.plugins.addExternal('pbckcode', 'http://prbaron.github.com/pbckcode/plugins/pbckcode/', 'plugin.js');
+        CKEDITOR.replace('commentBox', {
+            customConfig: '../config/comment.js'
+        });
         /**
          * Prettify.
          */
@@ -120,7 +128,8 @@
                             {!! Form::hidden('article_id', $article->id) !!}
                             {!! Form::bsTextarea('content', false, old('message'), [
                                 'placeholder' => 'Your message here...',
-                                'required' => 'required'
+                                'required' => 'required',
+                                'id' => 'commentBox'
                             ]) !!}
                             {!! Form::submit('Comment', ['class' => 'btn btn-outline-primary']) !!}
 

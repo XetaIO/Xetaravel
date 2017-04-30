@@ -1,11 +1,11 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'My account']) !!}
+{!! config(['app.title' => 'Users']) !!}
 
 @section('content')
 <div class="container">
-    <h4>Account</h4>
+    <h4>Users</h4>
     <p>
-        Page under construction.
+        List all users. Page under construction.
     </p>
 </div>
 @endsection

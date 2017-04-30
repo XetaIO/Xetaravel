@@ -11,5 +11,6 @@ composer.lock
 /node_modules
 /public/storage
 /public/coverage
+/public/vendor/ckeditor/release
 /storage/*.key
 /vendor

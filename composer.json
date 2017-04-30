@@ -38,7 +38,8 @@
         "mews/purifier": "~2.0",
         "greggilbert/recaptcha": "~2.0",
         "kirkbushell/eloquence": "~2.0",
-        "creitive/breadcrumbs": "dev-bootstrap4"
+        "creitive/breadcrumbs": "dev-bootstrap4",
+        "xetaio/xetaravel-ckeditor": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -82,5 +83,7 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
