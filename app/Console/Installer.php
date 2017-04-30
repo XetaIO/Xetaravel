@@ -53,8 +53,8 @@ class Installer
      */
     public static function createEnvTesting($dir, $io)
     {
-        $env = $dir . '.env.testing';
-        $defaultEnv = $dir . '.env.testing.exemple';
+        $env = $dir . '/.env.testing';
+        $defaultEnv = $dir . '/.env.testing.exemple';
         
         if (!file_exists($env)) {
             copy($defaultEnv, $env);
@@ -72,7 +72,7 @@ class Installer
      */
     public static function configDatabase($dir, $io)
     {
-        $env = $dir . '.env';
+        $env = $dir . '/.env';
         $content = file_get_contents($env);
 
         $databaseName = $io->ask('What is the database host ? ', 'localhost');
