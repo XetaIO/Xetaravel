@@ -12,13 +12,9 @@
 > # Installation
 > ## Requirements
 >
-> |PHP|
-> |:---:|
-> |![PHP](https://img.shields.io/badge/PHP->=5.6.4-44CB12.svg?style=flat-square)|
->
-> |   |   |
-> |:---:|:---:|
-> |**PHP**|![PHP](https://img.shields.io/badge/PHP->=5.6.4-44CB12.svg?style=flat-square)<br>![PHP](https://img.shields.io/badge/PHP%20ext-CURL-44CB12.svg?style=flat-square)|
+> |PHP|PHP Extension|DBMS|
+> |---|---|---|
+> |![PHP](https://img.shields.io/badge/PHP->=5.6.4-44CB12.svg?style=flat-square)|![CURL](https://img.shields.io/badge/PHP%20ext-CURL-44CB12.svg?style=flat-square)<br>![OpenSSL](https://img.shields.io/badge/PHP%20ext-OpenSSL-44CB12.svg?style=flat-square)<br>![PDO](https://img.shields.io/badge/PHP%20ext-PDO-44CB12.svg?style=flat-square)<br>![Mbstring](https://img.shields.io/badge/PHP%20ext-Mbstring-44CB12.svg?style=flat-square)<br>![Tokenizer](https://img.shields.io/badge/PHP%20ext-Tokenizer-44CB12.svg?style=flat-square)<br>![XML](https://img.shields.io/badge/PHP%20ext-XML-44CB12.svg?style=flat-square)|![MySQL](https://img.shields.io/badge/DBMS-MySQL-44CB12.svg?style=flat-square)
 >
 > # Contribute
 > If you want to contribute to the project by adding new features or just fix a bug, feel free to do a PR.
