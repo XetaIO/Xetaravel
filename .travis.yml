@@ -27,7 +27,6 @@ matrix:
 install:
   - composer self-update
   - composer install --prefer-dist --no-interaction
-  - composer run-script post-install-cmd --no-interaction
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE xetaravel_test;'; fi"

@@ -16,5 +16,9 @@
 > |:---:|
 > |![PHP](https://img.shields.io/badge/PHP->=5.6.4-44CB12.svg?style=flat-square)|
 >
+> |   |   |
+> |:---:|:---:|
+> |**PHP**|![PHP](https://img.shields.io/badge/PHP->=5.6.4-44CB12.svg?style=flat-square)<br>![PHP](https://img.shields.io/badge/PHP%20ext-CURL-44CB12.svg?style=flat-square)|
+>
 > # Contribute
 > If you want to contribute to the project by adding new features or just fix a bug, feel free to do a PR.
