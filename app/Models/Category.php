@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Models;
+namespace Xetaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Eloquence\Behaviours\Sluggable;
@@ -24,7 +23,7 @@ class Category extends Model
      */
     public function articles()
     {
-        return $this->hasMany('App\Models\Article');
+        return $this->hasMany('Xetaravel\Models\Article');
     }
 
     /**

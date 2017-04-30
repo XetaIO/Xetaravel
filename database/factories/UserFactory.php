@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(Xetaravel\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     $username = $faker->unique()->firstName;
@@ -15,7 +15,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->state(App\Models\User::class, 'isAdmin', function (Faker\Generator $faker) {
+$factory->state(Xetaravel\Models\User::class, 'isAdmin', function (Faker\Generator $faker) {
     return [
         'is_admin' => 1,
     ];

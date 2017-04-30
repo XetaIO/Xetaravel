@@ -1,7 +1,6 @@
 <?php
-namespace App\Providers;
+namespace Xetaravel\Providers;
 
-use App\Models\Article;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;

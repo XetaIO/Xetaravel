@@ -1,9 +1,9 @@
 <?php
-namespace App\Http\Controllers;
+namespace Xetaravel\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\User;
-use App\Models\Comment;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\User;
+use Xetaravel\Models\Comment;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

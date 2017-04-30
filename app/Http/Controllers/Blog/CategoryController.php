@@ -1,8 +1,8 @@
 <?php
-namespace App\Http\Controllers\Blog;
+namespace Xetaravel\Http\Controllers\Blog;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
+use Xetaravel\Http\Controllers\Controller;
+use Xetaravel\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

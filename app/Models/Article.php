@@ -1,8 +1,8 @@
 <?php
-namespace App\Models;
+namespace Xetaravel\Models;
 
-use App\Models\User;
-use App\Models\Category;
+use Xetaravel\Models\User;
+use Xetaravel\Models\Category;
 use Eloquence\Behaviours\CountCache\Countable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,7 +30,7 @@ class Article extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('Xetaravel\Models\Category');
     }
 
     /**
@@ -40,7 +40,7 @@ class Article extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('Xetaravel\Models\User');
     }
 
     /**
@@ -50,7 +50,7 @@ class Article extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('Xetaravel\Models\Comment');
     }
 
     /**

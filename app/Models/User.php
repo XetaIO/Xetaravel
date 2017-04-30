@@ -1,8 +1,7 @@
 <?php
+namespace Xetaravel\Models;
 
-namespace App\Models;
-
-use App\Utility\UserUtility;
+use Xetaravel\Utility\UserUtility;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -65,7 +64,7 @@ class User extends Authenticatable
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('Xetaravel\Models\Comment');
     }
 
     /**
@@ -75,7 +74,7 @@ class User extends Authenticatable
      */
     public function articles()
     {
-        return $this->hasMany('App\Models\Article');
+        return $this->hasMany('Xetaravel\Models\Article');
     }
 
     /**

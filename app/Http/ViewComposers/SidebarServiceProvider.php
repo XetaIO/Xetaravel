@@ -1,8 +1,8 @@
 <?php
-namespace App\Http\ViewComposers;
+namespace Xetaravel\Http\ViewComposers;
 
-use App\Models\Article;
-use App\Models\Category;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

@@ -9,5 +9,12 @@
 >
 > This is a light version of the [Xeta](https://github.com/XetaIO/Xeta) website made with Laravel. There's only the public website, no administration, no account management yet.
 >
+> # Installation
+> ## Requirements
+>
+> |PHP|
+> |:---:|
+> |![PHP](https://img.shields.io/badge/PHP->=5.6.4-44CB12.svg?style=flat-square)|
+>
 > # Contribute
 > If you want to contribute to the project by adding new features or just fix a bug, feel free to do a PR.

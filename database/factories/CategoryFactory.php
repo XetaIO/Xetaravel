@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
+$factory->define(Xetaravel\Models\Category::class, function (Faker\Generator $faker) {
     $title = $faker->sentence;
     
     return [

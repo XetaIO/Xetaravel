@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Middleware;
+namespace Xetaravel\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

@@ -176,13 +176,13 @@ return [
         /*
          * Application Service Providers
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\BootstrapServiceProvider::class,
-        App\Http\ViewComposers\SidebarServiceProvider::class
+        Xetaravel\Providers\AppServiceProvider::class,
+        Xetaravel\Providers\AuthServiceProvider::class,
+        // Xetaravel\Providers\BroadcastServiceProvider::class,
+        Xetaravel\Providers\EventServiceProvider::class,
+        Xetaravel\Providers\RouteServiceProvider::class,
+        Xetaravel\Providers\BootstrapServiceProvider::class,
+        Xetaravel\Http\ViewComposers\SidebarServiceProvider::class
     ],
 
     /*

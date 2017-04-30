@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace Xetaravel\Http\Controllers;
 
 use Creitive\Breadcrumbs\Breadcrumbs;
 use Illuminate\Foundation\Bus\DispatchesJobs;
