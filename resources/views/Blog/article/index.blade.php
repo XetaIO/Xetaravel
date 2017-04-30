@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'Blog']) !!}
+{!! config(['app.title' => 'Blog']) !!}
 
 @section('content')
 <div class="container pb-1">

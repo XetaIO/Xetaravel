@@ -3,12 +3,31 @@ namespace Xetaravel\Models;
 
 use Xetaravel\Models\User;
 use Xetaravel\Models\Category;
+use Xetaravel\Scopes\DisplayScope;
 use Eloquence\Behaviours\CountCache\Countable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
 
 class Article extends Model
 {
     use Countable;
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        
+        /**
+         * Don't apply the scope to the admin part.
+         */
+        if (Route::getFacadeRoot()->current()->getPrefix() != '/admin') {
+            static::addGlobalScope(new DisplayScope);
+        }
+    }
 
     /**
      * Return the count cache configuration.

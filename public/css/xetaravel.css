@@ -2470,6 +2470,38 @@ body > .container {
   }
 }
 
+::-moz-selection {
+  background: #f7a5a2;
+  color: #506A85;
+}
+
+::selection {
+  background: #f7a5a2;
+  color: #506A85;
+}
+
+::-moz-selection {
+  background: #f7a5a2;
+  color: #506A85;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f4645f;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 13px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;

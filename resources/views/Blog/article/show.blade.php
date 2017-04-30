@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => $article->title]) !!}
+{!! config(['app.title' => $article->title]) !!}
 
 @push('scripts')
     {!! Html::script('js/prettify.min.js')!!}

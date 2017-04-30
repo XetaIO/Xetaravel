@@ -5,7 +5,7 @@
               © 2016 Xetaravel.
           <ul class="list-inline d-inline-block mb-0">
             <li class="list-inline-item">
-              <a href="https://github.com/XetaIO/Xetaravels" target="_blank">
+              <a href="{{ config('xetaravel.site.github_url') }}" target="_blank">
                 <i class="fa fa-github-alt" data-toggle="tooltip" title="Source Code available on Github"></i>
               </a>
             </li>

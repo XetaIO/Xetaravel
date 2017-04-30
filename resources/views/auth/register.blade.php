@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'Join us !']) !!}
+{!! config(['app.title' => 'Join us !']) !!}
 
 @section('content')
 <div class="container">

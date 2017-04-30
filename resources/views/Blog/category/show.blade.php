@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.name' => 'Category : ' . $category->title]) !!}
+{!! config(['app.title' => 'Category : ' . $category->title]) !!}
 
 @section('content')
 <div class="container pb-1">

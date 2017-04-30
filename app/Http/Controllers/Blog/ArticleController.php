@@ -22,7 +22,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('category', 'user')->paginate(10);
+        $articles = Article::with('category', 'user')
+            ->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
         return view('Blog::article.index', ['articles' => $articles, 'breadcrumbs' => $this->breadcrumbs]);
     }
@@ -44,7 +45,7 @@ class ArticleController extends Controller
                 ->with('danger', 'This article doesn\'t exist or has been deleted !');
         }
 
-        $comments = $article->comments()->paginate(10);
+        $comments = $article->comments()->paginate(config('xetaravel.pagination.blog.comment_per_page'));
 
         $this->breadcrumbs->addCrumb(
             "Article : " . e($article->title),
