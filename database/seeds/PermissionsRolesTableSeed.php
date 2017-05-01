@@ -29,7 +29,7 @@ class PermissionsRolesTableSeeder extends Seeder
         $role = Role::where('slug', 'user')->first();
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 
-        // Banned Role
+        // Banished Role
         $role = Role::where('slug', 'banished')->first();
         $role->attachPermission(Permission::where('slug', 'show.banished')->first());
     }
