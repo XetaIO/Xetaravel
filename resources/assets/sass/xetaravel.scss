@@ -2,6 +2,7 @@
 // Variables
 @import "bootstrap/variables";
 
+@import "bootstrap/mixins";
 @import "mixins";
 
 // Plugins
@@ -17,3 +18,4 @@
 @import "features-box";
 @import "blog";
 @import "profile";
+@import "nav";

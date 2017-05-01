@@ -26,8 +26,8 @@ class LoginControllerTest extends TestCase
     {
         $this->dontSeeIsAuthenticated();
         $data = [
-            'email' => 'emeric@xeta.io',
-            'password' => '123456789',
+            'email' => 'admin@xeta.io',
+            'password' => 'admin',
             'remember' => 1,
         ];
         $response = $this->post('/users/login', $data);

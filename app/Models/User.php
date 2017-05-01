@@ -1,17 +1,20 @@
 <?php
 namespace Xetaravel\Models;
 
-use Xetaravel\Utility\UserUtility;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Eloquence\Behaviours\Sluggable;
+use Ultraware\Roles\Traits\HasRoleAndPermission;
+use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+use Xetaravel\Utility\UserUtility;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasRoleAndPermissionContract
 {
     use Notifiable,
         SoftDeletes,
-        Sluggable;
+        Sluggable,
+        HasRoleAndPermission;
 
     /**
      * The attributes that are mass assignable.
@@ -85,15 +88,5 @@ class User extends Authenticatable
     public function getProfileBackgroundAttribute()
     {
         return UserUtility::getProfileBackground();
-    }
-
-    /**
-     * Return whatever if the user is admin.
-     *
-     * @return boolean
-     */
-    public function isAdmin()
-    {
-        return $this->is_admin;
     }
 }

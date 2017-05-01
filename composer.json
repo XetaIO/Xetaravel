@@ -33,13 +33,15 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "fideloper/proxy": "~3.3",
         "laravelcollective/html": "^5.3.0",
         "filp/whoops": "^2.1",
         "mews/purifier": "~2.0",
         "greggilbert/recaptcha": "~2.0",
         "kirkbushell/eloquence": "~2.0",
         "creitive/breadcrumbs": "dev-bootstrap4",
-        "xetaio/xetaravel-ckeditor": "^1.0"
+        "xetaio/xetaravel-ckeditor": "^1.0",
+        "ultraware/roles": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -74,7 +76,9 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "XetaravelInstaller\\Installer::postInstall"
+            "XetaravelInstaller\\Installer::postInstall",
+            "npm install",
+            "gulp"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",

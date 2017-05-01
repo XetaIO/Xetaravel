@@ -12,5 +12,10 @@ composer.lock
 /public/storage
 /public/coverage
 /public/vendor/ckeditor/release
+/public/css
+/public/fonts
+/public/images
+/public/js
+/public/music
 /storage/*.key
 /vendor

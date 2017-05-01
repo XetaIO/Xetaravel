@@ -97,6 +97,18 @@ $spacers: (
   3: (
     x: ($spacer-x * 3),
     y: ($spacer-y * 3)
+  ),
+  4: (
+    x: ($spacer-x * 4),
+    y: ($spacer-y * 4)
+  ),
+  5: (
+    x: ($spacer-x * 5),
+    y: ($spacer-y * 5)
+  ),
+  6: (
+    x: ($spacer-x * 6),
+    y: ($spacer-y * 6)
   )
 ) !default;
 $border-width: 2px !default;
@@ -573,6 +585,11 @@ $nav-tabs-justified-active-link-border-color: $body-bg !default;
 $nav-pills-border-radius:     $border-radius !default;
 $nav-pills-active-link-color: $component-active-color !default;
 $nav-pills-active-link-bg:    $component-active-bg !default;
+
+$nav-menu-border-radius:     $border-radius !default;
+$nav-menu-active-link-color: $brand-primary !default;
+$nav-menu-active-link-bg:    $component-active-bg !default;
+$nav-manu-nav-link-padding:  1em 1em !default;
 
 
 // Pagination
