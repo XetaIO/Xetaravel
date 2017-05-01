@@ -7,6 +7,7 @@ use Xetaravel\Scopes\DisplayScope;
 use Eloquence\Behaviours\CountCache\Countable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 class Article extends Model
 {
@@ -22,9 +23,14 @@ class Article extends Model
         parent::boot();
         
         /**
-         * Don't apply the scope to the admin part.
+         * The Route::getFacadeRoot() is undefined in the testing environment for mysterious reasons.
          */
-        if (Route::getFacadeRoot()->current()->getPrefix() != '/admin') {
+        if (App::environment() != 'testing') {
+            // Don't apply the scope to the admin part.
+            if (Route::getFacadeRoot()->current()->getPrefix() != '/admin') {
+                static::addGlobalScope(new DisplayScope);
+            }
+        } else {
             static::addGlobalScope(new DisplayScope);
         }
     }

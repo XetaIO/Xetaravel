@@ -5,6 +5,7 @@ namespace Xetaravel\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -44,6 +45,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Ultraware\Roles\Exceptions\RoleDeniedException ||
+            $exception instanceof \Ultraware\Roles\Exceptions\PermissionDeniedException ||
+            $exception instanceof \Ultraware\Roles\Exceptions\LevelDeniedException) {
+            //If the user is banished, redirect him to the banished page.
+            if (Auth::check() && Auth::user()->hasRole('banished')) {
+                return redirect()
+                    ->route('page_banished');
+            }
+
+            return redirect()
+                ->route('page_index')
+                ->with('danger', 'You don\'t have the permission to view this page.');
+        }
+
         return parent::render($request, $exception);
     }
 

@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('images/avatar.png');
             $table->integer('comment_count')->unsigned()->default(0);
             $table->integer('article_count')->unsigned()->default(0);
-            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->ipAddress('register_ip');
             $table->ipAddress('last_login_ip');

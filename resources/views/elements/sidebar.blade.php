@@ -5,7 +5,7 @@
             <a href="{{ route('users_user_show', ['slug' => Auth::user()->slug, 'id' => Auth::user()->id]) }}" class="sidebar-avatar" title="Visit your profile !" data-toggle="tooltip" data-placement="left" data-container="body">
                 <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar">
             </a>
-            @if (Auth::user()->isAdmin())
+            @permission('access.administration')
                 <li>
                     <a href="{{ route('admin_page_index') }}" class="hidden-xs-down" title="Access to the site administration." data-toggle="tooltip" data-placement="left" data-container="body">
                         <i class="fa fa-dashboard"></i>
@@ -17,7 +17,7 @@
                         <small class="sidebar-text">Dashboard</small>
                     </a>
                 </li>
-            @endif
+            @endpermission
 
             <li>
                 <a href="{{ route('users_account_index') }}" class="hidden-xs-down" title="Manage your account settings." data-toggle="tooltip" data-placement="left" data-container="body">

@@ -27,7 +27,7 @@ class PageControllerTest extends TestCase
      */
     public function testIndexNotAdmin()
     {
-        $user = User::find(2);
+        $user = User::find(3);
         $this->be($user);
 
         $response = $this->get('/admin');

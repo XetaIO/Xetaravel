@@ -172,6 +172,7 @@ return [
         Eloquence\EloquenceServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Xetaravel\Ckeditor\Providers\CkeditorServiceProvider::class,
+        Ultraware\Roles\RolesServiceProvider::class,
 
         /*
          * Application Service Providers

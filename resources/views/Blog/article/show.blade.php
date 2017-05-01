@@ -2,16 +2,22 @@
 {!! config(['app.title' => $article->title]) !!}
 
 @push('scripts')
-    {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
+    @if (Auth::user())
+        {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
+    @endif
+    
     {!! Html::script('js/prettify.min.js')!!}
     <script type="text/javascript">
-        /**
-         * CKEditor
-         */
-        CKEDITOR.plugins.addExternal('pbckcode', 'http://prbaron.github.com/pbckcode/plugins/pbckcode/', 'plugin.js');
-        CKEDITOR.replace('commentBox', {
-            customConfig: '../config/comment.js'
-        });
+        @if (Auth::user())
+            /**
+            * CKEditor
+            */
+            CKEDITOR.plugins.addExternal('pbckcode', 'http://prbaron.github.com/pbckcode/plugins/pbckcode/', 'plugin.js');
+            CKEDITOR.replace('commentBox', {
+                customConfig: '../config/comment.js'
+            });
+        @endif
+        
         /**
          * Prettify.
          */

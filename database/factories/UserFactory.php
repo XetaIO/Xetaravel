@@ -9,14 +9,7 @@ $factory->define(Xetaravel\Models\User::class, function (Faker\Generator $faker)
         'username' => $username,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'is_admin' => 0,
         'register_ip' => $faker->ipv4,
         'last_login_ip' => $faker->ipv4
-    ];
-});
-
-$factory->state(Xetaravel\Models\User::class, 'isAdmin', function (Faker\Generator $faker) {
-    return [
-        'is_admin' => 1,
     ];
 });

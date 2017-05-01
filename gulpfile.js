@@ -41,5 +41,8 @@ elixir((mix) => {
         .scripts([
              'app.js'
         ], 'public/js/app.js')
-        .typescript('ts.ts');
+        .typescript('ts.ts')
+        .copy('resources/assets/music', 'public/music')
+        .copy('resources/assets/images', 'public/images')
+        .copy('resources/assets/fonts', 'public/fonts');
 });

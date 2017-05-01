@@ -10,11 +10,13 @@ class AccountController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('User', route('users_account_index'));
+        $this->breadcrumbs->addCrumb('Account', route('users_account_index'));
     }
 
     public function index()
     {
-        return view('account.index');
+        $this->breadcrumbs->setCssClasses('breadcrumb');
+
+        return view('account.index', ['breadcrumbs' => $this->breadcrumbs]);
     }
 }

@@ -18,6 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Xetaravel\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Xetaravel\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -57,6 +58,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         // Applications
-        'admin' => \Xetaravel\Http\Middleware\Admin::class
+        'permission' => \Xetaravel\Http\Middleware\VerifyPermission::class,
+        
+        // Extension
+        'role' => \Ultraware\Roles\Middleware\VerifyRole::class,
+        'level' => \Ultraware\Roles\Middleware\VerifyLevel::class,
     ];
 }

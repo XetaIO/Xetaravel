@@ -28,7 +28,7 @@
             <div class="col-xs-12">
                 <h1>Welcome on <span class="text-primary font-xeta">Xetaravel</span> !</h1>
                 <p class="description">
-                    This version is a light version of the <a class="font-weight-bold" href="https://github.com/XetaIO/Xeta" target="_blank">Xeta</a> project made with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and with <i class="fa fa-heart" style="color: #fa6c65"></i>.
+                    This version is a light version of the <a class="font-weight-bold" href="https://github.com/XetaIO/Xeta" target="_blank">Xeta</a> project made with <i class="fa fa-heart" style="color: #fa6c65"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
                 <a class="btn btn-outline-primary-inverse" href="{{ route('blog_article_index') }}">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog

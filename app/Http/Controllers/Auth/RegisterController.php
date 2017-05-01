@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use Illuminate\Support\Facades\Validator;
+use Ultraware\Roles\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -93,10 +94,14 @@ class RegisterController extends Controller
      * @param \Illuminate\Http\Request $request The request object.
      * @param mixed $user
      *
-     * @return mixed
+     * @return void
      */
     protected function registered(Request $request, $user)
     {
+        // Set the user role.
+        $role = Role::where('slug', 'user')->first();
+        $user->attachRole($role);
+        
         $request->session()->flash('success', 'Your account has been created successfully !');
     }
 }

@@ -1,17 +1,24 @@
 <?php
+
 /*
 |--------------------------------------------------------------------------
 | Regular Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', 'PageController@index')->name('page_index');
+Route::group(['middleware' => ['permission:access.site,allowGuest']], function () {
+    Route::get('/', 'PageController@index')->name('page_index');
+});
+
+Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {
+    Route::get('banished', 'PageController@banished')->name('page_banished');
+});
 
 /*
 |--------------------------------------------------------------------------
 | Users Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'users'], function () {
+Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allowGuest']], function () {
     Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes
         Route::get('login', 'LoginController@showLoginForm')->name('users_auth_login');
@@ -44,7 +51,11 @@ Route::group(['prefix' => 'users'], function () {
 | Blog Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
+Route::group([
+    'namespace' => 'Blog',
+    'prefix' => 'blog',
+    'middleware' => ['permission:access.site,allowGuest']
+], function () {
 
     // Article Routes
     Route::get('/', 'ArticleController@index')
@@ -71,7 +82,11 @@ Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
 Route::group([
         'namespace' => 'Admin',
         'prefix' => 'admin',
-        'middleware' => ['auth', 'admin']
+        'middleware' => [
+            'auth',
+            'permission:access.administration',
+            'permission:access.site'
+            ]
     ], function () {
         Route::get('/', 'PageController@index')->name('admin_page_index');
     }

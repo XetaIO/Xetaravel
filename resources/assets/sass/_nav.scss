@@ -1,0 +1,39 @@
+.nav-menu {
+  @include clearfix();
+
+  .nav-item {
+    float: left;
+
+    + .nav-item {
+      margin-left: $nav-item-margin;
+    }
+  }
+
+  .nav-link {
+    display: block;
+    padding: $nav-manu-nav-link-padding;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid rgba(0, 0, 0, 0.1);
+    border-right: 4px solid rgba(0, 0, 0, 0.1);
+
+    @include hover {
+      color: $nav-menu-active-link-color;
+      border-left: 4px solid $nav-menu-active-link-color;
+      border-right: 4px solid $nav-menu-active-link-color;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.open .nav-link {
+    @include plain-hover-focus {
+      color: $nav-menu-active-link-color;
+      cursor: default;
+      border-left: 4px solid $nav-menu-active-link-color;
+      border-right: 4px solid $nav-menu-active-link-color;
+    }
+  }
+}
