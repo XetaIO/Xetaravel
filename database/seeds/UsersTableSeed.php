@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $users = [
             [
                 'username' => 'Admin',
                 'email' => 'admin@xeta.io',
@@ -62,6 +62,18 @@ class UsersTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
-        ]);
+        ];
+
+        DB::table('users')->insert($users);
+
+        // Update avatars
+        foreach ($users as $user) {
+            $model = \Xetaravel\Models\User::where('username', $user['username'])->first();
+            $model->addMedia(public_path('images/avatar.png'))
+                ->preservingOriginal()
+                ->setName(substr(md5($user['username']), 0, 10))
+                ->setFileName(substr(md5($user['username']), 0, 10) . '.png')
+                ->toMediaCollection('avatar');
+        }
     }
 }
