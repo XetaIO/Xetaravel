@@ -55,6 +55,16 @@ return [
             'visibility' => 'public',
         ],
 
+        'media' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/media',
+        ],
+
+        'tests' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/tests/storage/media',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

@@ -27,8 +27,6 @@ class UserController extends Controller
      */
     public function show(Request $request, $slug, $id)
     {
-        
-        // Check if the article exist and if its display.
         $user = User::with('articles', 'comments')
             ->where('id', $id)
             ->first();

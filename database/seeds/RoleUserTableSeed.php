@@ -23,6 +23,6 @@ class RoleUserTableSeeder extends Seeder
         $user->attachRole(Role::where('slug', 'user')->first());
 
         $user = User::where('username', 'Banished')->first();
-        $user->attachRole(Role::where('slug', 'banned')->first());
+        $user->attachRole(Role::where('slug', 'banished')->first());
     }
 }

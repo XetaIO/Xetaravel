@@ -17,5 +17,8 @@ composer.lock
 /public/images
 /public/js
 /public/music
+/public/media
+/public/tests
 /storage/*.key
+/storage/medialibrary
 /vendor

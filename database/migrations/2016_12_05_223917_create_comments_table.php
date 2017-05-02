@@ -15,7 +15,7 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
             $table->integer('article_id')->unsigned()->index();
             $table->longText('content');
@@ -25,7 +25,7 @@ class CreateCommentsTable extends Migration
         /**
          * Only create foreign key on production/development.
          */
-        if (App::environment() == 'testing') {
+        if (App::environment() != 'testing') {
             Schema::table('comments', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users');
                 $table->foreign('article_id')->references('id')->on('articles');

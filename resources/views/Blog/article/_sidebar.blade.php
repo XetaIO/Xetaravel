@@ -1,5 +1,5 @@
 <div class="sidebar-module">
-    <h4>Latest Articles</h4>
+    <h4 class="font-xeta">Latest Articles</h4>
     <ol class="list-unstyled">
         @foreach ($articles as $article)
             <li>
@@ -11,7 +11,7 @@
     </ol>
 </div>
 <div class="sidebar-module">
-    <h4>Categories</h4>
+    <h4 class="font-xeta">Categories</h4>
     <ol class="list-unstyled">
         @foreach ($categories as $category)
             <li>

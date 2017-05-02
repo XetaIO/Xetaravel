@@ -1,5 +1,3 @@
-declare function $(jQuery): any;
-
 class Xeta
 {
     /**

@@ -41,16 +41,18 @@
         "kirkbushell/eloquence": "~2.0",
         "creitive/breadcrumbs": "dev-bootstrap4",
         "xetaio/xetaravel-ckeditor": "^1.0",
-        "ultraware/roles": "^5.4"
+        "ultraware/roles": "^5.4",
+        "spatie/laravel-medialibrary": "^5.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7",
+        "phpunit/phpunit": "^6.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "squizlabs/php_codesniffer": "3.0.x-dev",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "barryvdh/laravel-debugbar": "^2.3",
+        "symfony/filesystem": "^3.2"
     },
     "autoload": {
         "classmap": [

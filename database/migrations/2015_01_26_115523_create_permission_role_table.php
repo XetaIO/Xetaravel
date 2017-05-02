@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\App;
 
 class CreatePermissionRoleTable extends Migration
 {
@@ -15,11 +16,19 @@ class CreatePermissionRoleTable extends Migration
         Schema::create('permission_role', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('permission_id')->unsigned()->index();
-            $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->integer('role_id')->unsigned()->index();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
         });
+
+        /**
+         * Only create foreign key on production/development.
+         */
+        if (App::environment() != 'testing') {
+            Schema::table('permission_role', function (Blueprint $table) {
+                $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
+                $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            });
+        }
     }
 
     /**

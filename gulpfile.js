@@ -1,7 +1,7 @@
 const elixir = require('laravel-elixir');
 
 
-const elixirTypscript = require('elixir-typescript');
+require('laravel-elixir-typescript');
 
 /*
  |--------------------------------------------------------------------------
@@ -23,6 +23,9 @@ elixir((mix) => {
             'bootstrap/bootstrap.scss'
         ], 'public/css/bootstrap.min.css')
         .sass([
+            'jasny-bootstrap/jasny-bootstrap.scss'
+        ], 'public/css/bootstrap.plugins.min.css')
+        .sass([
             'font-awesome/font-awesome.scss'
         ], 'public/css/font-awesome.min.css')
         .scripts([
@@ -30,6 +33,7 @@ elixir((mix) => {
             'libs/jquery.easing.min.js',
             'libs/tether.min.js',
             'libs/bootstrap.min.js',
+            'libs/jasny-bootstrap.min.js',
             'libs/particles.min.js',
             'libs/prism.min.js',
             'libs/scrollup.min.js',
