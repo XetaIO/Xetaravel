@@ -1,20 +1,23 @@
 <?php
 namespace Xetaravel\Models;
 
+use Eloquence\Behaviours\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Eloquence\Behaviours\Sluggable;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Xetaravel\Utility\UserUtility;
 
-class User extends Authenticatable implements HasRoleAndPermissionContract
+class User extends Authenticatable implements HasRoleAndPermissionContract, HasMediaConversions
 {
     use Notifiable,
         SoftDeletes,
         Sluggable,
-        HasRoleAndPermission;
+        HasRoleAndPermission,
+        HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +43,10 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
      * @var array
      */
     protected $appends = [
-        'profile_background'
+        'profile_background',
+        'avatar_small',
+        'avatar_medium',
+        'avatar_big'
     ];
 
     /**
@@ -58,6 +64,27 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     public function slugStrategy()
     {
         return 'username';
+    }
+
+    public function registerMediaConversions()
+    {
+        $this->addMediaConversion('thumbnail.small')
+              ->width(100)
+              ->height(100)
+              ->keepOriginalImageFormat();
+        
+        $this->addMediaConversion('thumbnail.medium')
+              ->width(200)
+              ->height(200)
+              ->keepOriginalImageFormat();
+        
+        $this->addMediaConversion('thumbnail.big')
+              ->width(300)
+              ->height(300)
+              ->keepOriginalImageFormat();
+        
+        $this->addMediaConversion('original')
+              ->keepOriginalImageFormat();
     }
 
     /**
@@ -78,6 +105,36 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
     public function articles()
     {
         return $this->hasMany('Xetaravel\Models\Article');
+    }
+
+    /**
+     * Get the small avatar.
+     *
+     * @return string
+     */
+    public function getAvatarSmallAttribute()
+    {
+        return $this->getMedia('avatar')[0]->getUrl('thumbnail.small');
+    }
+
+    /**
+     * Get the medium avatar.
+     *
+     * @return string
+     */
+    public function getAvatarMediumAttribute()
+    {
+        return $this->getMedia('avatar')[0]->getUrl('thumbnail.medium');
+    }
+
+    /**
+     * Get the big avatar.
+     *
+     * @return string
+     */
+    public function getAvatarBigAttribute()
+    {
+        return $this->getMedia('avatar')[0]->getUrl('thumbnail.big');
     }
 
     /**

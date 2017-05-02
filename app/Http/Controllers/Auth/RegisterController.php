@@ -102,6 +102,14 @@ class RegisterController extends Controller
         $role = Role::where('slug', 'user')->first();
         $user->attachRole($role);
         
+        // Set the default avatar.
+        $user->clearMediaCollection('avatar');
+        $user->addMedia(public_path('images/avatar.png'))
+            ->preservingOriginal()
+            ->setName(substr(md5($user->username), 0, 10))
+            ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+            ->toMediaCollection('avatar');
+        
         $request->session()->flash('success', 'Your account has been created successfully !');
     }
 }

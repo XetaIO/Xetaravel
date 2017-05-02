@@ -3,7 +3,7 @@
     <div class="sidebar-container">
         <ul class="nav sidebar-menu">
             <a href="{{ route('users_user_show', ['slug' => Auth::user()->slug, 'id' => Auth::user()->id]) }}" class="sidebar-avatar" title="Visit your profile !" data-toggle="tooltip" data-placement="left" data-container="body">
-                <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar">
+                <img src="{{ asset(Auth::user()->avatar_small) }}" alt="avatar">
             </a>
             @permission('access.administration')
                 <li>

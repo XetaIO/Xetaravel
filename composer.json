@@ -41,7 +41,8 @@
         "kirkbushell/eloquence": "~2.0",
         "creitive/breadcrumbs": "dev-bootstrap4",
         "xetaio/xetaravel-ckeditor": "^1.0",
-        "ultraware/roles": "^5.4"
+        "ultraware/roles": "^5.4",
+        "spatie/laravel-medialibrary": "^5.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

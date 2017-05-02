@@ -36,5 +36,10 @@ class BootstrapServiceProvider extends ServiceProvider
             'label' => null,
             'attributes' => []
         ]);
+        Form::component(
+            'bsInputGroup',
+            'components.form.input-group',
+            ['name', 'label' => null, 'value' => null, 'attributes' => []]
+        );
     }
 }

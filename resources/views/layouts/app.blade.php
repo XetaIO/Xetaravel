@@ -13,6 +13,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/xetaravel.css') }}" rel="stylesheet">
 

@@ -173,6 +173,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Xetaravel\Ckeditor\Providers\CkeditorServiceProvider::class,
         Ultraware\Roles\RolesServiceProvider::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
 
         /*
          * Application Service Providers

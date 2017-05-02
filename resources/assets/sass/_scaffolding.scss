@@ -13,6 +13,13 @@ body {
     }
 }
 
+section {
+    padding: $section-padding;
+    border: 1px solid $section-border-color;
+    @include border-radius($border-radius);
+    @include clearfix;
+}
+
 .font-xeta {
     font-family: $font-family-xeta;
 }

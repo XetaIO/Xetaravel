@@ -62,7 +62,7 @@
                 <div class="card-block" style="display: flex;">
                     <div class="card-left" style="padding-right: 15px;">
                         <a href="{{ route('users_user_show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
-                            <img class="card-media rounded-circle" src="{{ asset($article->user->avatar) }}" alt="Avatar" height="64px", width="64px">
+                            <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                     </div>
                     <div class="card-body" style="flex: 1;">
@@ -87,7 +87,7 @@
                     <div class="media">
                         <div class="media-left">
                         <a href="{{ route('users_user_show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
-                            <img class="media-object rounded-circle" src="{{ asset($article->user->avatar) }}" alt="Avatar" height="64px", width="64px">
+                            <img class="media-object rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                         </div>
 
@@ -127,7 +127,7 @@
 
                 <div class="comment mb-2">
                     <div class="comment-media hidden-sm-down">
-                        {{ Html::image(Auth::user()->avatar, 'Avatar', ['class' => 'rounded-circle', 'height' => '80px', 'width' => '80px']) }}
+                        {{ Html::image(Auth::user()->avatar_small, 'Avatar', ['class' => 'rounded-circle', 'height' => '80px', 'width' => '80px']) }}
                     </div>
                     <div class="comment-content">
                         {!! Form::open(['route' => 'blog_comment_create']) !!}

@@ -132,7 +132,7 @@
 
                     <div class="media-left">
                         <a href="{{ route('users_user_show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
-                            <img class="media-object" src="{{ asset($comment->user->avatar) }}" alt="Avatar" height="64px", width="64px">
+                            <img class="media-object" src="{{ asset($comment->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                     </div>
 
