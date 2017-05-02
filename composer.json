@@ -71,14 +71,14 @@
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate"
+            "php artisan key:generate",
+            "npm install",
+            "gulp"
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "XetaravelInstaller\\Installer::postInstall",
-            "npm install",
-            "gulp"
+            "XetaravelInstaller\\Installer::postInstall"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
