@@ -1,7 +1,7 @@
 const elixir = require('laravel-elixir');
 
 
-const elixirTypscript = require('elixir-typescript');
+require('laravel-elixir-typescript');
 
 /*
  |--------------------------------------------------------------------------
