@@ -66,6 +66,11 @@ class User extends Authenticatable implements HasRoleAndPermissionContract, HasM
         return 'username';
     }
 
+    /**
+     * Register the related to the Model.
+     *
+     * @return void
+     */
     public function registerMediaConversions()
     {
         $this->addMediaConversion('thumbnail.small')

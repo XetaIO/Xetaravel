@@ -3,11 +3,17 @@ namespace Xetaravel\Http\Controllers;
 
 use Xetaravel\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator as FacadeValidator;
+use Illuminate\Validation\Validator;
+use Illuminate\View\View;
 
 class AccountController extends Controller
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
@@ -18,9 +24,9 @@ class AccountController extends Controller
     /**
      * Show the account update form.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View
     {
         $user = User::find(Auth::user()->id);
 
@@ -34,9 +40,9 @@ class AccountController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $this->validator($request->all())->validate();
 
@@ -44,11 +50,13 @@ class AccountController extends Controller
             $user = User::find(Auth::user()->id);
 
             // Handle the avatar upload.
-            $user->clearMediaCollection('avatar');
-            $user->addMedia($request->file('avatar'))
-                ->setName(substr(md5($user->username), 0, 10))
-                ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
-                ->toMediaCollection('avatar');
+            if (!is_null($request->file('avatar'))) {
+                $user->clearMediaCollection('avatar');
+                $user->addMedia($request->file('avatar'))
+                    ->setName(substr(md5($user->username), 0, 10))
+                    ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
+                    ->toMediaCollection('avatar');
+            }
 
             return redirect()
                 ->route('users_account_index')
@@ -65,9 +73,9 @@ class AccountController extends Controller
      *
      * @param array $data The data used to update the user.
      *
-     * @return \Xetaravel\Models\User
+     * @return int
      */
-    protected function updateUser(array $data)
+    protected function updateUser(array $data): int
     {
         return User::where('id', Auth::user()->id)
             ->update([
@@ -85,9 +93,9 @@ class AccountController extends Controller
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): Validator
     {
         $rules = [
             'first_name' => 'max:100',
@@ -97,6 +105,6 @@ class AccountController extends Controller
             'twitter' => 'max:50'
         ];
 
-        return Validator::make($data, $rules);
+        return FacadeValidator::make($data, $rules);
     }
 }
