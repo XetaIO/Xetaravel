@@ -53,6 +53,7 @@ class AccountController extends Controller
             if (!is_null($request->file('avatar'))) {
                 $user->clearMediaCollection('avatar');
                 $user->addMedia($request->file('avatar'))
+                    ->preservingOriginal()
                     ->setName(substr(md5($user->username), 0, 10))
                     ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
                     ->toMediaCollection('avatar');
