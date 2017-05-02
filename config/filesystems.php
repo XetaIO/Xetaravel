@@ -57,7 +57,12 @@ return [
 
         'media' => [
             'driver' => 'local',
-            'root'   => public_path().'/media',
+            'root'   => public_path() . '/media',
+        ],
+
+        'tests' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/tests/storage/media',
         ],
 
         's3' => [
