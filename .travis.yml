@@ -34,8 +34,6 @@ before_script:
   - phpenv rehash
   - set +H
   - mysql -V
-  - npm install
-  - gulp
 
 script:
   - sh -c "if [ '$DEFAULT' = '1' ]; then vendor/bin/phpunit; fi"

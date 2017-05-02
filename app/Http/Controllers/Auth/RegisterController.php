@@ -104,7 +104,7 @@ class RegisterController extends Controller
         
         // Set the default avatar.
         $user->clearMediaCollection('avatar');
-        $user->addMedia(public_path('images/avatar.png'))
+        $user->addMedia(resource_path('assets/images/avatar.png'))
             ->preservingOriginal()
             ->setName(substr(md5($user->username), 0, 10))
             ->setFileName(substr(md5($user->username), 0, 10) . '.png')
