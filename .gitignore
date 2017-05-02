@@ -19,7 +19,6 @@ composer.lock
 /public/music
 /public/media
 /public/tests
-/tests/storage
 /storage/*.key
 /storage/medialibrary
 /vendor
