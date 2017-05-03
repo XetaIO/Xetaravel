@@ -73,7 +73,7 @@
                         </h4>
 
                         <p class="card-subtitle text-muted">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean justo nunc, posuere id maximus ac, rhoncus a ante.
+                            {!! Purifier::clean($article->user->signature, 'user_signature') !!}
                         </p>
                     </div>
                 </div>

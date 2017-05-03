@@ -1,13 +1,15 @@
 <?php
 namespace Xetaravel\Http\Controllers;
 
-use Xetaravel\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Validator;
 use Illuminate\View\View;
+use Xetaravel\Models\Repositories\AccountRepository;
+use Xetaravel\Models\User;
+use Xetaravel\Models\Validators\AccountValidator;
 
 class AccountController extends Controller
 {
@@ -36,7 +38,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Handle a registration request for the application.
+     * Handle a account update request for the application.
      *
      * @param \Illuminate\Http\Request $request
      *
@@ -44,9 +46,9 @@ class AccountController extends Controller
      */
     public function update(Request $request): RedirectResponse
     {
-        $this->validator($request->all())->validate();
+        AccountValidator::update($request->all())->validate();
 
-        if ($this->updateUser($request->all())) {
+        if (AccountRepository::update($request->all())) {
             $user = User::find(Auth::user()->id);
 
             // Handle the avatar upload.
@@ -67,45 +69,5 @@ class AccountController extends Controller
                 ->route('users_account_index')
                 ->with('danger', 'An error occurred while saving your informations !');
         }
-    }
-
-    /**
-     * Update the user instance after a valid account update.
-     *
-     * @param array $data The data used to update the user.
-     *
-     * @return int
-     */
-    protected function updateUser(array $data): int
-    {
-        return User::where('id', Auth::user()->id)
-            ->update([
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'facebook' => $data['facebook'],
-                'twitter' => $data['twitter'],
-                'biography' => $data['biography'],
-                'signature' => $data['signature']
-            ]);
-    }
-
-    /**
-     * Get a validator for an incoming account request.
-     *
-     * @param array $data The data to validate.
-     *
-     * @return \Illuminate\Validation\Validator
-     */
-    protected function validator(array $data): Validator
-    {
-        $rules = [
-            'first_name' => 'max:100',
-            'last_name' => 'max:100',
-            'avatar' => 'image',
-            'facebook' => 'max:50',
-            'twitter' => 'max:50'
-        ];
-
-        return FacadeValidator::make($data, $rules);
     }
 }

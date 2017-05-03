@@ -1,15 +1,16 @@
 <?php
-
 namespace Xetaravel\Http\Controllers\Auth;
 
-use Xetaravel\Models\User;
-use Xetaravel\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Request as FacadeRequest;
 use Illuminate\Support\Facades\Validator;
 use Ultraware\Roles\Models\Role;
+use Xetaravel\Http\Controllers\Controller;
+use Xetaravel\Models\User;
+use Xetaravel\Models\Repositories\UserRepository;
+use Xetaravel\Models\Validators\UserValidator;
 
 class RegisterController extends Controller
 {
@@ -44,55 +45,29 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Handle a registration request for the application.
      *
-     * @param array $data The data to validate.
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function register(Request $request)
     {
-        $rules = [
-            'username' => 'required|min:4|max:20|unique:users',
-            'email' => 'required|email|max:50|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'terms' => 'required|min:1'
-        ];
+        UserValidator::create($request->all())->validate();
 
-        // Bipass the captcha for the unit testing.
-        if (App::environment() != 'testing') {
-            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|recaptcha']);
-        }
+        event(new Registered($user = UserRepository::create($request->all())));
 
-        return Validator::make($data, $rules);
-    }
+        $this->guard()->login($user);
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param array $data The data used to create the user.
-     *
-     * @return \Xetaravel\Models\User
-     */
-    protected function create(array $data)
-    {
-        $ip = FacadeRequest::ip();
-
-        return User::create([
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'register_ip' => $ip,
-            'last_login_ip' => $ip,
-            'last_login' => new \DateTime()
-        ]);
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     /**
      * The user has been registered.
      *
      * @param \Illuminate\Http\Request $request The request object.
-     * @param mixed $user
+     * @param \Xetaravel\Models\User $user The user that has been registered.
      *
      * @return void
      */

@@ -1,11 +1,10 @@
 <?php
 namespace Xetaravel\Models;
 
-use Xetaravel\Models\User;
 use Xetaravel\Models\Category;
-use Xetaravel\Scopes\DisplayScope;
+use Xetaravel\Models\User;
+use Xetaravel\Models\Scopes\DisplayScope;
 use Eloquence\Behaviours\CountCache\Countable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -40,7 +39,7 @@ class Article extends Model
      *
      * @return array
      */
-    public function countCaches()
+    public function countCaches(): array
     {
         return [
             User::class,
@@ -76,15 +75,5 @@ class Article extends Model
     public function comments()
     {
         return $this->hasMany('Xetaravel\Models\Comment');
-    }
-
-    /**
-     * Find the latest articles for the sidebar.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public static function sidebar()
-    {
-        return Article::latest()->take(5)->get();
     }
 }

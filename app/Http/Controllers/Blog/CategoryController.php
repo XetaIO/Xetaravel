@@ -18,7 +18,7 @@ class CategoryController extends Controller
     /**
      * Show the article by his id.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show(Request $request, $slug, $id)
     {
