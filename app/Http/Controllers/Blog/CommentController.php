@@ -5,7 +5,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
 use Xetaravel\Models\Repositories\CommentRepository;
 use Xetaravel\Models\Validators\CommentValidator;
 
