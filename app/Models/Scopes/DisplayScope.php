@@ -1,5 +1,5 @@
 <?php
-namespace Xetaravel\Scopes;
+namespace Xetaravel\Models\Scopes;
 
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;

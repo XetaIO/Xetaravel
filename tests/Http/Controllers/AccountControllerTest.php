@@ -30,7 +30,11 @@ class AccountControllerTest extends TestCase
     {
         $user = User::find(1);
         $this->be($user);
-        $this->assertTrue(empty($user->first_name));
+        $this->assertSame('Admin', $user->first_name);
+        $this->assertSame('Istrator', $user->last_name);
+        $this->assertSame('AdminFB', $user->facebook);
+        $this->assertSame('AdminTW', $user->twitter);
+        
         $oldAvatarUrl = $user->avatar_small;
 
         $file = new \Illuminate\Http\UploadedFile(

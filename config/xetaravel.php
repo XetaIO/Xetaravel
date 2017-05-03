@@ -38,7 +38,7 @@ return [
     'pagination' => [
         'blog' => [
             'article_per_page' => 10,
-            'comment_per_page' => 1
+            'comment_per_page' => 10
         ]
     ]
 ];

@@ -1,8 +1,8 @@
 <?php
 namespace Xetaravel\Http\ViewComposers;
 
-use Xetaravel\Models\Article;
-use Xetaravel\Models\Category;
+use Xetaravel\Models\Repositories\ArticleRepository;
+use Xetaravel\Models\Repositories\CategoryRepository;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,8 +16,8 @@ class SidebarServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('Blog::article._sidebar', function ($view) {
-            $articles = Article::sidebar();
-            $categories = Category::sidebar();
+            $articles = ArticleRepository::sidebar();
+            $categories = CategoryRepository::sidebar();
 
             $view->with(['articles' => $articles, 'categories' => $categories]);
         });

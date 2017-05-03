@@ -2,22 +2,38 @@
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\Sluggable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
-use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
-use Xetaravel\Utility\UserUtility;
+use Ultraware\Roles\Traits\HasRoleAndPermission;
+use Xetaravel\Models\Entities\UserEntity;
+use Xetaravel\Models\Presenters\UserPresenter;
 
-class User extends Authenticatable implements HasRoleAndPermissionContract, HasMediaConversions
+class User extends Model implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract,
+    HasRoleAndPermissionContract,
+    HasMediaConversions
 {
-    use Notifiable,
+    use Authenticatable,
+        Authorizable,
+        CanResetPassword,
+        Notifiable,
         SoftDeletes,
         Sluggable,
         HasRoleAndPermission,
-        HasMediaTrait;
+        HasMediaTrait,
+        UserEntity,
+        UserPresenter;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +41,13 @@ class User extends Authenticatable implements HasRoleAndPermissionContract, HasM
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'slug', 'register_ip', 'last_login_ip', 'last_login'
+        'username',
+        'email',
+        'password',
+        'slug',
+        'register_ip',
+        'last_login_ip',
+        'last_login'
     ];
 
     /**
@@ -34,7 +56,8 @@ class User extends Authenticatable implements HasRoleAndPermissionContract, HasM
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token'
     ];
 
     /**
@@ -44,9 +67,19 @@ class User extends Authenticatable implements HasRoleAndPermissionContract, HasM
      */
     protected $appends = [
         'profile_background',
+        
+        // Media Model
         'avatar_small',
         'avatar_medium',
-        'avatar_big'
+        'avatar_big',
+        
+        // Account Model
+        'first_name',
+        'last_name',
+        'biography',
+        'signature',
+        'facebook',
+        'twitter'
     ];
 
     /**
@@ -54,14 +87,16 @@ class User extends Authenticatable implements HasRoleAndPermissionContract, HasM
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * Return the field to slug.
      *
      * @return string
      */
-    public function slugStrategy()
+    public function slugStrategy(): string
     {
         return 'username';
     }
@@ -113,42 +148,22 @@ class User extends Authenticatable implements HasRoleAndPermissionContract, HasM
     }
 
     /**
-     * Get the small avatar.
+     * Get the account for the user.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function getAvatarSmallAttribute()
+    public function account()
     {
-        return $this->getMedia('avatar')[0]->getUrl('thumbnail.small');
+        return $this->hasOne('Xetaravel\Models\Account');
     }
 
     /**
-     * Get the medium avatar.
+     * Get the roles for the user.
      *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function getAvatarMediumAttribute()
+    public function roles()
     {
-        return $this->getMedia('avatar')[0]->getUrl('thumbnail.medium');
-    }
-
-    /**
-     * Get the big avatar.
-     *
-     * @return string
-     */
-    public function getAvatarBigAttribute()
-    {
-        return $this->getMedia('avatar')[0]->getUrl('thumbnail.big');
-    }
-
-    /**
-     * Get the porofile background.
-     *
-     * @return string
-     */
-    public function getProfileBackgroundAttribute()
-    {
-        return UserUtility::getProfileBackground();
+        return $this->belongsToMany('Ultraware\Roles\Models\Role');
     }
 }
