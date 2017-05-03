@@ -26,9 +26,15 @@ return [
             'AutoFormat.RemoveEmpty' => true,
         ],
         'user_signature' => [
-            'Core.Encoding' => 'UTF-8',
             'URI.Base' => 'http://xetaravel.xeta.io',
             'HTML.Allowed' => 'p, strong, em, u, a[href], br, img[alt|src|title]',
+            'AutoFormat.RemoveEmpty' => true
+        ],
+        'user_biography' => [
+            'URI.Base' => 'https://xetaravel.xeta.io',
+            'HTML.Allowed' => 'p, h1, h2, h3, h4, h5, span[style], strong, em, u, img[alt|src|style|title], ol, li, ul,
+            a[href], br, blockquote',
+            'CSS.AllowedProperties' => 'font-size,height,width,color',
             'AutoFormat.RemoveEmpty' => true
         ]
     ],

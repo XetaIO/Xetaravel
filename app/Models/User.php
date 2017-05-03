@@ -156,4 +156,14 @@ class User extends Model implements
     {
         return $this->hasOne('Xetaravel\Models\Account');
     }
+
+    /**
+     * Get the roles for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('Ultraware\Roles\Models\Role');
+    }
 }

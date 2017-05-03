@@ -137,15 +137,12 @@
             border-radius: 50%;
         }
 
-        .group, .joinedDate, .social {
+        .role,
+        .joinedDate,
+        .social {
             display: block;
             padding: 10px 0;
             border-top: 1px dotted #ddd;
-        }
-
-        .group.admin {
-            font-weight: bold;
-            color: $brand-danger;
         }
     }
 
@@ -160,6 +157,10 @@
         time {
             font-size: 80%;
         }
+    }
+
+    .biography {
+        border-top: 2px solid #eceeef;
     }
 }
 

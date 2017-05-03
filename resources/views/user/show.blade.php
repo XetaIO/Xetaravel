@@ -105,13 +105,11 @@
                     {{ $user->username }}
                 </h4>
 
-                <span class="group {{ Auth::user()->isAdmin() ? 'admin' : '' }}">
-                    @if (Auth::user()->isAdmin())
-                        Administrator
-                    @else
-                        Member
-                    @endif
-                </span>
+                <div class="role">
+                    @foreach ($user->roles as $role)
+                        <span style="{{ $role->css }}">{{ $role->name }}</span>
+                    @endforeach
+                </div>
 
                 <span class="joinedDate">
                     Joined<br>
@@ -159,6 +157,27 @@
 
         <div class="col-lg-9">
             <section class="section">
+                <div class="hr-divider">
+                    <h4 class="font-xeta text-xs-center">
+                        @if ($user->id == Auth::user()->id)
+                            Your Biography
+                        @else
+                            His Biography
+                        @endif
+                    </h4>
+                </div>
+                <div class="biography pt-1 pb-2">
+                    @if (!empty($user->biography))
+                        {!! Purifier::clean($user->biography, 'user_biography') !!}
+                    @else
+                        @if ($user->id == Auth::user()->id)
+                            You don't have set a biography.
+                            {!! Html::link(route('users_account_index'), '<i class="fa fa-plus"></i> Add one now', ['class' => 'btn btn-outline-primary'], null, false) !!}
+                        @else
+                            This user hasn't set a biography yet.
+                        @endif
+                    @endif
+                </div>
 
                 @if (!empty($user->articles->toArray()))
                     <div class="hr-divider">
