@@ -6,7 +6,7 @@
         {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
     @endif
     
-    {!! Html::script('js/prettify.min.js')!!}
+    {!! Html::script('js/highlight.min.js')!!}
     <script type="text/javascript">
         @if (Auth::user())
             /**
@@ -19,9 +19,9 @@
         @endif
         
         /**
-         * Prettify.
+         * HighlightJS.
          */
-        prettyPrint();
+        hljs.initHighlightingOnLoad();
     </script>
 @endpush
 
@@ -80,7 +80,7 @@
             </div>
 
             @if (!empty($comments->toArray()['data']))
-                <h4 class="mt-3">
+                <h4 class="mt-3 font-xeta">
                     {{ $article->comment_count }} Comments
                 </h4>
                 @foreach ($comments as $comment)

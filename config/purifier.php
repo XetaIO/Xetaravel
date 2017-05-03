@@ -8,9 +8,9 @@ return [
     'settings' => [
         'blog_article' => [
             'URI.Base' => 'http://sf.xeta.io',
-            'HTML.Allowed' => 'p, h1, h2, h3, h4, h5, span[style], strong, em, u, img[alt|src|style|title], ol, li, ul, a[href], br, blockquote[class], pre[class]',
+            'HTML.Allowed' => 'p, h1, h2, h3, h4, h5, span[style], strong, em, u, img[alt|src|style|title], ol, li, ul, a[href], br, blockquote[class], pre[class], code[class]',
             'CSS.AllowedProperties' => 'font-size,height,width',
-            'Attr.AllowedClasses' => 'prettyprint, linenums, blockquote',
+            'Attr.AllowedClasses' => 'hljs, blockquote',
             'AutoFormat.RemoveEmpty' => true,
         ],
         'blog_article_empty' => [

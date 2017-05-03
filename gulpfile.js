@@ -40,8 +40,8 @@ elixir((mix) => {
             'libs/sidebar.min.js'
         ], 'public/js/lib.min.js')
         .scripts([
-            'prettify.js',
-        ], 'public/js/prettify.min.js')
+            'highlight.js',
+        ], 'public/js/highlight.min.js')
         .scripts([
              'app.js'
         ], 'public/js/app.js')

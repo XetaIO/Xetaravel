@@ -27,8 +27,8 @@ CKEDITOR.editorConfig = function (config) {
     config.format_tags = 'p;h1;h2;h3;h4;h5;pre;address;div';
 
     config.pbckcode = {
-        cls: '',
-        highlighter: 'PRETTIFY',
+        cls: 'hljs',
+        highlighter: 'HIGHLIGHT',
         modes: [['HTML', 'html'], ['CSS', 'css'], ['PHP', 'php'], ['JavaScript', 'javascript']],
         theme: 'tomorrow_night',
         tab_size: '4'

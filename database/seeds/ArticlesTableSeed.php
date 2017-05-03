@@ -34,12 +34,14 @@ class ArticlesTableSeeder extends Seeder
 
 <p>&nbsp;</p>
 
-<p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.&nbsp;<img alt="heureux" src="https://xeta.io/js/ckeditor/plugins/smiley/images/heureux.png" style="height:19px; width:19px" title="heureux" /></p>
+<p>Odio dignissim qui <code>&lt;?= $this-&gt;Html-&gt;link(&#39;test&#39;, [&#39;key&#39; =&gt; true]) ?&gt;</code> te feugait nulla facilisi.</p>
+
+<p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<pre class="prettyprint linenums">
-&lt;?php
+<pre data-pbcklang="php" data-pbcktabsize="4">
+<code class="php hljs">&lt;?php
 namespace App\Event;
 
 use Cake\Event\Event;
@@ -84,7 +86,7 @@ class Logs implements EventListenerInterface
 
         return true;
     }
-}</pre>
+}</code></pre>
 
 <p>&nbsp;</p>',
             'comment_count' => 1,
