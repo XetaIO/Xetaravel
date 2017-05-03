@@ -18,7 +18,7 @@ class XetaravelPathGenerator implements PathGenerator
 
     /**
      * Get the path for conversions of the given media, relative to the root storage path.
-
+     *
      * @return string
      */
     public function getPathForConversions(Media $media) : string

@@ -4,6 +4,7 @@ namespace Xetaravel\Http\Controllers\Auth;
 
 use Xetaravel\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 
@@ -19,7 +20,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
 
     /**
@@ -42,10 +42,11 @@ class LoginController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendFailedLoginResponse(Request $request)
+    protected function sendFailedLoginResponse(Request $request): RedirectResponse
     {
         return redirect()
             ->back()
@@ -61,9 +62,9 @@ class LoginController extends Controller
      *
      * @param \Illuminate\Http\Request $request The request object.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         $this->guard()->logout();
 
@@ -80,7 +81,7 @@ class LoginController extends Controller
      * @param \Illuminate\Http\Request $request The request object.
      * @param mixed $user
      *
-     * @return mixed
+     * @return void
      */
     protected function authenticated(Request $request, $user)
     {

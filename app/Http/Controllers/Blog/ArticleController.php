@@ -3,7 +3,6 @@ namespace Xetaravel\Http\Controllers\Blog;
 
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller

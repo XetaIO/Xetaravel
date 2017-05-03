@@ -1,10 +1,9 @@
 <?php
 namespace Xetaravel\Http\Controllers;
 
-use Xetaravel\Models\Article;
 use Xetaravel\Models\User;
-use Xetaravel\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -15,7 +14,12 @@ class UserController extends Controller
         $this->breadcrumbs->addCrumb('Users', route('users_user_index'));
     }
 
-    public function index()
+    /**
+     * Show the account update form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(): View
     {
         return view('user.index');
     }
@@ -23,7 +27,7 @@ class UserController extends Controller
     /**
      * Show the user profile page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show(Request $request, $slug, $id)
     {

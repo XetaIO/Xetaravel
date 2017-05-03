@@ -3,9 +3,8 @@ namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Validator;
 use Ultraware\Roles\Models\Role;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
@@ -49,9 +48,9 @@ class RegisterController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function register(Request $request)
+    public function register(Request $request): RedirectResponse
     {
         UserValidator::create($request->all())->validate();
 

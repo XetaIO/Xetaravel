@@ -4,8 +4,6 @@ namespace Xetaravel\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator as FacadeValidator;
-use Illuminate\Validation\Validator;
 use Illuminate\View\View;
 use Xetaravel\Models\Repositories\AccountRepository;
 use Xetaravel\Models\User;

@@ -3,7 +3,6 @@ namespace Xetaravel\Http\Controllers;
 
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Comment;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
