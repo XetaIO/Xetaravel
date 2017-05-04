@@ -1,5 +1,5 @@
 filter:
-    paths: [src/*]
+    paths: [app/*]
     excluded_paths: [bootstrap/*, config/*, database/*, public/*, resources/*, routes/*, storage/*, tests/*, vendor/*]
 tools:
     php_analyzer: true
