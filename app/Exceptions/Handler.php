@@ -84,7 +84,7 @@ class Handler extends ExceptionHandler
      *
      * @param \Exception $e The exception to convert.
      *
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
     protected function convertExceptionToResponse(Exception $e)
     {
