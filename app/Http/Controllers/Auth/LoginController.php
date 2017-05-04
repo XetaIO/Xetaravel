@@ -85,6 +85,9 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        $request->session()->flash('success', 'You\'re successfully connected !');
+        $request->session()->flash(
+            'success',
+            'Welcome back <strong>' . e($user->username) . '</strong>! You\'re successfully connected !'
+        );
     }
 }

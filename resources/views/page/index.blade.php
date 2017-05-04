@@ -65,7 +65,7 @@
                 <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>
                 <h4 class="font-xeta">Interact</h4>
                 <p class="text-muted">
-                You can interact with Xeta's members in the blog or directly with me in the comments of an article.
+                You can interact with Xetaravel's members in the blog or directly with me in the comments of an article.
                 </p>
             </div>
         </div>

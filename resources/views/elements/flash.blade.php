@@ -9,7 +9,7 @@
             @elseif ($type == "success")
                 <i class="fa fa-check" aria-hidden="true"></i>
             @endif
-            {{ Session::get($type) }}
+            {!! Session::get($type) !!}
         </div>
     @endif
 @endforeach
