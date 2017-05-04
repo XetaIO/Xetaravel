@@ -109,22 +109,22 @@ class User extends Model implements
     public function registerMediaConversions()
     {
         $this->addMediaConversion('thumbnail.small')
-              ->width(100)
-              ->height(100)
-              ->keepOriginalImageFormat();
+                ->width(100)
+                ->height(100)
+                ->keepOriginalImageFormat();
         
         $this->addMediaConversion('thumbnail.medium')
-              ->width(200)
-              ->height(200)
-              ->keepOriginalImageFormat();
+                ->width(200)
+                ->height(200)
+                ->keepOriginalImageFormat();
         
         $this->addMediaConversion('thumbnail.big')
-              ->width(300)
-              ->height(300)
-              ->keepOriginalImageFormat();
+                ->width(300)
+                ->height(300)
+                ->keepOriginalImageFormat();
         
         $this->addMediaConversion('original')
-              ->keepOriginalImageFormat();
+                ->keepOriginalImageFormat();
     }
 
     /**
