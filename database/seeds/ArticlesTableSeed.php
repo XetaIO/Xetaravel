@@ -4,7 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ArticlesTableSeeder extends Seeder
+class ArticlesTableSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -92,7 +92,7 @@ class Logs implements EventListenerInterface
             'comment_count' => 1,
             'is_display' => 1,
             'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

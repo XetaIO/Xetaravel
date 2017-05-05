@@ -12,18 +12,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Users
-        $this->call(UsersTableSeeder::class);
-        $this->call(AccountsTableSeeder::class);
+        $this->call(UsersTableSeed::class);
+        $this->call(AccountsTableSeed::class);
 
         // Blog
-        $this->call(CategoriesTableSeeder::class);
-        $this->call(ArticlesTableSeeder::class);
-        $this->call(CommentsTableSeeder::class);
+        $this->call(CategoriesTableSeed::class);
+        $this->call(ArticlesTableSeed::class);
+        $this->call(CommentsTableSeed::class);
 
         // Permissions
-        $this->call(RolesTableSeeder::class);
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(PermissionsRolesTableSeeder::class);
-        $this->call(RoleUserTableSeeder::class);
+        $this->call(RolesTableSeed::class);
+        $this->call(PermissionsTableSeed::class);
+        $this->call(PermissionsRolesTableSeed::class);
+        $this->call(RoleUserTableSeed::class);
+
+        // Badges
+        $this->call(BadgesTableSeed::class);
     }
 }

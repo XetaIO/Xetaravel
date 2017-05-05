@@ -1577,3 +1577,54 @@
 .slideOutUp {
   animation-name: slideOutUp;
 }
+
+@keyframes ringing{
+    0%{
+        transform:rotate(-15deg)
+    }
+
+    2%{
+        transform:rotate(15deg)
+    }
+
+    4%{
+        transform:rotate(-18deg)
+    }
+
+    6%{
+        transform:rotate(18deg)
+    }
+
+    8%{
+        transform:rotate(-22deg)
+    }
+
+    10%{
+        transform:rotate(22deg)
+    }
+
+    12%{
+        transform:rotate(-18deg)
+    }
+
+    14%{
+        transform:rotate(18deg)
+    }
+
+    16%{
+        transform:rotate(-12deg)
+    }
+
+    18%{
+        transform:rotate(12deg)
+    }
+
+    20%{
+        transform:rotate(0deg)
+    }
+
+}
+
+.ringing{
+  animation: ringing 2.0s 5 ease 1.0s;
+}

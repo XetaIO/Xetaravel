@@ -42,6 +42,8 @@
             <span class="navbar-text navbar-hello-text float-xs-left float-sm-right font-weight-bold">
               Hello,&nbsp;
             </span>
+            <!-- Notifications -->
+            @include('elements._notifications')
         @endif
 
 

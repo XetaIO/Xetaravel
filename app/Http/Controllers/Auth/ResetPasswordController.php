@@ -1,9 +1,8 @@
 <?php
-
 namespace Xetaravel\Http\Controllers\Auth;
 
-use Xetaravel\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Xetaravel\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {
@@ -17,7 +16,6 @@ class ResetPasswordController extends Controller
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
     use ResetsPasswords;
 
     /**

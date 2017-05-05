@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Ultraware\Roles\Models\Permission;
 use Ultraware\Roles\Models\Role;
 
-class PermissionsRolesTableSeeder extends Seeder
+class PermissionsRolesTableSeed extends Seeder
 {
     /**
      * Run the database seeds.

@@ -1,4 +1,6 @@
-$(document).ready(function() {
+require('./broadcast');
+
+$(document).ready(function () {
     "use strict";
 
     $("body").tooltip({
@@ -7,6 +9,25 @@ $(document).ready(function() {
 
     $("body").popover({
         selector: "[data-toggle=popover]"
+    });
+
+    /**
+     * ScrollUp.
+     */
+    $.scrollUp({
+        scrollName: "scrollUp",
+        scrollDistance: 300,
+        scrollFrom: "top",
+        scrollSpeed: 1000,
+        easingType: "easeInOutCubic",
+        animation: "fade",
+        animationInSpeed: 200,
+        animationOutSpeed: 200,
+        scrollText: '<i class="fa fa-chevron-up"></i>',
+        scrollTitle: " ",
+        scrollImg: 0,
+        activeOverlay: 0,
+        zIndex: 1001
     });
 
     /**

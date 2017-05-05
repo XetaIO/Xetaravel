@@ -12,9 +12,18 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Xetaravel\Events\Event' => [
-            'Xetaravel\Listeners\EventListener',
-        ],
+        'Xetaravel\Events\UserUpdated' => [
+            'Xetaravel\Listeners\UserListener',
+        ]
+    ];
+
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        \Xetaravel\Listeners\Subscribers\BadgeSubscriber::class
     ];
 
     /**

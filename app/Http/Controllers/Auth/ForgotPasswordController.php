@@ -1,9 +1,8 @@
 <?php
-
 namespace Xetaravel\Http\Controllers\Auth;
 
-use Xetaravel\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Xetaravel\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {
@@ -17,7 +16,6 @@ class ForgotPasswordController extends Controller
     | your application to your users. Feel free to explore this trait.
     |
     */
-
     use SendsPasswordResetEmails;
 
     /**

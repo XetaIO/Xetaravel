@@ -9,7 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Title -->
-        <title>{{ config('app.title') . ' - ' . config('xetaravel.name') }}</title>
+        <title>{{ config('app.title') . ' - ' . config('app.name') }}</title>
 
         <!-- Styles -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -38,15 +38,12 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/lib.min.js') }}"></script>
-        <script src="{{ asset('js/ts.js') }}"></script>
 
         <!-- CSRF JS Token -->
         <script type="text/javascript">
-        var Xeta = new Xeta('<?= csrf_token() ?>');
-        //window.Laravel = <?= json_encode(['csrfToken' => csrf_token()]) ?>
+            window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
-        <script src="{{ asset('js/app.js') }}"></script>
-
+        <script src="{{ asset('js/xetaravel.js') }}"></script>
 
         <!-- Embed Scripts -->
         @stack('scripts')

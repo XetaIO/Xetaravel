@@ -40,7 +40,7 @@ class Comment extends Model
      */
     public function user()
     {
-        return $this->belongsTo('Xetaravel\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -50,6 +50,6 @@ class Comment extends Model
      */
     public function article()
     {
-        return $this->belongsTo('Xetaravel\Models\Article');
+        return $this->belongsTo(Article::class);
     }
 }

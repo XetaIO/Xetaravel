@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Ultraware\Roles\Models\Role;
 use Xetaravel\Models\User;
 
-class RoleUserTableSeeder extends Seeder
+class RoleUserTableSeed extends Seeder
 {
     /**
      * Run the database seeds.

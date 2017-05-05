@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schema;
 
-class CreatePasswordResetsTable extends Migration
+class CreateBadgeUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,19 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('password_resets', function (Blueprint $table) {
+        Schema::create('badge_user', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->integer('badge_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('email')->index();
-            $table->string('token')->index();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
 
         /**
          * Only create foreign key on production/development.
          */
-        if (App::environment() == 'testing') {
-            Schema::table('password_resets', function (Blueprint $table) {
+        if (App::environment() != 'testing') {
+            Schema::table('badge_user', function (Blueprint $table) {
+                $table->foreign('badge_id')->references('id')->on('badges')->onDelete('cascade');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
@@ -40,6 +39,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('badge_user');
     }
 }
