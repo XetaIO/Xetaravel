@@ -11,8 +11,6 @@ class CommentEvent
      * Create a new event instance.
      *
      * @param \Xetaravel\Models\User $user
-     *
-     * @return void
      */
     public function __construct(User $user)
     {
