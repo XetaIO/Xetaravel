@@ -67,6 +67,5 @@ class AccountController extends Controller
         return redirect()
             ->route('users_account_index')
             ->with('danger', 'An error occurred while saving your informations !');
-        
     }
 }
