@@ -154,7 +154,18 @@ $(document).ready(function () {
                     var id = $(this).attr('id');
                     $('#' + id + " .new").remove();
                     $('#' + id + " .markasread").remove();
-                    button.remove();
+                    $('.mark-all-notifications-as-read').remove();
+                    $('.dropdown-toggle').removeAttr('data-number');
+                    $('.dropdown-toggle i').removeClass('animated infinite ringing');
+                    $('.dropdown-toggle i').addClass('text-body');
+                });
+
+                // Page Notification
+                $('.notification-item').each(function (index, element) {
+                    var id = $(this).attr('id');
+                    $('#' + id + " .new").remove();
+                    $('#' + id + " .markasread").remove();
+                    $('.mark-all-notifications-as-read').remove();
                     $('.dropdown-toggle').removeAttr('data-number');
                     $('.dropdown-toggle i').removeClass('animated infinite ringing');
                     $('.dropdown-toggle i').addClass('text-body');
@@ -162,6 +173,26 @@ $(document).ready(function () {
             },
             error: function () {
                 console.log('Error while making the notifications as read.')
+            }
+        });
+    });
+
+    $('.delete-notification').bind("click", function (e) {
+        e.preventDefault();
+        var id = $(this).attr("data-id");
+
+        $.ajax({
+            type: "DELETE",
+            url: $(this).attr("data-url"),
+            headers: {
+                'X-CSRF-Token': Xetaravel.csrfToken
+            },
+            dataType: "json",
+            data: {
+                id: id
+            },
+            error: function () {
+                console.log('Error while deleting the notification.')
             }
         });
     });

@@ -30,6 +30,8 @@
         <!-- Header -->
         @include('elements.header')
 
+        @include('elements.flash')
+
         <!-- Content -->
         @yield('content')
 

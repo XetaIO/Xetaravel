@@ -6,6 +6,29 @@ use Tests\TestCase;
 
 class NotificationControllerTest extends TestCase
 {
+    /**
+     * Triggered before each test.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $user = User::find(1);
+        $this->be($user);
+    }
+
+    /**
+     * testIndexSuccess method
+     *
+     * @return void
+     */
+    public function testIndexSuccess()
+    {
+        $response = $this->get('/users/notification');
+        $response->assertSuccessful();
+    }
 
     /**
      * testMarkAsRead method
@@ -14,10 +37,7 @@ class NotificationControllerTest extends TestCase
      */
     public function testMarkAsRead()
     {
-        $user = User::find(1);
-        $this->be($user);
-
-        $response = $this->json('POST', '/users/notifications/markAsRead', ['id' => '123456789']);
+        $response = $this->json('POST', '/users/notification/markAsRead', ['id' => '123456789']);
 
         $response
             ->assertStatus(200)
@@ -33,10 +53,23 @@ class NotificationControllerTest extends TestCase
      */
     public function testMarkAllAsRead()
     {
-        $user = User::find(1);
-        $this->be($user);
+        $response = $this->json('POST', '/users/notification/markAllAsRead');
 
-        $response = $this->json('POST', '/users/notifications/markAllAsRead');
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'error' => false
+            ]);
+    }
+
+    /**
+     * testDelete method
+     *
+     * @return void
+     */
+    public function testDelete()
+    {
+        $response = $this->json('DELETE', '/users/notification/delete', ['id' => '123456789']);
 
         $response
             ->assertStatus(200)

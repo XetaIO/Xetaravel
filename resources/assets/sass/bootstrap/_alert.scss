@@ -6,7 +6,7 @@
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $spacer-y;
   border: $alert-border-width solid transparent;
-  @include border-radius($alert-border-radius);
+  //@include border-radius($alert-border-radius);
 }
 
 // Headings for larger alerts

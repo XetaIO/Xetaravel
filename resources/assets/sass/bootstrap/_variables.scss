@@ -636,26 +636,26 @@ $jumbotron-bg:                   $gray-lighter !default;
 //
 // Define colors for form feedback states and, by default, alerts.
 
-$state-primary-text:             $brand-primary !default;
-$state-primary-bg:               #fff !default;
-$state-primary-border:           $state-primary-text !default;
+$state-primary-text:             #fff !default;
+$state-primary-bg:               $brand-primary !default;
+$state-primary-border:           $state-primary-bg !default;
 
-$state-success-text:             $brand-success !default;
-$state-success-bg:               #fff !default;
-$state-success-border:           $state-success-text !default;
+$state-success-text:             #fff !default;
+$state-success-bg:               $brand-success !default;
+$state-success-border:           $state-success-bg !default;
 
-$state-info-text:                $brand-info !default;
-$state-info-bg:                  #fff !default;
-$state-info-border:              $state-info-text !default;
+$state-info-text:                #fff !default;
+$state-info-bg:                  $brand-info !default;
+$state-info-border:              $state-info-bg !default;
 
-$state-warning-text:             $brand-warning !default;
-$state-warning-bg:               #fff !default;
-$mark-bg:                        $state-warning-bg !default;
-$state-warning-border:           $state-warning-text !default;
+$state-warning-text:             #fff !default;
+$state-warning-bg:               $brand-warning !default;
+$mark-bg:                        $state-warning-text !default;
+$state-warning-border:           $state-warning-bg !default;
 
-$state-danger-text:              $brand-danger !default;
-$state-danger-bg:                #fff !default;
-$state-danger-border:            $state-danger-text !default;
+$state-danger-text:              #fff !default;
+$state-danger-bg:                $state-primary-bg !default;
+$state-danger-border:            $state-primary-bg !default;
 
 
 // Cards

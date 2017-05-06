@@ -13,7 +13,7 @@
 
         @if ($notifications->isNotEmpty())
             @foreach ($notifications as $notification)
-                <a class="dropdown-item notification-item" id="notification-{{ $notification->id }}" href="#">
+                <a class="dropdown-item notification-item" id="notification-{{ $notification->id }}"  href="{{ route('users_notification_index') }}">
                     <!-- Image -->
                     @if (isset($notification->data['image']))
                         <img src="{{ asset($notification->data['image']) }}" alt="Image">
@@ -57,7 +57,7 @@
         @endif
         
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-xs-center" href="#">
+        <a class="dropdown-item text-xs-center" href="{{ route('users_notification_index') }}">
             All Notifications
         </a>
     </div>

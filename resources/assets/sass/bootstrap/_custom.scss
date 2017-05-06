@@ -12,3 +12,27 @@
 		 url("../fonts/MiriamLibre-Regular.ttf") format("truetype"),
 		 url("../fonts/MiriamLibre-Regular.svg#MiriamLibre") format("svg");
 }
+
+.fixed-top {
+	position: fixed;
+    top: 0;
+}
+
+.alert.fixed-top {
+    width: 100%;
+    z-index: 1031;
+    -moz-animation: cssAnimation 0s ease-in 10s forwards;
+    -webkit-animation: cssAnimation 0s ease-in 10s forwards;
+    -o-animation: cssAnimation 0s ease-in 10s forwards;
+    animation: cssAnimation 0s ease-in 10s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes cssAnimation {
+    to {
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}

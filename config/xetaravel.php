@@ -22,12 +22,15 @@ return [
     | Pagination
     |--------------------------------------------------------------------------
     |
-    | All pagination settings used to di.
+    | All pagination settings used to pagination the queries.
     */
     'pagination' => [
         'blog' => [
             'article_per_page' => 10,
             'comment_per_page' => 10
+        ],
+        'notification' => [
+            'notification_per_page' => 10
         ]
     ]
 ];

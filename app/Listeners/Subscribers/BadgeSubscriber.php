@@ -48,7 +48,7 @@ class BadgeSubscriber
         });
 
         $result = $user->badges()->syncWithoutDetaching($collection);
-        
+
         return $this->sendNotifications($result, $badges, $user);
     }
 
@@ -66,11 +66,11 @@ class BadgeSubscriber
 
         $today = new Carbon();
         $diff = $today->diff($user->created_at)->y;
-        
+
         $collection = $badges->filter(function ($badge) use ($diff) {
             return $badge->rule <= $diff;
         });
-        
+
         $result = $user->badges()->syncWithoutDetaching($collection);
 
         return $this->sendNotifications($result, $badges, $user);

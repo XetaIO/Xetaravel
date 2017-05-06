@@ -4,22 +4,74 @@ namespace Xetaravel\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 use Xetaravel\Models\User;
 
 class NotificationController extends Controller
 {
     /**
-     * Undocumented function
-     *
-     * @return void
+     * Constructor
      */
-    public function index()
+    public function __construct()
     {
-        //
+        parent::__construct();
+
+        $this->breadcrumbs->addCrumb('Notifications', route('users_notification_index'));
+    }
+
+    /**
+     * Show the notifications.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(): View
+    {
+        $user = User::find(Auth::user()->id);
+
+        $this->breadcrumbs->setCssClasses('breadcrumb');
+
+        $notifications = $user->notifications()
+            ->paginate(config('xetaravel.pagination.notification.notification_per_page'));
+        $hasUnreadNotifications = $user->unreadNotifications->isNotEmpty();
+
+        return view(
+            'notification.index',
+            [
+                'user' => $user,
+                'breadcrumbs' => $this->breadcrumbs,
+                'notifications' => $notifications,
+                'hasUnreadNotifications' => $hasUnreadNotifications
+            ]
+        );
+    }
+
+    /**
+     * Delete a notification by its id.
+     *
+     * @param \Illuminate\Http\Request $request The current request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+        $notification = $user->notifications()
+            ->where('id', $request->input('id'))
+            ->first();
+        
+        if ($notification) {
+            $notification->delete();
+        }
+        
+        return response()->json([
+            'error' => false
+        ]);
     }
 
     /**
      * Mark a notification as read.
+     *
+     * @param \Illuminate\Http\Request $request The current request.
      *
      * @return \Illuminate\Http\JsonResponse
      */

@@ -20,7 +20,6 @@
     {!! $breadcrumbs->render() !!}
 </div>
 <div class="container pt-2">
-    @include('elements.flash')
 
     <div class="row">
         <div class="col-md-3">

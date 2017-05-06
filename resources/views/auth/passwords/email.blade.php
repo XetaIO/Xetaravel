@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <h2 class="text-xs-center mt-2">
+            <h2 class="text-xs-center font-xeta mt-2">
                 Reset Password
             </h2>
             @if (session('status'))
@@ -20,7 +20,7 @@
                 ]) !!}
 
                 <div class="form-group text-xs-center">
-                    {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>

@@ -45,12 +45,14 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
         Route::put('account', 'AccountController@update')->name('users_account_update');
 
         // Notification Routes
-        Route::get('notifications', 'NotificationController@index')
+        Route::get('notification', 'NotificationController@index')
             ->name('users_notification_index');
-        Route::post('notifications/markAsRead', 'NotificationController@markAsRead')
+        Route::post('notification/markAsRead', 'NotificationController@markAsRead')
             ->name('users_notification_markasread');
-        Route::post('notifications/markAllAsRead', 'NotificationController@markAllAsRead')
+        Route::post('notification/markAllAsRead', 'NotificationController@markAllAsRead')
             ->name('users_notification_markallasread');
+        Route::delete('notification/delete', 'NotificationController@delete')
+            ->name('users_notification_delete');
     });
 });
 

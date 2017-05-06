@@ -17,11 +17,10 @@
 </div>
 <hr />
 <div class="container pt-2">
-    @include('elements.flash')
 
     <div class="row">
         <div class="col-md-9">
-            @if (!empty($articles->toArray()['data']))
+            @if ($articles->isNotEmpty())
                 @foreach ($articles as $article)
                     <div class="blog-post">
                         <h1 class="blog-title">

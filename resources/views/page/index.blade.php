@@ -39,7 +39,6 @@
 </div>
 
 <div class="container" id="change-navbar">
-    @include('elements.flash')
 
     <div class="row mb-3">
         <div class="col-md-4">
