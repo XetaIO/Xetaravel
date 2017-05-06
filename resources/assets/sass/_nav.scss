@@ -67,6 +67,11 @@
 
   .dropdown-menu {
     max-width: 400px;
+
+    button {
+      font-size: 0.8em;
+      cursor: pointer;
+    }
   }
 
   .dropdown-item {
@@ -76,6 +81,13 @@
     padding-bottom: 10px;
     color: $body-color;
     border-top: 1px dashed rgba(0, 0, 0, 0.1);
+
+    &:hover .markasread {
+      opacity: 1;
+      right: -98px;
+      top: 25px;
+      visibility: visible;
+    }
 
     &:first-child,
     &:last-child,
@@ -128,6 +140,23 @@
           transform: translate3d(0, 0, 0);
         }
       }
+    }
+
+    .markasread {
+      position: absolute;
+      display: inline-block;
+      right: 0;
+      visibility: hidden;
+      opacity: 0;
+      padding: 5px 10px;
+      background-color: #fff;
+      border: 2px solid rgba(0, 0, 0, 0.15);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-color: #fff;
+      border-radius: $border-radius;
+      color: $brand-primary;
+      transition: opacity .3s ease-in, visibility 0s linear;
     }
   }
 }

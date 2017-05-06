@@ -137,8 +137,7 @@
                                 'required' => 'required',
                                 'id' => 'commentBox'
                             ]) !!}
-                            {!! Form::submit('Comment', ['class' => 'btn btn-outline-primary']) !!}
-
+                            {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i> Comment', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

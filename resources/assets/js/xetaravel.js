@@ -108,4 +108,61 @@ $(document).ready(function () {
             }
         });
     }
+
+    /**
+     * Notifications
+     */
+    $('.mark-notification-as-read').bind("click", function (e) {
+        e.preventDefault();
+        var id = $(this).attr("data-id");
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("data-url"),
+            headers: {
+                'X-CSRF-Token': Xetaravel.csrfToken
+            },
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $("#notification-" + id + " .new").remove();
+                    $("#notification-" + id + " .markasread").remove();
+                }
+            },
+            error: function () {
+                console.log('Error while making the notification as read.')
+            }
+        });
+    });
+
+    $('.mark-all-notifications-as-read').bind("click", function (e) {
+        e.preventDefault();
+        var button = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr("data-url"),
+            headers: {
+                'X-CSRF-Token': Xetaravel.csrfToken
+            },
+            dataType: "json",
+            success: function (data) {
+                $('.dropdown-item').each(function (index, element) {
+                    var id = $(this).attr('id');
+                    $('#' + id + " .new").remove();
+                    $('#' + id + " .markasread").remove();
+                    button.remove();
+                    $('.dropdown-toggle').removeAttr('data-number');
+                    $('.dropdown-toggle i').removeClass('animated infinite ringing');
+                    $('.dropdown-toggle i').addClass('text-body');
+                });
+            },
+            error: function () {
+                console.log('Error while making the notifications as read.')
+            }
+        });
+    });
 });

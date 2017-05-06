@@ -179,6 +179,31 @@
                     @endif
                 </div>
 
+                <div class="hr-divider">
+                    <h4 class="font-xeta text-xs-center">
+                        @if ($user->id == Auth::user()->id)
+                            Your Badges
+                        @else
+                            His Badges
+                        @endif
+                    </h4>
+                </div>
+                <div class="badges pt-1 pb-2">
+                    @if ($user->badges->isNotEmpty())
+                        @foreach ($user->badges as $badge)
+                        <div class="d-inline-block text-xs-center pr-1">
+                            <img src="{{ asset($badge->image) }}" alt="{{ $badge->name }}" width="105" data-toggle="tooltip" title="{{ $badge->name }}">
+                        </div>
+                        @endforeach
+                    @else
+                        @if ($user->id == Auth::user()->id)
+                            You don't have unlocked a badge yet.
+                        @else
+                            This user hasn't set unloacked a badge yet.
+                        @endif
+                    @endif
+                </div>
+
                 @if (!empty($user->articles->toArray()))
                     <div class="hr-divider">
                         <h4 class="font-xeta text-xs-center">
