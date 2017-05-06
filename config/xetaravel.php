@@ -3,17 +3,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Application Name
-    |--------------------------------------------------------------------------
-    |
-    | This value is the name of your application. This value is used when the
-    | framework needs to place the application's name in a notification or
-    | any other location as required by the application or its packages.
-    */
-    'name' => 'Xetaravel',
-
-    /*
-    |--------------------------------------------------------------------------
     | Xetaravel Site
     |--------------------------------------------------------------------------
     |
@@ -33,12 +22,15 @@ return [
     | Pagination
     |--------------------------------------------------------------------------
     |
-    | All pagination settings used to di.
+    | All pagination settings used to pagination the queries.
     */
     'pagination' => [
         'blog' => [
             'article_per_page' => 10,
             'comment_per_page' => 10
+        ],
+        'notification' => [
+            'notification_per_page' => 10
         ]
     ]
 ];

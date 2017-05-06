@@ -76,7 +76,9 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest(route('users_auth_login'));
+        return redirect()
+            ->guest(route('users_auth_login'))
+            ->with('danger', 'You don\'t have the permission to view this page.');
     }
 
     /**

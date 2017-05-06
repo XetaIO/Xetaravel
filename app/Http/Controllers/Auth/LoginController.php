@@ -1,12 +1,12 @@
 <?php
-
 namespace Xetaravel\Http\Controllers\Auth;
 
-use Xetaravel\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Xetaravel\Events\RegisterEvent;
+use Xetaravel\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -85,6 +85,8 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        event(new RegisterEvent($user));
+        
         $request->session()->flash(
             'success',
             'Welcome back <strong>' . e($user->username) . '</strong>! You\'re successfully connected !'

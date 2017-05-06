@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Ultraware\Roles\Models\Role;
 
-class RolesTableSeeder extends Seeder
+class RolesTableSeed extends Seeder
 {
     /**
      * Run the database seeds.

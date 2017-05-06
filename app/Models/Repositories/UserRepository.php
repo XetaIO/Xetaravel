@@ -26,4 +26,22 @@ class UserRepository
             'last_login' => new \DateTime()
         ]);
     }
+
+    /**
+     * Find the notifications data for the notification sidebar.
+     *
+     * @param int $userId The id of the user.
+     *
+     * @return array
+     */
+    public static function notificationsData($userId): array
+    {
+        $user = User::find($userId);
+        
+        return [
+            'notifications' => $user->notifications->take(8),
+            'hasUnreadNotifications' => $user->unreadNotifications->isNotEmpty(),
+            'unredNotificationsCount' => $user->unreadNotifications->count()
+        ];
+    }
 }

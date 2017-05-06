@@ -32,6 +32,18 @@
             </li>
 
             <li>
+                <a href="{{ route('users_notification_index') }}" class="hidden-xs-down" title="Check your new and old notifications." data-toggle="tooltip" data-placement="left" data-container="body">
+                    <i class="fa fa-bell-o"></i>
+                    <small class="sidebar-text">Notifications</small>
+                </a>
+                <!-- Responsive link -->
+                <a href="{{ route('users_notification_index') }}" class="hidden-sm-up">
+                    <i class="fa fa-bell-o"></i>
+                    <small class="sidebar-text">Notifications</small>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('users_auth_logout') }}"  class="hidden-xs-down text-danger" title="See you later !" data-toggle="tooltip" data-placement="left" data-container="body"
                     onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">

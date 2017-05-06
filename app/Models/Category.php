@@ -19,9 +19,11 @@ class Category extends Model
 
     /**
      * Get the articles for the category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function articles()
     {
-        return $this->hasMany('Xetaravel\Models\Article');
+        return $this->hasMany(Article::class);
     }
 }

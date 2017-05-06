@@ -62,10 +62,10 @@ class AccountController extends Controller
             return redirect()
                 ->route('users_account_index')
                 ->with('success', 'Your account has been updated successfully !');
-        } else {
-            return redirect()
-                ->route('users_account_index')
-                ->with('danger', 'An error occurred while saving your informations !');
         }
+        
+        return redirect()
+            ->route('users_account_index')
+            ->with('danger', 'An error occurred while saving your informations !');
     }
 }

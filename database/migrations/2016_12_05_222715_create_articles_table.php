@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schema;
 
 class CreateArticlesTable extends Migration
 {
@@ -31,8 +31,8 @@ class CreateArticlesTable extends Migration
          */
         if (App::environment() != 'testing') {
             Schema::table('articles', function (Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('users');
-                $table->foreign('category_id')->references('id')->on('categories');
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             });
         }
     }

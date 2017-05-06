@@ -41,8 +41,6 @@
 </div>
 <hr />
 <div class="container pt-2">
-    @include('elements.flash')
-
     <div class="row">
 
         <div class="col-md-9">
@@ -123,7 +121,6 @@
 
             <hr />
             @if (Auth::user())
-                @include('elements.flash')
 
                 <div class="comment mb-2">
                     <div class="comment-media hidden-sm-down">
@@ -137,8 +134,7 @@
                                 'required' => 'required',
                                 'id' => 'commentBox'
                             ]) !!}
-                            {!! Form::submit('Comment', ['class' => 'btn btn-outline-primary']) !!}
-
+                            {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i> Comment', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

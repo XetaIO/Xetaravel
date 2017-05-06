@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
@@ -134,7 +135,7 @@ class User extends Model implements
      */
     public function comments()
     {
-        return $this->hasMany('Xetaravel\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     /**
@@ -144,7 +145,7 @@ class User extends Model implements
      */
     public function articles()
     {
-        return $this->hasMany('Xetaravel\Models\Article');
+        return $this->hasMany(Article::class);
     }
 
     /**
@@ -154,7 +155,7 @@ class User extends Model implements
      */
     public function account()
     {
-        return $this->hasOne('Xetaravel\Models\Account');
+        return $this->hasOne(Account::class);
     }
 
     /**
@@ -164,6 +165,28 @@ class User extends Model implements
      */
     public function roles()
     {
-        return $this->belongsToMany('Ultraware\Roles\Models\Role');
+        return $this->belongsToMany(\Ultraware\Roles\Models\Role::class);
+    }
+
+    /**
+     * Get the badges for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class)->withTimestamps();
+    }
+
+    /**
+     * Get the notifications for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function notifications()
+    {
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')
+                        ->orderBy('read_at', 'asc')
+                        ->orderBy('created_at', 'desc');
     }
 }

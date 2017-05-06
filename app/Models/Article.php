@@ -54,7 +54,7 @@ class Article extends Model
      */
     public function category()
     {
-        return $this->belongsTo('Xetaravel\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -64,7 +64,7 @@ class Article extends Model
      */
     public function user()
     {
-        return $this->belongsTo('Xetaravel\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -74,6 +74,6 @@ class Article extends Model
      */
     public function comments()
     {
-        return $this->hasMany('Xetaravel\Models\Comment');
+        return $this->hasMany(Comment::class);
     }
 }

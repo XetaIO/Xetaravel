@@ -3,9 +3,12 @@ namespace Xetaravel\Http\Controllers\Blog;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Xetaravel\Events\CommentEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Repositories\CommentRepository;
+use Xetaravel\Models\User;
 use Xetaravel\Models\Validators\CommentValidator;
 
 class CommentController extends Controller
@@ -28,6 +31,9 @@ class CommentController extends Controller
 
         CommentValidator::create($request->all())->validate();
         CommentRepository::create($request->all(), auth()->user());
+
+        // We must find the user else we won't see the updated comment_count.
+        event(new CommentEvent(User::find(Auth::user()->id)));
 
         return back()
             ->with('success', 'Your comment has been posted successfully !');
