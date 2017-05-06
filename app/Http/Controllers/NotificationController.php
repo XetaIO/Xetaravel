@@ -2,7 +2,6 @@
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\User;
 
@@ -23,7 +22,7 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function markAsRead(Request $request): JsonResponse
+    public function markAsRead(): JsonResponse
     {
         $user = Auth::user();
         $notification = $user->notifications()
