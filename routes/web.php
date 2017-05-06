@@ -47,10 +47,10 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
         // Notification Routes
         Route::get('notifications', 'NotificationController@index')
             ->name('users_notification_index');
-        Route::post('/notifications/markAllAsRead', 'NotificationController@markAllAsRead')
-            ->name('users_notification_markallasread');
-        Route::post('/notifications/markAsRead', 'NotificationController@markAsRead')
+        Route::post('notifications/markAsRead', 'NotificationController@markAsRead')
             ->name('users_notification_markasread');
+        Route::post('notifications/markAllAsRead', 'NotificationController@markAllAsRead')
+            ->name('users_notification_markallasread');
     });
 });
 
