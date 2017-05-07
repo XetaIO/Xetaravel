@@ -21,15 +21,11 @@
 .alert.fixed-top {
     width: 100%;
     z-index: 1031;
-    -moz-animation: cssAnimation 0s ease-in 10s forwards;
-    -webkit-animation: cssAnimation 0s ease-in 10s forwards;
-    -o-animation: cssAnimation 0s ease-in 10s forwards;
-    animation: cssAnimation 0s ease-in 10s forwards;
-    -webkit-animation-fill-mode: forwards;
+    animation: closeAlert 0s ease-out 7s forwards;
     animation-fill-mode: forwards;
 }
 
-@keyframes cssAnimation {
+@keyframes closeAlert {
     to {
         width:0;
         height:0;
