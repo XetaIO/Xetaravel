@@ -15,7 +15,7 @@
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/xetaravel.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/xetaravel.min.css') }}" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
@@ -45,7 +45,7 @@
         <script type="text/javascript">
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
-        <script src="{{ asset('js/xetaravel.js') }}"></script>
+        <script src="{{ asset('js/xetaravel.min.js') }}"></script>
 
         <!-- Embed Scripts -->
         @stack('scripts')

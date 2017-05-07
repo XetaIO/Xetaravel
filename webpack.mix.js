@@ -10,7 +10,7 @@ const { mix } = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.css')
+mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
     .sass('resources/assets/sass/bootstrap/bootstrap.scss', 'public/css/bootstrap.min.css')
     .sass('resources/assets/sass/jasny-bootstrap/jasny-bootstrap.scss', 'public/css/bootstrap.plugins.min.css')
     .sass('resources/assets/sass/font-awesome/font-awesome.scss', 'public/css/font-awesome.min.css')
@@ -30,7 +30,7 @@ mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.css')
     ], 'public/js/highlight.min.js')
     .js([
         'resources/assets/js/xetaravel.js'
-    ], 'public/js/xetaravel.js')
+    ], 'public/js/xetaravel.min.js')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/fonts', 'public/fonts');
