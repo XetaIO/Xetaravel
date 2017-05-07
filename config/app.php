@@ -174,6 +174,7 @@ return [
         Xetaravel\Ckeditor\Providers\CkeditorServiceProvider::class,
         Ultraware\Roles\RolesServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+        Spatie\Menu\Laravel\MenuServiceProvider::class,
 
         /*
          * Application Service Providers
@@ -184,7 +185,7 @@ return [
         Xetaravel\Providers\EventServiceProvider::class,
         Xetaravel\Providers\RouteServiceProvider::class,
         Xetaravel\Providers\BootstrapServiceProvider::class,
-        Xetaravel\Http\ViewComposers\SidebarServiceProvider::class,
+        Xetaravel\Http\ViewComposers\BlogSidebarServiceProvider::class,
         Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class
     ],
 
@@ -241,7 +242,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
-        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        'Menu' => Spatie\Menu\Laravel\MenuFacade::class
 
     ],
 

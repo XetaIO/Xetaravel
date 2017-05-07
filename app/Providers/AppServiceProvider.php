@@ -15,8 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // View
-        $this->app['view']->addNamespace('Admin', base_path() . '/resources/views/Admin');
-        $this->app['view']->addNamespace('Blog', base_path() . '/resources/views/Blog');
+        View::addNamespace('Admin', base_path() . '/resources/views/Admin');
+        View::addNamespace('Blog', base_path() . '/resources/views/Blog');
 
         // Pagination
         Paginator::defaultView('vendor.pagination.bootstrap-4');

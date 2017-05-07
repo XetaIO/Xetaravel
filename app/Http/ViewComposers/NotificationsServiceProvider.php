@@ -15,7 +15,7 @@ class NotificationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('elements._notifications', function ($view) {
+        View::composer('partials._notifications', function ($view) {
             $notifications = UserRepository::notificationsData(Auth::user()->id);
 
             $view->with([
