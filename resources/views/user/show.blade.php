@@ -199,7 +199,7 @@
                         @if (Auth::user() && $user->id == Auth::user()->id)
                             You don't have unlocked a badge yet.
                         @else
-                            This user hasn't set unloacked a badge yet.
+                            This user hasn't unlocked a badge yet.
                         @endif
                     @endif
                 </div>
