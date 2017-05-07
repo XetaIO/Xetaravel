@@ -165,7 +165,6 @@ return [
         /*
          * Package Service Providers
          */
-        Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
@@ -179,6 +178,7 @@ return [
         /*
          * Application Service Providers
          */
+        Xetaravel\Providers\LocalEnvironmentServiceProvider::class,
         Xetaravel\Providers\AppServiceProvider::class,
         Xetaravel\Providers\AuthServiceProvider::class,
         // Xetaravel\Providers\BroadcastServiceProvider::class,
@@ -238,7 +238,6 @@ return [
         /*
          * Package Facades
          */
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
