@@ -6,11 +6,11 @@
 |--------------------------------------------------------------------------
 */
 Route::group(['middleware' => ['permission:access.site,allowGuest']], function () {
-    Route::get('/', 'PageController@index')->name('page_index');
+    Route::get('/', 'PageController@index')->name('page.index');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {
-    Route::get('banished', 'PageController@banished')->name('page_banished');
+    Route::get('banished', 'PageController@banished')->name('page.banished');
 });
 
 /*
@@ -19,40 +19,43 @@ Route::group(['middleware' => ['auth', 'permission:show.banished']], function ()
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allowGuest']], function () {
+    
+    Route::get('profile/{slug}.{id}', 'UserController@show')->name('users.user.show');
+    Route::get('/', 'UserController@index')->name('users.user.index');
+    
+    // Auth Namespace
     Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes
-        Route::get('login', 'LoginController@showLoginForm')->name('users_auth_login');
+        Route::get('login', 'LoginController@showLoginForm')->name('users.auth.login');
         Route::post('login', 'LoginController@login');
-        Route::post('logout', 'LoginController@logout')->name('users_auth_logout');
+        Route::post('logout', 'LoginController@logout')->name('users.auth.logout');
 
         // Registration Routes
-        Route::get('register', 'RegisterController@showRegistrationForm')->name('users_auth_register');
+        Route::get('register', 'RegisterController@showRegistrationForm')->name('users.auth.register');
         Route::post('register', 'RegisterController@register');
 
         // Password Reset Routes
-        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('users_auth_reset');
-        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('users_auth_email');
+        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('users.auth.reset');
+        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('users.auth.email');
         Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm');
         Route::post('password/reset', 'ResetPasswordController@reset');
     });
 
-    Route::get('profile/{slug}.{id}', 'UserController@show')->name('users_user_show');
-    Route::get('/', 'UserController@index')->name('users_user_index');
-
+    // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
         // Users Routes
-        Route::get('account', 'AccountController@index')->name('users_account_index');
-        Route::put('account', 'AccountController@update')->name('users_account_update');
+        Route::get('account', 'AccountController@index')->name('users.account.index');
+        Route::put('account', 'AccountController@update')->name('users.account.update');
 
         // Notification Routes
         Route::get('notification', 'NotificationController@index')
-            ->name('users_notification_index');
+            ->name('users.notification.index');
         Route::post('notification/markAsRead', 'NotificationController@markAsRead')
-            ->name('users_notification_markasread');
+            ->name('users.notification.markasread');
         Route::post('notification/markAllAsRead', 'NotificationController@markAllAsRead')
-            ->name('users_notification_markallasread');
+            ->name('users.notification.markallasread');
         Route::delete('notification/delete', 'NotificationController@delete')
-            ->name('users_notification_delete');
+            ->name('users.notification.delete');
     });
 });
 
@@ -69,18 +72,18 @@ Route::group([
 
     // Article Routes
     Route::get('/', 'ArticleController@index')
-        ->name('blog_article_index');
+        ->name('blog.article.index');
     Route::get('/article/{slug}.{id}', 'ArticleController@show')
-        ->name('blog_article_show');
+        ->name('blog.article.show');
 
     // Category Routes
     Route::get('/category/{slug}.{id}', 'CategoryController@show')
-        ->name('blog_category_show');
+        ->name('blog.category.show');
 
     Route::group(['middleware' => ['auth']], function () {
         // Comment Routes
         Route::post('/comment/create', 'CommentController@create')
-        ->name('blog_comment_create');
+        ->name('blog.comment.create');
     });
 });
 
@@ -98,6 +101,6 @@ Route::group([
             'permission:access.site'
             ]
     ], function () {
-        Route::get('/', 'PageController@index')->name('admin_page_index');
+        Route::get('/', 'PageController@index')->name('admin.page.index');
     }
 );

@@ -8,7 +8,7 @@
             <h2 class="text-xs-center font-xeta mt-2">
                 Login
             </h2>
-            {!! Form::open(['route' => 'users_auth_login']) !!}
+            {!! Form::open(['route' => 'users.auth.login']) !!}
                 {!! Form::bsEmail('email', 'E-Mail', old('email'), [
                     'placeholder' => 'Your E-Mail...',
                     'required' => 'required',
@@ -28,10 +28,10 @@
             {!! Form::close() !!}
         </div>
         <div class="col-md-12 text-xs-center">
-            <a class="btn btn-link" href="{{ route('users_auth_reset') }}">
+            <a class="btn btn-link" href="{{ route('users.auth.reset') }}">
                 Forgot Your Password?
             </a>
-            <a class="btn btn-link" href="{{ route('users_auth_register') }}">
+            <a class="btn btn-link" href="{{ route('users.auth.register') }}">
                 Not registered yet?
             </a>
         </div>

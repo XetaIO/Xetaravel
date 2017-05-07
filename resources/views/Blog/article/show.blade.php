@@ -59,13 +59,13 @@
             <div class="card card-outline-primary">
                 <div class="card-block" style="display: flex;">
                     <div class="card-left" style="padding-right: 15px;">
-                        <a href="{{ route('users_user_show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
+                        <a href="{{ route('users.user.show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
                             <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                     </div>
                     <div class="card-body" style="flex: 1;">
                         <h4 class="card-title text-truncate">
-                            <a href="{{ route('users_user_show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
+                            <a href="{{ route('users.user.show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
                                 {{ $article->user->username }}
                             </a>
                         </h4>
@@ -84,14 +84,14 @@
                 @foreach ($comments as $comment)
                     <div class="media">
                         <div class="media-left">
-                        <a href="{{ route('users_user_show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
+                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
                             <img class="media-object rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                         </div>
 
                         <div class="media-body">
                             <h5 class="media-heading">
-                                <a href="{{ route('users_user_show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
+                                <a href="{{ route('users.user.show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
                                     {{ $comment->user->username }}
                                 </a>
                             </h5>
@@ -127,7 +127,7 @@
                         {{ Html::image(Auth::user()->avatar_small, 'Avatar', ['class' => 'rounded-circle', 'height' => '80px', 'width' => '80px']) }}
                     </div>
                     <div class="comment-content">
-                        {!! Form::open(['route' => 'blog_comment_create']) !!}
+                        {!! Form::open(['route' => 'blog.comment.create']) !!}
                             {!! Form::hidden('article_id', $article->id) !!}
                             {!! Form::bsTextarea('content', false, old('message'), [
                                 'placeholder' => 'Your message here...',

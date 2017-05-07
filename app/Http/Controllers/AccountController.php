@@ -18,7 +18,7 @@ class AccountController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Account', route('users_account_index'));
+        $this->breadcrumbs->addCrumb('Account', route('users.account.index'));
     }
 
     /**
@@ -60,12 +60,12 @@ class AccountController extends Controller
             }
 
             return redirect()
-                ->route('users_account_index')
+                ->route('users.account.index')
                 ->with('success', 'Your account has been updated successfully !');
         }
         
         return redirect()
-            ->route('users_account_index')
+            ->route('users.account.index')
             ->with('danger', 'An error occurred while saving your informations !');
     }
 }

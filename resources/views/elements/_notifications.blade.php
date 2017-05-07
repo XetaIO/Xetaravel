@@ -13,7 +13,7 @@
 
         @if ($notifications->isNotEmpty())
             @foreach ($notifications as $notification)
-                <a class="dropdown-item notification-item" id="notification-{{ $notification->id }}"  href="{{ route('users_notification_index') }}">
+                <a class="dropdown-item notification-item" id="notification-{{ $notification->id }}"  href="{{ route('users.notification.index') }}">
                     <!-- Image -->
                     @if (isset($notification->data['image']))
                         <img src="{{ asset($notification->data['image']) }}" alt="Image">
@@ -37,7 +37,7 @@
                             New
                         </strong>
 
-                        <button data-id="{{ $notification->id }}" data-url="{{ route('users_notification_markasread') }}" class="btn btn-outline-primary markasread mark-notification-as-read">
+                        <button data-id="{{ $notification->id }}" data-url="{{ route('users.notification.markasread') }}" class="btn btn-outline-primary markasread mark-notification-as-read">
                             Mark as read
                         </button>
                     @endif
@@ -46,7 +46,7 @@
             @endforeach
 
             @if ($hasUnreadNotifications)
-                <button class="dropdown-item mark-all-notifications-as-read text-xs-center" data-url="{{ route('users_notification_markallasread') }}">
+                <button class="dropdown-item mark-all-notifications-as-read text-xs-center" data-url="{{ route('users.notification.markallasread') }}">
                     Mark all notifications as read
                 </button>
             @endif
@@ -57,7 +57,7 @@
         @endif
         
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-xs-center" href="{{ route('users_notification_index') }}">
+        <a class="dropdown-item text-xs-center" href="{{ route('users.notification.index') }}">
             All Notifications
         </a>
     </div>

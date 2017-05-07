@@ -79,7 +79,7 @@
                         @endif
                         @if ($user->id == Auth::user()->id)
                             <li class="list-inline-item" style="padding: 10px;">
-                                {!! Html::link(route('users_account_index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
+                                {!! Html::link(route('users.account.index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
                             </li>
                         @endif
                     </ul>
@@ -172,7 +172,7 @@
                     @else
                         @if ($user->id == Auth::user()->id)
                             You don't have set a biography.
-                            {!! Html::link(route('users_account_index'), '<i class="fa fa-plus"></i> Add one now', ['class' => 'btn btn-outline-primary'], null, false) !!}
+                            {!! Html::link(route('users.account.index'), '<i class="fa fa-plus"></i> Add one now', ['class' => 'btn btn-outline-primary'], null, false) !!}
                         @else
                             This user hasn't set a biography yet.
                         @endif
@@ -219,7 +219,7 @@
                             <tr>
                                 <td>
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
-                                    {!! Html::link(route('blog_article_show', ['slug' => $article->slug, 'id' => $article->id]), $article->title, ['class' => 'title text-primary']) !!}
+                                    {!! Html::link(route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]), $article->title, ['class' => 'title text-primary']) !!}
                                     <div>
                                         {!! Purifier::clean(
                                             str_limit($article->content, 275),
@@ -250,7 +250,7 @@
                             <tr>
                                 <td>
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
-                                    {!! Html::link(route('blog_article_show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]), $comment->article->title, ['class' => 'title text-primary']) !!}
+                                    {!! Html::link(route('blog.article.show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]), $comment->article->title, ['class' => 'title text-primary']) !!}
                                     <div>
                                         {!! Purifier::clean(
                                             str_limit($comment->content, 275),
