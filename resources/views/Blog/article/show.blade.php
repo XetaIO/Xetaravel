@@ -12,7 +12,7 @@
             /**
             * CKEditor
             */
-            CKEDITOR.plugins.addExternal('pbckcode', 'http://prbaron.github.com/pbckcode/plugins/pbckcode/', 'plugin.js');
+            CKEDITOR.plugins.addExternal('pbckcode', '{{ asset('/vendor/ckeditor/plugins/pbckcode-1.2.5/src/plugin.js') }}');
             CKEDITOR.replace('commentBox', {
                 customConfig: '../config/comment.js'
             });
