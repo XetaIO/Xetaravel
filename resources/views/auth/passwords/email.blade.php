@@ -13,7 +13,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            {!! Form::open(['route' => 'users_auth_email']) !!}
+            {!! Form::open(['route' => 'users.auth.email']) !!}
                 {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
                     'placeholder' => 'Your E-Mail...',
                     'required' => 'required'

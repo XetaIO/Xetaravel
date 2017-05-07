@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Users', route('users_user_index'));
+        $this->breadcrumbs->addCrumb('Users', route('users.user.index'));
     }
 
     /**
@@ -37,14 +37,14 @@ class UserController extends Controller
 
         if (is_null($user)) {
             return redirect()
-                ->route('page_index')
+                ->route('page.index')
                 ->with('danger', 'This user doesn\'t exist or has been deleted !');
         }
 
         $this->breadcrumbs->addCrumb(
             e($user->username),
             route(
-                'users_user_show',
+                'users.user.show',
                 ['slug' => $user->slug, 'id' => $user->id]
             )
         );

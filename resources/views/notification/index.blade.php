@@ -15,7 +15,7 @@
             <section>
                 @if ($notifications->isNotEmpty())
                     @if ($hasUnreadNotifications)
-                        <button class="btn btn-sm btn-outline-primary mark-all-notifications-as-read text-xs-center" data-url="{{ route('users_notification_markallasread') }}">
+                        <button class="btn btn-sm btn-outline-primary mark-all-notifications-as-read text-xs-center" data-url="{{ route('users.notification.markallasread') }}">
                             <i class="fa fa-check" aria-hidden="true"></i> Mark all notifications as read
                         </button>
                     @endif
@@ -49,7 +49,7 @@
                                     @endif
 
                                     <!-- Delete -->
-                                    <button type="button" class="close text-danger delete-notification" data-toggle="tooltip" title="Delete this notification" data-dismiss="alert" aria-label="Close" data-id="{{ $notification->id }}" data-url="{{ route('users_notification_delete') }}">
+                                    <button type="button" class="close text-danger delete-notification" data-toggle="tooltip" title="Delete this notification" data-dismiss="alert" aria-label="Close" data-id="{{ $notification->id }}" data-url="{{ route('users.notification.delete') }}">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </td>

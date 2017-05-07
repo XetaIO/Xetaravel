@@ -36,7 +36,7 @@ class PageController extends Controller
     {
         if (!Auth::user()->hasRole('banished')) {
             return redirect()
-                ->route('page_index');
+                ->route('page.index');
         }
 
         return view('page.banished');

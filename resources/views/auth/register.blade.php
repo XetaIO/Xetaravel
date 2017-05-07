@@ -8,7 +8,7 @@
             <h2 class="text-xs-center font-xeta mt-2">
                 Register
             </h2>
-            {!! Form::open(['route' => 'users_auth_register']) !!}
+            {!! Form::open(['route' => 'users.auth.register']) !!}
                 {!! Form::bsText('username', 'Username', old('username'), [
                     'placeholder' => 'Your Username...',
                     'required' => 'required',
@@ -39,7 +39,7 @@
                         {!! Form::button('<i class="fa fa-user-plus" aria-hidden="true"></i> Register', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                     </div>
                     <div class="col-md-12">
-                        <a class="btn btn-link" href="{{ route('users_auth_login') }}">
+                        <a class="btn btn-link" href="{{ route('users.auth.login') }}">
                             Already an account?
                         </a>
                     </div>

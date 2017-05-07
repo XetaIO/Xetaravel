@@ -24,7 +24,7 @@
                 @foreach ($articles as $article)
                     <div class="blog-post">
                         <h1 class="blog-title">
-                            <a href="{{ route('blog_article_show', ['slug' => $article->slug, 'id' => $article->id]) }}">
+                            <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}">
                                 {{ str_limit($article->title, 150) }}
                             </a>
                         </h1>
@@ -35,7 +35,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                     By
-                                    <a href="{{ route('users_user_show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
+                                    <a href="{{ route('users.user.show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
                                         {{ $article->user->username }}
                                     </a>
                                 </li>
@@ -48,7 +48,7 @@
                         ) !!}
 
                         <div class="blog-footer">
-                            <a href="{{ route('blog_article_show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="btn btn-outline-primary">
+                            <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="btn btn-outline-primary">
                                 Read More
                             </a>
                         </div>

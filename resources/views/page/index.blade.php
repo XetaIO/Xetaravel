@@ -30,7 +30,7 @@
                 <p class="description">
                     This version is a light version of the <a class="font-weight-bold" href="https://github.com/XetaIO/Xeta" target="_blank">Xeta</a> project made with <i class="fa fa-heart" style="color: #fa6c65"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
-                <a class="btn btn-outline-primary-inverse" href="{{ route('blog_article_index') }}">
+                <a class="btn btn-outline-primary-inverse" href="{{ route('blog.article.index') }}">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
                 </a>
             </div>
@@ -81,7 +81,7 @@
 
                     <div class="card-block">
                         <h4 class="card-title text-truncate">
-                            <a href="{{ route('blog_article_show', ['slug' => $article->slug, 'id' => $article->id]) }}">
+                            <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}">
                                 {{ $article->title }}
                             </a>
                         </h4>
@@ -90,7 +90,7 @@
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item">
                                     <i class="fa fa-tag" aria-hidden="true" data-toggle="tooltip" title="Category"></i>
-                                    <a href="{{ route('blog_category_show', ['slug' => $article->category->slug, 'id' => $article->category->id]) }}">
+                                    <a href="{{ route('blog.category.show', ['slug' => $article->category->slug, 'id' => $article->category->id]) }}">
                                         {{ $article->category->title }}
                                     </a>
                                 </li>
@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('blog_article_show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="card-link btn btn-outline-primary">Read More</a>
+                        <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="card-link btn btn-outline-primary">Read More</a>
                     </div>
                 </div>
             </div>
@@ -130,14 +130,14 @@
                 <div class="media">
 
                     <div class="media-left">
-                        <a href="{{ route('users_user_show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
+                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
                             <img class="media-object" src="{{ asset($comment->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                     </div>
 
                     <div class="media-body">
                         <h5 class="media-heading">
-                            <a href="{{ route('blog_article_show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]) }}">
+                            <a href="{{ route('blog.article.show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]) }}">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{ $comment->article->title }}
                             </a>
                         </h5>

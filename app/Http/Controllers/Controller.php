@@ -15,6 +15,6 @@ class Controller extends BaseController
     {
         $this->breadcrumbs = new Breadcrumbs();
         $this->breadcrumbs->setListElement('nav');
-        $this->breadcrumbs->addCrumb('Home', route('page_index'));
+        $this->breadcrumbs->addCrumb('Home', route('page.index'));
     }
 }

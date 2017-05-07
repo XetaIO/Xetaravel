@@ -11,7 +11,7 @@ class ArticleController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Blog', route('blog_article_index'));
+        $this->breadcrumbs->addCrumb('Blog', route('blog.article.index'));
     }
 
     /**
@@ -40,7 +40,7 @@ class ArticleController extends Controller
 
         if (is_null($article)) {
             return redirect()
-                ->route('blog_article_index')
+                ->route('blog.article.index')
                 ->with('danger', 'This article doesn\'t exist or has been deleted !');
         }
 
@@ -49,7 +49,7 @@ class ArticleController extends Controller
         $this->breadcrumbs->addCrumb(
             "Article : " . e($article->title),
             route(
-                'blog_article_show',
+                'blog.article.show',
                 ['slug' => $article->category->slug, 'id' => $article->category->id]
             )
         );

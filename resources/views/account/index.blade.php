@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-9">
             <section>
-                {!! Form::model($user, ['route' => 'users_account_update', 'files'=>'true', 'method' => 'put']) !!}
+                {!! Form::model($user, ['route' => 'users.account.update', 'files'=>'true', 'method' => 'put']) !!}
                     <div class="row">
                         <div class="col-md-5 col-lg-4">
                             <div class="form-group {{ $errors->has('avatar') ? 'has-danger' : '' }}">

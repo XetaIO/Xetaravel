@@ -3,7 +3,7 @@
     <ol class="list-unstyled">
         @foreach ($articles as $article)
             <li>
-                <a href="{{ route('blog_article_show', ['slug' => $article->slug, 'id' => $article->id]) }}">
+                <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}">
                     {{ $article->title }}
                 </a>
             </li>
@@ -15,7 +15,7 @@
     <ol class="list-unstyled">
         @foreach ($categories as $category)
             <li>
-                <a href="{{ route('blog_category_show', ['slug' => $category->slug, 'id' => $category->id]) }}">
+                <a href="{{ route('blog.category.show', ['slug' => $category->slug, 'id' => $category->id]) }}">
                     {{ $category->title }}
                 </a>
                 ({{ $category->article_count }})

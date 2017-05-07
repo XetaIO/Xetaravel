@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Blog', route('blog_article_index'));
+        $this->breadcrumbs->addCrumb('Blog', route('blog.article.index'));
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
 
         if (is_null($category)) {
             return redirect()
-                ->route('blog_article_index')
+                ->route('blog.article.index')
                 ->with('danger', 'This category doesn\'t exist or has been deleted !');
         }
 
@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $this->breadcrumbs->addCrumb(
             "Category : " . e($category->title),
             route(
-                'blog_article_show',
+                'blog.article.show',
                 ['slug' => $category->slug, 'id' => $category->id]
             )
         );

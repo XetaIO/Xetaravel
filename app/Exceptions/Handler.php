@@ -50,11 +50,11 @@ class Handler extends ExceptionHandler
             //If the user is banished, redirect him to the banished page.
             if (Auth::check() && Auth::user()->hasRole('banished')) {
                 return redirect()
-                    ->route('page_banished');
+                    ->route('page.banished');
             }
 
             return redirect()
-                ->route('page_index')
+                ->route('page.index')
                 ->with('danger', 'You don\'t have the permission to view this page.');
         }
 
@@ -76,12 +76,14 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()
-            ->guest(route('users_auth_login'))
+            ->guest(route('users.auth.login'))
             ->with('danger', 'You don\'t have the permission to view this page.');
     }
 
     /**
      * Create a Symfony response for the given exception.
+     *
+     * @codeCoverageIgnore
      *
      * @param \Exception $e The exception to convert.
      *
