@@ -9,6 +9,24 @@
 >
 > This is a light version of the [Xeta](https://github.com/XetaIO/Xeta) website made with Laravel. There's only the public website, no administration yet (This is a WIP).
 >
+> ## Demo
+> [xetaravel.xeta.io](https://xetaravel.xeta.io)
+>
+> ### Pre-installed Accounts
+> * **Admin**
+>   * User : **admin@xeta.io**
+>   * Password : **admin**
+> * **Editor**
+>   * User : **editor@xeta.io**
+>   * Password : **editor**
+> * **Member**
+>   * User : **member@xeta.io**
+>   * Password : **member**
+> * **Banished**
+>   * User : **banished@xeta.io**
+>   * Password : **banished**
+>   * **Note** : You will need to delete the cookie to logout due to the restriction of the ban system.
+>
 > # Installation
 > ## Requirements
 >
