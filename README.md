@@ -7,7 +7,7 @@
 > |:------:|:-------:|:------:|:-------:|:------:|:-------:|:-------:|
 > |[![Build Status](https://img.shields.io/travis/XetaIO/Xetaravel.svg?style=flat-square)](https://travis-ci.org/XetaIO/Xetaravel)|[![Coverage Status](https://img.shields.io/coveralls/XetaIO/Xetaravel/master.svg?style=flat-square)](https://coveralls.io/r/XetaIO/Xetaravel)|[![Scrutinizer](https://img.shields.io/scrutinizer/g/XetaIO/Xetaravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/XetaIO/Xetaravel)|[![Latest Stable Version](https://img.shields.io/packagist/v/XetaIO/Xetaravel.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel)|[![Total Downloads](https://img.shields.io/packagist/dt/xetaio/xetaravel.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel)|[![Laravel 5.4](https://img.shields.io/badge/Laravel-5.4-f4645f.svg?style=flat-square)](http://cakephp.org)|[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://packagist.org/packages/xety/xeta)|
 >
-> This is a light version of the [Xeta](https://github.com/XetaIO/Xeta) website made with Laravel. There's only the public website, no administration, no account management yet (This is a WIP).
+> This is a light version of the [Xeta](https://github.com/XetaIO/Xeta) website made with Laravel. There's only the public website, no administration yet (This is a WIP).
 >
 > # Installation
 > ## Requirements
