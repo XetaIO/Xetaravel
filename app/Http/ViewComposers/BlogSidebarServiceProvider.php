@@ -6,7 +6,7 @@ use Xetaravel\Models\Repositories\CategoryRepository;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class SidebarServiceProvider extends ServiceProvider
+class BlogSidebarServiceProvider extends ServiceProvider
 {
     /**
      * Register bindings in the container.
@@ -15,7 +15,7 @@ class SidebarServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('Blog::article._sidebar', function ($view) {
+        View::composer('partials.blog._sidebar', function ($view) {
             $articles = ArticleRepository::sidebar();
             $categories = CategoryRepository::sidebar();
 

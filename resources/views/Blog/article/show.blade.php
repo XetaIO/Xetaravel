@@ -148,7 +148,7 @@
         </div>
 
         <div class="col-md-3">
-            @include('Blog::article._sidebar')
+            @include('partials.blog._sidebar')
         </div>
 
     </div>

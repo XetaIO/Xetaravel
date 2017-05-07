@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-md-3">
-            @include('account._sidebar')
+            @include('partials.user._sidebar')
         </div>
         <div class="col-md-9">
             <section>

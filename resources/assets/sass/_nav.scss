@@ -27,7 +27,7 @@
     }
   }
 
-  .nav-link.active,
+  .active .nav-link,
   .nav-item.open .nav-link {
     @include plain-hover-focus {
       color: $nav-menu-active-link-color;
