@@ -174,11 +174,11 @@ return [
         Ultraware\Roles\RolesServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         Spatie\Menu\Laravel\MenuServiceProvider::class,
+        Xetaio\Local\Providers\LocalEnvironmentServiceProvider::class,
 
         /*
          * Application Service Providers
          */
-        Xetaravel\Providers\LocalEnvironmentServiceProvider::class,
         Xetaravel\Providers\AppServiceProvider::class,
         Xetaravel\Providers\AuthServiceProvider::class,
         // Xetaravel\Providers\BroadcastServiceProvider::class,

@@ -1,0 +1,16 @@
+parameters:
+    bin_dir: ./vendor/bin
+    git_dir: .
+    tasks:
+        phpversion:
+            project: '7.0'
+        phpcs:
+            standard: "PSR2"
+            ignore_patterns:
+                - "*.blade.php"
+                - bootstrap/
+                - config/
+                - database/
+                - public/
+                - resources/
+                - storage/

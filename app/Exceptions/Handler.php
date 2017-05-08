@@ -3,8 +3,8 @@ namespace Xetaravel\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
+use Xetaio\Local\Exceptions\LocalHandler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -19,7 +19,7 @@ class Handler extends ExceptionHandler
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
-        \Illuminate\Validation\ValidationException::class,
+        \Illuminate\Validation\ValidationException::class
     ];
 
     /**
@@ -78,30 +78,5 @@ class Handler extends ExceptionHandler
         return redirect()
             ->guest(route('users.auth.login'))
             ->with('danger', 'You don\'t have the permission to view this page.');
-    }
-
-    /**
-     * Create a Symfony response for the given exception.
-     *
-     * @codeCoverageIgnore
-     *
-     * @param \Exception $e The exception to convert.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    protected function convertExceptionToResponse(Exception $e)
-    {
-        if (config('app.debug')) {
-            $whoops = new \Whoops\Run;
-            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-
-            return response()->make(
-                $whoops->handleException($e),
-                method_exists($e, 'getStatusCode') ? $e->getStatusCode() : 500,
-                method_exists($e, 'getHeaders') ? $e->getHeaders() : []
-            );
-        }
-
-        return parent::convertExceptionToResponse($e);
     }
 }

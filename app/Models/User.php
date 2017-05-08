@@ -68,12 +68,12 @@ class User extends Model implements
      */
     protected $appends = [
         'profile_background',
-        
+
         // Media Model
         'avatar_small',
         'avatar_medium',
         'avatar_big',
-        
+
         // Account Model
         'first_name',
         'last_name',
@@ -113,17 +113,17 @@ class User extends Model implements
                 ->width(100)
                 ->height(100)
                 ->keepOriginalImageFormat();
-        
+
         $this->addMediaConversion('thumbnail.medium')
                 ->width(200)
                 ->height(200)
                 ->keepOriginalImageFormat();
-        
+
         $this->addMediaConversion('thumbnail.big')
                 ->width(300)
                 ->height(300)
                 ->keepOriginalImageFormat();
-        
+
         $this->addMediaConversion('original')
                 ->keepOriginalImageFormat();
     }
