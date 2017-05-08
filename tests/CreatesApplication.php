@@ -15,15 +15,14 @@ trait CreatesApplication
      */
     public function createApplication()
     {
-      
         $app = require __DIR__.'/../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
-        
+
         config(['medialibrary.defaultFilesystem' => 'tests']);
-        
+
         return $app;
     }
-    
+
     /**
      * Triggered before each test.
      *
@@ -37,6 +36,11 @@ trait CreatesApplication
         Artisan::call('db:seed', ['--class' => 'TestingDatabaseSeeder']);
     }
 
+    /**
+     * Triggered after each test.
+     *
+     * @return void
+     */
     public function tearDown()
     {
         $temp = public_path() . '/tests/storage';
