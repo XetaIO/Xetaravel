@@ -21,7 +21,7 @@ class UserController extends Controller
         parent::__construct();
 
         $route = Route::getCurrentRoute()->getActionName();
-        list($controller, $action) = explode('@', $route);
+        list(, $action) = explode('@', $route);
 
         if (in_array($action, ['index', 'show'])) {
             $this->breadcrumbs->addCrumb('Users', route('users.user.index'));
@@ -95,17 +95,14 @@ class UserController extends Controller
         switch ($type) {
             case 'email':
                 return $this->updateEmail($request);
-                break;
 
             case 'password':
                 return $this->updatePassword($request);
-                break;
 
             default:
                 return back()
                     ->withInput()
                     ->with('danger', 'Invalid type.');
-                break;
         }
     }
 
