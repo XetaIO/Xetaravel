@@ -3,10 +3,8 @@ namespace Xetaravel\Providers;
 
 use Collective\Html\FormFacade as Form;
 use Illuminate\Support\ServiceProvider;
-use Spatie\Menu\Laravel\MenuFacade as Menu;
-use Spatie\Menu\Laravel\Link;
 
-class BootstrapServiceProvider extends ServiceProvider
+class FormServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
@@ -15,22 +13,6 @@ class BootstrapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Spatie Menu
-        Menu::macro('userProfile', function () {
-            return Menu::new()
-                ->addClass('nav nav-menu flex-column')
-                ->setAttribute('role', 'navigation')
-                ->add(
-                    Link::toRoute('users.account.index', '<i class="fa fa-user"></i> Account')
-                        ->addClass('nav-link')
-                )
-                ->add(
-                    Link::toRoute('users.notification.index', '<i class="fa fa-bell-o"></i> Notifications')
-                        ->addClass('nav-link')
-                )
-                ->setActiveFromRequest();
-        });
-
         // Collective Form
         Form::component(
             'bsText',

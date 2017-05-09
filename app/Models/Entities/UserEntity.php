@@ -6,13 +6,20 @@ use Xetaravel\Utility\UserUtility;
 trait UserEntity
 {
     /**
+     * The default avatar used when there is no avatar for the user.
+     *
+     * @var string
+     */
+    protected $defaultAvatar = '/images/avatar.png';
+
+    /**
      * Get the small avatar.
      *
      * @return string
      */
     public function getAvatarSmallAttribute(): string
     {
-        return $this->getMedia('avatar')[0]->getUrl('thumbnail.small');
+        return $this->parseMedia('thumbnail.small');
     }
 
     /**
@@ -22,7 +29,7 @@ trait UserEntity
      */
     public function getAvatarMediumAttribute(): string
     {
-        return $this->getMedia('avatar')[0]->getUrl('thumbnail.medium');
+        return $this->parseMedia('thumbnail.medium');
     }
 
     /**
@@ -32,7 +39,7 @@ trait UserEntity
      */
     public function getAvatarBigAttribute(): string
     {
-        return $this->getMedia('avatar')[0]->getUrl('thumbnail.big');
+        return $this->parseMedia('thumbnail.big');
     }
 
     /**
@@ -43,5 +50,14 @@ trait UserEntity
     public function getProfileBackgroundAttribute(): string
     {
         return UserUtility::getProfileBackground();
+    }
+
+    protected function parseMedia(string $type): string
+    {
+        if (isset($this->getMedia('avatar')[0])) {
+            return $this->getMedia('avatar')[0]->getUrl($type);
+        }
+
+        return $this->defaultAvatar;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Xetaravel\Models\Repositories;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use Xetaravel\Models\User;
 
@@ -28,6 +29,36 @@ class UserRepository
     }
 
     /**
+     * Update the user's email after a valid email update.
+     *
+     * @param array $data The data used to update the user.
+     * @param \Xetaravel\Models\User $user The user to update.
+     *
+     * @return bool
+     */
+    public static function updateEmail(array $data, User $user): bool
+    {
+        $user->email = $data['email'];
+
+        return $user->save();
+    }
+
+    /**
+     * Update the user's password after a valid password update.
+     *
+     * @param array $data The data used to update the user.
+     * @param \Xetaravel\Models\User $user The user to update.
+     *
+     * @return bool
+     */
+    public static function updatePassword(array $data, User $user): bool
+    {
+        $user->password = Hash::make($data['password']);
+
+        return $user->save();
+    }
+
+    /**
      * Find the notifications data for the notification sidebar.
      *
      * @param int $userId The id of the user.
@@ -37,7 +68,7 @@ class UserRepository
     public static function notificationsData($userId): array
     {
         $user = User::find($userId);
-        
+
         return [
             'notifications' => $user->notifications->take(8),
             'hasUnreadNotifications' => $user->unreadNotifications->isNotEmpty(),

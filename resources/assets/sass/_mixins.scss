@@ -1,4 +1,15 @@
-@import "bootstrap/mixins/breakpoints";
+@mixin ma-button-variant($color, $background) {
+    text-decoration: none;
+    color: $color;
+    background-color: $background;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $color;
+        background-color: darken($background, 5%);
+    }
+}
 
 @mixin transition($arguments) {
   -webkit-transition: $arguments;

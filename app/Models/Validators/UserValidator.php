@@ -8,7 +8,7 @@ use Illuminate\Validation\Validator;
 class UserValidator
 {
     /**
-     * Get a validator for an incoming registration request.
+     * Get the validator for an incoming registration request.
      *
      * @param array $data The data to validate.
      *
@@ -27,6 +27,38 @@ class UserValidator
         if (App::environment() != 'testing') {
             $rules = array_merge($rules, ['g-recaptcha-response' => 'required|recaptcha']);
         }
+
+        return FacadeValidator::make($data, $rules);
+    }
+
+    /**
+     * Get the validator for an incoming email update request.
+     *
+     * @param array $data The data to validate.
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    public static function updateEmail(array $data): Validator
+    {
+        $rules = [
+            'email' => 'required|email|max:50|unique:users'
+        ];
+
+        return FacadeValidator::make($data, $rules);
+    }
+
+    /**
+     * Get the validator for an incoming password update request.
+     *
+     * @param array $data The data to validate.
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    public static function updatePassword(array $data): Validator
+    {
+        $rules = [
+            'password' => 'required|min:6|confirmed'
+        ];
 
         return FacadeValidator::make($data, $rules);
     }

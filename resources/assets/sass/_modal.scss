@@ -1,0 +1,58 @@
+.modal-actions {
+    display: flex;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.ma {
+    font-weight: bold;
+    text-align: center;
+}
+
+.ma-btn {
+    float: left;
+    width: 50%;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    background-color: #F1F1F1;
+
+    &:first-child {
+        border-bottom-left-radius: $border-radius;
+    }
+
+    &:last-child {
+        border-bottom-right-radius: $border-radius;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+        background-color: $btn-secondary-color;
+    }
+}
+
+.ma-btn-primary {
+     @include ma-button-variant($btn-primary-color, $btn-primary-bg);
+}
+
+.ma-btn-secondary {
+     @include ma-button-variant($btn-secondary-color, $btn-secondary-bg);
+}
+
+.ma-btn-success {
+     @include ma-button-variant($btn-success-color, $btn-success-bg);
+}
+
+.ma-btn-info {
+     @include ma-button-variant($btn-info-color, $btn-info-bg);
+}
+
+.ma-btn-warning {
+     @include ma-button-variant($btn-warning-color, $btn-warning-bg);
+}
+
+.ma-btn-danger {
+     @include ma-button-variant($btn-danger-color, $btn-danger-bg);
+}

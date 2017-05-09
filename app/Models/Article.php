@@ -5,12 +5,14 @@ use Xetaravel\Models\Category;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Scopes\DisplayScope;
 use Eloquence\Behaviours\CountCache\Countable;
+use Eloquence\Behaviours\Sluggable;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
 class Article extends Model
 {
-    use Countable;
+    use Countable,
+        Sluggable;
 
     /**
      * The "booting" method of the model.
@@ -20,7 +22,7 @@ class Article extends Model
     protected static function boot()
     {
         parent::boot();
-        
+
         /**
          * The Route::getFacadeRoot() is undefined in the testing environment for mysterious reasons.
          */
@@ -32,6 +34,16 @@ class Article extends Model
         } else {
             static::addGlobalScope(new DisplayScope);
         }
+    }
+
+    /**
+     * Return the field to slug.
+     *
+     * @return string
+     */
+    public function slugStrategy(): string
+    {
+        return 'title';
     }
 
     /**
