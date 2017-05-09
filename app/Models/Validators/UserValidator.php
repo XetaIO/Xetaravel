@@ -57,6 +57,7 @@ class UserValidator
     public static function updatePassword(array $data): Validator
     {
         $rules = [
+            'oldpassword' => 'required',
             'password' => 'required|min:6|confirmed'
         ];
 
