@@ -45,27 +45,22 @@ class AccountController extends Controller
     public function update(Request $request): RedirectResponse
     {
         AccountValidator::update($request->all())->validate();
+        AccountRepository::update($request->all());
 
-        if (AccountRepository::update($request->all())) {
-            $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
 
-            // Handle the avatar upload.
-            if (!is_null($request->file('avatar'))) {
-                $user->clearMediaCollection('avatar');
-                $user->addMedia($request->file('avatar'))
-                    ->preservingOriginal()
-                    ->setName(substr(md5($user->username), 0, 10))
-                    ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
-                    ->toMediaCollection('avatar');
-            }
-
-            return redirect()
-                ->route('users.account.index')
-                ->with('success', 'Your account has been updated successfully !');
+        // Handle the avatar upload.
+        if (!is_null($request->file('avatar'))) {
+            $user->clearMediaCollection('avatar');
+            $user->addMedia($request->file('avatar'))
+                ->preservingOriginal()
+                ->setName(substr(md5($user->username), 0, 10))
+                ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
+                ->toMediaCollection('avatar');
         }
-        
+
         return redirect()
             ->route('users.account.index')
-            ->with('danger', 'An error occurred while saving your informations !');
+            ->with('success', 'Your account has been updated successfully !');
     }
 }

@@ -16,6 +16,7 @@ class PermissionsRolesTableSeed extends Seeder
         // Admin Role
         $role = Role::where('slug', 'admin')->first();
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.users')->first());
         $role->attachPermission(Permission::where('slug', 'manage.articles')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 

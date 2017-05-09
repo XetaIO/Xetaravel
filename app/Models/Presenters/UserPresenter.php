@@ -10,7 +10,7 @@ trait UserPresenter
      */
     public function getFirstNameAttribute(): string
     {
-        return $this->parse($this->account->first_name);
+        return $this->parse($this->account, 'first_name');
     }
 
     /**
@@ -20,7 +20,7 @@ trait UserPresenter
      */
     public function getLastNameAttribute(): string
     {
-        return $this->parse($this->account->last_name);
+        return $this->parse($this->account, 'last_name');
     }
 
     /**
@@ -30,7 +30,7 @@ trait UserPresenter
      */
     public function getFullNameAttribute(): string
     {
-        return $this->parse($this->account->first_name) . ' ' . $this->parse($this->account->last_name);
+        return $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
     }
 
     /**
@@ -40,7 +40,7 @@ trait UserPresenter
      */
     public function getFacebookAttribute(): string
     {
-        return $this->parse($this->account->facebook);
+        return $this->parse($this->account, 'facebook');
     }
 
     /**
@@ -50,7 +50,7 @@ trait UserPresenter
      */
     public function getTwitterAttribute(): string
     {
-        return $this->parse($this->account->twitter);
+        return $this->parse($this->account, 'twitter');
     }
 
     /**
@@ -60,7 +60,7 @@ trait UserPresenter
      */
     public function getBiographyAttribute(): string
     {
-        return $this->parse($this->account->biography);
+        return $this->parse($this->account, 'biography');
     }
 
     /**
@@ -70,22 +70,24 @@ trait UserPresenter
      */
     public function getSignatureAttribute(): string
     {
-        return $this->parse($this->account->signature);
+        return $this->parse($this->account, 'signature');
     }
 
     /**
      * Parse an attribute and return its value or empty if null.
      *
+     * @param Object|null $relation The relation or the user object.
+     *       Can be `$this` or `$this->account` for exemple
      * @param string|null $attribute The attribute to parse.
      *
      * @return string
      */
-    protected function parse($attribute): string
+    protected function parse($relation, $attribute): string
     {
-        if ($attribute === null) {
+        if ($relation === null || $relation->{$attribute} === null) {
             return '';
         }
-        
-        return $attribute;
+
+        return $relation->{$attribute};
     }
 }

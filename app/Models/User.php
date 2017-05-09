@@ -7,7 +7,6 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
@@ -29,7 +28,6 @@ class User extends Model implements
         Authorizable,
         CanResetPassword,
         Notifiable,
-        SoftDeletes,
         Sluggable,
         HasRoleAndPermission,
         HasMediaTrait,
@@ -81,15 +79,6 @@ class User extends Model implements
         'signature',
         'facebook',
         'twitter'
-    ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'deleted_at'
     ];
 
     /**

@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Xetaravel\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesTableSeed extends Seeder
 {
@@ -13,19 +13,25 @@ class CategoriesTableSeed extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'title' => 'Laravel',
-            'description' => 'All articles related to Laravel.',
-            'article_count' => 1,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-        Category::create([
-            'title' => 'Xetaravel',
-            'description' => 'All articles related to Xetaravel.',
-            'article_count' => 0,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        $categories = [
+            [
+                'title' => 'Laravel',
+                'description' => 'All articles related to Laravel.',
+                'article_count' => 1,
+                'slug' => 'laravel',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'title' => 'Xetaravel',
+                'description' => 'All articles related to Xetaravel.',
+                'article_count' => 0,
+                'slug' => 'xetaravel',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ];
+
+        DB::table('categories')->insert($categories);
     }
 }

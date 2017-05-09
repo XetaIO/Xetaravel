@@ -1,7 +1,8 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Ultraware\Roles\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsTableSeed extends Seeder
 {
@@ -12,25 +13,44 @@ class PermissionsTableSeed extends Seeder
      */
     public function run()
     {
-        Permission::create([
-            'name' => 'Access Administration',
-            'slug' => 'access.administration',
-            'description' => 'The user can access to the administration.',
-        ]);
-        Permission::create([
-            'name' => 'Manage Articles',
-            'slug' => 'manage.articles',
-            'description' => 'The user can manage the articles.',
-        ]);
-        Permission::create([
-            'name' => 'Access Site',
-            'slug' => 'access.site',
-            'description' => 'The user can access to the site.',
-        ]);
-        Permission::create([
-            'name' => 'Show bannished',
-            'slug' => 'show.banished',
-            'description' => 'The user is bannished.',
-        ]);
+        $permissions = [
+            [
+                'name' => 'Access Administration',
+                'slug' => 'access.administration',
+                'description' => 'The user can access to the administration.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Manage Articles',
+                'slug' => 'manage.articles',
+                'description' => 'The user can manage the articles.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Manage Users',
+                'slug' => 'manage.users',
+                'description' => 'The user can manage the users.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Access Site',
+                'slug' => 'access.site',
+                'description' => 'The user can access to the site.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Show bannished',
+                'slug' => 'show.banished',
+                'description' => 'The user is bannished.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ];
+
+        DB::table('permissions')->insert($permissions);
     }
 }

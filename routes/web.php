@@ -19,10 +19,10 @@ Route::group(['middleware' => ['auth', 'permission:show.banished']], function ()
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allowGuest']], function () {
-    
+
     Route::get('profile/{slug}.{id}', 'UserController@show')->name('users.user.show');
     Route::get('/', 'UserController@index')->name('users.user.index');
-    
+
     // Auth Namespace
     Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes
@@ -43,7 +43,12 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
 
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
-        // Users Routes
+        // User Routes
+        Route::get('settings', 'UserController@showSettingsForm')->name('users.user.settings');
+        Route::put('settings', 'UserController@update');
+        Route::delete('delete', 'UserController@delete')->name('users.user.delete');
+
+        // Account Routes
         Route::get('account', 'AccountController@index')->name('users.account.index');
         Route::put('account', 'AccountController@update')->name('users.account.update');
 

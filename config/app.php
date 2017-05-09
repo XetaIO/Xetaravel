@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers
+         * Packages Service Providers
          */
         Collective\Html\HtmlServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
@@ -184,9 +184,10 @@ return [
         // Xetaravel\Providers\BroadcastServiceProvider::class,
         Xetaravel\Providers\EventServiceProvider::class,
         Xetaravel\Providers\RouteServiceProvider::class,
-        Xetaravel\Providers\BootstrapServiceProvider::class,
+        Xetaravel\Providers\FormServiceProvider::class,
+        Xetaravel\Providers\MenuServiceProvider::class,
         Xetaravel\Http\ViewComposers\BlogSidebarServiceProvider::class,
-        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class
+        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class,
     ],
 
     /*
