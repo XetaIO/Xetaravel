@@ -1,10 +1,4 @@
 <header class="pos-f-t">
-  <div class="collapse" id="navbar-header">
-      <div class="container bg-inverse p-1">
-        <h3>Collapsed content</h3>
-        <p>Toggleable via the navbar brand.</p>
-      </div>
-  </div>
   <nav class="navbar navbar-light bg-white">
     <div class="container">
       <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-expanded="false" aria-controls="exCollapsingNavbar2" aria-label="Toggle navigation"></button>
@@ -42,7 +36,7 @@
             <span class="navbar-text navbar-hello-text float-xs-left float-sm-right font-weight-bold">
               Hello,&nbsp;
             </span>
-            
+
             <!-- Notifications -->
             @include('partials._notifications')
         @endif

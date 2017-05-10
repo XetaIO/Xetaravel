@@ -1,0 +1,170 @@
+// Widget
+.widget {
+    padding: 15px;
+    color: $white;
+    border-radius: $border-radius;
+    overflow: hidden;
+}
+
+// Widget Stats
+.widget-stats {
+    position: relative;
+
+    .stats-icon {
+        font-size: 52px;
+        top: 12px;
+        right: 21px;
+        height: 56px;
+        width: 56px;
+        text-align: center;
+        line-height: 56px;
+        margin-left: 15px;
+        color: $white;
+        position: absolute;
+        opacity: .2;
+    }
+
+    .stats-title {
+        position: relative;
+        line-height: 1.1;
+        font-size: 12px;
+        margin: 2px 0 7px;
+    }
+
+    .stats-number {
+        font-size: 24px;
+        font-weight: 300;
+        margin-bottom: 10px;
+    }
+
+    .stats-progress {
+        height: 2px;
+        background-color: $white;
+        margin: 0 -15px 12px;
+    }
+
+    .stats-desc {
+        font-weight: 300;
+        margin-bottom: 0;
+    }
+
+    .stats-title,
+    .stats-desc {
+        color: rgba(255,255,255,.6);
+    }
+}
+
+// Widget Chart
+.widget-chart {
+    border-radius: $border-radius;
+
+    .widget-chart-content {
+        padding: 15px;
+        margin-right: 230px;
+    }
+
+    .chart-title {
+        font-size: 18px;
+        color: $white;
+        margin: 2px 5px 7px;
+
+        small {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            color: rgba(255,255,255,.3);
+        }
+    }
+
+    .widget-chart-sidebar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 230px;
+        padding: 15px;
+        border-left: 1px solid $brand-primary;
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+
+        .chart-number {
+            font-size: 24px;
+            font-weight: 300;
+            color: $white;
+            margin-bottom: 10px;
+
+            small {
+                font-size: 12px;
+                color: #616D72;
+                color: rgba(255,255,255,.3);
+                display: block;
+            }
+        }
+
+        .chart-legend {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            font-weight: 300;
+            position: absolute;
+            bottom: 10px;
+            list-style-type: none;
+
+            > li {
+                margin-bottom: 5px;
+                color: $white;
+
+                span {
+                    color: #616D72;
+                    color: rgba(255,255,255,.3);
+                }
+            }
+        }
+    }
+}
+
+// Widget Map
+.widget-map {
+    border-radius: $border-radius;
+
+    .stats-heading {
+        padding: 10px 15px;
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    .stats-title {
+        font-size: 18px;
+        color: $white;
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 20px;
+    }
+
+    .list-group-item {
+        font-size: 12px;
+        border-width: 1px 0;
+        padding: 10px 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+
+        .tag {
+            font-size: 100%;
+        }
+    }
+
+    .list-group-item-inverse {
+        border-color: #242a30;
+        color: $white;
+    }
+
+    &.widget-inverse {
+        >.stats-heading {
+            background: $brand-inverse;
+        }
+    }
+}
