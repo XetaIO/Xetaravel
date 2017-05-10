@@ -12,6 +12,9 @@
 > ## Demo
 > [xetaravel.xeta.io](https://xetaravel.xeta.io)
 >
+> ## Administration Preview
+> ![Admin](https://cloud.githubusercontent.com/assets/8210023/25923017/d958c432-35db-11e7-8306-92fc3406aed8.png)
+>
 > ### Pre-installed Accounts
 > * **Admin**
 >   * User : **admin@xeta.io**

@@ -1,6 +1,10 @@
 <?php
 
 return [
+    /**
+     * Whatever to enabled or not the analytics administration.
+     */
+    'enabled' => env('ANALYTICS_ENABLED', false),
 
     /*
      * The view id of which you want to display data.

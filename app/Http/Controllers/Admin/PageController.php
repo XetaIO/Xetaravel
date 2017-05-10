@@ -28,13 +28,13 @@ class PageController extends Controller
             ]
         );
 
-        $data = [];
+        $visitorsGraph = [];
         foreach ($visitorsData->rows as $row) {
             $row[0] = Carbon::createFromFormat('Ymd', $row[0]);
 
-            array_push($data, $row);
+            array_push($visitorsGraph, $row);
         }
-        $visitorsData->rows = array_reverse($data);
+        $visitorsData->rows = array_reverse($visitorsGraph);
 
         // Browsers
         $startDate = Carbon::create(2014, 07, 01);
@@ -52,7 +52,7 @@ class PageController extends Controller
             ]
         );
 
-        $data = [];
+        $browsersGraph = [];
         foreach ($browsersData->rows as $browser) {
             $percent = round(($browser[1] * 100) / $browsersData->totalsForAllResults['ga:pageviews'], 1);
 
@@ -79,9 +79,9 @@ class PageController extends Controller
             $browser[] = $percent;
             $browser[] = $color;
 
-            array_push($data, $browser);
+            array_push($browsersGraph, $browser);
         }
-        $browsersData->rows = array_reverse($data);
+        $browsersData->rows = array_reverse($browsersGraph);
 
         // Countries
         $countriesData = AnalyticsFacade::performQuery(
