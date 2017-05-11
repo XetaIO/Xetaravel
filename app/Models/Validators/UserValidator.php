@@ -17,7 +17,7 @@ class UserValidator
     public static function create(array $data): Validator
     {
         $rules = [
-            'username' => 'required|min:4|max:20|unique:users',
+            'username' => 'required|alpha_num|min:4|max:20|unique:users',
             'email' => 'required|email|max:50|unique:users',
             'password' => 'required|min:6|confirmed',
             'terms' => 'required|min:1'
