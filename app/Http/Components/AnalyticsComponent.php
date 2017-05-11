@@ -249,11 +249,11 @@ trait AnalyticsComponent
     {
         $percentage = ($pageviews * 100) / $total;
 
-        return round($percentage,  1);
+        return round($percentage, 1);
     }
 
     /**
-     * Get the browser color by his name.
+     * Get the browser color by his name
      *
      * @param string $browser The name of the browser.
      *
