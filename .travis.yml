@@ -23,8 +23,7 @@ matrix:
     - php: 7.0
       env: COVERALLS=1 DEFAULT=0 DB=mysql
 
-before_install:
-  - before_script: echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+before_install: echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
   - composer self-update
