@@ -41,4 +41,5 @@ mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
     ], 'public/js/xetaravel.min.js')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')
-    .copyDirectory('resources/assets/fonts', 'public/fonts');
+    .copyDirectory('resources/assets/fonts', 'public/fonts')
+    .version();

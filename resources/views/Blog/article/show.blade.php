@@ -5,8 +5,8 @@
     @if (Auth::user())
         {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
     @endif
-    
-    {!! Html::script('js/highlight.min.js')!!}
+
+    <script src="{{ mix('js/highlight.min.js') }}"></script>
     <script type="text/javascript">
         @if (Auth::user())
             /**
@@ -17,7 +17,7 @@
                 customConfig: '../config/comment.js'
             });
         @endif
-        
+
         /**
          * HighlightJS.
          */

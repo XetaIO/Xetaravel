@@ -12,10 +12,10 @@
         <title>{{ config('app.title') . ' - ' . config('app.name') }}</title>
 
         <!-- Styles -->
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/xetaravel.min.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
@@ -39,13 +39,13 @@
         @include('elements.footer')
 
         <!-- Scripts -->
-        <script src="{{ asset('js/lib.min.js') }}"></script>
+        <script src="{{ mix('js/lib.min.js') }}"></script>
 
         <!-- CSRF JS Token -->
         <script type="text/javascript">
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
-        <script src="{{ asset('js/xetaravel.min.js') }}"></script>
+        <script src="{{ mix('js/xetaravel.min.js') }}"></script>
 
         <!-- Embed Scripts -->
         @stack('scripts')
