@@ -6,6 +6,11 @@ return [
      */
     'enabled' => env('ANALYTICS_ENABLED', false),
 
+    /**
+     * The start date used to get the browsers statistics. Should be formated as `Y-m-d`.
+     */
+    'start_date' => '2014-08-01',
+
     /*
      * The view id of which you want to display data.
      */
@@ -21,7 +26,7 @@ return [
      * The amount of minutes the Google API responses will be cached.
      * If you set this to zero, the responses won't be cached at all.
      */
-    'cache_lifetime_in_minutes' => 0,
+    'cache_lifetime_in_minutes' => 120,
 
     /*
      * Here you may configure the "store" that the underlying Google_Client will
@@ -31,6 +36,6 @@ return [
      * Optional parameters: "lifetime", "prefix"
      */
     'cache' => [
-        'store' => 'file',
+        'store' => env('ANALYTICS_CACHE_STORE', 'file'),
     ],
 ];

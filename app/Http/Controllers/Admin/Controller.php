@@ -8,6 +8,8 @@ class Controller extends BaseController
 {
     public function __construct()
     {
+        parent::__construct();
+
         $this->breadcrumbs = new Breadcrumbs();
         $this->breadcrumbs->setListElement('nav');
         $this->breadcrumbs->setCssClasses('breadcrumb');

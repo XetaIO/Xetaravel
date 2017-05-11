@@ -3,12 +3,26 @@ namespace Xetaravel\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Rinvex\Country\CountryLoader;
-use Spatie\Analytics\AnalyticsFacade;
-use Spatie\Analytics\Period;
+use Illuminate\Support\Facades\Cache;
+use Xetaravel\Http\Components\AnalyticsComponent;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\Comment;
+use Xetaravel\Models\User;
 
 class PageController extends Controller
 {
+    use AnalyticsComponent;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->endDate = Carbon::now()->subDay();
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -16,185 +30,67 @@ class PageController extends Controller
      */
     public function index()
     {
-        // Visitors
-        $startDate = Carbon::now()->subDays(7);
-        $endDate = Carbon::now()->subDay();
-        $visitorsData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $endDate),
-            'ga:sessions,ga:pageviews',
-            [
-                'dimensions' => 'ga:date',
-                'sort' => 'ga:date'
-            ]
-        );
+        $minutes = config('analytics.cache_lifetime_in_minutes');
 
-        $visitorsGraph = [];
-        foreach ($visitorsData->rows as $row) {
-            $row[0] = Carbon::createFromFormat('Ymd', $row[0]);
+        if (config('analytics.enabled')) {
+            // @codeCoverageIgnoreStart
+            $visitorsData = Cache::remember('Analytics.visitors', $minutes, function () {
+                return $this->buildVisitorsGraph();
+            });
 
-            array_push($visitorsGraph, $row);
-        }
-        $visitorsData->rows = array_reverse($visitorsGraph);
+            $browsersData = Cache::remember('Analytics.browsers', $minutes, function () {
+                return $this->buildBrowsersGraph();
+            });
 
-        // Browsers
-        $startDate = Carbon::create(2014, 07, 01);
-        $browsersData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $endDate),
-            'ga:pageviews',
-            [
-                'dimensions' => 'ga:browser',
-                'sort' => 'ga:pageviews',
-                'filters' => 'ga:browser==Chrome,'
-                    .'ga:browser==Firefox,'
-                    .'ga:browser==Internet Explorer,'
-                    .'ga:browser==Safari,'
-                    .'ga:browser==Opera'
-            ]
-        );
+            $countriesData = Cache::remember('Analytics.countries', $minutes, function () {
+                return $this->buildCountriesGraph();
+            });
 
-        $browsersGraph = [];
-        foreach ($browsersData->rows as $browser) {
-            $percent = round(($browser[1] * 100) / $browsersData->totalsForAllResults['ga:pageviews'], 1);
+            $devicesGraph = Cache::remember('Analytics.devices', $minutes, function () {
+                return $this->buildDevicesGraph();
+            });
 
-            switch ($browser[0]) {
-                case 'Chrome':
-                    $color = '#00acac';
-                    break;
-                case 'Firefox':
-                    $color = '#f4645f';
-                    break;
-                case 'Safari':
-                    $color = '#727cb6';
-                    break;
-                case 'Opera':
-                    $color = '#348fe2';
-                    break;
-                case 'Internet Explorer':
-                    $color = '#75e376';
-                    break;
-                default:
-                    $color = '#ddd';
-            }
+            $topCountries = array_slice($countriesData->rows, 0, 3);
 
-            $browser[] = $percent;
-            $browser[] = $color;
+            $operatingSystemGraph = Cache::remember('Analytics.operatingsystem', $minutes, function () {
+                return $this->buildOperatingSytemGraph();
+            });
 
-            array_push($browsersGraph, $browser);
-        }
-        $browsersData->rows = array_reverse($browsersGraph);
-
-        // Countries
-        $countriesData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $endDate),
-            'ga:pageviews,ga:sessions',
-            [
-                'dimensions' => 'ga:countryIsoCode',
-                'sort' => '-ga:pageviews'
-            ]
-        );
-
-        foreach ($countriesData->rows as $country) {
-            $countries[$country[0]] = [
-                'ga:pageviews' => $country[1],
-                'ga:sessions' => $country[2],
-                'percent' => round(($country[1] * 100) / $countriesData->totalsForAllResults['ga:pageviews'], 1)
-            ];
-
-            if (!in_array($country[0], ['ZZ'])) {
-                $countryInstance = country((string)strtolower($country[0]));
-                $countries[$country[0]] += [
-                    'countryName' => $countryInstance->getName()
-                ];
-            } else {
-                $countries[$country[0]] += [
-                    'countryName' => 'Unknown'
-                ];
-            }
-        }
-        $countriesData->rows = $countries;
-        $topCountries = array_slice($countries, 0, 3);
-
-        // Devices
-        $startDate = Carbon::now()->subMonths(7);
-        $devicesData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $endDate),
-            'ga:pageviews',
-            [
-                'dimensions' => 'ga:mobileDeviceBranding,ga:yearMonth',
-                'sort' => '-ga:mobileDeviceBranding',
-                'filters' => 'ga:mobileDeviceBranding==Apple,'
-                    .'ga:mobileDeviceBranding==Samsung,'
-                    .'ga:mobileDeviceBranding==Google,'
-                    .'ga:mobileDeviceBranding==HTC,'
-                    .'ga:mobileDeviceBranding==Microsoft'
-            ]
-        );
-
-        $devicesGraph = [];
-        for ($i = 0; $i < 8; $i++) {
-            $date = Carbon::now()->subMonths($i);
-
-            $devicesGraph[$date->format('Ym')] = [
-                'period' => $date->format('Y-m-d'),
-                'Apple' => 0,
-                'Samsung' => 0,
-                'Google' => 0,
-                'HTC' => 0,
-                'Microsoft' => 0
-            ];
+            $todayVisitors = Cache::remember('Analytics.todayvisitors', $minutes, function () {
+                return $this->buildTodayVisitors();
+            });
+            // @codeCoverageIgnoreEnd
         }
 
-        foreach ($devicesData->rows as $device) {
-            $devicesGraph[$device[1]][$device[0]] = $device[2];
-        }
-        $devicesGraph = array_reverse($devicesGraph);
-        $devicesGraph = collect($devicesGraph)->toJson();
+        $usersCount = Cache::remember('Analytics.users.count', $minutes, function () {
+            return User::count();
+        });
 
-        // Operating System
-        $startDate = Carbon::now()->subMonths(7);
-        $operatingSystemData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $endDate),
-            'ga:pageviews',
-            [
-                'dimensions' => 'ga:operatingSystem,ga:yearMonth',
-                'sort' => '-ga:operatingSystem',
-                'filters' => 'ga:operatingSystem==Windows,'
-                    .'ga:operatingSystem==Macintosh,'
-                    .'ga:operatingSystem==Linux,'
-                    .'ga:operatingSystem==(not set)'
-            ]
-        );
+        $articlesCount = Cache::remember('Analytics.articles.count', $minutes, function () {
+            return Article::count();
+        });
 
-        $operatingSystemGraph = [];
-        for ($i = 0; $i < 8; $i++) {
-            $date = Carbon::now()->subMonths($i);
+        $commentsCount = Cache::remember('Analytics.comments.count', $minutes, function () {
+            return Comment::count();
+        });
 
-            $operatingSystemGraph[$date->format('Ym')] = [
-                'period' => $date->format('Y-m-d'),
-                'Windows' => 0,
-                'Macintosh' => 0,
-                'Linux' => 0,
-                '(not set)' => 0
-            ];
-        }
-
-        foreach ($operatingSystemData->rows as $os) {
-            $operatingSystemGraph[$os[1]][$os[0]] = $os[2];
-        }
-        $operatingSystemGraph = array_reverse($operatingSystemGraph);
-        $operatingSystemGraph = collect($operatingSystemGraph)->toJson();
+        $breadcrumbs = $this->breadcrumbs;
 
         return view(
             'Admin::page.index',
-            [
-                'breadcrumbs' => $this->breadcrumbs,
-                'visitorsData' => $visitorsData,
-                'browsersData' => $browsersData,
-                'countriesData' => $countriesData,
-                'topCountries' => $topCountries,
-                'devicesGraph' => $devicesGraph,
-                'operatingSystemGraph' => $operatingSystemGraph
-            ]
+            compact(
+                'breadcrumbs',
+                'visitorsData',
+                'browsersData',
+                'countriesData',
+                'topCountries',
+                'devicesGraph',
+                'operatingSystemGraph',
+                'usersCount',
+                'articlesCount',
+                'commentsCount',
+                'todayVisitors'
+            )
         );
     }
 }
