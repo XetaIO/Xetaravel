@@ -2,7 +2,7 @@
   <div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
-              © 2016 Xetaravel.
+              &copy; {{ date('Y', time()) }} {{ config('app.name') }}.
           <ul class="list-inline d-inline-block mb-0">
             <li class="list-inline-item">
               <a href="{{ config('xetaravel.site.github_url') }}" target="_blank">
