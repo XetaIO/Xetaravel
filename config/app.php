@@ -175,6 +175,7 @@ return [
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         Spatie\Menu\Laravel\MenuServiceProvider::class,
         Xetaio\Local\Providers\LocalEnvironmentServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
 
         /*
          * Application Service Providers
@@ -187,7 +188,7 @@ return [
         Xetaravel\Providers\FormServiceProvider::class,
         Xetaravel\Providers\MenuServiceProvider::class,
         Xetaravel\Http\ViewComposers\BlogSidebarServiceProvider::class,
-        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class,
+        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class
     ],
 
     /*
@@ -225,7 +226,7 @@ return [
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
+        'L5Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,
@@ -243,8 +244,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-        'Menu' => Spatie\Menu\Laravel\MenuFacade::class
-
+        'Menu' => Spatie\Menu\Laravel\MenuFacade::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class
     ],
 
 ];

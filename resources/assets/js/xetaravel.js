@@ -36,7 +36,7 @@ $(document).ready(function () {
     var width = "padding:5px 0;",
         infoPrimaryBackground = "background:#5ccc5c;",
         infoCornerBackground = "background:#a3f5a3;",
-        infoTitle = "color:#5ccc5c;background:#2f4052;font-weight:bold;",
+        infoTitle = "color:#a3f5a3;background:#2f4052;font-weight:bold;",
         messageInfo = [
             "\n %c  %c HELLO ! %c  %c  Don't forget that this website is open-source ! https://github.com/XetaIO/Xetaravel  %c  \n\n",
             infoPrimaryBackground + width,
@@ -45,7 +45,7 @@ $(document).ready(function () {
             "color:#fff;" + infoPrimaryBackground + width,
             infoCornerBackground + width
         ];
-    
+
     var warnPrimaryBackground = "background:#c22;",
         warnCornerBackground = "background:#e44;",
         warnTitle = "color:#e44;background:#2f4052;font-weight:bold;",

@@ -1,0 +1,60 @@
+.interface {
+    position: fixed;
+    top: 59px;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 4px solid $brand-primary;
+
+    .nav {
+        margin-bottom: 20px;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-item + .nav-item {
+        margin-left: 0;
+    }
+
+    .nav-link {
+        border-radius: 0;
+
+        &:hover {
+            color: $white;
+            background-color: $brand-primary;
+        }
+    }
+
+    .interface-header {
+        height: 70px;
+        border-bottom: 1px solid $brand-primary;
+
+        .avatar {
+            float: left;
+            width: 40px;
+            margin: 15px;
+            border-radius: 50%;
+            border: 2px solid $white;
+        }
+
+        .information {
+            padding-right: 15px;
+            padding-top: 25px;
+            margin-left: 70px;
+            text-align: left;
+        }
+    }
+}
+
+
+@media (max-width: 768px) {
+    .interface {
+        position: static;
+        border: none;
+    }
+}
