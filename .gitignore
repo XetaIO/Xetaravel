@@ -20,8 +20,6 @@ composer.lock
 /public/music
 /public/media
 /public/tests
-/public/mix.js
-/public/mix-manifest.json
 /public/mix.*.js
 /storage/*.key
 /storage/medialibrary
