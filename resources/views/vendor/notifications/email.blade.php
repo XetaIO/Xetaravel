@@ -72,7 +72,7 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                <img src="{{ asset('images/logo.svg') }}" width="45" height="45" alt="Xetaravel logo"/>
+                                <img style="margin: 0 auto;" src="{{ asset('images/logo300x300.png') }}" width="45" height="45" alt="Xetaravel logo"/>
                                 <br />
                                 {{ config('app.name') }}
                             </a>
