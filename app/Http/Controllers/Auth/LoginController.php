@@ -5,6 +5,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\View\View;
 use Xetaravel\Events\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
 
@@ -42,9 +43,9 @@ class LoginController extends Controller
     /**
      * Show the application's login form.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function showLoginForm()
+    public function showLoginForm(): View
     {
         return view('Auth.login');
     }
@@ -52,7 +53,7 @@ class LoginController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request The request object.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -89,7 +90,7 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param \Illuminate\Http\Request $request The request object.
-     * @param mixed $user
+     * @param \Xetaravel\Models\User $user The user that has been logged in.
      *
      * @return void
      */
