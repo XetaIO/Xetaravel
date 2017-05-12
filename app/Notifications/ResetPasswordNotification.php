@@ -20,9 +20,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     /**
      * Create a notification instance.
      *
-     * @param  string  $token
-     *
-     * @return void
+     * @param string $token
      */
     public function __construct($token)
     {
@@ -32,11 +30,11 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     /**
      * Get the notification's channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      *
-     * @return array|string
+     * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -48,7 +46,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->line('You are receiving this email because we received a password reset request for your account.')

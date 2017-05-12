@@ -2,8 +2,12 @@
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Xetaravel\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Password;
+use Illuminate\View\View;
+use Xetaravel\Http\Controllers\Controller;
+use Xetaravel\Models\Validators\PasswordResetValidator;
 
 class ForgotPasswordController extends Controller
 {
@@ -34,29 +38,32 @@ class ForgotPasswordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showLinkRequestForm()
+    public function showLinkRequestForm(): View
     {
         return view('Auth.passwords.email');
     }
 
     /**
-     * Validate the email for the given request.
+     * Send a reset link to the given user.
      *
-     * @param \Illuminate\Http\Request  $request
-     * @return void
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected function validateEmail(Request $request)
+    public function sendResetLinkEmail(Request $request): RedirectResponse
     {
-        $rule = [
-            'email' => 'required|email'
-        ];
+        PasswordResetValidator::validateEmail($request->all())->validate();
 
-        // Bipass the captcha for the unit testing.
-        if (App::environment() !== 'testing') {
-            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|recaptcha']);
-        }
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
 
-        $this->validate($request, $rules);
+        return $response == Password::RESET_LINK_SENT
+                    ? $this->sendResetLinkResponse($response)
+                    : $this->sendResetLinkFailedResponse($request, $response);
     }
 
     /**
@@ -66,7 +73,7 @@ class ForgotPasswordController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function sendResetLinkResponse($response)
+    protected function sendResetLinkResponse($response): RedirectResponse
     {
         return redirect()
             ->route('page.index')
