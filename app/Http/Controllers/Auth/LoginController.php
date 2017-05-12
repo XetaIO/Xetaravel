@@ -40,6 +40,16 @@ class LoginController extends Controller
     }
 
     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('Auth.login');
+    }
+
+    /**
      * Get the failed login response instance.
      *
      * @param \Illuminate\Http\Request $request
@@ -86,7 +96,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         event(new RegisterEvent($user));
-        
+
         $request->session()->flash(
             'success',
             'Welcome back <strong>' . e($user->username) . '</strong>! You\'re successfully connected !'

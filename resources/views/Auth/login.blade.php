@@ -28,7 +28,7 @@
             {!! Form::close() !!}
         </div>
         <div class="col-md-12 text-xs-center">
-            <a class="btn btn-link" href="{{ route('users.auth.reset') }}">
+            <a class="btn btn-link" href="{{ route('users.auth.password.request') }}">
                 Forgot Your Password?
             </a>
             <a class="btn btn-link" href="{{ route('users.auth.register') }}">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Reset your password']) !!}
+{!! config(['app.title'  => 'Create your new Password']) !!}
 
 @section('content')
 <div class="container">
@@ -13,14 +13,27 @@
                     {{ session('status') }}
                 </div>
             @endif
-            {!! Form::open(['route' => 'users.auth.email']) !!}
+
+            {!! Form::open(['route' => 'users.auth.password.handlereset']) !!}
+                {!! Form::hidden('token', $token) !!}
+
                 {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
                     'placeholder' => 'Your E-Mail...',
                     'required' => 'required'
                 ]) !!}
 
+                {!! Form::bsPassword('password', 'Password', [
+                    'placeholder' => 'Your new Password...',
+                    'required' => 'required'
+                ]) !!}
+
+                {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
+                    'placeholder' => 'Confirm your new Password...',
+                    'required' => 'required'
+                ]) !!}
+
                 <div class="form-group text-xs-center">
-                    {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-outline-primary']) !!}
+                    {!! Form::submit('Reset Password', ['class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>
