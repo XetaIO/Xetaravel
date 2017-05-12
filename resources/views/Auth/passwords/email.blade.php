@@ -8,11 +8,6 @@
             <h2 class="text-xs-center font-xeta mt-2">
                 Reset Password
             </h2>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
 
             {!! Form::open(['route' => 'users.auth.password.email']) !!}
                 {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [

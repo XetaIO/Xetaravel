@@ -49,6 +49,6 @@ class ForgotPasswordController extends Controller
     {
         return redirect()
             ->route('page.index')
-            ->with('success', trans($response));
+            ->with('success', $response);
     }
 }

@@ -28,8 +28,6 @@ class ResetPasswordController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -43,6 +41,7 @@ class ResetPasswordController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  string|null  $token
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showResetForm(Request $request, $token = null)
@@ -56,11 +55,12 @@ class ResetPasswordController extends Controller
      * Get the response for a successful password reset.
      *
      * @param  string  $response
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendResetResponse($response)
     {
         return redirect($this->redirectPath())
-            ->with('success', trans($response));
+            ->with('success', $response);
     }
 }
