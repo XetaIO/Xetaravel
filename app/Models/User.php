@@ -16,6 +16,7 @@ use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContra
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Xetaravel\Models\Entities\UserEntity;
 use Xetaravel\Models\Presenters\UserPresenter;
+use Xetaravel\Notifications\ResetPasswordNotification;
 
 class User extends Model implements
     AuthenticatableContract,
@@ -177,5 +178,17 @@ class User extends Model implements
         return $this->morphMany(DatabaseNotification::class, 'notifiable')
                         ->orderBy('read_at', 'asc')
                         ->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param string $token
+     *
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

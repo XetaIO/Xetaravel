@@ -5,6 +5,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Ultraware\Roles\Models\Role;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
@@ -41,6 +42,16 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm(): View
+    {
+        return view('Auth.register');
     }
 
     /**

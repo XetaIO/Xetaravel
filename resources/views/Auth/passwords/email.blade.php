@@ -8,19 +8,17 @@
             <h2 class="text-xs-center font-xeta mt-2">
                 Reset Password
             </h2>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-            {!! Form::open(['route' => 'users.auth.email']) !!}
+
+            {!! Form::open(['route' => 'users.auth.password.email']) !!}
                 {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
                     'placeholder' => 'Your E-Mail...',
                     'required' => 'required'
                 ]) !!}
 
+                {!! Recaptcha::render() !!}
+
                 <div class="form-group text-xs-center">
-                    {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-outline-primary']) !!}
+                    {!! Form::button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send Password Reset Link', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>

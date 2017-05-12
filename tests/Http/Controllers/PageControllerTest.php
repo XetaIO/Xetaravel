@@ -18,6 +18,20 @@ class PageControllerTest extends TestCase
     }
 
     /**
+     * testIndexBanishedSuccess method
+     *
+     * @return void
+     */
+    public function testIndexBanishedSuccess()
+    {
+        $user = User::find(4);
+        $this->be($user);
+
+        $response = $this->get('/');
+        $response->assertRedirect('/banished');
+    }
+
+    /**
      * testBanishedSuccess method
      *
      * @return void

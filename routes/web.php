@@ -35,10 +35,14 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
         Route::post('register', 'RegisterController@register');
 
         // Password Reset Routes
-        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('users.auth.reset');
-        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('users.auth.email');
-        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm');
-        Route::post('password/reset', 'ResetPasswordController@reset');
+        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')
+            ->name('users.auth.password.request');
+        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
+            ->name('users.auth.password.email');
+        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')
+            ->name('users.auth.password.reset');
+        Route::post('password/reset', 'ResetPasswordController@reset')
+            ->name('users.auth.password.handlereset');
     });
 
     // Auth Middleware
