@@ -28,7 +28,7 @@
                 ]) !!}
 
                 <div class="form-group text-xs-center">
-                    {!! Form::submit('Reset Password', ['class' => 'btn btn-outline-primary']) !!}
+                    {!! Form::button('<i class="fa fa-refresh" aria-hidden="true"></i> Reset Password', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>

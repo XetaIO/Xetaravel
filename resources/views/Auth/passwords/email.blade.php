@@ -15,8 +15,10 @@
                     'required' => 'required'
                 ]) !!}
 
+                {!! Recaptcha::render() !!}
+
                 <div class="form-group text-xs-center">
-                    {!! Form::submit('Send Password Reset Link', ['class' => 'btn btn-outline-primary']) !!}
+                    {!! Form::button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send Password Reset Link', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
         </div>
