@@ -54,6 +54,16 @@
   }
 }
 
+@mixin form-control-inverse-focus() {
+  &:focus {
+    color: $white;
+    background-color: $brand-inverse;
+    border-color: $input-border-focus;
+    outline: none;
+    @include box-shadow($input-box-shadow-focus);
+  }
+}
+
 // Form control sizing
 //
 // Relative text size, padding, and border-radii changes for form controls. For

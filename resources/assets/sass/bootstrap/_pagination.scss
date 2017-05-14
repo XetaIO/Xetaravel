@@ -42,6 +42,38 @@
   }
 }
 
+.pagination-inverse {
+    .page-item {
+        &.active .page-link {
+          @include plain-hover-focus {
+            color: $pagination-inverse-active-color;
+            background-color: $pagination-inverse-active-bg;
+            border-color: $pagination-inverse-active-border;
+          }
+        }
+
+        &.disabled .page-link {
+          @include plain-hover-focus {
+            color: $pagination-inverse-disabled-color;
+            background-color: $pagination-inverse-disabled-bg;
+            border-color: $pagination-inverse-disabled-border;
+          }
+        }
+    }
+
+    .page-link {
+      color: $pagination-inverse-color;
+      background-color: $pagination-inverse-bg;
+      border: $pagination-border-width solid $pagination-inverse-border-color;
+
+      @include hover-focus {
+        color: $pagination-inverse-hover-color;
+        background-color: $pagination-inverse-hover-bg;
+        border-color: $pagination-inverse-hover-border;
+      }
+    }
+}
+
 .page-link {
   position: relative;
   float: left; // Collapse white-space

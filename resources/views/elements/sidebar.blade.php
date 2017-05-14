@@ -57,9 +57,13 @@
                     <i class="fa fa-sign-out"></i>
                     <small class="sidebar-text">Logout</small>
                 </a>
-                <form id="logout-form" action="{{ route('users.auth.logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
+                {!! Form::open([
+                    'route' => 'users.auth.logout',
+                    'id' => 'logout-form',
+                    'method' => 'post',
+                    'style' => 'display: none;'
+                ]) !!}
+                {!! Form::close() !!}
             </li>
         </ul>
     </div>

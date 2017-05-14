@@ -30,6 +30,7 @@
         <!-- Header -->
         @include('Admin::elements.header')
 
+        <!-- Flash Messages -->
         @include('elements.flash')
 
         <div class="container-fluid">
@@ -40,6 +41,7 @@
                 <!-- Content -->
                 @yield('content')
 
+                <!-- Footer -->
                 @include('Admin::elements.footer')
             </div>
         </div>

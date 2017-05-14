@@ -372,3 +372,48 @@ select.form-control-lg {
     }
   }
 }
+
+// Inverse form
+
+.form-control-inverse {
+    background-color: $brand-inverse;
+    color: $white;
+    border-color: $gray;
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-inverse-focus();
+
+    // Placeholder
+    &::placeholder {
+      color: $gray;
+    }
+
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &:disabled,
+    &[readonly] {
+      background-color: $input-bg-disabled;
+      // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+      opacity: 1;
+    }
+}
+
+.form-control-label-inverse {
+    color: $white;
+}
+
+select.form-control-inverse {
+
+  &:focus::-ms-value {
+    // Suppress the nested default white text on blue background highlight given to
+    // the selected option text when the (still closed) <select> receives focus
+    // in IE and (under certain conditions) Edge, as it looks bad and cannot be made to
+    // match the appearance of the native widget.
+    // See https://github.com/twbs/bootstrap/issues/19398.
+    color: $input-color;
+    background-color: $brand-inverse;
+  }
+}

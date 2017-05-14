@@ -26,14 +26,21 @@ class Article extends Model
         /**
          * The Route::getFacadeRoot() is undefined in the testing environment for mysterious reasons.
          */
-        if (App::environment() != 'testing') {
+        if (App::environment() !== 'testing') {
             // Don't apply the scope to the admin part.
-            if (Route::getFacadeRoot()->current()->getPrefix() != '/admin') {
+            $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
+
+            if ($result === false) {
                 static::addGlobalScope(new DisplayScope);
             }
         } else {
             static::addGlobalScope(new DisplayScope);
         }
+
+        // Generated the slug before updating.
+        static::updating(function ($model) {
+            $model->generateSlug();
+        });
     }
 
     /**

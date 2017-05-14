@@ -2,6 +2,17 @@ const { mix } = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
+ | WebPack Configuration
+ |--------------------------------------------------------------------------
+ */
+mix.webpackConfig({
+    node: {
+        console: true
+    }
+});
+
+/*
+ |--------------------------------------------------------------------------
  | Mix Asset Management
  |--------------------------------------------------------------------------
  |
@@ -31,13 +42,15 @@ mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
         'resources/assets/js/libs/jquery-jvectormap-world-merc-en.min.js',
     ], 'public/js/lib.min.js')
     .scripts([
-        'resources/assets/js/highlight.js',
+        'resources/assets/js/highlight/highlight.js',
     ], 'public/js/highlight.min.js')
-    .scripts([
-        'resources/assets/js/xetaravel.admin.js'
+    .js([
+        'resources/assets/js/xetaravel.admin.js',
+        'resources/assets/js/console.js'
     ], 'public/js/xetaravel.admin.min.js')
     .js([
-        'resources/assets/js/xetaravel.js'
+        'resources/assets/js/xetaravel.js',
+        'resources/assets/js/console.js'
     ], 'public/js/xetaravel.min.js')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')

@@ -20,8 +20,7 @@ class UserController extends Controller
     {
         parent::__construct();
 
-        $route = Route::getCurrentRoute()->getActionName();
-        list(, $action) = explode('@', $route);
+        $action = Route::getFacadeRoot()->current()->getActionMethod();
 
         if (in_array($action, ['index', 'show'])) {
             $this->breadcrumbs->addCrumb('Users', route('users.user.index'));

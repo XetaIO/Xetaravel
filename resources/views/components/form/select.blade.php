@@ -3,10 +3,11 @@
         {!! Form::label($name, $label, ['class' => $labelClass]) !!}
     @endif
 
-    {!! Form::textarea(
+    {!! Form::select(
         $name,
-        $value,
-        array_merge(['class' => $errors->has($name) ? 'form-control form-control-danger' : 'form-control', 'rows' => 5], $attributes)
+        $list,
+        $selected,
+        array_merge(['class' => $errors->has($name) ? 'form-control form-control-danger' : 'form-control'], $attributes)
     ) !!}
 
     @if ($errors->has($name))

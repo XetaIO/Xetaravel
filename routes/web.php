@@ -111,5 +111,38 @@ Route::group([
             ]
     ], function () {
         Route::get('/', 'PageController@index')->name('admin.page.index');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Blog Routes
+        |--------------------------------------------------------------------------
+        */
+        Route::group([
+            'namespace' => 'Blog',
+            'prefix' => 'blog',
+            'middleware' => ['permission:manage.articles']
+        ], function () {
+
+            // Article Routes
+            Route::get('/articles', 'ArticleController@index')
+                ->name('admin.blog.article.index');
+
+            Route::get('/article/create', 'ArticleController@showCreateForm')
+                ->name('admin.blog.article.create');
+            Route::post('/article/create', 'ArticleController@create')
+                ->name('admin.blog.article.create');
+
+            Route::get('/article/update/{slug}.{id}', 'ArticleController@showUpdateForm')
+                ->name('admin.blog.article.edit');
+            Route::put('/article/update/{id}', 'ArticleController@update')
+                ->name('admin.blog.article.update');
+
+            Route::delete('/article/delete/{id}', 'ArticleController@delete')
+                ->name('admin.blog.article.delete');
+
+            // Category Routes
+            Route::get('/categories', 'CategoryController@index')
+                ->name('admin.blog.category.index');
+        });
     }
 );

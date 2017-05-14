@@ -37,6 +37,16 @@
     }
   }
 }
+.nav-pills {
+    .active .nav-link,
+    .nav-item.open .nav-link {
+      @include plain-hover-focus {
+        color: $white;
+        cursor: default;
+        background-color: $nav-menu-active-link-color;
+      }
+    }
+}
 
 .navbar-notifications {
   .dropdown-toggle {

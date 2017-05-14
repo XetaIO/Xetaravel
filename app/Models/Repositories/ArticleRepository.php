@@ -15,4 +15,21 @@ class ArticleRepository
     {
         return Article::latest()->take(5)->get();
     }
+
+    /**
+     * Update the article data and save it.
+     *
+     * @param array $data The data used to update the article.
+     *
+     * @return \Xetaravel\Models\Article
+     */
+    public static function update(array $data, Article $article): bool
+    {
+        $article->title = $data['title'];
+        $article->category_id = $data['category_id'];
+        $article->is_display = isset($data['is_display']) ? true : false;
+        $article->content = $data['content'];
+
+        return $article->save();
+    }
 }

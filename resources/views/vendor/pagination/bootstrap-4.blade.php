@@ -1,5 +1,13 @@
 @if ($paginator->hasPages())
-    <ul class="pagination">
+    @php
+        $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
+        $paginatorClass = "";
+
+        if ($result !== false) {
+            $paginatorClass = "pagination-inverse";
+        }
+    @endphp
+    <ul class="pagination {{ $paginatorClass }}">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
