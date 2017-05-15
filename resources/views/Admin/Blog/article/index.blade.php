@@ -19,6 +19,7 @@
                         <th>Author</th>
                         <th>Title</th>
                         <th>Category</th>
+                        <th>Comments</th>
                         <th>Is display</th>
                         <th>Created</th>
                         <th>Action</th>
@@ -51,6 +52,9 @@
                                     ['id' => $article->category->id, 'slug' => $article->category->slug]
                                 ) }}
                             </td>
+                            <td>
+                                {{ $article->comment_count }}
+                            </td>
                             <td class="font-weight-bold {{ $article->is_display ? 'text-success' : 'text-danger' }}">
                                 {{ $article->is_display ? 'Yes' : 'No' }}
                             </td>
@@ -77,11 +81,19 @@
                                         'class' => 'btn btn-sm btn-outline-danger',
                                         'data-toggle' => 'tooltip',
                                         'title' => 'Delete this article',
+                                        'onclick' => "event.preventDefault();document.getElementById('delete-form').submit();",
                                         'escape' => false
                                     ],
                                     null,
                                     false
                                 ) }}
+                                {!! Form::open([
+                                    'route' => ['admin.blog.article.delete', 'id' => $article->id],
+                                    'method' => 'delete',
+                                    'id' => 'delete-form',
+                                    'style' => 'display: none;'
+                                ]) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                     @endforeach

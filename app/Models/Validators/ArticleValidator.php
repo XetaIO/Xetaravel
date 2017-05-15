@@ -10,6 +10,30 @@ use Mews\Purifier\Facades\Purifier;
 class ArticleValidator
 {
     /**
+     * Get a validator for an incoming create request.
+     *
+     * @param array $data The data to validate.
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    public static function create(array $data): Validator
+    {
+        $rules = [
+            'title' => 'required|min:5',
+            'category_id' => 'required',
+            'slug' => 'unique:articles',
+            'content' => 'required|min:10'
+        ];
+
+        if (isset($data['content'])) {
+            $data['content'] = Purifier::clean($data['content'], 'blog_article');
+        }
+        $data['slug'] = Slug::fromTitle($data['title']);
+
+        return FacadeValidator::make($data, $rules);
+    }
+
+    /**
      * Get a validator for an incoming update request.
      *
      * @param array $data The data to validate.

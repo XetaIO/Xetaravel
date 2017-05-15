@@ -17,11 +17,29 @@ class ArticleRepository
     }
 
     /**
+     * Create the new article and save it.
+     *
+     * @param array $data The data used to create the article.
+     *
+     * @return bool
+     */
+    public static function create(array $data): bool
+    {
+        $article = new Article;
+        $article->title = $data['title'];
+        $article->category_id = $data['category_id'];
+        $article->is_display = isset($data['is_display']) ? true : false;
+        $article->content = $data['content'];
+
+        return $article->save();
+    }
+
+    /**
      * Update the article data and save it.
      *
      * @param array $data The data used to update the article.
      *
-     * @return \Xetaravel\Models\Article
+     * @return bool
      */
     public static function update(array $data, Article $article): bool
     {

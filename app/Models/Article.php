@@ -6,8 +6,9 @@ use Xetaravel\Models\User;
 use Xetaravel\Models\Scopes\DisplayScope;
 use Eloquence\Behaviours\CountCache\Countable;
 use Eloquence\Behaviours\Sluggable;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class Article extends Model
 {
@@ -23,9 +24,7 @@ class Article extends Model
     {
         parent::boot();
 
-        /**
-         * The Route::getFacadeRoot() is undefined in the testing environment for mysterious reasons.
-         */
+        // The Route::getFacadeRoot() is undefined in the testing environment for mysterious reasons.
         if (App::environment() !== 'testing') {
             // Don't apply the scope to the admin part.
             $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
@@ -40,6 +39,11 @@ class Article extends Model
         // Generated the slug before updating.
         static::updating(function ($model) {
             $model->generateSlug();
+        });
+
+        // Set the user id to the new article before saving it.
+        static::creating(function ($model) {
+            $model->user_id = Auth::user()->id;
         });
     }
 

@@ -28,12 +28,46 @@ class ArticleController extends Controller
     }
 
     /**
+     * Show the article create form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showCreateForm(): View
+    {
+        $categories = Category::pluck('title', 'id');
+
+        $breadcrumbs = $this->breadcrumbs
+            ->addCrumb('Manage Articles', route('admin.blog.article.index'))
+            ->addCrumb("Create", route('admin.blog.article.create'));
+
+        return view('Admin::Blog.article.create', ['categories' => $categories, 'breadcrumbs' => $this->breadcrumbs]);
+    }
+
+    /**
+     * Handle an article create request for the application.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function create(Request $request): RedirectResponse
+    {
+        ArticleValidator::create($request->all())->validate();
+
+        if (ArticleRepository::create($request->all())) {
+            return redirect()
+                ->route('admin.blog.article.index')
+                ->with('success', 'Your article has been created successfully !');
+        }
+    }
+
+    /**
      * Show the article update form.
      *
      * @param string $slug The slug of the article.
      * @param int $id The id of the article.
      *
-     * @return lluminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function showUpdateForm(string $slug, int $id)
     {
@@ -80,5 +114,33 @@ class ArticleController extends Controller
                 ->route('admin.blog.article.index')
                 ->with('success', 'Your article has been updated successfully !');
         }
+    }
+
+    /**
+     * Handle the delete request for the article.
+     *
+     * @param int $id The id of the article to delete.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(int $id): RedirectResponse
+    {
+        $article = Article::find($id);
+
+        if (is_null($article)) {
+            return redirect()
+                ->route('admin.blog.article.index')
+                ->with('danger', 'This article doesn\'t exist or has already been deleted !');
+        }
+
+        if ($article->delete()) {
+            return redirect()
+                ->route('admin.blog.article.index')
+                ->with('success', 'This article has been deleted successfully !');
+        }
+
+        return redirect()
+            ->route('admin.blog.article.index')
+            ->with('danger', 'An error occurred while deleting this article !');
     }
 }
