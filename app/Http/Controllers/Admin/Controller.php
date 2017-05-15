@@ -12,7 +12,7 @@ class Controller extends BaseController
 
         $this->breadcrumbs = new Breadcrumbs();
         $this->breadcrumbs->setListElement('nav');
-        $this->breadcrumbs->setCssClasses('breadcrumb');
+        $this->breadcrumbs->setCssClasses('breadcrumb breadcrumb-inverse bg-inverse');
         $this->breadcrumbs->addCrumb('Dashboard', route('admin.page.index'));
     }
 }

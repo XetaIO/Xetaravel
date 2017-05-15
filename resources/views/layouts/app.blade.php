@@ -30,6 +30,7 @@
         <!-- Header -->
         @include('elements.header')
 
+        <!-- Flash Messages -->
         @include('elements.flash')
 
         <!-- Content -->

@@ -128,7 +128,7 @@ trait AnalyticsComponent
             ];
 
             if (!in_array($country[0], ['ZZ'])) {
-                $countryInstance = country((string)strtolower($country[0]));
+                $countryInstance = country((string) strtolower($country[0]));
                 $countries[$country[0]] += [
                     'countryName' => $countryInstance->getName()
                 ];

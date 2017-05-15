@@ -627,6 +627,23 @@ $pagination-disabled-color:            $gray-light !default;
 $pagination-disabled-bg:               #fff !default;
 $pagination-disabled-border:           #ddd !default;
 
+// Inverse
+$pagination-inverse-color:            $link-color !default;
+$pagination-inverse-bg:               $brand-inverse !default;
+$pagination-inverse-border-width:     $border-width !default;
+$pagination-inverse-border-color:     $gray !default;
+
+$pagination-inverse-hover-color:      $link-hover-color !default;
+$pagination-inverse-hover-bg:         $gray !default;
+$pagination-inverse-hover-border:     $gray !default;
+
+$pagination-inverse-active-color:     #fff !default;
+$pagination-inverse-active-bg:        $brand-primary !default;
+$pagination-inverse-active-border:    $brand-primary !default;
+
+$pagination-inverse-disabled-color:   $gray-light !default;
+$pagination-inverse-disabled-bg:      $brand-inverse !default;
+$pagination-inverse-disabled-border:  $gray !default;
 
 // Jumbotron
 

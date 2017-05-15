@@ -75,7 +75,7 @@
 
     <div class="row">
 
-        @foreach ($articles as $article)
+        @forelse ($articles as $article)
             <div class="col-md-4">
                 <div class="card card-outline-primary text-xs-center">
 
@@ -118,14 +118,21 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-md-12">
+                <div class="alert alert-primary" role="alert">
+                    <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    There's no article yet, come back later !
+                </div>
+            </div>
+        @endforelse
     </div>
 
     <hr/>
     <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Comments</h1>
 
     <div class="row mb-3">
-        @foreach ($comments as $comment)
+        @forelse ($comments as $comment)
             <div class="col-md-6">
                 <div class="media">
 
@@ -156,7 +163,14 @@
 
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-md-12">
+                <div class="alert alert-primary" role="alert">
+                    <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    There's no comment yet, come back later !
+                </div>
+            </div>
+        @endforelse
     </div>
 
 </div>

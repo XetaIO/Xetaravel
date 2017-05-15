@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         parent::__construct();

@@ -1,8 +1,22 @@
+require('./bootstrap');
+
+$(document).ready(function () {
+    "use strict";
+
+    $("body").tooltip({
+        selector: "[data-toggle=tooltip]"
+    });
+
+    $("body").popover({
+        selector: "[data-toggle=popover]"
+    });
+});
+
 var getMonthName = function(a) {
     var b = [];
     return b[0] = "Jan", b[1] = "Feb", b[2] = "Mar", b[3] = "Apr", b[4] = "May", b[5] = "Jun", b[6] = "Jul", b[7] = "Aug", b[8] = "Sep", b[9] = "Oct", b[10] = "Nov", b[11] = "Dec", b[a]
 };
-var VisitorsLineCharts = function(data) {
+global.VisitorsLineCharts = function(data) {
     "use strict";
 
     // Colors
@@ -31,8 +45,8 @@ var VisitorsLineCharts = function(data) {
         gridLineColor: "rgba(0,0,0,0.5)",
         hideHover: "auto"
     });
-},
-BrowsersDonutChart = function(data) {
+};
+global.BrowsersDonutChart = function(data) {
     "use strict";
 
     // Colors
@@ -52,8 +66,8 @@ BrowsersDonutChart = function(data) {
         labelTextSize: "12px",
         backgroundColor: "#373a3c"
     });
-},
-VisitorsVectorMap = function(data) {
+};
+global.VisitorsVectorMap = function(data) {
     "use strict";
 
     0 !== $("#visitors-map").length && $("#visitors-map").vectorMap({
@@ -121,8 +135,8 @@ VisitorsVectorMap = function(data) {
             );
         }
     })
-},
-DevicesAreaChart = function(data) {
+};
+global.DevicesAreaChart = function(data) {
     "use strict";
 
     Morris.Area({
@@ -142,8 +156,8 @@ DevicesAreaChart = function(data) {
         resize: true,
         lineColors: ['#00acac', '#e74c3c', '#727cb6', '#348fe2', '#75e376']
     })
-},
-OperatingSystemBarChart = function(data) {
+};
+global.OperatingSystemBarChart = function(data) {
     "use strict";
 
     Morris.Bar({

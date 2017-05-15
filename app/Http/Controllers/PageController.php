@@ -19,7 +19,10 @@ class PageController extends Controller
             ->limit(6)
             ->get();
 
-        $comments = Comment::with('article', 'user')
+        $comments = Comment::with('user')
+            ->whereHas('article', function ($query) {
+                $query->where('is_display', true);
+            })
             ->latest()
             ->limit(4)
             ->get();

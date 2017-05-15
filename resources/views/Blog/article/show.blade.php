@@ -10,8 +10,8 @@
     <script type="text/javascript">
         @if (Auth::user())
             /**
-            * CKEditor
-            */
+             * CKEditor
+             */
             CKEDITOR.plugins.addExternal('pbckcode', '{{ asset('/vendor/ckeditor/plugins/pbckcode-1.2.5/src/plugin.js') }}');
             CKEDITOR.replace('commentBox', {
                 customConfig: '../config/comment.js'
