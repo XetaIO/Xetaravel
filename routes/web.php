@@ -124,7 +124,7 @@ Route::group([
         ], function () {
 
             // Article Routes
-            Route::get('/articles', 'ArticleController@index')
+            Route::get('/article', 'ArticleController@index')
                 ->name('admin.blog.article.index');
 
             Route::get('/article/create', 'ArticleController@showCreateForm')

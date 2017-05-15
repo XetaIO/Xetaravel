@@ -24,15 +24,10 @@ class Article extends Model
     {
         parent::boot();
 
-        // The Route::getFacadeRoot() is undefined in the testing environment for mysterious reasons.
-        if (App::environment() !== 'testing') {
-            // Don't apply the scope to the admin part.
-            $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
+        // Don't apply the scope to the admin part.
+        $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
 
-            if ($result === false) {
-                static::addGlobalScope(new DisplayScope);
-            }
-        } else {
+        if ($result === false) {
             static::addGlobalScope(new DisplayScope);
         }
 

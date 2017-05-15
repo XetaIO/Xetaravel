@@ -59,6 +59,10 @@ class ArticleController extends Controller
                 ->route('admin.blog.article.index')
                 ->with('success', 'Your article has been created successfully !');
         }
+
+        return redirect()
+            ->route('admin.blog.article.index')
+            ->with('danger', 'An error occurred while creating your article !');
     }
 
     /**
@@ -114,6 +118,10 @@ class ArticleController extends Controller
                 ->route('admin.blog.article.index')
                 ->with('success', 'Your article has been updated successfully !');
         }
+
+        return redirect()
+            ->route('admin.blog.article.index')
+            ->with('danger', 'An error occurred while updating your article !');
     }
 
     /**
