@@ -33,8 +33,8 @@ class CategoryController extends Controller
     public function showCreateForm(): View
     {
         $breadcrumbs = $this->breadcrumbs
-            ->addCrumb('Manage Categories', route('admin.blog.article.index'))
-            ->addCrumb("Create", route('admin.blog.article.create'));
+            ->addCrumb('Manage Categories', route('admin.blog.category.index'))
+            ->addCrumb("Create", route('admin.blog.category.create'));
 
         return view('Admin::Blog.category.create', ['breadcrumbs' => $this->breadcrumbs]);
     }
