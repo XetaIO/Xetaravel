@@ -38,6 +38,7 @@ class ArticleRepository
      * Update the article data and save it.
      *
      * @param array $data The data used to update the article.
+     * @param \Xetaravel\Models\Article $article The article to update.
      *
      * @return bool
      */

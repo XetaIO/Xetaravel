@@ -8,6 +8,21 @@ class Category extends Model
     use Sluggable;
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Generated the slug before updating.
+        static::updating(function ($model) {
+            $model->generateSlug();
+        });
+    }
+
+    /**
      * Return the field to slug.
      *
      * @return string

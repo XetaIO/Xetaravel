@@ -141,8 +141,21 @@ Route::group([
                 ->name('admin.blog.article.delete');
 
             // Category Routes
-            Route::get('/categories', 'CategoryController@index')
+            Route::get('/category', 'CategoryController@index')
                 ->name('admin.blog.category.index');
+
+            Route::get('/category/create', 'CategoryController@showCreateForm')
+                ->name('admin.blog.category.create');
+            Route::post('/category/create', 'CategoryController@create')
+                ->name('admin.blog.category.create');
+
+            Route::get('/category/update/{slug}.{id}', 'CategoryController@showUpdateForm')
+                ->name('admin.blog.category.edit');
+            Route::put('/category/update/{id}', 'CategoryController@update')
+                ->name('admin.blog.category.update');
+
+            Route::delete('/category/delete/{id}', 'CategoryController@delete')
+                ->name('admin.blog.category.delete');
         });
     }
 );
