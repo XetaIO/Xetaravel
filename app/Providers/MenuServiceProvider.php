@@ -62,5 +62,17 @@ class MenuServiceProvider extends ServiceProvider
                 )
                 ->setActiveFromRequest();
         });
+
+        Menu::macro('admin.user', function () {
+            return Menu::new()
+                ->addClass('nav nav-pills flex-column mb-0')
+                ->setAttribute('role', 'navigation')
+                ->add(
+                    Link::toRoute('admin.user.user.index', '<i class="fa fa-newspaper-o"></i> Manage Users')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->setActiveFromRequest();
+        });
     }
 }

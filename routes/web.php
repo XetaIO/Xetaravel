@@ -82,16 +82,16 @@ Route::group([
     // Article Routes
     Route::get('/', 'ArticleController@index')
         ->name('blog.article.index');
-    Route::get('/article/{slug}.{id}', 'ArticleController@show')
+    Route::get('article/{slug}.{id}', 'ArticleController@show')
         ->name('blog.article.show');
 
     // Category Routes
-    Route::get('/category/{slug}.{id}', 'CategoryController@show')
+    Route::get('category/{slug}.{id}', 'CategoryController@show')
         ->name('blog.category.show');
 
     Route::group(['middleware' => ['auth']], function () {
         // Comment Routes
-        Route::post('/comment/create', 'CommentController@create')
+        Route::post('comment/create', 'CommentController@create')
         ->name('blog.comment.create');
     });
 });
@@ -124,38 +124,54 @@ Route::group([
         ], function () {
 
             // Article Routes
-            Route::get('/article', 'ArticleController@index')
+            Route::get('article', 'ArticleController@index')
                 ->name('admin.blog.article.index');
 
-            Route::get('/article/create', 'ArticleController@showCreateForm')
+            Route::get('article/create', 'ArticleController@showCreateForm')
                 ->name('admin.blog.article.create');
-            Route::post('/article/create', 'ArticleController@create')
+            Route::post('article/create', 'ArticleController@create')
                 ->name('admin.blog.article.create');
 
-            Route::get('/article/update/{slug}.{id}', 'ArticleController@showUpdateForm')
+            Route::get('article/update/{slug}.{id}', 'ArticleController@showUpdateForm')
                 ->name('admin.blog.article.edit');
-            Route::put('/article/update/{id}', 'ArticleController@update')
+            Route::put('article/update/{id}', 'ArticleController@update')
                 ->name('admin.blog.article.update');
 
-            Route::delete('/article/delete/{id}', 'ArticleController@delete')
+            Route::delete('article/delete/{id}', 'ArticleController@delete')
                 ->name('admin.blog.article.delete');
 
             // Category Routes
-            Route::get('/category', 'CategoryController@index')
+            Route::get('category', 'CategoryController@index')
                 ->name('admin.blog.category.index');
 
-            Route::get('/category/create', 'CategoryController@showCreateForm')
+            Route::get('category/create', 'CategoryController@showCreateForm')
                 ->name('admin.blog.category.create');
-            Route::post('/category/create', 'CategoryController@create')
+            Route::post('category/create', 'CategoryController@create')
                 ->name('admin.blog.category.create');
 
-            Route::get('/category/update/{slug}.{id}', 'CategoryController@showUpdateForm')
+            Route::get('category/update/{slug}.{id}', 'CategoryController@showUpdateForm')
                 ->name('admin.blog.category.edit');
-            Route::put('/category/update/{id}', 'CategoryController@update')
+            Route::put('category/update/{id}', 'CategoryController@update')
                 ->name('admin.blog.category.update');
 
-            Route::delete('/category/delete/{id}', 'CategoryController@delete')
+            Route::delete('category/delete/{id}', 'CategoryController@delete')
                 ->name('admin.blog.category.delete');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | User Routes
+        |--------------------------------------------------------------------------
+        */
+        Route::group([
+            'namespace' => 'User',
+            'prefix' => 'user',
+            'middleware' => ['permission:manage.users']
+        ], function () {
+
+            // User Routes
+            Route::get('/', 'UserController@index')->name('admin.user.user.index');
+            Route::get('search', 'UserController@search')->name('admin.user.user.search');
         });
     }
 );

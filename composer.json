@@ -34,7 +34,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "fideloper/proxy": "~3.3",
-        "laravelcollective/html": "^5.3.0",
+        "laravelcollective/html": "^5.4.0",
         "mews/purifier": "~2.0",
         "greggilbert/recaptcha": "~2.0",
         "kirkbushell/eloquence": "~2.0",

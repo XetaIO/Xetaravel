@@ -43,6 +43,14 @@ class FormServiceProvider extends ServiceProvider
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
+        Form::component('bsRadio', 'components.form.radio', [
+            'name',
+            'value' => 1,
+            'checked' => null,
+            'label' => null,
+            'attributes' => [],
+            'labelClass' => 'form-control-label'
+        ]);
         Form::component('bsInputGroup', 'components.form.input-group', [
             'name',
             'label' => null,
