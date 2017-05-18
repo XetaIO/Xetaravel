@@ -25,7 +25,13 @@ class UserController extends Controller
 
         return view('Admin::User.user.index', compact('latestUsers', 'breadcrumbs'));
     }
-
+    /**
+     * Search users related to the type.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\View\View
+     */
     public function search(Request $request): View
     {
         $query = User::with(['roles'])->select();
@@ -54,7 +60,8 @@ class UserController extends Controller
                 $type = 'username';
                 break;
         }
-        $users = $query->paginate(2)
+        $users = $query
+            ->paginate(10)
             ->appends($request->except('page'));
 
         $breadcrumbs = $this->breadcrumbs
@@ -62,5 +69,12 @@ class UserController extends Controller
             ->addCrumb('Search an user', route('admin.user.user.search'));
 
         return view('Admin::User.user.search', compact('users', 'breadcrumbs', 'type', 'search'));
+    }
+
+    public function showUpdateForm(Request $request, string $slug, int $id)
+    {
+        $user = User::find($id)->with(['Account'])->first();
+
+        return view('Admin::User.user.update', compact('user'));
     }
 }

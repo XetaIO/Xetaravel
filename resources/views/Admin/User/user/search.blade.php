@@ -71,13 +71,12 @@
                                 </td>
                                 <td>
                                     {{ link_to(
-                                        route('admin.blog.article.edit', ['slug' => $user->slug, 'id' => $user->id]),
+                                        route('admin.user.user.edit', ['slug' => $user->slug, 'id' => $user->id]),
                                         '<i class="fa fa-edit"></i>',
                                         [
                                             'class' => 'btn btn-sm btn-outline-info',
                                             'data-toggle' => 'tooltip',
-                                            'title' => 'Edit this user',
-                                            'escape' => false
+                                            'title' => 'Edit this user'
                                         ],
                                         null,
                                         false
@@ -105,3 +104,4 @@
         </div>
     </div>
 </div>
+@endsection

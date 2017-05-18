@@ -172,6 +172,11 @@ Route::group([
             // User Routes
             Route::get('/', 'UserController@index')->name('admin.user.user.index');
             Route::get('search', 'UserController@search')->name('admin.user.user.search');
+
+            Route::get('update/{slug}.{id}', 'UserController@showUpdateForm')
+                ->name('admin.user.user.edit');
+            Route::put('update/{id}', 'UserController@update')
+                ->name('admin.user.user.update');
         });
     }
 );
