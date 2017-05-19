@@ -36,7 +36,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Handle a account update request for the application.
+     * Handle an account update request for the application.
      *
      * @param \Illuminate\Http\Request $request
      *
@@ -45,7 +45,7 @@ class AccountController extends Controller
     public function update(Request $request): RedirectResponse
     {
         AccountValidator::update($request->all())->validate();
-        AccountRepository::update($request->all());
+        AccountRepository::update($request->all(), Auth::user()->id);
 
         $user = User::find(Auth::user()->id);
 

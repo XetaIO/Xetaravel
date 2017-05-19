@@ -1,4 +1,10 @@
-<div class="form-group {{ $errors->has($name) ? 'has-danger' : '' }}">
+{{-- Required for multiple select --}}
+@php
+    $errorName = str_replace('[', '', $name);
+    $errorName = str_replace(']', '', $errorName);
+@endphp
+
+<div class="form-group {{ $errors->has($errorName) ? 'has-danger' : '' }}">
     @if ($label !== false)
         {!! Form::label($name, $label, ['class' => $labelClass]) !!}
     @endif
@@ -7,12 +13,15 @@
         $name,
         $list,
         $selected,
-        array_merge(['class' => $errors->has($name) ? 'form-control form-control-danger' : 'form-control'], $attributes)
+        array_merge(
+            ['class' => $errors->has($errorName) ? 'form-control form-control-danger' : 'form-control'], $attributes
+        ),
+        $optionsAttributes
     ) !!}
 
-    @if ($errors->has($name))
+    @if ($errors->has($errorName))
         <div class="form-control-feedback">
-            {{ $errors->first($name) }}
+            {{ $errors->first($errorName) }}
         </div>
     @endif
 </div>

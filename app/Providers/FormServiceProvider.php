@@ -63,6 +63,7 @@ class FormServiceProvider extends ServiceProvider
             'label' => null,
             'selected' => null,
             'attributes' => [],
+            'optionsAttributes' => [],
             'labelClass' => 'form-control-label'
         ]);
     }

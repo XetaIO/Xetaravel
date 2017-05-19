@@ -29,6 +29,22 @@ class UserRepository
     }
 
     /**
+     * Update the user informations after a valid update request.
+     *
+     * @param array $data The data used to update the user.
+     * @param \Xetaravel\Models\User $user The user to update.
+     *
+     * @return bool
+     */
+    public static function update(array $data, User $user): bool
+    {
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+
+        return $user->save();
+    }
+
+    /**
      * Update the user's email after a valid email update.
      *
      * @param array $data The data used to update the user.

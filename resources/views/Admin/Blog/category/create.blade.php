@@ -22,16 +22,14 @@
                         'placeholder' => 'Article title...',
                         'required' => 'required',
                         'autofocus'
-                    ],
-                    'form-control-label form-control-label-inverse'
+                    ]
                 ) !!}
 
                 {!! Form::bsTextarea(
                     'description',
                     'Description',
                     null,
-                    ['class' => 'form-control form-control-inverse col-md-6', 'required' => 'required'],
-                    'form-control-label form-control-label-inverse'
+                    ['class' => 'form-control form-control-inverse col-md-6', 'required' => 'required']
                 ) !!}
 
                 <div class="form-group">

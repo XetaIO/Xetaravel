@@ -1,8 +1,24 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Edit ' . e($user->username)]) !!}
 
+@push('scripts')
+    {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
+
+    <script type="text/javascript">
+
+        CKEDITOR.replace('biographyBox', {
+            customConfig: '../config/biography.js'
+        });
+        CKEDITOR.replace('signatureBox', {
+            customConfig: '../config/signature.js',
+            height: 100
+        });
+    </script>
+@endpush
+
 @section('content')
-<div class="col-sm-12 col-md-10 offset-md-2 pl-0 pr-0 pb-2">
+{{-- Header --}}
+<div class="col-sm-12 col-md-10 offset-md-2 pl-0 pr-0">
     <div class="profile-container">
         <div class="profile-header">
             <div class="background-container">
@@ -86,6 +102,13 @@
         </div>
     </div>
 </div>
+
+{{-- Breadcrumbs --}}
+<div class="col-sm-12 col-md-10 offset-md-2 p-2">
+    {!! $breadcrumbs->render() !!}
+</div>
+
+{{-- User Informations --}}
 <div class="col-sm-12 col-md-10 offset-md-2 pl-2 pr-2 pb-2">
     <div class="card card-inverse bg-inverse">
         <h5 class="card-header text-xs-center">
@@ -118,10 +141,131 @@
                         false
                     ) }}
                 </div>
-                <div class="col-md-9">
-                    {!! Form::model($user, ['route' => 'admin.user.user.update', 'method' => 'put']) !!}
+                <div class="col-md-6">
+                    {!! Form::model($user, ['route' => ['admin.user.user.update', $user->id], 'method' => 'put']) !!}
 
+                        {!! Form::bsText(
+                            'username',
+                            'Username',
+                            null,
+                            ['class' => 'form-control form-control-inverse']
+                        ) !!}
+
+                        {!! Form::bsText(
+                            'email',
+                            'E-mail',
+                            null,
+                            ['class' => 'form-control form-control-inverse']
+                        ) !!}
+
+                        {!! Form::bsSelect(
+                            'roles[]',
+                            $roles,
+                            'Roles',
+                            $user->roles->pluck('id')->toArray(),
+                            ['class' => 'form-control form-control-inverse col-md-4', 'multiple'],
+                            $optionsAttributes
+                        ) !!}
+
+                        {!! Form::bsText(
+                            'account[first_name]',
+                            'First Name',
+                            null,
+                            ['class' => 'form-control form-control-inverse']
+                        ) !!}
+
+                        {!! Form::bsText(
+                            'account[last_name]',
+                            'Last Name',
+                            null,
+                            ['class' => 'form-control form-control-inverse']
+                        ) !!}
+
+                        {!! Form::bsInputGroup(
+                            'account[facebook]',
+                            'Facebook',
+                            null,
+                            [
+                                'span' => 'http://facebook.com/',
+                                'spanStyle' => 'min-width:180px;',
+                                'spanClass' => 'input-group-addon input-group-addon-inverse',
+                                'class' => 'form-control form-control-inverse'
+                            ]
+                        ) !!}
+
+                        {!! Form::bsInputGroup(
+                            'account[twitter]',
+                            'Twitter',
+                            null,
+                            [
+                                'span' => 'http://twitter.com/',
+                                'spanStyle' => 'min-width:180px;',
+                                'spanClass' => 'input-group-addon input-group-addon-inverse',
+                                'class' => 'form-control form-control-inverse'
+                            ]
+                        ) !!}
+
+                        {!! Form::bsTextarea(
+                            'account[biography]',
+                            'Biography',
+                            null,
+                            ['id' => 'biographyBox']
+                        ) !!}
+
+                        {!! Form::bsTextarea(
+                            'account[signature]',
+                            'Signature',
+                            null,
+                            ['id' => 'signatureBox']
+                        ) !!}
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                {!! Form::button('<i class="fa fa-edit" aria-hidden="true"></i> Update', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
+                            </div>
+                        </div>
                     {!! Form::close() !!}
+                </div>
+
+                <div class="col-md-3">
+                    <h4 class="text-white">
+                        Others Informations
+                    </h4>
+                    <div class="form-group">
+                        <label class="form-control-label">
+                            Last Login IP
+                        </label>
+                        <p class="form-control-static text-muted">
+                            {{ $user->last_login_ip }}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">
+                            Registered IP
+                        </label>
+                        <p class="form-control-static text-muted">
+                            {{ $user->register_ip }}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label ">
+                            Registered
+                        </label>
+                        <p class="form-control-static text-muted">
+                            {{ $user->created_at->formatLocalized('%d %B %Y - %T') }}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">
+                            Last Updated
+                        </label>
+                        <p class="form-control-static text-muted">
+                            {{ $user->updated_at->formatLocalized('%d %B %Y - %T') }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,8 +4,12 @@ namespace Xetaravel\Http\Controllers\Admin\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Ultraware\Roles\Models\Role;
 use Xetaravel\Http\Controllers\Admin\Controller;
+use Xetaravel\Models\Repositories\UserRepository;
+use Xetaravel\Models\Repositories\AccountRepository;
 use Xetaravel\Models\User;
+use Xetaravel\Models\Validators\UserValidator;
 
 class UserController extends Controller
 {
@@ -71,10 +75,73 @@ class UserController extends Controller
         return view('Admin::User.user.search', compact('users', 'breadcrumbs', 'type', 'search'));
     }
 
+    /**
+     * Show the update form.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string $slug The slug of the user.
+     * @param int $id The id of the user.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function showUpdateForm(Request $request, string $slug, int $id)
     {
-        $user = User::find($id)->with(['Account'])->first();
+        $user = User::find($id);
 
-        return view('Admin::User.user.update', compact('user'));
+        if (is_null($user)) {
+            return redirect()
+                ->route('admin.user.user.index')
+                ->with('danger', 'This user doesn\'t exist or has been deleted !');
+        }
+
+        $roles = Role::pluck('name', 'id');
+        $attributes = Role::pluck('id')->toArray();
+
+        $optionsAttributes = [];
+        foreach ($attributes as $attribute) {
+            $optionsAttributes[$attribute] = [
+                'style' => Role::where('id', $attribute)->select('css')->first()->css
+            ];
+        }
+
+        $breadcrumbs = $this->breadcrumbs
+            ->setCssClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
+            ->addCrumb('Manage Users', route('admin.user.user.index'))
+            ->addCrumb(
+                'Edit ' . e($user->username),
+                route('admin.user.user.update', $user->slug, $user->id)
+            );
+
+        return view('Admin::User.user.update', compact('user', 'roles', 'optionsAttributes', 'breadcrumbs'));
+    }
+
+    /**
+     * Handle an user update request for the application.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id The id of the user to update.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, int $id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        if (is_null($user)) {
+            return redirect()
+                ->back()
+                ->with('danger', 'This user doesn\'t exist or has been deleted !');
+        }
+
+        UserValidator::update($request->all(), $user->id)->validate();
+
+        UserRepository::update($request->all(), $user);
+        AccountRepository::update($request->get('account'), $user->id);
+
+        $user->roles()->sync($request->get('roles'));
+
+        return redirect()
+            ->back()
+            ->with('success', 'This user has been updated successfully !');
     }
 }
