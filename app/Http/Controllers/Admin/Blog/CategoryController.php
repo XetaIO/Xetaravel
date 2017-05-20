@@ -71,13 +71,7 @@ class CategoryController extends Controller
      */
     public function showUpdateForm(string $slug, int $id)
     {
-        $category = Category::find($id);
-
-        if (is_null($category)) {
-            return redirect()
-                ->route('admin.blog.category.index')
-                ->with('danger', 'This category doesn\'t exist or has been deleted !');
-        }
+        $category = Category::findOrFail($id);
 
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb('Manage Categories', route('admin.blog.category.index'))
@@ -104,7 +98,7 @@ class CategoryController extends Controller
     {
         CategoryValidator::update($request->all(), $id)->validate();
 
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         if (CategoryRepository::update($request->all(), $category)) {
             return redirect()
@@ -126,13 +120,7 @@ class CategoryController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        $category = Category::find($id);
-
-        if (is_null($category)) {
-            return redirect()
-                ->route('admin.blog.category.index')
-                ->with('danger', 'This category doesn\'t exist or has already been deleted !');
-        }
+        $category = Category::findOrFail($id);
 
         if ($category->delete()) {
             return redirect()

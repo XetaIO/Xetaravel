@@ -17,16 +17,14 @@
                     'title',
                     'Title',
                     null,
-                    ['class' => 'form-control form-control-inverse col-md-6', 'placeholder' => 'Article title...'],
-                    'form-control-label form-control-label-inverse'
+                    ['class' => 'form-control form-control-inverse col-md-6', 'placeholder' => 'Article title...']
                 ) !!}
 
                 {!! Form::bsTextarea(
                     'description',
                     'Description',
                     null,
-                    ['class' => 'form-control form-control-inverse col-md-6'],
-                    'form-control-label form-control-label-inverse'
+                    ['class' => 'form-control form-control-inverse col-md-6']
                 ) !!}
 
                 <div class="form-group">

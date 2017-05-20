@@ -1,0 +1,59 @@
+.profile-container {
+    overflow: hidden;
+
+    .profile-header {
+        position: relative;
+        z-index: 3;
+
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            background-image: url(/images/profile/overlay.png);
+
+            .background {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: -9999px;
+                bottom: -9999px;
+                margin: auto 0;
+                width: 100%;
+                opacity: 0.8;
+
+                @include media-breakpoint-down(xs) {
+                    width: inherit;
+                }
+            }
+        }
+    }
+
+    .profile-information {
+        padding-top: 50px;
+
+        ul {
+            margin: 0;
+        }
+
+        li {
+            background: rgba(0,0,0,0.3);
+            padding: 15px 30px;
+            border-radius: $border-radius;
+
+            img {
+                border: 8px solid rgba(255,255,255,0.3);
+                max-width: 120px;
+            }
+
+            .username,
+            .full-name {
+                margin-top: 10px;
+                color: $white;
+                text-shadow: 0 0 4px $white;
+            }
+        }
+    }
+}

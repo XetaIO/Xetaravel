@@ -69,8 +69,7 @@
                                         [
                                             'class' => 'btn btn-sm btn-outline-info',
                                             'data-toggle' => 'tooltip',
-                                            'title' => 'Edit this article',
-                                            'escape' => false
+                                            'title' => 'Edit this article'
                                         ],
                                         null,
                                         false
@@ -82,8 +81,7 @@
                                             'class' => 'btn btn-sm btn-outline-danger',
                                             'data-toggle' => 'tooltip',
                                             'title' => 'Delete this article',
-                                            'onclick' => "event.preventDefault();document.getElementById('delete-form').submit();",
-                                            'escape' => false
+                                            'onclick' => "event.preventDefault();document.getElementById('delete-form').submit();"
                                         ],
                                         null,
                                         false

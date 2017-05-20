@@ -9,6 +9,10 @@
     > td {
       background-color: $background;
     }
+
+    > a {
+      color: inherit;
+    }
   }
 
   // Hover states for `.table-hover`

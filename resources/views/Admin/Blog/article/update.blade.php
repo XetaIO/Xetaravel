@@ -31,8 +31,7 @@
                     'title',
                     'Title',
                     null,
-                    ['class' => 'form-control form-control-inverse col-md-6', 'placeholder' => 'Article title...'],
-                    'form-control-label form-control-label-inverse'
+                    ['class' => 'form-control form-control-inverse col-md-6', 'placeholder' => 'Article title...']
                 ) !!}
 
                 {!! Form::bsSelect(
@@ -40,8 +39,7 @@
                     $categories,
                     'Category',
                     null,
-                    ['class' => 'form-control form-control-inverse col-md-2'],
-                    'form-control-label form-control-label-inverse'
+                    ['class' => 'form-control form-control-inverse col-md-2']
                 ) !!}
 
                 {!! Form::bsCheckbox(
@@ -52,16 +50,14 @@
                     [
                         'label' => 'Display',
                         'labelClass' => 'custom-control custom-checkbox form-control-inverse d-block'
-                    ],
-                    'form-control-label form-control-label-inverse'
+                    ]
                 ) !!}
 
                 {!! Form::bsTextarea(
                     'content',
                     'Content',
                     null,
-                    ['id' => 'contentBox', 'class' => 'form-control form-control-inverse'],
-                    'form-control-label form-control-label-inverse'
+                    ['id' => 'contentBox', 'class' => 'form-control form-control-inverse']
                 ) !!}
 
                 <div class="form-group">

@@ -21,6 +21,7 @@ composer.lock
 /public/media
 /public/tests
 /public/mix.*.js
+/public/mix-manifest.json
 /storage/*.key
 /storage/medialibrary
 /vendor

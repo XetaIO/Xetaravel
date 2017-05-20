@@ -34,9 +34,5 @@
     <p class="p-1 m-0 text-white font-xeta">
         Users
     </p>
-  <ul class="nav nav-pills flex-column">
-    <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-users"></i> Manage Users</a>
-    </li>
-  </ul>
+    {!! Menu::{'admin.user'}() !!}
 </nav>

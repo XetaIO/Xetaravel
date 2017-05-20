@@ -36,8 +36,7 @@
                         'placeholder' => 'Article title...',
                         'required' => 'required',
                         'autofocus'
-                    ],
-                    'form-control-label form-control-label-inverse'
+                    ]
                 ) !!}
 
                 {!! Form::bsSelect(
@@ -45,8 +44,7 @@
                     $categories,
                     'Category',
                     1,
-                    ['class' => 'form-control form-control-inverse col-md-2', 'required' => 'required'],
-                    'form-control-label form-control-label-inverse'
+                    ['class' => 'form-control form-control-inverse col-md-2', 'required' => 'required']
                 ) !!}
 
                 {!! Form::bsCheckbox(
@@ -57,16 +55,14 @@
                     [
                         'label' => 'Display',
                         'labelClass' => 'custom-control custom-checkbox form-control-inverse d-block'
-                    ],
-                    'form-control-label form-control-label-inverse'
+                    ]
                 ) !!}
 
                 {!! Form::bsTextarea(
                     'content',
                     'Content',
                     null,
-                    ['id' => 'contentBox', 'class' => 'form-control form-control-inverse', 'required' => 'required'],
-                    'form-control-label form-control-label-inverse'
+                    ['id' => 'contentBox', 'class' => 'form-control form-control-inverse', 'required' => 'required']
                 ) !!}
 
                 <div class="form-group">

@@ -138,7 +138,6 @@ class ArticleControllerTest extends TestCase
     public function testDeleteArticleNotFound()
     {
         $response = $this->delete('/admin/blog/article/delete/1337');
-        $response->assertStatus(302);
-        $response->assertSessionHas('danger');
+        $response->assertStatus(404);
     }
 }

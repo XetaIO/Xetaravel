@@ -16,14 +16,15 @@ class CommentController extends Controller
     /**
      * Create a comment for an article.
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function create(Request $request): RedirectResponse
     {
-        // Check if the article exist and if its display.
-        $article = Article::find($request->article_id);
+        $article = Article::findOrFail($request->article_id);
 
-        if (is_null($article) || $article->is_display == false) {
+        if ($article->is_display == false) {
             return back()
                 ->withInput()
                 ->with('danger', 'This article doesn\'t exist or you can not reply to it !');

@@ -1,3 +1,11 @@
+// Custom variables
+
+// Body
+$body-color: #fff;
+
+// Selection
+$selection-background:  #f7a5a2 !default;
+$selection-color:       #fff !default;
 
 // Variables
 @import "../bootstrap/variables";
@@ -7,12 +15,15 @@
 @import "../mixins";
 
 // Plugins
-@import "../scrollup";
 @import "../jvectormap/jvectormap";
+@import "../morris/morris";
+
+// Components
+@import "../scrollup";
 @import "../nav";
 @import "../sidebar";
 @import "../scrollbar";
-@import "../morris/morris";
+@import "../modal";
 
 // Application
 @import "scaffolding";
@@ -20,3 +31,4 @@
 @import "footer";
 @import "interface";
 @import "widget";
+@import "profile";

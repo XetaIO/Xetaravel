@@ -113,6 +113,10 @@
   // scss-lint:enable QualifyingElement
 }
 
+.input-group-addon-inverse {
+    border: $input-btn-border-width solid $gray;
+}
+
 
 //
 // Reset rounded corners

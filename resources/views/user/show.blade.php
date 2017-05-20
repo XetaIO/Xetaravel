@@ -12,7 +12,7 @@
                 <div class="profile-information text-xs-center">
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            {!! Html::image($user->avatar_small, $user->username, ['class' => 'rounded-circle']) !!}
+                            {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle']) !!}
                             <h2 class="username font-xeta">
                                 {{ $user->username }}
                             </h2>

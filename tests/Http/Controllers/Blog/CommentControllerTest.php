@@ -14,7 +14,7 @@ class CommentControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         $user = User::find(1);
         $this->be($user);
     }
@@ -28,8 +28,7 @@ class CommentControllerTest extends TestCase
     public function testCreateArticleNotFound()
     {
         $response = $this->post('/blog/comment/create', ['article_id' => 3]);
-        $response->assertSessionHas('danger');
-        $response->assertStatus(302);
+        $response->assertStatus(404);
     }
 
     /**
