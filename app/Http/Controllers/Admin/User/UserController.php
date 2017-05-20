@@ -3,6 +3,8 @@ namespace Xetaravel\Http\Controllers\Admin\User;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Ultraware\Roles\Models\Role;
 use Xetaravel\Http\Controllers\Admin\Controller;
@@ -86,13 +88,7 @@ class UserController extends Controller
      */
     public function showUpdateForm(Request $request, string $slug, int $id)
     {
-        $user = User::find($id);
-
-        if (is_null($user)) {
-            return redirect()
-                ->route('admin.user.user.index')
-                ->with('danger', 'This user doesn\'t exist or has been deleted !');
-        }
+        $user = User::findOrFail($id);
 
         $roles = Role::pluck('name', 'id');
         $attributes = Role::pluck('id')->toArray();
@@ -125,16 +121,9 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $user = User::find($id);
-
-        if (is_null($user)) {
-            return redirect()
-                ->back()
-                ->with('danger', 'This user doesn\'t exist or has been deleted !');
-        }
+        $user = User::findOrFail($id);
 
         UserValidator::update($request->all(), $user->id)->validate();
-
         UserRepository::update($request->all(), $user);
         AccountRepository::update($request->get('account'), $user->id);
 
@@ -143,5 +132,57 @@ class UserController extends Controller
         return redirect()
             ->back()
             ->with('success', 'This user has been updated successfully !');
+    }
+
+    /**
+     * Handle the delete request for the user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id The id of the user to delete.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, int $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if (!Hash::check($request->input('password'), Auth::user()->password)) {
+            return redirect()
+                ->back()
+                ->with('danger', 'Your Password does not match !');
+        }
+
+        if ($user->delete()) {
+            return redirect()
+                ->route('admin.user.user.index')
+                ->with('success', 'This user has been deleted successfully !');
+        }
+
+        return redirect()
+            ->route('admin.user.user.index')
+            ->with('danger', 'An error occurred while deleting this user !');
+    }
+
+    /**
+     * Delete the avatar for the specified user.
+     *
+     * @param int $id The id of the user.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteAvatar(int $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        $user->clearMediaCollection('avatar');
+        $user->addMedia(resource_path('assets/images/avatar.png'))
+            ->preservingOriginal()
+            ->setName(substr(md5($user->username), 0, 10))
+            ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+            ->toMediaCollection('avatar');
+
+        return redirect()
+            ->back()
+            ->with('success', 'The avatar has been deleted successfully !');
     }
 }

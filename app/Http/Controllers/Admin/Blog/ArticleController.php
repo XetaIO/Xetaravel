@@ -111,7 +111,7 @@ class ArticleController extends Controller
     {
         ArticleValidator::update($request->all(), $id)->validate();
 
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
 
         if (ArticleRepository::update($request->all(), $article)) {
             return redirect()
@@ -133,13 +133,7 @@ class ArticleController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        $article = Article::find($id);
-
-        if (is_null($article)) {
-            return redirect()
-                ->route('admin.blog.article.index')
-                ->with('danger', 'This article doesn\'t exist or has already been deleted !');
-        }
+        $article = Article::findOrFail($id);
 
         if ($article->delete()) {
             return redirect()

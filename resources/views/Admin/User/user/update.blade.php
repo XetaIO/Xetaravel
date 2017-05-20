@@ -40,7 +40,7 @@
                             <li class="col-md-6 offset-md-3 mt-3 mb-2">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="d-inline-block mr-2 text-white">
+                                        <div class="d-inline-block mr-2">
                                             <h5 class="base-header">
                                                 Comments
                                             </h5>
@@ -48,7 +48,7 @@
                                                 {{ $user->comment_count }}
                                             </h6>
                                         </div>
-                                        <div class="d-inline-block mr-2 text-white">
+                                        <div class="d-inline-block mr-2">
                                             <h5 class="base-header">
                                                 Articles
                                             </h5>
@@ -118,28 +118,85 @@
         <div class="card-block">
             <div class="row">
                 <div class="col-md-3 text-xs-center">
-                    <h5 class="text-white">
+                    <h5>
                         Avatar
                     </h5>
+
                     {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle img-thumbnail mb-1']) !!}
                     <br />
+
                     {{ link_to(
-                        '#',
+                        route('admin.user.user.deleteavatar', $user->id),
                         '<i class="fa fa-remove"></i> Delete avatar',
-                        ['class' => 'btn btn-outline-primary mb-1'],
+                        [
+                            'class' => 'btn btn-outline-primary mb-1',
+                            'onclick' => 'event.preventDefault();document.getElementById(\'delete-avatar-form\').submit();'],
                         null,
                         false
                     ) }}
-                    <p class="text-white mb-1">
+
+                    {!! Form::open([
+                        'route' => ['admin.user.user.deleteavatar', $user->id],
+                        'id' => 'delete-avatar-form',
+                        'method' => 'delete',
+                        'style' => 'display: none;'
+                    ]) !!}
+                    {!! Form::close() !!}
+
+                    <p class="mb-1">
                         Member since {{ $user->created_at->formatLocalized('%d %B %Y - %T') }}
                     </p>
-                    {{ link_to(
-                        '#',
-                        '<i class="fa fa-remove"></i> Delete account',
-                        ['class' => 'btn btn-outline-danger mb-1'],
-                        null,
-                        false
-                    ) }}
+
+                    <button type="button" class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#deleteAccountModal">
+                        <i class="fa fa-remove" aria-hidden="true"></i> Delete account
+                    </button>
+
+                    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModal" aria-hidden="true">
+                        <div class="modal-dialog text-body-primary" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteAccountModalLabel">
+                                        Delete <strong>{{ $user->username }}</strong> Account
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                {!! Form::open([
+                                    'route' => ['admin.user.user.delete', $user->id],
+                                    'method' => 'delete'
+                                ]) !!}
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <p>
+                                                Are you sure you want delete this account ? <strong>This operation is not reversible.</strong>
+                                            </p>
+                                        </div>
+                                        {!! Form::bsInputGroup(
+                                            'password',
+                                            null,
+                                            null,
+                                            [
+                                                'span' => '<i class="fa fa-lock"></i>',
+                                                'required' => 'required',
+                                                'type' => 'password',
+                                                'placeholder' => 'Your password...'
+                                            ]
+                                        ) !!}
+                                    </div>
+
+                                    <div class="modal-actions">
+                                        {!! Form::button('Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
+                                        <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                    </div>
+
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     {!! Form::model($user, ['route' => ['admin.user.user.update', $user->id], 'method' => 'put']) !!}
@@ -228,7 +285,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <h4 class="text-white">
+                    <h4>
                         Others Informations
                     </h4>
                     <div class="form-group">
@@ -268,10 +325,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="card-footer">
-
         </div>
     </div>
 </div>

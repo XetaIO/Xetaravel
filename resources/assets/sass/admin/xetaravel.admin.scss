@@ -15,12 +15,15 @@ $selection-color:       #fff !default;
 @import "../mixins";
 
 // Plugins
-@import "../scrollup";
 @import "../jvectormap/jvectormap";
+@import "../morris/morris";
+
+// Components
+@import "../scrollup";
 @import "../nav";
 @import "../sidebar";
 @import "../scrollbar";
-@import "../morris/morris";
+@import "../modal";
 
 // Application
 @import "scaffolding";

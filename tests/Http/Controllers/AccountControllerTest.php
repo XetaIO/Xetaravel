@@ -6,6 +6,18 @@ use Tests\TestCase;
 
 class AccountControllerTest extends TestCase
 {
+    /**
+     * Triggered before each test.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $user = User::find(1);
+        $this->be($user);
+    }
 
     /**
      * testIndexSuccess method
@@ -14,9 +26,6 @@ class AccountControllerTest extends TestCase
      */
     public function testIndexSuccess()
     {
-        $user = User::find(1);
-        $this->be($user);
-        
         $response = $this->get('/users/account');
         $response->assertSuccessful();
     }
@@ -29,12 +38,12 @@ class AccountControllerTest extends TestCase
     public function testUpdateSuccess()
     {
         $user = User::find(1);
-        $this->be($user);
+
         $this->assertSame('Admin', $user->first_name);
         $this->assertSame('Istrator', $user->last_name);
         $this->assertSame('AdminFB', $user->facebook);
         $this->assertSame('AdminTW', $user->twitter);
-        
+
         $oldAvatarUrl = $user->avatar_small;
 
         $file = new \Illuminate\Http\UploadedFile(
@@ -45,7 +54,7 @@ class AccountControllerTest extends TestCase
             null,
             true
         );
-        
+
         $data = [
             'first_name' => 'Jhon',
             'last_name' => 'Doe',
@@ -58,7 +67,7 @@ class AccountControllerTest extends TestCase
         $response = $this->put('/users/account', $data);
         $response->assertStatus(302);
         $response->assertSessionHas('success');
-        
+
         $user = User::find(1);
         $this->assertNotSame($oldAvatarUrl, $user->avatar_small, 'The path should not be the same.');
         $this->assertSame('Jhon', $user->first_name);

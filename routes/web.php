@@ -177,6 +177,12 @@ Route::group([
                 ->name('admin.user.user.edit');
             Route::put('update/{id}', 'UserController@update')
                 ->name('admin.user.user.update');
+
+            Route::delete('delete/{id}', 'UserController@delete')
+                ->name('admin.user.user.delete');
+
+            Route::delete('deleteAvatar/{id}', 'UserController@deleteAvatar')
+                ->name('admin.user.user.deleteavatar');
         });
     }
 );

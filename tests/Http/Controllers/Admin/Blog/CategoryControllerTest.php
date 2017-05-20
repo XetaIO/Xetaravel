@@ -84,8 +84,7 @@ class CategoryControllerTest extends TestCase
     public function testShowUpdateFormCategoryNotFound()
     {
         $response = $this->get('/admin/blog/category/update/eww-slug.1337');
-        $response->assertStatus(302);
-        $response->assertSessionHas('danger');
+        $response->assertStatus(404);
     }
 
     /**
@@ -132,7 +131,6 @@ class CategoryControllerTest extends TestCase
     public function testDeleteCategoryNotFound()
     {
         $response = $this->delete('/admin/blog/category/delete/1337');
-        $response->assertStatus(302);
-        $response->assertSessionHas('danger');
+        $response->assertStatus(404);
     }
 }
