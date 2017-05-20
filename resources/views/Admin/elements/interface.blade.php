@@ -34,5 +34,5 @@
     <p class="p-1 m-0 text-white font-xeta">
         Users
     </p>
-    {!! Menu::{ 'admin.user' }() !!}
+    {!! Menu::{'admin.user'}() !!}
 </nav>
