@@ -9,9 +9,6 @@
 >
 > This is a light version of the [Xeta](https://github.com/XetaIO/Xeta) website made with Laravel.Actually, I have developed this blog to try Laravel, and I have decided to release it to help people starting with Laravel, so there is probably some custom configurations/functions that only fit my needs.
 >
-> ### Note
-> There's only the public website, no administration yet (This is a WIP)
->
 > ## Demo
 > [xetaravel.xeta.io](https://xetaravel.xeta.io)
 >
