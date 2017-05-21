@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
-use Ultraware\Roles\Models\Role;
 use Xetaravel\Http\Controllers\Admin\Controller;
 use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\Repositories\AccountRepository;
 use Xetaravel\Models\User;
+use Xetaravel\Models\Role;
 use Xetaravel\Models\Validators\UserValidator;
 
 class UserController extends Controller

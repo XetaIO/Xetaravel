@@ -170,7 +170,7 @@ class User extends Model implements
      */
     public function roles()
     {
-        return $this->belongsToMany(\Ultraware\Roles\Models\Role::class);
+        return $this->belongsToMany(Role::class);
     }
 
     /**

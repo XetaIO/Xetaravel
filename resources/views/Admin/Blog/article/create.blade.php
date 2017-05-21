@@ -67,7 +67,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        {!! Form::button('<i class="fa fa-edit" aria-hidden="true"></i> Create', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
+                        {!! Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Create', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                     </div>
                 </div>
             {!! Form::close() !!}

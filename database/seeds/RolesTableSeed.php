@@ -16,7 +16,7 @@ class RolesTableSeed extends Seeder
         $roles = [
             [
                 'name' => 'Administrator',
-                'slug' => 'admin',
+                'slug' => 'administrator',
                 'description' => '',
                 'css' => 'font-weight: bold; color: #ef3c3c;',
                 'level' => 3,

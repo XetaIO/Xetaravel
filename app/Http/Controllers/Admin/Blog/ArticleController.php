@@ -40,7 +40,7 @@ class ArticleController extends Controller
             ->addCrumb('Manage Articles', route('admin.blog.article.index'))
             ->addCrumb("Create", route('admin.blog.article.create'));
 
-        return view('Admin::Blog.article.create', ['categories' => $categories, 'breadcrumbs' => $this->breadcrumbs]);
+        return view('Admin::Blog.article.create', compact('categories', 'breadcrumbs'));
     }
 
     /**
