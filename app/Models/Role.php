@@ -18,6 +18,7 @@ class Role extends Model implements RoleHasRelationsContract
         'name',
         'slug',
         'description',
+        'css',
         'level'
     ];
 
@@ -32,6 +33,11 @@ class Role extends Model implements RoleHasRelationsContract
 
         // Generated the slug before updating.
         static::updating(function ($model) {
+            $model->setSlugAttribute($model->name);
+        });
+
+        // Generated the slug before creating.
+        static::creating(function ($model) {
             $model->setSlugAttribute($model->name);
         });
     }

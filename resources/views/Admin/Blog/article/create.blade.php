@@ -48,10 +48,10 @@
                 ) !!}
 
                 {!! Form::bsCheckbox(
-                    "is_display",
+                    'is_display',
                     null,
                     1,
-                    "Check to display this article",
+                    'Check to display this article',
                     [
                         'label' => 'Display',
                         'labelClass' => 'custom-control custom-checkbox form-control-inverse d-block'

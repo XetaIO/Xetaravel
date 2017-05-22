@@ -60,6 +60,28 @@
                                         null,
                                         false
                                     ) }}
+
+                                    @if ($role->is_deletable)
+                                        {{ link_to(
+                                            route('admin.role.role.delete', ['id' => $role->id]),
+                                            '<i class="fa fa-remove"></i>',
+                                            [
+                                                'class' => 'btn btn-sm btn-outline-danger',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Delete this role',
+                                                'onclick' => "event.preventDefault();document.getElementById('delete-form').submit();"
+                                            ],
+                                            null,
+                                            false
+                                        ) }}
+                                        {!! Form::open([
+                                            'route' => ['admin.role.role.delete', 'id' => $role->id],
+                                            'method' => 'delete',
+                                            'id' => 'delete-form',
+                                            'style' => 'display: none;'
+                                        ]) !!}
+                                        {!! Form::close() !!}
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

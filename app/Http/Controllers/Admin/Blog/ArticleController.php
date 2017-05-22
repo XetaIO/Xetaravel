@@ -53,16 +53,11 @@ class ArticleController extends Controller
     public function create(Request $request): RedirectResponse
     {
         ArticleValidator::create($request->all())->validate();
-
-        if (ArticleRepository::create($request->all())) {
-            return redirect()
-                ->route('admin.blog.article.index')
-                ->with('success', 'Your article has been created successfully !');
-        }
+        ArticleRepository::create($request->all());
 
         return redirect()
             ->route('admin.blog.article.index')
-            ->with('danger', 'An error occurred while creating your article !');
+            ->with('success', 'Your article has been created successfully !');
     }
 
     /**
@@ -109,19 +104,14 @@ class ArticleController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        ArticleValidator::update($request->all(), $id)->validate();
-
         $article = Article::findOrFail($id);
 
-        if (ArticleRepository::update($request->all(), $article)) {
-            return redirect()
-                ->route('admin.blog.article.index')
-                ->with('success', 'Your article has been updated successfully !');
-        }
+        ArticleValidator::update($request->all(), $id)->validate();
+        ArticleRepository::update($request->all(), $article);
 
         return redirect()
             ->route('admin.blog.article.index')
-            ->with('danger', 'An error occurred while updating your article !');
+            ->with('success', 'Your article has been updated successfully !');
     }
 
     /**

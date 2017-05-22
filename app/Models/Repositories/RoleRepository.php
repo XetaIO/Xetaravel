@@ -14,17 +14,13 @@ class RoleRepository
      *
      * @return \Xetaravel\Models\User
      */
-    public static function create(array $data): User
+    public static function create(array $data): Role
     {
-        $ip = FacadeRequest::ip();
-
-        return User::create([
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'register_ip' => $ip,
-            'last_login_ip' => $ip,
-            'last_login' => new \DateTime()
+        return Role::create([
+            'name' => $data['name'],
+            'css' => $data['css'],
+            'level' => $data['level'],
+            'description' => $data['description']
         ]);
     }
 

@@ -4,11 +4,11 @@ namespace Xetaravel\Http\Controllers\Admin\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Xetaravel\Models\Role;
 use Ultraware\Roles\Models\Permission;
 use Xetaravel\Http\Controllers\Admin\Controller;
-use Xetaravel\Models\Validators\RoleValidator;
 use Xetaravel\Models\Repositories\RoleRepository;
+use Xetaravel\Models\Role;
+use Xetaravel\Models\Validators\RoleValidator;
 
 class RoleController extends Controller
 {
@@ -34,24 +34,33 @@ class RoleController extends Controller
     public function showCreateForm(): View
     {
         $permissions = Permission::pluck('name', 'id');
-        $attributes = Permission::pluck('id')->toArray();
 
-        $optionsAttributes = [];
-        foreach ($attributes as $attribute) {
-            $optionsAttributes[$attribute] = [
-                'title' => 'Role Information',
-                'data-content' => Permission::where('id', $attribute)->select('description')->first()->description,
-                'data-toggle' => 'popover',
-                'data-trigger' => 'hover',
-                'data-placement' => 'top'
-            ];
-        }
+        $optionsAttributes = $this->getOptionAttributes();
 
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb('Manage Roles', route('admin.role.role.index'))
             ->addCrumb("Create", route('admin.role.role.create'));
 
         return view('Admin::Role.role.create', compact('permissions', 'breadcrumbs', 'optionsAttributes'));
+    }
+
+    /**
+     * Handle a role create request for the application.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function create(Request $request): RedirectResponse
+    {
+        RoleValidator::create($request->all())->validate();
+
+        $role = RoleRepository::create($request->all());
+        $role->syncPermissions($request->get('permissions'));
+
+        return redirect()
+            ->route('admin.role.role.index')
+            ->with('success', 'This role has been created successfully !');
     }
 
     /**
@@ -68,19 +77,9 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
 
         $permissions = Permission::pluck('name', 'id');
-        $attributes = Permission::pluck('id')->toArray();
         $permission = Permission::where('slug', 'access.administration')->first();
 
-        $optionsAttributes = [];
-        foreach ($attributes as $attribute) {
-            $optionsAttributes[$attribute] = [
-                'title' => 'Role Information',
-                'data-content' => Permission::where('id', $attribute)->select('description')->first()->description,
-                'data-toggle' => 'popover',
-                'data-trigger' => 'hover',
-                'data-placement' => 'top'
-            ];
-        }
+        $optionsAttributes = $this->getOptionAttributes();
 
         $breadcrumbs = $this->breadcrumbs
             ->setCssClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
@@ -116,5 +115,64 @@ class RoleController extends Controller
         return redirect()
             ->back()
             ->with('success', 'This role has been updated successfully !');
+    }
+
+    /**
+     * Handle the delete request for the role.
+     *
+     * @param int $id The id of the role to delete.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(int $id): RedirectResponse
+    {
+        $role = Role::findOrFail($id);
+
+        if (!$role->is_deletable) {
+            return redirect()
+                ->route('admin.role.role.index')
+                ->with('danger', 'You can not delete this role !');
+        }
+
+        // Sync the `user` role on all users for this group.
+        foreach ($role->users as $user) {
+            // Only do that if the user does not have another role.
+            if ($user->roles->count() == 1) {
+                $user->roles()->sync(Role::find(3), false);
+            }
+        }
+
+        if ($role->delete()) {
+            return redirect()
+                ->route('admin.role.role.index')
+                ->with('success', 'This role has been deleted successfully !');
+        }
+
+        return redirect()
+            ->route('admin.role.role.index')
+            ->with('danger', 'An error occurred while deleting this role !');
+    }
+
+    /**
+     * Return a list of attributes for the permissions option field.
+     *
+     * @return array
+     */
+    protected function getOptionAttributes(): array
+    {
+        $attributes = Permission::pluck('id')->toArray();
+        $optionsAttributes = [];
+
+        foreach ($attributes as $attribute) {
+            $optionsAttributes[$attribute] = [
+                'title' => 'Role Information',
+                'data-content' => Permission::where('id', $attribute)->select('description')->first()->description,
+                'data-toggle' => 'popover',
+                'data-trigger' => 'hover',
+                'data-placement' => 'top'
+            ];
+        }
+
+        return $optionsAttributes;
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Validation\Validator;
 class RoleValidator
 {
     /**
-     * Get the validator for an incoming registration request.
+     * Get the validator for an incoming create request.
      *
      * @param array $data The data to validate.
      *
@@ -18,11 +18,13 @@ class RoleValidator
     public static function create(array $data): Validator
     {
         $rules = [
-            'username' => 'required|alpha_num|min:4|max:20|unique:users',
-            'email' => 'required|email|max:50|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'terms' => 'required|min:1'
+            'name' => 'required|min:2|max:20|unique:roles',
+            'slug' => 'unique:roles',
+            'level' => 'required|integer',
+            'description' => 'max:150',
+            'permissions' => 'required'
         ];
+        $data['slug'] = Str::slug($data['name'], config('roles.separator'));
 
         return FacadeValidator::make($data, $rules);
     }

@@ -209,6 +209,9 @@ Route::group([
             Route::put('update/{id}', 'RoleController@update')
                 ->name('admin.role.role.update');
 
+            Route::delete('delete/{id}', 'RoleController@delete')
+                ->name('admin.role.role.delete');
+
             // Permission Route
             Route::get('permission', 'PermissionController@index')->name('admin.role.permission.index');
         });
