@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Ultraware\Roles\Models\Permission;
-use Ultraware\Roles\Models\Role;
+use Xetaravel\Models\Role;
 
 class PermissionsRolesTableSeed extends Seeder
 {
@@ -14,9 +14,10 @@ class PermissionsRolesTableSeed extends Seeder
     public function run()
     {
         // Admin Role
-        $role = Role::where('slug', 'admin')->first();
+        $role = Role::where('slug', 'administrator')->first();
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
         $role->attachPermission(Permission::where('slug', 'manage.users')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.roles')->first());
         $role->attachPermission(Permission::where('slug', 'manage.articles')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 

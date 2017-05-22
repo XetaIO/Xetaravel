@@ -49,16 +49,11 @@ class CategoryController extends Controller
     public function create(Request $request): RedirectResponse
     {
         CategoryValidator::create($request->all())->validate();
-
-        if (CategoryRepository::create($request->all())) {
-            return redirect()
-                ->route('admin.blog.category.index')
-                ->with('success', 'Your category has been created successfully !');
-        }
+        CategoryRepository::create($request->all());
 
         return redirect()
             ->route('admin.blog.category.index')
-            ->with('danger', 'An error occurred while creating your category !');
+            ->with('success', 'Your category has been created successfully !');
     }
 
     /**
@@ -96,19 +91,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        CategoryValidator::update($request->all(), $id)->validate();
-
         $category = Category::findOrFail($id);
 
-        if (CategoryRepository::update($request->all(), $category)) {
-            return redirect()
-                ->route('admin.blog.category.index')
-                ->with('success', 'Your category has been updated successfully !');
-        }
+        CategoryValidator::update($request->all(), $id)->validate();
+        CategoryRepository::update($request->all(), $category);
 
         return redirect()
             ->route('admin.blog.category.index')
-            ->with('danger', 'An error occurred while updating your category !');
+            ->with('success', 'Your category has been updated successfully !');
     }
 
     /**

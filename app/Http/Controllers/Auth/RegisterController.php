@@ -6,10 +6,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Ultraware\Roles\Models\Role;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Repositories\UserRepository;
+use Xetaravel\Models\Role;
 use Xetaravel\Models\Validators\UserValidator;
 
 class RegisterController extends Controller

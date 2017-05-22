@@ -40,7 +40,7 @@ return [
     */
 
     'models' => [
-        'role' => Ultraware\Roles\Models\Role::class,
+        'role' => Xetaravel\Models\Role::class,
         'permission' => Ultraware\Roles\Models\Permission::class,
     ],
 

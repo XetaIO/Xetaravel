@@ -1,8 +1,9 @@
 <?php
 namespace Tests\Http\Controllers\Blog;
 
-use Xetaravel\Models\User;
 use Tests\TestCase;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\User;
 
 class CommentControllerTest extends TestCase
 {
@@ -29,6 +30,22 @@ class CommentControllerTest extends TestCase
     {
         $response = $this->post('/blog/comment/create', ['article_id' => 3]);
         $response->assertStatus(404);
+    }
+
+    /**
+     * testCreateArticleNotDisplay method
+     *
+     * @return void
+     */
+    public function testCreateArticleNotDisplay()
+    {
+        $article = Article::find(1);
+        $article->is_display = false;
+        $article->save();
+
+        $response = $this->post('/blog/comment/create', ['article_id' => 1]);
+        $response->assertSessionHas('danger');
+        $response->assertStatus(302);
     }
 
     /**

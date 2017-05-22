@@ -68,7 +68,24 @@ class MenuServiceProvider extends ServiceProvider
                 ->addClass('nav nav-pills flex-column mb-0')
                 ->setAttribute('role', 'navigation')
                 ->add(
-                    Link::toRoute('admin.user.user.index', '<i class="fa fa-newspaper-o"></i> Manage Users')
+                    Link::toRoute('admin.user.user.index', '<i class="fa fa-users"></i> Manage Users')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->setActiveFromRequest();
+        });
+
+        Menu::macro('admin.role', function () {
+            return Menu::new()
+                ->addClass('nav nav-pills flex-column mb-0')
+                ->setAttribute('role', 'navigation')
+                ->add(
+                    Link::toRoute('admin.role.role.index', '<i class="fa fa-user-circle-o"></i> Manage Roles')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->add(
+                    Link::toRoute('admin.role.permission.index', '<i class="fa fa-wrench"></i> Manage Permissions')
                         ->addClass('nav-link')
                         ->addParentClass('nav-item')
                 )

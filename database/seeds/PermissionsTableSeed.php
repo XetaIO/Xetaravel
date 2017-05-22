@@ -29,6 +29,13 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'name' => 'Manage Roles',
+                'slug' => 'manage.roles',
+                'description' => 'The user can manage the roles.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'name' => 'Manage Users',
                 'slug' => 'manage.users',
                 'description' => 'The user can manage the users.',

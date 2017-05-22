@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
-use Ultraware\Roles\Models\Role;
 
 class UserValidator
 {

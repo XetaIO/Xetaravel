@@ -26,13 +26,24 @@
     </p>
     {!! Menu::{'admin.administration'}() !!}
 
-    <p class="p-1 m-0 text-white font-xeta">
-        Blog
-    </p>
-    {!! Menu::{'admin.blog'}() !!}
+    @permission('manage.articles')
+        <p class="p-1 m-0 text-white font-xeta">
+            Blog
+        </p>
+        {!! Menu::{'admin.blog'}() !!}
+    @endpermission
 
-    <p class="p-1 m-0 text-white font-xeta">
-        Users
-    </p>
-    {!! Menu::{'admin.user'}() !!}
+    @permission('manage.users')
+        <p class="p-1 m-0 text-white font-xeta">
+            Users
+        </p>
+        {!! Menu::{'admin.user'}() !!}
+    @endpermission
+
+    @permission('manage.roles')
+        <p class="p-1 m-0 text-white font-xeta">
+            Roles
+        </p>
+        {!! Menu::{'admin.role'}() !!}
+    @endpermission
 </nav>

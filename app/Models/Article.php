@@ -24,11 +24,13 @@ class Article extends Model
     {
         parent::boot();
 
-        // Don't apply the scope to the admin part.
-        $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
-
-        if ($result === false) {
-            static::addGlobalScope(new DisplayScope);
+        // The Route::getPrefix() is undefined in the testing environment for mysterious reasons.
+        if (App::environment() !== 'testing') {
+            // Don't apply the scope to the admin part.
+            $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
+            if ($result === false) {
+                static::addGlobalScope(new DisplayScope);
+            }
         }
 
         // Generated the slug before updating.

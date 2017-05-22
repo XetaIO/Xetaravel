@@ -184,5 +184,36 @@ Route::group([
             Route::delete('deleteAvatar/{id}', 'UserController@deleteAvatar')
                 ->name('admin.user.user.deleteavatar');
         });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Role Routes
+        |--------------------------------------------------------------------------
+        */
+        Route::group([
+            'namespace' => 'Role',
+            'prefix' => 'role',
+            'middleware' => ['permission:manage.roles']
+        ], function () {
+
+            // Role Routes
+            Route::get('/', 'RoleController@index')->name('admin.role.role.index');
+
+            Route::get('create', 'RoleController@showCreateForm')
+                ->name('admin.role.role.create');
+            Route::post('create', 'RoleController@create')
+                ->name('admin.role.role.create');
+
+            Route::get('update/{slug}.{id}', 'RoleController@showUpdateForm')
+                ->name('admin.role.role.edit');
+            Route::put('update/{id}', 'RoleController@update')
+                ->name('admin.role.role.update');
+
+            Route::delete('delete/{id}', 'RoleController@delete')
+                ->name('admin.role.role.delete');
+
+            // Permission Route
+            Route::get('permission', 'PermissionController@index')->name('admin.role.permission.index');
+        });
     }
 );
