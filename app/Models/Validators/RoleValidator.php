@@ -33,7 +33,7 @@ class RoleValidator
      * Get a validator for an incoming update request.
      *
      * @param array $data The data to validate.
-     * @param int $id The actual role id to ignore the username rule.
+     * @param int $id The actual role id to ignore the name rule.
      *
      * @return \Illuminate\Validation\Validator
      */
