@@ -13,8 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
-//use Ultraware\Roles\Traits\HasRoleAndPermission;
-use Xetaravel\Models\HasRoleAndPermission;
+use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Xetaravel\Models\Entities\UserEntity;
 use Xetaravel\Models\Presenters\UserPresenter;
 use Xetaravel\Notifications\ResetPasswordNotification;
@@ -206,5 +205,38 @@ class User extends Model implements
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * Get all permissions from roles.
+     *
+     * @return Builder
+     */
+    public function rolePermissions()
+    {
+        $permissionModel = app(config('roles.models.permission'));
+
+        return $permissionModel
+            ::select([
+                'permissions.*',
+                'permission_role.created_at as pivot_created_at',
+                'permission_role.updated_at as pivot_updated_at'
+            ])
+            ->join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
+            ->join('roles', 'roles.id', '=', 'permission_role.role_id')
+            ->whereIn('roles.id', $this->getRoles()->pluck('id')->toArray())
+            ->orWhere('roles.level', '<', $this->level())
+            ->groupBy([
+                'permissions.id',
+                'permissions.name',
+                'permissions.slug',
+                'permissions.description',
+                'permissions.model',
+                'permissions.created_at',
+                'permissions.updated_at',
+                'permissions.is_deletable',
+                'pivot_created_at',
+                'pivot_updated_at'
+            ]);
     }
 }
