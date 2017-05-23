@@ -1,7 +1,6 @@
 <?php
 namespace Tests\Http\Controllers\Admin\Role;
 
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Role;
@@ -28,7 +27,7 @@ class RoleControllerTest extends TestCase
      */
     public function testIndexSuccess()
     {
-        $response = $this->get('/admin/role');
+        $response = $this->get('/admin/role/role');
         $response->assertSuccessful();
     }
 
@@ -39,7 +38,7 @@ class RoleControllerTest extends TestCase
      */
     public function testShowCreateFormSuccess()
     {
-        $response = $this->get('/admin/role/create');
+        $response = $this->get('/admin/role/role/create');
         $response->assertSuccessful();
     }
 
@@ -60,7 +59,7 @@ class RoleControllerTest extends TestCase
                 2
             ]
         ];
-        $response = $this->post('/admin/role/create', $data);
+        $response = $this->post('/admin/role/role/create', $data);
         $response->assertSessionHas('success');
         $response->assertStatus(302);
 
@@ -80,7 +79,7 @@ class RoleControllerTest extends TestCase
      */
     public function testShowUpdateFormSuccess()
     {
-        $response = $this->get('/admin/role/update/administrator.1');
+        $response = $this->get('/admin/role/role/update/1');
         $response->assertSuccessful();
     }
 
@@ -101,7 +100,7 @@ class RoleControllerTest extends TestCase
                 2
             ]
         ];
-        $response = $this->put('/admin/role/update/1', $data);
+        $response = $this->put('/admin/role/role/update/1', $data);
         $response->assertSessionHas('success');
         $response->assertStatus(302);
 
@@ -135,7 +134,7 @@ class RoleControllerTest extends TestCase
         $banished = User::find(4);
         $banished->roles()->sync($role, false);
 
-        $response = $this->delete("/admin/role/delete/{$role->id}");
+        $response = $this->delete("/admin/role/role/delete/{$role->id}");
         $response->assertSessionHas('success');
         $response->assertStatus(302);
 
@@ -153,7 +152,7 @@ class RoleControllerTest extends TestCase
      */
     public function testDeleteIsNotDeletableFailed()
     {
-        $response = $this->delete("/admin/role/delete/1");
+        $response = $this->delete('/admin/role/role/delete/1');
         $response->assertSessionHas('danger');
         $response->assertStatus(302);
     }

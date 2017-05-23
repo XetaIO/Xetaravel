@@ -197,23 +197,36 @@ Route::group([
         ], function () {
 
             // Role Routes
-            Route::get('/', 'RoleController@index')->name('admin.role.role.index');
+            Route::get('role', 'RoleController@index')->name('admin.role.role.index');
 
-            Route::get('create', 'RoleController@showCreateForm')
+            Route::get('role/create', 'RoleController@showCreateForm')
                 ->name('admin.role.role.create');
-            Route::post('create', 'RoleController@create')
+            Route::post('role/create', 'RoleController@create')
                 ->name('admin.role.role.create');
 
-            Route::get('update/{slug}.{id}', 'RoleController@showUpdateForm')
+            Route::get('role/update/{id}', 'RoleController@showUpdateForm')
                 ->name('admin.role.role.edit');
-            Route::put('update/{id}', 'RoleController@update')
+            Route::put('role/update/{id}', 'RoleController@update')
                 ->name('admin.role.role.update');
 
-            Route::delete('delete/{id}', 'RoleController@delete')
+            Route::delete('role/delete/{id}', 'RoleController@delete')
                 ->name('admin.role.role.delete');
 
             // Permission Route
             Route::get('permission', 'PermissionController@index')->name('admin.role.permission.index');
+
+            Route::get('permission/create', 'PermissionController@showCreateForm')
+                ->name('admin.role.permission.create');
+            Route::post('permission/create', 'PermissionController@create')
+                ->name('admin.role.permission.create');
+
+            Route::get('permission/update/{id}', 'PermissionController@showUpdateForm')
+                ->name('admin.role.permission.edit');
+            Route::put('permission/update/{id}', 'PermissionController@update')
+                ->name('admin.role.permission.update');
+
+            Route::delete('permission/delete/{id}', 'PermissionController@delete')
+                ->name('admin.role.permission.delete');
         });
     }
 );
