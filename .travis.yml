@@ -30,7 +30,7 @@ matrix:
 before_install: echo 'extension="redis.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
-  - composer self-update
+  - composer self-update --snapshot
   - composer install --prefer-dist --no-interaction
 
 before_script:
