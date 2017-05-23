@@ -27,6 +27,7 @@ class AccountControllerTest extends TestCase
     public function testIndexSuccess()
     {
         $response = $this->get('/users/account');
+        dd($response->baseResponse->getContent());
         $response->assertSuccessful();
     }
 
