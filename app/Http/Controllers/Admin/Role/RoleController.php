@@ -4,8 +4,8 @@ namespace Xetaravel\Http\Controllers\Admin\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Ultraware\Roles\Models\Permission;
 use Xetaravel\Http\Controllers\Admin\Controller;
+use Xetaravel\Models\Permission;
 use Xetaravel\Models\Repositories\RoleRepository;
 use Xetaravel\Models\Role;
 use Xetaravel\Models\Validators\RoleValidator;
@@ -13,7 +13,7 @@ use Xetaravel\Models\Validators\RoleValidator;
 class RoleController extends Controller
 {
     /**
-     * Show the search page.
+     * Show all the roles.
      *
      * @return \Illuminate\View\View
      */
@@ -67,12 +67,11 @@ class RoleController extends Controller
      * Show the update form.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string $slug The slug of the role.
      * @param int $id The id of the role.
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function showUpdateForm(Request $request, string $slug, int $id)
+    public function showUpdateForm(Request $request, int $id)
     {
         $role = Role::findOrFail($id);
 
@@ -96,7 +95,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Handle an user update request for the application.
+     * Handle a role update request for the application.
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id The id of the role to update.
@@ -165,7 +164,7 @@ class RoleController extends Controller
 
         foreach ($attributes as $attribute) {
             $optionsAttributes[$attribute] = [
-                'title' => 'Role Information',
+                'title' => 'Permission Information',
                 'data-content' => Permission::where('id', $attribute)->select('description')->first()->description,
                 'data-toggle' => 'popover',
                 'data-trigger' => 'hover',

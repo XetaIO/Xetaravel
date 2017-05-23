@@ -8,11 +8,11 @@ use Xetaravel\Models\Role;
 class RoleRepository
 {
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new role instance.
      *
-     * @param array $data The data used to create the user.
+     * @param array $data The data used to create the role.
      *
-     * @return \Xetaravel\Models\User
+     * @return \Xetaravel\Models\Role
      */
     public static function create(array $data): Role
     {
@@ -27,7 +27,7 @@ class RoleRepository
     /**
      * Update the role informations after a valid update request.
      *
-     * @param array $data The data used to update the user.
+     * @param array $data The data used to update the role.
      * @param \Xetaravel\Models\Role $role The role to update.
      *
      * @return bool

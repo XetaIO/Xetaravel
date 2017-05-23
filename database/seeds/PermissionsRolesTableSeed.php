@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Ultraware\Roles\Models\Permission;
+use Xetaravel\Models\Permission;
 use Xetaravel\Models\Role;
 
 class PermissionsRolesTableSeed extends Seeder
