@@ -23,12 +23,16 @@
             "homepage": "https://github.com/Xety"
         }
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        "breadcrumbs": {
             "type": "vcs",
             "url": "https://github.com/XetaIO/breadcrumbs"
         }
-    ],
+    },
     "require": {
         "php": ">=7.0",
         "laravel/framework": "5.4.*",
