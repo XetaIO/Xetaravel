@@ -40,9 +40,12 @@ class UserController extends Controller
     /**
      * Show the user profile page.
      *
+     * @param string $slug The slug of the user.
+     * @param int $id The id of the user.
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function show(Request $request, $slug, $id)
+    public function show(Request $request, string $slug, int $id)
     {
         $user = User::with('articles', 'comments')
             ->where('id', $id)
