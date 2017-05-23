@@ -7,6 +7,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
@@ -205,5 +206,38 @@ class User extends Model implements
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * Get all permissions from roles.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function rolePermissions(): Builder
+    {
+        $permissionModel = app(config('roles.models.permission'));
+
+        return $permissionModel
+            ::select([
+                'permissions.*',
+                'permission_role.created_at as pivot_created_at',
+                'permission_role.updated_at as pivot_updated_at'
+            ])
+            ->join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
+            ->join('roles', 'roles.id', '=', 'permission_role.role_id')
+            ->whereIn('roles.id', $this->getRoles()->pluck('id')->toArray())
+            ->orWhere('roles.level', '<', $this->level())
+            ->groupBy([
+                'permissions.id',
+                'permissions.name',
+                'permissions.slug',
+                'permissions.description',
+                'permissions.model',
+                'permissions.created_at',
+                'permissions.updated_at',
+                'permissions.is_deletable',
+                'pivot_created_at',
+                'pivot_updated_at'
+            ]);
     }
 }
