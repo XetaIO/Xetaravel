@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->integer('article_count')->unsigned()->default(0);
             $table->rememberToken();
             $table->ipAddress('register_ip');
-            $table->ipAddress('last_login_ip');
+            $table->ipAddress('last_login_ip')->nullable();
             $table->dateTime('last_login')->nullable();
             $table->timestamps();
         });

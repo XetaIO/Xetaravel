@@ -176,6 +176,7 @@ return [
         Spatie\Menu\Laravel\MenuServiceProvider::class,
         Xetaio\Local\Providers\LocalEnvironmentServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
+        Xetaio\IpTraceable\Providers\IpTraceableServiceProvider::class,
 
         /*
          * Application Service Providers
@@ -188,7 +189,7 @@ return [
         Xetaravel\Providers\FormServiceProvider::class,
         Xetaravel\Providers\MenuServiceProvider::class,
         Xetaravel\Http\ViewComposers\BlogSidebarServiceProvider::class,
-        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class
+        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class,
     ],
 
     /*
