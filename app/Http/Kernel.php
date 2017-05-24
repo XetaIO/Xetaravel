@@ -1,5 +1,4 @@
 <?php
-
 namespace Xetaravel\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -34,6 +33,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Xetaravel\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Xetaio\IpTraceable\Http\Middleware\IpTraceable::class,
         ],
 
         'api' => [
@@ -59,7 +59,7 @@ class Kernel extends HttpKernel
 
         // Applications
         'permission' => \Xetaravel\Http\Middleware\VerifyPermission::class,
-        
+
         // Extension
         'role' => \Ultraware\Roles\Middleware\VerifyRole::class,
         'level' => \Ultraware\Roles\Middleware\VerifyLevel::class,
