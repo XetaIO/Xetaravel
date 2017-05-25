@@ -1,13 +1,15 @@
 <?php
 namespace Xetaravel\Models;
 
-use Xetaravel\Models\Article;
-use Xetaravel\Models\User;
 use Eloquence\Behaviours\CountCache\Countable;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\Gates\CommentGate;
+use Xetaravel\Models\User;
 
 class Comment extends Model
 {
-    use Countable;
+    use Countable,
+        CommentGate;
 
     /**
      * The attributes that are mass assignable.

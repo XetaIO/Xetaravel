@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Xetaravel\Events\CommentEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\Article;
+use Xetaravel\Models\Comment;
 use Xetaravel\Models\Repositories\CommentRepository;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Validators\CommentValidator;
@@ -30,8 +31,14 @@ class CommentController extends Controller
                 ->with('danger', 'This article doesn\'t exist or you can not reply to it !');
         }
 
+        if (Comment::isFlooding(Auth::user())) {
+            return back()
+                ->withInput()
+                ->with('danger', 'Wow, keep calm bro, and try to not flood !');
+        }
+
         CommentValidator::create($request->all())->validate();
-        CommentRepository::create($request->all(), auth()->user());
+        CommentRepository::create($request->all(), Auth::user());
 
         // We must find the user else we won't see the updated comment_count.
         event(new CommentEvent(User::find(Auth::user()->id)));
