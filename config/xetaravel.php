@@ -22,7 +22,7 @@ return [
     | Pagination
     |--------------------------------------------------------------------------
     |
-    | All pagination settings used to pagination the queries.
+    | All pagination settings used to paginate the queries.
     */
     'pagination' => [
         'blog' => [
@@ -31,6 +31,19 @@ return [
         ],
         'notification' => [
             'notification_per_page' => 10
+        ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Flood Rules
+    |--------------------------------------------------------------------------
+    |
+    | All flood rules that apply at various point on the site. They are all in seconds.
+    */
+   'flood' => [
+       'blog' => [
+           'comment' => 30
         ]
     ]
 ];

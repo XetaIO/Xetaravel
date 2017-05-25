@@ -61,6 +61,22 @@ class CommentControllerTest extends TestCase
     }
 
     /**
+     * testCreateIsFloodingFailed method
+     *
+     * @return void
+     */
+    public function testCreateIsFloodingFailed()
+    {
+        config(['xetaravel.flood.blog.comment' => (60 * 10)]);
+
+        $this->post('/blog/comment/create', ['article_id' => 1, 'content' =>  '0123456789']);
+
+        $response = $this->post('/blog/comment/create', ['article_id' => 1, 'content' =>  '0123456789']);
+        $response->assertSessionHas('danger');
+        $response->assertStatus(302);
+    }
+
+    /**
      * testCreateSuccess method
      *
      * @return void
