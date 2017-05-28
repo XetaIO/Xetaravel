@@ -83,8 +83,22 @@ class CommentControllerTest extends TestCase
      */
     public function testCreateSuccess()
     {
-        $response = $this->post('/blog/comment/create', ['article_id' => 1, 'content' =>  '0123456789']);
+        $response = $this->post('/blog/comment/create', ['article_id' => 1, 'content' =>  '0123456789 @editor ds']);
         $response->assertSessionHas('success');
         $response->assertStatus(302);
+    }
+
+    /**
+     * testShow method
+     *
+     * @return void
+     */
+    public function testShow()
+    {
+        $response = $this->get('/blog/comment/show/1');
+        $response->assertStatus(302);
+        $response->assertRedirect(
+            '/blog/article/lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit.1?page=1&#comment-1'
+        );
     }
 }
