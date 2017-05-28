@@ -26,18 +26,19 @@
         @stack('scriptsTop')
     </head>
     <body>
+        <div id="app">
+            <!-- Header -->
+            @include('elements.header')
 
-        <!-- Header -->
-        @include('elements.header')
+            <!-- Flash Messages -->
+            @include('elements.flash')
 
-        <!-- Flash Messages -->
-        @include('elements.flash')
+            <!-- Content -->
+            @yield('content')
 
-        <!-- Content -->
-        @yield('content')
-
-        <!-- Footer -->
-        @include('elements.footer')
+            <!-- Footer -->
+            @include('elements.footer')
+        </div>
 
         <!-- Scripts -->
         <script src="{{ mix('js/lib.min.js') }}"></script>

@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./vue');
 
 $(document).ready(function () {
     "use strict";

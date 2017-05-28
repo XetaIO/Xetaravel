@@ -5,12 +5,14 @@ use Eloquence\Behaviours\CountCache\Countable;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Gates\CommentGate;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
+use Xetaravel\Models\Presenters\CommentPresenter;
 use Xetaravel\Models\User;
 
 class Comment extends Model
 {
     use Countable,
         CommentGate,
+        CommentPresenter,
         HasMentionsTrait;
 
     /**
@@ -22,6 +24,15 @@ class Comment extends Model
         'article_id',
         'user_id',
         'content'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'content_markdown'
     ];
 
     /**
