@@ -4,12 +4,14 @@ namespace Xetaravel\Models;
 use Eloquence\Behaviours\CountCache\Countable;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Gates\CommentGate;
+use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\User;
 
 class Comment extends Model
 {
     use Countable,
-        CommentGate;
+        CommentGate,
+        HasMentionsTrait;
 
     /**
      * The attributes that are mass assignable.

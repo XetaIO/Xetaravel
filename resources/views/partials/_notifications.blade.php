@@ -4,7 +4,7 @@
     href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="icon fa fa-bell-o {{ $hasUnreadNotifications ? 'animated infinite ringing' : 'text-body' }}"></i>
     </a>
-    
+
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
         <h6 class="dropdown-header text-xs-center">
             News Notifications
@@ -13,12 +13,23 @@
 
         @if ($notifications->isNotEmpty())
             @foreach ($notifications as $notification)
-                <a class="dropdown-item notification-item" id="notification-{{ $notification->id }}"  href="{{ route('users.notification.index') }}">
+                @php
+                    if ($notification->data['type'] == 'mention') {
+                        $href = $notification->data['link'];
+                    } else {
+                        $href = route('users.notification.index');
+                    }
+                @endphp
+                <a class="dropdown-item notification-item" id="notification-{{ $notification->id }}"  href="{{ $href }}">
                     <!-- Image -->
                     @if (isset($notification->data['image']))
                         <img src="{{ asset($notification->data['image']) }}" alt="Image">
                     @else
-                        <img src="{{ asset('images/logo.svg') }}" alt="Image">
+                        @if ($notification->data['type'] == 'mention')
+                            <i class="fa fa-at fa-3x text-primary" aria-hidden="true"></i>
+                        @else
+                            <img src="{{ asset('images/logo.svg') }}" alt="Image">
+                        @endif
                     @endif
 
                     <!-- Message -->
@@ -41,7 +52,7 @@
                             Mark as read
                         </button>
                     @endif
-                
+
                 </a>
             @endforeach
 
@@ -55,7 +66,7 @@
                 You don't have any notifications.
             </p>
         @endif
-        
+
         <div class="dropdown-divider"></div>
         <a class="dropdown-item text-xs-center" href="{{ route('users.notification.index') }}">
             All Notifications

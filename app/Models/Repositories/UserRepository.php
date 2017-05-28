@@ -86,7 +86,7 @@ class UserRepository
         $user = User::find($userId);
 
         return [
-            'notifications' => $user->notifications->take(8),
+            'notifications' => $user->notifications()->take(8)->get(),
             'hasUnreadNotifications' => $user->unreadNotifications->isNotEmpty(),
             'unredNotificationsCount' => $user->unreadNotifications->count()
         ];

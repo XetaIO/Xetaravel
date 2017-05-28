@@ -166,17 +166,18 @@ return [
          * Packages Service Providers
          */
         Collective\Html\HtmlServiceProvider::class,
-        Mews\Purifier\PurifierServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
         Eloquence\EloquenceServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
-        Xetaravel\Ckeditor\Providers\CkeditorServiceProvider::class,
         Ultraware\Roles\RolesServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         Spatie\Menu\Laravel\MenuServiceProvider::class,
         Xetaio\Local\Providers\LocalEnvironmentServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Xetaio\IpTraceable\Providers\IpTraceableServiceProvider::class,
+        Xetaio\Editor\EditorServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Xetaio\Mentions\Providers\MentionServiceProvider::class,
 
         /*
          * Application Service Providers
@@ -243,10 +244,10 @@ return [
          */
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'Menu' => Spatie\Menu\Laravel\MenuFacade::class,
-        'Analytics' => Spatie\Analytics\AnalyticsFacade::class
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
     ],
 
 ];

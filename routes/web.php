@@ -20,7 +20,7 @@ Route::group(['middleware' => ['auth', 'permission:show.banished']], function ()
 */
 Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allowGuest']], function () {
 
-    Route::get('profile/{slug}.{id}', 'UserController@show')->name('users.user.show');
+    Route::get('profile/@{slug}', 'UserController@show')->name('users.user.show');
     Route::get('/', 'UserController@index')->name('users.user.index');
 
     // Auth Namespace
@@ -88,6 +88,10 @@ Route::group([
     // Category Routes
     Route::get('category/{slug}.{id}', 'CategoryController@show')
         ->name('blog.category.show');
+
+    // Comment Routes
+    Route::get('comment/show/{id}', 'CommentController@show')
+        ->name('blog.comment.show');
 
     Route::group(['middleware' => ['auth']], function () {
         // Comment Routes

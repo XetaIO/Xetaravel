@@ -43,7 +43,7 @@ return [
     */
    'flood' => [
        'blog' => [
-           'comment' => 30
+           'comment' => 1
         ]
     ]
 ];

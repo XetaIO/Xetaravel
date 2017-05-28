@@ -46,6 +46,7 @@
     ~ .custom-control-indicator {
       cursor: $custom-control-disabled-cursor;
       background-color: $custom-control-disabled-indicator-bg;
+      opacity: .5;
     }
 
     ~ .custom-control-description {
@@ -53,6 +54,23 @@
       cursor: $custom-control-disabled-cursor;
     }
   }
+}
+
+.custom-checkbox-disabled {
+  cursor: inherit;
+
+  .custom-control-input {
+    &:disabled {
+      ~ .custom-control-indicator {
+        cursor: inherit;
+      }
+
+      ~ .custom-control-description {
+        cursor: inherit;
+      }
+    }
+  }
+
 }
 
 // Custom indicator

@@ -1,18 +1,31 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'My account']) !!}
 
+@push('style')
+    {!! editor_css() !!}
+    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
-    {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
-    
-    <script type="text/javascript">
-        
-        CKEDITOR.replace('biographyBox', {
-            customConfig: '../config/biography.js'
-        });
-        CKEDITOR.replace('signatureBox', {
-            customConfig: '../config/signature.js'
-        });
-    </script>
+    {!! editor_js() !!}
+    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+
+    @php
+        $signature = [
+            'id' => 'signatureEditor',
+            'height' => '200',
+        ];
+    @endphp
+    @include('editor/partials/_signature', $signature)
+
+    @php
+        $biography = [
+            'id' => 'biographyEditor',
+            'height' => '250'
+        ];
+    @endphp
+    @include('editor/partials/_biography', [$biography, $signature])
+
 @endpush
 
 @section('content')
@@ -79,7 +92,7 @@
                             'placeholder' => 'Your Facebook here...'
                         ]
                     ) !!}
-                    
+
                     {!! Form::bsInputGroup(
                         'twitter',
                         'Twitter',
@@ -91,9 +104,9 @@
                         ]
                     ) !!}
 
-                    {!! Form::bsTextarea('biography', 'Biography', null, ['id' => 'biographyBox']) !!}
+                    {!! Form::bsTextarea('biography', 'Biography', null, ['editor' => 'biographyEditor', 'style' => 'display:none;']) !!}
 
-                    {!! Form::bsTextarea('signature', 'Signature', null, ['id' => 'signatureBox', 'rows' => 5]) !!}
+                    {!! Form::bsTextarea('signature', 'Signature', null, ['editor' => 'signatureEditor', 'style' => 'display:none;']) !!}
 
                     <div class="form-group text-xs-center">
                         <div class="col-md-12">

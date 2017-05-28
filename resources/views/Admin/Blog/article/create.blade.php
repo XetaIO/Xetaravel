@@ -1,18 +1,23 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Create an Article']) !!}
 
-@push('scripts')
-    {!! Html::script('/vendor/ckeditor/release/ckeditor.js') !!}
+@push('style')
+    {!! editor_css() !!}
+    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
+@endpush
 
-    <script type="text/javascript">
-        /**
-         * CKEditor
-         */
-        CKEDITOR.plugins.addExternal('pbckcode', '{{ asset('/vendor/ckeditor/plugins/pbckcode-1.2.5/src/plugin.js') }}');
-        CKEDITOR.replace('contentBox', {
-            customConfig: '../config/article.js'
-        });
-    </script>
+@push('scripts')
+    {!! editor_js() !!}
+    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+
+    @php
+        $articleConfig = [
+            'id' => 'articleEditor',
+            'height' => '550'
+        ];
+    @endphp
+
+    @include('editor/partials/_article', $articleConfig)
 @endpush
 
 @section('content')
@@ -61,8 +66,13 @@
                 {!! Form::bsTextarea(
                     'content',
                     'Content',
-                    null,
-                    ['id' => 'contentBox', 'class' => 'form-control form-control-inverse', 'required' => 'required']
+                    old('content'),
+                    [
+                        'class' => 'form-control form-control-inverse',
+                        'required' => 'required',
+                        'editor' => 'articleEditor',
+                        'style' => 'display:none;'
+                    ]
                 ) !!}
 
                 <div class="form-group">

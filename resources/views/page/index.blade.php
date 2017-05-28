@@ -105,12 +105,9 @@
                             </ul>
                         </small>
 
-                        <p class="card-text">
-                            {!! Purifier::clean(
-                                str_limit($article->content, 120),
-                                'blog_article_empty'
-                            ) !!}
-                        </p>
+                        <div class="card-text">
+                            {!! Markdown::convertToHtml(str_limit($article->content, 120)) !!}
+                        </div>
                     </div>
 
                     <div class="card-footer">
@@ -137,7 +134,7 @@
                 <div class="media">
 
                     <div class="media-left">
-                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
+                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug]) }}">
                             <img class="media-object" src="{{ asset($comment->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                     </div>
@@ -153,12 +150,9 @@
                             <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i> {{ $comment->created_at }}
                         </small>
 
-                        <p>
-                            {!! Purifier::clean(
-                                str_limit($comment->content, 250),
-                                'blog_article_empty'
-                            ) !!}
-                        </p>
+                        <div>
+                            {!! Markdown::convertToHtml(str_limit($comment->content, 250)) !!}
+                        </div>
                     </div>
 
                 </div>

@@ -19,7 +19,7 @@
                             <i class="fa fa-check" aria-hidden="true"></i> Mark all notifications as read
                         </button>
                     @endif
-                    
+
                     <table class="table table-hover table-notifications">
                         @foreach ($notifications as $notification)
                             <tr class="alert notification-item" id="notification-{{ $notification->id }}">
@@ -28,7 +28,11 @@
                                     @if (isset($notification->data['image']))
                                         <img src="{{ asset($notification->data['image']) }}" alt="Image" width="60">
                                     @else
-                                        <img src="{{ asset('images/logo.svg') }}" alt="Image" width="60">
+                                        @if ($notification->data['type'] == 'mention')
+                                            <i class="fa fa-at fa-4x text-primary" style="vertical-align: middle;" aria-hidden="true"></i>
+                                        @else
+                                            <img src="{{ asset('images/logo.svg') }}" alt="Image" width="60">
+                                        @endif
                                     @endif
 
                                     <!-- Message -->
@@ -56,7 +60,7 @@
                             </tr>
                         @endforeach
                     </table>
-                    
+
                     <div class="col-md 12 text-xs-center">
                         {{ $notifications->render() }}
                     </div>

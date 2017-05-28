@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Http\Controllers\Admin\Controller;
 use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\Repositories\AccountRepository;
@@ -125,7 +126,15 @@ class UserController extends Controller
 
         UserValidator::update($request->all(), $user->id)->validate();
         UserRepository::update($request->all(), $user);
-        AccountRepository::update($request->get('account'), $user->id);
+        $account = AccountRepository::update($request->get('account'), $user->id);
+
+        $parser = new MentionParser($account, ['mention' => false]);
+        $signature = $parser->parse($account->signature);
+        $biography = $parser->parse($account->biography);
+
+        $account->signature = $signature;
+        $account->biography = $biography;
+        $account->save();
 
         $user->roles()->sync($request->get('roles'));
 

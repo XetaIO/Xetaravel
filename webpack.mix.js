@@ -26,6 +26,7 @@ mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
     .sass('resources/assets/sass/bootstrap/bootstrap.scss', 'public/css/bootstrap.min.css')
     .sass('resources/assets/sass/jasny-bootstrap/jasny-bootstrap.scss', 'public/css/bootstrap.plugins.min.css')
     .sass('resources/assets/sass/font-awesome/font-awesome.scss', 'public/css/font-awesome.min.css')
+    .sass('resources/assets/sass/editor-md/editormd.scss', 'public/css/editor-md.custom.min.css')
     .scripts([
         'resources/assets/js/libs/jquery.min.js',
         'resources/assets/js/libs/jquery.easing.min.js',
@@ -55,4 +56,5 @@ mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/fonts', 'public/fonts')
+    .copyDirectory('resources/assets/editor-md', 'public/editor-md')
     .version();

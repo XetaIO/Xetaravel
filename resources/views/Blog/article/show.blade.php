@@ -1,26 +1,28 @@
 @extends('layouts.app')
 {!! config(['app.title' => $article->title]) !!}
 
+@push('style')
+    {!! editor_css() !!}
+    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
-    @if (Auth::user())
-        {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
-    @endif
+    {!! editor_js() !!}
+    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+
+    @php
+        $config = [
+            'id' => 'commentEditor',
+            'height' => '350'
+        ];
+    @endphp
+
+    @include('editor/partials/_comment', $config)
+
 
     <script src="{{ mix('js/highlight.min.js') }}"></script>
     <script type="text/javascript">
-        @if (Auth::user())
-            /**
-             * CKEditor
-             */
-            CKEDITOR.plugins.addExternal('pbckcode', '{{ asset('/vendor/ckeditor/plugins/pbckcode-1.2.5/src/plugin.js') }}');
-            CKEDITOR.replace('commentBox', {
-                customConfig: '../config/comment.js'
-            });
-        @endif
-
-        /**
-         * HighlightJS.
-         */
+        /* HighlightJS */
         hljs.initHighlightingOnLoad();
     </script>
 @endpush
@@ -52,26 +54,28 @@
                         </li>
                     </ul>
                 </div>
-                {!! Purifier::clean($article->content, 'blog_article') !!}
+                <div>
+                    {!! Markdown::convertToHtml($article->content) !!}
+                </div>
             </div>
 
             <hr />
             <div class="card card-outline-primary">
                 <div class="card-block" style="display: flex;">
                     <div class="card-left" style="padding-right: 15px;">
-                        <a href="{{ route('users.user.show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
+                        <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
                             <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                     </div>
                     <div class="card-body" style="flex: 1;">
                         <h4 class="card-title text-truncate">
-                            <a href="{{ route('users.user.show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
+                            <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
                                 {{ $article->user->username }}
                             </a>
                         </h4>
 
                         <p class="card-subtitle text-muted">
-                            {!! Purifier::clean($article->user->signature, 'user_signature') !!}
+                            {!! Markdown::convertToHtml($article->user->signature) !!}
                         </p>
                     </div>
                 </div>
@@ -82,16 +86,16 @@
                     {{ $article->comment_count }} Comments
                 </h4>
                 @foreach ($comments as $comment)
-                    <div class="media">
+                    <div class="media" id="comment-{{ $comment->getKey() }}">
                         <div class="media-left">
-                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
+                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug]) }}">
                             <img class="media-object rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
                         </a>
                         </div>
 
                         <div class="media-body">
                             <h5 class="media-heading">
-                                <a href="{{ route('users.user.show', ['slug' => $comment->user->slug, 'id' => $comment->user->id]) }}">
+                                <a href="{{ route('users.user.show', ['slug' => $comment->user->slug]) }}">
                                     {{ $comment->user->username }}
                                 </a>
                             </h5>
@@ -101,9 +105,9 @@
                                 {{ $comment->created_at }}
                             </small>
 
-                            <p>
-                                {!! Purifier::clean($comment->content, 'blog_article') !!}
-                            </p>
+                            <div>
+                                {!! Markdown::convertToHtml($comment->content) !!}
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -129,11 +133,14 @@
                     <div class="comment-content">
                         {!! Form::open(['route' => 'blog.comment.create']) !!}
                             {!! Form::hidden('article_id', $article->id) !!}
+
                             {!! Form::bsTextarea('content', false, old('message'), [
                                 'placeholder' => 'Your message here...',
                                 'required' => 'required',
-                                'id' => 'commentBox'
+                                'editor' => 'commentEditor',
+                                'style' => 'display:none;'
                             ]) !!}
+
                             {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i> Comment', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>

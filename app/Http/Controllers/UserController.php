@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\User;
@@ -41,14 +42,13 @@ class UserController extends Controller
      * Show the user profile page.
      *
      * @param string $slug The slug of the user.
-     * @param int $id The id of the user.
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function show(Request $request, string $slug, int $id)
+    public function show(Request $request, string $slug)
     {
         $user = User::with('articles', 'comments')
-            ->where('id', $id)
+            ->where('slug', Str::lower($slug))
             ->first();
 
         if (is_null($user)) {
@@ -61,7 +61,7 @@ class UserController extends Controller
             e($user->username),
             route(
                 'users.user.show',
-                ['slug' => $user->slug, 'id' => $user->id]
+                ['slug' => $user->slug]
             )
         );
         $this->breadcrumbs->setCssClasses('breadcrumb');

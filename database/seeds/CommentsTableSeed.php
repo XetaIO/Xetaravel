@@ -17,7 +17,7 @@ class CommentsTableSeed extends Seeder
             [
                 'user_id' => 2,
                 'article_id' => 1,
-                'content' => '<p>Lorem i<strong>psum dolor sit amet,</strong> consectetuer adipiscing elit, sed diam nonummy nibh <u>euismod tincidunt </u>ut laoreet dolore <em>magna aliquam </em>erat volutpat.</p>',
+                'content' => 'Lorem **ipsum dolor sit amet**, consectetuer adipiscing elit, sed diam nonummy nibh *euismod tincidunt* ut laoreet dolore `magna aliquam` erat volutpat.',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

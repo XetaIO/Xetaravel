@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Events\CommentEvent;
 use Xetaravel\Http\Controllers\Controller;
+use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Comment;
 use Xetaravel\Models\Repositories\CommentRepository;
@@ -38,12 +39,59 @@ class CommentController extends Controller
         }
 
         CommentValidator::create($request->all())->validate();
-        CommentRepository::create($request->all(), Auth::user());
+        $comment = CommentRepository::create($request->all(), Auth::user());
+
+        // Handle the mentions.
+        $parser = new MentionParser($comment);
+        $content = $parser->parse($comment->content);
+
+        $comment->content = $content;
+        $comment->save();
 
         // We must find the user else we won't see the updated comment_count.
         event(new CommentEvent(User::find(Auth::user()->id)));
 
-        return back()
+        return redirect()
+            ->route('blog.comment.show', ['id' => $comment->getKey()])
             ->with('success', 'Your comment has been posted successfully !');
+    }
+
+    /**
+     * Redirect an user to an article, page and comment.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id The ID of the comment.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function show(Request $request, int $id): RedirectResponse
+    {
+        $comment = Comment::findOrFail($id);
+
+        //Count the number of comment before this message.
+        $commentsBefore = Comment::where([
+            ['article_id', $comment->article_id],
+            ['created_at', '<', $comment->created_at]
+        ])->count();
+
+        //Get the number of messages per page.
+        $commentsPerPage = config('xetaravel.pagination.blog.comment_per_page');
+
+        //Calculate the page.
+        $page = floor($commentsBefore / $commentsPerPage) + 1;
+        $page = ($page > 1) ? $page : 1;
+
+        $request->session()->keep(['primary', 'danger', 'warning', 'success', 'info']);
+
+        return redirect()
+            ->route(
+                'blog.article.show',
+                [
+                    'slug' => $comment->article->slug,
+                    'id' => $comment->article->id,
+                    'page' => $page,
+                    '#comment-' . $comment->getKey()
+                ]
+            );
     }
 }

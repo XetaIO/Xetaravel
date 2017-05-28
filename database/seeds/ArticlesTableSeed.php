@@ -19,77 +19,92 @@ class ArticlesTableSeed extends Seeder
                 'category_id' => 1,
                 'title' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
                 'slug' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit',
-                'content' => '<p><strong>Lorem ipsum</strong> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                'content' => '**Lorem ipsum** dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 
-    <blockquote>
-    <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-    </blockquote>
+[http://exemple.com](http://exemple.com)
 
-    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat :&nbsp;</p>
+> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
 
-    <ul>
-    	<li>vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto</li>
-    	<li>odio dignissim qui blandit praesent luptatum zzril</li>
-    	<li>delenit augue duis dolore te feugait nulla facilisi</li>
-    </ul>
+Duis autem vel eum iriure *dolor in hendrerit* in vulputate velit esse molestie consequat :&nbsp;
 
-    <p>&nbsp;</p>
 
-    <p>Odio dignissim qui <code>&lt;?= $this-&gt;Html-&gt;link(&#39;test&#39;, [&#39;key&#39; =&gt; true]) ?&gt;</code> te feugait nulla facilisi.</p>
+- vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto
+- odio dignissim qui blandit praesent luptatum zzril
+- delenit augue duis dolore te feugait nulla facilisi
 
-    <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.&nbsp;</p>
+Odio dignissim qui `{!! Markdown::convertToHtml($article->content) !!}` te feugait nulla facilisi. :fr:
 
-    <p>&nbsp;</p>
+- [x] Discuss namespace
+- [ ] Flood system on Threads and Comments
+- [ ] CKEditor on Threads and Comments
+- [ ] Tagged User system
 
-    <pre data-pbcklang="php" data-pbcktabsize="4">
-    <code class="php hljs">&lt;?php
-    namespace App\Event;
+Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. :hushed:
 
-    use Cake\Event\Event;
-    use Cake\Event\EventListenerInterface;
-    use Cake\ORM\TableRegistry;
+| Feugiat | Vulputate |
+| ---- | ---- |
+| nostrud | lobortis |
+| aliquam | molestie |
 
-    class Logs implements EventListenerInterface
+```php
+<?php
+namespace Xetaravel\Models;
+
+use Eloquence\Behaviours\CountCache\Countable;
+use Xetaravel\Models\Article;
+use Xetaravel\Models\Gates\CommentGate;
+use Xetaravel\Models\User;
+
+class Comment extends Model
+{
+    use Countable,
+        CommentGate;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        \'article_id\',
+        \'user_id\',
+        \'content\'
+    ];
+
+    /**
+     * Return the count cache configuration.
+     *
+     * @return array
+     */
+    public function countCaches(): array
     {
-        /**
-         * ImplementedEvents method.
-         *
-         * @return array
-         */
-        public function implementedEvents()
-        {
-            return [
-                &#39;Log.User&#39; =&gt; &#39;userLog&#39;
-            ];
-        }
+        return [
+            User::class,
+            Article::class
+        ];
+    }
 
-        /**
-         * An user has doing an important action, we log it.
-         *
-         * @param Event $event The event that was fired.
-         *
-         * @return bool
-         */
-        public function userLog(Event $event)
-        {
-            $this-&gt;UsersLogs = TableRegistry::get(&#39;UsersLogs&#39;);
+    /**
+     * Get the user that owns the comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
-            $data = [
-                &#39;user_id&#39; =&gt; $event-&gt;getData(&#39;user_id&#39;),
-                &#39;username&#39; =&gt; $event-&gt;getData(&#39;username&#39;),
-                &#39;user_ip&#39; =&gt; $event-&gt;getData(&#39;user_ip&#39;),
-                &#39;user_agent&#39; =&gt; $event-&gt;getData(&#39;user_agent&#39;),
-                &#39;action&#39; =&gt; $event-&gt;getData(&#39;action&#39;)
-            ];
-
-            $entity = $this-&gt;UsersLogs-&gt;newEntity($data);
-            $this-&gt;UsersLogs-&gt;save($entity);
-
-            return true;
-        }
-    }</code></pre>
-
-    <p>&nbsp;</p>',
+    /**
+     * Get the article that owns the comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
+}
+```',
                 'comment_count' => 1,
                 'is_display' => 1,
                 'created_at' => Carbon::now(),

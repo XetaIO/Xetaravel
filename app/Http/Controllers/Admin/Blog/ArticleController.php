@@ -4,6 +4,7 @@ namespace Xetaravel\Http\Controllers\Admin\Blog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Http\Controllers\Admin\Controller;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Category;
@@ -53,7 +54,14 @@ class ArticleController extends Controller
     public function create(Request $request): RedirectResponse
     {
         ArticleValidator::create($request->all())->validate();
-        ArticleRepository::create($request->all());
+        $article = ArticleRepository::create($request->all());
+
+        // Handle the mentions.
+        $parser = new MentionParser($article);
+        $content = $parser->parse($article->content);
+
+        $article->content = $content;
+        $article->save();
 
         return redirect()
             ->route('admin.blog.article.index')
@@ -107,7 +115,14 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         ArticleValidator::update($request->all(), $id)->validate();
-        ArticleRepository::update($request->all(), $article);
+        $article = ArticleRepository::update($request->all(), $article);
+
+        // Handle the mentions.
+        $parser = new MentionParser($article);
+        $content = $parser->parse($article->content);
+
+        $article->content = $content;
+        $article->save();
 
         return redirect()
             ->route('admin.blog.article.index')

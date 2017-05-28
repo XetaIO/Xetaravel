@@ -1,19 +1,34 @@
 <?php
 namespace Xetaravel\Models;
 
-use Xetaravel\Models\Category;
-use Xetaravel\Models\User;
-use Xetaravel\Models\Scopes\DisplayScope;
 use Eloquence\Behaviours\CountCache\Countable;
 use Eloquence\Behaviours\Sluggable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
+use Xetaravel\Models\Category;
+use Xetaravel\Models\User;
+use Xetaravel\Models\Scopes\DisplayScope;
 
 class Article extends Model
 {
     use Countable,
-        Sluggable;
+        Sluggable,
+        HasMentionsTrait;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'user_id',
+        'category_id',
+        'is_display',
+        'content'
+    ];
 
     /**
      * The "booting" method of the model.

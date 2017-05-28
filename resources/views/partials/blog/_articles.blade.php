@@ -12,17 +12,16 @@
                 </li>
                 <li class="list-inline-item">
                     By
-                    <a href="{{ route('users.user.show', ['slug' => $article->user->slug, 'id' => $article->user->id]) }}">
+                    <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
                         {{ $article->user->username }}
                     </a>
                 </li>
             </ul>
         </div>
 
-        {!! Purifier::clean(
-            str_limit($article->content, 650),
-            'blog_article_empty'
-        ) !!}
+        <div>
+            {!! Markdown::convertToHtml(str_limit($article->content, 650)) !!}
+        </div>
 
         <div class="blog-footer">
             <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="btn btn-outline-primary">

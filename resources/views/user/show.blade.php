@@ -168,7 +168,7 @@
                 </div>
                 <div class="biography pt-1 pb-2">
                     @if (!empty($user->biography))
-                        {!! Purifier::clean($user->biography, 'user_biography') !!}
+                        {!! Markdown::convertToHtml($user->biography) !!}
                     @else
                         @if (Auth::user() && $user->id == Auth::user()->id)
                             You don't have set a biography.
@@ -204,13 +204,13 @@
                     @endif
                 </div>
 
-                @if (!empty($user->articles->toArray()))
+                @if ($user->articles->isNotEmpty())
                     <div class="hr-divider">
                         <h4 class="font-xeta text-xs-center">
                             @if (Auth::user() && $user->id == Auth::user()->id)
-                                Your lastest Articles in the Blog
+                                Your latest Articles in the Blog
                             @else
-                                His lastest Articles in the Blog
+                                His latest Articles in the Blog
                             @endif
                         </h4>
                     </div>
@@ -221,10 +221,7 @@
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
                                     {!! Html::link(route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]), $article->title, ['class' => 'title text-primary']) !!}
                                     <div>
-                                        {!! Purifier::clean(
-                                            str_limit($article->content, 275),
-                                            'blog_article_empty'
-                                        ) !!}
+                                        {!! Markdown::convertToHtml(str_limit($article->content, 275)) !!}
                                     </div>
                                     <time>
                                         Created at {{ $article->created_at->format('H:i:s Y-m-d') }}
@@ -235,13 +232,13 @@
                     </table>
                 @endif
 
-                @if (!empty($user->comments->toArray()))
+                @if ($user->comments->isNotEmpty())
                     <div class="hr-divider">
                         <h4 class="font-xeta text-xs-center">
                             @if (Auth::user() && $user->id == Auth::user()->id)
-                                Your lastest Comments in the Blog
+                                Your latest Comments in the Blog
                             @else
-                                His lastest Comments in the Blog
+                                His latest Comments in the Blog
                             @endif
                         </h4>
                     </div>
@@ -252,10 +249,7 @@
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
                                     {!! Html::link(route('blog.article.show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]), $comment->article->title, ['class' => 'title text-primary']) !!}
                                     <div>
-                                        {!! Purifier::clean(
-                                            str_limit($comment->content, 275),
-                                            'blog_article_empty'
-                                        ) !!}
+                                        {!! Markdown::convertToHtml(str_limit($comment->content, 275)) !!}
                                     </div>
                                     <time>
                                         Created at {{ $comment->created_at->format('H:i:s Y-m-d') }}

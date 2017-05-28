@@ -3,7 +3,6 @@ namespace Xetaravel\Models\Validators;
 
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Validator;
-use Mews\Purifier\Facades\Purifier;
 
 class CommentValidator
 {
@@ -20,10 +19,6 @@ class CommentValidator
             'content' => 'required|min:10',
             'article_id' => 'required'
         ];
-
-        if (isset($data['content'])) {
-            $data['content'] = Purifier::clean($data['content'], 'blog_comment_empty');
-        }
 
         return FacadeValidator::make($data, $rules);
     }
