@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\Repositories\AccountRepository;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Validators\AccountValidator;
@@ -28,7 +29,7 @@ class AccountController extends Controller
      */
     public function index(): View
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::id());
 
         $this->breadcrumbs->setCssClasses('breadcrumb');
 
@@ -45,11 +46,18 @@ class AccountController extends Controller
     public function update(Request $request): RedirectResponse
     {
         AccountValidator::update($request->all())->validate();
-        AccountRepository::update($request->all(), Auth::user()->id);
+        $account = AccountRepository::update($request->all(), Auth::id());
 
-        $user = User::find(Auth::user()->id);
+        $parser = new MentionParser($account, ['mention' => false]);
+        $signature = $parser->parse($account->signature);
+        $biography = $parser->parse($account->biography);
 
-        // Handle the avatar upload.
+        $account->signature = $signature;
+        $account->biography = $biography;
+        $account->save();
+
+        $user = User::find(Auth::id());
+
         if (!is_null($request->file('avatar'))) {
             $user->clearMediaCollection('avatar');
             $user->addMedia($request->file('avatar'))

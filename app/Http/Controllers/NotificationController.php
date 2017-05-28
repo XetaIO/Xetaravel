@@ -26,7 +26,7 @@ class NotificationController extends Controller
      */
     public function index(): View
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::id());
 
         $this->breadcrumbs->setCssClasses('breadcrumb');
 
@@ -58,11 +58,11 @@ class NotificationController extends Controller
         $notification = $user->notifications()
             ->where('id', $request->input('id'))
             ->first();
-        
+
         if ($notification) {
             $notification->delete();
         }
-        
+
         return response()->json([
             'error' => false
         ]);
@@ -81,11 +81,11 @@ class NotificationController extends Controller
         $notification = $user->notifications()
             ->where('id', $request->input('id'))
             ->first();
-        
+
         if ($notification) {
             $notification->markAsRead();
         }
-        
+
         return response()->json([
             'error' => false
         ]);
@@ -100,7 +100,7 @@ class NotificationController extends Controller
     {
         $user = Auth::user();
         $user->unreadNotifications->markAsRead();
-        
+
         return response()->json([
             'error' => false
         ]);

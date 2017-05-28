@@ -9,10 +9,13 @@
 Homestead.json
 Homestead.yaml
 composer.lock
+studio.json
 /node_modules
+/plugins
 /public/storage
 /public/coverage
-/public/vendor/ckeditor/release
+/public/vendor/editor.md/
+/public/editor-md/
 /public/css
 /public/fonts
 /public/images

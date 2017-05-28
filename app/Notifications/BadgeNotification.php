@@ -8,10 +8,17 @@ class BadgeNotification extends Notification
 {
     use Queueable;
 
+    /**
+     * The badge instance.
+     *
+     * @var \Xetaravel\Models\Badge
+     */
     public $badge;
 
     /**
      * Create a new notification instance.
+     *
+     * @param \Xetaravel\Models\Badge $badge
      */
     public function __construct($badge)
     {
@@ -21,7 +28,7 @@ class BadgeNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      *
      * @return array
      */

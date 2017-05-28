@@ -5,7 +5,6 @@ use Eloquence\Behaviours\Slug;
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
-use Mews\Purifier\Facades\Purifier;
 
 class ArticleValidator
 {
@@ -24,10 +23,6 @@ class ArticleValidator
             'slug' => 'unique:articles',
             'content' => 'required|min:10'
         ];
-
-        if (isset($data['content'])) {
-            $data['content'] = Purifier::clean($data['content'], 'blog_article');
-        }
         $data['slug'] = Slug::fromTitle($data['title']);
 
         return FacadeValidator::make($data, $rules);
@@ -51,10 +46,6 @@ class ArticleValidator
             ],
             'content' => 'required|min:10'
         ];
-
-        if (isset($data['content'])) {
-            $data['content'] = Purifier::clean($data['content'], 'blog_article');
-        }
         $data['slug'] = Slug::fromTitle($data['title']);
 
         return FacadeValidator::make($data, $rules);

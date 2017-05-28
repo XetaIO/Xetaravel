@@ -1,19 +1,31 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Edit ' . e($user->username)]) !!}
 
+@push('style')
+    {!! editor_css() !!}
+    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
-    {!! Html::script('/vendor/ckeditor/release/ckeditor.js')!!}
+    {!! editor_js() !!}
+    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
 
-    <script type="text/javascript">
+    @php
+        $signature = [
+            'id' => 'signatureEditor',
+            'height' => '200',
+        ];
+    @endphp
+    @include('editor/partials/_signature', $signature)
 
-        CKEDITOR.replace('biographyBox', {
-            customConfig: '../config/biography.js'
-        });
-        CKEDITOR.replace('signatureBox', {
-            customConfig: '../config/signature.js',
-            height: 100
-        });
-    </script>
+    @php
+        $biography = [
+            'id' => 'biographyEditor',
+            'height' => '250'
+        ];
+    @endphp
+    @include('editor/partials/_biography', [$biography, $signature])
+
 @endpush
 
 @section('content')
@@ -266,14 +278,14 @@
                             'account[biography]',
                             'Biography',
                             null,
-                            ['id' => 'biographyBox']
+                            ['editor' => 'biographyEditor', 'style' => 'display:none;']
                         ) !!}
 
                         {!! Form::bsTextarea(
                             'account[signature]',
                             'Signature',
                             null,
-                            ['id' => 'signatureBox']
+                            ['editor' => 'signatureEditor', 'style' => 'display:none;']
                         ) !!}
 
                         <div class="form-group">

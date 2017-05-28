@@ -31,7 +31,7 @@ class UserControllerTest extends TestCase
         $user = User::find(1);
         $this->be($user);
 
-        $response = $this->get('/users/profile/xeta.1');
+        $response = $this->get('/users/profile/@admin');
         $response->assertSuccessful();
     }
 
@@ -42,7 +42,7 @@ class UserControllerTest extends TestCase
      */
     public function testShowUserNotFound()
     {
-        $response = $this->get('/users/profile/not-found.5');
+        $response = $this->get('/users/profile/@admin1337');
         $response->assertSessionHas('danger');
         $response->assertStatus(302);
         $response->assertRedirect('/');

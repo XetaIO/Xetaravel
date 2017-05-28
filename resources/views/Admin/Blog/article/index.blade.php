@@ -36,7 +36,7 @@
                                     {{ link_to_route(
                                         'users.user.show',
                                         $article->user->username,
-                                        ['id' => $article->user->id, 'slug' => $article->user->slug]
+                                        ['slug' => $article->user->slug]
                                     ) }}
                                 </td>
                                 <td>

@@ -98,7 +98,7 @@
                                     {{ link_to_route(
                                         'users.user.show',
                                         $user->username,
-                                        ['id' => $user->id, 'slug' => $user->slug]
+                                        ['slug' => $user->slug]
                                     ) }}
                                 </td>
                                 <td>
