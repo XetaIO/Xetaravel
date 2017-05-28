@@ -25,7 +25,7 @@ class EmojiExtension extends Extension
     /**
      * Returns a list of inline parsers to add to the existing list.
      *
-     * @return \League\CommonMark\Inline\Parser\InlineParserInterface
+     * @return array
      */
     public function getInlineParsers()
     {

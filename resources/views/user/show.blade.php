@@ -77,7 +77,7 @@
                                 ) !!}
                             </li>
                         @endif
-                        @if (Auth::user() && $user->id == Auth::user()->id)
+                        @if (Auth::user() && $user->id == Auth::id())
                             <li class="list-inline-item" style="padding: 10px;">
                                 {!! Html::link(route('users.account.index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
                             </li>
@@ -159,7 +159,7 @@
             <section class="section">
                 <div class="hr-divider">
                     <h4 class="font-xeta text-xs-center">
-                        @if (Auth::user() && $user->id == Auth::user()->id)
+                        @if (Auth::user() && $user->id == Auth::id())
                             Your Biography
                         @else
                             His Biography
@@ -170,7 +170,7 @@
                     @if (!empty($user->biography))
                         {!! Markdown::convertToHtml($user->biography) !!}
                     @else
-                        @if (Auth::user() && $user->id == Auth::user()->id)
+                        @if (Auth::user() && $user->id == Auth::id())
                             You don't have set a biography.
                             {!! Html::link(route('users.account.index'), '<i class="fa fa-plus"></i> Add one now', ['class' => 'btn btn-outline-primary'], null, false) !!}
                         @else
@@ -181,7 +181,7 @@
 
                 <div class="hr-divider">
                     <h4 class="font-xeta text-xs-center">
-                        @if (Auth::user() && $user->id == Auth::user()->id)
+                        @if (Auth::user() && $user->id == Auth::id())
                             Your Badges
                         @else
                             His Badges
@@ -196,7 +196,7 @@
                         </div>
                         @endforeach
                     @else
-                        @if (Auth::user() && $user->id == Auth::user()->id)
+                        @if (Auth::user() && $user->id == Auth::id())
                             You don't have unlocked a badge yet.
                         @else
                             This user hasn't unlocked a badge yet.
@@ -207,7 +207,7 @@
                 @if ($user->articles->isNotEmpty())
                     <div class="hr-divider">
                         <h4 class="font-xeta text-xs-center">
-                            @if (Auth::user() && $user->id == Auth::user()->id)
+                            @if (Auth::user() && $user->id == Auth::id())
                                 Your latest Articles in the Blog
                             @else
                                 His latest Articles in the Blog
@@ -235,7 +235,7 @@
                 @if ($user->comments->isNotEmpty())
                     <div class="hr-divider">
                         <h4 class="font-xeta text-xs-center">
-                            @if (Auth::user() && $user->id == Auth::user()->id)
+                            @if (Auth::user() && $user->id == Auth::id())
                                 Your latest Comments in the Blog
                             @else
                                 His latest Comments in the Blog

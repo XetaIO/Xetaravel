@@ -26,7 +26,7 @@ class NotificationController extends Controller
      */
     public function index(): View
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::id());
 
         $this->breadcrumbs->setCssClasses('breadcrumb');
 

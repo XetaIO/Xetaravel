@@ -41,7 +41,6 @@ class CommentController extends Controller
         CommentValidator::create($request->all())->validate();
         $comment = CommentRepository::create($request->all(), Auth::user());
 
-        // Handle the mentions.
         $parser = new MentionParser($comment);
         $content = $parser->parse($comment->content);
 
@@ -49,7 +48,7 @@ class CommentController extends Controller
         $comment->save();
 
         // We must find the user else we won't see the updated comment_count.
-        event(new CommentEvent(User::find(Auth::user()->id)));
+        event(new CommentEvent(User::find(Auth::id())));
 
         return redirect()
             ->route('blog.comment.show', ['id' => $comment->getKey()])

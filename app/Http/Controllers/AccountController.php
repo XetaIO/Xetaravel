@@ -29,7 +29,7 @@ class AccountController extends Controller
      */
     public function index(): View
     {
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::id());
 
         $this->breadcrumbs->setCssClasses('breadcrumb');
 
@@ -46,7 +46,7 @@ class AccountController extends Controller
     public function update(Request $request): RedirectResponse
     {
         AccountValidator::update($request->all())->validate();
-        $account = AccountRepository::update($request->all(), Auth::user()->id);
+        $account = AccountRepository::update($request->all(), Auth::id());
 
         $parser = new MentionParser($account, ['mention' => false]);
         $signature = $parser->parse($account->signature);
@@ -56,9 +56,8 @@ class AccountController extends Controller
         $account->biography = $biography;
         $account->save();
 
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::id());
 
-        // Handle the avatar upload.
         if (!is_null($request->file('avatar'))) {
             $user->clearMediaCollection('avatar');
             $user->addMedia($request->file('avatar'))

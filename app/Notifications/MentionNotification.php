@@ -12,7 +12,7 @@ class MentionNotification extends Notification implements ShouldQueue
     use Queueable;
 
     /**
-     * The badge instance.
+     * The model instance.
      *
      * @var \Xetaravel\Models\Model
      */

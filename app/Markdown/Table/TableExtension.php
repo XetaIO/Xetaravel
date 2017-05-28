@@ -13,7 +13,7 @@ class TableExtension extends Extension
     /**
      * Returns a list of block parsers to add to the existing list.
      *
-     * @return \League\CommonMark\Block\Parser\AbstractBlockParser
+     * @return array
      */
     public function getBlockParsers()
     {
@@ -25,7 +25,7 @@ class TableExtension extends Extension
     /**
      * Returns a list of block renderers to add to the existing list.
      *
-     * @return \League\CommonMark\Block\Renderer\BlockRendererInterface
+     * @return array
      */
     public function getBlockRenderers()
     {

@@ -56,7 +56,6 @@ class ArticleController extends Controller
         ArticleValidator::create($request->all())->validate();
         $article = ArticleRepository::create($request->all());
 
-        // Handle the mentions.
         $parser = new MentionParser($article);
         $content = $parser->parse($article->content);
 
@@ -117,7 +116,6 @@ class ArticleController extends Controller
         ArticleValidator::update($request->all(), $id)->validate();
         $article = ArticleRepository::update($request->all(), $article);
 
-        // Handle the mentions.
         $parser = new MentionParser($article);
         $content = $parser->parse($article->content);
 

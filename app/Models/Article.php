@@ -55,7 +55,7 @@ class Article extends Model
 
         // Set the user id to the new article before saving it.
         static::creating(function ($model) {
-            $model->user_id = Auth::user()->id;
+            $model->user_id = Auth::id();
         });
     }
 

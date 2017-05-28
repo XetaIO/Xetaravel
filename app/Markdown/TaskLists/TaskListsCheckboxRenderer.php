@@ -15,6 +15,8 @@ class TaskListsCheckboxRenderer implements InlineRendererInterface
      * @param \League\CommonMark\Inline\Element\AbstractInline $inline
      * @param \League\CommonMark\ElementRendererInterface $htmlRenderer
      *
+     * @throws \InvalidArgumentException
+     *
      * @return \League\CommonMark\HtmlElement
      */
     public function render(AbstractInline $inline, ElementRendererInterface $htmlRenderer)
@@ -28,14 +30,15 @@ class TaskListsCheckboxRenderer implements InlineRendererInterface
             $attrs[$key] = $htmlRenderer->escape($value, true);
         }
 
-        $attrs['type']     = 'checkbox';
+        $attrs['type'] = 'checkbox';
         $attrs['disabled'] = '';
         $attrs['class'] = 'custom-control-input';
+
         if ($inline->isChecked()) {
             $attrs['checked'] = 'checked';
         }
-
         $text = $inline->getData('text', '');
+
         if (!empty($text)) {
             $text = $htmlRenderer->escape($text, true);
         }

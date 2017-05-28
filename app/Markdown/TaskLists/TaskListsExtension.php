@@ -37,7 +37,7 @@ class TaskListsExtension extends Extension
     /**
      * Returns a list of inline parsers to add to the existing list.
      *
-     * @return \League\CommonMark\Inline\Parser\InlineParserInterface
+     * @return array
      */
     public function getInlineParsers()
     {
@@ -47,7 +47,7 @@ class TaskListsExtension extends Extension
     /**
      * Returns a list of inline renderers to add to the existing list.
      *
-     * @return \League\CommonMark\Inline\Renderer\InlineRendererInterface
+     * @return array
      */
     public function getInlineRenderers()
     {
