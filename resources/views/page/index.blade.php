@@ -141,7 +141,7 @@
 
                     <div class="media-body">
                         <h5 class="media-heading">
-                            <a href="{{ route('blog.article.show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]) }}">
+                            <a href="{{ route('blog.comment.show', ['id' => $comment->id]) }}">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{ $comment->article->title }}
                             </a>
                         </h5>
