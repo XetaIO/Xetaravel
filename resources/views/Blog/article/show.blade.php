@@ -28,7 +28,7 @@
 @endpush
 
 @section('content')
-<div class="container pb-1">
+<div class="container pb-1 pt-4">
     <div class="blog-header mt-2">
         <div class="container">
             <h1 class="blog-title">
