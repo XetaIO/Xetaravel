@@ -63,13 +63,13 @@
             <div class="card card-outline-primary">
                 <div class="card-block" style="display: flex;">
                     <div class="card-left" style="padding-right: 15px;">
-                        <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
-                            <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
+                        <a href="{{ $article->user->profile_url }}">
+                            <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
                         </a>
                     </div>
                     <div class="card-body" style="flex: 1;">
                         <h4 class="card-title text-truncate">
-                            <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
+                            <a href="{{ $article->user->profile_url }}">
                                 {{ $article->user->username }}
                             </a>
                         </h4>
@@ -81,40 +81,17 @@
                 </div>
             </div>
 
-            @if (!empty($comments->toArray()['data']))
+            @if ($comments->isNotEmpty())
                 <h4 class="mt-3 font-xeta">
                     {{ $article->comment_count }} Comments
                 </h4>
-                @foreach ($comments as $comment)
-                    <div class="media" id="comment-{{ $comment->getKey() }}">
-                        <div class="media-left">
-                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug]) }}">
-                            <img class="media-object rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
-                        </a>
-                        </div>
 
-                        <div class="media-body">
-                            <h5 class="media-heading">
-                                <a href="{{ route('users.user.show', ['slug' => $comment->user->slug]) }}">
-                                    {{ $comment->user->username }}
-                                </a>
-                            </h5>
-
-                            <small class="text-muted">
-                                <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                                {{ $comment->created_at }}
-                            </small>
-
-                            <div>
-                                {!! Markdown::convertToHtml($comment->content) !!}
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                <comments :comments="{{ $comments->getCollection()->toJson() }}"></comments>
 
                 <div class="col-md 12 text-xs-center">
                     {{ $comments->render() }}
                 </div>
+
             @elseif (Auth::user())
                 <hr />
                 <div class="alert alert-primary" role="alert">

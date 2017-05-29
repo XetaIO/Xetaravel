@@ -215,11 +215,11 @@
                         </h4>
                     </div>
                     <table class="table table-profile">
-                        @foreach ($user->articles as $article)
+                        @foreach ($articles as $article)
                             <tr>
                                 <td>
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
-                                    {!! Html::link(route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]), $article->title, ['class' => 'title text-primary']) !!}
+                                    {!! Html::link($article->article_url, $article->title, ['class' => 'title text-primary']) !!}
                                     <div>
                                         {!! Markdown::convertToHtml(str_limit($article->content, 275)) !!}
                                     </div>
@@ -243,11 +243,11 @@
                         </h4>
                     </div>
                     <table class="table table-profile">
-                        @foreach ($user->comments as $comment)
+                        @foreach ($comments as $comment)
                             <tr>
                                 <td>
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
-                                    {!! Html::link(route('blog.article.show', ['slug' => $comment->article->slug, 'id' => $comment->article->id]), $comment->article->title, ['class' => 'title text-primary']) !!}
+                                    {!! Html::link($comment->comment_url, $comment->article->title, ['class' => 'title text-primary']) !!}
                                     <div>
                                         {!! Markdown::convertToHtml(str_limit($comment->content, 275)) !!}
                                     </div>

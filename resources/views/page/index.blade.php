@@ -81,7 +81,7 @@
 
                     <div class="card-block">
                         <h4 class="card-title text-truncate">
-                            <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}">
+                            <a href="{{ $article->article_url }}">
                                 {{ $article->title }}
                             </a>
                         </h4>
@@ -90,7 +90,7 @@
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item">
                                     <i class="fa fa-tag" aria-hidden="true" data-toggle="tooltip" title="Category"></i>
-                                    <a href="{{ route('blog.category.show', ['slug' => $article->category->slug, 'id' => $article->category->id]) }}">
+                                    <a href="{{ $article->category->category_url }}">
                                         {{ $article->category->title }}
                                     </a>
                                 </li>
@@ -111,7 +111,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="card-link btn btn-outline-primary">Read More</a>
+                        <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">Read More</a>
                     </div>
                 </div>
             </div>
@@ -128,20 +128,20 @@
     <hr/>
     <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Comments</h1>
 
-    <div class="row mb-3">
+    <div class="row pb-3">
         @forelse ($comments as $comment)
             <div class="col-md-6">
                 <div class="media">
 
                     <div class="media-left">
-                        <a href="{{ route('users.user.show', ['slug' => $comment->user->slug]) }}">
-                            <img class="media-object" src="{{ asset($comment->user->avatar_small) }}" alt="Avatar" height="64px", width="64px">
+                        <a href="{{ $comment->user->profile_url }}">
+                            <img class="media-object" src="{{ asset($comment->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
                         </a>
                     </div>
 
                     <div class="media-body">
                         <h5 class="media-heading">
-                            <a href="{{ route('blog.comment.show', ['id' => $comment->id]) }}">
+                            <a href="{{ $comment->comment_url }}">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{ $comment->article->title }}
                             </a>
                         </h5>

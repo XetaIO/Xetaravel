@@ -48,18 +48,10 @@ class ArticleController extends Controller
         }
 
         $comments = $article->comments()->paginate(config('xetaravel.pagination.blog.comment_per_page'));
+        $comments->load('user');
 
-        $this->breadcrumbs->addCrumb(
-            "Article : " . e($article->title),
-            route(
-                'blog.article.show',
-                ['slug' => $article->category->slug, 'id' => $article->category->id]
-            )
-        );
+        $breadcrumbs = $this->breadcrumbs->addCrumb("Article : " . e($article->title), $article->article_url);
 
-        return view(
-            'Blog::article.show',
-            ['article' => $article, 'comments' => $comments, 'breadcrumbs' => $this->breadcrumbs]
-        );
+        return view('Blog::article.show', compact('article', 'comments', 'breadcrumbs'));
     }
 }

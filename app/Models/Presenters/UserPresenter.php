@@ -1,8 +1,17 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
+use Xetaravel\Utility\UserUtility;
+
 trait UserPresenter
 {
+    /**
+     * The default avatar used when there is no avatar for the user.
+     *
+     * @var string
+     */
+    protected $defaultAvatar = '/images/avatar.png';
+
     /**
      * Get the account first name.
      *
@@ -71,6 +80,76 @@ trait UserPresenter
     public function getSignatureAttribute(): string
     {
         return $this->parse($this->account, 'signature');
+    }
+
+    /**
+     * Get the small avatar.
+     *
+     * @return string
+     */
+    public function getAvatarSmallAttribute(): string
+    {
+        return $this->parseMedia('thumbnail.small');
+    }
+
+    /**
+     * Get the medium avatar.
+     *
+     * @return string
+     */
+    public function getAvatarMediumAttribute(): string
+    {
+        return $this->parseMedia('thumbnail.medium');
+    }
+
+    /**
+     * Get the big avatar.
+     *
+     * @return string
+     */
+    public function getAvatarBigAttribute(): string
+    {
+        return $this->parseMedia('thumbnail.big');
+    }
+
+    /**
+     * Get the profile background.
+     *
+     * @return string
+     */
+    public function getProfileBackgroundAttribute(): string
+    {
+        return UserUtility::getProfileBackground();
+    }
+
+    /**
+     * Get the profile url.
+     *
+     * @return string
+     */
+    public function getProfileUrlAttribute(): string
+    {
+        if (!isset($this->slug)) {
+            return '';
+        }
+
+        return route('users.user.show', ['slug' => $this->slug]);
+    }
+
+    /**
+     * Parse a mdedia and return it if isset or return the default avatar.
+     *
+     * @param string $type The type of the media to get.
+     *
+     * @return string
+     */
+    protected function parseMedia(string $type): string
+    {
+        if (isset($this->getMedia('avatar')[0])) {
+            return $this->getMedia('avatar')[0]->getUrl($type);
+        }
+
+        return $this->defaultAvatar;
     }
 
     /**

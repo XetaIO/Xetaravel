@@ -21,13 +21,10 @@ mix.webpackConfig({
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
-    .sass('resources/assets/sass/admin/xetaravel.admin.scss', 'public/css/xetaravel.admin.min.css')
-    .sass('resources/assets/sass/bootstrap/bootstrap.scss', 'public/css/bootstrap.min.css')
-    .sass('resources/assets/sass/jasny-bootstrap/jasny-bootstrap.scss', 'public/css/bootstrap.plugins.min.css')
-    .sass('resources/assets/sass/font-awesome/font-awesome.scss', 'public/css/font-awesome.min.css')
-    .sass('resources/assets/sass/editor-md/editormd.scss', 'public/css/editor-md.custom.min.css')
-    .scripts([
+require('./webpack.sass.mix.js');
+require('./webpack.js.mix.js');
+
+mix.scripts([
         'resources/assets/js/libs/jquery.min.js',
         'resources/assets/js/libs/jquery.easing.min.js',
         'resources/assets/js/libs/tether.min.js',
@@ -45,14 +42,6 @@ mix.sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.min.css')
     .scripts([
         'resources/assets/js/highlight/highlight.js',
     ], 'public/js/highlight.min.js')
-    .js([
-        'resources/assets/js/xetaravel.admin.js',
-        'resources/assets/js/console.js'
-    ], 'public/js/xetaravel.admin.min.js')
-    .js([
-        'resources/assets/js/xetaravel.js',
-        'resources/assets/js/console.js'
-    ], 'public/js/xetaravel.min.js')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/fonts', 'public/fonts')

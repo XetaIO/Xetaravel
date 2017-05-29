@@ -15,7 +15,6 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
-use Xetaravel\Models\Entities\UserEntity;
 use Xetaravel\Models\Presenters\UserPresenter;
 use Xetaravel\Notifications\ResetPasswordNotification;
 
@@ -33,7 +32,6 @@ class User extends Model implements
         Sluggable,
         HasRoleAndPermission,
         HasMediaTrait,
-        UserEntity,
         UserPresenter;
 
     /**
@@ -68,6 +66,7 @@ class User extends Model implements
      */
     protected $appends = [
         'profile_background',
+        'profile_url',
 
         // Media Model
         'avatar_small',

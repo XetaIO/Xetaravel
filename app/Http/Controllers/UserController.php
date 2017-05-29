@@ -56,17 +56,23 @@ class UserController extends Controller
                 ->route('page.index')
                 ->with('danger', 'This user doesn\'t exist or has been deleted !');
         }
+        $articles = $user->articles()
+            ->latest()
+            ->take(config('xetaravel.pagination.user.articles_profile_page'))
+            ->get();
 
-        $this->breadcrumbs->addCrumb(
+        $comments = $user->comments()
+            ->latest()
+            ->take(config('xetaravel.pagination.user.comments_profile_page'))
+            ->get();
+
+        $breadcrumbs = $this->breadcrumbs->addCrumb(
             e($user->username),
-            route(
-                'users.user.show',
-                ['slug' => $user->slug]
-            )
+            $user->profile_url
         );
         $this->breadcrumbs->setCssClasses('breadcrumb');
 
-        return view('user.show', ['user' => $user, 'breadcrumbs' => $this->breadcrumbs]);
+        return view('user.show', compact('user', 'articles', 'comments', 'breadcrumbs'));
     }
 
     /**

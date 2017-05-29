@@ -39,7 +39,7 @@
         "xetaio/xetaravel-local": "^0.0.1",
         "xetaio/xetaravel-iptraceable": "^0.0.1",
         "xetaio/xetaravel-editor-md": "^0.0.1",
-        "xetaio/xetaravel-mentions": "^0.0.1",
+        "xetaio/xetaravel-mentions": "~0.0.1",
         "fideloper/proxy": "~3.3",
         "laravelcollective/html": "^5.4.0",
         "greggilbert/recaptcha": "~2.0",

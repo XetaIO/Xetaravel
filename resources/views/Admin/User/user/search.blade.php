@@ -38,11 +38,7 @@
                                     {{ $user->id }}
                                 </th>
                                 <td class="{{ $type == 'username' ? 'table-primary' : '' }}">
-                                    {{ link_to_route(
-                                        'users.user.show',
-                                        $user->username,
-                                        ['slug' => $user->slug]
-                                    ) }}
+                                    {{ link_to($user->profile_url, $user->username) }}
                                 </td>
                                 <td class="{{ $type == 'email' ? 'table-primary' : '' }}">
                                     {{ $user->email }}

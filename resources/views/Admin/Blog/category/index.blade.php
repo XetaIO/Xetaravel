@@ -31,11 +31,7 @@
                                     {{ $category->id }}
                                 </th>
                                 <td>
-                                    {{ link_to_route(
-                                        'blog.category.show',
-                                        str_limit($category->title, 60),
-                                        ['id' => $category->id, 'slug' => $category->slug]
-                                    ) }}
+                                    {{ link_to($category->category_url, str_limit($category->title, 60)) }}
                                 </td>
                                 <td>
                                     {{ str_limit($category->description, 60) }}

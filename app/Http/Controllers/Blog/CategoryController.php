@@ -34,13 +34,7 @@ class CategoryController extends Controller
 
         $articles = $category->articles()->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
-        $this->breadcrumbs->addCrumb(
-            "Category : " . e($category->title),
-            route(
-                'blog.article.show',
-                ['slug' => $category->slug, 'id' => $category->id]
-            )
-        );
+        $this->breadcrumbs->addCrumb("Category : " . e($category->title), $category->category_url);
 
         return view(
             'Blog::category.show',
