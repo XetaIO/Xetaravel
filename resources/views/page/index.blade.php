@@ -128,7 +128,7 @@
     <hr/>
     <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Comments</h1>
 
-    <div class="row mb-3">
+    <div class="row pb-3">
         @forelse ($comments as $comment)
             <div class="col-md-6">
                 <div class="media">
