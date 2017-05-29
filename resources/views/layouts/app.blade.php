@@ -26,19 +26,20 @@
         @stack('scriptsTop')
     </head>
     <body>
-        <div id="app">
-            <!-- Header -->
-            @include('elements.header')
+        <!-- Header -->
+        @include('elements.header')
 
-            <!-- Flash Messages -->
-            @include('elements.flash')
+        <!-- Flash Messages -->
+        @include('elements.flash')
 
+        <div id="app-vue">
             <!-- Content -->
             @yield('content')
-
-            <!-- Footer -->
-            @include('elements.footer')
         </div>
+
+
+        <!-- Footer -->
+        @include('elements.footer')
 
         <!-- Scripts -->
         <script src="{{ mix('js/lib.min.js') }}"></script>

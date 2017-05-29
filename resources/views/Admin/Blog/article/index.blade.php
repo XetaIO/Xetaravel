@@ -33,25 +33,13 @@
                                     {{ $article->id }}
                                 </th>
                                 <td>
-                                    {{ link_to_route(
-                                        'users.user.show',
-                                        $article->user->username,
-                                        ['slug' => $article->user->slug]
-                                    ) }}
+                                    {{ link_to($article->user->profile_url, $article->user->username) }}
                                 </td>
                                 <td>
-                                    {{ link_to_route(
-                                        'blog.article.show',
-                                        str_limit($article->title, 60),
-                                        ['id' => $article->id, 'slug' => $article->slug]
-                                    ) }}
+                                    {{ link_to($article->article_url, str_limit($article->title, 60)) }}
                                 </td>
                                 <td>
-                                    {{ link_to_route(
-                                        'blog.category.show',
-                                        $article->category->title,
-                                        ['id' => $article->category->id, 'slug' => $article->category->slug]
-                                    ) }}
+                                    {{ link_to($article->category->category_url, $article->category->title) }}
                                 </td>
                                 <td>
                                     {{ $article->comment_count }}

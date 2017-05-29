@@ -53,12 +53,12 @@ class MentionNotification extends Notification implements ShouldQueue
 
         if ($this->model instanceof Comment) {
             $message = '<strong>@%s</strong> has mentionned your name in his comment !';
-            $link = route('blog.comment.show', ['id' => $this->model->getKey()]);
+            $link = $this->model->comment_url;
         }
 
         if ($this->model instanceof Article) {
             $message = '<strong>@%s</strong> has mentionned your name in his article !';
-            $link = route('blog.article.show', ['slug' => $this->model->slug, 'id' => $this->model->getKey()]);
+            $link = $this->model->article_url;
         }
         $username = $this->model->user->username;
 

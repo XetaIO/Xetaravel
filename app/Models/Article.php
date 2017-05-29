@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Category;
-use Xetaravel\Models\User;
+use Xetaravel\Models\Presenters\ArticlePresenter;
 use Xetaravel\Models\Scopes\DisplayScope;
+use Xetaravel\Models\User;
 
 class Article extends Model
 {
     use Countable,
         Sluggable,
+        ArticlePresenter,
         HasMentionsTrait;
 
     /**
@@ -28,6 +30,15 @@ class Article extends Model
         'category_id',
         'is_display',
         'content'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'article_url'
     ];
 
     /**

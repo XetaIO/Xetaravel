@@ -31,6 +31,10 @@ return [
         ],
         'notification' => [
             'notification_per_page' => 10
+        ],
+        'user' => [
+            'comments_profile_page' => 20,
+            'articles_profile_page' => 15
         ]
     ],
 

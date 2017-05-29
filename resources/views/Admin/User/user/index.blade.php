@@ -95,11 +95,7 @@
                                     {{ $user->id }}
                                 </th>
                                 <td>
-                                    {{ link_to_route(
-                                        'users.user.show',
-                                        $user->username,
-                                        ['slug' => $user->slug]
-                                    ) }}
+                                    {{ link_to($user->profile_url, $user->username) }}
                                 </td>
                                 <td>
                                     {{ $user->email }}

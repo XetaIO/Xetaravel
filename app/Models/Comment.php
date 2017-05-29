@@ -32,7 +32,8 @@ class Comment extends Model
      * @var array
      */
     protected $appends = [
-        'content_markdown'
+        'content_markdown',
+        'comment_url'
     ];
 
     /**

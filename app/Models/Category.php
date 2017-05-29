@@ -2,10 +2,21 @@
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\Sluggable;
+use Xetaravel\Models\Presenters\CategoryPresenter;
 
 class Category extends Model
 {
-    use Sluggable;
+    use Sluggable,
+        CategoryPresenter;
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'category_url'
+    ];
 
     /**
      * The "booting" method of the model.

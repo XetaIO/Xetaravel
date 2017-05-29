@@ -63,13 +63,13 @@
             <div class="card card-outline-primary">
                 <div class="card-block" style="display: flex;">
                     <div class="card-left" style="padding-right: 15px;">
-                        <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
+                        <a href="{{ $article->user->profile_url }}">
                             <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
                         </a>
                     </div>
                     <div class="card-body" style="flex: 1;">
                         <h4 class="card-title text-truncate">
-                            <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
+                            <a href="{{ $article->user->profile_url }}">
                                 {{ $article->user->username }}
                             </a>
                         </h4>

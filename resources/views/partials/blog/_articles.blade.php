@@ -1,7 +1,7 @@
 @forelse ($articles as $article)
     <div class="blog-post">
         <h1 class="blog-title">
-            <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}">
+            <a href="{{ $article->article_url }}">
                 {{ str_limit($article->title, 150) }}
             </a>
         </h1>
@@ -12,7 +12,7 @@
                 </li>
                 <li class="list-inline-item">
                     By
-                    <a href="{{ route('users.user.show', ['slug' => $article->user->slug]) }}">
+                    <a href="{{ $article->user->profile_url }}">
                         {{ $article->user->username }}
                     </a>
                 </li>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="blog-footer">
-            <a href="{{ route('blog.article.show', ['slug' => $article->slug, 'id' => $article->id]) }}" class="btn btn-outline-primary">
+            <a href="{{ $article->article_url }}" class="btn btn-outline-primary">
                 Read More
             </a>
         </div>
