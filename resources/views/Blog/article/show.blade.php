@@ -50,7 +50,16 @@
                 <div class="blog-post-meta">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                            <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
+                                {{ $article->created_at }}
+                            </time>
+                        </li>
+                        <li class="list-inline-item">
+                            <i class="fa fa-tag" aria-hidden="true" data-toggle="tooltip" title="Category"></i>
+                            <a href="{{ $article->category->category_url }}">
+                                {{ $article->category->title }}
+                            </a>
                         </li>
                     </ul>
                 </div>

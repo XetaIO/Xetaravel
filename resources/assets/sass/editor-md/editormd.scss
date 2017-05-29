@@ -2,12 +2,19 @@
 @import "../bootstrap/variables";
 
 /**
+ * CodeMirror `mdn-like` theme.
+ */
+.cm-s-mdn-like .CodeMirror-gutters {
+  border-left: 6px solid rgba(244,100,95,0.65) !important;
+}
+
+/**
  * Editor Mask
  *
  */
 .editormd-mask {
-    background-color: #000 !important;
-    opacity: .2 !important;
+  background-color: #000 !important;
+  opacity: .2 !important;
 }
 
 /**

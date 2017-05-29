@@ -8,13 +8,20 @@
         <div class="blog-post-meta">
             <ul class="list-inline mb-0">
                 <li class="list-inline-item">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
+                        {{ $article->created_at }}
+                    </time>
                 </li>
                 <li class="list-inline-item">
-                    By
+                    <i class="fa fa-user"></i>
                     <a href="{{ $article->user->profile_url }}">
                         {{ $article->user->username }}
                     </a>
+                </li>
+                <li class="list-inline-item">
+                    <i class="fa fa-comments"></i>
+                    {{ $article->comment_count }}
                 </li>
             </ul>
         </div>

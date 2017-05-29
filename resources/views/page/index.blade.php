@@ -76,22 +76,28 @@
     <div class="row">
 
         @forelse ($articles as $article)
-            <div class="col-md-4">
-                <div class="card card-outline-primary text-xs-center">
+            <div class="col-md-4 mb-1">
+                <div class="card card-outline-primary text-xs-center" style="height: 100%; margin-bottom: 60px;">
 
                     <div class="card-block">
-                        <h4 class="card-title text-truncate">
+                        <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{ $article->title }}">
                             <a href="{{ $article->article_url }}">
                                 {{ $article->title }}
                             </a>
                         </h4>
 
                         <small class="card-subtitle text-muted">
-                            <ul class="list-inline mb-0">
+                            <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <i class="fa fa-tag" aria-hidden="true" data-toggle="tooltip" title="Category"></i>
                                     <a href="{{ $article->category->category_url }}">
                                         {{ $article->category->title }}
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="fa fa-user" aria-hidden="true" data-toggle="tooltip" title="User"></i>
+                                    <a href="{{ $article->user->proffile_url }}">
+                                        {{ $article->user->username }}
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
@@ -100,7 +106,9 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                                    {{ $article->created_at }}
+                                    <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
+                                        {{ $article->created_at->format('Y-m-d') }}
+                                    </time>
                                 </li>
                             </ul>
                         </small>
@@ -110,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="card-footer">
+                    <div class="card-footer" style="position: absolute; bottom: 0; width: 100%;">
                         <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">Read More</a>
                     </div>
                 </div>
@@ -147,7 +155,10 @@
                         </h5>
 
                         <small class="text-muted">
-                            <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i> {{ $comment->created_at }}
+                            <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
+                            <time datetime="{{ $comment->created_at->format('c') }}" title="{{ $comment->created_at->format('c') }}" data-toggle="tooltip">
+                                {{ $comment->created_at }}
+                            </time>
                         </small>
 
                         <div>
