@@ -1,4 +1,5 @@
-export default class Sidebar {
+export default class Sidebar
+{
 
     /**
      * The sidebar element.
@@ -24,7 +25,8 @@ export default class Sidebar {
     /**
      * The constructor.
      */
-    constructor() {
+    constructor()
+    {
         this.sidebar = document.getElementById("sidebar");
         this.trigger = document.getElementById('sidebar-trigger');
         this.overlay = document.createElement('div');
@@ -39,7 +41,8 @@ export default class Sidebar {
      *
      * @return {void}
      */
-    protected closeSidebar(): void {
+    protected closeSidebar(): void
+    {
         this.sidebar.classList.remove('sidebar-opened');
         this.sidebar.classList.add('sidebar-closed');
         this.overlay.parentNode.removeChild(this.overlay);
@@ -55,7 +58,8 @@ export default class Sidebar {
      *
      * @return {void}
      */
-    private triggerListener = (event: Event):void => {
+    private triggerListener = (event: Event): void =>
+    {
         event.preventDefault();
 
         if (this.sidebar.classList.contains('sidebar-opened')) {
@@ -80,7 +84,8 @@ export default class Sidebar {
      *
      * @return {void}
      */
-    private overlayListener = (event: Event): void => {
+    private overlayListener = (event: Event): void =>
+    {
         this.closeSidebar();
         this.overlay.removeEventListener('click', this.overlayListener);
     }

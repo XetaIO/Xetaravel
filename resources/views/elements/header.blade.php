@@ -1,5 +1,5 @@
 <header class="pos-f-t">
-  <nav class="navbar navbar-light bg-white">
+  <nav id="navbar" class="navbar navbar-light bg-white">
     <div class="container">
       <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-expanded="false" aria-controls="exCollapsingNavbar2" aria-label="Toggle navigation"></button>
       <a class="navbar-brand font-xeta font-weight-bold" href="{{ route('page.index') }}">

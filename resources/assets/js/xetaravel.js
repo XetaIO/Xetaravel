@@ -60,22 +60,22 @@ $(document).ready(function () {
      * User Profile
      */
     var minWidth = 992,
-        sidebar = $('.sidebar-profile');
+        sidebar = document.getElementById('sidebar-profile');
 
-    if (sidebar.length && width >= minWidth) {
-        var sidebarTop = sidebar.offset().top,
-            bottom = $(".footer").outerHeight(!0);
+    if (sidebar !== null && width >= minWidth) {
+        var sidebarTop = sidebar.getBoundingClientRect().top + document.body.scrollTop - 1;
 
-        $(document).scroll(function() {
-            var navbarHeight = $(".navbar").height() + 10,
-                scrollStart = $(this).scrollTop();
+        document.addEventListener('scroll', function () {
+            var navbarHeight = document.getElementById('navbar').offsetHeight,
+                scrollStart = document.body.scrollTop;
+
             var top = sidebarTop - navbarHeight;
 
-            if(scrollStart > top && !sidebar.hasClass('fixed')) {
-                sidebar.addClass('fixed');
+            if (scrollStart > top && !sidebar.classList.contains('fixed')) {
+                sidebar.classList.add('fixed');
             }
-            if (scrollStart < top && sidebar.hasClass('fixed')) {
-                sidebar.removeClass('fixed');
+            if (scrollStart < top && sidebar.classList.contains('fixed')) {
+                sidebar.classList.remove('fixed');
             }
         });
     }
