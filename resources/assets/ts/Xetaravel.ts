@@ -1,4 +1,5 @@
 import Sidebar from './Sidebar';
+import SidebarProfile from './SidebarProfile';
 import Console from './Console/Console';
 
 
@@ -6,7 +7,10 @@ class Xetaravel
 {
     constructor()
     {
-        var sidebar = new Sidebar();
+        let sidebar: Sidebar = new Sidebar();
+        let sidebarProfile: SidebarProfile = new SidebarProfile(
+            document.getElementById('sidebar-profile')
+        );
 
         this.renderConsoleMessages();
     }

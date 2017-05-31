@@ -55,30 +55,6 @@ $(document).ready(function () {
             }
         });
     }
-
-    /**
-     * User Profile
-     */
-    var minWidth = 992,
-        sidebar = document.getElementById('sidebar-profile');
-
-    if (sidebar !== null && width >= minWidth) {
-        var sidebarTop = sidebar.getBoundingClientRect().top + document.body.scrollTop - 1;
-
-        document.addEventListener('scroll', function () {
-            var navbarHeight = document.getElementById('navbar').offsetHeight,
-                scrollStart = document.body.scrollTop;
-
-            var top = sidebarTop - navbarHeight;
-
-            if (scrollStart > top && !sidebar.classList.contains('fixed')) {
-                sidebar.classList.add('fixed');
-            }
-            if (scrollStart < top && sidebar.classList.contains('fixed')) {
-                sidebar.classList.remove('fixed');
-            }
-        });
-    }
 });
 
 /*app = {

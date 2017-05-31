@@ -1,4 +1,5 @@
-export interface ConsoleInterface {
+export interface ConsoleInterface
+{
     title: string;
     message: string;
     width: string;
