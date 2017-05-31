@@ -14,7 +14,7 @@ class NotificationControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         $user = User::find(1);
         $this->be($user);
     }
@@ -69,7 +69,7 @@ class NotificationControllerTest extends TestCase
      */
     public function testDelete()
     {
-        $response = $this->json('DELETE', '/users/notification/delete', ['id' => '123456789']);
+        $response = $this->json('DELETE', '/users/notification/delete/123456789');
 
         $response
             ->assertStatus(200)

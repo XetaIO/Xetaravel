@@ -19,6 +19,9 @@
     "cross-env": "^3.2.3",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
-    "vue": "^2.3.3"
+    "vue": "^2.3.3",
+    "sprintf-js": "^1.1.1",
+    "ts-loader": "^2.0.2",
+    "typescript": "^2.2.1"
   }
 }

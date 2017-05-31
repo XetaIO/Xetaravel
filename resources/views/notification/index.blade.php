@@ -13,53 +13,12 @@
         </div>
         <div class="col-md-9">
             <section>
+
                 @if ($notifications->isNotEmpty())
-                    @if ($hasUnreadNotifications)
-                        <button class="btn btn-sm btn-outline-primary mark-all-notifications-as-read text-xs-center" data-url="{{ route('users.notification.markallasread') }}">
-                            <i class="fa fa-check" aria-hidden="true"></i> Mark all notifications as read
-                        </button>
-                    @endif
-
-                    <table class="table table-hover table-notifications">
-                        @foreach ($notifications as $notification)
-                            <tr class="alert notification-item" id="notification-{{ $notification->id }}">
-                                <td style="position: relative;">
-                                     <!-- Image -->
-                                    @if (isset($notification->data['image']))
-                                        <img src="{{ asset($notification->data['image']) }}" alt="Image" width="60">
-                                    @else
-                                        @if ($notification->data['type'] == 'mention')
-                                            <i class="fa fa-at fa-4x text-primary" style="vertical-align: middle;" aria-hidden="true"></i>
-                                        @else
-                                            <img src="{{ asset('images/logo.svg') }}" alt="Image" width="60">
-                                        @endif
-                                    @endif
-
-                                    <!-- Message -->
-                                    <span class="message">
-                                        @if (isset($notification->data['message_key']))
-                                            {!! sprintf($notification->data['message'], $notification->data['message_key']) !!}
-                                        @else
-                                            {!! $notification->data['message'] !!}
-                                        @endif
-                                    </span>
-
-                                    <!-- Read -->
-                                    @if ($notification->unread())
-                                        <strong class="new">
-                                            <span></span>
-                                            New
-                                        </strong>
-                                    @endif
-
-                                    <!-- Delete -->
-                                    <button type="button" class="close text-danger delete-notification" data-toggle="tooltip" title="Delete this notification" data-dismiss="alert" aria-label="Close" data-id="{{ $notification->id }}" data-url="{{ route('users.notification.delete') }}">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
+                    <users-notifications
+                        :notifications="{{ json_encode($notifications->items()) }}"
+                        :route-delete-notification="{{ var_export(route('users.notification.delete', ['id' => ''])) }}">
+                    </users-notifications>
 
                     <div class="col-md 12 text-xs-center">
                         {{ $notifications->render() }}
@@ -67,6 +26,7 @@
                 @else
                     You don't have any notifications.
                 @endif
+
             </section>
         </div>
     </div>

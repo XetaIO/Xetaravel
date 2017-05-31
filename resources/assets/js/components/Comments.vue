@@ -32,7 +32,7 @@
         props: ['comments'],
 
         methods: {
-    		getDate: (now) => {
+    		getDate: function (now) {
                 let date = new Date(now);
                 date.setHours(date.getHours() + 2);
 

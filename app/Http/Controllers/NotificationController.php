@@ -46,17 +46,18 @@ class NotificationController extends Controller
     }
 
     /**
-     * Delete a notification by its id.
+     * Delete a notification by its ID.
      *
      * @param \Illuminate\Http\Request $request The current request.
+     * @param string $slug The notification ID.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request): JsonResponse
+    public function delete(Request $request, string $slug): JsonResponse
     {
         $user = Auth::user();
         $notification = $user->notifications()
-            ->where('id', $request->input('id'))
+            ->where('id', $slug)
             ->first();
 
         if ($notification) {

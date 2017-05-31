@@ -1,5 +1,5 @@
 <header class="pos-f-t">
-  <nav class="navbar navbar-light bg-white">
+  <nav id="navbar" class="navbar navbar-light bg-white">
     <div class="container">
       <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-expanded="false" aria-controls="exCollapsingNavbar2" aria-label="Toggle navigation"></button>
       <a class="navbar-brand font-xeta font-weight-bold" href="{{ route('page.index') }}">
@@ -29,7 +29,7 @@
             </div>
         @else
             <div class="navbar-text btn-group float-sm-right font-weight-bold">
-                <a href="#" class="nav-link sidebar-trigger">
+                <a href="#" id="sidebar-trigger" class="nav-link">
                     {{ Auth::user()->username }}
                 </a>
             </div>

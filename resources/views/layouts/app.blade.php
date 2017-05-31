@@ -26,13 +26,14 @@
         @stack('scriptsTop')
     </head>
     <body>
-        <!-- Header -->
-        @include('elements.header')
-
-        <!-- Flash Messages -->
-        @include('elements.flash')
 
         <div id="app-vue">
+            <!-- Header -->
+            @include('elements.header')
+
+            <!-- Flash Messages -->
+            @include('elements.flash')
+
             <!-- Content -->
             @yield('content')
         </div>

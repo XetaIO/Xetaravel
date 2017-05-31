@@ -33,7 +33,6 @@ mix.scripts([
         'resources/assets/js/libs/particles.min.js',
         'resources/assets/js/libs/prism.min.js',
         'resources/assets/js/libs/scrollup.min.js',
-        'resources/assets/js/libs/sidebar.min.js',
         'resources/assets/js/libs/raphael.min.js',
         'resources/assets/js/libs/morris.min.js',
         'resources/assets/js/libs/jquery-jvectormap.min.js',

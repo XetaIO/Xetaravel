@@ -97,7 +97,7 @@
     </div>
     <div class="row profile">
         <div class="col-lg-3">
-            <section class="sidebar-profile section">
+            <section id="sidebar-profile" class="sidebar-profile section">
                 <div class="avatar">
                     {!! Html::image($user->avatar_small, 'Avatar', ['width' => '120', 'height' => '120']) !!}
                 </div>
