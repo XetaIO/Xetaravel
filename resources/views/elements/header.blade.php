@@ -29,7 +29,7 @@
             </div>
         @else
             <div class="navbar-text btn-group float-sm-right font-weight-bold">
-                <a href="#" class="nav-link sidebar-trigger">
+                <a href="#" id="sidebar-trigger" class="nav-link">
                     {{ Auth::user()->username }}
                 </a>
             </div>

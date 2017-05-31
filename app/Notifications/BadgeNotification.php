@@ -48,7 +48,7 @@ class BadgeNotification extends Notification
     {
         return [
             'message' => 'You have unlock the badge <strong>%s</strong> !',
-            'message_key' => $this->badge->name,
+            'message_key' => [$this->badge->name],
             'image' => $this->badge->image,
             'type' => 'badge'
         ];

@@ -63,7 +63,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
             ->name('users.notification.markasread');
         Route::post('notification/markAllAsRead', 'NotificationController@markAllAsRead')
             ->name('users.notification.markallasread');
-        Route::delete('notification/delete', 'NotificationController@delete')
+        Route::delete('notification/delete/{slug}', 'NotificationController@delete')
             ->name('users.notification.delete');
     });
 });

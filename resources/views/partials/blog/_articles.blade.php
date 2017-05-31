@@ -10,7 +10,7 @@
                 <li class="list-inline-item">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
-                        {{ $article->created_at }}
+                        {{ $article->created_at->format('Y-m-d') }}
                     </time>
                 </li>
                 <li class="list-inline-item">
