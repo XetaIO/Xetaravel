@@ -35,7 +35,13 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        return view('user.index');
+        $users = User::with('Account')
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('xetaravel.pagination.user.user_per_page'));
+
+        $breadcrumbs = $this->breadcrumbs->setCssClasses('breadcrumb');
+
+        return view('user.index', compact('users', 'breadcrumbs'));
     }
 
     /**
