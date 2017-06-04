@@ -39,7 +39,7 @@ class UserController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(config('xetaravel.pagination.user.user_per_page'));
 
-        $breadcrumbs = $this->breadcrumbs->setCssClasses('breadcrumb');
+        $breadcrumbs = $this->breadcrumbs;
 
         return view('user.index', compact('users', 'breadcrumbs'));
     }
@@ -76,7 +76,6 @@ class UserController extends Controller
             e($user->username),
             $user->profile_url
         );
-        $this->breadcrumbs->setCssClasses('breadcrumb');
 
         return view('user.show', compact('user', 'articles', 'comments', 'breadcrumbs'));
     }
@@ -88,9 +87,7 @@ class UserController extends Controller
      */
     public function showSettingsForm(): View
     {
-        $this->breadcrumbs
-            ->addCrumb('Settings', route('users.user.settings'))
-            ->setCssClasses('breadcrumb');
+        $this->breadcrumbs->addCrumb('Settings', route('users.user.settings'));
 
         return view('user.settings', ['breadcrumbs' => $this->breadcrumbs]);
     }

@@ -81,7 +81,7 @@ class RoleController extends Controller
         $optionsAttributes = $this->getOptionAttributes();
 
         $breadcrumbs = $this->breadcrumbs
-            ->setCssClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
+            ->setListElementClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
             ->addCrumb('Manage Roles', route('admin.role.role.index'))
             ->addCrumb(
                 'Update ' . e($role->name),

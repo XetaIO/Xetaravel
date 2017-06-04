@@ -23,12 +23,6 @@
             "homepage": "https://github.com/Xety"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/XetaIO/breadcrumbs"
-        }
-    ],
     "require": {
         "php": ">=7.0",
         "laravel/framework": "5.4.*",
@@ -40,11 +34,11 @@
         "xetaio/xetaravel-iptraceable": "^0.0.1",
         "xetaio/xetaravel-editor-md": "^0.0.1",
         "xetaio/xetaravel-mentions": "~0.0.1",
+        "xety/breadcrumbs": "~1.0",
         "fideloper/proxy": "~3.3",
         "laravelcollective/html": "^5.4.0",
         "greggilbert/recaptcha": "~2.0",
         "kirkbushell/eloquence": "~2.0",
-        "creitive/breadcrumbs": "dev-bootstrap4",
         "ultraware/roles": "^5.4",
         "rinvex/country": "^3.1",
         "graham-campbell/markdown": "^7.0",

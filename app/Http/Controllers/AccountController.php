@@ -31,8 +31,6 @@ class AccountController extends Controller
     {
         $user = User::find(Auth::id());
 
-        $this->breadcrumbs->setCssClasses('breadcrumb');
-
         return view('account.index', ['user' => $user, 'breadcrumbs' => $this->breadcrumbs]);
     }
 
