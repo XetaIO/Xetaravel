@@ -102,7 +102,7 @@ class UserController extends Controller
         }
 
         $breadcrumbs = $this->breadcrumbs
-            ->setCssClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
+            ->setListElementClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
             ->addCrumb('Manage Users', route('admin.user.user.index'))
             ->addCrumb(
                 'Edit ' . e($user->username),

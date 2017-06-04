@@ -83,6 +83,15 @@ class User extends Model implements
     ];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'last_login'
+    ];
+
+    /**
      * The "booting" method of the model.
      *
      * @return void

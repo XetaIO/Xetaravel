@@ -33,13 +33,20 @@ trait UserPresenter
     }
 
     /**
-     * Get the account full name.
+     * Get the account full name. Return the username if the user
+     * has not set his first name and last name.
      *
      * @return string
      */
     public function getFullNameAttribute(): string
     {
-        return $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
+        $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
+
+        if (empty(trim($fullName))) {
+            return $this->username;
+        }
+
+        return $fullName;
     }
 
     /**

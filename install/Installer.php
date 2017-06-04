@@ -21,14 +21,14 @@ class Installer
     \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \
      \  /\  /  __/ | (_| (_) | | | | | |  __/
       \/  \/ \___|_|\___\___/|_| |_| |_|\___|
-                                             
+
                    _
                   | |
                   | |_ ___
                   | __/ _ \
                   | || (_) |
                    \__\___/
-                        
+
   __   __    _                            _
   \ \ / /   | |                          | |
    \ V / ___| |_ __ _ _ __ __ ___   _____| |
@@ -38,7 +38,7 @@ class Installer
 
         </info>");
         $rootDir = dirname(dirname(__DIR__));
-        
+
         static::createEnvTesting($rootDir, $io);
         static::configDatabase($rootDir, $io);
     }
@@ -55,7 +55,7 @@ class Installer
     {
         $env = $dir . '/.env.testing';
         $defaultEnv = $dir . '/.env.testing.exemple';
-        
+
         if (!file_exists($env)) {
             copy($defaultEnv, $env);
             $io->write('<info>Created `.env.testing` file.</info>');

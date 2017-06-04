@@ -12,6 +12,7 @@ class CategoryController extends Controller
     {
         parent::__construct();
 
+        $this->breadcrumbs->removeListElementClasses('breadcrumb');
         $this->breadcrumbs->addCrumb('Blog', route('blog.article.index'));
     }
 

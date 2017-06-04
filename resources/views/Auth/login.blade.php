@@ -2,7 +2,7 @@
 {!! config(['app.title' => 'Login into your account']) !!}
 
 @section('content')
-<div class="container">
+<div class="container mt-6">
     <div class="row">
         <div class="col-md-4 offset-md-4">
             <h2 class="text-xs-center font-xeta mt-2">

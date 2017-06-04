@@ -69,7 +69,7 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
 
         $breadcrumbs = $this->breadcrumbs
-            ->setCssClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
+            ->setListElementClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
             ->addCrumb('Manage Permissions', route('admin.role.permission.index'))
             ->addCrumb(
                 'Update ' . e($permission->name),
