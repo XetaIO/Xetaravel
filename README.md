@@ -25,7 +25,12 @@
 > ## Install
 > While Redis is optional, it is recommended to use Redis with this application.
 > ```bash
-> composer create-project --prefer-dist xetaio/xetaravel <application_name>
+> composer create-project xetaio/xetaravel <application_name>
+> ```
+> Then you will need to migrate and seed your application:
+> ```bash
+> php artisan migrate
+> php artisan db:seed
 > ```
 >
 > ### Pre-installed Accounts
