@@ -88,7 +88,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "process-timeout": 2000
     },
     "minimum-stability": "dev",
     "prefer-stable": true
