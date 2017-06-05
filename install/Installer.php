@@ -37,7 +37,7 @@ class Installer
   /_/ \_\___|\__\__,_|_|  \__,_| \_/ \___|_|
 
         </info>");
-        $rootDir = dirname(__DIR__);
+        $rootDir = base_path();
 
         static::createEnvTesting($rootDir, $io);
         static::configDatabase($rootDir, $io);
