@@ -15,6 +15,20 @@ Route::group(['middleware' => ['auth', 'permission:show.banished']], function ()
 
 /*
 |--------------------------------------------------------------------------
+| Socialite Routes
+|--------------------------------------------------------------------------
+*/
+Route::group([
+    'prefix' => 'auth',
+    'namespace' => 'Auth',
+    'middleware' => 'permission:access.site,allowGuest'
+], function () {
+    Route::get('github', 'SocialiteController@redirectToProvider')->name('auth.github');
+    Route::get('github/callback', 'SocialiteController@handleProviderCallback');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Users Routes
 |--------------------------------------------------------------------------
 */

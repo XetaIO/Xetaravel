@@ -26,6 +26,10 @@
                     {!! Form::button('<i class="fa fa-sign-in" aria-hidden="true"></i> Login', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
                 </div>
             {!! Form::close() !!}
+
+            <div class="text-xs-center">
+                {!! link_to(route('auth.github'), 'Login with Github <i class="fa fa-github"></i>', ['class' => 'btn btn-outline-secondary'], true, false)!!}
+            </div>
         </div>
         <div class="col-md-12 text-xs-center">
             <a class="btn btn-link" href="{{ route('users.auth.password.request') }}">

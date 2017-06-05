@@ -35,8 +35,17 @@
                 {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
 
                 <div class="form-group text-xs-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-1">
                         {!! Form::button('<i class="fa fa-user-plus" aria-hidden="true"></i> Register', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
+                    </div>
+                    <div class="col-md-12">
+                        {!! link_to(
+                            route('auth.github'),
+                            'Register with Github <i class="fa fa-github"></i>',
+                            ['class' => 'btn btn-outline-secondary'],
+                            true,
+                            false
+                        )!!}
                     </div>
                     <div class="col-md-12">
                         <a class="btn btn-link" href="{{ route('users.auth.login') }}">

@@ -178,6 +178,7 @@ return [
         Xetaio\Editor\EditorServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Xetaio\Mentions\Providers\MentionServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers
@@ -247,7 +248,8 @@ return [
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'Menu' => Spatie\Menu\Laravel\MenuFacade::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
-        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class
     ],
 
 ];
