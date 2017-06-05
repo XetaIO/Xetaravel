@@ -1,14 +1,14 @@
 @extends('layouts.error')
-{!! config(['app.title' => 'Website in maintenance']) !!}
+{!! config(['app.title' => 'Whoops, something went wrong']) !!}
 
 @section('content')
 <div class="container mt-4">
     <div class="error">
         <div class="title font-xeta">
-            503
+            500
         </div>
         <div class="description mb-1">
-            The website is in maintenance, try again later.
+            Whoops, looks like something went wrong.
         </div>
         <div class="link">
             {!! link_to(
