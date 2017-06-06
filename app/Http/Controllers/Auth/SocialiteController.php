@@ -106,7 +106,7 @@ class SocialiteController extends Controller
      * @param string $driver The driver used.
      * @param string $type The type of callback. (Either `login` or `register`)
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function handleProviderCallback(Request $request, string $driver, string $type): RedirectResponse
     {
