@@ -17,8 +17,9 @@ class CreateUsersTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('username', 20)->unique()->index();
             $table->string('email', 50)->unique()->index();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('slug', 20)->unique();
+            $table->string('github_id')->nullable()->unique();
             $table->integer('comment_count')->unsigned()->default(0);
             $table->integer('article_count')->unsigned()->default(0);
             $table->rememberToken();

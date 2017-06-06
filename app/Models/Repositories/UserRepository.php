@@ -11,21 +11,32 @@ class UserRepository
      * Create a new user instance after a valid registration.
      *
      * @param array $data The data used to create the user.
+     * @param array $providerData The additional data provided by the provider.
+     * @param bool $provider Whether the user is registered with a Social Provider.
      *
      * @return \Xetaravel\Models\User
      */
-    public static function create(array $data): User
+    public static function create(array $data, array $providerData = [], bool $provider = false): User
     {
         $ip = FacadeRequest::ip();
 
-        return User::create([
+        $user = [
             'username' => $data['username'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
             'register_ip' => $ip,
             'last_login_ip' => $ip,
             'last_login' => new \DateTime()
-        ]);
+        ];
+
+        if ($provider === false) {
+            $user += [
+                'password' => bcrypt($data['password'])
+            ];
+        } else {
+            $user += $providerData;
+        }
+
+        return User::create($user);
     }
 
     /**

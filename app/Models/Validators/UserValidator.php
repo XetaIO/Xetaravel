@@ -33,6 +33,23 @@ class UserValidator
     }
 
     /**
+     * Get the validator for an incoming registration request with a social provider.
+     *
+     * @param array $data The data to validate.
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    public static function createWithProvider(array $data): Validator
+    {
+        $rules = [
+            'username' => 'required|alpha_num|min:4|max:20|unique:users',
+            'email' => 'required|email|max:50|unique:users'
+        ];
+
+        return FacadeValidator::make($data, $rules);
+    }
+
+    /**
      * Get a validator for an incoming update request. (Administration)
      *
      * @param array $data The data to validate.
