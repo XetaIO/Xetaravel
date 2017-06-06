@@ -23,8 +23,14 @@ Route::group([
     'namespace' => 'Auth',
     'middleware' => 'permission:access.site,allowGuest'
 ], function () {
-    Route::get('github', 'SocialiteController@redirectToProvider')->name('auth.github');
-    Route::get('github/callback', 'SocialiteController@handleProviderCallback');
+    Route::get('{driver}/{type}', 'SocialiteController@redirectToProvider')
+        ->name('auth.driver.type');
+    Route::get('{driver}/{type}/callback', 'SocialiteController@handleProviderCallback')
+        ->name('auth.driver.type.callback');
+    Route::get('{driver}/register/form', 'SocialiteController@showRegistrationForm')
+        ->name('auth.driver.register');
+    Route::post('{driver}/register/validate', 'SocialiteController@register')
+        ->name('auth.driver.register.validate');
 });
 
 /*

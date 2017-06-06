@@ -20,7 +20,7 @@ class UserRepository
     {
         $ip = FacadeRequest::ip();
 
-        $data = [
+        $user = [
             'username' => $data['username'],
             'email' => $data['email'],
             'register_ip' => $ip,
@@ -29,14 +29,14 @@ class UserRepository
         ];
 
         if ($provider === false) {
-            $data += [
+            $user += [
                 'password' => bcrypt($data['password'])
             ];
         } else {
-            $data += $providerData;
+            $user += $providerData;
         }
 
-        return User::create($data);
+        return User::create($user);
     }
 
     /**

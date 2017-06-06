@@ -34,7 +34,7 @@ class RegisterControllerTest extends TestCase
             'terms' => 1,
         ];
         $response = $this->post('/users/register', $data);
-        
+
         $response->assertSessionHas('success');
         $response->assertStatus(302);
         $response->assertRedirect('/');

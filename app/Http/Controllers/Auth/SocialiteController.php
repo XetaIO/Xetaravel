@@ -2,16 +2,22 @@
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Exception;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as ProviderUser;
+use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseSF;
 use Xetaravel\Events\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\Role;
+use Xetaravel\Models\Validators\UserValidator;
 
 class SocialiteController extends Controller
 {
@@ -25,34 +31,202 @@ class SocialiteController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * Redirect the user to the GitHub authentication page.
+     * The driver used.
      *
-     * @return Response
+     * @var string
      */
-    public function redirectToProvider()
+    protected $driver;
+
+    /**
+     * Show the registration form.
+     *
+     * @param \Illuminate\Http\Request $request The request object.
+     * @param string $driver The driver used.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm(Request $request, string $driver): View
     {
-        return Socialite::driver('github')->redirect();
+        return view('Auth.socialite');
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Register an user that has been forced to modify his email or
+     * username due to a conflit with the database.
      *
-     * @return Response
+     * @param \Illuminate\Http\Request $request The request object.
+     * @param string $driver The driver used.
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function handleProviderCallback(Request $request)
+    public function register(Request $request, string $driver): RedirectResponse
     {
+        $this->driver = $driver;
+        $validator = UserValidator::createWithProvider($request->all());
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput($request->all());
+        }
+        $user = Socialite::driver($driver)->userFromToken($request->session()->get('socialite.token'));
+
+        $user->nickname = $request->input('username');
+        $user->email = $request->input('email');
+
+        $user = $this->registered($user);
+
+        $request->session()->forget('socialite');
+
+        return $this->login($request, $user);
+    }
+
+    /**
+     * Redirect the user to the Provider authentication page.
+     *
+     * @param \Illuminate\Http\Request $request The request object.
+     * @param string $driver The driver used.
+     * @param string $type The type of callback. (Either `login` or `register`)
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToProvider(Request $request, string $driver, string $type): RedirectResponseSF
+    {
+        return Socialite::driver($driver)
+                ->redirectUrl(route('auth.driver.type.callback', ['driver' => $driver, 'type' => $type]))
+                ->redirect();
+    }
+
+    /**
+     * Obtain the user information from the Provider and process to the
+     * registration or login regarding to the type of callback.
+     *
+     * @param \Illuminate\Http\Request $request The request object.
+     * @param string $driver The driver used.
+     * @param string $type The type of callback. (Either `login` or `register`)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback(Request $request, string $driver, string $type): RedirectResponse
+    {
+        $this->driver = $driver;
+
         try {
-            $user = Socialite::driver('github')->user();
+            $user = Socialite::driver($driver)->user();
         } catch (Exception $e) {
+            $redirect = 'users.auth.login';
+
+            if ($type == 'register') {
+                $redirect = 'users.auth.register';
+            }
+            $driver = Str::title($driver);
+
+            return redirect()
+                ->route($redirect)
+                ->with('danger', "An error occurred while getting your information from {$driver} !");
+        }
+
+        if ($type == 'register') {
+            $user = $this->handleRegister($request, $user);
+
+            if (!$user instanceof User) {
+                return $user;
+            }
+
+            return $this->login($request, $user);
+        }
+
+        if (!$user = User::where($driver . '_id', $user->id)->first()) {
             return redirect()
                 ->route('users.auth.login')
-                ->with('danger', 'An error occurred while getting your information from GitHub !');
+                ->with('danger', "This user is not registered, register it or try another login method.");
         }
-        $user = $this->findOrCreateUser($user);
 
+        return $this->login($request, $user);
+    }
+
+    /**
+     * Login the user and trigger the authenticated function.
+     *
+     * @param \Illuminate\Http\Request $request The request object.
+     * @param \Xetaravel\Models\User $user The user to login.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function login(Request $request, User $user): RedirectResponse
+    {
         Auth::login($user, true);
 
-        return $this->authenticated($request, $user) ?: redirect()->intended($this->redirectPath());
+        $this->authenticated($request, $user);
+
+        return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * Handle the registration.
+     *
+     * @param \Illuminate\Http\Request $request The request object.
+     * @param \Laravel\Socialite\Two\User $user The user to register.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Xetaravel\Models\User
+     */
+    protected function handleRegister(Request $request, ProviderUser $user)
+    {
+        $driver = $this->driver;
+
+        if (User::where($driver . '_id', $user->id)->first()) {
+            $driver = Str::title($driver);
+
+            return redirect()
+                ->route('users.auth.login')
+                ->with('danger', "This {$driver} user is already registered !");
+        }
+
+        $validator = UserValidator::createWithProvider([
+            'username' => $user->nickname,
+            'email' => $user->email
+        ]);
+
+        if ($validator->fails()) {
+            $request->session()->put('socialite', [
+                'driver' => $driver,
+                'token' => $user->token
+            ]);
+
+            return redirect()
+                ->route('auth.driver.register', ['driver' => $driver])
+                ->withErrors($validator)
+                ->withInput([
+                    'username' => $user->nickname,
+                    'email' => $user->email
+                ]);
+        }
+
+        $user = $this->registered($user);
+
+        return $user;
+    }
+
+    /**
+     * Create the user.
+     *
+     * @param \Laravel\Socialite\Two\User $user The user to create.
+     *
+     * @return \Xetaravel\Models\User
+     */
+    protected function createUser(ProviderUser $user)
+    {
+        return UserRepository::create(
+            [
+                'username' => $user->nickname,
+                'email' => $user->email
+            ],
+            [
+                $this->driver . '_id' => $user->id
+            ],
+            true
+        );
     }
 
     /**
@@ -74,43 +248,16 @@ class SocialiteController extends Controller
     }
 
     /**
-     * Find the user if he exists or create it.
+     * The user has been registered.
      *
-     * @param \Laravel\Socialite\Two\User $providerUser
+     * @param \Laravel\Socialite\Two\User $user The user that has been registered.
      *
      * @return \Xetaravel\Models\User
      */
-    protected function findOrCreateUser(ProviderUser $providerUser): User
+    protected function registered(ProviderUser $user): User
     {
-        if ($user = User::where('github_id', $providerUser->id)->first()) {
-            return $user;
-        }
+        event(new Registered($user = $this->createUser($user)));
 
-        $user = UserRepository::create(
-            [
-                'username' => $providerUser->nickname,
-                'email' => $providerUser->email
-            ],
-            [
-                'github_id' => $providerUser->id
-            ],
-            true
-        );
-
-        $this->registered($user);
-
-        return $user;
-    }
-
-    /**
-     * The user has been registered.
-     *
-     * @param \Xetaravel\Models\User $user The user that has been registered.
-     *
-     * @return void
-     */
-    protected function registered(User $user)
-    {
         $role = Role::where('slug', 'user')->first();
         $user->attachRole($role);
 
@@ -120,5 +267,7 @@ class SocialiteController extends Controller
             ->setName(substr(md5($user->username), 0, 10))
             ->setFileName(substr(md5($user->username), 0, 10) . '.png')
             ->toMediaCollection('avatar');
+
+        return $user;
     }
 }
