@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class CreateDiscussCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,14 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('discuss_comments', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
-            $table->string('first_name', 100)->nullable();
-            $table->string('last_name', 100)->nullable();
-            $table->text('biography')->nullable();
-            $table->text('signature')->nullable();
-            $table->string('facebook', 50)->nullable();
-            $table->string('twitter', 50)->nullable();
+            $table->integer('thread_id')->unsigned()->index();
+            $table->longText('content');
+            $table->boolean('is_edited')->default(false);
+            $table->integer('edited_user_id')->unsigned()->index();
+            $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
 
@@ -30,8 +29,10 @@ class CreateAccountsTable extends Migration
          * Only create foreign key on production/development.
          */
         if (App::environment() !== 'testing') {
-            Schema::table('accounts', function (Blueprint $table) {
+            Schema::table('discuss_comments', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('thread_id')->references('id')->on('discuss_threads')->onDelete('cascade');
+                $table->foreign('edited_user_id')->references('id')->on('users');
             });
         }
     }
@@ -43,6 +44,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('discuss_comments');
     }
 }
