@@ -24,6 +24,7 @@ mix.webpackConfig({
 
 mix.js([
         'resources/assets/js/xetaravel.admin.js',
+        'resources/assets/ts/Xetaravel.admin.ts'
     ], 'public/js/xetaravel.admin.min.js')
     .js([
         'resources/assets/js/xetaravel.js',
