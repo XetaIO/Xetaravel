@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
 class CreateDiscussThreadsTable extends Migration
@@ -28,23 +27,10 @@ class CreateDiscussThreadsTable extends Migration
             $table->boolean('is_edited')->default(false);
             $table->integer('solved_comment_id')->unsigned()->nullable()->index();
             $table->integer('last_comment_id')->unsigned()->nullable()->index();
-            $table->integer('edited_user_id')->unsigned()->index();
+            $table->integer('edited_user_id')->unsigned()->nullable()->index();
             $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
-
-        /**
-         * Only create foreign key on production/development.
-         */
-        if (App::environment() !== 'testing') {
-            Schema::table('discuss_threads', function (Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-                $table->foreign('category_id')->references('id')->on('discuss_categories')->onDelete('cascade');
-                $table->foreign('solved_comment_id')->references('id')->on('discuss_comments');
-                $table->foreign('last_comment_id')->references('id')->on('discuss_comments');
-                $table->foreign('edited_user_id')->references('id')->on('users');
-            });
-        }
     }
 
     /**

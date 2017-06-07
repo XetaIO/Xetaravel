@@ -24,7 +24,7 @@ Route::group([
         Route::group([
             'namespace' => 'Blog',
             'prefix' => 'blog',
-            'middleware' => ['permission:manage.articles']
+            'middleware' => ['permission:manage.blog']
         ], function () {
 
             // Article Routes

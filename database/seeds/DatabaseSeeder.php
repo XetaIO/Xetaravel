@@ -28,5 +28,10 @@ class DatabaseSeeder extends Seeder
 
         // Badges
         $this->call(BadgesTableSeed::class);
+
+        // Discuss
+        $this->call(DiscussCategoriesTableSeed::class);
+        $this->call(DiscussThreadsTableSeed::class);
+        $this->call(DiscussCommentsTableSeed::class);
     }
 }

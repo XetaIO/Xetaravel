@@ -20,7 +20,7 @@ class CreateDiscussCommentsTable extends Migration
             $table->integer('thread_id')->unsigned()->index();
             $table->longText('content');
             $table->boolean('is_edited')->default(false);
-            $table->integer('edited_user_id')->unsigned()->index();
+            $table->integer('edited_user_id')->unsigned()->nullable()->index();
             $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
@@ -29,6 +29,14 @@ class CreateDiscussCommentsTable extends Migration
          * Only create foreign key on production/development.
          */
         if (App::environment() !== 'testing') {
+            Schema::table('discuss_threads', function (Blueprint $table) {
+                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('category_id')->references('id')->on('discuss_categories')->onDelete('cascade');
+                $table->foreign('solved_comment_id')->references('id')->on('discuss_comments');
+                $table->foreign('last_comment_id')->references('id')->on('discuss_comments');
+                $table->foreign('edited_user_id')->references('id')->on('users');
+            });
+
             Schema::table('discuss_comments', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->foreign('thread_id')->references('id')->on('discuss_threads')->onDelete('cascade');

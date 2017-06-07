@@ -26,7 +26,7 @@
     </p>
     {!! Menu::{'admin.administration'}() !!}
 
-    @permission('manage.articles')
+    @permission('manage.blog')
         <p class="p-1 m-0 text-white font-xeta">
             Blog
         </p>
