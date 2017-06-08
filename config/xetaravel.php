@@ -36,6 +36,10 @@ return [
             'user_per_page' => 15,
             'comments_profile_page' => 20,
             'articles_profile_page' => 15
+        ],
+        'discuss' => [
+            'thread_per_page' => 15,
+            'comment_per_page' => 10
         ]
     ],
 

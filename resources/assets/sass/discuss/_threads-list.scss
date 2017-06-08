@@ -1,0 +1,33 @@
+
+.discuss-threads-list {
+    .discuss-threads-list-item {
+        @include clearfix();
+
+        padding: 10px;
+
+        @include hover {
+            background-color: #f3f6f9;
+        }
+    }
+
+    .discuss-threads-list-content {
+        @include clearfix();
+
+        padding: 0 70px 0 60px;
+    }
+
+    .discuss-threads-list-tags {
+        position: relative;
+        top: -12px;
+    }
+
+    .discuss-threads-list-reply-count {
+        @include clearfix();
+
+        position: relative;
+        top: 14px;
+        width: 70px;
+        padding: 0 5px;
+        text-align: center;
+    }
+}

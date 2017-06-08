@@ -48,6 +48,22 @@ a.tag {
   @include border-radius($tag-pill-border-radius);
 }
 
+.tag-group {
+    display: table;
+
+    &.tag {
+      display: table-cell;
+    }
+}
+
+.tag-group .tag:not(:first-child) {
+    @include border-left-radius(0);
+}
+
+.tag-group .tag:not(:last-child) {
+    @include border-right-radius(0);
+}
+
 // Colors
 //
 // Contextual variations (linked tags get darker on :hover).

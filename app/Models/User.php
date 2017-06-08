@@ -77,6 +77,7 @@ class User extends Model implements
         // Account Model
         'first_name',
         'last_name',
+        'full_name',
         'biography',
         'signature',
         'facebook',

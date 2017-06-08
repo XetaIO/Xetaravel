@@ -12,7 +12,7 @@
             @include('Discuss::partials._sidebar')
         </div>
         <div class="col-md-9">
-
+            @include('Discuss::partials._threads')
         </div>
     </div>
 </div>

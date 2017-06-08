@@ -1,0 +1,44 @@
+
+.discuss-popover-user {
+    width: 380px;
+    max-width: inherit;
+
+    .popover-content {
+        padding: 14px;
+        background: rgba(0, 0, 0, 0.4);
+        color: $white;
+    }
+
+    .background-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        z-index: -1;
+
+        .background {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -9999px;
+            bottom: -9999px;
+            margin: auto 0;
+            width: 100%;
+            opacity: 0.8;
+        }
+    }
+}
+
+.discuss-popover-user-profile {
+    padding-left: 60px;
+}
+
+.discuss-popover-user-username > h5 > a {
+    color: #fff;
+
+    @include hover {
+        color: #f4645f;
+    }
+}

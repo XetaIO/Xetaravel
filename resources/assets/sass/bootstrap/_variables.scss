@@ -84,35 +84,15 @@ $spacer:   1rem !default;
 $spacer-x: $spacer !default;
 $spacer-y: $spacer !default;
 $spacers: (
-  0: (
-    x: 0,
-    y: 0
-  ),
-  1: (
-    x: $spacer-x,
-    y: $spacer-y
-  ),
-  2: (
-    x: ($spacer-x * 1.5),
-    y: ($spacer-y * 1.5)
-  ),
-  3: (
-    x: ($spacer-x * 3),
-    y: ($spacer-y * 3)
-  ),
-  4: (
-    x: ($spacer-x * 4),
-    y: ($spacer-y * 4)
-  ),
-  5: (
-    x: ($spacer-x * 5),
-    y: ($spacer-y * 5)
-  ),
-  6: (
-    x: ($spacer-x * 6),
-    y: ($spacer-y * 6)
-  )
+  0: 0,
+  1: $spacer,
+  2: ($spacer * 1.5),
+  3: ($spacer * 3),
+  4: ($spacer * 4),
+  5: ($spacer * 5),
+  6: ($spacer * 6)
 ) !default;
+
 $border-width: 2px !default;
 
 // ScrollBar

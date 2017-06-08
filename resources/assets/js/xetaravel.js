@@ -8,9 +8,7 @@ $(document).ready(function () {
         selector: "[data-toggle=tooltip]"
     });
 
-    $("body").popover({
-        selector: "[data-toggle=popover]"
-    });
+    $('[data-toggle="popover"]').popover();
 
     /**
      * ScrollUp.

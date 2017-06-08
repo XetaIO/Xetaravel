@@ -1,5 +1,5 @@
 <div class="sidebar-module">
-    <div class="discuss-new-discussion-btn">
+    <div class="discuss-new-discussion-btn text-truncate">
         {{ link_to(
             route('discuss.thread.create'),
             '<i class="fa fa-pencil"></i> Start a Discussion',

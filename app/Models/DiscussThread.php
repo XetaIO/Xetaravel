@@ -43,7 +43,8 @@ class DiscussThread extends Model
      * @var array
      */
     protected $appends = [
-        'thread_url'
+        'thread_url',
+        'last_page'
     ];
 
     /**

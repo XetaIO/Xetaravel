@@ -3,6 +3,8 @@ import Comments from './components/Comments.vue'
 import Notifications from './components/Notifications.vue'
 import UsersNotifications from './components/UsersNotifications.vue'
 
+import DiscussUser from './components/Discuss/User.vue'
+
 Vue.config.productionTip = false;
 
 const app = new Vue({
@@ -11,7 +13,8 @@ const app = new Vue({
     components: {
         Comments,
         Notifications,
-        UsersNotifications
+        UsersNotifications,
+        DiscussUser
     },
 
     data: {
