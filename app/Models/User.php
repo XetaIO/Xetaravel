@@ -206,6 +206,26 @@ class User extends Model implements
     }
 
     /**
+     * Get the discuss comments for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussComments()
+    {
+        return $this->hasMany(DiscussComment::class);
+    }
+
+    /**
+     * Get the discuss threads for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussThreads()
+    {
+        return $this->hasMany(DiscussThread::class);
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token

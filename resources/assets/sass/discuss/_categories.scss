@@ -1,0 +1,31 @@
+
+.discuss-categories {
+
+    li {
+        margin: 5px 0;
+    }
+
+    .discuss-categories-link {
+        color: $body-color;
+
+        @include hover-focus {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
+
+        i {
+            margin-right: 10px;
+        }
+    }
+
+    .discuss-categories-color {
+        background-color: #e7edf3;
+        margin-right: 10px;
+        height: 16px;
+        width: 16px;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 4px;
+    }
+}
+

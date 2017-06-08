@@ -15,6 +15,9 @@
             <a class="nav-link-menu" href="{{ route('blog.article.index') }}">
                 <span data-hover="Blog">Blog</span>
             </a>
+            <a class="nav-link-menu" href="{{ route('discuss.index') }}">
+                <span data-hover="Discuss">Discuss</span>
+            </a>
           </li>
         </ul>
 
