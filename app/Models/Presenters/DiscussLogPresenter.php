@@ -1,11 +1,13 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
+use Xetaravel\Events\Discuss\CommentWasDeletedEvent;
 use Xetaravel\Events\Discuss\ThreadTitleWasChangedEvent;
 use Xetaravel\Events\Discuss\ThreadCategoryWasChangedEvent;
 use Xetaravel\Events\Discuss\ThreadWasLockedEvent;
 use Xetaravel\Events\Discuss\ThreadWasPinnedEvent;
 use Xetaravel\Models\DiscussCategory;
+use Xetaravel\Models\User;
 
 trait DiscussLogPresenter
 {
@@ -29,15 +31,32 @@ trait DiscussLogPresenter
             case ThreadWasPinnedEvent::class:
                 return 'pinned';
                 break;
+            case CommentWasDeletedEvent::class:
+                return 'deleted';
+                break;
             default:
                 return 'unknown';
         }
     }
 
     /**
+     * Get the user related to the deleted comment.
+     *
+     * @return null|\Xetaravel\Models\DiscussCategory
+     */
+    public function getCommentUserAttribute()
+    {
+        if ($this->event_type !== CommentWasDeletedEvent::class) {
+            return null;
+        }
+
+        return User::find($this->data['comment_user_id']);
+    }
+
+    /**
      * Get the old category.
      *
-     * @return \Xetaravel\Models\DiscussCategory
+     * @return null|\Xetaravel\Models\DiscussCategory
      */
     public function getOldCategoryAttribute()
     {
@@ -51,7 +70,7 @@ trait DiscussLogPresenter
     /**
      * Get the new category.
      *
-     * @return \Xetaravel\Models\DiscussCategory
+     * @return null|\Xetaravel\Models\DiscussCategory
      */
     public function getNewCategoryAttribute()
     {

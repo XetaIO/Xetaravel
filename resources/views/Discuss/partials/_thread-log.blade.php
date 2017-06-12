@@ -8,6 +8,8 @@
             <i class="fa fa-lock"></i>
         @elseif ($log->type == 'pinned')
             <i class="fa fa-thumb-tack"></i>
+        @elseif ($log->type == 'deleted')
+            <i class="fa fa-trash-o"></i>
         @endif
     </span>
     <img src="{{ $log->user->avatar_small }}" class="rounded-circle" />
@@ -51,6 +53,18 @@
     {{-- Thread Pinned --}}
     @elseif ($log->type == 'pinned')
         pinned the discussion
+        {!! $time !!}
+
+    {{-- Comment Deleted --}}
+    @elseif ($log->type == 'deleted')
+        deleted a comment from
+        <discuss-user
+            :user="{{ json_encode($log->commentUser) }}"
+            :created-at="{{ var_export($log->commentUser->created_at->diffForHumans()) }}"
+            :last-login="{{ var_export($log->commentUser->last_login->diffForHumans()) }}"
+            :background-color="{{ var_export($log->commentUser->avatar_primary_color) }}">
+        </discuss-user>
+
         {!! $time !!}
     @endif
 </div>

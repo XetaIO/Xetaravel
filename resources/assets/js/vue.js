@@ -3,7 +3,9 @@ import Comments from './components/Comments.vue'
 import Notifications from './components/Notifications.vue'
 import UsersNotifications from './components/UsersNotifications.vue'
 
+// Discuss
 import DiscussUser from './components/Discuss/User.vue'
+import DiscussShare from './components/Discuss/Share.vue'
 
 Vue.config.productionTip = false;
 
@@ -14,7 +16,10 @@ const app = new Vue({
         Comments,
         Notifications,
         UsersNotifications,
-        DiscussUser
+
+        // Discuss
+        DiscussUser,
+        DiscussShare
     },
 
     data: {

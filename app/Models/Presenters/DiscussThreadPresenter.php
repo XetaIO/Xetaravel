@@ -1,8 +1,20 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
+
 trait DiscussThreadPresenter
 {
+    /**
+     * Get the content parsed in HTML.
+     *
+     * @return string
+     */
+    public function getContentMarkdownAttribute(): string
+    {
+        return Markdown::convertToHtml($this->content);
+    }
+
     /**
      * Get the thread url.
      *
@@ -24,11 +36,12 @@ trait DiscussThreadPresenter
      */
     public function getLastPageAttribute(): int
     {
-        $page = ceil($this->comment_count / config('xetaravel.pagination.discuss.comment_per_page'));
+        $comments = $this->comment_count;
 
         if ($this->is_solved) {
-            $page--;
+            $comments = $this->comment_count - 1;
         }
+        $page = ceil($comments / config('xetaravel.pagination.discuss.comment_per_page'));
 
         return ($page) ? $page : 1;
     }

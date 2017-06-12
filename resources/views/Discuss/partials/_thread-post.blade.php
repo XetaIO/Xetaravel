@@ -46,12 +46,27 @@
                             </span>
                         </li>
                     @endif
+
+                    {{-- Share --}}
+                    <li class="list-inline-item float-xs-right">
+                        @if ($is_thread)
+                            <discuss-share
+                                :post-id="{{ var_export($post->getKey()) }}"
+                                :route-input="{{ var_export(route('discuss.thread.show', ['slug' => $post->slug, 'id' => $post->getKey()])) }}">
+                            </discuss-share>
+                        @else
+                            <discuss-share
+                                :post-id="{{ var_export($post->getKey()) }}"
+                                :route-input="{{ var_export(route('discuss.comment.show', ['id' => $post->getKey()])) }}">
+                            </discuss-share>
+                        @endif
+                    </li>
                 </ul>
             </div>
 
             {{-- Thread Content --}}
             <div class="discuss-thread-content">
-                {!! Markdown::convertToHtml($post->content) !!}
+                {!! $post->content_markdown !!}
             </div>
 
             {{-- Thread Actions --}}
