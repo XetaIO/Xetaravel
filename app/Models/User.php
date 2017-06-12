@@ -73,6 +73,7 @@ class User extends Model implements
         'avatar_small',
         'avatar_medium',
         'avatar_big',
+        'avatar_primary_color',
 
         // Account Model
         'first_name',
@@ -236,6 +237,16 @@ class User extends Model implements
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * Get the discuss logs for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussLogs()
+    {
+        return $this->hasMany(DiscussLog::class);
     }
 
     /**

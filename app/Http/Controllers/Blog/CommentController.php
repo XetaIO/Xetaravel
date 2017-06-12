@@ -32,7 +32,7 @@ class CommentController extends Controller
                 ->with('danger', 'This article doesn\'t exist or you can not reply to it !');
         }
 
-        if (Comment::isFlooding(Auth::user())) {
+        if (Comment::isFlooding(Auth::user(), 'xetaravel.flood.blog.comment')) {
             return back()
                 ->withInput()
                 ->with('danger', 'Wow, keep calm bro, and try to not flood !');

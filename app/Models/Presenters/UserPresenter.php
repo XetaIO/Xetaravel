@@ -13,6 +13,13 @@ trait UserPresenter
     protected $defaultAvatar = '/images/avatar.png';
 
     /**
+     * The default primary color used when there is no primary color defined.
+     *
+     * @var string
+     */
+    protected $defaultAvatarPrimaryColor = '#B4AEA4';
+
+    /**
      * Get the account first name.
      *
      * @return string
@@ -141,6 +148,20 @@ trait UserPresenter
         }
 
         return route('users.user.show', ['slug' => $this->slug]);
+    }
+
+    /**
+     * Get the primary color detected in the avatar.
+     *
+     * @return string
+     */
+    public function getAvatarPrimaryColorAttribute(): string
+    {
+        if (isset($this->getMedia('avatar')[0]) && $this->getMedia('avatar')[0]->hasCustomProperty('primaryColor')) {
+            return $this->getMedia('avatar')[0]->getCustomProperty('primaryColor');
+        }
+
+        return $this->defaultAvatarPrimaryColor;
     }
 
     /**

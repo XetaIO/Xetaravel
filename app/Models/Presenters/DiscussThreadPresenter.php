@@ -26,6 +26,10 @@ trait DiscussThreadPresenter
     {
         $page = ceil($this->comment_count / config('xetaravel.pagination.discuss.comment_per_page'));
 
+        if ($this->is_solved) {
+            $page--;
+        }
+
         return ($page) ? $page : 1;
     }
 }

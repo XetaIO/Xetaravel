@@ -17,10 +17,6 @@ Route::group([
     // Thread Routes
     Route::get('thread/{slug}.{id}', 'ThreadController@show')
         ->name('discuss.thread.show');
-    Route::get('thread/create', 'ThreadController@showCreateForm')
-        ->name('discuss.thread.create');
-    Route::post('thread/create', 'ThreadController@create')
-        ->name('discuss.thread.create');
 
     // Category Routes
     Route::get('categories', 'CategoryController@index')
@@ -31,4 +27,17 @@ Route::group([
     // Comment Routes
     Route::get('comment/show/{id}', 'CommentController@show')
         ->name('discuss.comment.show');
+
+    // Auth Middleware
+    Route::group(['middleware' => ['auth']], function () {
+        // Thread Routes
+        Route::get('thread/create', 'ThreadController@showCreateForm')
+            ->name('discuss.thread.create');
+        Route::post('thread/create', 'ThreadController@create')
+            ->name('discuss.thread.create');
+
+        // Comment Routes
+        Route::get('comment/solved/{id}', 'CommentController@markAsSolved')
+            ->name('discuss.comment.solved');
+    });
 });

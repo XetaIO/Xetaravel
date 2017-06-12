@@ -66,4 +66,14 @@ class DiscussComment extends Model
     {
         return $this->belongsTo(DiscussThread::class);
     }
+
+    /**
+     * Get the user that edited the comment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function editedUser()
+    {
+        return $this->hasOne(User::class, 'id', 'edited_user_id');
+    }
 }

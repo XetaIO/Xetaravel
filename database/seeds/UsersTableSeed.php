@@ -85,6 +85,7 @@ class UsersTableSeed extends Seeder
                 ->preservingOriginal()
                 ->setName(substr(md5($user['username']), 0, 10))
                 ->setFileName(substr(md5($user['username']), 0, 10) . '.png')
+                ->withCustomProperties(['primaryColor' => '#B4AEA4'])
                 ->toMediaCollection('avatar');
         }
     }

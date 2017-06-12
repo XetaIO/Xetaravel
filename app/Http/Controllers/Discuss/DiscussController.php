@@ -9,6 +9,8 @@ class DiscussController extends Controller
     public function index(): View
     {
         $threads = DiscussThread::with('User', 'Category', 'LastComment')
+            ->orderBy('is_pinned', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(config('xetaravel.pagination.discuss.thread_per_page'));
 
         $breadcrumbs = $this->breadcrumbs;

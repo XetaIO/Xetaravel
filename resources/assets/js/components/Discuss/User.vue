@@ -9,13 +9,14 @@
         props: [
             'user',
             'createdAt',
-            'lastLogin'
+            'lastLogin',
+            'backgroundColor'
         ],
 
         methods: {
             getContent: function () {
                 return '<div class="discuss-popover-user-avatar float-xs-left">' +
-                            '<img class="img-thumbnail" src="' + this.user.avatar_small + '" width="50px" />' +
+                            '<img class="img-thumbnail" src="' + this.user.avatar_small + '" />' +
                         '</div>' +
                         '<div class="discuss-popover-user-profile">' +
                             '<div class="discuss-popover-user-username">' +
@@ -38,20 +39,11 @@
                         '</div>';
             },
             getTemplate: function () {
-                return '<div class="popover discuss-popover-user" role="tooltip">' +
-                            '<div class="background-container">' +
-                                '<img src="' + this.user.profile_background + '" alt="Profile background" class="background">' +
-                            '</div>' +
+                return '<div class="popover discuss-popover-user" role="tooltip" style="background-color: ' + this.backgroundColor + '">' +
                             '<div class="popover-arrow"></div>' +
                             '<div class="popover-content"></div>' +
                         '</div>';
-            },
-    		getDate: function (now) {
-                let date = new Date(now);
-                date.setHours(date.getHours() + 2);
-
-                return date.toISOString();
-    		}
+            }
     	}
     }
 </script>

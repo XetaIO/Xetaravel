@@ -3,7 +3,7 @@ namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
 use Xetaravel\Models\Article;
-use Xetaravel\Models\Gates\CommentGate;
+use Xetaravel\Models\Gates\FloodGate;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Presenters\CommentPresenter;
 use Xetaravel\Models\User;
@@ -11,7 +11,7 @@ use Xetaravel\Models\User;
 class Comment extends Model
 {
     use Countable,
-        CommentGate,
+        FloodGate,
         CommentPresenter,
         HasMentionsTrait;
 

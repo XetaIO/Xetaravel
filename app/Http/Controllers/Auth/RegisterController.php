@@ -90,6 +90,7 @@ class RegisterController extends Controller
             ->preservingOriginal()
             ->setName(substr(md5($user->username), 0, 10))
             ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+            ->withCustomProperties(['primaryColor' => '#B4AEA4'])
             ->toMediaCollection('avatar');
 
         $request->session()->flash('success', 'Your account has been created successfully !');

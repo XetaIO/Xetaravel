@@ -51,8 +51,12 @@ return [
     | All flood rules that apply at various point on the site. They are all in seconds.
     */
    'flood' => [
+       'general' => 30,
        'blog' => [
            'comment' => 30
+        ],
+        'discuss' => [
+            'thread' => 60
         ]
     ],
 
