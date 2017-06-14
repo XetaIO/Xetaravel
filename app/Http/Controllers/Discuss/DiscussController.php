@@ -2,19 +2,19 @@
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\View\View;
-use Xetaravel\Models\DiscussThread;
+use Xetaravel\Models\DiscussConversation;
 
 class DiscussController extends Controller
 {
     public function index(): View
     {
-        $threads = DiscussThread::with('User', 'Category', 'LastComment')
+        $conversations = DiscussConversation::with('User', 'Category', 'FirstPost', 'LastPost')
             ->orderBy('is_pinned', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(config('xetaravel.pagination.discuss.thread_per_page'));
+            ->paginate(config('xetaravel.pagination.discuss.conversation_per_page'));
 
         $breadcrumbs = $this->breadcrumbs;
 
-        return view('Discuss::index', compact('breadcrumbs', 'threads'));
+        return view('Discuss::index', compact('breadcrumbs', 'conversations'));
     }
 }

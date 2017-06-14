@@ -31,7 +31,9 @@ class DatabaseSeeder extends Seeder
 
         // Discuss
         $this->call(DiscussCategoriesTableSeed::class);
-        $this->call(DiscussThreadsTableSeed::class);
-        $this->call(DiscussCommentsTableSeed::class);
+        $this->call(DiscussConversationsTableSeed::class);
+        $this->call(DiscussPostsTableSeed::class);
+        $this->call(DiscussUsersTableSeed::class);
+        $this->call(DiscussLogsTableSeed::class);
     }
 }

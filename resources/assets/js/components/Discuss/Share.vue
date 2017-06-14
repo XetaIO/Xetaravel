@@ -8,16 +8,17 @@
     export default {
         props: [
             'postId',
+            'postType',
             'routeInput'
         ],
 
         methods: {
             getContent: function () {
-                return '<div class="discuss-thread-meta-share">' +
-                            '<span class="discuss-thread-meta-share-number font-weight-bold">' +
-                                'Post #' + this.postId +
+                return '<div class="discuss-conversation-meta-share">' +
+                            '<span class="discuss-conversation-meta-share-number font-weight-bold">' +
+                                this.postType + ' #' + this.postId +
                             '</span>' +
-                            '<input onFocus="this.select()" autofocus="autofocus" class="discuss-thread-meta-share-input form-control" value="' + this.routeInput + '">' +
+                            '<input onFocus="this.select()" autofocus="autofocus" class="discuss-conversation-meta-share-input form-control" value="' + this.routeInput + '">' +
                         '</div>';
             },
             getTemplate: function () {

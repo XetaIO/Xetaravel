@@ -12,7 +12,7 @@
 
     @php
         $config = [
-            'id' => 'threadEditor',
+            'id' => 'conversationEditor',
             'height' => '350'
         ];
     @endphp
@@ -41,7 +41,7 @@
             <h3 class="text-xs-center">
                 Start a discussion
             </h3>
-            {!! Form::open(['route' => 'discuss.thread.create', 'method' => 'post']) !!}
+            {!! Form::open(['route' => 'discuss.conversation.create', 'method' => 'post']) !!}
 
                 {!! Form::bsText(
                     'title',
@@ -70,18 +70,18 @@
                     [
                         'class' => 'form-control',
                         'required' => 'required',
-                        'editor' => 'threadEditor',
+                        'editor' => 'conversationEditor',
                         'style' => 'display:none;'
                     ]
                 ) !!}
 
-                <div class="form-group">
-                    <h5 class="text-muted">
-                        Moderation
-                    </h5>
-                </div>
+                @permission ('manage.discuss.conversations')
+                    <div class="form-group">
+                        <h5 class="text-muted">
+                            Moderation
+                        </h5>
+                    </div>
 
-                @permission ('manage.discuss.threads')
                     {!! Form::bsCheckbox(
                         'is_locked',
                         null,

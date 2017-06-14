@@ -1,46 +1,35 @@
-<div class="sidebar-module">
-    <div class="discuss-new-discussion-btn text-truncate">
-        {{ link_to(
-            route('discuss.thread.create'),
-            '<i class="fa fa-pencil"></i> Start a Discussion',
-            ['class' => 'btn btn-primary'],
-            true,
-            false
-        ) }}
-    </div>
-    <ol class="list-unstyled discuss-categories">
+<ol class="list-unstyled discuss-categories">
+    <li>
+        <a href="#" class="discuss-categories-link font-xeta">
+            <i class="fa fa-newspaper-o text-primary"></i> All Discussions
+        </a>
+    </li>
+    <li>
+        <a href="#" class="discuss-categories-link font-xeta">
+            <i class="fa fa-comments-o text-primary"></i> Most Commented
+        </a>
+    </li>
+</ol>
+<ol class="list-unstyled discuss-categories">
+    @forelse ($categories as $category)
         <li>
-            <a href="#" class="discuss-categories-link font-xeta">
-                <i class="fa fa-newspaper-o text-primary"></i> All Discussions
+            <a href="{{ $category->category_url }}" class="discuss-categories-link font-xeta">
+                <span class="discuss-categories-color" style="background-color: {{ $category->color }};"></span>
+                {{ $category->title }}
             </a>
         </li>
+    @empty
         <li>
-            <a href="#" class="discuss-categories-link font-xeta">
-                <i class="fa fa-comments-o text-primary"></i> Most Commented
-            </a>
+            There's no categories yet.
         </li>
-    </ol>
-    <ol class="list-unstyled discuss-categories">
-        @forelse ($categories as $category)
-            <li>
-                <a href="{{ $category->category_url }}" class="discuss-categories-link font-xeta">
-                    <span class="discuss-categories-color" style="background-color: {{ $category->color }};"></span>
-                    {{ $category->title }}
-                </a>
-            </li>
-        @empty
-            <li>
-                There's no categories yet.
-            </li>
-        @endforelse
+    @endforelse
 
-        @if ($categories->count() >= config('xetaravel.discuss.categories_sidebar'))
-            <li>
-                <a href="{{ route('discuss.category.index') }}" class="discuss-categories-link font-xeta">
-                    <span class="discuss-categories-color" style="background-color: transparent"></span>
-                    More...
-                </a>
-            </li>
-        @endif
-    </ol>
-</div>
+    @if ($categories->count() >= config('xetaravel.discuss.categories_sidebar'))
+        <li>
+            <a href="{{ route('discuss.category.index') }}" class="discuss-categories-link font-xeta">
+                <span class="discuss-categories-color" style="background-color: transparent"></span>
+                More...
+            </a>
+        </li>
+    @endif
+</ol>

@@ -12,9 +12,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Xetaravel\Events\UserUpdated' => [
-            'Xetaravel\Listeners\UserListener',
-        ]
+        //
     ];
 
     /**
@@ -23,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        \Xetaravel\Listeners\Subscribers\BadgeSubscriber::class
+        \Xetaravel\Listeners\Subscribers\BadgeSubscriber::class,
+        \Xetaravel\Listeners\Subscribers\Discuss\LogSubscriber::class
     ];
 
     /**

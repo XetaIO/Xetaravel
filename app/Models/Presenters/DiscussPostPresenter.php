@@ -3,7 +3,7 @@ namespace Xetaravel\Models\Presenters;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
 
-trait DiscussCommentPresenter
+trait DiscussPostPresenter
 {
     /**
      * Get the content parsed in HTML.
@@ -16,12 +16,12 @@ trait DiscussCommentPresenter
     }
 
     /**
-     * Get the comment url.
+     * Get the post url.
      *
      * @return string
      */
-    public function getCommentUrlAttribute(): string
+    public function getPostUrlAttribute(): string
     {
-        return route('discuss.comment.show', ['id' => $this->getKey()]);
+        return route('discuss.post.show', ['id' => $this->getKey()]);
     }
 }

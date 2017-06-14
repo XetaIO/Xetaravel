@@ -2,6 +2,8 @@
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\Sluggable;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\Presenters\DiscussCategoryPresenter;
 
 class DiscussCategory extends Model
@@ -44,12 +46,29 @@ class DiscussCategory extends Model
     }
 
     /**
-     * Get the threads for the category.
+     * Get the conversations for the category.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function threads()
+    public function conversations()
     {
-        return $this->hasMany(DiscussThread::class);
+        return $this->hasMany(DiscussConversation::class);
+    }
+
+    /**
+     * Pluck the categories by the given fields and the locked state.
+     *
+     * @param string $value
+     * @param string|null $column
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function pluckLocked($value, $column = null): Collection
+    {
+        if (Auth::user()->hasPermission('manage.discuss.conversations')) {
+            return self::pluck($value, $column);
+        }
+
+        return self::where('is_locked', false)->pluck($value, $column);
     }
 }

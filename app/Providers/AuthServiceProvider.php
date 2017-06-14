@@ -3,10 +3,10 @@ namespace Xetaravel\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Xetaravel\Models\DiscussComment;
-use Xetaravel\Models\DiscussThread;
-use Xetaravel\Policies\DiscussCommentPolicy;
-use Xetaravel\Policies\DiscussThreadPolicy;
+use Xetaravel\Models\DiscussPost;
+use Xetaravel\Models\DiscussConversation;
+use Xetaravel\Policies\DiscussPostPolicy;
+use Xetaravel\Policies\DiscussConversationPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,8 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        DiscussComment::class => DiscussCommentPolicy::class,
-        DiscussThread::class => DiscussThreadPolicy::class,
+        DiscussPost::class => DiscussPostPolicy::class,
+        DiscussConversation::class => DiscussConversationPolicy::class,
     ];
 
     /**

@@ -14,11 +14,10 @@ class CommentRepository
      *
      * @return \Xetaravel\Models\Comment
      */
-    public static function create(array $data, $user): Comment
+    public static function create(array $data): Comment
     {
         return Comment::create([
             'article_id' => $data['article_id'],
-            'user_id' => $user->id,
             'content' => $data['content']
         ]);
     }

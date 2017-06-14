@@ -38,8 +38,8 @@ return [
             'articles_profile_page' => 15
         ],
         'discuss' => [
-            'thread_per_page' => 15,
-            'comment_per_page' => 10
+            'conversation_per_page' => 15,
+            'post_per_page' => 10
         ]
     ],
 
@@ -56,7 +56,7 @@ return [
            'comment' => 30
         ],
         'discuss' => [
-            'thread' => 60
+            'conversation' => 60
         ]
     ],
 
@@ -68,6 +68,8 @@ return [
     |
     */
     'discuss' => [
-        'categories_sidebar' => 15
+        'categories_sidebar' => 15,
+        // The number in days.
+        'info_message_old_conversation' => 92
     ]
 ];

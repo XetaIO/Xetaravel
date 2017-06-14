@@ -32,14 +32,14 @@ class CommentController extends Controller
                 ->with('danger', 'This article doesn\'t exist or you can not reply to it !');
         }
 
-        if (Comment::isFlooding(Auth::user(), 'xetaravel.flood.blog.comment')) {
+        if (Comment::isFlooding('xetaravel.flood.blog.comment')) {
             return back()
                 ->withInput()
                 ->with('danger', 'Wow, keep calm bro, and try to not flood !');
         }
 
         CommentValidator::create($request->all())->validate();
-        $comment = CommentRepository::create($request->all(), Auth::user());
+        $comment = CommentRepository::create($request->all());
 
         $parser = new MentionParser($comment);
         $content = $parser->parse($comment->content);
@@ -67,16 +67,13 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
-        //Count the number of comment before this message.
         $commentsBefore = Comment::where([
             ['article_id', $comment->article_id],
             ['created_at', '<', $comment->created_at]
         ])->count();
 
-        //Get the number of messages per page.
         $commentsPerPage = config('xetaravel.pagination.blog.comment_per_page');
 
-        //Calculate the page.
         $page = floor($commentsBefore / $commentsPerPage) + 1;
         $page = ($page > 1) ? $page : 1;
 

@@ -19,7 +19,7 @@ class CreateDiscussCategoriesTable extends Migration
             $table->string('slug')->unique()->index();
             $table->text('description');
             $table->string('color', 7)->default('#e7edf3');
-            $table->integer('thread_count')->unsigned()->default(0);
+            $table->integer('conversation_count')->unsigned()->default(0);
             $table->boolean('is_locked')->default(false);
             $table->timestamps();
         });

@@ -2,10 +2,10 @@
 namespace Xetaravel\Policies;
 
 use Xetaravel\Models\User;
-use Xetaravel\Models\DiscussComment;
+use Xetaravel\Models\DiscussPost;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DiscussCommentPolicy
+class DiscussPostPolicy
 {
     use HandlesAuthorization;
 
@@ -19,34 +19,34 @@ class DiscussCommentPolicy
      */
     public function before(User $user, string $ability)
     {
-        if ($user->hasPermission('manage.discuss.comments')) {
+        if ($user->hasPermission('manage.discuss.posts')) {
             return true;
         }
     }
 
     /**
-     * Determine whether the user can update the discussComment.
+     * Determine whether the user can update the discuss post.
      *
      * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussComment $discussComment
+     * @param \Xetaravel\Models\DiscussPost $discussPost
      *
      * @return bool
      */
-    public function update(User $user, DiscussComment $discussComment)
+    public function update(User $user, DiscussPost $discussPost)
     {
-        return $user->id === $discussComment->user_id;
+        return $user->id === $discussPost->user_id;
     }
 
     /**
-     * Determine whether the user can delete the discussComment.
+     * Determine whether the user can delete the discuss post.
      *
      * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussComment $discussComment
+     * @param \Xetaravel\Models\DiscussPost $discussPost
      *
      * @return bool
      */
-    public function delete(User $user, DiscussComment $discussComment)
+    public function delete(User $user, DiscussPost $discussPost)
     {
-        return $user->id === $discussComment->user_id;
+        return $user->id === $discussPost->user_id;
     }
 }

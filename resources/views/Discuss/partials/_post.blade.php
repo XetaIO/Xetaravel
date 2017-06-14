@@ -1,9 +1,9 @@
 
 @if (get_class($post) !== \Xetaravel\Models\DiscussLog::class)
-    <div class="discuss-thread {{ $solved ? 'discuss-thread-solved bg-success' : ''}}">
-        <div class="discuss-thread-user float-xs-left text-xs-center">
-            @if ($solved)
-                <span class="discuss-thread-user-solved rounded-circle" data-toggle="tooltip" title="This response helped the author.">
+    <div id="post-{{ $post->id }}" class="discuss-conversation {{ $isSolvedPost ? 'discuss-conversation-solved bg-success' : ''}}">
+        <div class="discuss-conversation-user float-xs-left text-xs-center">
+            @if ($isSolvedPost)
+                <span class="discuss-conversation-user-solved rounded-circle" data-toggle="tooltip" title="This response helped the author.">
                     <i class="fa fa-3x fa-check text-success"></i>
                     <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
                 </span>
@@ -12,10 +12,10 @@
             @endif
         </div>
 
-        <div class="discuss-thread-post">
+        <div class="discuss-conversation-post">
 
-            {{-- Thread Meta --}}
-            <div class="discuss-thread-meta">
+            {{-- Conversation Meta --}}
+            <div class="discuss-conversation-meta">
                 <ul class="list-inline mb-0">
 
                     {{-- User with Vue --}}
@@ -48,29 +48,23 @@
                     @endif
 
                     {{-- Share --}}
-                    <li class="list-inline-item float-xs-right">
-                        @if ($is_thread)
-                            <discuss-share
-                                :post-id="{{ var_export($post->getKey()) }}"
-                                :route-input="{{ var_export(route('discuss.thread.show', ['slug' => $post->slug, 'id' => $post->getKey()])) }}">
-                            </discuss-share>
-                        @else
-                            <discuss-share
-                                :post-id="{{ var_export($post->getKey()) }}"
-                                :route-input="{{ var_export(route('discuss.comment.show', ['id' => $post->getKey()])) }}">
-                            </discuss-share>
-                        @endif
+                    <li class="discuss-conversation-post-meta-share list-inline-item float-xs-right">
+                        <discuss-share
+                            :post-id="{{ var_export($post->getKey()) }}"
+                            :post-type="{{ var_export('Post') }}"
+                            :route-input="{{ var_export(route('discuss.post.show', ['id' => $post->getKey()])) }}">
+                        </discuss-share>
                     </li>
                 </ul>
             </div>
 
-            {{-- Thread Content --}}
-            <div class="discuss-thread-content">
+            {{-- Conversation Content --}}
+            <div class="discuss-conversation-content">
                 {!! $post->content_markdown !!}
             </div>
 
-            {{-- Thread Actions --}}
-            <div class="discuss-thread-actions">
+            {{-- Conversation Actions --}}
+            <div class="discuss-conversation-actions">
                 <ul class="list-inline mb-0">
 
                     {{-- Others actions --}}
@@ -79,16 +73,18 @@
                             <button href="#" class="btn btn-link" type="button" id="dropdownActionsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-fw fa-ellipsis-h"></i>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownActionsMenu">
+                            <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownActionsMenu">
                                 {{-- Moderation actions --}}
                                 @can('update', $post)
                                     <a class="dropdown-item" href="#">Edit</a>
                                 @endcan
 
-                                @can('delete', $post)
-                                    <h6 class="dropdown-header">Moderation</h6>
-                                    <a class="dropdown-item" href="#">Delete</a>
-                                @endcan
+                                @if ($post->id !== $conversation->first_post_id)
+                                    @can('delete', $post)
+                                        <h6 class="dropdown-header">Moderation</h6>
+                                        <a class="dropdown-item" href="#">Delete</a>
+                                    @endcan
+                                @endif
                             </div>
                         </div>
                     </li>
@@ -101,7 +97,7 @@
                     </li>-->
 
                     {{-- Reply action --}}
-                    @if (!$thread->is_locked)
+                    @if (!$conversation->is_locked)
                         <li class="list-inline-item float-xs-right">
                             @auth
                                 <a href="#" class="btn btn-link">
@@ -116,24 +112,24 @@
                     @endif
 
                     {{-- Solved action --}}
-                    @unless ($comment == false)
+                    @if ($post->id !== $conversation->first_post_id && is_null($conversation->solved_post_id))
                         <li class="list-inline-item float-xs-right">
-                            <a href="{{ route('discuss.comment.solved', ['id' => $post->id]) }}" class="btn btn-link text-success" data-toggle="tooltip" title="Mark this response as solved.">
+                            <a href="{{ route('discuss.post.solved', ['id' => $post->id]) }}" class="btn btn-link text-success" data-toggle="tooltip" title="Mark this response as solved.">
                                 <i class="fa fa-check"></i>
                             </a>
                         </li>
-                    @endunless
+                    @endif
                 </ul>
             </div>
 
             {{-- User Signature --}}
             @empty (!$post->user->signature)
-                <div class="discuss-thread-signature">
+                <div class="discuss-conversation-signature">
                     {!! Markdown::convertToHtml($post->user->signature) !!}
                 </div>
             @endempty
         </div>
     </div>
 @else
-    @include('Discuss::partials._thread-log', ['log' => $post])
+    @include('Discuss::partials._log', ['log' => $post])
 @endif

@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiscussCommentsTable extends Migration
+class CreateDiscussPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class CreateDiscussCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discuss_comments', function (Blueprint $table) {
+        Schema::create('discuss_posts', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('thread_id')->unsigned()->index();
+            $table->integer('conversation_id')->unsigned()->index();
             $table->longText('content');
+            $table->integer('edit_count')->unsigned()->default(0);
             $table->boolean('is_edited')->default(false);
             $table->integer('edited_user_id')->unsigned()->nullable()->index();
             $table->timestamp('edited_at')->nullable();
@@ -29,17 +30,18 @@ class CreateDiscussCommentsTable extends Migration
          * Only create foreign key on production/development.
          */
         if (App::environment() !== 'testing') {
-            Schema::table('discuss_threads', function (Blueprint $table) {
+            Schema::table('discuss_conversations', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->foreign('category_id')->references('id')->on('discuss_categories')->onDelete('cascade');
-                $table->foreign('solved_comment_id')->references('id')->on('discuss_comments');
-                $table->foreign('last_comment_id')->references('id')->on('discuss_comments');
+                $table->foreign('first_post_id')->references('id')->on('discuss_posts');
+                $table->foreign('solved_post_id')->references('id')->on('discuss_posts');
+                $table->foreign('last_post_id')->references('id')->on('discuss_posts');
                 $table->foreign('edited_user_id')->references('id')->on('users');
             });
 
-            Schema::table('discuss_comments', function (Blueprint $table) {
+            Schema::table('discuss_posts', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-                $table->foreign('thread_id')->references('id')->on('discuss_threads')->onDelete('cascade');
+                $table->foreign('conversation_id')->references('id')->on('discuss_conversations')->onDelete('cascade');
                 $table->foreign('edited_user_id')->references('id')->on('users');
             });
         }
@@ -52,6 +54,6 @@ class CreateDiscussCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discuss_comments');
+        Schema::dropIfExists('discuss_posts');
     }
 }

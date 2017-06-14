@@ -2,21 +2,21 @@
 namespace Xetaravel\Models\Gates;
 
 use Carbon\Carbon;
-use Xetaravel\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 trait FloodGate
 {
     /**
      * Check whatever the user is flooding or not.
      *
-     * @param \Xetaravel\Models\User $user The user to check.
      * @param string $rule The configuration rule to use.
      *
      * @return bool
      */
-    public static function isFlooding(User $user, string $rule = 'xetaravel.flood.general'): bool
+    public static function isFlooding(string $rule = 'xetaravel.flood.general'): bool
     {
         $class = get_called_class();
+        $user = Auth::user();
 
         return $class::where('user_id', $user->id)
             ->where(

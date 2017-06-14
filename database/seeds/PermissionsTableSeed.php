@@ -39,9 +39,9 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Manage Discuss Threads',
-                'slug' => 'manage.discuss.threads',
-                'description' => 'The user can manage the discuss threads.',
+                'name' => 'Manage Discuss Conversations',
+                'slug' => 'manage.discuss.conversations',
+                'description' => 'The user can manage the discuss conversations.',
                 'is_deletable' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -55,9 +55,9 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Manage Discuss Comments',
-                'slug' => 'manage.discuss.comments',
-                'description' => 'The user can manage the discuss comments.',
+                'name' => 'Manage Discuss Posts',
+                'slug' => 'manage.discuss.posts',
+                'description' => 'The user can manage the discuss posts.',
                 'is_deletable' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

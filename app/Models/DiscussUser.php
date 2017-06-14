@@ -1,12 +1,12 @@
 <?php
 namespace Xetaravel\Models;
 
+use Eloquence\Behaviours\CountCache\Countable;
 use Illuminate\Support\Facades\Auth;
-use Xetaravel\Models\Presenters\DiscussLogPresenter;
 
-class DiscussLog extends Model
+class DiscussUser extends Model
 {
-    use DiscussLogPresenter;
+    use Countable;
 
     /**
      * The attributes that are mass assignable.
@@ -15,19 +15,7 @@ class DiscussLog extends Model
      */
     protected $fillable = [
         'user_id',
-        'loggable_id',
-        'loggable_type',
-        'event_type',
-        'data'
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'data' => 'array'
+        'conversation_id'
     ];
 
     /**
@@ -39,14 +27,26 @@ class DiscussLog extends Model
     {
         parent::boot();
 
-        // Set the user id to the new post before saving it.
+        // Set the user id to the new user before saving it.
         static::creating(function ($model) {
             $model->user_id = Auth::id();
         });
     }
 
     /**
-     * Get the user that owns the log.
+     * Return the count cache configuration.
+     *
+     * @return array
+     */
+    public function countCaches(): array
+    {
+        return [
+            'user_count' => [DiscussConversation::class, 'conversation_id', 'id']
+        ];
+    }
+
+    /**
+     * Get the user that owns the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -56,12 +56,12 @@ class DiscussLog extends Model
     }
 
     /**
-     * Get the loggable relation.
+     * Get the conversation that owns the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function loggable()
+    public function conversation()
     {
-        return $this->morphTo();
+        return $this->belongsTo(DiscussConversation::class);
     }
 }

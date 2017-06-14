@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
-use Xetaravel\Models\Presenters\DiscussThreadPresenter;
+use Xetaravel\Models\Presenters\DiscussConversationPresenter;
 use Xetaravel\Models\Scopes\DisplayScope;
 use Xetaravel\Models\User;
 
-class DiscussThread extends Model
+class DiscussConversation extends Model
 {
     use Countable,
         Sluggable,
         FloodGate,
-        DiscussThreadPresenter,
+        DiscussConversationPresenter,
         HasMentionsTrait;
 
     /**
@@ -31,12 +31,13 @@ class DiscussThread extends Model
         'category_id',
         'title',
         'slug',
-        'content',
-        'comment_count',
+        'post_count',
+        'participants_count',
         'is_locked',
         'is_pinned',
         'is_solved',
-        'is_edited'
+        'is_edited',
+        'edit_count'
     ];
 
     /**
@@ -45,7 +46,7 @@ class DiscussThread extends Model
      * @var array
      */
     protected $appends = [
-        'thread_url',
+        'conversation_url',
         'last_page'
     ];
 
@@ -72,7 +73,7 @@ class DiscussThread extends Model
             $model->generateSlug();
         });
 
-        // Set the user id to the new thread before saving it.
+        // Set the user id to the new conversation before saving it.
         static::creating(function ($model) {
             $model->user_id = Auth::id();
         });
@@ -96,13 +97,13 @@ class DiscussThread extends Model
     public function countCaches(): array
     {
         return [
-            'discuss_thread_count' => [User::class, 'user_id', 'id'],
-            'thread_count' => [DiscussCategory::class, 'category_id', 'id']
+            'discuss_conversation_count' => [User::class, 'user_id', 'id'],
+            'conversation_count' => [DiscussCategory::class, 'category_id', 'id']
         ];
     }
 
     /**
-     * Get the category that owns the thread.
+     * Get the category that owns the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -112,7 +113,7 @@ class DiscussThread extends Model
     }
 
     /**
-     * Get the user that owns the thread.
+     * Get the user that owns the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -122,37 +123,57 @@ class DiscussThread extends Model
     }
 
     /**
-     * Get the comments for the thread.
+     * Get the posts for the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comments()
+    public function posts()
     {
-        return $this->hasMany(DiscussComment::class, 'thread_id', 'id');
+        return $this->hasMany(DiscussPost::class, 'conversation_id', 'id');
     }
 
     /**
-     * Get the solved comment of the thread.
+     * Get the posts for the conversation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(DiscussUser::class, 'conversation_id', 'id');
+    }
+
+    /**
+     * Get the first post of the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function solvedComment()
+    public function firstPost()
     {
-        return $this->hasOne(DiscussComment::class, 'id', 'solved_comment_id');
+        return $this->hasOne(DiscussPost::class, 'id', 'first_post_id');
     }
 
     /**
-     * Get the last comment of the thread.
+     * Get the solved post of the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function lastComment()
+    public function solvedPost()
     {
-        return $this->hasOne(DiscussComment::class, 'id', 'last_comment_id');
+        return $this->hasOne(DiscussPost::class, 'id', 'solved_post_id');
     }
 
     /**
-     * Get the user that edited the thread.
+     * Get the last post of the conversation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lastPost()
+    {
+        return $this->hasOne(DiscussPost::class, 'id', 'last_post_id');
+    }
+
+    /**
+     * Get the user that edited the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -162,7 +183,7 @@ class DiscussThread extends Model
     }
 
     /**
-     * Get the discuss logs for the thread.
+     * Get the discuss logs for the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -172,31 +193,28 @@ class DiscussThread extends Model
     }
 
     /**
-     * Get the logs and comments related to the current thread
-     * for the given the pagination comments and return the data
+     * Get the logs and posts related to the current conversation
+     * for the given the pagination posts and return the data
      * ordered by `created_at` as a Collection.
      *
-     * @param \Illuminate\Support\Collection $comments
+     * @param \Illuminate\Support\Collection $posts
      * @param int $page
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getCommentWithLogs(Collection $comments, int $page): Collection
+    public function getPostsWithLogs(Collection $posts, int $page): Collection
     {
         $logs = DiscussLog::where([
             'loggable_type' => get_class($this),
             'loggable_id' => $this->getKey(),
         ]);
 
-        if ($comments->isEmpty()) {
-            return $comments->merge($logs->get())->sortBy('created_at');
-        }
-        $previousComment = $this->getPreviousComment($comments->last()->created_at);
+        $previousPost = $this->getPreviousPost($posts->first()->created_at);
 
         // When there're several pages and the current page is not the first and not the last.
         if ($this->lastPage > $page && $page !== 1) {
-            $logs = $logs->where('created_at', '<=', $comments->last()->created_at)
-                ->where('created_at', '>=', $previousComment->created_at);
+            $logs = $logs->where('created_at', '<=', $posts->last()->created_at)
+                ->where('created_at', '>=', $previousPost->created_at);
 
         // When there're only one page.
         } elseif ($this->lastPage == 1) {
@@ -204,30 +222,38 @@ class DiscussThread extends Model
 
         // When there're several pages and the current page is the first page.
         } elseif ($page == 1) {
-            $logs = $logs->where('created_at', '<=', $comments->last()->created_at);
+            $logs = $logs->where('created_at', '<=', $posts->last()->created_at);
 
         // When there're several page and the current page is the last page
         } elseif ($page == $this->lastPage) {
-            $logs = $logs->where('created_at', '>=', $previousComment->created_at);
+            $logs = $logs->where('created_at', '>', $previousPost->created_at);
         }
-        $logs = $logs->get();
+        $postsWithLogs = $posts->merge($logs->get())->sortBy('created_at');
 
-        $commentsWithLogs = $comments->merge($logs);
+        // If the conversation has a solved post, prepend it
+        // then prepend the first post to the collection
+        if ($this->lastPage == 1 || $page == 1) {
+            if (!is_null($this->solved_post_id)) {
+                $postsWithLogs->prepend(DiscussPost::findOrFail($this->solved_post_id));
+            }
+            $postsWithLogs->prepend(DiscussPost::findOrFail($this->first_post_id));
+        }
 
-        return $commentsWithLogs->sortBy('created_at');
+        return $postsWithLogs;
     }
 
     /**
-     * Get the previous comment related to the current thread with
+     * Get the previous post related to the current conversation with
      * the given date.
      *
      * @param string $createdAt
      *
-     * @return \Xetaravel\Models\DiscussComment|null
+     * @return \Xetaravel\Models\DiscussPost|null
      */
-    protected function getPreviousComment(string $createdAt)
+    protected function getPreviousPost(string $createdAt)
     {
-        return DiscussComment::where('id', '!=', $this->solved_comment_id)
+        return DiscussPost::where('id', '!=', $this->solved_post_id)
+                ->where('conversation_id', $this->getKey())
                 ->where('created_at', '<', $createdAt)
                 ->orderBy('created_at', 'desc')
                 ->first();

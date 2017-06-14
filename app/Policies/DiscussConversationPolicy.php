@@ -2,10 +2,10 @@
 namespace Xetaravel\Policies;
 
 use Xetaravel\Models\User;
-use Xetaravel\Models\DiscussThread;
+use Xetaravel\Models\DiscussConversation;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DiscussThreadPolicy
+class DiscussConversationPolicy
 {
     use HandlesAuthorization;
 
@@ -25,28 +25,28 @@ class DiscussThreadPolicy
     }
 
     /**
-     * Determine whether the user can update the discussThread.
+     * Determine whether the user can update the discuss conversation.
      *
      * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussThread $discussThread
+     * @param \Xetaravel\Models\DiscussConversation $discussConversation
      *
      * @return bool
      */
-    public function update(User $user, DiscussThread $discussThread)
+    public function update(User $user, DiscussConversation $discussConversation)
     {
-        return $user->id === $discussThread->user_id;
+        return $user->id === $discussConversation->user_id;
     }
 
     /**
-     * Determine whether the user can delete the discussThread.
+     * Determine whether the user can delete the discuss conversation.
      *
      * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussThread $discussThread
+     * @param \Xetaravel\Models\DiscussConversation $discussConversation
      *
      * @return bool
      */
-    public function delete(User $user, DiscussThread $discussThread)
+    public function delete(User $user, DiscussConversation $discussConversation)
     {
-        return $user->id === $discussThread->user_id;
+        return $user->id === $discussConversation->user_id;
     }
 }

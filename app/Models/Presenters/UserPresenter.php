@@ -165,6 +165,18 @@ trait UserPresenter
     }
 
     /**
+     * We must decrement the post count due to the first post being counted.
+     *
+     * @param int $count The actual post count cache.
+     *
+     * @return int
+     */
+    public function getDiscussPostCountAttribute($count): int
+    {
+        return $count - $this->discuss_conversation_count;
+    }
+
+    /**
      * Parse a mdedia and return it if isset or return the default avatar.
      *
      * @param string $type The type of the media to get.

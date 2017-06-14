@@ -1,11 +1,11 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
-use Xetaravel\Events\Discuss\CommentWasDeletedEvent;
-use Xetaravel\Events\Discuss\ThreadTitleWasChangedEvent;
-use Xetaravel\Events\Discuss\ThreadCategoryWasChangedEvent;
-use Xetaravel\Events\Discuss\ThreadWasLockedEvent;
-use Xetaravel\Events\Discuss\ThreadWasPinnedEvent;
+use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
+use Xetaravel\Events\Discuss\ConversationWasLockedEvent;
+use Xetaravel\Events\Discuss\ConversationWasPinnedEvent;
+use Xetaravel\Events\Discuss\PostWasDeletedEvent;
+use Xetaravel\Events\Discuss\TitleWasChangedEvent;
 use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\User;
 
@@ -19,19 +19,19 @@ trait DiscussLogPresenter
     public function getTypeAttribute()
     {
         switch ($this->event_type) {
-            case ThreadCategoryWasChangedEvent::class:
+            case CategoryWasChangedEvent::class:
                 return 'category';
                 break;
-            case ThreadTitleWasChangedEvent::class:
+            case TitleWasChangedEvent::class:
                 return 'title';
                 break;
-            case ThreadWasLockedEvent::class:
+            case ConversationWasLockedEvent::class:
                 return 'locked';
                 break;
-            case ThreadWasPinnedEvent::class:
+            case ConversationWasPinnedEvent::class:
                 return 'pinned';
                 break;
-            case CommentWasDeletedEvent::class:
+            case PostWasDeletedEvent::class:
                 return 'deleted';
                 break;
             default:
@@ -40,17 +40,17 @@ trait DiscussLogPresenter
     }
 
     /**
-     * Get the user related to the deleted comment.
+     * Get the user related to the deleted post.
      *
-     * @return null|\Xetaravel\Models\DiscussCategory
+     * @return null|\Xetaravel\Models\User
      */
-    public function getCommentUserAttribute()
+    public function getPostUserAttribute()
     {
-        if ($this->event_type !== CommentWasDeletedEvent::class) {
+        if ($this->event_type !== PostWasDeletedEvent::class) {
             return null;
         }
 
-        return User::find($this->data['comment_user_id']);
+        return User::find($this->data['post_user_id']);
     }
 
     /**
@@ -60,7 +60,7 @@ trait DiscussLogPresenter
      */
     public function getOldCategoryAttribute()
     {
-        if ($this->event_type !== ThreadCategoryWasChangedEvent::class) {
+        if ($this->event_type !== CategoryWasChangedEvent::class) {
             return null;
         }
 
@@ -74,7 +74,7 @@ trait DiscussLogPresenter
      */
     public function getNewCategoryAttribute()
     {
-        if ($this->event_type !== ThreadCategoryWasChangedEvent::class) {
+        if ($this->event_type !== CategoryWasChangedEvent::class) {
             return null;
         }
 

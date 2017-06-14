@@ -1,5 +1,5 @@
-<div class="discuss-thread discuss-thread-log discuss-thread-log-{{ $log->type }}">
-    <span class="discuss-thread-log-icon">
+<div class="discuss-conversation discuss-conversation-log discuss-conversation-log-{{ $log->type }}">
+    <span class="discuss-conversation-log-icon">
         @if ($log->type == 'category')
             <i class="fa fa-tag"></i>
         @elseif ($log->type == 'title')
@@ -9,7 +9,7 @@
         @elseif ($log->type == 'pinned')
             <i class="fa fa-thumb-tack"></i>
         @elseif ($log->type == 'deleted')
-            <i class="fa fa-trash-o"></i>
+            <i class="fa fa-trash"></i>
         @endif
     </span>
     <img src="{{ $log->user->avatar_small }}" class="rounded-circle" />
@@ -45,12 +45,12 @@
         <strong>{{ $log->data['new'] }}</strong>
         {!! $time !!}
 
-    {{-- Thread Locked --}}
+    {{-- Conversation Locked --}}
     @elseif ($log->type == 'locked')
         locked the discussion
         {!! $time !!}
 
-    {{-- Thread Pinned --}}
+    {{-- Conversation Pinned --}}
     @elseif ($log->type == 'pinned')
         pinned the discussion
         {!! $time !!}
@@ -59,10 +59,10 @@
     @elseif ($log->type == 'deleted')
         deleted a comment from
         <discuss-user
-            :user="{{ json_encode($log->commentUser) }}"
-            :created-at="{{ var_export($log->commentUser->created_at->diffForHumans()) }}"
-            :last-login="{{ var_export($log->commentUser->last_login->diffForHumans()) }}"
-            :background-color="{{ var_export($log->commentUser->avatar_primary_color) }}">
+            :user="{{ json_encode($log->postUser) }}"
+            :created-at="{{ var_export($log->postUser->created_at->diffForHumans()) }}"
+            :last-login="{{ var_export($log->postUser->last_login->diffForHumans()) }}"
+            :background-color="{{ var_export($log->postUser->avatar_primary_color) }}">
         </discuss-user>
 
         {!! $time !!}
