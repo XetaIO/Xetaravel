@@ -1,6 +1,7 @@
 <template>
-    <a href="javascript:void(0);" data-toggle="tooltip" title="Share">
-        <i class="fa fa-share" aria-hidden="true" data-toggle="popover" data-html="true" data-placement="left" data-trigger="click" :data-template="getTemplate()" :data-content="getContent()"></i>
+    <a href="javascript:void(0);" data-toggle="popover" data-html="true" data-placement="left" data-trigger="click" :data-template="getTemplate()" :data-content="getContent()">
+        <i class="fa fa-share" aria-hidden="true"></i>
+        Share
     </a>
 </template>
 

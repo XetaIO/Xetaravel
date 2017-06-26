@@ -57,7 +57,7 @@
                     @endif
                 </div>
                 <small>
-                    @if (!is_null($conversation->lastPost))
+                    @if ($conversation->first_post_id !== $conversation->last_post_id)
                         <i class="fa fa-reply"></i>
                         <discuss-user
                             :user="{{ json_encode($conversation->lastPost->user) }}"
@@ -86,7 +86,10 @@
             </div>
         </li>
     @empty
-        There're no conversations yet.
+        <div class="alert alert-primary" role="alert">
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+            There're no conversations yet.
+        </div>
     @endforelse
 </ul>
 

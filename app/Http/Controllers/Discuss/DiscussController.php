@@ -6,6 +6,11 @@ use Xetaravel\Models\DiscussConversation;
 
 class DiscussController extends Controller
 {
+    /**
+     * Display all conversations.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index(): View
     {
         $conversations = DiscussConversation::with('User', 'Category', 'FirstPost', 'LastPost')

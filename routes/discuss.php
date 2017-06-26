@@ -43,6 +43,10 @@ Route::group([
         // Post Routes
         Route::post('post/create', 'PostController@create')
             ->name('discuss.post.create');
+
+        Route::delete('post/delete/{id}', 'PostController@delete')
+            ->name('discuss.post.delete');
+
         Route::get('post/solved/{id}', 'PostController@solved')
             ->name('discuss.post.solved');
     });

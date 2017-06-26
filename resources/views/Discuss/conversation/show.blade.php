@@ -7,17 +7,19 @@
 @endpush
 
 @push('scripts')
-    {!! editor_js() !!}
-    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+    @if($conversation->is_locked == false)
+        {!! editor_js() !!}
+        <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
 
-    @php
-        $config = [
-            'id' => 'commentEditor',
-            'height' => '350'
-        ];
-    @endphp
+        @php
+            $config = [
+                'id' => 'commentEditor',
+                'height' => '350'
+            ];
+        @endphp
 
-    @include('editor/partials/_comment', $config)
+        @include('editor/partials/_comment', $config)
+    @endif
 
 
     <script src="{{ mix('js/highlight.min.js') }}"></script>
@@ -244,7 +246,7 @@
     </div>
 </div>
 
-{{-- Edit Modal --}}
+{{-- Edit Conversation Modal --}}
 <div class="modal fade" id="editDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="editDiscussionModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -326,7 +328,7 @@
     </div>
 </div>
 
-{{-- Delete Modal --}}
+{{-- Delete Conversation Modal --}}
 <div class="modal fade" id="deleteDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="deleteDiscussionModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -352,6 +354,47 @@
                     </div>
                 </div>
 
+
+                <div class="modal-actions">
+                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
+                    <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        Close
+                    </button>
+                </div>
+
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+{{-- Delete Post Modal --}}
+<div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePostModalLabel">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete the post
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {!! Form::open([
+                'route' => ['discuss.post.delete', 'id' => $post->id],
+                'method' => 'delete',
+                'id' => 'deletePostForm'
+            ]) !!}
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>
+                            Are you sure you want delete this post ? <strong>This operation is not reversible.</strong>
+                        </p>
+                    </div>
+                </div>
 
                 <div class="modal-actions">
                     {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}

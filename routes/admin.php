@@ -6,14 +6,14 @@
 |--------------------------------------------------------------------------
 */
 Route::group([
-        'namespace' => 'Admin',
-        'prefix' => 'admin',
-        'middleware' => [
-            'auth',
-            'permission:access.administration',
-            'permission:access.site'
-            ]
-    ], function () {
+    'namespace' => 'Admin',
+    'prefix' => 'admin',
+    'middleware' => [
+        'auth',
+        'permission:access.administration',
+        'permission:access.site'
+    ]
+], function () {
         Route::get('/', 'PageController@index')->name('admin.page.index');
 
         /*
@@ -132,5 +132,4 @@ Route::group([
             Route::delete('permission/delete/{id}', 'PermissionController@delete')
                 ->name('admin.role.permission.delete');
         });
-    }
-);
+});

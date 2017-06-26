@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussConversationPresenter;
+use Xetaravel\Models\Repositories\DiscussPostRepository;
 use Xetaravel\Models\Scopes\DisplayScope;
 use Xetaravel\Models\User;
 
@@ -209,7 +210,9 @@ class DiscussConversation extends Model
             'loggable_id' => $this->getKey(),
         ]);
 
-        $previousPost = $this->getPreviousPost($posts->first()->created_at);
+        if (!$posts->isEmpty()) {
+            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
+        }
 
         // When there're several pages and the current page is not the first and not the last.
         if ($this->lastPage > $page && $page !== 1) {
@@ -240,22 +243,5 @@ class DiscussConversation extends Model
         }
 
         return $postsWithLogs;
-    }
-
-    /**
-     * Get the previous post related to the current conversation with
-     * the given date.
-     *
-     * @param string $createdAt
-     *
-     * @return \Xetaravel\Models\DiscussPost|null
-     */
-    protected function getPreviousPost(string $createdAt)
-    {
-        return DiscussPost::where('id', '!=', $this->solved_post_id)
-                ->where('conversation_id', $this->getKey())
-                ->where('created_at', '<', $createdAt)
-                ->orderBy('created_at', 'desc')
-                ->first();
     }
 }

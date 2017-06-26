@@ -46,4 +46,20 @@ class DiscussPostRepository
 
         return $post;
     }
+
+    /**
+     * Find the previous post related to the given post.
+     *
+     * @param \Xetaravel\Models\DiscussPost $post
+     *
+     * @return \Xetaravel\Models\DiscussPost|null
+     */
+    public static function findPreviousPost(DiscussPost $post)
+    {
+        return DiscussPost::where('id', '!=', $post->conversation->solved_post_id)
+                ->where('conversation_id', $post->conversation->getKey())
+                ->where('created_at', '<', $post->created_at)
+                ->orderBy('created_at', 'desc')
+                ->first();
+    }
 }

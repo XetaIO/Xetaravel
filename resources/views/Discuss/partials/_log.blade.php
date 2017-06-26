@@ -55,7 +55,7 @@
         pinned the discussion
         {!! $time !!}
 
-    {{-- Comment Deleted --}}
+    {{-- Post Deleted --}}
     @elseif ($log->type == 'deleted')
         deleted a comment from
         <discuss-user

@@ -38,11 +38,12 @@ trait DiscussConversationPresenter
      */
     public function getLastPageAttribute(): int
     {
-        $posts = $this->post_count;
+        $posts = $this->post_count_formated;
 
         if ($this->is_solved) {
-            $posts = $this->post_count - 1;
+            $posts = $posts - 1;
         }
+
         $page = ceil($posts / config('xetaravel.pagination.discuss.post_per_page'));
 
         return ($page) ? $page : 1;

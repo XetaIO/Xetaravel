@@ -3,25 +3,23 @@
   "scripts": {
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-
     "watch-js": "npm run watch -- --watch-poll --env.mixfile=webpack.js.mix",
     "watch-sass": "npm run watch -- --watch-poll --env.mixfile=webpack.sass.mix",
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch-poll": "npm run watch -- --watch-poll",
-
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
+    "@types/node": "^7.0.31",
     "axios": "^0.15.3",
     "cross-env": "^3.2.3",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
-    "vue": "^2.3.3",
     "sprintf-js": "^1.1.1",
     "ts-loader": "^2.0.2",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.1",
+    "vue": "^2.3.3"
   }
 }

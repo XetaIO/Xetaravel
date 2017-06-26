@@ -76,13 +76,19 @@
                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownActionsMenu">
                                 {{-- Moderation actions --}}
                                 @can('update', $post)
-                                    <a class="dropdown-item" href="#">Edit</a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fa fa-pencil"></i>
+                                        Edit
+                                    </a>
                                 @endcan
 
                                 @if ($post->id !== $conversation->first_post_id)
                                     @can('delete', $post)
                                         <h6 class="dropdown-header">Moderation</h6>
-                                        <a class="dropdown-item" href="#">Delete</a>
+                                        <a class="dropdown-item" data-toggle="modal" href="#deletePostModal" data-target="#deletePostModal" data-form-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
+                                            <i class="fa fa-trash"></i>
+                                            Delete
+                                        </a>
                                     @endcan
                                 @endif
                             </div>
@@ -101,10 +107,12 @@
                         <li class="list-inline-item float-xs-right">
                             @auth
                                 <a href="#" class="btn btn-link">
+                                    <i class="fa fa-reply"></i>
                                     Reply
                                 </a>
                             @else
                                 <a href="{{ route('users.auth.login') }}" class="btn btn-link">
+                                    <i class="fa fa-reply"></i>
                                     Reply
                                 </a>
                             @endauth

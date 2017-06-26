@@ -83,6 +83,49 @@ class PostController extends Controller
     }
 
     /**
+     * Handle a delete action for the post.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, int $id): RedirectResponse
+    {
+        $post = DiscussPost::findOrFail($id);
+        $conversation = $post->conversation;
+
+        if ($conversation->first_post_id == $post->getKey()) {
+            return redirect()
+                ->route('discuss.post.show', ['id' => $post->getKey()])
+                ->with('danger', 'You can not deete the first post of a conversation !');
+        }
+
+        if ($conversation->last_post_id == $post->getKey()) {
+            $previousPost = DiscussPostRepository::findPreviousPost($post);
+
+            $conversation->last_post_id = $previousPost->getKey();
+        }
+
+        if ($conversation->solved_post_id == $post->getKey()) {
+            $conversation->solved_post_id = null;
+            $conversation->is_solved = false;
+        }
+
+        if ($post->delete()) {
+            $conversation->save();
+
+            return redirect()
+                ->route('discuss.conversation.show', ['id' => $conversation->getKey(), 'slug' => $conversation->slug])
+                ->with('success', 'This post has been deleted successfully !');
+        }
+
+        return redirect()
+            ->route('discuss.post.show', ['id' => $post->getKey()])
+            ->with('danger', 'An error occurred while deleting this post !');
+    }
+
+    /**
      * Mark as solved.
      *
      * @param \Illuminate\Http\Request $request
