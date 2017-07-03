@@ -1,7 +1,6 @@
 <?php
 namespace Xetaravel\Models\Validators;
 
-use Eloquence\Behaviours\Slug;
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
@@ -27,10 +26,8 @@ class DiscussConversationValidator
                 'integer',
                 Rule::in($categories->toArray())
             ],
-            'slug' => 'unique:discuss_conversations',
             'content' => 'required|min:10'
         ];
-        $data['slug'] = Slug::fromTitle($data['title']);
 
         return FacadeValidator::make($data, $rules);
     }
@@ -53,12 +50,8 @@ class DiscussConversationValidator
                 'required',
                 'integer',
                 Rule::in($categories->toArray())
-            ],
-            'slug' => [
-                Rule::unique('discuss_conversations')->ignore($id)
             ]
         ];
-        $data['slug'] = Slug::fromTitle($data['title']);
 
         return FacadeValidator::make($data, $rules);
     }

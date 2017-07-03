@@ -19,7 +19,7 @@ class DiscussConversationPolicy
      */
     public function before(User $user, string $ability)
     {
-        if ($user->hasPermission('manage.discuss.threads')) {
+        if ($user->hasPermission('manage.discuss.conversations')) {
             return true;
         }
     }

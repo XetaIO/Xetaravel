@@ -18,7 +18,7 @@ class CreateDiscussConversationsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->string('title');
-            $table->string('slug')->unique()->index();
+            $table->string('slug');
             $table->integer('post_count')->unsigned()->default(0);
             $table->integer('user_count')->unsigned()->default(0);
             $table->boolean('is_locked')->default(false);
