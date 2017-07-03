@@ -30,6 +30,10 @@ class CreateDiscussPostsTable extends Migration
          * Only create foreign key on production/development.
          */
         if (App::environment() !== 'testing') {
+            Schema::table('discuss_categories', function (Blueprint $table) {
+                $table->foreign('last_conversation_id')->references('id')->on('discuss_conversations');
+            });
+
             Schema::table('discuss_conversations', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->foreign('category_id')->references('id')->on('discuss_categories')->onDelete('cascade');

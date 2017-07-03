@@ -63,6 +63,9 @@
                 {!! $post->content_markdown !!}
             </div>
 
+            {{-- Conversation Edit --}}
+            <div class="discuss-conversation-edit"></div>
+
             {{-- Conversation Actions --}}
             <div class="discuss-conversation-actions">
                 <ul class="list-inline mb-0">
@@ -76,7 +79,7 @@
                             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownActionsMenu">
                                 {{-- Moderation actions --}}
                                 @can('update', $post)
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}" href="#">
                                         <i class="fa fa-pencil"></i>
                                         Edit
                                     </a>

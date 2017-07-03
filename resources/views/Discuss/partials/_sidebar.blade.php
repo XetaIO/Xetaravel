@@ -1,6 +1,6 @@
 <ol class="list-unstyled discuss-categories">
     <li>
-        <a href="#" class="discuss-categories-link font-xeta">
+        <a href="{{ route('discuss.index') }}" class="discuss-categories-link font-xeta">
             <i class="fa fa-newspaper-o text-primary"></i> All Discussions
         </a>
     </li>

@@ -1,6 +1,7 @@
 <?php
 namespace Xetaravel\Http\Controllers\Discuss;
 
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,7 +91,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(Request $request, int $id): RedirectResponse
+    public function delete(int $id): RedirectResponse
     {
         $post = DiscussPost::findOrFail($id);
         $conversation = $post->conversation;
@@ -128,12 +129,11 @@ class PostController extends Controller
     /**
      * Mark as solved.
      *
-     * @param \Illuminate\Http\Request $request
      * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function solved(Request $request, int $id): RedirectResponse
+    public function solved(int $id): RedirectResponse
     {
         $post = DiscussPost::findOrFail($id);
 
@@ -155,5 +155,63 @@ class PostController extends Controller
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
             ->with('success', 'This reply as been marked as solved !');
+    }
+
+    /**
+     * Handle an edit action for the post.
+     *
+     * @param Request $request
+     * @param int $id The id of the post to edit.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function edit(Request $request, int $id) : RedirectResponse
+    {
+        $post = DiscussPost::findOrFail($id);
+
+        if (!Auth::user()->can('update', $post)) {
+            return back()
+                ->with('danger', 'You\'re not authorized to edit this message.');
+        }
+
+        DiscussPostValidator::edit($request->all())->validate();
+
+        $parser = new MentionParser($post);
+        $content = $parser->parse($request->input('content'));
+
+        $post->content = $content;
+        $post->is_edited = true;
+        $post->edited_user_id = Auth::id();
+        $post->edited_at = Carbon::now();
+        $post->save();
+
+        return redirect()
+            ->route('discuss.post.show', ['id' => $id])
+            ->with('success', 'Your post has been edited successfully !');
+    }
+
+    /**
+     * Get the edit json template.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
+    public function editTemplate(int $id)
+    {
+        $post = DiscussPost::find($id);
+
+        if (!Auth::user()->can('update', $post) || !$post) {
+            return response()->json([
+                'error' => true,
+                'message' => 'You\'re not authorized to edit this message or this message has been deleted.'
+            ]);
+        }
+
+        return response(
+            view('Discuss::post.editTemplate', ['post' => $post]),
+            200,
+            ['Content-Type' => 'application/json']
+        );
     }
 }

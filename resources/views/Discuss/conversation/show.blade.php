@@ -7,19 +7,25 @@
 @endpush
 
 @push('scripts')
-    @if($conversation->is_locked == false)
-        {!! editor_js() !!}
-        <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+    {!! editor_js() !!}
+    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
 
+    @php
+        $config = [
+            'id' => 'editPostEditor'
+        ];
+    @endphp
+
+    @if($conversation->is_locked == false)
         @php
             $config = [
                 'id' => 'commentEditor',
                 'height' => '350'
             ];
         @endphp
-
-        @include('editor/partials/_comment', $config)
     @endif
+
+    @include('editor/partials/_comment', $config)
 
 
     <script src="{{ mix('js/highlight.min.js') }}"></script>
@@ -181,7 +187,7 @@
                 )
                     <div class="alert alert-info" role="alert">
                         <i class="fa fa-info" aria-hidden="true"></i>
-                        This discussion is not active anymore since at least 3 month !
+                        This discussion is not active anymore since at least 3 months !
                     </div>
                 @endif
 

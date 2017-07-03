@@ -68,7 +68,7 @@ return [
     |
     */
     'discuss' => [
-        'categories_sidebar' => 15,
+        'categories_sidebar' => 2, //15,
         // The number in days.
         'info_message_old_conversation' => 92
     ]

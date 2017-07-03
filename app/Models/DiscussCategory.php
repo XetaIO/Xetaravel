@@ -56,6 +56,16 @@ class DiscussCategory extends Model
     }
 
     /**
+     * Get the last conversation of the category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lastConversation()
+    {
+        return $this->hasOne(DiscussConversation::class, 'id', 'last_conversation_id');
+    }
+
+    /**
      * Pluck the categories by the given fields and the locked state.
      *
      * @param string $value
@@ -65,7 +75,7 @@ class DiscussCategory extends Model
      */
     public static function pluckLocked($value, $column = null): Collection
     {
-        if (Auth::user()->hasPermission('manage.discuss.conversations')) {
+        if (Auth::user() && Auth::user()->hasPermission('manage.discuss.conversations')) {
             return self::pluck($value, $column);
         }
 

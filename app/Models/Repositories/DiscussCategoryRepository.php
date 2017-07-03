@@ -3,6 +3,7 @@ namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
 use Xetaravel\Models\DiscussCategory;
+use Xetaravel\Models\DiscussConversation;
 
 class DiscussCategoryRepository
 {

@@ -1,13 +1,17 @@
+import Post from './Post';
+
 declare let $: any;
 
 export default class Discuss
 {
     constructor() {
+        let post: Post = new Post();
+
         this.deletePostModal();
     }
 
     /**
-     * handle the delete post modal event.
+     * Handle the delete post modal event.
      */
     protected deletePostModal()
     {

@@ -38,5 +38,12 @@ class DiscussConversationsTableSeed extends Seeder
         ];
 
         DB::table('discuss_conversations')->insert($conversations);
+
+        // Update the foreign key related to conversations.
+        DB::table('discuss_categories')
+            ->where('id', 1)
+            ->update([
+            'last_conversation_id' => 1
+        ]);
     }
 }
