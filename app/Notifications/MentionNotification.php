@@ -6,6 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Comment;
+use Xetaravel\Models\DiscussPost;
 
 class MentionNotification extends Notification implements ShouldQueue
 {
@@ -49,25 +50,47 @@ class MentionNotification extends Notification implements ShouldQueue
      */
     public function toDatabase($notifiable): array
     {
-        $message = 'Unknown mention.';
+        return $this->parseInstance(['type' => 'mention']);
+    }
 
-        if ($this->model instanceof Comment) {
-            $message = '<strong>@%s</strong> has mentionned your name in his comment !';
-            $link = $this->model->comment_url;
+    /**
+     * Parse the instance of the model and build the array.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function parseInstance(array $data = [])
+    {
+        $model = $this->model;
+
+        switch (true) {
+            case $model instanceof DiscussPost:
+                $data['message'] = '<strong>@%s</strong> has mentionned your name in his post !';
+                $data['link'] = $model->post_url;
+
+                break;
+
+            case $model instanceof Comment:
+                $data['message'] = '<strong>@%s</strong> has mentionned your name in his comment !';
+                $data['link'] = $model->comment_url;
+
+                break;
+
+            case $model instanceof Article:
+                $data['message'] = '<strong>@%s</strong> has mentionned your name in his article !';
+                $data['link'] = $model->article_url;
+
+                break;
+
+            default:
+                $data['message'] = 'Unknown mention.';
+                $data['link'] = route('users.notification.index');
+
+                break;
         }
+        $data['message'] = sprintf($data['message'], $model->user->username);
 
-        if ($this->model instanceof Article) {
-            $message = '<strong>@%s</strong> has mentionned your name in his article !';
-            $link = $this->model->article_url;
-        }
-        $username = $this->model->user->username;
-
-        $message = sprintf($message, $this->model->user->username);
-
-        return [
-            'message' => $message,
-            'link' => $link,
-            'type' => 'mention'
-        ];
+        return $data;
     }
 }
