@@ -3,6 +3,7 @@ namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\View\View;
 use Xetaravel\Models\DiscussCategory;
+use Xetaravel\Models\DiscussConversation;
 
 class CategoryController extends Controller
 {
@@ -18,5 +19,25 @@ class CategoryController extends Controller
         $breadcrumbs = $this->breadcrumbs->addCrumb('All Categories', route('discuss.category.index'));
 
         return view('Discuss::category.index', compact('categories', 'breadcrumbs'));
+    }
+
+    /**
+     * Display all conversations related to the category.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show(string $slug, int $id): View
+    {
+        $category = DiscussCategory::findOrFail($id);
+
+        $conversations = DiscussConversation::where('category_id', $category->getKey())
+            ->with('User', 'Category', 'FirstPost', 'LastPost')
+            ->orderBy('is_pinned', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('xetaravel.pagination.discuss.conversation_per_page'));
+
+        $breadcrumbs = $this->breadcrumbs;
+
+        return view('Discuss::category.show', compact('breadcrumbs', 'conversations', 'category'));
     }
 }
