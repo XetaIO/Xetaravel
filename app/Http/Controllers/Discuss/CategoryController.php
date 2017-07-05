@@ -36,7 +36,12 @@ class CategoryController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(config('xetaravel.pagination.discuss.conversation_per_page'));
 
-        $breadcrumbs = $this->breadcrumbs;
+        $this->breadcrumbs->addCrumb('Categories', route('discuss.category.index'));
+
+        $breadcrumbs = $this->breadcrumbs->addCrumb(
+            e($category->title),
+            route('discuss.category.show', ['slug' => $category->slug,'id' => $category->getKey()])
+        );
 
         return view('Discuss::category.show', compact('breadcrumbs', 'conversations', 'category'));
     }

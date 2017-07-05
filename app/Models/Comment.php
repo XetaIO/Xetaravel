@@ -2,6 +2,7 @@
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
+use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
