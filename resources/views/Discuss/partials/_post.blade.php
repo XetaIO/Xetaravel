@@ -109,7 +109,7 @@
                     @if (!$conversation->is_locked)
                         <li class="list-inline-item float-xs-right">
                             @auth
-                                <a href="#" class="btn btn-link">
+                                <a href="#" class="btn btn-link postReplyButton" data-content="{{ '@' . $post->user->username }}#{{ $post->id }}">
                                     <i class="fa fa-reply"></i>
                                     Reply
                                 </a>

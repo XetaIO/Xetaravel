@@ -59,7 +59,6 @@ class EmojiParser extends AbstractInlineParser
      */
     public function parse(InlineParserContext $inlineContext)
     {
-
         $cursor = $inlineContext->getCursor();
 
         $previous = $cursor->peek(-1);

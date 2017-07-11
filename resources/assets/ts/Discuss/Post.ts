@@ -1,5 +1,6 @@
 declare let axios: any;
 declare let editormd: any;
+declare let _commentEditor: any;
 declare let $: any;
 
 export default class Post
@@ -16,6 +17,29 @@ export default class Post
      */
     constructor() {
         this.initEditButton();
+        this.initReplyButton();
+    }
+
+    /**
+     * Handle Reply button for posts.
+     */
+    protected initReplyButton()
+    {
+        this.buttons = document.getElementsByClassName('postReplyButton');
+
+        let __this = this;
+
+        Array.from(this.buttons).forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                let content = button.getAttribute("data-content");
+
+                _commentEditor.setCursor({ line: 0, ch: 0 });
+                _commentEditor.insertValue(content + '\n');
+
+            }, false);
+        });
     }
 
     /**
@@ -48,7 +72,7 @@ export default class Post
                         content.addClass('d-none');
                         edit.append(response.data.form);
 
-                        var testEditormd = editormd("editPostEditor-" + id, {
+                        var editPostEditor = editormd("editPostEditor-" + id, {
                             width: "100%",
                             height: 340,
                             markdown: response.data.markdown
@@ -61,5 +85,4 @@ export default class Post
             }, false);
         });
     }
-
 }
