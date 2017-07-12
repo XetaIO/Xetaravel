@@ -134,7 +134,7 @@ class DiscussConversation extends Model
     }
 
     /**
-     * Get the posts for the conversation.
+     * Get the users for the conversation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

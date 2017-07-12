@@ -181,6 +181,7 @@ class PostController extends Controller
 
         $post->content = $content;
         $post->is_edited = true;
+        $post->edit_count++;
         $post->edited_user_id = Auth::id();
         $post->edited_at = Carbon::now();
         $post->save();

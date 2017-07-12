@@ -1,6 +1,7 @@
 <?php
 namespace Xetaravel\Models\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
@@ -93,6 +94,11 @@ class DiscussConversationRepository
 
             $conversation->category_id = $data['category_id'];
         }
+
+        $conversation->is_edited = true;
+        $conversation->edit_count++;
+        $conversation->edited_user_id = Auth::id();
+        $conversation->edited_at = Carbon::now();
 
         $conversation->save();
 

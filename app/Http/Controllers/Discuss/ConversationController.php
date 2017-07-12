@@ -98,6 +98,8 @@ class ConversationController extends Controller
     {
         $conversation = DiscussConversation::findOrFail($id);
 
+        $this->authorize('update', $conversation);
+
         DiscussConversationValidator::update($request->all(), $id)->validate();
         $conversation = DiscussConversationRepository::update($request->all(), $conversation);
 
