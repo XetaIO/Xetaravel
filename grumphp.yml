@@ -3,7 +3,7 @@ parameters:
     git_dir: .
     tasks:
         phpversion:
-            project: '7.0'
+            project: '7.1'
         phpcs:
             standard: "PSR2"
             ignore_patterns:
