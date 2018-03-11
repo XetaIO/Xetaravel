@@ -49,8 +49,8 @@ class AccountControllerTest extends TestCase
         $file = new \Illuminate\Http\UploadedFile(
             base_path('tests/storage/tmp_avatar.png'),
             'tmp_avatar.png',
-            24988,
             'image/png',
+            24988,
             null,
             true
         );
