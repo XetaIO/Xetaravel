@@ -23,9 +23,9 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'name' => 'Manage Articles',
-                'slug' => 'manage.articles',
-                'description' => 'The user can manage the articles.',
+                'name' => 'Manage Blog',
+                'slug' => 'manage.blog',
+                'description' => 'The user can manage the blog.',
                 'is_deletable' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -34,6 +34,30 @@ class PermissionsTableSeed extends Seeder
                 'name' => 'Manage Roles',
                 'slug' => 'manage.roles',
                 'description' => 'The user can manage the roles.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Manage Discuss Conversations',
+                'slug' => 'manage.discuss.conversations',
+                'description' => 'The user can manage the discuss conversations.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Manage Discuss Categories',
+                'slug' => 'manage.discuss.categories',
+                'description' => 'The user can manage the discuss categories.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Manage Discuss Posts',
+                'slug' => 'manage.discuss.posts',
+                'description' => 'The user can manage the discuss posts.',
                 'is_deletable' => false,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

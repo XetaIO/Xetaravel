@@ -2,11 +2,14 @@ import Sidebar from './Sidebar';
 import SidebarProfile from './SidebarProfile';
 import Console from './Console/Console';
 
+import Discuss from './Discuss/Discuss';
+
 
 class Xetaravel
 {
     constructor()
     {
+        let discuss: Discuss = new Discuss();
         let sidebar: Sidebar = new Sidebar();
         let sidebarProfile: SidebarProfile = new SidebarProfile(
             document.getElementById('sidebar-profile')

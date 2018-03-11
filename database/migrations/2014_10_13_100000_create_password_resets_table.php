@@ -26,7 +26,7 @@ class CreatePasswordResetsTable extends Migration
         /**
          * Only create foreign key on production/development.
          */
-        if (App::environment() == 'testing') {
+        if (App::environment() !== 'testing') {
             Schema::table('password_resets', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });

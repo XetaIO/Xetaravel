@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('github_id')->nullable()->unique();
             $table->integer('comment_count')->unsigned()->default(0);
             $table->integer('article_count')->unsigned()->default(0);
+            $table->integer('discuss_conversation_count')->unsigned()->default(0);
+            $table->integer('discuss_post_count')->unsigned()->default(0);
             $table->rememberToken();
             $table->ipAddress('register_ip');
             $table->ipAddress('last_login_ip')->nullable();

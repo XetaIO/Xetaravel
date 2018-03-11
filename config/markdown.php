@@ -40,6 +40,7 @@ return [
 
     'extensions' => [
         Xetaravel\Markdown\Emoji\EmojiExtension::class,
+        Xetaravel\Markdown\Reply\ReplyExtension::class,
         Xetaravel\Markdown\Table\TableExtension::class,
         Xetaravel\Markdown\TaskLists\TaskListsExtension::class,
     ],
@@ -128,7 +129,7 @@ return [
     |
     */
 
-    'html_input' => 'strip',
+    'html_input' => 'escape',
 
     /*
     |--------------------------------------------------------------------------

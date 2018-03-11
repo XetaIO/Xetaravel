@@ -29,7 +29,7 @@ class CreateArticlesTable extends Migration
         /**
          * Only create foreign key on production/development.
          */
-        if (App::environment() != 'testing') {
+        if (App::environment() !== 'testing') {
             Schema::table('articles', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
                 $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

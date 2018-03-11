@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use League\ColorExtractor\Color;
+use League\ColorExtractor\Palette;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\Repositories\AccountRepository;
 use Xetaravel\Models\User;
@@ -57,11 +59,20 @@ class AccountController extends Controller
         $user = User::find(Auth::id());
 
         if (!is_null($request->file('avatar'))) {
+            $palette = Palette::fromFilename($request->file('avatar')->path());
+            $topColor = $palette->getMostUsedColors(1);
+
+            $color = '#FFFFFF';
+            foreach ($topColor as $color => $count) {
+                $color = Color::fromIntToHex($color);
+            }
+
             $user->clearMediaCollection('avatar');
             $user->addMedia($request->file('avatar'))
                 ->preservingOriginal()
                 ->setName(substr(md5($user->username), 0, 10))
                 ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
+                ->withCustomProperties(['primaryColor' => $color])
                 ->toMediaCollection('avatar');
         }
 

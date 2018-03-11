@@ -5,6 +5,7 @@ use League\CommonMark\ElementRendererInterface;
 use League\CommonMark\HtmlElement;
 use League\CommonMark\Inline\Element\AbstractInline;
 use League\CommonMark\Inline\Renderer\InlineRendererInterface;
+use League\CommonMark\Util\Xml;
 use Xetaravel\Markdown\TaskLists\TaskListsCheckbox;
 
 class TaskListsCheckboxRenderer implements InlineRendererInterface
@@ -27,7 +28,7 @@ class TaskListsCheckboxRenderer implements InlineRendererInterface
 
         $attrs = [];
         foreach ($inline->getData('attributes', []) as $key => $value) {
-            $attrs[$key] = $htmlRenderer->escape($value, true);
+            $attrs[$key] = Xml::escape($value, true);
         }
 
         $attrs['type'] = 'checkbox';
@@ -40,7 +41,7 @@ class TaskListsCheckboxRenderer implements InlineRendererInterface
         $text = $inline->getData('text', '');
 
         if (!empty($text)) {
-            $text = $htmlRenderer->escape($text, true);
+            $text = Xml::escape($text, true);
         }
 
         return new HtmlElement(

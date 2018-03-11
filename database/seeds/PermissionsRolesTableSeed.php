@@ -18,13 +18,17 @@ class PermissionsRolesTableSeed extends Seeder
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
         $role->attachPermission(Permission::where('slug', 'manage.users')->first());
         $role->attachPermission(Permission::where('slug', 'manage.roles')->first());
-        $role->attachPermission(Permission::where('slug', 'manage.articles')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.blog')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.categories')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 
         // Editor Role
         $role = Role::where('slug', 'editor')->first();
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
-        $role->attachPermission(Permission::where('slug', 'manage.articles')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.blog')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 
         // User Role

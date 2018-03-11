@@ -1,0 +1,62 @@
+
+.discuss-categories {
+
+    li {
+        margin: 5px 0;
+    }
+
+    .discuss-categories-link {
+        color: $body-color;
+
+        @include hover-focus {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
+
+        i {
+            margin-right: 10px;
+        }
+    }
+
+    .discuss-categories-color {
+        background-color: #e7edf3;
+        margin-right: 10px;
+        height: 16px;
+        width: 16px;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 4px;
+    }
+}
+
+.discuss-categories-list {
+    height: 100%;
+
+    @include border-radius($border-radius);
+
+    a {
+        @include hover-focus {
+            text-decoration: underline;
+        }
+    }
+
+    .discuss-categories-header {
+        padding: 15px;
+        transition: background .2s;
+
+        @include hover-focus {
+            background: rgba(0, 0, 0, 0.05);
+        }
+    }
+
+    .discuss-categories-footer {
+        padding: 5px 0;
+        margin: 0 20px;
+        border-top: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .discuss-categories-footer,
+    .discuss-categories-list-description {
+        font-size: 80%;
+    }
+}

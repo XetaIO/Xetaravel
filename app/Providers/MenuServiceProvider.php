@@ -2,7 +2,7 @@
 namespace Xetaravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Spatie\Menu\Laravel\MenuFacade as Menu;
+use Spatie\Menu\Laravel\Facades\Menu;
 use Spatie\Menu\Laravel\Link;
 
 class MenuServiceProvider extends ServiceProvider

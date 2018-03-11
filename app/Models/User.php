@@ -13,6 +13,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
+use Spatie\MediaLibrary\Media;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Xetaravel\Models\Presenters\UserPresenter;
@@ -73,10 +74,12 @@ class User extends Model implements
         'avatar_small',
         'avatar_medium',
         'avatar_big',
+        'avatar_primary_color',
 
         // Account Model
         'first_name',
         'last_name',
+        'full_name',
         'biography',
         'signature',
         'facebook',
@@ -122,7 +125,7 @@ class User extends Model implements
      *
      * @return void
      */
-    public function registerMediaConversions()
+    public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumbnail.small')
                 ->width(100)
@@ -206,6 +209,26 @@ class User extends Model implements
     }
 
     /**
+     * Get the discuss comments for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussComments()
+    {
+        return $this->hasMany(DiscussComment::class);
+    }
+
+    /**
+     * Get the discuss threads for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussThreads()
+    {
+        return $this->hasMany(DiscussThread::class);
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token
@@ -215,6 +238,16 @@ class User extends Model implements
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * Get the discuss logs for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussLogs()
+    {
+        return $this->hasMany(DiscussLog::class);
     }
 
     /**

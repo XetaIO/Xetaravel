@@ -21,6 +21,8 @@ class UsersTableSeed extends Seeder
                 'slug' => 'admin',
                 'article_count' => 1,
                 'comment_count' => 0,
+                'discuss_conversation_count' => 1,
+                'discuss_post_count' => 1,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
                 'last_login' => Carbon::now(),
@@ -34,6 +36,8 @@ class UsersTableSeed extends Seeder
                 'slug' => 'editor',
                 'article_count' => 0,
                 'comment_count' => 1,
+                'discuss_conversation_count' => 0,
+                'discuss_post_count' => 1,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
                 'last_login' => Carbon::now(),
@@ -47,6 +51,8 @@ class UsersTableSeed extends Seeder
                 'slug' => 'member',
                 'article_count' => 0,
                 'comment_count' => 0,
+                'discuss_conversation_count' => 0,
+                'discuss_post_count' => 0,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
                 'last_login' => Carbon::now(),
@@ -60,6 +66,8 @@ class UsersTableSeed extends Seeder
                 'slug' => 'banished',
                 'article_count' => 0,
                 'comment_count' => 0,
+                'discuss_conversation_count' => 0,
+                'discuss_post_count' => 0,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
                 'last_login' => Carbon::now(),
@@ -77,6 +85,7 @@ class UsersTableSeed extends Seeder
                 ->preservingOriginal()
                 ->setName(substr(md5($user['username']), 0, 10))
                 ->setFileName(substr(md5($user['username']), 0, 10) . '.png')
+                ->withCustomProperties(['primaryColor' => '#B4AEA4'])
                 ->toMediaCollection('avatar');
         }
     }

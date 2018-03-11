@@ -24,7 +24,7 @@ class CreateBadgeUserTable extends Migration
         /**
          * Only create foreign key on production/development.
          */
-        if (App::environment() != 'testing') {
+        if (App::environment() !== 'testing') {
             Schema::table('badge_user', function (Blueprint $table) {
                 $table->foreign('badge_id')->references('id')->on('badges')->onDelete('cascade');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

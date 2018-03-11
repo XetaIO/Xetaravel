@@ -11,7 +11,7 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
     */
-    'name' => 'Xetaravel',
+    'name' => env('APP_NAME', 'Xetaravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -108,23 +108,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'single'),
-
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -172,7 +155,6 @@ return [
         Ultraware\Roles\RolesServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         Spatie\Menu\Laravel\MenuServiceProvider::class,
-        Xetaio\Local\Providers\LocalEnvironmentServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Xetaio\IpTraceable\Providers\IpTraceableServiceProvider::class,
         Xetaio\Editor\EditorServiceProvider::class,
@@ -191,6 +173,7 @@ return [
         Xetaravel\Providers\FormServiceProvider::class,
         Xetaravel\Providers\MenuServiceProvider::class,
         Xetaravel\Http\ViewComposers\BlogSidebarServiceProvider::class,
+        Xetaravel\Http\ViewComposers\DiscussSidebarServiceProvider::class,
         Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class,
     ],
 
@@ -246,10 +229,9 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-        'Menu' => Spatie\Menu\Laravel\MenuFacade::class,
+        'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class
-    ],
-
+    ]
 ];

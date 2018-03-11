@@ -36,6 +36,10 @@ return [
             'user_per_page' => 15,
             'comments_profile_page' => 20,
             'articles_profile_page' => 15
+        ],
+        'discuss' => [
+            'conversation_per_page' => 15,
+            'post_per_page' => 10
         ]
     ],
 
@@ -46,9 +50,26 @@ return [
     |
     | All flood rules that apply at various point on the site. They are all in seconds.
     */
-   'flood' => [
+    'flood' => [
+       'general' => 30,
        'blog' => [
            'comment' => 30
+        ],
+        'discuss' => [
+            'conversation' => 60
         ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Discuss
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+    'discuss' => [
+        'categories_sidebar' => 2, //15,
+        // The number in days.
+        'info_message_old_conversation' => 92
     ]
 ];

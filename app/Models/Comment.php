@@ -2,8 +2,9 @@
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
+use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\Article;
-use Xetaravel\Models\Gates\CommentGate;
+use Xetaravel\Models\Gates\FloodGate;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Presenters\CommentPresenter;
 use Xetaravel\Models\User;
@@ -11,7 +12,7 @@ use Xetaravel\Models\User;
 class Comment extends Model
 {
     use Countable,
-        CommentGate,
+        FloodGate,
         CommentPresenter,
         HasMentionsTrait;
 
@@ -35,6 +36,21 @@ class Comment extends Model
         'content_markdown',
         'comment_url'
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Set the user id to the new comment before saving it.
+        static::creating(function ($model) {
+            $model->user_id = Auth::id();
+        });
+    }
 
     /**
      * Return the count cache configuration.

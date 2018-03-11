@@ -13,7 +13,6 @@ code {
   font-weight: bold;
   color: $code-color;
   background-color: $code-bg;
-  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.05);
   @include border-radius($border-radius);
 }
 

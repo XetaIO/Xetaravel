@@ -1,0 +1,94 @@
+
+.discuss-conversations-list {
+    .discuss-conversations-list-item {
+        @include clearfix();
+
+        padding: 10px;
+
+        @include hover {
+            background-color: #f3f6f9;
+        }
+    }
+
+    .discuss-conversations-list-content {
+        @include clearfix();
+
+        padding: 0 70px 0 60px;
+    }
+
+    .discuss-conversations-list-tags {
+        position: relative;
+        top: -12px;
+    }
+
+    .discuss-conversations-list-reply-count {
+        @include clearfix();
+
+        position: relative;
+        top: 14px;
+        width: 70px;
+        padding: 0 5px;
+        text-align: center;
+    }
+
+    .discuss-conversations-list-avatar {
+        position: relative;
+        width: 60px;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .discuss-conversations-list-user-solved {
+        width: 50px;
+        height: 50px;
+        background-color: $white;
+        padding: 0 9px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        i {
+            position: absolute;
+            vertical-align: middle;
+            line-height: 30px;
+            margin-top: 10px;
+            z-index: 2;
+        }
+
+        img {
+            opacity: 0.1;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .discuss-conversations-list-badges {
+        position: absolute;
+        top: -10px;
+        padding-left: 0;
+        list-style: none;
+        z-index: 2;
+
+        .tag {
+            border-radius: 50%;
+            padding: 0.30em;
+        }
+    }
+
+    .discuss-conversations-list-badges-item {
+        display: inline-block;
+
+        > span > i {
+            height: 12px;
+            width: 12px;
+        }
+
+        &:not(:last-child) {
+            margin-right: -8px;
+        }
+    }
+}

@@ -1,0 +1,34 @@
+
+.discuss-popover-user {
+    width: 380px;
+    max-width: inherit;
+
+    .popover-content {
+        @include clearfix();
+
+        padding: 14px;
+        color: $white;
+    }
+
+    .discuss-popover-user-avatar {
+        img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+        }
+    }
+
+    .discuss-popover-user-profile {
+        @include clearfix();
+
+        padding-left: 80px;
+    }
+}
+
+.discuss-popover-user-username > h5 > a {
+    color: #fff;
+
+    @include hover {
+        text-decoration: underline;
+    }
+}

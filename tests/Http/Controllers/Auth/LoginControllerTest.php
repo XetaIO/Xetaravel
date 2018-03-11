@@ -24,14 +24,14 @@ class LoginControllerTest extends TestCase
      */
     public function testLoginSuccess()
     {
-        $this->dontSeeIsAuthenticated();
+        $this->assertGuest();
         $data = [
             'email' => 'admin@xeta.io',
             'password' => 'admin',
             'remember' => 1,
         ];
         $response = $this->post('/users/login', $data);
-        $this->seeIsAuthenticated();
+        $this->assertAuthenticated();
         $response->assertSessionHas('success');
         $response->assertStatus(302);
         $response->assertRedirect('/');
@@ -44,15 +44,15 @@ class LoginControllerTest extends TestCase
      */
     public function testLoginFailed()
     {
-        $this->dontSeeIsAuthenticated();
+        $this->assertGuest();
         $data = [
             'email' => 'emeric@xeta.io',
             'password' => 'wrong-password',
             'remember' => 1,
         ];
         $response = $this->post('/users/login', $data);
-        
-        $this->dontSeeIsAuthenticated();
+
+        $this->assertGuest();
         $response->assertStatus(302);
         $response->assertRedirect('/');
     }
@@ -65,11 +65,11 @@ class LoginControllerTest extends TestCase
     public function testLogoutSuccess()
     {
         $this->be(User::find(1));
-        $this->seeIsAuthenticated();
+        $this->assertAuthenticated();
 
         $response = $this->post('/users/logout');
-        
-        $this->dontSeeIsAuthenticated();
+
+        $this->assertGuest();
         $response->assertSessionHas('success');
         $response->assertStatus(302);
         $response->assertRedirect('/');

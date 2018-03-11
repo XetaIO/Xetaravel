@@ -114,7 +114,7 @@ class PermissionControllerTest extends TestCase
         $response->assertSessionHas('success');
         $response->assertStatus(302);
 
-        $this->assertTrue($role->permissions->contains('name', 'Manage Articles'));
+        $this->assertTrue($role->permissions->contains('name', 'Manage Blog'));
         $this->assertFalse($role->permissions->contains('name', 'Test Perm'));
     }
 

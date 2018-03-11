@@ -29,7 +29,7 @@ class CreateAccountsTable extends Migration
         /**
          * Only create foreign key on production/development.
          */
-        if (App::environment() != 'testing') {
+        if (App::environment() !== 'testing') {
             Schema::table('accounts', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });

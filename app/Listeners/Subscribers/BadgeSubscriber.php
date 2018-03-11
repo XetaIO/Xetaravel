@@ -81,7 +81,7 @@ class BadgeSubscriber
      *
      * @param array $result The result of the synchronization.
      * @param \Illuminate\Database\Eloquent\Collection $badges The badges collection related to the listener.
-     * @param \Xetaravel\Models\User $user The user to nitify.
+     * @param \Xetaravel\Models\User $user The user to notify.
      *
      * @return bool
      */
@@ -90,15 +90,15 @@ class BadgeSubscriber
         if (empty($result['attached'])) {
             return true;
         }
-        
+
         $sendNotification = function ($badgeId, $key, $badges) use ($user) {
             $badgeCollection = $badges->filter(function ($badge) use ($badgeId) {
                 return $badge->id == $badgeId;
             })->first();
-            
+
             $user->notify(new BadgeNotification($badgeCollection));
         };
-        
+
         return array_walk($result['attached'], $sendNotification, $badges);
     }
 }
