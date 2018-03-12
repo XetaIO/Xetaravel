@@ -94,6 +94,9 @@ class PostController extends Controller
     public function delete(int $id): RedirectResponse
     {
         $post = DiscussPost::findOrFail($id);
+
+        $this->authorize('delete', $post);
+
         $conversation = $post->conversation;
 
         if ($conversation->first_post_id == $post->getKey()) {

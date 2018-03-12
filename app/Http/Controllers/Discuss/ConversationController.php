@@ -121,6 +121,8 @@ class ConversationController extends Controller
     {
         $conversation = DiscussConversation::findOrFail($id);
 
+        $this->authorize('delete', $conversation);
+
         if ($conversation->delete()) {
             return redirect()
                 ->route('discuss.index')
