@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
-class CategoryValidator
+class DiscussCategoryValidator
 {
     /**
      * Get a validator for an incoming create request.
@@ -19,7 +19,8 @@ class CategoryValidator
     {
         $rules = [
             'title' => 'required|min:5',
-            'slug' => 'unique:categories',
+            'slug' => 'unique:discuss_categories',
+            'color' => 'min:7|max:7',
             'description' => 'required|min:10'
         ];
         $data['slug'] = Slug::fromTitle($data['title']);
@@ -40,8 +41,9 @@ class CategoryValidator
         $rules = [
             'title' => 'required|min:5',
             'slug' => [
-                Rule::unique('categories')->ignore($id)
+                Rule::unique('discuss_categories')->ignore($id)
             ],
+            'color' => 'min:7|max:7',
             'description' => 'required|min:10'
         ];
         $data['slug'] = Slug::fromTitle($data['title']);

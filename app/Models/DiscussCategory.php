@@ -12,6 +12,18 @@ class DiscussCategory extends Model
         DiscussCategoryPresenter;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'color',
+        'is_locked',
+        'description'
+    ];
+
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array
@@ -33,6 +45,16 @@ class DiscussCategory extends Model
         static::updating(function ($model) {
             $model->generateSlug();
         });
+
+        // Reset the last_conversation_id field and handle the conversations deleting.
+        static::deleting(function ($model) {
+            $model->last_conversation_id = null;
+            $model->save();
+
+            foreach ($model->conversations as $conversation) {
+                $conversation->delete();
+            }
+        });
     }
 
     /**
@@ -52,7 +74,7 @@ class DiscussCategory extends Model
      */
     public function conversations()
     {
-        return $this->hasMany(DiscussConversation::class);
+        return $this->hasMany(DiscussConversation::class, 'category_id', 'id');
     }
 
     /**

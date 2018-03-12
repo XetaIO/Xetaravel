@@ -62,7 +62,7 @@
                                             'class' => 'btn btn-sm btn-outline-danger',
                                             'data-toggle' => 'tooltip',
                                             'title' => 'Delete this category',
-                                            'onclick' => "event.preventDefault();document.getElementById('delete-form').submit();",
+                                            'onclick' => "event.preventDefault();document.getElementById('delete-form-{$category->id}').submit();",
                                             'escape' => false
                                         ],
                                         null,
@@ -71,7 +71,7 @@
                                     {!! Form::open([
                                         'route' => ['admin.blog.category.delete', 'id' => $category->id],
                                         'method' => 'delete',
-                                        'id' => 'delete-form',
+                                        'id' => "delete-form-{$category->id}",
                                         'style' => 'display: none;'
                                     ]) !!}
                                     {!! Form::close() !!}

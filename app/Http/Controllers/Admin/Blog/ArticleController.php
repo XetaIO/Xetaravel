@@ -14,6 +14,16 @@ use Xetaravel\Models\Validators\ArticleValidator;
 class ArticleController extends Controller
 {
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->breadcrumbs->addCrumb('Blog', route('admin.blog.article.index'));
+    }
+
+    /**
      * Show all articles.
      *
      * @return \Illuminate\View\View

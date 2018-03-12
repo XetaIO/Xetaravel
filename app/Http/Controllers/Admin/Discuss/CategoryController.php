@@ -1,13 +1,13 @@
 <?php
-namespace Xetaravel\Http\Controllers\Admin\Blog;
+namespace Xetaravel\Http\Controllers\Admin\Discuss;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Xetaravel\Http\Controllers\Admin\Controller;
-use Xetaravel\Models\Category;
-use Xetaravel\Models\Repositories\CategoryRepository;
-use Xetaravel\Models\Validators\CategoryValidator;
+use Xetaravel\Models\DiscussCategory;
+use Xetaravel\Models\Repositories\DiscussCategoryRepository;
+use Xetaravel\Models\Validators\DiscussCategoryValidator;
 
 class CategoryController extends Controller
 {
@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Blog', route('admin.blog.article.index'));
+        $this->breadcrumbs->addCrumb('Discuss', route('admin.discuss.category.index'));
     }
 
     /**
@@ -28,11 +28,14 @@ class CategoryController extends Controller
      */
     public function index(): View
     {
-        $categories = Category::paginate(config('xetaravel.pagination.blog.article_per_page'));
+        $categories = DiscussCategory::paginate(config('xetaravel.pagination.discuss.conversation_per_page'));
 
-        $this->breadcrumbs->addCrumb('Manage Categories', route('admin.blog.category.index'));
+        $this->breadcrumbs->addCrumb('Manage Categories', route('admin.discuss.category.index'));
 
-        return view('Admin::Blog.category.index', ['categories' => $categories, 'breadcrumbs' => $this->breadcrumbs]);
+        return view(
+            'Admin::Discuss.category.index',
+            ['categories' => $categories, 'breadcrumbs' => $this->breadcrumbs]
+        );
     }
 
     /**
@@ -43,10 +46,10 @@ class CategoryController extends Controller
     public function showCreateForm(): View
     {
         $breadcrumbs = $this->breadcrumbs
-            ->addCrumb('Manage Categories', route('admin.blog.category.index'))
-            ->addCrumb("Create", route('admin.blog.category.create'));
+            ->addCrumb('Manage Categories', route('admin.discuss.category.index'))
+            ->addCrumb("Create", route('admin.discuss.category.create'));
 
-        return view('Admin::Blog.category.create', ['breadcrumbs' => $this->breadcrumbs]);
+        return view('Admin::Discuss.category.create', ['breadcrumbs' => $this->breadcrumbs]);
     }
 
     /**
@@ -58,11 +61,11 @@ class CategoryController extends Controller
      */
     public function create(Request $request): RedirectResponse
     {
-        CategoryValidator::create($request->all())->validate();
-        CategoryRepository::create($request->all());
+        DiscussCategoryValidator::create($request->all())->validate();
+        DiscussCategoryRepository::create($request->all());
 
         return redirect()
-            ->route('admin.blog.category.index')
+            ->route('admin.discuss.category.index')
             ->with('success', 'Your category has been created successfully !');
     }
 
@@ -76,19 +79,19 @@ class CategoryController extends Controller
      */
     public function showUpdateForm(string $slug, int $id)
     {
-        $category = Category::findOrFail($id);
+        $category = DiscussCategory::findOrFail($id);
 
         $breadcrumbs = $this->breadcrumbs
-            ->addCrumb('Manage Categories', route('admin.blog.category.index'))
+            ->addCrumb('Manage Categories', route('admin.discuss.category.index'))
             ->addCrumb(
                 "Update : " . e(str_limit($category->title, 30)),
                 route(
-                    'admin.blog.category.index',
+                    'admin.discuss.category.index',
                     ['slug' => $category->slug, 'id' => $category->id]
                 )
             );
 
-        return view('Admin::Blog.category.update', compact('category', 'breadcrumbs'));
+        return view('Admin::Discuss.category.update', compact('category', 'breadcrumbs'));
     }
 
     /**
@@ -101,13 +104,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $category = Category::findOrFail($id);
+        $category = DiscussCategory::findOrFail($id);
 
-        CategoryValidator::update($request->all(), $id)->validate();
-        CategoryRepository::update($request->all(), $category);
+        DiscussCategoryValidator::update($request->all(), $id)->validate();
+        DiscussCategoryRepository::update($request->all(), $category);
 
         return redirect()
-            ->route('admin.blog.category.index')
+            ->route('admin.discuss.category.index')
             ->with('success', 'Your category has been updated successfully !');
     }
 
@@ -120,16 +123,16 @@ class CategoryController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        $category = Category::findOrFail($id);
+        $category = DiscussCategory::findOrFail($id);
 
         if ($category->delete()) {
             return redirect()
-                ->route('admin.blog.category.index')
+                ->route('admin.discuss.category.index')
                 ->with('success', 'This category has been deleted successfully !');
         }
 
         return redirect()
-            ->route('admin.blog.category.index')
+            ->route('admin.discuss.category.index')
             ->with('danger', 'An error occurred while deleting this category !');
     }
 }

@@ -172,7 +172,7 @@
                     @else
                         @if (Auth::user() && $user->id == Auth::id())
                             You don't have set a biography.
-                            {!! Html::link(route('users.account.index'), '<i class="fa fa-plus"></i> Add one now', ['class' => 'btn btn-outline-primary'], null, false) !!}
+                            {!! Html::link(route('users.account.index'), '<i class="fa fa-plus"></i> Add now', ['class' => 'btn btn-outline-primary'], null, false) !!}
                         @else
                             This user hasn't set a biography yet.
                         @endif
