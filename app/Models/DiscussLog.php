@@ -39,7 +39,7 @@ class DiscussLog extends Model
     {
         parent::boot();
 
-        // Set the user id to the new post before saving it.
+        // Set the user id to the new log before saving it.
         static::creating(function ($model) {
             $model->user_id = Auth::id();
         });

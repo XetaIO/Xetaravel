@@ -104,4 +104,19 @@ class DiscussConversationRepository
 
         return $conversation;
     }
+
+    /**
+     * Find the previous conversation related to the given conversation.
+     *
+     * @param \Xetaravel\Models\DiscussConversation $conversation
+     *
+     * @return \Xetaravel\Models\DiscussConversation|null
+     */
+    public static function findPreviousConversation(DiscussConversation $conversation)
+    {
+        return DiscussConversation::where('category_id', $conversation->category->getKey())
+            ->where('created_at', '<', $conversation->created_at)
+            ->orderBy('created_at', 'desc')
+            ->first();
+    }
 }

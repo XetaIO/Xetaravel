@@ -99,7 +99,7 @@ class PostController extends Controller
         if ($conversation->first_post_id == $post->getKey()) {
             return redirect()
                 ->route('discuss.post.show', ['id' => $post->getKey()])
-                ->with('danger', 'You can not deete the first post of a conversation !');
+                ->with('danger', 'You can not delete the first post of a discussion !');
         }
 
         if ($conversation->last_post_id == $post->getKey()) {
