@@ -9,6 +9,7 @@
 Homestead.json
 Homestead.yaml
 composer.lock
+package-lock.json
 studio.json
 /node_modules
 /plugins

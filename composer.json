@@ -36,7 +36,7 @@
         "xetaio/xetaravel-mentions": "^2.0",
         "xety/breadcrumbs": "~1.0",
         "fideloper/proxy": "^4.0",
-        "laravelcollective/html": "^5.4.0",
+        "laravelcollective/html": "^5.6",
         "greggilbert/recaptcha": "~2.0",
         "kirkbushell/eloquence": "~2.0",
         "ultraware/roles": "^5.6",
