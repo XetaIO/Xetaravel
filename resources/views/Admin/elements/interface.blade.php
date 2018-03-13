@@ -33,6 +33,13 @@
         {!! Menu::{'admin.blog'}() !!}
     @endpermission
 
+    @permission('manage.discuss.categories')
+        <p class="p-1 m-0 text-white font-xeta">
+            Discuss
+        </p>
+        {!! Menu::{'admin.discuss'}() !!}
+    @endpermission
+
     @permission('manage.users')
         <p class="p-1 m-0 text-white font-xeta">
             Users

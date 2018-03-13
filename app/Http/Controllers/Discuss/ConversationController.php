@@ -2,6 +2,7 @@
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\DiscussCategory;
@@ -89,8 +90,8 @@ class ConversationController extends Controller
      * Handle a conversation update request for the application.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string $slug
-     * @param int $id
+     * @param string $slug The slug of the conversation to update.
+     * @param int $id The id of the conversation to update.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -105,7 +106,31 @@ class ConversationController extends Controller
 
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
-            ->with('success', 'Your conversation has been updated successfully !');
+            ->with('success', 'Your discussion has been updated successfully !');
+    }
+
+    /**
+     * Handle the delete request for a conversation.
+     *
+     * @param string $slug The slug of the conversation to delete.
+     * @param int $id The id of the conversation to delete.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(string $slug, int $id) : RedirectResponse
+    {
+        $conversation = DiscussConversation::findOrFail($id);
+
+        $this->authorize('delete', $conversation);
+
+        if ($conversation->delete()) {
+            return redirect()
+                ->route('discuss.index')
+                ->with('success', 'This discussion has been deleted successfully !');
+        }
+
+        return back()
+            ->with('danger', 'An error occurred while deleting this discussion !');
     }
 
     /**

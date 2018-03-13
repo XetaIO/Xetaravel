@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-{!! config(['app.title' => 'Manage Articles']) !!}
+{!! config(['app.title' => 'Manage Categories']) !!}
 
 @section('content')
 <div class="col-sm-12 col-md-10 offset-md-2 p-2">
@@ -8,76 +8,80 @@
 <div class="col-sm-12 col-md-10 offset-md-2 pl-2 pr-2 pb-2">
     <div class="card card-inverse bg-inverse">
         <h5 class="card-header">
-            Manage Articles
+            Manage Categories
         </h5>
         <div class="card-block">
-            {{ link_to(route('admin.blog.article.create'), '<i class="fa fa-plus"></i> New Article', ['class' => 'btn btn-outline-primary mb-2'], null, false) }}
-            @if ($articles->isNotEmpty())
+            {{ link_to(route('admin.discuss.category.create'), '<i class="fa fa-plus"></i> New Category', ['class' => 'btn btn-outline-primary mb-2'], null, false) }}
+            @if ($categories->isNotEmpty())
                 <table class="table table-hover table-inverse">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Author</th>
                             <th>Title</th>
-                            <th>Category</th>
-                            <th>Comments</th>
-                            <th>Is display</th>
+                            <th>Description</th>
+                            <th>Conversations</th>
+                            <th>Is locked</th>
                             <th>Created</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($articles as $article)
+                        @foreach ($categories as $category)
                             <tr>
-                                <th scope="row">
-                                    {{ $article->id }}
+                            <th scope="row">
+                                    {{ $category->id }}
                                 </th>
-                                <td>
-                                    {{ link_to($article->user->profile_url, $article->user->username) }}
+                                <td class="font-weight-bold">
+                                    {{ link_to(
+                                        $category->category_url,
+                                        str_limit($category->title, 60),
+                                        [
+                                            'style' => "color: {$category->color};"
+                                        ]
+                                    ) }}
                                 </td>
                                 <td>
-                                    {{ link_to($article->article_url, str_limit($article->title, 60)) }}
+                                    {{ str_limit($category->description, 60) }}
                                 </td>
                                 <td>
-                                    {{ link_to($article->category->category_url, $article->category->title) }}
+                                    {{ $category->conversation_count }}
+                                </td>
+                                <td class="font-weight-bold {{ $category->is_locked ? 'text-danger' : 'text-success' }}">
+                                    {{ $category->is_locked ? 'Yes' : 'No' }}
                                 </td>
                                 <td>
-                                    {{ $article->comment_count }}
-                                </td>
-                                <td class="font-weight-bold {{ $article->is_display ? 'text-success' : 'text-danger' }}">
-                                    {{ $article->is_display ? 'Yes' : 'No' }}
-                                </td>
-                                <td>
-                                    {{ $article->created_at->formatLocalized('%d %B %Y - %T') }}
+                                    {{ $category->created_at->formatLocalized('%d %B %Y - %T') }}
                                 </td>
                                 <td>
                                     {{ link_to(
-                                        route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]),
+                                        route('admin.discuss.category.edit', ['slug' => $category->slug, 'id' => $category->id]),
                                         '<i class="fa fa-edit"></i>',
                                         [
                                             'class' => 'btn btn-sm btn-outline-info',
                                             'data-toggle' => 'tooltip',
-                                            'title' => 'Edit this article'
+                                            'title' => 'Edit this category',
+                                            'escape' => false
                                         ],
                                         null,
                                         false
                                     ) }}
                                     {{ link_to(
-                                        route('admin.blog.article.delete', ['id' => $article->id]),
+                                        route('admin.discuss.category.delete', ['id' => $category->id]),
                                         '<i class="fa fa-remove"></i>',
                                         [
                                             'class' => 'btn btn-sm btn-outline-danger',
                                             'data-toggle' => 'tooltip',
-                                            'title' => 'Delete this article',
-                                            'onclick' => "event.preventDefault();document.getElementById('delete-form-{$article->id}').submit();"
+                                            'title' => 'Delete this category',
+                                            'onclick' => "event.preventDefault();document.getElementById('delete-form-{$category->id}').submit();",
+                                            'escape' => false
                                         ],
                                         null,
                                         false
                                     ) }}
                                     {!! Form::open([
-                                        'route' => ['admin.blog.article.delete', 'id' => $article->id],
+                                        'route' => ['admin.discuss.category.delete', 'id' => $category->id],
                                         'method' => 'delete',
-                                        'id' => "delete-form-{$article->id}",
+                                        'id' => "delete-form-{$category->id}",
                                         'style' => 'display: none;'
                                     ]) !!}
                                     {!! Form::close() !!}
@@ -88,19 +92,19 @@
                 </table>
 
                 <div class="col-md 12 text-xs-center">
-                    {{ $articles->render() }}
+                    {{ $categories->render() }}
                 </div>
             @else
                 <div class="col-md-12">
                     <div class="alert alert-primary" role="alert">
                         <i class="fa fa-exclamation" aria-hidden="true"></i>
-                        There's no article yet, create your first article now !
+                        There's no category yet, create your first category now !
                     </div>
                 </div>
             @endif
         </div>
         <div class="card-footer text-muted">
-            There're {{ $articles->count() }} articles. {{ $articles->where('is_display', false)->count() }} articles are not display.
+            There're {{ $categories->count() }} categories.
         </div>
     </div>
 </div>

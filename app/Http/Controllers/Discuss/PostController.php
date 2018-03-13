@@ -26,7 +26,8 @@ class PostController extends Controller
     {
         $conversation = DiscussConversation::findOrFail($request->conversation_id);
 
-        if (DiscussPost::isFlooding('xetaravel.flood.discuss.post')) {
+        // Use that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
+        if (DiscussPost::isFlooding('xetaravel.flood.discuss.post') && !Auth::user()->hasPermission('manage.discuss')) {
             return back()
                 ->withInput()
                 ->with('danger', 'Wow, keep calm bro, and try to not flood !');
@@ -94,18 +95,21 @@ class PostController extends Controller
     public function delete(int $id): RedirectResponse
     {
         $post = DiscussPost::findOrFail($id);
+
+        $this->authorize('delete', $post);
+
         $conversation = $post->conversation;
 
         if ($conversation->first_post_id == $post->getKey()) {
             return redirect()
                 ->route('discuss.post.show', ['id' => $post->getKey()])
-                ->with('danger', 'You can not deete the first post of a conversation !');
+                ->with('danger', 'You can not delete the first post of a discussion !');
         }
 
         if ($conversation->last_post_id == $post->getKey()) {
             $previousPost = DiscussPostRepository::findPreviousPost($post);
 
-            $conversation->last_post_id = $previousPost->getKey();
+            $conversation->last_post_id = !is_null($previousPost) ? $previousPost->getKey() : null;
         }
 
         if ($conversation->solved_post_id == $post->getKey()) {

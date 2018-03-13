@@ -10,6 +10,16 @@ class Category extends Model
         CategoryPresenter;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'description'
+    ];
+
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array

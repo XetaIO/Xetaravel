@@ -64,6 +64,35 @@ Route::group([
 
         /*
         |--------------------------------------------------------------------------
+        | Discuss Routes
+        |--------------------------------------------------------------------------
+        */
+        Route::group([
+            'namespace' => 'Discuss',
+            'prefix' => 'discuss',
+            'middleware' => ['permission:manage.discuss']
+        ], function () {
+
+                // Category Routes
+            Route::get('category', 'CategoryController@index')
+                ->name('admin.discuss.category.index');
+
+            Route::get('category/create', 'CategoryController@showCreateForm')
+                ->name('admin.discuss.category.create');
+            Route::post('category/create', 'CategoryController@create')
+                ->name('admin.discuss.category.create');
+
+            Route::get('category/update/{slug}.{id}', 'CategoryController@showUpdateForm')
+                ->name('admin.discuss.category.edit');
+            Route::put('category/update/{id}', 'CategoryController@update')
+                ->name('admin.discuss.category.update');
+
+            Route::delete('category/delete/{id}', 'CategoryController@delete')
+                ->name('admin.discuss.category.delete');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
         | User Routes
         |--------------------------------------------------------------------------
         */

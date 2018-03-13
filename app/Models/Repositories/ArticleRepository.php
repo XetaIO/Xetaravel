@@ -13,7 +13,7 @@ class ArticleRepository
      */
     public static function sidebar(): Collection
     {
-        return Article::latest()->take(5)->get();
+        return Article::latest()->take(config('xetaravel.blog.articles_sidebar'))->get();
     }
 
     /**

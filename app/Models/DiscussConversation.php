@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussConversationPresenter;
+use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
 use Xetaravel\Models\Scopes\DisplayScope;
 use Xetaravel\Models\User;
@@ -69,14 +70,50 @@ class DiscussConversation extends Model
     {
         parent::boot();
 
+        // Set the user id to the new conversation before saving it.
+        static::creating(function ($model) {
+            $model->user_id = Auth::id();
+        });
+
         // Generated the slug before updating.
         static::updating(function ($model) {
             $model->generateSlug();
         });
 
-        // Set the user id to the new conversation before saving it.
-        static::creating(function ($model) {
-            $model->user_id = Auth::id();
+        // Handle the before deleting the conversation.
+        static::deleting(function ($model) {
+            $category = $model->category;
+
+            // If the conversation is the last_conversation of the category,
+            // find the new last_conversation and update the category.
+            if ($category->last_conversation_id == $model->getKey()) {
+                $previousConversation = DiscussConversationRepository::findPreviousConversation($model);
+
+                if (is_null($previousConversation)) {
+                    $category->last_conversation_id = null;
+                } else {
+                    $category->last_conversation_id = $previousConversation->getKey();
+                }
+
+                $category->save();
+            }
+
+            // Set the forgein keys to null, else it won't delete since it delete
+            // the posts before the conversation.
+            $model->first_post_id = null;
+            $model->last_post_id = null;
+            $model->solved_post_id = null;
+            $model->save();
+
+            // We need to do this to refresh the countable cache `discuss_post_count` of the user.
+            foreach ($model->posts as $post) {
+                $post->delete();
+            }
+
+            // It don't delete the logs, so we need to do it manually.
+            foreach ($model->discussLogs as $log) {
+                $log->delete();
+            }
         });
     }
 

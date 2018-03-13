@@ -63,6 +63,18 @@ class MenuServiceProvider extends ServiceProvider
                 ->setActiveFromRequest();
         });
 
+        Menu::macro('admin.discuss', function () {
+            return Menu::new()
+                ->addClass('nav nav-pills flex-column mb-0')
+                ->setAttribute('role', 'navigation')
+                ->add(
+                    Link::toRoute('admin.discuss.category.index', '<i class="fa fa-tags"></i> Manage Categories')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->setActiveFromRequest();
+        });
+
         Menu::macro('admin.user', function () {
             return Menu::new()
                 ->addClass('nav nav-pills flex-column mb-0')

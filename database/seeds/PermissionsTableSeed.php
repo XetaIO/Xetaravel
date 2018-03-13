@@ -39,6 +39,14 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'name' => 'Manage Discuss',
+                'slug' => 'manage.discuss',
+                'description' => 'The user can manage the discuss.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'name' => 'Manage Discuss Conversations',
                 'slug' => 'manage.discuss.conversations',
                 'description' => 'The user can manage the discuss conversations.',

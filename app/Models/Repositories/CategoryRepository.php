@@ -13,7 +13,7 @@ class CategoryRepository
      */
     public static function sidebar(): Collection
     {
-        return Category::take(25)->orderBy('title', 'asc')->get();
+        return Category::take(config('xetaravel.blog.categories_sidebar'))->orderBy('title', 'asc')->get();
     }
 
     /**
@@ -21,15 +21,14 @@ class CategoryRepository
      *
      * @param array $data The data used to create the category.
      *
-     * @return bool
+     * @return \Xetaravel\Models\Category
      */
-    public static function create(array $data): bool
+    public static function create(array $data): Category
     {
-        $category = new Category;
-        $category->title = $data['title'];
-        $category->description = $data['description'];
-
-        return $category->save();
+        return Category::create([
+            'title' => $data['title'],
+            'description' => $data['description']
+        ]);
     }
 
     /**
