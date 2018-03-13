@@ -100,4 +100,43 @@ class PostControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertSessionHas('danger');
     }
+
+    /**
+     * testEditSuccess method
+     *
+     * @return void
+     */
+    public function testEditSuccess()
+    {
+        $data = [
+            'content' => 'This is an edited post.'
+        ];
+
+        $response = $this->put('/discuss/post/edit/1', $data);
+        $response->assertStatus(302);
+        $response->assertSessionHas('success');
+
+        $post = DiscussPost::findOrFail(1);
+
+        $this->assertSame($data['content'], $post->content);
+    }
+
+    /**
+     * testEditNotAuthorizedFailed method
+     *
+     * @return void
+     */
+    public function testEditNotAuthorizedFailed()
+    {
+        $user = User::find(3);
+        $this->be($user);
+
+        $data = [
+            'content' => 'This is an edited post.'
+        ];
+
+        $response = $this->put('/discuss/post/edit/1', $data);
+        $response->assertStatus(302);
+        $response->assertSessionHas('danger');
+    }
 }
