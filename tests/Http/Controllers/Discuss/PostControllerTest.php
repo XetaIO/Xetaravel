@@ -82,6 +82,9 @@ class PostControllerTest extends TestCase
      */
     public function testSolvedSuccess()
     {
+        $user = User::find(2);
+        $this->be($user);
+
         $response = $this->get('/discuss/post/solved/2');
         $response->assertStatus(302);
         $response->assertSessionHas('success');
@@ -99,6 +102,20 @@ class PostControllerTest extends TestCase
         $response = $this->get('/discuss/post/solved/2');
         $response->assertStatus(302);
         $response->assertSessionHas('danger');
+    }
+
+    /**
+     * testSolvedPermissionFailed method
+     *
+     * @return void
+     */
+    public function testSolvedPermissionFailed()
+    {
+        $user = User::find(3);
+        $this->be($user);
+
+        $response = $this->get('/discuss/post/solved/2');
+        $response->assertStatus(403);
     }
 
     /**
