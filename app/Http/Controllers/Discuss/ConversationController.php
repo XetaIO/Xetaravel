@@ -3,6 +3,7 @@ namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\DiscussCategory;
@@ -67,7 +68,10 @@ class ConversationController extends Controller
     {
         DiscussConversationValidator::create($request->all())->validate();
 
-        if (DiscussConversation::isFlooding('xetaravel.flood.discuss.conversation')) {
+        // Users that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
+        if (DiscussConversation::isFlooding('xetaravel.flood.discuss.conversation') &&
+            !Auth::user()->hasPermission('manage.discuss')
+        ) {
             return back()
                 ->withInput()
                 ->with('danger', 'Wow, keep calm bro, and try to not flood !');

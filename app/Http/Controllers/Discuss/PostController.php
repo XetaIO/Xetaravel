@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         $conversation = DiscussConversation::findOrFail($request->conversation_id);
 
-        // Use that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
+        // Users that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
         if (DiscussPost::isFlooding('xetaravel.flood.discuss.post') && !Auth::user()->hasPermission('manage.discuss')) {
             return back()
                 ->withInput()
@@ -98,30 +98,18 @@ class PostController extends Controller
 
         $this->authorize('delete', $post);
 
-        $conversation = $post->conversation;
-
-        if ($conversation->first_post_id == $post->getKey()) {
+        if ($post->conversation->first_post_id == $post->getKey()) {
             return redirect()
                 ->route('discuss.post.show', ['id' => $post->getKey()])
                 ->with('danger', 'You can not delete the first post of a discussion !');
         }
 
-        if ($conversation->last_post_id == $post->getKey()) {
-            $previousPost = DiscussPostRepository::findPreviousPost($post);
-
-            $conversation->last_post_id = !is_null($previousPost) ? $previousPost->getKey() : null;
-        }
-
-        if ($conversation->solved_post_id == $post->getKey()) {
-            $conversation->solved_post_id = null;
-            $conversation->is_solved = false;
-        }
-
         if ($post->delete()) {
-            $conversation->save();
-
             return redirect()
-                ->route('discuss.conversation.show', ['id' => $conversation->getKey(), 'slug' => $conversation->slug])
+                ->route(
+                    'discuss.conversation.show',
+                    ['id' => $post->conversation->getKey(), 'slug' => $post->conversation->slug]
+                )
                 ->with('success', 'This post has been deleted successfully !');
         }
 

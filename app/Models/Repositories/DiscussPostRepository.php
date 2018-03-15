@@ -23,9 +23,9 @@ class DiscussPostRepository
             'content' => $data['content']
         ]);
 
-        if (Auth::user()->hasPermission('manage.discuss.conversations')) {
-            $conversation = DiscussConversation::find($data['conversation_id']);
+        $conversation = DiscussConversation::find($data['conversation_id']);
 
+        if (Auth::user()->hasPermission('manage.discuss.conversations')) {
             $data['is_pinned'] = isset($data['is_pinned']) ? true : false;
             $data['is_locked'] = isset($data['is_locked']) ? true : false;
 
@@ -39,10 +39,11 @@ class DiscussPostRepository
 
             $conversation->is_locked = $data['is_locked'];
             $conversation->is_pinned = $data['is_pinned'];
-            $conversation->last_post_id = $post->getKey();
-
-            $conversation->save();
         }
+
+        $conversation->last_post_id = $post->getKey();
+
+        $conversation->save();
 
         return $post;
     }
@@ -54,12 +55,17 @@ class DiscussPostRepository
      *
      * @return \Xetaravel\Models\DiscussPost|null
      */
-    public static function findPreviousPost(DiscussPost $post)
+    public static function findPreviousPost(DiscussPost $post, bool $withSolved = false)
     {
-        return DiscussPost::where('id', '!=', $post->conversation->solved_post_id)
+        $previousPost = DiscussPost::where('id', '!=', $post->getKey())
                 ->where('conversation_id', $post->conversation->getKey())
-                ->where('created_at', '<', $post->created_at)
-                ->orderBy('created_at', 'desc')
+                ->where('created_at', '<=', $post->created_at);
+
+        if (!$withSolved) {
+            $previousPost = $previousPost->where('id', '!=', $post->conversation->solved_post_id);
+        }
+
+        return $previousPost->orderBy('created_at', 'desc')
                 ->first();
     }
 }
