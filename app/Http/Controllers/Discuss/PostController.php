@@ -129,6 +129,8 @@ class PostController extends Controller
     {
         $post = DiscussPost::findOrFail($id);
 
+        $this->authorize('solved', $post);
+
         if ($post->getKey() == $post->conversation->solved_post_id) {
             return back()
                 ->with('danger', 'This post is already the solved post !');
