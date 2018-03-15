@@ -15,7 +15,7 @@ class CreateDiscussConversationsTable extends Migration
     {
         Schema::create('discuss_conversations', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('user_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->nullable()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->string('title');
             $table->string('slug');

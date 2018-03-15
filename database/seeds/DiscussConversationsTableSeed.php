@@ -43,7 +43,7 @@ class DiscussConversationsTableSeed extends Seeder
         DB::table('discuss_categories')
             ->where('id', 1)
             ->update([
-            'last_conversation_id' => 1
-        ]);
+                'last_conversation_id' => 1
+            ]);
     }
 }

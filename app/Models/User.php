@@ -108,6 +108,20 @@ class User extends Model implements
         static::updating(function ($model) {
             $model->generateSlug();
         });
+
+        static::deleting(function ($model) {
+            foreach ($model->discussPosts as $post) {
+                $post->delete();
+            }
+
+            foreach ($model->discussUsers as $user) {
+                $user->delete();
+            }
+
+            foreach ($model->discussConversations as $conversation) {
+                $conversation->delete();
+            }
+        });
     }
 
     /**
@@ -209,23 +223,33 @@ class User extends Model implements
     }
 
     /**
-     * Get the discuss comments for the user.
+     * Get the discuss posts for the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function discussComments()
+    public function discussPosts()
     {
-        return $this->hasMany(DiscussComment::class);
+        return $this->hasMany(DiscussPost::class);
     }
 
     /**
-     * Get the discuss threads for the user.
+     * Get the discuss conversations for the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function discussThreads()
+    public function discussConversations()
     {
-        return $this->hasMany(DiscussThread::class);
+        return $this->hasMany(DiscussConversation::class);
+    }
+
+    /**
+     * Get the discuss users for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussUsers()
+    {
+        return $this->hasMany(DiscussUser::class);
     }
 
     /**

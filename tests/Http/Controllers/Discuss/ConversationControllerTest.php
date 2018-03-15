@@ -51,6 +51,9 @@ class ConversationControllerTest extends TestCase
      */
     public function testCreateIsFloodingFailed()
     {
+        $user = User::find(2);
+        $this->be($user);
+
         config(['xetaravel.flood.discuss.conversation' => (60 * 10)]);
 
         $data = [
@@ -58,7 +61,7 @@ class ConversationControllerTest extends TestCase
             'category_id' => 2,
             'content' => '**This** is an awesome text.'
         ];
-        //$this->post('/discuss/conversation/create', $data);
+        $this->post('/discuss/conversation/create', $data);
 
         $response = $this->post('/discuss/conversation/create', $data);
         $response->assertSessionHas('danger');

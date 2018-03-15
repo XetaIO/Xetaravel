@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussPostPresenter;
+use Xetaravel\Models\Repositories\DiscussPostRepository;
 
 class DiscussPost extends Model
 {
@@ -57,6 +58,27 @@ class DiscussPost extends Model
         // Set the user id to the new post before saving it.
         static::creating(function ($model) {
             $model->user_id = Auth::id();
+        });
+
+        static::deleting(function ($model) {
+            $conversation = $model->conversation;
+
+            if ($conversation->first_post_id == $model->getKey()) {
+                $conversation->delete();
+            }
+
+            if ($conversation->last_post_id == $model->getKey()) {
+                $previousPost = DiscussPostRepository::findPreviousPost($model, true);
+
+                $conversation->last_post_id = !is_null($previousPost) ? $previousPost->getKey() : null;
+            }
+
+            if ($conversation->solved_post_id == $model->getKey()) {
+                $conversation->solved_post_id = null;
+                $conversation->is_solved = false;
+            }
+
+            $conversation->save();
         });
     }
 

@@ -54,6 +54,9 @@ class DiscussConversationRepository
         $conversation->last_post_id = $comment->id;
         $conversation->save();
 
+        $conversation->category->last_conversation_id = $conversation->getKey();
+        $conversation->category->save();
+
         return $conversation;
     }
 
