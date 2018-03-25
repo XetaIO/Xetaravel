@@ -19,6 +19,7 @@ class CreateDiscussPostsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('conversation_id')->unsigned()->index();
             $table->longText('content');
+            $table->boolean('is_solved')->default(false);
             $table->integer('edit_count')->unsigned()->default(0);
             $table->boolean('is_edited')->default(false);
             $table->integer('edited_user_id')->unsigned()->nullable()->index();

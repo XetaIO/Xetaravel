@@ -146,6 +146,9 @@ class PostController extends Controller
         $conversation->is_solved = true;
         $conversation->save();
 
+        $post->is_solved = true;
+        $post->save();
+
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
             ->with('success', 'This reply as been marked as solved !');

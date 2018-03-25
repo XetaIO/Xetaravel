@@ -9,7 +9,6 @@ use Xetaravel\Events\Discuss\PostWasDeletedEvent;
 use Xetaravel\Events\Discuss\TitleWasChangedEvent;
 use Xetaravel\Models\DiscussLog;
 use Xetaravel\Models\User;
-use Xetaravel\Notifications\BadgeNotification;
 
 class LogSubscriber
 {
