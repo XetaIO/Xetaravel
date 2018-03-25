@@ -2,12 +2,9 @@
 namespace Xetaravel\Models;
 
 use Illuminate\Support\Facades\Auth;
-use Xetaravel\Models\Presenters\UserRubyPresenter;
 
 class UserRuby extends Model
 {
-    use UserRubyPresenter;
-
     /**
      * The attributes that are mass assignable.
      *
