@@ -4,12 +4,23 @@
         <div class="discuss-conversation-user float-xs-left text-xs-center">
             @if ($isSolvedPost)
                 <span class="discuss-conversation-user-solved rounded-circle" data-toggle="tooltip" title="This response helped the author.">
-                    <i class="fa fa-3x fa-check text-success"></i>
+                    <i class="fa fa-3x fa-check text-success discuss-conversation-user-solved-icon"></i>
+
+                    @if ($post->user->hasRubies)
+                        <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earn Rubies."></i>
+                    @endif
+
                     <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
                 </span>
             @else
+                @if ($post->user->hasRubies)
+                    <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earn Rubies."></i>
+                @endif
+
                 <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
             @endif
+
+
         </div>
 
         <div class="discuss-conversation-post">
@@ -17,6 +28,11 @@
             {{-- Conversation Meta --}}
             <div class="discuss-conversation-meta">
                 <ul class="list-inline mb-0">
+
+                    <li class="list-inline-item discuss-conversation-post-meta-experiences" data-toggle="tooltip" title="This user has {{ $post->user->experiences_total }} XP">
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        {{ $post->user->experiences_total }}
+                    </li>
 
                     {{-- User with Vue --}}
                     <li class="list-inline-item font-weight-bold">

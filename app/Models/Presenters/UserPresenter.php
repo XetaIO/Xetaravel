@@ -40,6 +40,16 @@ trait UserPresenter
     }
 
     /**
+     * Get whatever the user has rubies or not.
+     *
+     * @return boolean
+     */
+    public function getHasRubiesAttribute(): bool
+    {
+        return $this->rubies_total > 0 ? true : false;
+    }
+
+    /**
      * Get the account full name. Return the username if the user
      * has not set his first name and last name.
      *
@@ -54,6 +64,16 @@ trait UserPresenter
         }
 
         return $fullName;
+    }
+
+    /**
+     * Get the experiences total formated.
+     *
+     * @return integer
+     */
+    public function getExperiencesTotalAttribute($experiencesTotal): int
+    {
+        return number_format($experiencesTotal, 0, ".", " ");
     }
 
     /**

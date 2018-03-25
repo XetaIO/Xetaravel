@@ -85,7 +85,7 @@
         top: 0;
     }
 
-    i {
+    .discuss-conversation-user-solved-icon {
         position: absolute;
         vertical-align: middle;
         line-height: 70px;
@@ -94,10 +94,22 @@
 
 .discuss-conversation-user {
     width: 70px;
+    position: relative;
 
     img {
         width: 70px;
         height: 70px;
+    }
+
+    .discuss-conversation-user-rubies {
+        position: absolute;
+        right: 0;
+        background-color: $white;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        padding: 4px 3px 3px;
+        width: 28px;
+        height: 28px;
     }
 }
 
@@ -183,5 +195,11 @@
 
     i {
         font-size: 1.5em;
+    }
+}
+
+.discuss-conversation-post-meta-experiences {
+    i {
+        color: $brand-experiences;
     }
 }

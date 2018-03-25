@@ -46,6 +46,8 @@ class User extends Model implements
         'password',
         'slug',
         'github_id',
+        'xp_total',
+        'rubies_total',
         'register_ip',
         'last_login_ip',
         'last_login'
@@ -253,6 +255,36 @@ class User extends Model implements
     }
 
     /**
+     * Get the discuss logs for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussLogs()
+    {
+        return $this->hasMany(DiscussLog::class);
+    }
+
+    /**
+     * Get the users rubies for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function usersRubies()
+    {
+        return $this->hasMany(UserRuby::class);
+    }
+
+    /**
+     * Get the users experiences for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function usersExperiences()
+    {
+        return $this->hasMany(UserExperience::class);
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token
@@ -262,16 +294,6 @@ class User extends Model implements
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
-    }
-
-    /**
-     * Get the discuss logs for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function discussLogs()
-    {
-        return $this->hasMany(DiscussLog::class);
     }
 
     /**
