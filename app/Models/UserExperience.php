@@ -2,12 +2,9 @@
 namespace Xetaravel\Models;
 
 use Illuminate\Support\Facades\Auth;
-use Xetaravel\Models\Presenters\UserExperiencePresenter;
 
 class UserExperience extends Model
 {
-    use UserExperiencePresenter;
-
     /**
      * The attributes that are mass assignable.
      *
