@@ -44,10 +44,6 @@ class ExperienceSubscriber
             'obtainable_id' => $event->post->getKey(),
             'obtainable_type' => get_class($event->post),
             'event_type' => PostWasCreatedEvent::class
-            /*'data' => [
-                'old' => $event->oldCategory,
-                'new' => $event->category
-            ]*/
         ];
 
         return $this->create($data);

@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xetaio\Mentions\Parser\MentionParser;
+use Xetaravel\Events\Experiences\PostWasCreatedEvent;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
@@ -148,6 +149,8 @@ class PostController extends Controller
 
         $post->is_solved = true;
         $post->save();
+
+        event(new PostWasCreatedEvent($post, Auth::user()));
 
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
