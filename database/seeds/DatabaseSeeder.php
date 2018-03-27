@@ -37,6 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DiscussLogsTableSeed::class);
 
         // Experiences & Rubies
-        $this->call(UsersExperiencesTableSeed::class);
+        $this->call(ExperiencesTableSeed::class);
     }
 }

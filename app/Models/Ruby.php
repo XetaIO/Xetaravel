@@ -3,7 +3,7 @@ namespace Xetaravel\Models;
 
 use Illuminate\Support\Facades\Auth;
 
-class UserExperience extends Model
+class Ruby extends Model
 {
     /**
      * The attributes that are mass assignable.

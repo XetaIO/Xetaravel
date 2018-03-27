@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersRubiesTable extends Migration
+class CreateRubiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,12 @@ class CreateUsersRubiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_rubies', function (Blueprint $table) {
+        Schema::create('rubies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->morphs('obtainable');
+            $table->string('event_type');
+            $table->text('data')->nullable();
             $table->timestamps();
         });
 
@@ -25,7 +27,7 @@ class CreateUsersRubiesTable extends Migration
          * Only create foreign key on production/development.
          */
         if (App::environment() !== 'testing') {
-            Schema::table('users_rubies', function (Blueprint $table) {
+            Schema::table('rubies', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
@@ -38,6 +40,6 @@ class CreateUsersRubiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_rubies');
+        Schema::dropIfExists('rubies');
     }
 }

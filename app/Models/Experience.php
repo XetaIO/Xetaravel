@@ -1,10 +1,13 @@
 <?php
 namespace Xetaravel\Models;
 
+use Eloquence\Behaviours\SumCache\Summable;
 use Illuminate\Support\Facades\Auth;
 
-class UserRuby extends Model
+class Experience extends Model
 {
+    use Summable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -12,8 +15,20 @@ class UserRuby extends Model
      */
     protected $fillable = [
         'user_id',
+        'amount',
         'obtainable_id',
-        'obtainable_type'
+        'obtainable_type',
+        'event_type',
+        'data'
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'data' => 'array'
     ];
 
     /**
@@ -27,8 +42,22 @@ class UserRuby extends Model
 
         // Set the user id to the new log before saving it.
         static::creating(function ($model) {
-            $model->user_id = Auth::id();
+            if (is_null($model->user_id)) {
+                $model->user_id = Auth::id();
+            }
         });
+    }
+
+    /**
+     * Return the sum cache configuration.
+     *
+     * @return array
+     */
+    public function sumCaches()
+    {
+        return [
+            'experiences_total' => [User::class, 'amount', 'user_id', 'id']
+        ];
     }
 
     /**

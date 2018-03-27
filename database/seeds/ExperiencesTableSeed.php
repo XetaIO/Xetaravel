@@ -4,7 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UsersExperiencesTableSeed extends Seeder
+class ExperiencesTableSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,29 +15,27 @@ class UsersExperiencesTableSeed extends Seeder
     {
         $now = Carbon::now();
 
-        $xp = [
+        $experiences = [
             [
                 'user_id' => 1,
                 'amount' => 90,
                 'obtainable_type' => 'Xetaravel\\Models\\DiscussConversation',
                 'obtainable_id' => 1,
-                'event_type' => 'Xetaravel\\Events\\Users\\Xp\\NewThreadEvent',
-                'data' => '{"id":1}',
+                'event_type' => 'Xetaravel\\Events\\Experiences\\ConversationWasCreatedEvent',
                 'created_at' => $now,
                 'updated_at' => $now
             ],
             [
                 'user_id' => 2,
                 'amount' => 75,
-                'obtainable_type' => 'Xetaravel\\Models\\DiscussConversation',
-                'obtainable_id' => 1,
-                'event_type' => 'Xetaravel\\Events\\Users\\Xp\\NewPostEvent',
-                'data' => '{"id":2}',
+                'obtainable_type' => 'Xetaravel\\Models\\DiscussPost',
+                'obtainable_id' => 2,
+                'event_type' => 'Xetaravel\\Events\\Experiences\\PostWasCreatedEvent',
                 'created_at' => $now,
                 'updated_at' => $now
             ]
         ];
 
-        DB::table('users_experiences')->insert($xp);
+        DB::table('experiences')->insert($experiences);
     }
 }

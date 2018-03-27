@@ -1,7 +1,6 @@
 <?php
 namespace Xetaravel\Providers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -22,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $subscribe = [
         \Xetaravel\Listeners\Subscribers\BadgeSubscriber::class,
-        \Xetaravel\Listeners\Subscribers\Discuss\LogSubscriber::class
+        \Xetaravel\Listeners\Subscribers\Discuss\LogSubscriber::class,
+        \Xetaravel\Listeners\Subscribers\ExperienceSubscriber::class
     ];
 
     /**

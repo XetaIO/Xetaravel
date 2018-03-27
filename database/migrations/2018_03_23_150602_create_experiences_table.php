@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersExperiencesTable extends Migration
+class CreateExperiencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,13 @@ class CreateUsersExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_experiences', function (Blueprint $table) {
+        Schema::create('experiences', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('amount')->default(0);
             $table->morphs('obtainable');
             $table->string('event_type');
-            $table->text('data');
+            $table->text('data')->nullable();
             $table->timestamps();
         });
 
@@ -28,7 +28,7 @@ class CreateUsersExperiencesTable extends Migration
          * Only create foreign key on production/development.
          */
         if (App::environment() !== 'testing') {
-            Schema::table('users_experiences', function (Blueprint $table) {
+            Schema::table('experiences', function (Blueprint $table) {
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });
         }
@@ -41,6 +41,6 @@ class CreateUsersExperiencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_experiences');
+        Schema::dropIfExists('experiences');
     }
 }

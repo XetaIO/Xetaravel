@@ -46,8 +46,6 @@ class User extends Model implements
         'password',
         'slug',
         'github_id',
-        'xp_total',
-        'rubies_total',
         'register_ip',
         'last_login_ip',
         'last_login'
@@ -265,23 +263,23 @@ class User extends Model implements
     }
 
     /**
-     * Get the users rubies for the user.
+     * Get the rubies for the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usersRubies()
+    public function rubies()
     {
-        return $this->hasMany(UserRuby::class);
+        return $this->hasMany(Ruby::class);
     }
 
     /**
-     * Get the users experiences for the user.
+     * Get the experiences for the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function usersExperiences()
+    public function experiences()
     {
-        return $this->hasMany(UserExperience::class);
+        return $this->hasMany(Experience::class);
     }
 
     /**

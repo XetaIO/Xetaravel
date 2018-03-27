@@ -9,6 +9,7 @@ use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussLog;
+use Xetaravel\Events\Experiences\ConversationWasCreatedEvent;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Validators\DiscussConversationValidator;
 
@@ -84,6 +85,8 @@ class ConversationController extends Controller
 
         $post->content = $content;
         $post->save();
+
+        event(new ConversationWasCreatedEvent($conversation, Auth::user()));
 
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
