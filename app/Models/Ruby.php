@@ -38,7 +38,9 @@ class Ruby extends Model
 
         // Set the user id to the new log before saving it.
         static::creating(function ($model) {
-            $model->user_id = Auth::id();
+            if (is_null($model->user_id)) {
+                $model->user_id = Auth::id();
+            }
         });
     }
 

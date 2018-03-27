@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Events\Experiences\PostWasCreatedEvent;
 use Xetaravel\Events\Experiences\PostWasSolvedEvent;
+use Xetaravel\Events\Rubies\PostWasSolvedEvent as RubiesPostWasSolvedEvent;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
@@ -154,6 +155,8 @@ class PostController extends Controller
         $post->save();
 
         event(new PostWasSolvedEvent($post, Auth::user()));
+
+        event(new RubiesPostWasSolvedEvent($post, Auth::user()));
 
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
