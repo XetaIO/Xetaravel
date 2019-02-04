@@ -1,5 +1,5 @@
 parameters:
-    bin_dir: ./vendor/bin
+    bin_dir: "Z:\\Web\\Sites\\Xetaravel\\vendor\\bin"
     git_dir: .
     tasks:
         phpversion:
