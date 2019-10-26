@@ -23,10 +23,10 @@ return [
     'service_account_credentials_json' => storage_path('app/analytics/service-account-credentials.json'),
 
     /*
-     * The amount of minutes the Google API responses will be cached.
+     * The amount of seconds the Google API responses will be cached.
      * If you set this to zero, the responses won't be cached at all.
      */
-    'cache_lifetime_in_minutes' => 120,
+    'cache_lifetime_in_secondes' => 7200,  // 2 hours
 
     /*
      * Here you may configure the "store" that the underlying Google_Client will

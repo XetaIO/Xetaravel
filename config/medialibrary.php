@@ -4,9 +4,9 @@ return [
 
     /*
      * The filesystems on which to store added files and derived images by default. Choose
-     * one or more of the filesystems you configured in app/config/filesystems.php
+     * one or more of the filesystems you've configured in config/filesystems.php.
      */
-    'default_filesystem' => 'media',
+    'disk_name' => 'media',
 
     /*
      * The maximum file size of an item in bytes. Adding a file
@@ -23,7 +23,7 @@ return [
     /*
      * The class name of the media model to be used.
      */
-    'media_model' => Spatie\MediaLibrary\Media::class,
+    'media_model' => Spatie\MediaLibrary\Models\Media::class,
 
     /*
      * The engine that will perform the image conversions.
@@ -32,15 +32,15 @@ return [
     'image_driver' => 'gd',
 
     /*
-     * When urls to files get generated this class will be called. Leave empty
+     * When urls to files get generated, this class will be called. Leave empty
      * if your files are stored locally above the site root or on s3.
      */
-    'custom_url_generator_class' => null,
+    'url_generator' => null,
 
     /*
      * The class that contains the strategy for determining a media file's path.
      */
-    'custom_path_generator_class' => Xetaravel\MediaLibrary\PathGenerator\XetaravelPathGenerator::class,
+    'path_generator' => Xetaravel\MediaLibrary\PathGenerator\XetaravelPathGenerator::class,
 
     's3' => [
         /*
@@ -68,9 +68,10 @@ return [
      */
     'image_generators' => [
         Spatie\MediaLibrary\ImageGenerators\FileTypes\Image::class,
+        Spatie\MediaLibrary\ImageGenerators\FileTypes\Webp::class,
         Spatie\MediaLibrary\ImageGenerators\FileTypes\Pdf::class,
         Spatie\MediaLibrary\ImageGenerators\FileTypes\Svg::class,
-        Spatie\MediaLibrary\ImageGenerators\FileTypes\Video::class,
+        Spatie\MediaLibrary\ImageGenerators\FileTypes\Video::class
     ],
 
     /*

@@ -2,10 +2,10 @@
 namespace Xetaravel\Markdown\Emoji;
 
 use League\CommonMark\Inline\Element\Image;
-use League\CommonMark\Inline\Parser\AbstractInlineParser;
+use League\CommonMark\Inline\Parser\InlineParserInterface;
 use League\CommonMark\InlineParserContext;
 
-class EmojiParser extends AbstractInlineParser
+class EmojiParser implements InlineParserInterface
 {
     /**
      * The emoji mappings.
@@ -44,7 +44,7 @@ class EmojiParser extends AbstractInlineParser
      *
      * @return array
      */
-    public function getCharacters()
+    public function getCharacters(): array
     {
         return [':'];
     }
@@ -57,7 +57,7 @@ class EmojiParser extends AbstractInlineParser
      *
      * @return bool
      */
-    public function parse(InlineParserContext $inlineContext)
+    public function parse(InlineParserContext $inlineContext): bool
     {
         $cursor = $inlineContext->getCursor();
 

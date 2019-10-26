@@ -2,7 +2,6 @@
 namespace Xetaravel\Http\Components;
 
 use Carbon\Carbon;
-use Rinvex\Country\CountryLoader;
 use Spatie\Analytics\AnalyticsFacade;
 use Spatie\Analytics\Period;
 

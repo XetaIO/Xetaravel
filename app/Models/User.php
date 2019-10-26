@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
-use Spatie\MediaLibrary\Media;
+use Spatie\MediaLibrary\Models\Media;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Xetaravel\Models\Presenters\UserPresenter;
@@ -24,7 +24,7 @@ class User extends Model implements
     AuthorizableContract,
     CanResetPasswordContract,
     HasRoleAndPermissionContract,
-    HasMediaConversions
+    HasMedia
 {
     use Authenticatable,
         Authorizable,
