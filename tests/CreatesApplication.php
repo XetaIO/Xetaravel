@@ -31,7 +31,7 @@ trait CreatesApplication
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -44,7 +44,7 @@ trait CreatesApplication
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $temp = public_path() . '/tests/storage';
 
