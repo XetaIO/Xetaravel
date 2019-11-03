@@ -11,6 +11,7 @@ Homestead.yaml
 composer.lock
 package-lock.json
 studio.json
+vagrant-ssh
 /node_modules
 /plugins
 /public/storage

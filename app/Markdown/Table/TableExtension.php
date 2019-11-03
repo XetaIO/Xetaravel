@@ -1,40 +1,30 @@
 <?php
 namespace Xetaravel\Markdown\Table;
 
-use League\CommonMark\Extension\Extension;
-use Webuni\CommonMark\TableExtension\TableCaptionRenderer;
-use Webuni\CommonMark\TableExtension\TableRowsRenderer;
-use Webuni\CommonMark\TableExtension\TableRowRenderer;
-use Webuni\CommonMark\TableExtension\TableCellRenderer;
-use Webuni\CommonMark\TableExtension\TableParser;
+use League\CommonMark\ConfigurableEnvironmentInterface;
+use League\CommonMark\Extension\ExtensionInterface;
+use League\CommonMark\Ext\Table\Table;
+use League\CommonMark\Ext\Table\TableParser;
+use League\CommonMark\Ext\Table\TableCaption;
+use League\CommonMark\Ext\Table\TableCaptionRenderer;
+use League\CommonMark\Ext\Table\TableSection;
+use League\CommonMark\Ext\Table\TableSectionRenderer;
+use League\CommonMark\Ext\Table\TableRow;
+use League\CommonMark\Ext\Table\TableRowRenderer;
+use League\CommonMark\Ext\Table\TableCell;
+use League\CommonMark\Ext\Table\TableCellRenderer;
 
-class TableExtension extends Extension
+final class TableExtension implements ExtensionInterface
 {
-    /**
-     * Returns a list of block parsers to add to the existing list.
-     *
-     * @return array
-     */
-    public function getBlockParsers()
+    public function register(ConfigurableEnvironmentInterface $environment): void
     {
-        return [
-            new TableParser(),
-        ];
-    }
-
-    /**
-     * Returns a list of block renderers to add to the existing list.
-     *
-     * @return array
-     */
-    public function getBlockRenderers()
-    {
-        return [
-            \Webuni\CommonMark\TableExtension\Table::class => new TableRenderer(),
-            \Webuni\CommonMark\TableExtension\TableCaption::class => new TableCaptionRenderer(),
-            \Webuni\CommonMark\TableExtension\TableRows::class => new TableRowsRenderer(),
-            \Webuni\CommonMark\TableExtension\TableRow::class => new TableRowRenderer(),
-            \Webuni\CommonMark\TableExtension\TableCell::class => new TableCellRenderer(),
-        ];
+        $environment
+            ->addBlockParser(new TableParser())
+            ->addBlockRenderer(Table::class, new TableRenderer())
+            ->addBlockRenderer(TableCaption::class, new TableCaptionRenderer())
+            ->addBlockRenderer(TableSection::class, new TableSectionRenderer())
+            ->addBlockRenderer(TableRow::class, new TableRowRenderer())
+            ->addBlockRenderer(TableCell::class, new TableCellRenderer())
+        ;
     }
 }

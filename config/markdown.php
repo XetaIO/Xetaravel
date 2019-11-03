@@ -39,10 +39,10 @@ return [
     */
 
     'extensions' => [
+        League\CommonMark\Ext\TaskList\TaskListExtension::class,
         Xetaravel\Markdown\Emoji\EmojiExtension::class,
         Xetaravel\Markdown\Reply\ReplyExtension::class,
-        Xetaravel\Markdown\Table\TableExtension::class,
-        Xetaravel\Markdown\TaskLists\TaskListsExtension::class,
+        Xetaravel\Markdown\Table\TableExtension::class
     ],
 
     /*
@@ -144,4 +144,15 @@ return [
 
     'allow_unsafe_links' => true,
 
+        /*
+    |--------------------------------------------------------------------------
+    | Maximum Nesting Level
+    |--------------------------------------------------------------------------
+    |
+    | This option specifies the maximum permitted block nesting level.
+    |
+    | Default: INF
+    |
+    */
+    'max_nesting_level' => INF,
 ];

@@ -35,5 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DiscussPostsTableSeed::class);
         $this->call(DiscussUsersTableSeed::class);
         $this->call(DiscussLogsTableSeed::class);
+
+        // Experiences & Rubies
+        $this->call(ExperiencesTableSeed::class);
     }
 }

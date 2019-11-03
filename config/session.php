@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -122,7 +124,7 @@ return [
     |
     */
 
-    'cookie' => 'xetaravel_session',
+    'cookie' => Str::slug(env('APP_NAME', 'laravel'), '_').'_session',
 
     /*
     |--------------------------------------------------------------------------

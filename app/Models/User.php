@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
-use Spatie\MediaLibrary\Media;
+use Spatie\MediaLibrary\Models\Media;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Xetaravel\Models\Presenters\UserPresenter;
@@ -24,7 +24,7 @@ class User extends Model implements
     AuthorizableContract,
     CanResetPasswordContract,
     HasRoleAndPermissionContract,
-    HasMediaConversions
+    HasMedia
 {
     use Authenticatable,
         Authorizable,
@@ -253,6 +253,36 @@ class User extends Model implements
     }
 
     /**
+     * Get the discuss logs for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function discussLogs()
+    {
+        return $this->hasMany(DiscussLog::class);
+    }
+
+    /**
+     * Get the rubies for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rubies()
+    {
+        return $this->hasMany(Ruby::class);
+    }
+
+    /**
+     * Get the experiences for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token
@@ -262,16 +292,6 @@ class User extends Model implements
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
-    }
-
-    /**
-     * Get the discuss logs for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function discussLogs()
-    {
-        return $this->hasMany(DiscussLog::class);
     }
 
     /**

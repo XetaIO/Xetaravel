@@ -1,23 +1,24 @@
 <?php
 namespace Xetaravel\Markdown\Emoji;
 
-use League\CommonMark\Extension\Extension;
+use League\CommonMark\ConfigurableEnvironmentInterface;
+use League\CommonMark\Extension\ExtensionInterface;
 
-class EmojiExtension extends Extension
+final class EmojiExtension implements ExtensionInterface
 {
     /**
      * The emoji parser.
      *
      * @var \Xetaravel\Markdown\Emoji\EmojiParser
      */
-    protected $parser;
+    //protected $parser;
 
     /**
      * Create a new emoji parser instance.
      *
      * @param \Xetaravel\Markdown\Emoji\EmojiParser $parser
      */
-    public function __construct(EmojiParser $parser)
+    /*public function __construct(EmojiParser $parser)
     {
         $this->parser = $parser;
     }
@@ -27,8 +28,13 @@ class EmojiExtension extends Extension
      *
      * @return array
      */
-    public function getInlineParsers()
+   /*public function getInlineParsers()
     {
         return [$this->parser];
+    }*/
+
+    public function register(ConfigurableEnvironmentInterface $environment)
+    {
+        $environment->addInlineParser(new EmojiParser);
     }
 }
