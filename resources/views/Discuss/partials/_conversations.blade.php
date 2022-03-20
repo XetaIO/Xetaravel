@@ -54,7 +54,7 @@
 
                     @if ($conversation->is_solved)
                             <span class="tag tag-success">
-                                Résolue
+                                <i class="fa fa-check" aria-hidden="true"></i> Solved
                             </span>
                         </div>
                     @endif

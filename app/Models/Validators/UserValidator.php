@@ -26,7 +26,7 @@ class UserValidator
 
         // Bipass the captcha for the unit testing.
         if (App::environment() !== 'testing') {
-            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|recaptcha']);
+            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|captcha']);
         }
 
         return FacadeValidator::make($data, $rules);

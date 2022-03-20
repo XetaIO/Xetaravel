@@ -33,5 +33,5 @@ Vagrantfile
 /public/tests
 /public/mix.*.js
 /storage/*.key
-/storage/medialibrary
+/storage/media-library
 /vendor

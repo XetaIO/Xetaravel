@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Reset your password']) !!}
 
+@push('scriptsTop')
+    {!! NoCaptcha::renderJs() !!}
+@endpush
+
 @section('content')
 <div class="container mt-6">
     <div class="row">
@@ -15,7 +19,14 @@
                     'required' => 'required'
                 ]) !!}
 
-                {!! Recaptcha::render() !!}
+                <div class="form-group {{ $errors->has('g-recaptcha-response') ? 'has-danger' : '' }}">
+                    {!! NoCaptcha::display() !!}
+                    @if ($errors->has('g-recaptcha-response'))
+                        <div class="form-control-feedback">
+                            {{ $errors->first('g-recaptcha-response') }}
+                        </div>
+                    @endif
+                </div>
 
                 <div class="form-group text-xs-center">
                     {!! Form::button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send Password Reset Link', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}

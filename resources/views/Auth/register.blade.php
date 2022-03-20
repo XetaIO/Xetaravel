@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Join us !']) !!}
 
+@push('scriptsTop')
+    {!! NoCaptcha::renderJs() !!}
+@endpush
+
 @section('content')
 <div class="container mt-6">
     <div class="row">
@@ -30,7 +34,14 @@
                     'required' => 'required'
                 ]) !!}
 
-                {!! Recaptcha::render() !!}
+                <div class="form-group {{ $errors->has('g-recaptcha-response') ? 'has-danger' : '' }}">
+                        {!! NoCaptcha::display() !!}
+                        @if ($errors->has('g-recaptcha-response'))
+                            <div class="form-control-feedback">
+                                {{ $errors->first('g-recaptcha-response') }}
+                            </div>
+                        @endif
+                    </div>
 
                 {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
 
