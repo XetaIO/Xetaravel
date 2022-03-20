@@ -28,7 +28,7 @@
             {!! Form::close() !!}
 
             <div class="text-xs-center">
-                {!! link_to(route('auth.driver.type', ['driver' => 'github', 'type' => 'login']), 'Login with Github <i class="fa fa-github"></i>', ['class' => 'btn btn-outline-secondary'], true, false) !!}
+                {!! link_to(route('auth.driver.redirect', ['driver' => 'github']), 'Login with Github <i class="fa fa-github"></i>', ['class' => 'btn btn-outline-secondary'], true, false) !!}
             </div>
         </div>
         <div class="col-md-12 text-xs-center">

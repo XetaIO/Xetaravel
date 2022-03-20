@@ -3,14 +3,30 @@ namespace Xetaravel\Listeners\Subscribers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Xetaravel\Events\Badges\ExperiencesEvent;
+use Xetaravel\Events\Badges\PostEvent;
+use Xetaravel\Events\Badges\PostSolvedEvent;
 use Xetaravel\Events\RegisterEvent;
 use Xetaravel\Events\CommentEvent;
 use Xetaravel\Models\Badge;
+use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\User;
 use Xetaravel\Notifications\BadgeNotification;
 
 class BadgeSubscriber
 {
+    /**
+     * The events mapping to the listener function.
+     *
+     * @var array
+     */
+    protected $events = [
+        RegisterEvent::class => 'onNewRegister',
+        PostEvent::class => 'onNewPost',
+        PostSolvedEvent::class => 'onNewPostSolved',
+        ExperiencesEvent::class => 'onNewExperiences'
+    ];
+
     /**
      * Register the listeners for the subscriber.
      *
@@ -20,15 +36,9 @@ class BadgeSubscriber
      */
     public function subscribe($events)
     {
-        $events->listen(
-            'Xetaravel\Events\RegisterEvent',
-            'Xetaravel\Listeners\Subscribers\BadgeSubscriber@onNewRegister'
-        );
-
-        $events->listen(
-            'Xetaravel\Events\CommentEvent',
-            'Xetaravel\Listeners\Subscribers\BadgeSubscriber@onNewComment'
-        );
+        foreach ($this->events as $event => $action) {
+            $events->listen($event, BadgeSubscriber::class . '@' . $action);
+        }
     }
 
     /**
@@ -45,6 +55,73 @@ class BadgeSubscriber
 
         $collection = $badges->filter(function ($badge) use ($user) {
             return $badge->rule <= $user->comment_count;
+        });
+
+        $result = $user->badges()->syncWithoutDetaching($collection);
+
+        return $this->sendNotifications($result, $badges, $user);
+    }
+
+    /**
+     * Listener related to the posts badge.
+     *
+     * @param \Xetaravel\Events\PostEvent $event The event that was fired.
+     *
+     * @return bool
+     */
+    public function onNewPost(PostEvent $event): bool
+    {
+        $user = $event->user;
+        $badges = Badge::where('type', 'onNewPost')->get();
+
+        $collection = $badges->filter(function ($badge) use ($user) {
+            return $badge->rule <= $user->discuss_post_count;
+        });
+
+        $result = $user->badges()->syncWithoutDetaching($collection);
+
+        return $this->sendNotifications($result, $badges, $user);
+    }
+
+    /**
+     * Listener related to the post solved badge.
+     *
+     * @param \Xetaravel\Events\PostSolvedEvent $event The event that was fired.
+     *
+     * @return bool
+     */
+    public function onNewPostSolved(PostSolvedEvent $event): bool
+    {
+        $user = $event->user;
+        $badges = Badge::where('type', 'onNewPostSolved')->get();
+
+        $collection = $badges->filter(function ($badge) use ($user) {
+            $postsSolved = DiscussPost::where('user_id', $user->id)
+                    ->where('is_solved', true)
+                    ->count();
+
+            return $badge->rule <= $postsSolved;
+        });
+
+        $result = $user->badges()->syncWithoutDetaching($collection);
+
+        return $this->sendNotifications($result, $badges, $user);
+    }
+
+    /**
+     * Listener related to the experiences badge.
+     *
+     * @param \Xetaravel\Events\ExperiencesEvent $event The event that was fired.
+     *
+     * @return bool
+     */
+    public function onNewExperiences(ExperiencesEvent $event): bool
+    {
+        $user = $event->user;
+        $badges = Badge::where('type', 'onNewExperiences')->get();
+
+        $collection = $badges->filter(function ($badge) use ($user) {
+            return $badge->rule <= $user->experiences_total;
         });
 
         $result = $user->badges()->syncWithoutDetaching($collection);

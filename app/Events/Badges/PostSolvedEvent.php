@@ -1,10 +1,15 @@
 <?php
-namespace Xetaravel\Events;
+namespace Xetaravel\Events\Badges;
 
 use Xetaravel\Models\User;
 
-class CommentEvent
+class PostSolvedEvent
 {
+    /**
+     * The user instance.
+     *
+     * @var \Xetaravel\Models\User
+     */
     public $user;
 
     /**

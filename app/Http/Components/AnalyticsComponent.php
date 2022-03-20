@@ -32,6 +32,23 @@ trait AnalyticsComponent
     }
 
     /**
+     * Build the today visitors metric.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return string
+     */
+    public function buildAllTimeVisitors(): string
+    {
+        $startDate = Carbon::createFromFormat('Y-m-d', config('analytics.start_date'));
+        $endDate = Carbon::now();
+
+        $visitorsData = AnalyticsFacade::performQuery(Period::create($startDate, $endDate), 'ga:sessions');
+
+        return $visitorsData->totalsForAllResults['ga:sessions'];
+    }
+
+    /**
      * Build the visitors graph for the last 7 days.
      *
      * @codeCoverageIgnore

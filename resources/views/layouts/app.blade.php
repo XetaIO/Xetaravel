@@ -50,6 +50,7 @@
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
         <script src="{{ mix('js/xetaravel.min.js') }}"></script>
+        <script src="https://kit.fontawesome.com/61f38896f8.js" crossorigin="anonymous"></script>
 
         <!-- Embed Scripts -->
         @stack('scripts')

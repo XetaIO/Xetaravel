@@ -11,7 +11,13 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        //
+        /*\SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            'SocialiteProviders\\Discord\\DiscordExtendSocialite@handle',
+            'SocialiteProviders\\Twitch\\TwitchExtendSocialite@handle'
+        ],*/
+        \Illuminate\Auth\Events\Registered::class => [
+            \Illuminate\Auth\Listeners\SendEmailVerificationNotification::class,
+        ]
     ];
 
     /**

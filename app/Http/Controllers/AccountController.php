@@ -48,7 +48,10 @@ class AccountController extends Controller
         AccountValidator::update($request->all())->validate();
         $account = AccountRepository::update($request->all(), Auth::id());
 
-        $parser = new MentionParser($account, ['mention' => false]);
+        $parser = new MentionParser($account, [
+            'regex' => '/\s({character}{pattern}{rules})\s/',
+            'mention' => false
+        ]);
         $signature = $parser->parse($account->signature);
         $biography = $parser->parse($account->biography);
 

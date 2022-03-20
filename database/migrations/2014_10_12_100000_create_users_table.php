@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->ipAddress('register_ip');
             $table->ipAddress('last_login_ip')->nullable();
             $table->dateTime('last_login')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

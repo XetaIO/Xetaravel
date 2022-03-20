@@ -19,18 +19,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Queue Prefix
-    |--------------------------------------------------------------------------
-    |
-    | If you are running multiple sites on a single server you should consider
-    | specifying a queue prefix. This string will be prepended to the queue
-    | names to prevent cross-talk when using certain local queue drivers.
-    |
-    */
-    'prefix' => env('QUEUE_PREFIX', ''),
-
-    /*
-    |--------------------------------------------------------------------------
     | Queue Connections
     |--------------------------------------------------------------------------
     |
@@ -74,6 +62,7 @@ return [
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
+            'block_for' => null,
         ],
 
     ],
@@ -90,6 +79,7 @@ return [
     */
 
     'failed' => [
+        'driver' => env('QUEUE_FAILED_DRIVER', 'database'),
         'database' => env('DB_CONNECTION', 'mysql'),
         'table' => 'failed_jobs',
     ],

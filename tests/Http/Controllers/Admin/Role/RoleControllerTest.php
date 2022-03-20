@@ -128,8 +128,8 @@ class RoleControllerTest extends TestCase
                 2
             ]
         ]);
-        $editor = User::find(2);
-        $editor->roles()->sync($role);
+        $moderator = User::find(2);
+        $moderator->roles()->sync($role);
 
         $banished = User::find(4);
         $banished->roles()->sync($role, false);
@@ -141,8 +141,8 @@ class RoleControllerTest extends TestCase
         $this->assertTrue($banished->roles->contains('name', 'Banished'));
         $this->assertFalse($banished->roles->contains('name', 'User'));
 
-        $this->assertTrue($editor->roles->contains('name', 'User'));
-        $this->assertFalse($editor->roles->contains('name', 'Editor'));
+        $this->assertTrue($moderator->roles->contains('name', 'User'));
+        $this->assertFalse($moderator->roles->contains('name', 'Moderator'));
     }
 
     /**

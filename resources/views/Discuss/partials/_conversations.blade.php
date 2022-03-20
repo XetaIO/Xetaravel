@@ -43,17 +43,20 @@
                 <div class="discuss-conversations-list-tags float-xs-right">
                     @if ($conversation->is_solved)
                         <div class="tag-group">
+                    @endif
+
                             <a href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' =>$conversation->category->getKey()]) }}" class="tag tag-default" style="background-color: {{ $conversation->category->color }};">
+                            @if (!is_null($conversation->category->icon))
+                                <i class="{{ $conversation->category->icon }}"></i>
+                            @endif
                                 {{ $conversation->category->title }}
                             </a>
+
+                    @if ($conversation->is_solved)
                             <span class="tag tag-success">
-                                Solved
+                                Résolue
                             </span>
                         </div>
-                    @else
-                        <a href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' =>$conversation->category->getKey()]) }}" class="tag tag-default" style="background-color: {{ $conversation->category->color }};">
-                            {{ $conversation->category->title }}
-                        </a>
                     @endif
                 </div>
                 <small>

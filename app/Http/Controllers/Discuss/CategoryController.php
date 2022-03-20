@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index(): View
     {
-        $categories = DiscussCategory::orderBy('title', 'asc')->get();
+        $categories = DiscussCategory::orderBy('level', 'asc')->get();
 
         $breadcrumbs = $this->breadcrumbs->addCrumb('All Categories', route('discuss.category.index'));
 
@@ -38,8 +38,14 @@ class CategoryController extends Controller
 
         $this->breadcrumbs->addCrumb('Categories', route('discuss.category.index'));
 
+        $icon = "";
+
+        if (!is_null($category->icon)) {
+            $icon = "<i class=\"{$category->icon}\"></i> ";
+        }
+
         $breadcrumbs = $this->breadcrumbs->addCrumb(
-            e($category->title),
+            $icon . e($category->title),
             route('discuss.category.show', ['slug' => $category->slug,'id' => $category->getKey()])
         );
 

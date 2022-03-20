@@ -23,10 +23,10 @@ Route::group([
     'namespace' => 'Auth',
     'middleware' => 'permission:access.site,allowGuest'
 ], function () {
-    Route::get('{driver}/{type}', 'SocialiteController@redirectToProvider')
-        ->name('auth.driver.type');
-    Route::get('{driver}/{type}/callback', 'SocialiteController@handleProviderCallback')
-        ->name('auth.driver.type.callback');
+    Route::get('{driver}/redirect', 'SocialiteController@redirectToProvider')
+        ->name('auth.driver.redirect');
+    Route::get('{driver}/callback', 'SocialiteController@handleProviderCallback')
+        ->name('auth.driver.callback');
     Route::get('{driver}/register/form', 'SocialiteController@showRegistrationForm')
         ->name('auth.driver.register');
     Route::post('{driver}/register/validate', 'SocialiteController@register')
@@ -63,6 +63,14 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
             ->name('users.auth.password.reset');
         Route::post('password/reset', 'ResetPasswordController@reset')
             ->name('users.auth.password.handlereset');
+
+        // Email Verification Routes
+        Route::get('email/verify/{hash}', 'VerificationController@show')
+            ->name('users.auth.verification.notice');
+        Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')
+            ->name('users.auth.verification.verify');
+        Route::post('email/resend', 'VerificationController@resend')
+            ->name('users.auth.verification.resend');
     });
 
     // Auth Middleware

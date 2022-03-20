@@ -114,7 +114,7 @@
                         </small>
 
                         <div class="card-text">
-                            {!! Markdown::convertToHtml(str_limit($article->content, 120)) !!}
+                            {!! Markdown::convertToHtml(Str::limit($article->content, 120)) !!}
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                         </small>
 
                         <div>
-                            {!! Markdown::convertToHtml(str_limit($comment->content, 250)) !!}
+                            {!! Markdown::convertToHtml(Str::limit($comment->content, 250)) !!}
                         </div>
                     </div>
 

@@ -10,7 +10,7 @@
                 There are some errors while registering your account. Please fix these errors before to continue.
             </div>
             <h2 class="text-xs-center font-xeta mt-2">
-                Register with {{ title_case(session('socialite.driver')) }}
+                Register with {{ Str::title(session('socialite.driver')) }}
             </h2>
         </div>
         <div class="col-md-4 offset-md-4">

@@ -87,6 +87,14 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'name' => 'Access Member',
+                'slug' => 'access.member',
+                'description' => 'The user can access to the member section.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'name' => 'Show Banished',
                 'slug' => 'show.banished',
                 'description' => 'The user is banished.',

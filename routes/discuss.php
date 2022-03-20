@@ -8,11 +8,15 @@
 Route::group([
         'namespace' => 'Discuss',
         'prefix' => 'discuss',
-        'middleware' => ['permission:access.site,allowGuest']
+        'middleware' => ['permission:access.site,allowGuest', 'discuss.maintenance']
 ], function () {
     // Discuss Routes
     Route::get('/', 'DiscussController@index')
         ->name('discuss.index');
+
+    //  Leaderboard Route
+    Route::get('leaderboard', 'DiscussController@leaderboard')
+        ->name('discuss.leaderboard');
 
     // Conversation Routes
     Route::get('conversation/{slug}.{id}', 'ConversationController@show')

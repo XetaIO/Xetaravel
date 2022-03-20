@@ -13,6 +13,7 @@
     .tag {
         border-radius: 50%;
         padding: 0.30em;
+        border: 2px solid #ddd;
     }
 }
 
@@ -28,11 +29,17 @@
 .discuss-conversation-header-categories {
     display: inline-table;
     margin: 0 1rem 1rem 0;
+
+    .tag {
+        border-radius: 0.2rem;
+        font-size: 13px;
+    }
 }
 
 .discuss-conversation-header-badges .tag,
 .discuss-conversation-header-categories .tag {
     color: $white;
+    padding: 0.4em 0.5em;
 }
 
 .discuss-conversation {
@@ -110,6 +117,36 @@
         padding: 4px 3px 3px;
         width: 28px;
         height: 28px;
+    }
+
+    .discuss-conversation-user-roles {
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        padding: 6px 4px;
+        margin-top: 4px;
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+
+        &.discuss-conversation-user-member {
+            background-color: #00af94;
+            color: #fff;
+        }
+
+        &.discuss-conversation-user-moderator {
+            background-color: #f1c40f;
+            color: #fff;
+        }
+
+        &.discuss-conversation-user-administrator {
+            background-color: $brand-primary;
+            color: #fff;
+        }
+
+        &.discuss-conversation-user-developer {
+            background-color: #32aeff;
+            color: #fff;
+        }
     }
 }
 

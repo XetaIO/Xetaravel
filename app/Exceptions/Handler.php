@@ -1,11 +1,13 @@
 <?php
 namespace Xetaravel\Exceptions;
 
-use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -28,10 +30,10 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -40,10 +42,10 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         if ($exception instanceof \Ultraware\Roles\Exceptions\RoleDeniedException ||
             $exception instanceof \Ultraware\Roles\Exceptions\PermissionDeniedException ||
@@ -72,12 +74,10 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
-
-        return redirect()
-            ->guest(route('users.auth.login'))
-            ->with('danger', 'You don\'t have the permission to view this page.');
+        return $request->expectsJson()
+            ? response()->json(['error' => 'Unauthenticated.'], 401)
+            : redirect()
+                ->guest($exception->redirectTo() ?? route('users.auth.login'))
+                ->with('danger', 'You don\'t have the permission to view this page.');
     }
 }

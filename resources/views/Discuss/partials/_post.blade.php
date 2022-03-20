@@ -1,23 +1,39 @@
-
 @if (get_class($post) !== \Xetaravel\Models\DiscussLog::class)
     <div id="post-{{ $post->id }}" class="discuss-conversation {{ $isSolvedPost ? 'discuss-conversation-solved bg-success' : ''}}">
         <div class="discuss-conversation-user float-xs-left text-xs-center">
             @if ($isSolvedPost)
-                <span class="discuss-conversation-user-solved rounded-circle" data-toggle="tooltip" title="This response helped the author.">
+                <span class="discuss-conversation-user-solved rounded-circle" data-toggle="tooltip" title="This answer helped the author.">
                     <i class="fa fa-3x fa-check text-success discuss-conversation-user-solved-icon"></i>
 
                     @if ($post->user->hasRubies)
-                        <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earn Rubies."></i>
+                        <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earned Rubies."></i>
                     @endif
 
                     <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
                 </span>
             @else
                 @if ($post->user->hasRubies)
-                    <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earn Rubies."></i>
+                    <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earned Rubies."></i>
                 @endif
 
                 <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
+            @endif
+
+            <!-- Handle the user's icons -->
+            @if ($post->user->hasRole(['member'], true))
+                <i aria-hidden="true" class="fas fa-user-tie discuss-conversation-user-roles discuss-conversation-user-member"  data-toggle="tooltip" title="Member"></i>
+            @endif
+
+            @if ($post->user->isModerator())
+                <i aria-hidden="true" class="fas fa-shield-alt discuss-conversation-user-roles discuss-conversation-user-moderator"  data-toggle="tooltip" title="Moderator"></i>
+            @endif
+
+            @if ($post->user->hasRole(['administrator', 'developer']))
+                <i aria-hidden="true" class="fas fa-wrench discuss-conversation-user-roles discuss-conversation-user-administrator"  data-toggle="tooltip" title="Administrator"></i>
+            @endif
+
+            @if ($post->user->isDeveloper())
+                <i aria-hidden="true" class="fas fa-code discuss-conversation-user-roles discuss-conversation-user-developer"  data-toggle="tooltip" title="Developer"></i>
             @endif
 
 
@@ -83,36 +99,39 @@
             <div class="discuss-conversation-edit"></div>
 
             {{-- Conversation Actions --}}
+            @auth
             <div class="discuss-conversation-actions">
                 <ul class="list-inline mb-0">
 
-                    {{-- Others actions --}}
-                    <li class="list-inline-item float-xs-right">
-                        <div class="dropdown">
-                            <button href="#" class="btn btn-link" type="button" id="dropdownActionsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-fw fa-ellipsis-h"></i>
-                            </button>
-                            <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownActionsMenu">
-                                {{-- Moderation actions --}}
-                                @can('update', $post)
-                                    <a class="dropdown-item postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}" href="#">
-                                        <i class="fa fa-pencil"></i>
-                                        Edit
-                                    </a>
-                                @endcan
-
-                                @if ($post->id !== $conversation->first_post_id)
-                                    @can('delete', $post)
-                                        <h6 class="dropdown-header">Moderation</h6>
-                                        <a class="dropdown-item" data-toggle="modal" href="#deletePostModal" data-target="#deletePostModal" data-form-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
-                                            <i class="fa fa-trash"></i>
-                                            Delete
+                    @canany(['update', 'delete'], $post)
+                        {{-- Others actions --}}
+                        <li class="list-inline-item float-xs-right">
+                            <div class="dropdown">
+                                <button href="#" class="btn btn-link" type="button" id="dropdownActionsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-fw fa-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownActionsMenu">
+                                    {{-- Moderation actions --}}
+                                    @can('update', $post)
+                                        <a class="dropdown-item postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}" href="#">
+                                            <i class="fa fa-pencil"></i>
+                                            Edit
                                         </a>
                                     @endcan
-                                @endif
+
+                                    @if ($post->id !== $conversation->first_post_id)
+                                        @can('delete', $post)
+                                            <h6 class="dropdown-header">Moderation</h6>
+                                            <a class="dropdown-item" data-toggle="modal" href="#deletePostModal" data-target="#deletePostModal" data-form-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
+                                                <i class="fa fa-trash"></i>
+                                                Delete
+                                            </a>
+                                        @endcan
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endcan
 
                     {{-- Like action --}}
                     <!--<li class="list-inline-item float-xs-right">
@@ -140,14 +159,17 @@
 
                     {{-- Solved action --}}
                     @if ($post->id !== $conversation->first_post_id && is_null($conversation->solved_post_id))
-                        <li class="list-inline-item float-xs-right">
-                            <a href="{{ route('discuss.post.solved', ['id' => $post->id]) }}" class="btn btn-link text-success" data-toggle="tooltip" title="Mark this response as solved.">
-                                <i class="fa fa-check"></i>
-                            </a>
-                        </li>
+                        @can('solved', $conversation)
+                            <li class="list-inline-item float-xs-right">
+                                <a href="{{ route('discuss.post.solved', ['id' => $post->id]) }}" class="btn btn-link text-success" data-toggle="tooltip" title="Mark this response as solved.">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                            </li>
+                        @endcan
                     @endif
                 </ul>
             </div>
+            @endauth
 
             {{-- User Signature --}}
             @empty (!$post->user->signature)

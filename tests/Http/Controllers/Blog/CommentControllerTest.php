@@ -83,7 +83,7 @@ class CommentControllerTest extends TestCase
      */
     public function testCreateSuccess()
     {
-        $response = $this->post('/blog/comment/create', ['article_id' => 1, 'content' =>  '0123456789 @editor ds']);
+        $response = $this->post('/blog/comment/create', ['article_id' => 1, 'content' =>  '0123456789 @moderator ds']);
         $response->assertSessionHas('success');
         $response->assertStatus(302);
     }

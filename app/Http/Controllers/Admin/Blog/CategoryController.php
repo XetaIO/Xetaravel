@@ -3,6 +3,7 @@ namespace Xetaravel\Http\Controllers\Admin\Blog;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaravel\Http\Controllers\Admin\Controller;
 use Xetaravel\Models\Category;
@@ -81,7 +82,7 @@ class CategoryController extends Controller
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb('Manage Categories', route('admin.blog.category.index'))
             ->addCrumb(
-                "Update : " . e(str_limit($category->title, 30)),
+                "Update : " . e(Str::limit($category->title, 30)),
                 route(
                     'admin.blog.category.index',
                     ['slug' => $category->slug, 'id' => $category->id]

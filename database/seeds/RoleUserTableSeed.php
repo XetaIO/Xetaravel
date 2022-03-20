@@ -14,10 +14,10 @@ class RoleUserTableSeed extends Seeder
     public function run()
     {
         $user = User::where('username', 'Admin')->first();
-        $user->attachRole(Role::where('slug', 'administrator')->first());
+        $user->attachRole(Role::where('slug', 'developer')->first());
 
-        $user = User::where('username', 'Editor')->first();
-        $user->attachRole(Role::where('slug', 'editor')->first());
+        $user = User::where('username', 'Moderator')->first();
+        $user->attachRole(Role::where('slug', 'moderator')->first());
 
         $user = User::where('username', 'Member')->first();
         $user->attachRole(Role::where('slug', 'user')->first());

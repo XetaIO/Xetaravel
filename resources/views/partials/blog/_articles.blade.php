@@ -2,7 +2,7 @@
     <div class="blog-post">
         <h1 class="blog-title">
             <a href="{{ $article->article_url }}">
-                {{ str_limit($article->title, 150) }}
+                {{ Str::limit($article->title, 150) }}
             </a>
         </h1>
         <div class="blog-post-meta">
@@ -27,7 +27,7 @@
         </div>
 
         <div>
-            {!! Markdown::convertToHtml(str_limit($article->content, 650)) !!}
+            {!! Markdown::convertToHtml(Str::limit($article->content, 650)) !!}
         </div>
 
         <div class="blog-footer">

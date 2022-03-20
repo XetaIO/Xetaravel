@@ -1,10 +1,15 @@
 <?php
-namespace Xetaravel\Events;
+namespace Xetaravel\Events\Badges;
 
 use Xetaravel\Models\User;
 
-class RegisterEvent
+class ExperiencesEvent
 {
+    /**
+     * The user instance.
+     *
+     * @var \Xetaravel\Models\User
+     */
     public $user;
 
     /**

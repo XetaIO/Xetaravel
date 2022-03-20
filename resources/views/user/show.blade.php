@@ -12,7 +12,15 @@
                 <div class="profile-information text-xs-center">
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle']) !!}
+                            <div class="topleaderboard">
+                                @if ($user->badges()->where('slug', 'topleaderboard')->exists())
+                                    <?php $badge = $user->badges()->where('slug', 'topleaderboard')->first(); ?>
+                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="bottom" data-trigger="hover" style="color:{{ $badge->color }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
+                                @endif
+
+                                    {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle']) !!}
+                            </div>
+
                             <h2 class="username font-xeta">
                                 {{ $user->username }}
                             </h2>
@@ -191,9 +199,11 @@
                 <div class="badges pt-1 pb-2">
                     @if ($user->badges->isNotEmpty())
                         @foreach ($user->badges as $badge)
-                        <div class="d-inline-block text-xs-center pr-1">
-                            <img src="{{ asset($badge->image) }}" alt="{{ $badge->name }}" width="105" data-toggle="tooltip" title="{{ $badge->name }}">
-                        </div>
+                            @if ($badge->slug !== 'topleaderboard')
+                                    <li class="list-inline-item">
+                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="top" data-trigger="hover" style="color:{{ $badge->color }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
+                                </li>
+                            @endif
                         @endforeach
                     @else
                         @if (Auth::user() && $user->id == Auth::id())
@@ -221,7 +231,7 @@
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
                                     {!! Html::link($article->article_url, $article->title, ['class' => 'title text-primary']) !!}
                                     <div>
-                                        {!! Markdown::convertToHtml(str_limit($article->content, 275)) !!}
+                                        {!! Markdown::convertToHtml(Str::limit($article->content, 275)) !!}
                                     </div>
                                     <time>
                                         Created at {{ $article->created_at->format('H:i:s Y-m-d') }}
@@ -249,7 +259,7 @@
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
                                     {!! Html::link($comment->comment_url, $comment->article->title, ['class' => 'title text-primary']) !!}
                                     <div>
-                                        {!! Markdown::convertToHtml(str_limit($comment->content, 275)) !!}
+                                        {!! Markdown::convertToHtml(Str::limit($comment->content, 275)) !!}
                                     </div>
                                     <time>
                                         Created at {{ $comment->created_at->format('H:i:s Y-m-d') }}

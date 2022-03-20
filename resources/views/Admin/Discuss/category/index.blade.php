@@ -34,14 +34,14 @@
                                 <td class="font-weight-bold">
                                     {{ link_to(
                                         $category->category_url,
-                                        str_limit($category->title, 60),
+                                        Str::limit($category->title, 60),
                                         [
                                             'style' => "color: {$category->color};"
                                         ]
                                     ) }}
                                 </td>
                                 <td>
-                                    {{ str_limit($category->description, 60) }}
+                                    {{ Str::limit($category->description, 60) }}
                                 </td>
                                 <td>
                                     {{ $category->conversation_count }}

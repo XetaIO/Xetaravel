@@ -57,22 +57,20 @@
                 @endif
             </ul>
 
-            @if ($conversation->is_solved)
-                <div class="discuss-conversation-header-categories tag-group">
-                    <a href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' =>$conversation->category->getKey()]) }}" class="tag tag-default text-white" style="background-color: {{ $conversation->category->color }};">
-                        {{ $conversation->category->title }}
-                    </a>
+            <div class="discuss-conversation-header-categories {{ $conversation->is_solved ? "tag-group" : "" }}">
+                <a href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' =>$conversation->category->getKey()]) }}" class="tag tag-default text-white" style="background-color: {{ $conversation->category->color }};">
+                    @if (!is_null($conversation->category->icon))
+                        <i class="{{ $conversation->category->icon }}"></i>
+                    @endif
+                    {{ $conversation->category->title }}
+                </a>
+                @if ($conversation->is_solved)
                     <span class="tag tag-success text-white">
-                        Solved
+                        <i class="fa fa-check" aria-hidden="true"></i> Solved
                     </span>
-                </div>
-            @else
-                <div class="discuss-conversation-header-categories">
-                    <a href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' =>$conversation->category->getKey()]) }}" class="tag tag-default text-white" style="background-color: {{ $conversation->category->color }};">
-                        {{ $conversation->category->title }}
-                    </a>
-                </div>
-            @endif
+                @endif
+            </div>
+
             <h2 class="text-truncate">
                 {{ $conversation->title }}
             </h2>

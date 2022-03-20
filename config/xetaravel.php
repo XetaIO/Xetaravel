@@ -12,9 +12,9 @@ return [
     'site' => [
         'description' => 'You will find content related to web development like tutorials, my personal tests on new technologies etc',
         'github_url' => 'https://github.com/XetaIO/Xetaravel',
-        'contact_email' => 'contact@xeta.io',
+        'contact_email' => 'zoro.fmt@gmail.com',
         'analytics_tracker_code' => 'UA-40328289-2',
-        'full_url' => 'https://xetaravel.xeta.io',
+        'full_url' => 'https://xetaravel.com',
     ],
 
     /*
@@ -80,7 +80,7 @@ return [
     |
     */
     'discuss' => [
-        'categories_sidebar' => 2, //15,
+        'categories_sidebar' => 15,
         // The number in days.
         'info_message_old_conversation' => 92
     ]

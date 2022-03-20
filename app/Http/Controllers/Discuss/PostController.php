@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xetaio\Mentions\Parser\MentionParser;
+use Xetaravel\Events\Discuss\PostWasDeletedEvent;
 use Xetaravel\Events\Experiences\PostWasCreatedEvent;
 use Xetaravel\Events\Experiences\PostWasSolvedEvent;
 use Xetaravel\Events\Rubies\PostWasSolvedEvent as RubiesPostWasSolvedEvent;
@@ -40,7 +41,9 @@ class PostController extends Controller
         $post = DiscussPostRepository::create($request->all());
         $user = DiscussUserRepository::create($request->all());
 
-        $parser = new MentionParser($post);
+        $parser = new MentionParser($post, [
+            'regex' => '/\s({character}{pattern}{rules})\s/'
+        ]);
         $content = $parser->parse($post->content);
 
         $post->content = $content;
@@ -110,6 +113,8 @@ class PostController extends Controller
         }
 
         if ($post->delete()) {
+            event(new PostWasDeletedEvent($post->conversation, $post->user));
+
             return redirect()
                 ->route(
                     'discuss.conversation.show',
@@ -134,7 +139,7 @@ class PostController extends Controller
     {
         $post = DiscussPost::findOrFail($id);
 
-        $this->authorize('solved', $post);
+        $this->authorize('solved', $post->conversation);
 
         if ($post->getKey() == $post->conversation->solved_post_id) {
             return back()
@@ -182,7 +187,9 @@ class PostController extends Controller
 
         DiscussPostValidator::edit($request->all())->validate();
 
-        $parser = new MentionParser($post);
+        $parser = new MentionParser($post, [
+            'regex' => '/\s({character}{pattern}{rules})\s/'
+        ]);
         $content = $parser->parse($request->input('content'));
 
         $post->content = $content;

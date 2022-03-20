@@ -44,7 +44,7 @@ $screen-md-max:              ($screen-lg-min - 1);
 $grid-gutter-width:         30px;
 //** Point at which the navbar becomes uncollapsed.
 $grid-float-breakpoint:     768px;
- 
+
 //--
 $container-lg:              ((1140px + $grid-gutter-width));
 //** Maximum with of a smooth container.
@@ -69,8 +69,8 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
 
 // Basics of a navbar
 $navbar-height:                    50px;
-$navbar-padding-horizontal:        floor(($grid-gutter-width / 2));
-$navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2);
+$navbar-padding-horizontal:        floor(calc($grid-gutter-width / 2));
+$navbar-padding-vertical:          calc(($navbar-height - $line-height-computed) / 2);
 
 //== Components
 //

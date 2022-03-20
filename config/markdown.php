@@ -39,10 +39,10 @@ return [
     */
 
     'extensions' => [
-        League\CommonMark\Ext\TaskList\TaskListExtension::class,
+        League\CommonMark\Extension\TaskList\TaskListExtension::class,
+        League\CommonMark\Extension\Table\TableExtension::class,
         Xetaravel\Markdown\Emoji\EmojiExtension::class,
-        Xetaravel\Markdown\Reply\ReplyExtension::class,
-        Xetaravel\Markdown\Table\TableExtension::class
+        Xetaravel\Markdown\Reply\ReplyExtension::class
     ],
 
     /*
