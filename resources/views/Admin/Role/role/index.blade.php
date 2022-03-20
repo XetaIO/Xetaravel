@@ -37,7 +37,7 @@
                                     <span style="{{ $role->css }}">{{ $role->name }}</span>
                                 </td>
                                 <td>
-                                    {{ str_limit($role->description, 60) }}
+                                    {{ Str::limit($role->description, 60) }}
                                 </td>
                                 <td>
                                     {{ $role->level }}

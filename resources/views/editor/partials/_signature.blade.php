@@ -1,31 +1,31 @@
 <script type="text/javascript">
-var _{{ array_get($signature, 'id', 'myeditor') }};
+var _{{ Arr::get($signature, 'id', 'myeditor') }};
 $(function() {
     editormd.emoji = {
-        path : "{{ config('app.url') . array_get($signature, 'emojiPath', config('editor.emojiPath')) }}",
+        path : "{{ config('app.url') . Arr::get($signature, 'emojiPath', config('editor.emojiPath')) }}",
         ext : ".png"
     };
     editormd.urls = {
-        atLinkBase : "{{ route('users.user.show', ['slug' => ''], false) }}"
+        atLinkBase : "{{ URL::route('users.user.show', false) }}"
     };
-    _{{ array_get($signature, 'id', 'myeditor') }} = editormd({
-        id : "{{ array_get($signature, 'id', 'myeditor') }}",
-        width : "{{ array_get($signature, 'width', config('editor.width')) }}",
-        height : "{{ array_get($signature, 'height', config('editor.height')) }}",
-        saveHTMLToTextarea : {{ array_get($signature, 'saveHTMLToTextarea', config('editor.saveHTMLToTextarea')) }},
-        emoji : {{ array_get($signature, 'emoji', config('editor.emoji')) }},
-        taskList : {{ array_get($signature, 'taskList', config('editor.taskList')) }},
-        tex : {{ array_get($signature, 'tex', config('editor.tex')) }},
-        toc : {{ array_get($signature, 'toc', config('editor.toc')) }},
-        tocm : {{ array_get($signature, 'tocm', config('editor.tocm')) }},
-        codeFold : {{ array_get($signature, 'codeFold', config('editor.codeFold')) }},
-        flowChart: {{ array_get($signature, 'flowChart', config('editor.flowChart')) }},
-        sequenceDiagram: {{ array_get($signature, 'sequenceDiagram', config('editor.sequenceDiagram')) }},
-        path : "{{ array_get($signature, 'path', config('editor.path')) }}",
-        imageUpload : {{ array_get($signature, 'imageUpload', config('editor.imageUpload')) }},
-        imageFormats : {!! array_get($signature, 'imageFormats', json_encode(config('editor.imageFormats'))) !!},
-        imageUploadURL : "{{ array_get($signature, 'imageUploadURL', config('editor.imageUploadURL')) }}?_token={{ csrf_token() }}&from=xetaravel-editor-md",
-        pluginPath : "{{ asset(array_get($signature, 'pluginPath', config('editor.pluginPath'))) }}/",
+    _{{ Arr::get($signature, 'id', 'myeditor') }} = editormd({
+        id : "{{ Arr::get($signature, 'id', 'myeditor') }}",
+        width : "{{ Arr::get($signature, 'width', config('editor.width')) }}",
+        height : "{{ Arr::get($signature, 'height', config('editor.height')) }}",
+        saveHTMLToTextarea : {{ Arr::get($signature, 'saveHTMLToTextarea', config('editor.saveHTMLToTextarea')) }},
+        emoji : {{ Arr::get($signature, 'emoji', config('editor.emoji')) }},
+        taskList : {{ Arr::get($signature, 'taskList', config('editor.taskList')) }},
+        tex : {{ Arr::get($signature, 'tex', config('editor.tex')) }},
+        toc : {{ Arr::get($signature, 'toc', config('editor.toc')) }},
+        tocm : {{ Arr::get($signature, 'tocm', config('editor.tocm')) }},
+        codeFold : {{ Arr::get($signature, 'codeFold', config('editor.codeFold')) }},
+        flowChart: {{ Arr::get($signature, 'flowChart', config('editor.flowChart')) }},
+        sequenceDiagram: {{ Arr::get($signature, 'sequenceDiagram', config('editor.sequenceDiagram')) }},
+        path : "{{ Arr::get($signature, 'path', config('editor.path')) }}",
+        imageUpload : {{ Arr::get($signature, 'imageUpload', config('editor.imageUpload')) }},
+        imageFormats : {!! Arr::get($signature, 'imageFormats', json_encode(config('editor.imageFormats'))) !!},
+        imageUploadURL : "{{ Arr::get($signature, 'imageUploadURL', config('editor.imageUploadURL')) }}?_token={{ csrf_token() }}&from=xetaravel-editor-md",
+        pluginPath : "{{ asset(Arr::get($signature, 'pluginPath', config('editor.pluginPath'))) }}/",
         watch : false,
         editorTheme : 'mdn-like',
         placeholder : 'Type your signature here...',

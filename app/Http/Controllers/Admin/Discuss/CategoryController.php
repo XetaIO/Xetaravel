@@ -3,6 +3,7 @@ namespace Xetaravel\Http\Controllers\Admin\Discuss;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaravel\Http\Controllers\Admin\Controller;
 use Xetaravel\Models\DiscussCategory;
@@ -84,7 +85,7 @@ class CategoryController extends Controller
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb('Manage Categories', route('admin.discuss.category.index'))
             ->addCrumb(
-                "Update : " . e(str_limit($category->title, 30)),
+                "Update : " . e(Str::limit($category->title, 30)),
                 route(
                     'admin.discuss.category.index',
                     ['slug' => $category->slug, 'id' => $category->id]

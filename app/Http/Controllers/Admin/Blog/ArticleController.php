@@ -3,6 +3,7 @@ namespace Xetaravel\Http\Controllers\Admin\Blog;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Http\Controllers\Admin\Controller;
@@ -101,7 +102,7 @@ class ArticleController extends Controller
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb('Manage Articles', route('admin.blog.article.index'))
             ->addCrumb(
-                "Update : " . e(str_limit($article->title, 30)),
+                "Update : " . e(Str::limit($article->title, 30)),
                 route(
                     'admin.blog.article.index',
                     ['slug' => $article->category->slug, 'id' => $article->category->id]

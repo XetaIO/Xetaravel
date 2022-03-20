@@ -110,6 +110,9 @@ class UserController extends Controller
             case 'password':
                 return $this->updatePassword($request);
 
+            case 'newpassword':
+                return $this->createPassword($request);
+
             default:
                 return back()
                     ->withInput()
@@ -186,5 +189,30 @@ class UserController extends Controller
         return redirect()
             ->route('users.user.settings')
             ->with('success', 'Your Password has been updated successfully !');
+    }
+
+    /**
+     * Handle a Password create request for the user.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function createPassword(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        if (!is_null($user->password)) {
+            return redirect()
+                ->route('users.user.settings')
+                ->with('danger', 'You have already set a password.');
+        }
+
+        UserValidator::createPassword($request->all())->validate();
+        UserRepository::createPassword($request->all(), $user);
+
+        return redirect()
+            ->route('users.user.settings')
+            ->with('success', 'Your password has been created successfully!');
     }
 }

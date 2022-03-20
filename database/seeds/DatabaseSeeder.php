@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
 
         // Badges
         $this->call(BadgesTableSeed::class);
+        $this->call(BadgesUsersTableSeed::class);
 
         // Discuss
         $this->call(DiscussCategoriesTableSeed::class);
@@ -38,5 +39,8 @@ class DatabaseSeeder extends Seeder
 
         // Experiences & Rubies
         $this->call(ExperiencesTableSeed::class);
+
+        // Settings
+        $this->call(SettingsTableSeed::class);
     }
 }

@@ -4,27 +4,31 @@ namespace Xetaravel\Models;
 use Eloquence\Behaviours\Sluggable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 use Ultraware\Roles\Traits\HasRoleAndPermission;
 use Xetaravel\Models\Presenters\UserPresenter;
-use Xetaravel\Notifications\ResetPasswordNotification;
+use Xetaravel\Notifications\Auth\VerifyEmail;
+use Xetaravel\Notifications\Auth\ResetPassword;
 
 class User extends Model implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract,
     HasRoleAndPermissionContract,
-    HasMedia
+    HasMedia,
+    MustVerifyEmailContract
 {
     use Authenticatable,
         Authorizable,
@@ -32,8 +36,9 @@ class User extends Model implements
         Notifiable,
         Sluggable,
         HasRoleAndPermission,
-        HasMediaTrait,
-        UserPresenter;
+        InteractsWithMedia,
+        UserPresenter,
+        MustVerifyEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -48,7 +53,8 @@ class User extends Model implements
         'github_id',
         'register_ip',
         'last_login_ip',
-        'last_login'
+        'last_login',
+        'email_verified_at'
     ];
 
     /**
@@ -139,7 +145,7 @@ class User extends Model implements
      *
      * @return void
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumbnail.small')
                 ->width(100)
@@ -195,10 +201,10 @@ class User extends Model implements
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles()
+    /*public function roles()
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
-    }
+    }*/
 
     /**
      * Get the badges for the user.
@@ -291,7 +297,17 @@ class User extends Model implements
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(new ResetPassword($token));
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
     }
 
     /**

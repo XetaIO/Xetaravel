@@ -1,31 +1,31 @@
 <script type="text/javascript">
-var _{{ array_get($biography, 'id', 'myeditor') }};
+var _{{ Arr::get($biography, 'id', 'myeditor') }};
 $(function() {
     editormd.emoji = {
-        path : "{{ config('app.url') . array_get($biography, 'emojiPath', config('editor.emojiPath')) }}",
+        path : "{{ config('app.url') . Arr::get($biography, 'emojiPath', config('editor.emojiPath')) }}",
         ext : ".png"
     };
     editormd.urls = {
-        atLinkBase : "{{ route('users.user.show', ['slug' => ''], false) }}"
+        atLinkBase : "{{ URL::route('users.user.show', false) }}"
     };
-    _{{ array_get($biography, 'id', 'myeditor') }} = editormd({
-        id : "{{ array_get($biography, 'id', 'myeditor') }}",
-        width : "{{ array_get($biography, 'width', config('editor.width')) }}",
-        height : "{{ array_get($biography, 'height', config('editor.height')) }}",
-        saveHTMLToTextarea : {{ array_get($biography, 'saveHTMLToTextarea', config('editor.saveHTMLToTextarea')) }},
-        emoji : {{ array_get($biography, 'emoji', config('editor.emoji')) }},
-        taskList : {{ array_get($biography, 'taskList', config('editor.taskList')) }},
-        tex : {{ array_get($biography, 'tex', config('editor.tex')) }},
-        toc : {{ array_get($biography, 'toc', config('editor.toc')) }},
-        tocm : {{ array_get($biography, 'tocm', config('editor.tocm')) }},
-        codeFold : {{ array_get($biography, 'codeFold', config('editor.codeFold')) }},
-        flowChart: {{ array_get($biography, 'flowChart', config('editor.flowChart')) }},
-        sequenceDiagram: {{ array_get($biography, 'sequenceDiagram', config('editor.sequenceDiagram')) }},
-        path : "{{ array_get($biography, 'path', config('editor.path')) }}",
-        imageUpload : {{ array_get($biography, 'imageUpload', config('editor.imageUpload')) }},
-        imageFormats : {!! array_get($biography, 'imageFormats', json_encode(config('editor.imageFormats'))) !!},
-        imageUploadURL : "{{ array_get($biography, 'imageUploadURL', config('editor.imageUploadURL')) }}?_token={{ csrf_token() }}&from=xetaravel-editor-md",
-        pluginPath : "{{ asset(array_get($biography, 'pluginPath', config('editor.pluginPath'))) }}/",
+    _{{ Arr::get($biography, 'id', 'myeditor') }} = editormd({
+        id : "{{ Arr::get($biography, 'id', 'myeditor') }}",
+        width : "{{ Arr::get($biography, 'width', config('editor.width')) }}",
+        height : "{{ Arr::get($biography, 'height', config('editor.height')) }}",
+        saveHTMLToTextarea : {{ Arr::get($biography, 'saveHTMLToTextarea', config('editor.saveHTMLToTextarea')) }},
+        emoji : {{ Arr::get($biography, 'emoji', config('editor.emoji')) }},
+        taskList : {{ Arr::get($biography, 'taskList', config('editor.taskList')) }},
+        tex : {{ Arr::get($biography, 'tex', config('editor.tex')) }},
+        toc : {{ Arr::get($biography, 'toc', config('editor.toc')) }},
+        tocm : {{ Arr::get($biography, 'tocm', config('editor.tocm')) }},
+        codeFold : {{ Arr::get($biography, 'codeFold', config('editor.codeFold')) }},
+        flowChart: {{ Arr::get($biography, 'flowChart', config('editor.flowChart')) }},
+        sequenceDiagram: {{ Arr::get($biography, 'sequenceDiagram', config('editor.sequenceDiagram')) }},
+        path : "{{ Arr::get($biography, 'path', config('editor.path')) }}",
+        imageUpload : {{ Arr::get($biography, 'imageUpload', config('editor.imageUpload')) }},
+        imageFormats : {!! Arr::get($biography, 'imageFormats', json_encode(config('editor.imageFormats'))) !!},
+        imageUploadURL : "{{ Arr::get($biography, 'imageUploadURL', config('editor.imageUploadURL')) }}?_token={{ csrf_token() }}&from=xetaravel-editor-md",
+        pluginPath : "{{ asset(Arr::get($biography, 'pluginPath', config('editor.pluginPath'))) }}/",
         watch : false,
         editorTheme : 'mdn-like',
         placeholder : 'Type your biography here...',

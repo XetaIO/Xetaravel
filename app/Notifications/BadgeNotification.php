@@ -50,7 +50,8 @@ class BadgeNotification extends Notification implements ShouldQueue
         return [
             'message' => 'You have unlock the badge <strong>%s</strong> !',
             'message_key' => [$this->badge->name],
-            'image' => $this->badge->image,
+            'icon' => $this->badge->icon,
+            'color' => $this->badge->color,
             'type' => 'badge'
         ];
     }

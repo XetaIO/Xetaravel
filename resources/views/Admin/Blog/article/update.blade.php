@@ -27,7 +27,7 @@
 <div class="col-sm-12 col-md-10 offset-md-2 pl-2 pr-2 pb-2">
     <div class="card card-inverse bg-inverse">
         <h5 class="card-header">
-            Update : {{ str_limit($article->title, 60) }}
+            Update : {{ Str::limit($article->title, 60) }}
         </h5>
         <div class="card-block">
             {!! Form::model($article, ['route' => ['admin.blog.article.update', $article->id], 'method' => 'put']) !!}

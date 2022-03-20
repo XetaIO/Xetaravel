@@ -10,7 +10,10 @@ class Badge extends Model
      */
     protected $fillable = [
         'name',
-        'image',
+        'slug',
+        'description',
+        'icon',
+        'color',
         'type',
         'rule'
     ];
@@ -23,5 +26,17 @@ class Badge extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Check if the given user has unlocked this badge.
+     *
+     * @return bool
+     */
+    public function hasUser($user)
+    {
+        return $this->users()
+            ->where('user_id', $user->getKey())
+            ->exists();
     }
 }

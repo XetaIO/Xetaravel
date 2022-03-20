@@ -33,6 +33,7 @@ class ReplyParser implements BlockParserInterface
 
         $cursor->advanceBy(strlen($matches[0]));
         $context->addBlock($reply);
+        $context->setBlocksParsed(true);
 
         return true;
     }

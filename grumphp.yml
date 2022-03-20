@@ -1,9 +1,9 @@
-parameters:
-    bin_dir: ./vendor/bin
-    git_dir: .
+grumphp:
+    hooks_dir: ~
+    hooks_preset: local
     tasks:
         phpversion:
-            project: '7.1'
+            project: '7.2'
         phpcs:
             standard: "PSR2"
             ignore_patterns:

@@ -12,7 +12,7 @@ use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as ProviderUser;
 use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseSF;
-use Xetaravel\Events\RegisterEvent;
+use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Repositories\UserRepository;
@@ -47,7 +47,12 @@ class SocialiteController extends Controller
      */
     public function showRegistrationForm(Request $request, string $driver): View
     {
-        return view('Auth.socialite');
+        if (is_null($request->session()->get('socialite.driver'))) {
+            return redirect()
+                ->route('users.auth.login')
+                ->with('danger', 'You are not authorized to view this page!');
+        }
+        return view('Auth.socialite', compact('driver'));
     }
 
     /**
@@ -87,14 +92,14 @@ class SocialiteController extends Controller
      *
      * @param \Illuminate\Http\Request $request The request object.
      * @param string $driver The driver used.
-     * @param string $type The type of callback. (Either `login` or `register`)
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToProvider(Request $request, string $driver, string $type): RedirectResponseSF
+    public function redirectToProvider(Request $request, string $driver): RedirectResponseSF
     {
         return Socialite::driver($driver)
-                ->redirectUrl(route('auth.driver.type.callback', ['driver' => $driver, 'type' => $type]))
+                ->setScopes(['identify', 'email'])
+                ->redirectUrl(route('auth.driver.callback', ['driver' => $driver]))
                 ->redirect();
     }
 
@@ -104,46 +109,35 @@ class SocialiteController extends Controller
      *
      * @param \Illuminate\Http\Request $request The request object.
      * @param string $driver The driver used.
-     * @param string $type The type of callback. (Either `login` or `register`)
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function handleProviderCallback(Request $request, string $driver, string $type): RedirectResponse
+    public function handleProviderCallback(Request $request, string $driver): RedirectResponse
     {
         $this->driver = $driver;
 
         try {
             $user = Socialite::driver($driver)->user();
         } catch (Exception $e) {
-            $redirect = 'users.auth.login';
-
-            if ($type == 'register') {
-                $redirect = 'users.auth.register';
-            }
             $driver = Str::title($driver);
 
             return redirect()
-                ->route($redirect)
+                ->route('users.auth.login')
                 ->with('danger', "An error occurred while getting your information from {$driver} !");
         }
 
-        if ($type == 'register') {
-            $user = $this->handleRegister($request, $user);
-
-            if (!$user instanceof User) {
-                return $user;
-            }
-
-            return $this->login($request, $user);
+        // Check if the user is already registered
+        if (!$member = User::where($driver . '_id', $user->id)->first()) {
+            $register = $this->handleRegister($request, $user);
         }
 
-        if (!$user = User::where($driver . '_id', $user->id)->first()) {
-            return redirect()
-                ->route('users.auth.login')
-                ->with('danger', "This user is not registered, register it or try another login method.");
+        if (isset($register) && $register instanceof RedirectResponse) {
+            return $register;
+        } elseif (!isset($register) || !$register instanceof User) {
+            $register = $member;
         }
 
-        return $this->login($request, $user);
+        return $this->login($request, $register);
     }
 
     /**
@@ -156,6 +150,12 @@ class SocialiteController extends Controller
      */
     protected function login(Request $request, User $user): RedirectResponse
     {
+        if (!$user->hasVerifiedEmail()) {
+            $user = $user->getKey();
+
+            return redirect(route('users.auth.verification.notice', base64_encode($user)));
+        }
+
         Auth::login($user, true);
 
         $this->authenticated($request, $user);
@@ -173,16 +173,6 @@ class SocialiteController extends Controller
      */
     protected function handleRegister(Request $request, ProviderUser $user)
     {
-        $driver = $this->driver;
-
-        if (User::where($driver . '_id', $user->id)->first()) {
-            $driver = Str::title($driver);
-
-            return redirect()
-                ->route('users.auth.login')
-                ->with('danger', "This {$driver} user is already registered !");
-        }
-
         $validator = UserValidator::createWithProvider([
             'username' => $user->nickname,
             'email' => $user->email
@@ -190,12 +180,12 @@ class SocialiteController extends Controller
 
         if ($validator->fails()) {
             $request->session()->put('socialite', [
-                'driver' => $driver,
+                'driver' => $this->driver,
                 'token' => $user->token
             ]);
 
             return redirect()
-                ->route('auth.driver.register', ['driver' => $driver])
+                ->route('auth.driver.register', ['driver' => $this->driver])
                 ->withErrors($validator)
                 ->withInput([
                     'username' => $user->nickname,
@@ -250,23 +240,33 @@ class SocialiteController extends Controller
     /**
      * The user has been registered.
      *
-     * @param \Laravel\Socialite\Two\User $user The user that has been registered.
+     * @param \Laravel\Socialite\Two\User $providerUser The user that has been registered.
      *
      * @return \Xetaravel\Models\User
      */
-    protected function registered(ProviderUser $user): User
+    protected function registered(ProviderUser $providerUser): User
     {
-        event(new Registered($user = $this->createUser($user)));
+        event(new Registered($user = $this->createUser($providerUser)));
 
         $role = Role::where('slug', 'user')->first();
         $user->attachRole($role);
 
-        $user->clearMediaCollection('avatar');
-        $user->addMedia(resource_path('assets/images/avatar.png'))
-            ->preservingOriginal()
-            ->setName(substr(md5($user->username), 0, 10))
-            ->setFileName(substr(md5($user->username), 0, 10) . '.png')
-            ->toMediaCollection('avatar');
+        if (is_null($providerUser->avatar)) {
+            // Set the default avatar.
+            $user->addMedia(resource_path('assets/images/avatar.png'))
+                ->preservingOriginal()
+                ->setName(substr(md5($user->username), 0, 10))
+                ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+                ->withCustomProperties(['primaryColor' => '#B4AEA4'])
+                ->toMediaCollection('avatar');
+        } else {
+            $user->clearMediaCollection('avatar');
+            $user->addMediaFromUrl($providerUser->avatar)
+                ->preservingOriginal()
+                ->setName(substr(md5($user->username), 0, 10))
+                ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+                ->toMediaCollection('avatar');
+        }
 
         return $user;
     }

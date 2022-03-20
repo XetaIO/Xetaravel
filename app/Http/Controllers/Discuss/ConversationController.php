@@ -80,7 +80,9 @@ class ConversationController extends Controller
         $conversation = DiscussConversationRepository::create($request->all());
         $post = $conversation->firstPost;
 
-        $parser = new MentionParser($post);
+        $parser = new MentionParser($post, [
+            'regex' => '/\s({character}{pattern}{rules})\s/'
+        ]);
         $content = $parser->parse($post->content);
 
         $post->content = $content;

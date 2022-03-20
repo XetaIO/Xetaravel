@@ -49,17 +49,4 @@ class DiscussPostPolicy
     {
         return $user->id === $discussPost->user_id;
     }
-
-    /**
-     * Determine whether the user can make a discuss post as solved.
-     *
-     * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussPost $discussPost
-     *
-     * @return bool
-     */
-    public function solved(User $user, DiscussPost $discussPost)
-    {
-        return $user->id === $discussPost->user_id;
-    }
 }

@@ -40,7 +40,7 @@
                                     <code>{{ $permission->slug }}</code>
                                 </td>
                                 <td>
-                                    {{ str_limit($permission->description, 60) }}
+                                    {{ Str::limit($permission->description, 60) }}
                                 </td>
                                 <td>
                                     {{ $permission->model }}

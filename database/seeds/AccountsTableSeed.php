@@ -25,10 +25,10 @@ class AccountsTableSeed extends Seeder
             ],
             [
                 'user_id' => 2,
-                'first_name' => 'Editor',
-                'last_name' => 'Name',
-                'facebook' => 'EditorFB',
-                'twitter' => 'EditorTW',
+                'first_name' => 'Mode',
+                'last_name' => 'Rator',
+                'facebook' => 'ModeratorFB',
+                'twitter' => 'ModeratorTW',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

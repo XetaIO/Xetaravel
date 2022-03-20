@@ -115,4 +115,20 @@ class UserValidator
 
         return FacadeValidator::make($data, $rules);
     }
+
+    /**
+     * Get the validator for an incoming password create request.
+     *
+     * @param array $data The data to validate.
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    public static function createPassword(array $data): Validator
+    {
+        $rules = [
+            'password' => 'required|min:6|confirmed'
+        ];
+
+        return FacadeValidator::make($data, $rules);
+    }
 }

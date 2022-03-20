@@ -50,7 +50,6 @@ class AccountControllerTest extends TestCase
             base_path('tests/storage/tmp_avatar.png'),
             'tmp_avatar.png',
             'image/png',
-            24988,
             null,
             true
         );

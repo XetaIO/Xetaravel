@@ -24,39 +24,38 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "laravel/framework": "^5.8",
-        "laravel/socialite": "^3.0",
-        "laravel/tinker": "^1.0",
-        "xetaio/recaptcha": "^3.0",
-        "xetaio/roles": "^5.8",
-        "xetaio/xetaravel-editor-md": "^1.0",
-        "xetaio/xetaravel-iptraceable": "^1.0",
-        "xetaio/xetaravel-mentions": "^2.0",
+        "php": "^7.2.5",
+        "laravel/framework": "^7.0",
+        "laravel/socialite": "^4.0",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
+        "xetaio/roles": "^7.0",
+        "xetaio/xetaravel-editor-md": "^2.0",
+        "xetaio/xetaravel-iptraceable": "^2.0",
+        "xetaio/xetaravel-mentions": "^3.0",
         "xety/breadcrumbs": "^1.0",
-        "spatie/laravel-analytics": "^3.6.4",
-        "spatie/laravel-medialibrary": "^7.0.0",
-        "spatie/laravel-menu": "^3.1",
+        "spatie/laravel-analytics": "^3.0",
+        "spatie/laravel-medialibrary": "^8.0",
+        "spatie/laravel-menu": "^3.0",
         "league/color-extractor": "^0.3.2",
-        "league/commonmark-ext-table": "^2.0",
-        "league/commonmark-ext-task-list": "^1.0",
-        "laravelcollective/html": "^5.8",
-        "fideloper/proxy": "^4.0",
-        "graham-campbell/markdown": "^11.0",
-        "kirkbushell/eloquence": "^2.0",
-        "rinvex/countries": "^6.1"
+        "laravelcollective/html": "^6.0",
+        "fideloper/proxy": "^4.2",
+        "graham-campbell/markdown": "^13.0",
+        "kirkbushell/eloquence": "^4.0",
+        "rinvex/countries": "^7.0",
+        "anhskohbo/no-captcha": "^3.0",
+        "doctrine/dbal": "^2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
-        "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^8.0",
+        "laravel/homestead": "^13.2",
+        "phpro/grumphp": "^0.19",
+        "phpunit/phpunit": "^8.5",
+        "squizlabs/php_codesniffer": "^3.2",
         "symfony/css-selector": "^4.0",
         "symfony/dom-crawler": "^4.0",
-        "symfony/filesystem": "^4.0",
-        "squizlabs/php_codesniffer": "^3.2",
-        "phpro/grumphp": "^0.14",
-        "barryvdh/laravel-debugbar": "^3.1"
+        "symfony/filesystem": "^4.0"
     },
     "autoload": {
         "classmap": [
@@ -89,15 +88,18 @@
             "XetaravelInstaller\\Installer::postInstall"
         ],
         "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
         ]
     },
     "config": {
         "preferred-install": "dist",
         "process-timeout": 2000,
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true,
+            "phpro/grumphp": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

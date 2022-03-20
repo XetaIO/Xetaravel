@@ -13,8 +13,8 @@ class PermissionsRolesTableSeed extends Seeder
      */
     public function run()
     {
-        // Admin Role
-        $role = Role::where('slug', 'administrator')->first();
+        // Developper Role
+        $role = Role::where('slug', 'developer')->first();
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
         $role->attachPermission(Permission::where('slug', 'manage.users')->first());
         $role->attachPermission(Permission::where('slug', 'manage.roles')->first());
@@ -25,10 +25,22 @@ class PermissionsRolesTableSeed extends Seeder
         $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 
-        // Editor Role
-        $role = Role::where('slug', 'editor')->first();
+        // Admin Role
+        $role = Role::where('slug', 'administrator')->first();
+        $role->attachPermission(Permission::where('slug', 'access.administration')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.users')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.blog')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.categories')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
+        $role->attachPermission(Permission::where('slug', 'access.site')->first());
+
+        // Moderator Role
+        $role = Role::where('slug', 'moderator')->first();
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
         $role->attachPermission(Permission::where('slug', 'manage.blog')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 

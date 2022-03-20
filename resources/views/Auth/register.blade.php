@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-md-12">
                         {!! link_to(
-                            route('auth.driver.type', ['driver' => 'github', 'type' => 'register']),
+                            route('auth.driver.redirect', ['driver' => 'github']),
                             'Register with Github <i class="fa fa-github"></i>',
                             ['class' => 'btn btn-outline-secondary'],
                             true,
