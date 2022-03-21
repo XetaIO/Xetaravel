@@ -63,7 +63,7 @@ class LoginController extends Controller
         return view('Auth.login');
     }
 
-/**
+    /**
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
