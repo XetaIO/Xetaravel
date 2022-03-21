@@ -28,10 +28,16 @@
     @if ($log->type == 'category')
         added the
         <a href="{{ route('discuss.category.show', ['slug' => $log->newCategory->slug, 'id' => $log->newCategory->id]) }}" class="tag tag-default text-white" style="background-color: {{ $log->newCategory->color }};">
+            @if (!is_null($log->newCategory->icon))
+                <i class="{{ $log->newCategory->icon }}"></i>
+            @endif
             {{ $log->newCategory->title }}
         </a>
         and removed
         <a href="{{ route('discuss.category.show', ['slug' => $log->oldCategory->slug, 'id' => $log->oldCategory->id]) }}" class="tag tag-default text-white" style="background-color: {{ $log->oldCategory->color }};">
+            @if (!is_null($log->oldCategory->icon))
+                <i class="{{ $log->oldCategory->icon }}"></i>
+            @endif
             {{ $log->oldCategory->title }}
         </a>
         categories
