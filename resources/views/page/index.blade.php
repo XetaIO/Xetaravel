@@ -119,7 +119,9 @@
                     </div>
 
                     <div class="card-footer" style="position: absolute; bottom: 0; width: 100%;">
-                        <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">Read More</a>
+                        <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">
+                            <i aria-hidden="true" class="fa fa-newspaper-o"></i> Read More
+                        </a>
                     </div>
                 </div>
             </div>

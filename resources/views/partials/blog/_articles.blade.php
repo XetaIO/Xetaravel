@@ -32,7 +32,7 @@
 
         <div class="blog-footer">
             <a href="{{ $article->article_url }}" class="btn btn-outline-primary">
-                Read More
+                <i aria-hidden="true" class="fa fa-newspaper-o"></i> Read More
             </a>
         </div>
     </div>
