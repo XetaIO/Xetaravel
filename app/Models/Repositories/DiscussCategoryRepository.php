@@ -30,6 +30,7 @@ class DiscussCategoryRepository
             'color' => $data['color'],
             'is_locked' => isset($data['is_locked']) ? true : false,
             'level' => $data['level'],
+            'icon' => $data['icon'],
             'description' => $data['description']
         ]);
     }
@@ -46,6 +47,8 @@ class DiscussCategoryRepository
     {
         $category->title = $data['title'];
         $category->color = $data['color'];
+        $category->level = $data['level'];
+        $category->icon = $data['icon'];
         $category->is_locked = isset($data['is_locked']) ? true : false;
         $category->description = $data['description'];
 

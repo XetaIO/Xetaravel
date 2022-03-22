@@ -141,8 +141,8 @@ class RoleControllerTest extends TestCase
         $this->assertTrue($banished->roles->contains('name', 'Banished'));
         $this->assertFalse($banished->roles->contains('name', 'User'));
 
-        $this->assertTrue($moderator->roles->contains('name', 'User'));
-        $this->assertFalse($moderator->roles->contains('name', 'Moderator'));
+        $this->assertFalse($moderator->roles->contains('name', 'User'));
+        $this->assertTrue($moderator->roles->contains('name', 'Moderator'));
     }
 
     /**

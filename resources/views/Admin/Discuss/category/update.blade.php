@@ -31,6 +31,26 @@
                     ]
                 ) !!}
 
+                {!! Form::bsText(
+                    'level',
+                    'Level',
+                    null,
+                    [
+                        'class' => 'form-control form-control-inverse col-md-2',
+                        'placeholder' => '1'
+                    ]
+                ) !!}
+
+                {!! Form::bsText(
+                    'icon',
+                    'Icon',
+                    null,
+                    [
+                        'class' => 'form-control form-control-inverse col-md-2',
+                        'placeholder' => 'fa fa-icon'
+                    ]
+                ) !!}
+
                 {!! Form::bsCheckbox(
                     'is_locked',
                     null,

@@ -52,6 +52,8 @@ class CategoryControllerTest extends TestCase
         $data = [
             'title' => 'My category',
             'color' => '#dddddd',
+            'level' => 1,
+            'icon' => 'fa fa-test',
             'is_locked' => false,
             'description' => 'My awesome description.'
         ];
@@ -63,6 +65,9 @@ class CategoryControllerTest extends TestCase
         $category = DiscussCategory::where('title', $data['title'])->first();
         $this->assertSame($data['title'], $category->title);
         $this->assertSame('my-category', (string) $category->slug);
+        $this->assertSame($data['level'], $category->level);
+        $this->assertSame($data['icon'], $category->icon);
+        $this->assertSame($data['is_locked'], (bool) $category->is_locked);
     }
 
     /**
@@ -97,6 +102,8 @@ class CategoryControllerTest extends TestCase
         $data = [
             'title' => 'My category',
             'color' => '#dddddd',
+            'level' => 2,
+            'icon' => 'fa fa-icon',
             'description' => 'My awesome description.'
         ];
 
@@ -110,6 +117,8 @@ class CategoryControllerTest extends TestCase
         $this->assertSame($data['color'], $category->color);
         $this->assertFalse((bool) $category->is_locked);
         $this->assertSame($data['description'], $category->description);
+        $this->assertSame($data['level'], $category->level);
+        $this->assertSame($data['icon'], $category->icon);
     }
 
     /**
