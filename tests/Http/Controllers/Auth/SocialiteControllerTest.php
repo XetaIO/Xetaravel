@@ -29,7 +29,12 @@ class SocialiteControllerTest extends TestCase
         $redirect = urlencode(route('auth.driver.callback', ['driver' => 'github']));
 
         $this->assertStringContainsString(
-            'https://github.com/login/oauth/authorize?redirect_uri=' . $redirect,
+            'https://github.com/login/oauth/authorize?',
+            $response->headers->get('Location')
+        );
+
+        $this->assertStringContainsString(
+            'redirect_uri=' . $redirect,
             $response->headers->get('Location')
         );
     }
