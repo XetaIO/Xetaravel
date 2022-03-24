@@ -17,7 +17,7 @@ class UsersTableSeed extends Seeder
         $users = [
             [
                 'username' => 'Admin',
-                'email' => 'admin@xeta.io',
+                'email' => 'admin@xetaravel.io',
                 'password' => bcrypt('admin'),
                 'slug' => 'admin',
                 'article_count' => 1,
@@ -35,7 +35,7 @@ class UsersTableSeed extends Seeder
             ],
             [
                 'username' => 'Moderator',
-                'email' => 'moderator@xeta.io',
+                'email' => 'moderator@xetaravel.io',
                 'password' => bcrypt('moderator'),
                 'slug' => 'moderator',
                 'article_count' => 0,
@@ -53,7 +53,7 @@ class UsersTableSeed extends Seeder
             ],
             [
                 'username' => 'Member',
-                'email' => 'member@xeta.io',
+                'email' => 'member@xetaravel.io',
                 'password' => bcrypt('member'),
                 'slug' => 'member',
                 'article_count' => 0,
@@ -71,7 +71,7 @@ class UsersTableSeed extends Seeder
             ],
             [
                 'username' => 'Banished',
-                'email' => 'banished@xeta.io',
+                'email' => 'banished@xetaravel.io',
                 'password' => bcrypt('banished'),
                 'slug' => 'banished',
                 'article_count' => 0,

@@ -3,7 +3,7 @@ grumphp:
     hooks_preset: local
     tasks:
         phpversion:
-            project: '7.2'
+            project: '8.0'
         phpcs:
             standard: "PSR2"
             ignore_patterns:

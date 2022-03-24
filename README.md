@@ -7,7 +7,9 @@
 > |:------:|:-------:|:------:|:-------:|:------:|:-------:|:-------:|
 > |[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/XetaIO/Xetaravel/Unit%20Tests?style=flat-square)](https://github.com/XetaIO/Xetaravel/actions/workflows/tests.yml)|[![Coverage Status](https://img.shields.io/coveralls/XetaIO/Xetaravel/master.svg?style=flat-square)](https://coveralls.io/r/XetaIO/Xetaravel)|[![Scrutinizer](https://img.shields.io/scrutinizer/g/XetaIO/Xetaravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/XetaIO/Xetaravel)|[![Latest Stable Version](https://img.shields.io/packagist/v/XetaIO/Xetaravel.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel)|[![Total Downloads](https://img.shields.io/packagist/dt/xetaio/xetaravel.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel)|[![Laravel 5.6](https://img.shields.io/badge/Laravel-8.0-f4645f.svg?style=flat-square)](http://laravel.com)|[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/XetaIO/Xetaravel/blob/master/LICENSE)|
 >
-> This is a light version of the [Xeta](https://github.com/XetaIO/Xeta) website made with Laravel.Actually, I have developed this blog to try Laravel, and I have decided to release it to help people starting with Laravel, so there is probably some custom configurations/functions that only fit my needs.
+> Xetaravel is a resource to help people starting with Laravel.
+>
+> Actually, I have developed this blog to try Laravel, and I have decided to release it to help people starting with Laravel, so there is probably some custom configurations/functions that only fit my needs.
 >
 > ## Demo
 > Note : All installed accounts won't work on the demo site, you will need to create a new one. (Sadly, we can't trust internet people :frowning_face:)
@@ -16,6 +18,9 @@
 >
 > ## Administration Preview
 > ![Admin](https://cloud.githubusercontent.com/assets/8210023/25923017/d958c432-35db-11e7-8306-92fc3406aed8.png)
+>
+> ## Discuss Preview
+> ![Discuss](https://user-images.githubusercontent.com/8210023/159991685-d2b53d9f-7d55-4cf5-b0c7-6066cee5572a.png)
 >
 > # Installation
 > ## Requirements
@@ -41,23 +46,47 @@
 > npm run production
 > ```
 >
-> **Note** : If you are familiar with VMs, I will publish a tutorial to set up a VM with all tools included in it
-> with ServerPilot soon.
 >
 > ### Pre-installed Accounts
 > * **Admin**
->   * User : **admin@xeta.io**
+>   * User : **admin@xetaravel.io**
 >   * Password : **admin**
-> * **Editor**
->   * User : **editor@xeta.io**
->   * Password : **editor**
+> * **Moderator**
+>   * User : **Moderator@xetaravel.io**
+>   * Password : **moderator**
 > * **Member**
->   * User : **member@xeta.io**
+>   * User : **member@xetaravel.io**
 >   * Password : **member**
 > * **Banished**
->   * User : **banished@xeta.io**
+>   * User : **banished@xetaravel.io**
 >   * Password : **banished**
 >   * **Note** : You will need to delete the cookie to logout due to the restriction of the ban system.
+>
+> # Features
+> This project implements many features and will implements more in the future. Here's a list of the features developed in Xetaravel :
+>
+> * ###### Blog
+>     * Categories
+>     * Comments
+>
+> * ###### Discuss
+>     * Categories
+>     * Replies
+>     * Leaderboard
+>     * Solved Reply
+>     * Actions Logs
+>     * Pinned/Locked
+>
+> * ###### Admin Panel
+>     * Google Analytics integrated
+>     * Users Management
+>     * Blog Management
+>         * Categories
+>         * Articles
+>     * Discuss Management
+>         * Categories
+>     * Roles Management
+>     * Permissions Management
 >
 > # Contribute
 > If you want to contribute, please [follow this guide](https://github.com/XetaIO/Xetaravel/blob/master/.github/CONTRIBUTING.md).
