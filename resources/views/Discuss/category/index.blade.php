@@ -42,7 +42,7 @@
                                 <a  class="text-white" href="{{ route('discuss.post.show', ['id' => $category->lastConversation->last_post_id]) }}">
                                     <strong>{{ $category->lastConversation->title }}</strong>
 
-                                    <time datetime="{{ $category->lastConversation->created_at->format('c') }}">
+                                    <time datetime="{{ $category->lastConversation->created_at->format('Y-m-d H:i:s') }}">
                                         {{ $category->lastConversation->created_at->diffForHumans() }}
                                     </time>
                                 </a>

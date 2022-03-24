@@ -81,7 +81,7 @@ class ConversationController extends Controller
         $post = $conversation->firstPost;
 
         $parser = new MentionParser($post, [
-            'regex' => '/\s({character}{pattern}{rules})\s/'
+            'regex' => config('mentions.regex')
         ]);
         $content = $parser->parse($post->content);
 

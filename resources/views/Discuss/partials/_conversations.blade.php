@@ -69,8 +69,8 @@
                             :background-color="{{ var_export($conversation->lastPost->user->avatar_primary_color) }}">
                         </discuss-user>
                         replied
-                        <time datetime="{{ $conversation->lastPost->created_at->format('c') }}" title="{{ $conversation->lastPost->created_at->format('c') }}" data-toggle="tooltip">
-                            {{ $conversation->created_at->diffForHumans() }}
+                        <time datetime="{{ $conversation->lastPost->created_at->format('Y-m-d H:i:s') }}" title="{{ $conversation->lastPost->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
+                            {{ $conversation->lastPost->created_at->diffForHumans() }}
                         </time>
                     @else
                         <i class="fa fa-pencil"></i>
@@ -81,7 +81,7 @@
                             :background-color="{{ var_export($conversation->user->avatar_primary_color) }}">
                         </discuss-user>
                         started
-                        <time datetime="{{ $conversation->created_at->format('c') }}" title="{{ $conversation->created_at->format('c') }}" data-toggle="tooltip">
+                        <time datetime="{{ $conversation->created_at->format('Y-m-d H:i:s') }}" title="{{ $conversation->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
                             {{ $conversation->created_at->diffForHumans() }}
                         </time>
                     @endif

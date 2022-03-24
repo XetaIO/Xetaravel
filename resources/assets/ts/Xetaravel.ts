@@ -1,7 +1,6 @@
 import Sidebar from './Sidebar';
 import SidebarProfile from './SidebarProfile';
 import Console from './Console/Console';
-
 import Discuss from './Discuss/Discuss';
 
 

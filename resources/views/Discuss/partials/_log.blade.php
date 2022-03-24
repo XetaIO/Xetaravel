@@ -21,7 +21,7 @@
     </discuss-user>
 
     @php
-    $time = "<time datetime=\"{$log->created_at->format('c')}\" data-toggle=\"tooltip\" title=\"{$log->created_at->format('c')}\">{$log->created_at->diffForHumans()}</time>";
+    $time = "<time datetime=\"{$log->created_at->format('Y-m-d H:i:s')}\" data-toggle=\"tooltip\" title=\"{$log->created_at->format('Y-m-d H:i:s')}\">{$log->created_at->diffForHumans()}</time>";
     @endphp
 
     {{-- Category Changed --}}

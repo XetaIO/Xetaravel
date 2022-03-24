@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import moment from 'moment'
 import Comments from './components/Comments.vue'
 import Notifications from './components/Notifications.vue'
 import UsersNotifications from './components/UsersNotifications.vue'
@@ -8,6 +9,12 @@ import DiscussUser from './components/Discuss/User.vue'
 import DiscussShare from './components/Discuss/Share.vue'
 
 Vue.config.productionTip = false;
+
+Vue.filter('formatDate', function(date) {
+    if (date) {
+      return moment(String(date)).format('MM/DD/YYYY  hh:mm:ss')
+    }
+  });
 
 const app = new Vue({
     el: '#app-vue',

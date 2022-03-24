@@ -24,47 +24,44 @@
         }
     ],
     "require": {
-        "php": "^7.2.5",
-        "laravel/framework": "^7.0",
-        "laravel/socialite": "^4.0",
-        "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
-        "xetaio/roles": "^7.0",
+        "php": "^8.0",
+        "anhskohbo/no-captcha": "^3.0",
+        "fideloper/proxy": "^4.3",
+        "graham-campbell/markdown": "^13.0",
+        "kirkbushell/eloquence": "^8.0",
+        "laravel/framework": "^8.0",
+        "laravel/socialite": "^5.0",
+        "laravel/tinker": "^2.7",
+        "laravel/ui": "^3.0",
+        "laravelcollective/html": "^6.0",
+        "rinvex/countries": "^8.0",
+        "spatie/laravel-analytics": "^4.0",
+        "spatie/laravel-medialibrary": "^9.0",
+        "spatie/laravel-menu": "^3.0",
+        "xetaio/color-extractor": "^0.3.3",
+        "xetaio/roles": "^8.0",
         "xetaio/xetaravel-editor-md": "^2.0",
         "xetaio/xetaravel-iptraceable": "^2.0",
-        "xetaio/xetaravel-mentions": "^3.0",
-        "xety/breadcrumbs": "^1.0",
-        "spatie/laravel-analytics": "^3.0",
-        "spatie/laravel-medialibrary": "^8.0",
-        "spatie/laravel-menu": "^3.0",
-        "league/color-extractor": "^0.3.2",
-        "laravelcollective/html": "^6.0",
-        "fideloper/proxy": "^4.2",
-        "graham-campbell/markdown": "^13.0",
-        "kirkbushell/eloquence": "^4.0",
-        "rinvex/countries": "^7.0",
-        "anhskohbo/no-captcha": "^3.0",
-        "doctrine/dbal": "^2.0"
+        "xetaio/xetaravel-mentions": "^8.0",
+        "xety/breadcrumbs": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
         "filp/whoops": "^2.0",
         "laravel/homestead": "^13.2",
-        "phpro/grumphp": "^0.19",
-        "phpunit/phpunit": "^8.5",
+        "phpro/grumphp": "^1.0",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.2",
         "symfony/css-selector": "^4.0",
         "symfony/dom-crawler": "^4.0",
         "symfony/filesystem": "^4.0"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
             "Xetaravel\\": "app/",
-            "XetaravelInstaller\\": "install/"
+            "XetaravelInstaller\\": "install/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {

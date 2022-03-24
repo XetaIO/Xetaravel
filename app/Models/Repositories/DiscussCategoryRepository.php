@@ -28,7 +28,7 @@ class DiscussCategoryRepository
         return DiscussCategory::create([
             'title' => $data['title'],
             'color' => $data['color'],
-            'is_locked' => isset($data['is_locked']) ? true : false,
+            'is_locked' => isset($data['is_locked']) ? (bool) $data['is_locked'] : false,
             'level' => $data['level'],
             'icon' => $data['icon'],
             'description' => $data['description']
@@ -49,7 +49,7 @@ class DiscussCategoryRepository
         $category->color = $data['color'];
         $category->level = $data['level'];
         $category->icon = $data['icon'];
-        $category->is_locked = isset($data['is_locked']) ? true : false;
+        $category->is_locked = isset($data['is_locked']) ? (bool) $data['is_locked'] : false;
         $category->description = $data['description'];
 
         return $category->save();

@@ -1,6 +1,6 @@
 <template>
     <div class="comments">
-        <figure class="media" :id="'comment-' + comment.id" v-for="comment in comments">
+        <figure class="media" :id="'comment-' + comment.id" v-for="comment in comments" v-bind:key="comment">
             <div class="media-left">
                 <a :href="comment.user.profile_url">
                     <img class="media-object rounded-circle" :src="comment.user.avatar_small" alt="Avatar" height="64px" width="64px">
@@ -14,10 +14,10 @@
                     </a>
                 </h5>
 
-                <time :datetime="getDate(comment.created_at)" :title="getDate(comment.created_at)" data-toggle="tooltip">
+                <time :datetime="comment.created_at | formatDate" :title="comment.created_at | formatDate" data-toggle="tooltip">
                     <small class="text-muted">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                        {{ comment.created_at }}
+                        {{ comment.created_at |  formatDate }}
                     </small>
                 </time>
 

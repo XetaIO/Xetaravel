@@ -106,7 +106,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                                    <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
+                                    <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" title="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
                                         {{ $article->created_at->format('Y-m-d') }}
                                     </time>
                                 </li>
@@ -158,7 +158,7 @@
 
                         <small class="text-muted">
                             <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                            <time datetime="{{ $comment->created_at->format('c') }}" title="{{ $comment->created_at->format('c') }}" data-toggle="tooltip">
+                            <time datetime="{{ $comment->created_at->format('Y-m-d H:i:s') }}" title="{{ $comment->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
                                 {{ $comment->created_at }}
                             </time>
                         </small>
