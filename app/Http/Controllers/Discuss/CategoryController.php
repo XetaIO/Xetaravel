@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
         $breadcrumbs = $this->breadcrumbs->addCrumb(
             $icon . e($category->title),
-            route('discuss.category.show', ['slug' => $category->slug,'id' => $category->getKey()])
+            route('discuss.category.show', ['slug' => $category->slug, 'id' => $category->getKey()])
         );
 
         return view('Discuss::category.show', compact('breadcrumbs', 'conversations', 'category'));

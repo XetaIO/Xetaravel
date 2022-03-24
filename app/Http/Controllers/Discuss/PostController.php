@@ -41,10 +41,10 @@ class PostController extends Controller
         $post = DiscussPostRepository::create($request->all());
         $user = DiscussUserRepository::create($request->all());
 
-        $parser = new MentionParser($post, [
-            'regex' => '/\s({character}{pattern}{rules})\s/'
-        ]);
+        $parser = new MentionParser($post);
         $content = $parser->parse($post->content);
+
+        //dd($content);
 
         $post->content = $content;
         $post->save();
@@ -188,7 +188,7 @@ class PostController extends Controller
         DiscussPostValidator::edit($request->all())->validate();
 
         $parser = new MentionParser($post, [
-            'regex' => '/\s({character}{pattern}{rules})\s/'
+            'regex' => config('mentions.regex')
         ]);
         $content = $parser->parse($request->input('content'));
 

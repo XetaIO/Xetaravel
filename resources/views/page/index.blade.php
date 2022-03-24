@@ -106,7 +106,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                                    <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
+                                    <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" title="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
                                         {{ $article->created_at->format('Y-m-d') }}
                                     </time>
                                 </li>
@@ -119,7 +119,9 @@
                     </div>
 
                     <div class="card-footer" style="position: absolute; bottom: 0; width: 100%;">
-                        <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">Read More</a>
+                        <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">
+                            <i aria-hidden="true" class="fa fa-newspaper-o"></i> Read More
+                        </a>
                     </div>
                 </div>
             </div>
@@ -156,7 +158,7 @@
 
                         <small class="text-muted">
                             <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                            <time datetime="{{ $comment->created_at->format('c') }}" title="{{ $comment->created_at->format('c') }}" data-toggle="tooltip">
+                            <time datetime="{{ $comment->created_at->format('Y-m-d H:i:s') }}" title="{{ $comment->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
                                 {{ $comment->created_at }}
                             </time>
                         </small>

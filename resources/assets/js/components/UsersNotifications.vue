@@ -8,7 +8,7 @@
 
         <table class="table table-hover table-notifications">
 
-            <tr v-for="notification in notifications"
+            <tr v-bind:key="notification" v-for="notification in notifications"
                 v-on:mouseover.prevent="markNotificationAsRead(notification)"
                 :class="'notification-' + notification.id + ' alert notification-item'">
 

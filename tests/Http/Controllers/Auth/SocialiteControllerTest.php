@@ -13,7 +13,8 @@ class SocialiteControllerTest extends TestCase
     public function testShowRegistrationForm()
     {
         $response = $this->get('/auth/github/register/form');
-        $response->assertSuccessful();
+        $response->assertStatus(302);
+        $response->assertSessionHas('danger');
     }
 
     /**
@@ -23,12 +24,17 @@ class SocialiteControllerTest extends TestCase
      */
     public function testRedirectToProvider()
     {
-        $response = $this->get('/auth/github/register');
+        $response = $this->get('/auth/github/redirect');
         $response->assertStatus(302);
-        $redirect = urlencode(route('auth.driver.type.callback', ['driver' => 'github', 'type' => 'register']));
+        $redirect = urlencode(route('auth.driver.callback', ['driver' => 'github']));
 
-        $this->assertContains(
-            'https://github.com/login/oauth/authorize?redirect_uri=' . $redirect,
+        $this->assertStringContainsString(
+            'https://github.com/login/oauth/authorize?',
+            $response->headers->get('Location')
+        );
+
+        $this->assertStringContainsString(
+            'redirect_uri=' . $redirect,
             $response->headers->get('Location')
         );
     }

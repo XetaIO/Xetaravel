@@ -49,7 +49,7 @@ class AccountController extends Controller
         $account = AccountRepository::update($request->all(), Auth::id());
 
         $parser = new MentionParser($account, [
-            'regex' => '/\s({character}{pattern}{rules})\s/',
+            'regex' => config('mentions.regex'),
             'mention' => false
         ]);
         $signature = $parser->parse($account->signature);

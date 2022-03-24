@@ -21,6 +21,7 @@ class DiscussCategoryValidator
             'title' => 'required|min:5',
             'slug' => 'unique:discuss_categories',
             'color' => 'min:7|max:7',
+            'level' => 'required',
             'description' => 'required|min:10'
         ];
         $data['slug'] = Slug::fromTitle($data['title']);
@@ -44,6 +45,7 @@ class DiscussCategoryValidator
                 Rule::unique('discuss_categories')->ignore($id)
             ],
             'color' => 'min:7|max:7',
+            'level' => 'required',
             'description' => 'required|min:10'
         ];
         $data['slug'] = Slug::fromTitle($data['title']);

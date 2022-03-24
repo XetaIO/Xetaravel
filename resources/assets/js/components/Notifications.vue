@@ -13,7 +13,7 @@
             <div class="dropdown-divider mb-0"></div>
 
             <!-- Notifications -->
-            <a v-for="notification in notifications"
+            <a  v-bind:key="notification" v-for="notification in notifications"
                 v-on:mouseover.prevent="markNotificationAsRead(notification)"
                 :href="getNotificationUrl(notification)" :class="'notification-' + notification.id + ' dropdown-item notification-item'">
 

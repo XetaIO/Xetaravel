@@ -21,6 +21,7 @@ class DiscussCategory extends Model
         'color',
         'is_locked',
         'level',
+        'icon',
         'description'
     ];
 

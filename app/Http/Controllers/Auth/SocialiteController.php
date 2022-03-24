@@ -43,9 +43,9 @@ class SocialiteController extends Controller
      * @param \Illuminate\Http\Request $request The request object.
      * @param string $driver The driver used.
      *
-     * @return \Illuminate\View\View
+     * @return Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function showRegistrationForm(Request $request, string $driver): View
+    public function showRegistrationForm(Request $request, string $driver)
     {
         if (is_null($request->session()->get('socialite.driver'))) {
             return redirect()

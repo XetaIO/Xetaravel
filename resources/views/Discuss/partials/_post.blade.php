@@ -62,9 +62,9 @@
                     </li>
 
                     {{-- Date --}}
-                    <li class="list-inline-item" data-toggle="tooltip" title="{{ $post->created_at->format('c') }}">
+                    <li class="list-inline-item" data-toggle="tooltip" title="{{ $post->created_at->format('Y-m-d H:i:s') }}">
                         <i aria-hidden="true" class="fa fa-calendar"></i>
-                        <time datetime="{{ $post->created_at->format('c') }}">
+                        <time datetime="{{ $post->created_at->format('Y-m-d H:i:s') }}">
                             {{ $post->created_at->diffForHumans() }}
                         </time>
                     </li>

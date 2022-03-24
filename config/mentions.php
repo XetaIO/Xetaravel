@@ -15,5 +15,6 @@ return [
             // Notification class to use when this model is mentioned.
             'notification' => Xetaravel\Notifications\MentionNotification::class,
         ]
-    ]
+    ],
+    'regex' => '/\B((?<!(\[|\/))@[A-Za-z0-9]{4,20})(?!\])/'
 ];

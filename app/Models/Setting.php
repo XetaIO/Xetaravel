@@ -54,7 +54,7 @@ class Setting extends Model
         switch (gettype($value)) {
             case 'int':
             case 'integer':
-                $model->value_int =$value;
+                $model->value_int = $value;
                 $model->value_str = null;
                 $model->value_bool = null;
 

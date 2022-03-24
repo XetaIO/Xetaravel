@@ -81,7 +81,7 @@ class ConversationController extends Controller
         $post = $conversation->firstPost;
 
         $parser = new MentionParser($post, [
-            'regex' => '/\s({character}{pattern}{rules})\s/'
+            'regex' => config('mentions.regex')
         ]);
         $content = $parser->parse($post->content);
 
@@ -151,6 +151,6 @@ class ConversationController extends Controller
      */
     protected function getCurrentPage(Request $request): int
     {
-        return !is_null($request->get('page')) ? (int)$request->get('page') : 1;
+        return !is_null($request->get('page')) ? (int) $request->get('page') : 1;
     }
 }

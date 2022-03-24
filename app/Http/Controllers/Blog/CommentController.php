@@ -4,7 +4,7 @@ namespace Xetaravel\Http\Controllers\Blog;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Xetaravel\Events\CommentEvent;
+use Xetaravel\Events\Badges\CommentEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\Article;

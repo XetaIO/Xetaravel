@@ -9,7 +9,7 @@
             <ul class="list-inline mb-0">
                 <li class="list-inline-item">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <time datetime="{{ $article->created_at->format('c') }}" title="{{ $article->created_at->format('c') }}" data-toggle="tooltip">
+                    <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" title="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
                         {{ $article->created_at->format('Y-m-d') }}
                     </time>
                 </li>
@@ -32,7 +32,7 @@
 
         <div class="blog-footer">
             <a href="{{ $article->article_url }}" class="btn btn-outline-primary">
-                Read More
+                <i aria-hidden="true" class="fa fa-newspaper-o"></i> Read More
             </a>
         </div>
     </div>
