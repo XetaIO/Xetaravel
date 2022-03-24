@@ -26,7 +26,7 @@ class LoginControllerTest extends TestCase
     {
         $this->assertGuest();
         $data = [
-            'email' => 'admin@xeta.io',
+            'email' => 'admin@xetaravel.io',
             'password' => 'admin',
             'remember' => 1,
         ];
@@ -46,7 +46,7 @@ class LoginControllerTest extends TestCase
     {
         $this->assertGuest();
         $data = [
-            'email' => 'emeric@xeta.io',
+            'email' => 'emeric@xetaravel.io',
             'password' => 'wrong-password',
             'remember' => 1,
         ];

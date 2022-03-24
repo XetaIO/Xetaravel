@@ -40,23 +40,23 @@ class UserControllerTest extends TestCase
     {
         $response = $this->get('/admin/user/search?search=admin&type=username');
         $response->assertSuccessful();
-        $response->assertSee('admin@xeta.io');
+        $response->assertSee('admin@xetaravel.io');
 
         $response = $this->get('/admin/user/search?search=admin&type=email');
         $response->assertSuccessful();
-        $response->assertSee('admin@xeta.io');
+        $response->assertSee('admin@xetaravel.io');
 
         $response = $this->get('/admin/user/search?search=127&type=register_ip');
         $response->assertSuccessful();
-        $response->assertSee('admin@xeta.io');
+        $response->assertSee('admin@xetaravel.io');
 
         $response = $this->get('/admin/user/search?search=127&type=last_login_ip');
         $response->assertSuccessful();
-        $response->assertSee('admin@xeta.io');
+        $response->assertSee('admin@xetaravel.io');
 
         $response = $this->get('/admin/user/search?search=admin&type=unknown');
         $response->assertSuccessful();
-        $response->assertSee('admin@xeta.io');
+        $response->assertSee('admin@xetaravel.io');
     }
 
     /**
@@ -79,7 +79,7 @@ class UserControllerTest extends TestCase
     {
         $data = [
             'username' => 'Test',
-            'email' => 'test@xeta.io',
+            'email' => 'test@xetaravel.io',
             'account' => [
                 'first_name' => 'test first',
                 'last_name' => 'test last',

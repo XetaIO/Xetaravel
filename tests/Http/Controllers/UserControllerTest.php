@@ -86,15 +86,15 @@ class UserControllerTest extends TestCase
     {
         $user = User::find(1);
         $this->be($user);
-        $this->assertSame('admin@xeta.io', $user->email);
+        $this->assertSame('admin@xetaravel.io', $user->email);
 
-        $response = $this->put('/users/settings', ['type' => 'email', 'email' => 'newadmin@xeta.io']);
+        $response = $this->put('/users/settings', ['type' => 'email', 'email' => 'newadmin@xetaravel.io']);
         $response->assertSessionHas('success');
         $response->assertStatus(302);
         $response->assertRedirect('/users/settings');
 
         $user = User::find(1);
-        $this->assertSame('newadmin@xeta.io', $user->email);
+        $this->assertSame('newadmin@xetaravel.io', $user->email);
     }
 
     /**
@@ -107,7 +107,7 @@ class UserControllerTest extends TestCase
         $user = User::find(1);
         $this->be($user);
 
-        $response = $this->put('/users/settings', ['type' => 'email', 'email' => 'admin@xeta.io']);
+        $response = $this->put('/users/settings', ['type' => 'email', 'email' => 'admin@xetaravel.io']);
         $response->assertSessionHasErrors(['email']);
         $response->assertStatus(302);
     }

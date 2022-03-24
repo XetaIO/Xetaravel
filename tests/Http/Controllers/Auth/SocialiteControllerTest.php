@@ -46,7 +46,7 @@ class SocialiteControllerTest extends TestCase
      */
     public function testRegisterValidationFail()
     {
-        $data = ['username' => 'admin', 'email' => 'admin@xeta.io'];
+        $data = ['username' => 'admin', 'email' => 'admin@xetaravel.io'];
         $response = $this->post('/auth/github/register/validate', $data);
         $response->assertStatus(302);
     }

@@ -23,7 +23,7 @@ class ForgotPasswordControllerTest extends TestCase
      */
     public function testSendResetLinkEmailSuccess()
     {
-        $response = $this->post('/users/password/email', ['email' => 'admin@xeta.io']);
+        $response = $this->post('/users/password/email', ['email' => 'admin@xetaravel.io']);
         $response->assertStatus(302);
         $response->assertSessionHas('success');
     }
