@@ -50,9 +50,11 @@ jobs:
 
       - name: Run tests
         run: vendor/bin/phpunit --coverage-clover tests/vendor/temp/coverage.xml
-        #env:
-        #  DB_HOST: localhost
-        #  DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        env:
+          DB_HOST: localhost
+          DB_DATABASE: xetaravel_test
+          DB_USERNAME: admin
+          DB_PASSWORD: rootpass
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
