@@ -37,7 +37,7 @@ jobs:
       - run: php -v
 
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
