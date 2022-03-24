@@ -14,14 +14,13 @@ jobs:
         strategy:
             matrix:
                 php: [8.0, 8.1]
-                dependency-version: [prefer-lowest, prefer-stable]
                 os: [ubuntu-latest]
 
-        name: P${{ matrix.php }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
+        name: PHP${{ matrix.php }} - ${{ matrix.os }}
 
         services:
             mysql:
-                image: mysql:5.7
+                image: mysql:8.0
                 env:
                     MYSQL_ALLOW_EMPTY_PASSWORD: yes
                     MYSQL_DATABASE: xetaravel_test
