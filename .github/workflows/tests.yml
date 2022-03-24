@@ -19,9 +19,12 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: xetaravel_test
-          DB_HOST: 127.0.0.1
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: rootpass
+          MYSQL_ROOT_PASSWORD: rootpass
         ports:
-            - 3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
@@ -47,8 +50,9 @@ jobs:
 
       - name: Run tests
         run: vendor/bin/phpunit --coverage-clover tests/vendor/temp/coverage.xml
-        env:
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        #env:
+        #  DB_HOST: localhost
+        #  DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
