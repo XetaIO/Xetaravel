@@ -28,7 +28,7 @@
                 <div class="col-md-12">
                     <div class="breadcrumb text-md-center">
                         <h5 class="mb-0">
-                                Pillar of the Community
+                                Community Pillar
                         </h5>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="col-md-4">
                         <div class="leaderboard">
                             <span class="leaderboard-number">
-                                {{ $i }}
+                                <b>{{ $i }}</b>
                             </span>
                             <div class="leaderboard-body">
                                 <a href="{{ $user->profile_url }}" style="position: relative;">

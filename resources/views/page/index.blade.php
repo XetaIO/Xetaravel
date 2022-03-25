@@ -28,10 +28,14 @@
             <div class="col-xs-12">
                 <h1>Welcome on <span class="text-primary font-xeta">Xetaravel</span> !</h1>
                 <p class="description">
-                    This version is a light version of the <a class="font-weight-bold" href="https://github.com/XetaIO/Xeta" target="_blank">Xeta</a> project made with <i class="fa fa-heart" style="color: #fa6c65"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
+                    This website was made to try <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
+                    Project <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
                 <a class="btn btn-outline-primary-inverse" href="{{ route('blog.article.index') }}">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
+                </a>
+                <a class="btn btn-outline-primary-inverse" href="{{ route('discuss.index') }}">
+                    <i class="fa fa-comment-o" aria-hidden="true"></i> Visit Discuss
                 </a>
             </div>
         </div>

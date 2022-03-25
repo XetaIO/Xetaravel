@@ -38,7 +38,7 @@ class DiscussController extends Controller
 
         $users = Cache::remember('Badges.users.pillarofcommunity', $secondes, function () {
             $users = User::whereDoesntHave('roles', function (Builder $query) {
-                $query->where('slug', 'banni'); // Select all user that does not have the role "banni"
+                $query->where('slug', 'banished'); // Select all user that does not have the role "banished"
             })
             ->orderBy('experiences_total', 'desc')
             ->limit(15)
