@@ -36,7 +36,7 @@ trait CreatesApplication
     {
         parent::setUp();
 
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
         Artisan::call('db:seed', ['--class' => 'TestingDatabaseSeeder']);
 
         // Set the all Settings in the config array.

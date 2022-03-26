@@ -7,8 +7,9 @@
 .env.testing
 .directory
 .vagrant
-vagrant-ssh.bat
 .phpunit.result.cache
+scheduler.log
+vagrant-ssh.bat
 Homestead.json
 Homestead.yaml
 composer.lock
