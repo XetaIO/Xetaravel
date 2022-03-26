@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('leaderboard:update')
-                ->everyMinute()
+                ->weekly()
                 ->runInBackground();
                 //->appendOutputTo('/home/vagrant/xetaravel/scheduler.log');
     }
