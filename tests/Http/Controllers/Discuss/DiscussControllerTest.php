@@ -15,4 +15,15 @@ class DiscussControllerTest extends TestCase
         $response = $this->get('/discuss');
         $response->assertSuccessful();
     }
+
+    /**
+     * testIndex method
+     *
+     * @return void
+     */
+    public function testLeaderboard()
+    {
+        $response = $this->get('/discuss/leaderboard');
+        $response->assertSuccessful();
+    }
 }

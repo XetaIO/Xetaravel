@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Xetaravel\Models\DiscussConversation;
+use Xetaravel\Models\Badge;
 use Xetaravel\Models\User;
 
 class DiscussController extends Controller
@@ -49,6 +50,8 @@ class DiscussController extends Controller
 
         $breadcrumbs = $this->breadcrumbs->addCrumb('Leaderboard', route('discuss.leaderboard'));
 
-        return view('Discuss::leaderboard', compact('breadcrumbs', 'users'));
+        $badge = Badge::where('slug', 'topleaderboard')->first();
+
+        return view('Discuss::leaderboard', compact('breadcrumbs', 'users', 'badge'));
     }
 }

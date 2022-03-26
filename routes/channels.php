@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Broadcast;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -9,8 +12,6 @@
 | used to check if an authenticated user can listen to the channel.
 |
 */
-use Illuminate\Support\Facades\Broadcast;
-
 Broadcast::channel('Xetaravel.User.{id}', function ($user, $id) {
     //return true;
     //return (int) $user->id === (int) $id;

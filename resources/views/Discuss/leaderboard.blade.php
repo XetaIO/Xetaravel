@@ -32,9 +32,16 @@
                         </h5>
                     </div>
                 </div>
-                <?php $i = 0 ?>
+
+                @php
+                    $i = 0;
+                @endphp
+
                 @foreach ($users as $user)
-                    <?php $i++; ?>
+                    @php
+                        $i++;
+                    @endphp
+
                     @if ($i == 4)
                         <div class="col-md-12">
                             <div class="breadcrumb mt-4 text-md-center">
@@ -51,9 +58,9 @@
                             </span>
                             <div class="leaderboard-body">
                                 <a href="{{ $user->profile_url }}" style="position: relative;">
-                                    <img src="{{ $user->avatar_small }}" alt="{{ $user->username }}"  class="leaderboard-body-image img-thumbnail" style="{{ $i <=3 ? "border-color: #f7a925;" : ""}}"/>
+                                    <img src="{{ $user->avatar_small }}" alt="{{ $user->username }}"  class="leaderboard-body-image img-thumbnail {{ $badge->icon }}" style="height:100px; width:100px; {{ $i <=3 ? "border-color: #f7a925;" : ""}}"/>
                                     @if ($i <= 3)
-                                        <i aria-hidden="true" class="fas fa-medal leaderboard-body-badge"  data-toggle="popover" data-trigger="hover" data-placement="top" title="Pilier de la Communauté" data-content="Débloqué quand vos points d'expériences sont dans le top 3 de tout les membres Division."></i>
+                                        <i aria-hidden="true" class="fas fa-medal leaderboard-body-badge"  data-toggle="popover" data-trigger="hover" data-placement="top" title="{{ $badge->name }}" data-content="{{ $badge->description }}"></i>
                                     @endif
                                 </a>
                                 <h5 class="leaderboard-user">
