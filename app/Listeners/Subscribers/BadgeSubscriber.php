@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Xetaravel\Events\Badges\ExperiencesEvent;
 use Xetaravel\Events\Badges\PostEvent;
 use Xetaravel\Events\Badges\PostSolvedEvent;
+use Xetaravel\Events\Badges\LeaderboardEvent;
 use Xetaravel\Events\RegisterEvent;
 use Xetaravel\Events\CommentEvent;
 use Xetaravel\Models\Badge;
@@ -24,7 +25,8 @@ class BadgeSubscriber
         RegisterEvent::class => 'onNewRegister',
         PostEvent::class => 'onNewPost',
         PostSolvedEvent::class => 'onNewPostSolved',
-        ExperiencesEvent::class => 'onNewExperiences'
+        ExperiencesEvent::class => 'onNewExperiences',
+        LeaderboardEvent::class => 'onNewLeaderboard'
     ];
 
     /**
@@ -149,6 +151,23 @@ class BadgeSubscriber
         });
 
         $result = $user->badges()->syncWithoutDetaching($collection);
+
+        return $this->sendNotifications($result, $badges, $user);
+    }
+
+    /**
+     * Listener related to the leaderboard badge.
+     *
+     * @param \Xetaravel\Events\RegisterEvent $event The event that was fired.
+     *
+     * @return bool
+     */
+    public function onNewLeaderboard(LeaderboardEvent $event): bool
+    {
+        $user = $event->user;
+        $badges = Badge::where('type', 'topLeaderboard')->get();
+
+        $result = $user->badges()->syncWithoutDetaching($badges);
 
         return $this->sendNotifications($result, $badges, $user);
     }

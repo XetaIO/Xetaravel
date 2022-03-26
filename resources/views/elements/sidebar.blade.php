@@ -21,24 +21,24 @@
 
             <li>
                 <a href="{{ route('users.account.index') }}" class="hidden-xs-down" title="Manage your account settings." data-toggle="tooltip" data-placement="left" data-container="body">
-                    <i class="fa fa-cogs"></i>
+                    <i class="fas fa-user-edit"></i>
                     <small class="sidebar-text">My Account</small>
                 </a>
                 <!-- Responsive link -->
                 <a href="{{ route('users.account.index') }}" class="hidden-sm-up">
-                    <i class="fa fa-cogs"></i>
+                    <i class="fas fa-user-edit"></i>
                     <small class="sidebar-text">My Account</small>
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('users.notification.index') }}" class="hidden-xs-down" title="Check your new and old notifications." data-toggle="tooltip" data-placement="left" data-container="body">
-                    <i class="fa fa-bell-o"></i>
+                    <i class="fas fa-user-tag"></i>
                     <small class="sidebar-text">Notifications</small>
                 </a>
                 <!-- Responsive link -->
                 <a href="{{ route('users.notification.index') }}" class="hidden-sm-up">
-                    <i class="fa fa-bell-o"></i>
+                    <i class="fas fa-user-tag"></i>
                     <small class="sidebar-text">Notifications</small>
                 </a>
             </li>

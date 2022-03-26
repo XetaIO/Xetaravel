@@ -19,15 +19,15 @@ class MenuServiceProvider extends ServiceProvider
                 ->addClass('nav nav-menu flex-column')
                 ->setAttribute('role', 'navigation')
                 ->add(
-                    Link::toRoute('users.account.index', '<i class="fa fa-user"></i> Account')
+                    Link::toRoute('users.account.index', '<i class="fas fa-user-edit"></i> Account')
                         ->addClass('nav-link')
                 )
                 ->add(
-                    Link::toRoute('users.notification.index', '<i class="fa fa-bell-o"></i> Notifications')
+                    Link::toRoute('users.notification.index', '<i class="fas fa-user-tag"></i> Notifications')
                         ->addClass('nav-link')
                 )
                 ->add(
-                    Link::toRoute('users.user.settings', '<i class="fa fa-cogs"></i> Settings')
+                    Link::toRoute('users.user.settings', '<i class="fas fa-user-cog"></i> Settings')
                         ->addClass('nav-link')
                 )
                 ->setActiveFromRequest();
