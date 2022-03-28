@@ -18,6 +18,12 @@
             <a class="nav-link-menu" href="{{ route('discuss.index') }}">
                 <span data-hover="Discuss">Discuss</span>
             </a>
+            @if (config('settings.discuss.enabled') ||
+              (!config('settings.discuss.enabled') && !is_null(Auth::user()) && Auth::user()->level() >= 4))
+                <a class="nav-link-menu" href="{{ route('discuss.index') }}">
+                    <span data-hover="Discuss">Discuss</span>
+                </a>
+              @endif
           </li>
         </ul>
 

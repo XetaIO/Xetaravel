@@ -22,7 +22,7 @@ class SettingsTableSeed extends Seeder
                 'value_int' => null,
                 'value_str' => null,
                 'value_bool' => true,
-                'description' => 'Active/Désactive le système et la page de connexion.',
+                'description' => 'Enable/Disable the login system.',
                 'created_at' => $now,
                 'updated_at' => $now
             ],
@@ -31,16 +31,7 @@ class SettingsTableSeed extends Seeder
                 'value_int' => null,
                 'value_str' => null,
                 'value_bool' => true,
-                'description' => 'Active/Désactive le système et la page d\'inscription',
-                'created_at' => $now,
-                'updated_at' => $now
-            ],
-            [
-                'name' => 'user.rewards.enabled',
-                'value_int' => null,
-                'value_str' => null,
-                'value_bool' => true,
-                'description' => 'Active/Désactive le système et la page de rewards.',
+                'description' => 'Enable/Disable the register system.',
                 'created_at' => $now,
                 'updated_at' => $now
             ],
@@ -49,7 +40,7 @@ class SettingsTableSeed extends Seeder
                 'value_int' => null,
                 'value_str' => null,
                 'value_bool' => true,
-                'description' => 'Active/Désactive le système de vérification des emails.',
+                'description' => 'Enable/Disable the email verification system.',
                 'created_at' => $now,
                 'updated_at' => $now
             ],
@@ -58,7 +49,7 @@ class SettingsTableSeed extends Seeder
                 'value_int' => null,
                 'value_str' => null,
                 'value_bool' => true,
-                'description' => 'Active/Désactive le système Discuss.',
+                'description' => 'Enable/Disable the Discuss system.',
                 'created_at' => $now,
                 'updated_at' => $now
             ]

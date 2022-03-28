@@ -163,4 +163,30 @@ Route::group([
             Route::delete('permission/delete/{id}', 'PermissionController@delete')
                 ->name('admin.role.permission.delete');
         });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Settings Routes
+        |--------------------------------------------------------------------------
+        */
+        Route::group([
+            'middleware' => ['permission:manage.settings']
+        ], function () {
+
+            // Settings Routes
+            Route::get('settings', 'SettingController@index')->name('admin.setting.index');
+
+            Route::get('settings/create', 'SettingController@showCreateForm')
+                ->name('admin.setting.create');
+            Route::post('settings/create', 'SettingController@create')
+                ->name('admin.setting.create');
+
+            Route::get('settings/update/{id}', 'SettingController@showUpdateForm')
+                ->name('admin.setting.edit');
+            Route::put('settings/update/{id}', 'SettingController@update')
+                ->name('admin.setting.update');
+
+            Route::delete('settings/delete/{id}', 'SettingController@delete')
+                ->name('admin.setting.delete');
+        });
 });

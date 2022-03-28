@@ -19,7 +19,8 @@ class Setting extends Model
         'value_bool',
         'value',
         'description',
-        'last_updated_user_id'
+        'last_updated_user_id',
+        'is_deletable'
     ];
 
 
@@ -29,7 +30,8 @@ class Setting extends Model
      * @var array
      */
     protected $appends = [
-        'value'
+        'value',
+        'type'
     ];
 
     /**
@@ -43,9 +45,9 @@ class Setting extends Model
 
         // Get the type of the value before to save.
         static::updating(function ($model) {
-            $model = self::castValue($model->new_value, $model);
+            $model = self::castValue($model->value, $model);
 
-            unset($model->new_value);
+            unset($model->value);
         });
     }
 

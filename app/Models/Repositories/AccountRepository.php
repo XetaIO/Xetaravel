@@ -1,7 +1,6 @@
 <?php
 namespace Xetaravel\Models\Repositories;
 
-use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\Account;
 
 class AccountRepository

@@ -24,6 +24,7 @@ class PermissionsRolesTableSeed extends Seeder
         $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.categories')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.settings')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 
         // Admin Role
@@ -35,6 +36,7 @@ class PermissionsRolesTableSeed extends Seeder
         $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.categories')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.posts')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.settings')->first());
         $role->attachPermission(Permission::where('slug', 'access.site')->first());
 
         // Moderator Role

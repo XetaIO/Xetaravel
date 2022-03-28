@@ -1,8 +1,6 @@
 <?php
 namespace Xetaravel\Models\Repositories;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request as FacadeRequest;
 use Xetaravel\Models\Permission;
 
 class PermissionRepository

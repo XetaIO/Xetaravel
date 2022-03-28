@@ -1,7 +1,6 @@
 <?php
 namespace Xetaravel\Models\Repositories;
 
-use Illuminate\Support\Collection;
 use Xetaravel\Models\Comment;
 
 class CommentRepository
