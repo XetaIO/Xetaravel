@@ -2,7 +2,6 @@
 namespace Xetaravel\Models\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
 use Xetaravel\Events\Discuss\ConversationWasLockedEvent;
@@ -74,12 +73,12 @@ class DiscussConversationRepository
             $data['is_pinned'] = isset($data['is_pinned']) ? true : false;
             $data['is_locked'] = isset($data['is_locked']) ? true : false;
 
-            if ($conversation->is_pinned != $data['is_pinned'] && $data['is_pinned'] == true) {
-                event(new ConversationWasPinnedEvent($conversation, Auth::user()));
+            if ($conversation->is_pinned != $data['is_pinned'] && $data['is_pinned'] === true) {
+                event(new ConversationWasPinnedEvent($conversation));
             }
 
-            if ($conversation->is_locked != $data['is_locked'] && $data['is_locked'] == true) {
-                event(new ConversationWasLockedEvent($conversation, Auth::user()));
+            if ($conversation->is_locked != $data['is_locked'] && $data['is_locked'] === true) {
+                event(new ConversationWasLockedEvent($conversation));
             }
 
             $conversation->is_locked = $data['is_locked'];

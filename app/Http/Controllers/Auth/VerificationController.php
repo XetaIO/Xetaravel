@@ -70,8 +70,7 @@ class VerificationController extends Controller
     {
         $user = User::find($request->route('id'));
 
-
-        if (! hash_equals((string) $request->route('id'), (string) $user->getKey())) {
+        if (!hash_equals((string) $request->route('id'), (string) $user->getKey())) {
             throw new AuthorizationException;
         }
 

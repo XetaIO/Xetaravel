@@ -103,5 +103,17 @@ class MenuServiceProvider extends ServiceProvider
                 )
                 ->setActiveFromRequest();
         });
+
+        Menu::macro('admin.setting', function () {
+            return Menu::new()
+                ->addClass('nav nav-pills flex-column mb-0')
+                ->setAttribute('role', 'navigation')
+                ->add(
+                    Link::toRoute('admin.setting.index', '<i class="fa fa-cogs"></i> Manage Settings')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->setActiveFromRequest();
+        });
     }
 }

@@ -1,12 +1,10 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
-use Xetaravel\Models\Setting;
-
 trait SettingPresenter
 {
     /**
-     * Get the actual status of the server.
+     * Attribute the value regardless to the type.
      *
      * @return int|bool|string
      */
@@ -22,6 +20,28 @@ trait SettingPresenter
 
         if (!is_null($this->value_str)) {
             return $this->value_str;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the type of the value.
+     *
+     * @return int|bool|string
+     */
+    public function getTypeAttribute()
+    {
+        if (!is_null($this->value_int)) {
+            return $this->type = "value_int";
+        }
+
+        if (!is_null($this->value_bool)) {
+            return $this->type = "value_bool";
+        }
+
+        if (!is_null($this->value_str)) {
+            return $this->type = "value_str";
         }
 
         return null;

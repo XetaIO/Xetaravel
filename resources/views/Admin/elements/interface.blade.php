@@ -53,4 +53,11 @@
         </p>
         {!! Menu::{'admin.role'}() !!}
     @endpermission
+
+    @permission('manage.settings')
+        <p class="p-1 m-0 text-white font-xeta">
+            Settings
+        </p>
+        {!! Menu::{'admin.setting'}() !!}
+    @endpermission
 </nav>

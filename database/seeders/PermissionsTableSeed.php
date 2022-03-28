@@ -80,6 +80,14 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'name' => 'Manage Settings',
+                'slug' => 'manage.settings',
+                'description' => 'The user can manage the settings.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'name' => 'Access Site',
                 'slug' => 'access.site',
                 'description' => 'The user can access to the site.',
