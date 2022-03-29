@@ -86,10 +86,10 @@
   font-size: $font-size-base;
   font-weight: normal;
   line-height: $input-line-height;
-  color: $input-color;
+  //color: $input-color;
   text-align: center;
-  background-color: $input-group-addon-bg;
-  border: $input-btn-border-width solid $input-group-addon-border-color;
+  //background-color: $input-group-addon-bg;
+  //border: $input-btn-border-width solid $input-group-addon-border-color;
   @include border-radius($input-border-radius);
 
   // Sizing
