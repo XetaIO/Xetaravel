@@ -2,7 +2,7 @@
 {!! config(['app.title' => 'Leaderboard']) !!}
 
 @section('content')
-<div class="container pt-3 pb-0">
+<div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}
 </div>
 <div class="container pt-2">

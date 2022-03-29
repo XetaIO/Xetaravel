@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Discuss']) !!}
+{!! config(['app.title' => 'Search : ' . $search]) !!}
 
 @section('content')
 <div class="container pt-6 pb-0">
@@ -29,7 +29,7 @@
                     <!-- Search form -->
                     <div class="input-group mb-1">
                     {!! Form::open(['route' => 'discuss.search.index', 'method' => 'post', 'style' => 'display: contents;']) !!}
-                        <input placeholder="Search..." required="required" name="search" type="text" id="search" class="form-control">
+                        <input placeholder="Search..." required="required" name="search" type="text" id="search" class="form-control" value="{{ $search }}">
 
                         {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'input-group-addon btn btn-primary']) !!}
                     {!! Form::close() !!}

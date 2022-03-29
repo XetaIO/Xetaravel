@@ -91,7 +91,11 @@
     @empty
         <div class="alert alert-primary" role="alert">
             <i class="fa fa-exclamation" aria-hidden="true"></i>
-            There're no conversations yet.
+            @if (isset($search))
+                There're no result for your search : <b>{{ $search }}</b>. Maybe try with another word.
+            @else
+                There're no conversations yet.
+            @endif
         </div>
     @endforelse
 </ul>

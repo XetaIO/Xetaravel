@@ -34,6 +34,10 @@ Route::group([
     Route::get('post/show/{id}', 'PostController@show')
         ->name('discuss.post.show');
 
+    // Search Route
+    Route::post('search', 'SearchController@index')
+        ->name('discuss.search.index');
+
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
         // Conversation Routes
