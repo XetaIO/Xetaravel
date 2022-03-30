@@ -37,7 +37,7 @@
         "propa/laravel-browscap": "^2.0",
         "rinvex/countries": "^8.0",
         "spatie/laravel-analytics": "^4.0",
-        "spatie/laravel-medialibrary": "^9.0",
+        "spatie/laravel-medialibrary": "^9.12",
         "spatie/laravel-menu": "^3.0",
         "xetaio/color-extractor": "^0.3.3",
         "xetaio/roles": "^8.0",
