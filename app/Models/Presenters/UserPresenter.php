@@ -1,7 +1,7 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
-use Xetaravel\Models\ActivityLog;
+use Xetaravel\Models\Session;
 use Xetaravel\Utility\UserUtility;
 
 trait UserPresenter
@@ -204,7 +204,7 @@ trait UserPresenter
      */
     public function getOnlineAttribute(): string
     {
-        $online = ActivityLog::expires()->where('user_id', $this->id)->first();
+        $online = Session::expires()->where('user_id', $this->id)->first();
 
         return is_null($online) ? false : true;
     }

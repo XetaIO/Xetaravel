@@ -1,7 +1,7 @@
 <?php
 namespace Xetaravel\Models;
 
-class ActivityLog extends Model
+class Session extends Model
 {
 
     /**
@@ -11,11 +11,12 @@ class ActivityLog extends Model
      */
     protected $fillable = [
         'user_id',
-        'url',
-        'method',
-        'ip',
+        'ip_address',
         'user_agent',
-        'last_activity'
+        'payload',
+        'last_activity',
+        'url',
+        'method'
     ];
 
     /**

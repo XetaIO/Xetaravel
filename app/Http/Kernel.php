@@ -34,7 +34,7 @@ class Kernel extends HttpKernel
             \Xetaravel\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Xetaio\IpTraceable\Http\Middleware\IpTraceable::class,
-            \Xetaravel\Http\Middleware\ActivityLogs::class,
+            \Xetaravel\Http\Middleware\SessionLogs::class,
         ],
 
         'api' => [

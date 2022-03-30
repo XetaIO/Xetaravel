@@ -2,10 +2,10 @@
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
-use Xetaravel\Models\Repositories\ActivityLogRepository;
+use Xetaravel\Models\Session;
+use Xetaravel\Models\Repositories\SessionRepository;
 
-class ActivityLogs
+class SessionLogs
 {
     /**
      * Handle an incoming request.
@@ -20,17 +20,14 @@ class ActivityLogs
             return $next($request);
         }
 
+        $session = Session::where('id', $request->session()->getId())->first();
+
         $data = [
             'url' => $request->path(),
-            'method' => $request->method(),
-            'user_agent' => $request->userAgent(),
-            'ip' => $request->ip(),
-            'last_activity' => time()
+            'method' => $request->method()
         ];
 
-        $user = $request->user()->getKey();
-
-        ActivityLogRepository::update($data, $user);
+        SessionRepository::update($data, $session);
 
         return $next($request);
     }
