@@ -36,4 +36,5 @@ Vagrantfile
 /public/mix-manifest.json
 /storage/*.key
 /storage/media-library
+/storage/framework/browscap.ini
 /vendor

@@ -4,7 +4,6 @@ namespace Xetaravel\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Propa\BrowscapPHP\Facades\Browscap;
 use Xetaravel\Models\Session;
 
 class SecurityController extends Controller
@@ -31,7 +30,7 @@ class SecurityController extends Controller
         $sessions = [];
 
         foreach ($records as $record) {
-            $infos = Browscap::getBrowser($record->user_agent);
+            $infos = get_browser($record->user_agent);
 
             $record->infos = $infos;
 
