@@ -176,7 +176,6 @@ return [
         Xetaio\Mentions\Providers\MentionServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
-        Propa\BrowscapPHP\BrowscapServiceProvider::class,
 
         /*
          * Application Service Providers
@@ -252,7 +251,6 @@ return [
         'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
         'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Browscap' => Propa\BrowscapPHP\Facades\Browscap::class
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class
     ]
 ];
