@@ -2,6 +2,7 @@
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
 use Xetaravel\Models\Session;
 use Xetaravel\Models\Repositories\SessionRepository;
 
@@ -16,7 +17,7 @@ class SessionLogs
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()) {
+        if (!$request->user() || App::environment() == 'testing') {
             return $next($request);
         }
 
