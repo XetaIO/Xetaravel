@@ -95,6 +95,9 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
             ->name('users.notification.markallasread');
         Route::delete('notification/delete/{slug?}', 'NotificationController@delete')
             ->name('users.notification.delete');
+
+        // Security Routes
+        Route::get('security', 'SecurityController@index')->name('users.security.index');
     });
 });
 

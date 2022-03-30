@@ -34,6 +34,7 @@ class Kernel extends HttpKernel
             \Xetaravel\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Xetaio\IpTraceable\Http\Middleware\IpTraceable::class,
+            \Xetaravel\Http\Middleware\SessionLogs::class,
         ],
 
         'api' => [
@@ -80,7 +81,7 @@ class Kernel extends HttpKernel
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\Authenticate::class,
+        \Xetaravel\Http\Middleware\Authenticate::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,

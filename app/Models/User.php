@@ -89,7 +89,10 @@ class User extends Model implements
         'biography',
         'signature',
         'facebook',
-        'twitter'
+        'twitter',
+
+        // Session Model
+        'online'
     ];
 
     /**

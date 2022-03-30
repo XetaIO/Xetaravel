@@ -1,6 +1,7 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
+use Xetaravel\Models\Session;
 use Xetaravel\Utility\UserUtility;
 
 trait UserPresenter
@@ -194,6 +195,18 @@ trait UserPresenter
     public function getDiscussPostCountAttribute($count): int
     {
         return $count - $this->discuss_conversation_count;
+    }
+
+    /**
+     * Get the status of the user : online or offline
+     *
+     * @return string
+     */
+    public function getOnlineAttribute(): string
+    {
+        $online = Session::expires()->where('user_id', $this->id)->first();
+
+        return is_null($online) ? false : true;
     }
 
     /**

@@ -44,6 +44,13 @@
             </li>
 
             <li>
+                <a href="{{ route('users.security.index') }}" class="hidden-xs-down" title="Manage the security of your account." data-toggle="tooltip" data-placement="left" data-container="body">
+                    <i class="fas fa-user-lock"></i>
+                    <small class="sidebar-text">Security</small>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('users.auth.logout') }}"  class="hidden-xs-down text-danger" title="See you later !" data-toggle="tooltip" data-placement="left" data-container="body"
                     onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
