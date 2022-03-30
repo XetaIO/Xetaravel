@@ -91,7 +91,7 @@ class User extends Model implements
         'facebook',
         'twitter',
 
-        // Activity Model
+        // Session Model
         'online'
     ];
 

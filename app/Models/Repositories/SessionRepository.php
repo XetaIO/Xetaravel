@@ -17,6 +17,11 @@ class SessionRepository
     {
         $session->method =  $data['method'];
         $session->url =  $data['url'];
+
+        if (isset($data['created_at'])) {
+            $session->created_at =  $data['created_at'];
+        }
+
         $session->save();
 
         return $session;

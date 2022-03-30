@@ -1,0 +1,46 @@
+.security-sessions {
+    padding: 0;
+
+    .security-sessions-item {
+        position: relative;
+        line-height: 18px;
+        padding: 15px;
+        list-style-type: none;
+        border-bottom: 1px solid rgba(212,212,212,0.45);
+        border-left: 1px solid rgba(212,212,212,0.45);
+        border-right: 1px solid rgba(212,212,212,0.45);
+
+        &:first-child {
+            border-top: 1px solid rgba(212,212,212,0.45);
+        }
+
+        &:hover {
+            background-color: rgba(212,212,212,0.25);
+        }
+
+        .online {
+            float: left;
+            width: 8px;
+            height: 8px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #6cc644;
+            box-shadow: 0 0 10px #6cc644;
+        }
+
+        .icon {
+            float: left;
+            width: 32px;
+            margin-top: 1px;
+            margin-left: 15px;
+            text-align: center;
+            color: #bbb;
+        }
+
+        .details {
+            position: relative;
+            width: 350px;
+            margin-left: 70px;
+        }
+    }
+}

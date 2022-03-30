@@ -34,6 +34,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
+        "propa/laravel-browscap": "^2.0",
         "rinvex/countries": "^8.0",
         "spatie/laravel-analytics": "^4.0",
         "spatie/laravel-medialibrary": "^9.0",

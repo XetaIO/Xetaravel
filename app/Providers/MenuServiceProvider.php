@@ -30,6 +30,10 @@ class MenuServiceProvider extends ServiceProvider
                     Link::toRoute('users.user.settings', '<i class="fas fa-user-cog"></i> Settings')
                         ->addClass('nav-link')
                 )
+                ->add(
+                    Link::toRoute('users.security.index', '<i class="fas fa-user-lock"></i> Security')
+                        ->addClass('nav-link')
+                )
                 ->setActiveFromRequest();
         });
 

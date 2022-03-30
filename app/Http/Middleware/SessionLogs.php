@@ -28,6 +28,12 @@ class SessionLogs
             'method' => $request->method()
         ];
 
+        if (is_null($session->created_at)) {
+            $data += [
+                'created_at' => date('Y-m-d G:i:s'),
+            ];
+        }
+
         SessionRepository::update($data, $session);
 
         return $next($request);
