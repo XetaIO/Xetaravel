@@ -12,7 +12,6 @@ use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussConversationPresenter;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
-use Xetaravel\Models\Scopes\DisplayScope;
 use Xetaravel\Models\User;
 
 class DiscussConversation extends Model

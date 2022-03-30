@@ -119,6 +119,33 @@
         height: 28px;
     }
 
+    .discuss-conversation-user-status {
+        color: #fa6c65;
+        display: block;
+        padding: 5px 0;
+        border-top: none;
+
+        i {
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            box-shadow: 0 0 8px #fa6c65;
+            background: #fa6c65;
+            line-height: 20px;
+            vertical-align: middle;
+            border-radius: 50%;
+
+            &.online {
+                box-shadow: 0 0 8px #5cb35d;
+                background: #5cb35d;
+            }
+        }
+
+        .online {
+            color: #5cb35d;
+        }
+    }
+
     .discuss-conversation-user-roles {
         border-radius: 50%;
         border: 2px solid #ddd;
@@ -151,6 +178,7 @@
 }
 
 .discuss-conversation-post {
+    min-height: 130px;
     padding-left: 80px;
 }
 

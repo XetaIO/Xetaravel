@@ -36,6 +36,18 @@
                 <i aria-hidden="true" class="fas fa-code discuss-conversation-user-roles discuss-conversation-user-developer"  data-toggle="tooltip" title="Developer"></i>
             @endif
 
+            @if ($post->user->online)
+                <span class="discuss-conversation-user-status">
+                    <i class="online" data-toggle="tooltip" title="The user is online"></i>
+                    <small class="online">Online</small>
+                </span>
+            @else
+                <span class="discuss-conversation-user-status">
+                    <i data-toggle="tooltip" title="The user is offline"></i>
+                    <small class="offline">Offline</small>
+                </span>
+            @endif
+
 
         </div>
 
