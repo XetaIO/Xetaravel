@@ -23,6 +23,10 @@ class SessionLogs
 
         $session = Session::where('id', $request->session()->getId())->first();
 
+        if (is_null($session)) {
+            return $next($request);
+        }
+
         $data = [
             'url' => $request->path(),
             'method' => $request->method()

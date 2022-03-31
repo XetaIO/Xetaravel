@@ -41,7 +41,9 @@ class PostController extends Controller
         $post = DiscussPostRepository::create($request->all());
         $user = DiscussUserRepository::create($request->all());
 
-        $parser = new MentionParser($post);
+        $parser = new MentionParser($post, [
+            'regex' => config('mentions.regex')
+        ]);
         $content = $parser->parse($post->content);
 
         //dd($content);
