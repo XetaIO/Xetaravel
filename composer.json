@@ -24,12 +24,11 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0.2",
+        "guzzlehttp/guzzle": "^7.2",
         "anhskohbo/no-captcha": "^3.0",
-        "fideloper/proxy": "^4.3",
-        "graham-campbell/markdown": "^13.0",
-        "kirkbushell/eloquence": "^8.0",
-        "laravel/framework": "^8.0",
+        "graham-campbell/markdown": "^14.0.x-dev",
+        "laravel/framework": "^9.2",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.0",
@@ -39,23 +38,24 @@
         "spatie/laravel-medialibrary": "^9.12",
         "spatie/laravel-menu": "^4.0",
         "xetaio/color-extractor": "^0.3.3",
-        "xetaio/roles": "^8.0",
-        "xetaio/xetaravel-editor-md": "^2.0",
-        "xetaio/xetaravel-iptraceable": "^2.0",
-        "xetaio/xetaravel-mentions": "^8.0",
+        "xetaio/roles": "^9.0",
+        "xetaio/eloquence": "^9.0",
+        "xetaio/xetaravel-editor-md": "^9.0",
+        "xetaio/xetaravel-iptraceable": "^9.0",
+        "xetaio/xetaravel-mentions": "^9.0",
         "xety/breadcrumbs": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
-        "filp/whoops": "^2.0",
         "laravel/homestead": "^13.2",
         "phpro/grumphp": "^1.0",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.2",
         "symfony/css-selector": "^4.0",
         "symfony/dom-crawler": "^4.0",
-        "symfony/filesystem": "^4.0",
-        "mockery/mockery": "^1.0"
+        "symfony/filesystem": "^5.0",
+        "mockery/mockery": "^1.0",
+        "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {
         "psr-4": {

@@ -1,9 +1,10 @@
 <?php
 namespace Xetaravel\Markdown\Emoji;
 
-use League\CommonMark\Inline\Element\Image;
-use League\CommonMark\Inline\Parser\InlineParserInterface;
-use League\CommonMark\InlineParserContext;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
+use League\CommonMark\Parser\Inline\InlineParserInterface;
+use League\CommonMark\Parser\InlineParserContext;
+use League\CommonMark\Parser\Inline\InlineParserMatch;
 
 class EmojiParser implements InlineParserInterface
 {
@@ -44,9 +45,9 @@ class EmojiParser implements InlineParserInterface
      *
      * @return array
      */
-    public function getCharacters(): array
+    public function getMatchDefinition(): InlineParserMatch
     {
-        return [':'];
+        return InlineParserMatch::string(':');
     }
 
     /**

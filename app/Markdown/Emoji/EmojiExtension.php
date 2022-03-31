@@ -1,13 +1,13 @@
 <?php
 namespace Xetaravel\Markdown\Emoji;
 
-use League\CommonMark\ConfigurableEnvironmentInterface;
+use League\CommonMark\Environment\EnvironmentBuilderInterface;
 use League\CommonMark\Extension\ExtensionInterface;
 
 final class EmojiExtension implements ExtensionInterface
 {
 
-    public function register(ConfigurableEnvironmentInterface $environment)
+    public function register(EnvironmentBuilderInterface $environment): void
     {
         $environment->addInlineParser(new EmojiParser);
     }

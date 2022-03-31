@@ -1,39 +1,41 @@
 <?php
 namespace Xetaravel\Markdown\Reply;
 
-use League\CommonMark\Block\Parser\BlockParserInterface;
-use League\CommonMark\ContextInterface;
-use League\CommonMark\Cursor;
-use League\CommonMark\Util\RegexHelper;
+use League\CommonMark\Parser\Inline\InlineParserInterface;
+use League\CommonMark\Parser\Inline\InlineParserMatch;
+use League\CommonMark\Parser\InlineParserContext;
 
-class ReplyParser implements BlockParserInterface
+final class ReplyParser implements InlineParserInterface
 {
+    // Regex used to match Replies
+    const REGEXP_REPLY = '\@(?<user>[\w]{4,20})\#(?<post>[0-9]{1,16})';
 
-    const REGEXP_REPLY = '/\@(?<user>[\w]{4,20})\#(?<post>[0-9]{1,16})/';
-
-    /**
-     * Parse a line and determine if it contains an emoji. If it does,
-     * then we do the necessary.
-     *
-     * @param \League\CommonMark\ContextInterface $context
-     * @param \League\CommonMark\Cursor $cursor
-     *
-     * @return bool
-     */
-    public function parse(ContextInterface $context, Cursor $cursor): bool
+    public function getMatchDefinition(): InlineParserMatch
     {
-        $matches = RegexHelper::matchAll(self::REGEXP_REPLY, $cursor->getLine());
+        return InlineParserMatch::regex(self::REGEXP_REPLY);
+    }
 
-        if (null === $matches) {
-            return false;
-        }
-        $route = route('discuss.post.show', ['id' => $matches['post']]);
+    public function parse(InlineParserContext $inlineContext): bool
+    {
+        $reply = $inlineContext->getFullMatch();
+        $route = route('discuss.post.show', ['id' => $inlineContext->getMatches()[3]]);
 
-        $reply = new Reply($route, $matches['user']);
+        // Push the cursor to the lenght of the full match.
+        $inlineContext->getCursor()->advanceBy(\strlen($reply));
 
-        $cursor->advanceBy(strlen($matches[0]));
-        $context->addBlock($reply);
-        $context->setBlocksParsed(true);
+        $inlineContext->getContainer()
+            ->appendChild(new Reply(
+                $inlineContext->getMatches()[0],
+                [
+                    'attributes' => [
+                        'class' => 'discuss-conversation-user-reply',
+                        'href' => $route,
+                        //'style' => 'display: block;',
+                        'data-toggle' => 'tooltip',
+                        'title' => 'View the answer of ' . $inlineContext->getMatches()[2]
+                    ]
+                ]
+            ));
 
         return true;
     }
