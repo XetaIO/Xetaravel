@@ -36,7 +36,6 @@ class Contact extends Mailable
     public function build()
     {
         return $this
-                    ->from('contact@xetaravel.com', 'Contact - Xetaravel')
                     ->subject($this->details['subject'])
                     ->view('emails.contact');
     }
