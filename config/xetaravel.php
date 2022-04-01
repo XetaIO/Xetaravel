@@ -17,6 +17,8 @@ return [
         'contact_email' => 'zoro.fmt@gmail.com',
         'analytics_tracker_code' => 'UA-40328289-2',
         'full_url' => 'https://xetaravel.com',
+        'packagist_url' => 'https://repo.packagist.org/p2/xetaio/xetaravel.json',
+        'packagist_cache_timeout' => 7200 // 2 hours
     ],
 
     /*
