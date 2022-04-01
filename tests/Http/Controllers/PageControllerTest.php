@@ -58,4 +58,46 @@ class PageControllerTest extends TestCase
         $response = $this->get('/banished');
         $response->assertRedirect('/');
     }
+
+    /**
+     * testTermsSuccess method
+     *
+     * @return void
+     */
+    public function testTermsSuccess()
+    {
+        $response = $this->get('/terms');
+        $response->assertSuccessful();
+    }
+
+    /**
+     * testShowContactSuccess method
+     *
+     * @return void
+     */
+    public function testShowContactSuccess()
+    {
+        $response = $this->get('/contact');
+        $response->assertSuccessful();
+    }
+
+    /**
+     * testContactSuccess method
+     *
+     * @return void
+     */
+    public function testContactSuccess()
+    {
+        $data = [
+            'name' => 'Test Setting',
+            'email' => 'my-email@xetaravel.io',
+            'subject' => 'Subject of the Mail',
+            'message' => 'Test de message de mail.',
+            'ip' => '127.0.0.1'
+        ];
+        $response = $this->post('/contact', $data);
+
+        $response->assertSessionHas('success');
+        $response->assertStatus(302);
+    }
 }
