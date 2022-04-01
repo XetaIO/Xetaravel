@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Users']) !!}
 
+@push('meta')
+  <x-meta title="Users" />
+@endpush
+
 @section('content')
 <div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}

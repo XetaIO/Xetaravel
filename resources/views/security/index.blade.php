@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Security']) !!}
 
+@push('meta')
+  <x-meta title="Security" />
+@endpush
+
 @section('content')
 <div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}
@@ -26,11 +30,11 @@
                                 <span class="online"></span>
 
                                 <span class="icon" data-toggle="tooltip" data-container="body" title="{{ $session->user_agent }}">
-                                    @if (strtolower($session->infos->device_type) === 'desktop')
+                                    @if ($session->infos['desktop'] === true)
                                         <i class="fa fa-desktop fa-2x"></i>
-                                    @elseif (strtolower($session->infos->device_type) === 'mobile phone')
+                                    @elseif ($session->infos['phone'] === true)
                                         <i class="fa fa-mobile fa-2x"></i>
-                                    @elseif (strtolower($session->infos->device_type) === 'tablet')
+                                    @elseif ($session->infos['tablet'] === true)
                                         <i class="fa fa-tablet fa-2x"></i>
                                     @else
                                         <i class="fa fa-desktop fa-2x"></i>
@@ -50,8 +54,8 @@
                                     </p>
 
                                     <p>
-                                        <strong>{{ $session->infos->browser }}</strong>
-                                        on {{ $session->infos->platform }}
+                                        <strong>{{ $session->infos['browser'] }} {{ $session->infos['browser_version'] }}</strong>
+                                        on {{ $session->infos['platform'] }} {{ $session->infos['platform_version'] }}
                                     </p>
 
                                     <p>

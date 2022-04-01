@@ -1,5 +1,9 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Search : ' . $search]) !!}
+{!! config(['app.title' => 'Search : ' . e($search)]) !!}
+
+@push('meta')
+  <x-meta title="Search : {{ e($search) }}" />
+@endpush
 
 @section('content')
 <div class="container pt-6 pb-0">

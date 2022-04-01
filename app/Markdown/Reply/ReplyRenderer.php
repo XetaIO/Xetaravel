@@ -1,19 +1,41 @@
 <?php
 namespace Xetaravel\Markdown\Reply;
 
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\HtmlElement;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
+use League\CommonMark\Util\HtmlElement;
+use League\CommonMark\Util\Xml;
+use League\CommonMark\Xml\XmlNodeRendererInterface;
 
-class ReplyRenderer implements BlockRendererInterface
+final class ReplyRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
-    public function render(AbstractBlock $block, ElementRendererInterface $htmlRenderer, $inTightList = false)
+    /**
+     * @param Reply $node
+     *
+     * {@inheritDoc}
+     *
+     * @psalm-suppress MoreSpecificImplementedParamType
+     */
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
     {
-        return new HtmlElement(
-            'a',
-            ['class' => 'discuss-conversation-user-reply', 'href' => $block->getRoute()],
-            '<i class="fa fa-reply"></i> ' . $block->getUser()
-        );
+        Reply::assertInstanceOf($node);
+
+        $attrs = $node->data->get('attributes');
+
+        return new HtmlElement('a', $attrs, '<i class="fa fa-reply"></i> ' . Xml::escape($node->getLiteral()) . '<br>');
+    }
+
+    public function getXmlTagName(Node $node): string
+    {
+        return 'a';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getXmlAttributes(Node $node): array
+    {
+        return [];
     }
 }

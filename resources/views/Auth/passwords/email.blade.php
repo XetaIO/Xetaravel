@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Reset your password']) !!}
 
+@push('meta')
+    <x-meta title="Reset your password" />
+@endpush
+
 @push('scriptsTop')
     {!! NoCaptcha::renderJs() !!}
 @endpush

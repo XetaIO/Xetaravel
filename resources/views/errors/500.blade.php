@@ -1,6 +1,10 @@
 @extends('layouts.error')
 {!! config(['app.title' => 'Whoops, something went wrong']) !!}
 
+@push('meta')
+  <x-meta title="Whoops, something went wrong" />
+@endpush
+
 @section('content')
 <div class="container mt-4">
     <div class="error">

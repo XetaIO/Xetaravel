@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Edit ' . e($user->username)]) !!}
 
+@push('meta')
+    <x-meta title="Edit : {{ e($user->username) }}" />
+@endpush
+
 @push('style')
     {!! editor_css() !!}
     <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">

@@ -1,5 +1,13 @@
 @extends('layouts.app')
-{!! config(['app.title' => $conversation->title]) !!}
+{!! config(['app.title' => e($conversation->title)]) !!}
+
+@push('meta')
+  <x-meta
+    title="{{ e($conversation->title) }}"
+    author="{{ $conversation->user->username }}"
+    description="{!! Markdown::convertToHtml($conversation->firstPost->content) !!}"
+/>
+@endpush
 
 @push('style')
     {!! editor_css() !!}

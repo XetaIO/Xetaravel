@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'You\'re banished']) !!}
 
+@push('meta')
+  <x-meta title="You're banished" />
+@endpush
+
 @section('content')
 <div class="container pt-6">
     <div class="text-xs-center">

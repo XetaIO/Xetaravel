@@ -16,5 +16,5 @@ return [
             'notification' => Xetaravel\Notifications\MentionNotification::class,
         ]
     ],
-    'regex' => '/\B((?<!(\[|\/))@[A-Za-z0-9]{4,20})(?!\])/'
+    'regex' => '/\B((?<!(\[|\/))@[A-Za-z0-9]{4,20}+\b(?!#))/'
 ];

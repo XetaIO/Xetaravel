@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Welcome !']) !!}
 
+@push('meta')
+  <x-meta title="Welcome !" />
+@endpush
+
 @push('style')
     <style>
     @media (min-width: 768px) {

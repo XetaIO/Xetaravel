@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'My account']) !!}
 
+@push('meta')
+    <x-meta title="My account" />
+@endpush
+
 @push('style')
     {!! editor_css() !!}
     <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">

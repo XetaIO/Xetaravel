@@ -1,6 +1,15 @@
 @extends('layouts.app')
 {!! config(['app.title' => $article->title]) !!}
 
+@push('meta')
+    <x-meta
+        title="{{ $article->title }}"
+        author="{{ $article->user->username }}"
+        description="{!! Markdown::convertToHtml($article->content) !!}"
+        url="{{ $article->article_url }}"
+    />
+@endpush
+
 @push('style')
     {!! editor_css() !!}
     <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">

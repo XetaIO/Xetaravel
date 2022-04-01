@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Update ' . e($permission->name)]) !!}
 
+@push('meta')
+    <x-meta title="Update : {{ e($permission->name) }}" />
+@endpush
+
 @section('content')
 <div class="col-sm-12 col-md-10 offset-md-2 p-2">
     {!! $breadcrumbs->render() !!}

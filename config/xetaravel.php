@@ -10,7 +10,9 @@ return [
     | used everywhere around the application.
     */
     'site' => [
-        'description' => 'You will find content related to web development like tutorials, my personal tests on new technologies etc',
+        'copyright' => 'Emeric Fèvre',
+        'title' => 'Welcome to Xetaravel',
+        'description' => 'This website was made to try Laravel and to do my personnal website and I have decided to release it to help people starting with Laravel.',
         'github_url' => 'https://github.com/XetaIO/Xetaravel',
         'contact_email' => 'zoro.fmt@gmail.com',
         'analytics_tracker_code' => 'UA-40328289-2',

@@ -1,6 +1,10 @@
 @extends('layouts.error')
 {!! config(['app.title' => 'Website in maintenance']) !!}
 
+@push('meta')
+  <x-meta title="Website in maintenance" />
+@endpush
+
 @section('content')
 <div class="container mt-4">
     <div class="error">

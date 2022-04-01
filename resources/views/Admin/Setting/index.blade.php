@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Manage Settings']) !!}
 
+@push('meta')
+    <x-meta title="Manage Settings" />
+@endpush
+
 @section('content')
 <div class="col-sm-12 col-md-10 offset-md-2 p-2">
     {!! $breadcrumbs->render() !!}

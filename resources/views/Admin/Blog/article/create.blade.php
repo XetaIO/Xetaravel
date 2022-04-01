@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Create an Article']) !!}
 
+@push('meta')
+    <x-meta title="Create an Article" />
+@endpush
+
 @push('style')
     {!! editor_css() !!}
     <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">

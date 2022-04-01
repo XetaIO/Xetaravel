@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'All Categories']) !!}
 
+@push('meta')
+    <x-meta title="All Categories" />
+@endpush
+
 @section('content')
 <div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}

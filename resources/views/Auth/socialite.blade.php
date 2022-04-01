@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Join us !']) !!}
 
+@push('meta')
+    <x-meta title="Join us !" />
+@endpush
+
 @section('content')
 <div class="container mt-6">
     <div class="row">

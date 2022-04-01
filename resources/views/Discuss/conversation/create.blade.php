@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Start a discussion']) !!}
 
+@push('meta')
+  <x-meta title="Start a discussion" />
+@endpush
+
 @push('style')
     {!! editor_css() !!}
     <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">

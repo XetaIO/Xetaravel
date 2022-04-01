@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Join us !']) !!}
 
+@push('meta')
+    <x-meta title="Join us !" />
+@endpush
+
 @push('scriptsTop')
     {!! NoCaptcha::renderJs() !!}
 @endpush
