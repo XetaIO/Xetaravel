@@ -21,6 +21,9 @@
                     <span data-hover="Discuss">Discuss</span>
                 </a>
               @endif
+            <a class="nav-link-menu" href="{{ route('page.contact') }}">
+                <span data-hover="Contact">Contact</span>
+            </a>
           </li>
         </ul>
 

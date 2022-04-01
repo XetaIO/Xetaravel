@@ -44,6 +44,12 @@
         </div>
         <div class="col-md-9">
             <section>
+                <div class="hr-divider">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                        My Account
+                    </h4>
+                </div>
+
                 {!! Form::model($user, ['route' => 'users.account.update', 'files'=>'true', 'method' => 'put']) !!}
                     <div class="row">
                         <div class="col-md-5 col-lg-4">

@@ -36,3 +36,38 @@ section {
         position: static;
     }
 }
+
+.hr-divider {
+    position: relative;
+    line-height: 20px;
+    font-size: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+
+    &:before {
+        position: absolute;
+        top: 49%;
+        display: block;
+        content: " ";
+        width: 100%;
+        height: 1px;
+        background-color: #B7B7B7;
+    }
+
+    .hr-divider-content {
+        position: relative;
+        z-index: 2;
+        display: inline-block;
+        padding-left: 1em;
+        padding-right: 1em;
+        vertical-align: middle;
+        background-color: #ffffff;
+    }
+
+    .hr-divider-heading {
+        margin-top: 0;
+        margin-bottom: 0;
+        color: inherit;
+    }
+}

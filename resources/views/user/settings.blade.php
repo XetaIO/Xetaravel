@@ -17,9 +17,11 @@
         </div>
         <div class="col-md-9">
             <section class="mb-3">
-                <h4 class="text-xs-center font-xeta">
-                    Change your E-mail
-                </h4>
+                <div class="hr-divider">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                        Change your E-mail
+                    </h4>
+                </div>
                 {!! Form::open(['route' => 'users.user.settings', 'method' => 'put']) !!}
                     {!! Form::hidden('type', 'email') !!}
 
@@ -50,9 +52,11 @@
 
             <section class="mb-3">
                 @if (!is_null(Auth::user()->password))
-                <h4 class="text-xs-center font-xeta">
-                    Change your Password
-                </h4>
+                <div class="hr-divider">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                        Change your Password
+                    </h4>
+                </div>
                 {!! Form::open(['route' => 'users.user.settings', 'method' => 'put']) !!}
                     {!! Form::hidden('type', 'password') !!}
                     <div class="row">
@@ -83,9 +87,11 @@
                     </div>
                 {!! Form::close() !!}
             @else
-                <h4 class="text-xs-center font-xeta">
-                    Create a Password
-                </h4>
+                <div class="hr-divider">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                        Create a Password
+                    </h4>
+                </div>
                 <div class="alert alert-primary text-xs-center" role="alert">
                     <i class="fa fa-exclamation" aria-hidden="true"></i>
                     With a registration via Github, you have the possibility to define a password to <b>connect also with your email and password</b> in addition to the connection via Github!
@@ -118,9 +124,11 @@
             </section>
 
             <section>
-                <h4 class="text-xs-center font-xeta">
-                    Delete your Account
-                </h4>
+                <div class="hr-divider">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                        Delete your Account
+                    </h4>
+                </div>
                 <div class="form-group text-xs-center">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteAccountModal">
