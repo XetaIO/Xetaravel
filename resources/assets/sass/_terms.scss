@@ -1,0 +1,27 @@
+.terms {
+    h4 {
+        &:hover {
+            i {
+                display:inline-block;
+            }
+        }
+
+        i {
+            font-size: 80%;
+            display: none;
+        }
+    }
+
+    h5 {
+        &:hover {
+            i {
+                display:inline-block;
+            }
+        }
+
+        i {
+            font-size: 80%;
+            display: none;
+        }
+    }
+}

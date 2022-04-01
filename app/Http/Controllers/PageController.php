@@ -31,6 +31,19 @@ class PageController extends Controller
     }
 
     /**
+     * Display the terms page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function terms()
+    {
+
+        $this->breadcrumbs->addCrumb('Terms', route('page.terms'));
+
+        return view('page.terms', ['breadcrumbs' => $this->breadcrumbs]);
+    }
+
+    /**
      * Display the banished page.
      *
      * @return \Illuminate\Http\Response

@@ -2,8 +2,13 @@
 	<div class="container">
 		<div class="row">
 		<div class="col-md-6">
-			&copy; {{ date('Y', time()) }} {{ config('app.name') }}.
-			<ul class="list-inline d-inline-block mb-0">
+			&copy; {{ date('Y', time()) }} {{ config('app.name') }}
+			<ul class="list-inline d-inline-block mb-0 ml-1">
+				<li class="list-inline-item">
+					<a href="{{ route('page.terms') }}">
+						Terms
+					</a>
+				</li>
 				<li class="list-inline-item">
 					<a href="{{ config('xetaravel.site.github_url') }}" target="_blank">
 						<i class="fa fa-github-alt" data-toggle="tooltip" title="Source Code available on Github"></i>
@@ -14,7 +19,6 @@
 						<small>Version : {{ config('xetaravel.version') }}</small>
 					</li>
 				@endif
-
 			</ul>
 		</div>
 

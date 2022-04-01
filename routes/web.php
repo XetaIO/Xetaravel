@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['middleware' => ['permission:access.site,allowGuest']], function () {
     Route::get('/', 'PageController@index')->name('page.index');
+
+    Route::get('/terms', 'PageController@terms')->name('page.terms');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {
