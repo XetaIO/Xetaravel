@@ -10,6 +10,11 @@
 					</a>
 				</li>
 				<li class="list-inline-item">
+					<a href="{{ route('page.contact') }}">
+						Contact
+					</a>
+				</li>
+				<li class="list-inline-item">
 					<a href="{{ config('xetaravel.site.github_url') }}" target="_blank">
 						<i class="fa fa-github-alt" data-toggle="tooltip" title="Source Code available on Github"></i>
 					</a>

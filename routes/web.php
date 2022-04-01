@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['permission:access.site,allowGuest']], function () {
     Route::get('/', 'PageController@index')->name('page.index');
 
-    Route::get('/terms', 'PageController@terms')->name('page.terms');
+    Route::get('terms', 'PageController@terms')->name('page.terms');
+
+    Route::get('contact', 'PageController@showContact')->name('page.contact');
+    Route::post('contact', 'PageController@contact');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {

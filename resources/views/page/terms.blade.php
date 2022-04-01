@@ -1,8 +1,8 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Welcome !']) !!}
+{!! config(['app.title' => 'Terms of Service']) !!}
 
 @push('meta')
-  <x-meta title="Welcome !" />
+  <x-meta title="Terms of Service" />
 @endpush
 
 @section('content')
@@ -116,7 +116,7 @@
                     One person or legal entity may not maintain more than one Account.
                 </li>
                 <li>
-                    When deleting your Account, all your Content will not be deleted directly. If you want all your Content to be deleted, please ask <a href="/contact">here</a>.
+                    When deleting your Account, all your Content will not be deleted directly. If you want all your Content to be deleted, please ask <a href="{{ route('page.contact') }}">here</a>.
                 </li>
             </ol>
 

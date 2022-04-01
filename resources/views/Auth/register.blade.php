@@ -48,7 +48,7 @@
                             @endif
                         </div>
 
-                    {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
+                    {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the " . link_to(route('page.terms'), 'Terms') . ".") !!}
 
                     <div class="form-group text-xs-center">
                         <div class="col-md-12 mb-1">
