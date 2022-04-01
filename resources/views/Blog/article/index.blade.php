@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Blog']) !!}
 
+@push('meta')
+    <x-meta title="Blog" />
+@endpush
+
 @section('content')
 <div class="container pb-1 pt-4">
     <div class="blog-header mt-2">

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title'  => 'Create your new Password']) !!}
 
+@push('meta')
+    <x-meta title="Create your new Password" />
+@endpush
+
 @section('content')
 <div class="container mt-6">
     <div class="row">

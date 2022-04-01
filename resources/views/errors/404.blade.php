@@ -1,6 +1,10 @@
 @extends('layouts.error')
 {!! config(['app.title' => 'Not found']) !!}
 
+@push('meta')
+  <x-meta title="Not found" />
+@endpush
+
 @section('content')
 <div class="container mt-4">
     <div class="error">

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Login into your account']) !!}
 
+@push('meta')
+    <x-meta title="Login into your account" />
+@endpush
+
 @section('content')
 <div class="container mt-6">
     <div class="row">

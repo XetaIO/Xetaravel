@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => 'Vérifiez votre E-mail !']) !!}
 
+@push('meta')
+    <x-meta title="Vérifiez votre E-mail !" />
+@endpush
+
 @section('content')
 <div class="container mt-6">
     <div class="row">

@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 {!! config(['app.title' => 'Dashboard']) !!}
 
+@push('meta')
+    <x-meta title="Dashboard" />
+@endpush
+
 @section('content')
 <main class="col-sm-12 col-md-10 offset-md-2 p-2">
     <div class="row">

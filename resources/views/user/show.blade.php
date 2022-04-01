@@ -1,5 +1,9 @@
 @extends('layouts.app')
-{!! config(['app.title' => $user->username . ' profile']) !!}
+{!! config(['app.title' => e($user->username) . ' profile']) !!}
+
+@push('meta')
+  <x-meta title="{{ e($user->username) }}  profile" />
+@endpush
 
 @section('content')
 <div class="profile-container">

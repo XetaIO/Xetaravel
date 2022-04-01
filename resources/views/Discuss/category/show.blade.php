@@ -1,6 +1,10 @@
 @extends('layouts.app')
 {!! config(['app.title' => e($category->title)]) !!}
 
+@push('meta')
+  <x-meta title="{{ e($category->title) }}" />
+@endpush
+
 @section('content')
 <div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}

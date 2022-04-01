@@ -1,5 +1,9 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Category : ' . $category->title]) !!}
+{!! config(['app.title' => 'Category : ' . e($category->title)]) !!}
+
+@push('meta')
+    <x-meta title="Category : {{ e($category->title) }}" />
+@endpush
 
 @section('content')
 <div class="container pb-1 pt-4">

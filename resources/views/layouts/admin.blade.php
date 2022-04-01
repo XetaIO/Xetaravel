@@ -11,6 +11,9 @@
         <!-- Title -->
         <title>{{ config('app.title') . ' - ' . config('app.name') }}</title>
 
+        <!-- Meta -->
+        @stack('meta')
+
         <!-- Styles -->
         <link href="{{ mix('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ mix('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
