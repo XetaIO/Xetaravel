@@ -61,6 +61,18 @@ class DiscussConversation extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_locked' => 'boolean',
+        'is_pinned' => 'boolean',
+        'is_solved' => 'boolean',
+        'is_edited' => 'boolean',
+    ];
+
+    /**
      * The "booting" method of the model.
      *
      * @return void
