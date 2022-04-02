@@ -39,6 +39,27 @@ class PostControllerTest extends TestCase
     }
 
     /**
+     * testCreateWithFLoodFailed method
+     *
+     * @return void
+     */
+    public function testCreateWithFLoodFailed()
+    {
+        $user = User::find(3);
+        $this->be($user);
+
+        $data = [
+            'conversation_id' => 1,
+            'content' => '**This** is an awesome text.'
+        ];
+
+        $this->post('/discuss/post/create', $data);
+        $response = $this->post('/discuss/post/create', $data);
+        $response->assertSessionHas('danger');
+        $response->assertStatus(302);
+    }
+
+    /**
      * testShowSuccess method
      *
      * @return void
