@@ -170,7 +170,7 @@
         <div class="col-lg-9">
             <section class="section">
                 <div class="hr-divider">
-                    <h4 class="font-xeta text-xs-center">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
                         @if (Auth::user() && $user->id == Auth::id())
                             Your Biography
                         @else
@@ -192,7 +192,7 @@
                 </div>
 
                 <div class="hr-divider">
-                    <h4 class="font-xeta text-xs-center">
+                    <h4 class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
                         @if (Auth::user() && $user->id == Auth::id())
                             Your Badges
                         @else
@@ -220,7 +220,7 @@
 
                 @if ($user->articles->isNotEmpty())
                     <div class="hr-divider">
-                        <h4 class="font-xeta text-xs-center">
+                        <h4 class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
                             @if (Auth::user() && $user->id == Auth::id())
                                 Your latest Articles in the Blog
                             @else

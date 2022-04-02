@@ -104,7 +104,7 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <i class="fa fa-user" aria-hidden="true" data-toggle="tooltip" title="User"></i>
-                                    <a href="{{ $article->user->proffile_url }}">
+                                    <a href="{{ $article->user->profile_url }}">
                                         {{ $article->user->username }}
                                     </a>
                                 </li>
