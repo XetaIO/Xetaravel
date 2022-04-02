@@ -3,6 +3,7 @@ namespace Tests\Http\Controllers\Discuss;
 
 use Tests\TestCase;
 use Xetaravel\Models\DiscussPost;
+use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\User;
 
 class PostControllerTest extends TestCase
@@ -38,6 +39,27 @@ class PostControllerTest extends TestCase
     }
 
     /**
+     * testCreateWithFLoodFailed method
+     *
+     * @return void
+     */
+    public function testCreateWithFLoodFailed()
+    {
+        $user = User::find(3);
+        $this->be($user);
+
+        $data = [
+            'conversation_id' => 1,
+            'content' => '**This** is an awesome text.'
+        ];
+
+        $this->post('/discuss/post/create', $data);
+        $response = $this->post('/discuss/post/create', $data);
+        $response->assertSessionHas('danger');
+        $response->assertStatus(302);
+    }
+
+    /**
      * testShowSuccess method
      *
      * @return void
@@ -61,6 +83,25 @@ class PostControllerTest extends TestCase
         $response->assertSessionHas('success');
 
         $this->assertNull(DiscussPost::find(2));
+    }
+
+    /**
+     * testDeleteSolvedPostSuccess method
+     *
+     * @return void
+     */
+    public function testDeleteSolvedPostSuccess()
+    {
+        $this->get('/discuss/post/solved/2'); // Mark post 2 as Solved
+
+        $response = $this->delete('/discuss/post/delete/2'); // Deleting solved post should reset 'solved_post_id'.
+        $response->assertStatus(302);
+        $response->assertSessionHas('success');
+
+        $conversation = DiscussConversation::find(1);
+
+        $this->assertNull($conversation->solved_post_id);
+        $this->assertFalse($conversation->is_solved);
     }
 
     /**

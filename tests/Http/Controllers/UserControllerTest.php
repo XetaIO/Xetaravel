@@ -192,6 +192,13 @@ class UserControllerTest extends TestCase
         $response->assertSessionHas('success');
         $response->assertStatus(302);
         $response->assertRedirect('/');
+
+        $response = $this->get('/users/profile/@admin');
+        $response->assertSessionHas('danger'); // That mean the user does not exist or has been deleted.
+        $response->assertStatus(302);
+
+        $response = $this->get('/discuss/conversation/this-is-an-announcement.1');
+        $response->assertSee('Deleted'); // Deleted Users must be displayed with Deleted username.
     }
 
     /**

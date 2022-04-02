@@ -46,8 +46,6 @@ class PostController extends Controller
         ]);
         $content = $parser->parse($post->content);
 
-        //dd($content);
-
         $post->content = $content;
         $post->save();
 

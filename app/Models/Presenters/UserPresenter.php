@@ -1,6 +1,7 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Xetaravel\Models\Session;
 use Xetaravel\Utility\UserUtility;
 
@@ -19,6 +20,18 @@ trait UserPresenter
      * @var string
      */
     protected $defaultAvatarPrimaryColor = '#B4AEA4';
+
+    /**
+     * Get the user's username.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function username(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->trashed() ? 'Deleted' : $value
+        );
+    }
 
     /**
      * Get the account first name.
@@ -58,6 +71,10 @@ trait UserPresenter
      */
     public function getFullNameAttribute(): string
     {
+        if ($this->trashed()) {
+            return $this->username;
+        }
+
         $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
 
         if (empty(trim($fullName))) {
@@ -166,6 +183,10 @@ trait UserPresenter
     {
         if (!isset($this->slug)) {
             return '';
+        }
+
+        if ($this->trashed()) {
+            return route('users.user.show', ['slug' => strtolower($this->username)]);
         }
 
         return route('users.user.show', ['slug' => $this->slug]);

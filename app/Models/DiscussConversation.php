@@ -61,6 +61,18 @@ class DiscussConversation extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_locked' => 'boolean',
+        'is_pinned' => 'boolean',
+        'is_solved' => 'boolean',
+        'is_edited' => 'boolean',
+    ];
+
+    /**
      * The "booting" method of the model.
      *
      * @return void
@@ -156,7 +168,7 @@ class DiscussConversation extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     /**
@@ -176,7 +188,7 @@ class DiscussConversation extends Model
      */
     public function users()
     {
-        return $this->hasMany(DiscussUser::class, 'conversation_id', 'id');
+        return $this->hasMany(DiscussUser::class, 'conversation_id', 'id')->withTrashed();
     }
 
     /**
@@ -216,7 +228,7 @@ class DiscussConversation extends Model
      */
     public function editedUser()
     {
-        return $this->hasOne(User::class, 'id', 'edited_user_id');
+        return $this->hasOne(User::class, 'id', 'edited_user_id')->withTrashed();
     }
 
     /**
