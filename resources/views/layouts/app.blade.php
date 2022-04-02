@@ -29,7 +29,7 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', {{ config('xetaravel.site.analytics_tracker_code') }});
+            gtag('config', '{{ config('xetaravel.site.analytics_tracker_code') }}');
         </script>
 
         <!-- Embed Styles -->
