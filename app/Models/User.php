@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
@@ -38,7 +39,8 @@ class User extends Model implements
         HasRoleAndPermission,
         InteractsWithMedia,
         UserPresenter,
-        MustVerifyEmail;
+        MustVerifyEmail,
+        SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -116,20 +118,6 @@ class User extends Model implements
         // Generated the slug before updating.
         static::updating(function ($model) {
             $model->generateSlug();
-        });
-
-        static::deleting(function ($model) {
-            foreach ($model->discussPosts as $post) {
-                $post->delete();
-            }
-
-            foreach ($model->discussUsers as $user) {
-                $user->delete();
-            }
-
-            foreach ($model->discussConversations as $conversation) {
-                $conversation->delete();
-            }
         });
     }
 
