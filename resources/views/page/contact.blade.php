@@ -5,6 +5,10 @@
   <x-meta title="Contact" />
 @endpush
 
+@push('scriptsTop')
+    {!! NoCaptcha::renderJs() !!}
+@endpush
+
 @section('content')
 <div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}
@@ -70,6 +74,15 @@
                                 'required' => 'required'
                             ]
                         ) !!}
+
+                         <div class="form-group {{ $errors->has('g-recaptcha-response') ? 'has-danger' : '' }}">
+                            {!! NoCaptcha::display() !!}
+                            @if ($errors->has('g-recaptcha-response'))
+                                <div class="form-control-feedback">
+                                    {{ $errors->first('g-recaptcha-response') }}
+                                </div>
+                            @endif
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-12">

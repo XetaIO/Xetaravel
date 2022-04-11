@@ -3,8 +3,10 @@ namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request ;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Comment;
@@ -68,6 +70,19 @@ class PageController extends Controller
      */
     public function contact(Request $request): RedirectResponse
     {
+        $rules = [
+            'name' => 'required|min:4|max:30',
+            'email' => 'required|email|max:50',
+            'message' => 'required|min:10',
+        ];
+
+        // Bipass the captcha for the unit testing.
+        if (App::environment() !== 'testing') {
+            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|captcha']);
+        }
+
+        Validator::make($request->all(), $rules)->validate();
+
         $details = [
             'name' => $request->get('name'),
             'email' => $request->get('email'),
