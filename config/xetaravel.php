@@ -14,7 +14,7 @@ return [
         'title' => 'Welcome to Xetaravel',
         'description' => 'This website was made to try Laravel and to do my personnal website and I have decided to release it to help people starting with Laravel.',
         'github_url' => 'https://github.com/XetaIO/Xetaravel',
-        'contact_email' => 'zoro.fmt@gmail.com',
+        'contact_email' => 'emeric@xetaravel.com',
         'analytics_tracker_code' => 'UA-224686157-1',
         'full_url' => 'https://xetaravel.com',
         'packagist_url' => 'https://repo.packagist.org/p2/xetaio/xetaravel.json',
