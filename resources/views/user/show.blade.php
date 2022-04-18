@@ -28,6 +28,12 @@
                             <h2 class="username font-xeta">
                                 {{ $user->username }}
                             </h2>
+                            @if ($user->full_name !== $user->username)
+                                <h4 class="full-name">
+                                    {{ $user->full_name }}
+                                </h4>
+                            @endif
+
                         </li>
                     </ul>
                 </div>
