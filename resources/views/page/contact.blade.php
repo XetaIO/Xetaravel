@@ -107,7 +107,7 @@
                         </li>
                         <li>
                             <i class="fa fa-envelope-o"></i>
-                            <a href="mailto:zoro.fmt@gmail.com">zoro.fmt@gmail.com</a>
+                            <a href="mailto:{{ config('xetaravel.site.contact_email') }}">{{ config('xetaravel.site.contact_email') }}</a>
                         </li>
                     </ul>
 
