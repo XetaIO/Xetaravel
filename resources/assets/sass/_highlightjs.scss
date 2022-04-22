@@ -82,8 +82,14 @@ pre code {
 }
 
 .hljs-type,
-.hljs-class .hljs-title {
+.hljs-class .hljs-title,
+.token.class-name,
+.token.scope {
   color: #FF5D38;
+}
+
+.token.punctuation {
+  color: #686f79;
 }
 
 .hljs-tag,
@@ -109,7 +115,7 @@ pre code {
 }
 
 .hljs-meta {
-  color: #9797a7;
+  color: #db4957;
   font-weight: bold;
 }
 

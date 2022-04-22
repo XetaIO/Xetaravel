@@ -89,7 +89,7 @@
                     <div class="card-body" style="flex: 1;">
                         <h4 class="card-title text-truncate">
                             <a href="{{ $article->user->profile_url }}">
-                                {{ $article->user->username }}
+                                {{ $article->user->full_name }}
                             </a>
                         </h4>
 
