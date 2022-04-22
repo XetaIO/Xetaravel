@@ -62,7 +62,7 @@
                     ]
                 ) !!}
 
-                <div class="form-group mb-2 {{ $errors->has('banner') ? 'has-danger' : '' }}">
+                <div class="form-group mb-4 {{ $errors->has('banner') ? 'has-danger' : '' }}">
                     <label for="banner" class="form-control-label">Banner</label>
 
                     <div class="fileinput fileinput-exists" data-provides="fileinput">
@@ -78,7 +78,7 @@
                                 <span class="fileinput-exists">Change</span>
                                     {!! Form::file('banner') !!}
                             </span>
-                            <span class="text-muted">Recommended size : 825x250px<span>
+                            <span class="text-muted">Recommended size : 825x250px</span>
                         </div>
                     </div>
                     @if ($errors->has('banner'))

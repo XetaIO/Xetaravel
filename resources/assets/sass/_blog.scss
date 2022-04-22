@@ -41,6 +41,9 @@
             object-fit: fill;
             max-width: 100%;
             opacity: 0.9;
+            border: 1px solid $brand-primary;
+            padding: 5px;
+            border-radius: 4px;
         }
     }
 
