@@ -24,7 +24,7 @@ class CommentController extends Controller
      */
     public function create(Request $request): RedirectResponse
     {
-        $article = Article::findOrFail($request->article_id);
+        Article::findOrFail($request->article_id);
 
         if (Comment::isFlooding('xetaravel.flood.blog.comment')) {
             return back()
