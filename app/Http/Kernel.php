@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         // Applications
         'permission' => \Xetaravel\Http\Middleware\VerifyPermission::class,
         'discuss.maintenance' => \Xetaravel\Http\Middleware\DiscussMaintenance::class,
+        'display' => \Xetaravel\Http\Middleware\EnableDisplayScopeMiddleware::class,
 
         // Extension
         'role' => \Ultraware\Roles\Middleware\VerifyRole::class,

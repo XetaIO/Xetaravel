@@ -34,7 +34,7 @@
             Create an article
         </h5>
         <div class="card-block">
-            {!! Form::open(['route' => 'admin.blog.article.create', 'method' => 'post']) !!}
+            {!! Form::open(['route' => 'admin.blog.article.create', 'files'=>'true', 'method' => 'post']) !!}
 
                 {!! Form::bsText(
                     'title',
@@ -66,6 +66,30 @@
                         'labelClass' => 'custom-control custom-checkbox form-control-inverse d-block'
                     ]
                 ) !!}
+
+                <div class="form-group mb-2 {{ $errors->has('banner') ? 'has-danger' : '' }}">
+                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                        <div class="fileinput-new">
+                            <img src="{{ asset('images/articles/default_banner.jpg') }}" alt="Default Banner">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists">
+                            <img src="{{ asset('images/articles/default_banner.jpg') }}" alt="Article Banner">
+                        </div>
+                        <div class="mt-1">
+                            <span class="btn btn-outline-primary btn-file">
+                                <i class="fa fa-refresh"></i>
+                                <span class="fileinput-exists">Change</span>
+                                    {!! Form::file('banner') !!}
+                            </span>
+                            <span class="text-muted">Recommended size : 825x250px<span>
+                        </div>
+                    </div>
+                    @if ($errors->has('banner'))
+                        <div class="form-control-feedback">
+                            {{ $errors->first('banner') }}
+                        </div>
+                    @endif
+                </div>
 
                 {!! Form::bsTextarea(
                     'content',

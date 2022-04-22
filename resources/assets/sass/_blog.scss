@@ -28,15 +28,24 @@
  * Blog posts
  */
 
-.blog-post {
-  margin-bottom: 4rem;
-}
-.blog-post-meta {
-  margin-bottom: 1.25rem;
-  color: #999;
-}
-.blog-footer {
-  margin-top: 3rem;
+.blog {
+    &-post {
+        margin-bottom: 4rem;
+
+        &-meta {
+            margin-bottom: 1.25rem;
+            color: #999;
+          }
+
+        &-banner {
+            object-fit: fill;
+            max-width: 100%;
+        }
+    }
+
+    &-footer {
+        margin-top: 3rem;
+      }
 }
 
 /**

@@ -34,7 +34,7 @@
             Update : {{ Str::limit($article->title, 60) }}
         </h5>
         <div class="card-block">
-            {!! Form::model($article, ['route' => ['admin.blog.article.update', $article->id], 'method' => 'put']) !!}
+            {!! Form::model($article, ['route' => ['admin.blog.article.update', $article->id], 'files'=>'true', 'method' => 'put']) !!}
 
                 {!! Form::bsText(
                     'title',
@@ -61,6 +61,30 @@
                         'labelClass' => 'custom-control custom-checkbox form-control-inverse d-block'
                     ]
                 ) !!}
+
+                <div class="form-group mb-2 {{ $errors->has('banner') ? 'has-danger' : '' }}">
+                    <div class="fileinput fileinput-exists" data-provides="fileinput">
+                        <div class="fileinput-new">
+                            <img src="{{ $article->article_banner }}" alt="Default Banner">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists">
+                            <img src="{{ $article->article_banner }}" alt="Article Banner">
+                        </div>
+                        <div class="mt-1">
+                            <span class="btn btn-outline-primary btn-file">
+                                <i class="fa fa-refresh"></i>
+                                <span class="fileinput-exists">Change</span>
+                                    {!! Form::file('banner') !!}
+                            </span>
+                            <span class="text-muted">Recommended size : 825x250px<span>
+                        </div>
+                    </div>
+                    @if ($errors->has('banner'))
+                        <div class="form-control-feedback">
+                            {{ $errors->first('banner') }}
+                        </div>
+                    @endif
+                </div>
 
                 {!! Form::bsTextarea(
                     'content',
