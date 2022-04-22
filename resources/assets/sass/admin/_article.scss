@@ -1,17 +1,19 @@
 .card {
     .fileinput {
-    &-new,
-    &-exists {
-        max-width: 100%;
-        max-height: 250px;
+        display: block;
 
-        & img {
+        &-new,
+        &-exists {
             max-width: 100%;
             max-height: 250px;
-            border: 1px solid $brand-primary;
-            padding: 4px;
-            border-radius: 0.18rem;
+
+            & img {
+                max-width: 100%;
+                max-height: 250px;
+                border: 1px solid $brand-primary;
+                padding: 4px;
+                border-radius: 0.18rem;
+            }
         }
     }
-}
 }

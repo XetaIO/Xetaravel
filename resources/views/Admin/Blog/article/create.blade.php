@@ -68,6 +68,8 @@
                 ) !!}
 
                 <div class="form-group mb-2 {{ $errors->has('banner') ? 'has-danger' : '' }}">
+                    <label for="banner" class="form-control-label">Banner</label>
+
                     <div class="fileinput fileinput-exists" data-provides="fileinput">
                         <div class="fileinput-new">
                             <img src="{{ asset('images/articles/default_banner.jpg') }}" alt="Default Banner">
