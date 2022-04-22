@@ -101,6 +101,13 @@ fieldset[disabled] a.btn {
   @include button-outline-variant($btn-primary-inverse, $btn-primary-bg);
 }
 
+// Fix for the header.
+@media (max-width: 768px) {
+  .btn-outline-primary-inverse {
+    @include button-outline-variant($btn-primary-bg);
+  }
+}
+
 //
 // Link buttons
 //

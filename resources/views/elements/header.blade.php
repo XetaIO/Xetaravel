@@ -6,7 +6,7 @@
           <img src="{{ asset('images/logo.svg') }}" width="25" height="25" class="d-inline-block align-middle" alt="Logo">
           Xetaravel
       </a>
-      <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+      <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
         <ul class="nav navbar-nav">
           <li class="nav-item">
             <a class="nav-link-menu" href="{{ route('page.index') }}">
@@ -28,7 +28,7 @@
         </ul>
 
         @if (Auth::guest())
-            <div class="float-sm-right">
+            <div class="float-xs-right">
                 <a class="btn btn-header-register-login btn-outline-primary" href="{{ route('users.auth.register') }}">
                     <i class="fa fa-user-plus" aria-hidden="true"></i> Register
                 </a>
@@ -37,14 +37,16 @@
                 </a>
             </div>
         @else
-            <div class="navbar-text btn-group float-sm-right font-weight-bold">
-                <a href="#" id="sidebar-trigger" class="nav-link">
-                    {{ Auth::user()->username }}
-                </a>
+            <div class=" float-xs-left  float-lg-right" style="display: flex;">
+              <span class="navbar-text navbar-hello-text font-weight-bold">
+                Hello,&nbsp;
+              </span>
+              <div class="navbar-text btn-group font-weight-bold">
+                  <a href="#" id="sidebar-trigger" class="nav-link">
+                      {{ Auth::user()->username }}
+                  </a>
+              </div>
             </div>
-            <span class="navbar-text navbar-hello-text float-xs-left float-sm-right font-weight-bold">
-              Hello,&nbsp;
-            </span>
 
             <!-- Notifications -->
             @include('partials._notifications')
