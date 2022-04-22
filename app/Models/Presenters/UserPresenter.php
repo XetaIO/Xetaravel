@@ -231,7 +231,7 @@ trait UserPresenter
     }
 
     /**
-     * Parse a mdedia and return it if isset or return the default avatar.
+     * Parse a media and return it if isset or return the default avatar.
      *
      * @param string $type The type of the media to get.
      *

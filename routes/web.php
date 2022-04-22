@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 | Regular Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['middleware' => ['permission:access.site,allowGuest']], function () {
+Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']], function () {
     Route::get('/', 'PageController@index')->name('page.index');
 
     Route::get('terms', 'PageController@terms')->name('page.terms');
@@ -114,7 +114,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
 Route::group([
     'namespace' => 'Blog',
     'prefix' => 'blog',
-    'middleware' => ['permission:access.site,allowGuest']
+    'middleware' => ['permission:access.site,allowGuest', 'display']
 ], function () {
 
     // Article Routes

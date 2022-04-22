@@ -37,7 +37,7 @@ class VerifyPermission
         if (!$this->auth->check() && in_array('allowGuest', $permission)) {
             return $next($request);
         }
-        
+
         if ($this->auth->check() && $this->auth->user()->hasPermission($permission[0])) {
             return $next($request);
         }

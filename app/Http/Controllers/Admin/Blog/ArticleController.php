@@ -73,6 +73,22 @@ class ArticleController extends Controller
         $article->content = $content;
         $article->save();
 
+        // Default banner for the article.
+        $banner = resource_path('assets/images/articles/default_banner.jpg');
+
+        if (!is_null($request->file('banner'))) {
+            $banner = $request->file('banner');
+        }
+
+        $article->clearMediaCollection('article');
+        $article->addMedia($banner)
+            ->preservingOriginal()
+            ->setName(substr(md5($article->slug), 0, 10))
+            ->setFileName(
+                substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg'  : $banner->extension())
+            )
+            ->toMediaCollection('article');
+
         return redirect()
             ->route('admin.blog.article.index')
             ->with('success', 'Your article has been created successfully !');
@@ -132,6 +148,26 @@ class ArticleController extends Controller
 
         $article->content = $content;
         $article->save();
+
+        if (!is_null($request->file('banner') || $article->article_banner == '/images/articles/default_banner.jpg')) {
+            // Default banner for the article.
+            $banner = resource_path('assets/images/articles/default_banner.jpg');
+
+            if (!is_null($request->file('banner'))) {
+                $banner = $request->file('banner');
+            }
+
+            $article->clearMediaCollection('article');
+            $article->addMedia($banner)
+                ->preservingOriginal()
+                ->setName(substr(md5($article->slug), 0, 10))
+                ->setFileName(
+                    substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg'  : $banner->extension())
+                )
+                ->toMediaCollection('article');
+        }
+
+
 
         return redirect()
             ->route('admin.blog.article.index')

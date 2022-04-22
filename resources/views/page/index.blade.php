@@ -85,7 +85,7 @@
 
         @forelse ($articles as $article)
             <div class="col-md-4 mb-1">
-                <div class="card card-outline-primary text-xs-center" style="height: 100%; margin-bottom: 60px;">
+                <div class="card card-outline-primary text-xs-center">
 
                     <div class="card-block">
                         <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{ $article->title }}">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
 
-                    <div class="card-footer" style="position: absolute; bottom: 0; width: 100%;">
+                    <div class="card-footer">
                         <a href="{{ $article->article_url }}" class="card-link btn btn-outline-primary">
                             <i aria-hidden="true" class="fa fa-newspaper-o"></i> Read More
                         </a>

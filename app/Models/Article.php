@@ -3,21 +3,22 @@ namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
 use Eloquence\Behaviours\Sluggable;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Category;
 use Xetaravel\Models\Presenters\ArticlePresenter;
-use Xetaravel\Models\Scopes\DisplayScope;
 use Xetaravel\Models\User;
 
-class Article extends Model
+class Article extends Model implements HasMedia
 {
     use Countable,
         Sluggable,
         ArticlePresenter,
-        HasMentionsTrait;
+        HasMentionsTrait,
+        InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +39,10 @@ class Article extends Model
      * @var array
      */
     protected $appends = [
-        'article_url'
+        'article_url',
+
+        // Media Model
+        'article_banner'
     ];
 
     /**
@@ -49,15 +53,6 @@ class Article extends Model
     protected static function boot()
     {
         parent::boot();
-
-        // The Route::getPrefix() is undefined in the testing environment for mysterious reasons.
-        if (App::environment() !== 'testing') {
-            // Don't apply the scope to the admin part.
-            $result = strpos(Route::getFacadeRoot()->current()->getPrefix(), 'admin');
-            if ($result === false) {
-                static::addGlobalScope(new DisplayScope);
-            }
-        }
 
         // Generated the slug before updating.
         static::updating(function ($model) {
@@ -91,6 +86,22 @@ class Article extends Model
             User::class,
             Category::class
         ];
+    }
+
+    /**
+     * Register the related to the Model.
+     *
+     * @return void
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('article.banner')
+                ->width(825)
+                ->height(250)
+                ->keepOriginalImageFormat();
+
+        $this->addMediaConversion('original')
+                ->keepOriginalImageFormat();
     }
 
     /**

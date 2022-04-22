@@ -26,6 +26,8 @@
             </ul>
         </div>
 
+        <img class="blog-post-banner" src="{{ $article->article_banner }}" alt="Article image">
+
         <div>
             {!! Markdown::convertToHtml(Str::limit($article->content, 650)) !!}
         </div>
