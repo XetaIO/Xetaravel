@@ -44,8 +44,9 @@ class CommentControllerTest extends TestCase
         $article->save();
 
         $response = $this->post('/blog/comment/create', ['article_id' => 1]);
-        $response->assertSessionHas('danger');
-        $response->assertStatus(302);
+        // The article must not be found since is_display is false and the global scope apply.
+        $response->assertSeeText('Not found');
+        $response->assertStatus(404);
     }
 
     /**

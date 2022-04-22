@@ -3,7 +3,6 @@
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Xetaravel\Models\Article;
 use Xetaravel\Models\Scopes\DisplayScope;
