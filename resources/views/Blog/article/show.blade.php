@@ -79,21 +79,21 @@
             </div>
 
             <hr />
-            <div class="card card-outline-primary">
-                <div class="card-block" style="display: flex;">
-                    <div class="card-left" style="padding-right: 15px;">
+            <div class="author">
+                <div class="author-block">
+                    <div class="author-left">
                         <a href="{{ $article->user->profile_url }}">
-                            <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
+                            <img class="author-left-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
                         </a>
                     </div>
-                    <div class="card-body" style="flex: 1;">
-                        <h4 class="card-title text-truncate">
+                    <div class="author-body">
+                        <h2 class="author-body-title text-truncate">
                             <a href="{{ $article->user->profile_url }}">
                                 {{ $article->user->full_name }}
                             </a>
-                        </h4>
+                        </h2>
 
-                        <p class="card-subtitle text-muted">
+                        <p class="author-body-subtitle text-muted">
                             {!! Markdown::convertToHtml($article->user->signature) !!}
                         </p>
                     </div>
@@ -101,9 +101,9 @@
             </div>
 
             @if ($comments->isNotEmpty())
-                <h4 class="mt-3 font-xeta">
+                <h3 class="mt-3 font-xeta">
                     {{ $article->comment_count }} Comments
-                </h4>
+                </h3>
 
                 <comments :comments="{{ $comments->getCollection()->toJson() }}"></comments>
 

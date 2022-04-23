@@ -5,13 +5,39 @@
 
 				<div class="row">
 					<div class="col-md-6">
-						<h5 class="mb-1">Utils</h5>
-						<ul class="pl-0">
+						<h3 class="mb-1">Utils</h3>
+						<ul class="list-unstyled">
 							<li class="mb-1">
-								{{ link_to(route('users.auth.register'), '<i class="fa fa-user-plus"></i> Register', ['class' => 'btn btn-outline-info'], null, false) }}
+								{{ link_to(route('users.auth.register'), '<i class="fa fa-user-plus"></i> Register', ['class' => 'btn btn-outline-primary-inverse'], null, false) }}
 							</li>
 							<li class="mb-1">
 								{{ link_to(route('users.auth.login'), '<i class="fa fa-sign-in"></i> Login', ['class' => 'btn btn-outline-primary'], null, false) }}
+							</li>
+							<li class="mb-1">
+								<a href="{{ route('blog.article.index') }}">
+									Blog
+								</a>
+							</li>
+							<li class="mb-1">
+								<a href="{{ route('discuss.index') }}">
+									Discuss
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-md-6">
+						<h3 class="mb-1">Extra</h3>
+						<ul class="list-unstyled">
+							<li class="mb-1">
+								<a href="{{ route('page.terms') }}">
+									Terms
+								</a>
+							</li>
+							<li class="mb-1">
+								<a href="{{ route('page.contact') }}">
+									Contact
+								</a>
 							</li>
 							<li class="mb-1">
 								<a href="{{ config('xetaravel.site.github_url') }}" target="_blank">
@@ -25,37 +51,11 @@
 							@endif
 						</ul>
 					</div>
-
-					<div class="col-md-6">
-						<h5 class="mb-1">Extra</h5>
-						<ul class="pl-0">
-							<li class="mb-1">
-								<a href="{{ route('blog.article.index') }}">
-									Blog
-								</a>
-							</li>
-							<li class="mb-1">
-								<a href="{{ route('discuss.index') }}">
-									Discuss
-								</a>
-							</li>
-							<li class="mb-1">
-								<a href="{{ route('page.terms') }}">
-									Terms
-								</a>
-							</li>
-							<li class="mb-1">
-								<a href="{{ route('page.contact') }}">
-									Contact
-								</a>
-							</li>
-						</ul>
-					</div>
 				</div>
 			</div>
 
 			<div class="col-md-4">
-				<h5 class="mb-1">Subscriber to get the latest news !</h5>
+				<h3 class="mb-1">Subscribe to get the latest news !</h3>
 
 				 <div class="input-group mb-1">
 						<form method="POST" action="{{ route('newsletter.subscribe') }}" accept-charset="UTF-8" style="display: contents;">
@@ -73,11 +73,15 @@
 
 		<div class="row pb-1">
 			<div class="col-md-12 text-md-center">
-				&copy; {{ date('Y', time()) }} {{ config('app.name') }}. All rights reserved.
-				<br/>
-				<i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank">@Emeric</a>
-				<br/>
-				Hosted with <a href="https://forge.laravel.com" target="_blank">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank">DigitalOcean</a>
+				<div>
+					&copy; {{ date('Y', time()) }} {{ config('app.name') }}. All rights reserved.
+				</div>
+				<div>
+					<i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank">@Emeric</a>
+				</div>
+				<div>
+					Hosted with <a href="https://forge.laravel.com" target="_blank">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank">DigitalOcean</a>
+				</div>
 			</div>
 		</div>
 	</div>

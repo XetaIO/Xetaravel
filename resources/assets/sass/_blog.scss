@@ -32,6 +32,10 @@
     &-post {
         margin-bottom: 4rem;
 
+        &-title {
+          font-size: 40px;
+        }
+
         &-meta {
             margin-bottom: 1.25rem;
             color: #999;
@@ -50,6 +54,41 @@
     &-footer {
         margin-top: 3rem;
       }
+}
+
+/**
+  * Author
+  */
+.author {
+    border-radius: 5px;
+    border: 2px solid $brand-primary;
+
+    &-block {
+        display: flex;
+        padding: 20px;
+    }
+
+    &-left {
+        padding-right: 15px;
+
+        &-media {
+            border: 3px solid rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    &-body {
+        flex: 1 1 0%;
+
+        &-title {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        &-subtitle {
+            margin-top: -6px;
+            margin-bottom: 0;
+          }
+    }
 }
 
 /**
@@ -72,5 +111,14 @@
     & > .comment-content {
         flex-grow: 1;
         -webkit-box-flex: 1;
+    }
+}
+
+/**
+  * Sidebar
+  */
+.sidebar-module {
+    &-title {
+        font-size: 25px;
     }
 }

@@ -1,6 +1,6 @@
 @forelse ($articles as $article)
     <div class="blog-post">
-        <h1 class="blog-title">
+        <h1 class="blog-post-title">
             <a href="{{ $article->article_url }}">
                 {{ Str::limit($article->title, 150) }}
             </a>

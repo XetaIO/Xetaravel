@@ -48,6 +48,11 @@
                     <i class="fas fa-user-lock"></i>
                     <small class="sidebar-text">Security</small>
                 </a>
+                <!-- Responsive link -->
+                <a href="{{ route('users.security.index') }}" class="hidden-sm-up">
+                    <i class="fas fa-user-lock"></i>
+                    <small class="sidebar-text">Security</small>
+                </a>
             </li>
 
             <li>

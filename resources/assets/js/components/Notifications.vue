@@ -6,9 +6,9 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-            <h6 class="dropdown-header text-xs-center">
+            <div class="dropdown-header text-xs-center">
                 News Notifications
-            </h6>
+            </div>
 
             <div class="dropdown-divider mb-0"></div>
 

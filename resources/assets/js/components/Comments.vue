@@ -8,11 +8,11 @@
             </div>
 
             <div class="media-body">
-                <h5 class="media-heading">
+                <h4 class="media-heading">
                     <a :href="comment.user.profile_url">
                         {{ comment.user.username }}
                     </a>
-                </h5>
+                </h4>
 
                 <time :datetime="comment.created_at | formatDate" :title="comment.created_at | formatDate" data-toggle="tooltip">
                     <small class="text-muted">
