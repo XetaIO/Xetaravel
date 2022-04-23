@@ -9,9 +9,9 @@
 <div class="container pb-1 pt-4">
     <div class="blog-header mt-2">
         <div class="container">
-            <h1 class="blog-title">
+            <div class="blog-post-title">
                 Blog
-            </h1>
+            </div>
         </div>
     </div>
 </div>
@@ -24,11 +24,11 @@
 
     <div class="row">
         <div class="col-md-9">
-            @include('partials.blog._articles')
+            @include('Blog::partials._articles')
         </div>
 
         <div class="col-md-3">
-            @include('partials.blog._sidebar')
+            @include('Blog::partials._sidebar')
         </div>
 
     </div>

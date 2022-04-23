@@ -1,7 +1,7 @@
 <div class="sidebar-module">
-    <h4 class="font-xeta">
+    <h2 class="sidebar-module-title font-xeta">
         Latest Articles
-    </h4>
+    </h2>
     <ol class="list-unstyled">
         @foreach ($articles as $article)
             <li>
@@ -13,9 +13,9 @@
     </ol>
 </div>
 <div class="sidebar-module">
-    <h4 class="font-xeta">
+    <h2 class="sidebar-module-title font-xeta">
         Categories
-    </h4>
+    </h2>
     <ol class="list-unstyled">
         @foreach ($categories as $category)
             <li>

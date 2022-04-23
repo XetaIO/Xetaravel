@@ -32,7 +32,7 @@ $(document).ready(function () {
     /**
      * Navbar
      */
-    var minWidth = 768,
+    var minWidth = 767,
         navbar = $('#change-navbar'),
         offset = navbar.offset(),
         width = window.innerWidth;

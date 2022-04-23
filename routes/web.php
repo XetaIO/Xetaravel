@@ -14,6 +14,8 @@ Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']],
 
     Route::get('contact', 'PageController@showContact')->name('page.contact');
     Route::post('contact', 'PageController@contact');
+
+    Route::post('subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {
@@ -134,6 +136,12 @@ Route::group([
     Route::group(['middleware' => ['auth']], function () {
         // Comment Routes
         Route::post('comment/create', 'CommentController@create')
-        ->name('blog.comment.create');
+            ->name('blog.comment.create');
+        Route::delete('comment/delete/{id}', 'CommentController@delete')
+            ->name('blog.comment.delete');
+        Route::put('comment/edit/{id}', 'CommentController@edit')
+            ->name('blog.comment.edit');
+        Route::get('comment/edit-template/{id}', 'CommentController@editTemplate')
+            ->name('blog.comment.editTemplate');
     });
 });

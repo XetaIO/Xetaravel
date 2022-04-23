@@ -1,6 +1,6 @@
 <template>
     <a href="javascript:void(0);" class="font-weight-bold" data-toggle="popover" :data-template="getTemplate()" data-html="true" :data-content="getContent()" data-placement="top" data-trigger="click">
-        {{ user.username }}
+        {{ user.full_name }}
     </a>
 </template>
 

@@ -7,7 +7,7 @@
 
 @push('style')
     <style>
-    @media (min-width: 768px) {
+    @media (min-width: 993px) {
         .bg-white {
             background-color: transparent !important;
         }
@@ -52,7 +52,7 @@
         <div class="col-md-4">
             <div class="features-box">
                 <i class="fa fa-code text-primary" aria-hidden="true"></i>
-                <h4 class="font-xeta">Open Source</h4>
+                <div class="font-xeta">Open Source</div>
                 <p class="text-muted">
                     The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank">Github</a>. If you want to contribute, feel free to do a PR.
                 </p>
@@ -61,7 +61,7 @@
         <div class="col-md-4">
             <div class="features-box">
                 <i class="fa fa-flask text-primary" aria-hidden="true"></i>
-                <h4 class="font-xeta">Experiences</h4>
+                <div class="font-xeta">Experiences</div>
                 <p class="text-muted">
                 I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
                 </p>
@@ -70,7 +70,7 @@
         <div class="col-md-4">
             <div class="features-box">
                 <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>
-                <h4 class="font-xeta">Interact</h4>
+                <div class="font-xeta">Interact</div>
                 <p class="text-muted">
                 You can interact with Xetaravel's members in the blog or directly with me in the comments of an article.
                 </p>
@@ -79,7 +79,7 @@
     </div>
 
     <hr/>
-    <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Articles</h1>
+    <h2 class="text-xs-center font-xeta mt-3 mb-3">Latest Articles</h2>
 
     <div class="row">
 
@@ -88,11 +88,11 @@
                 <div class="card card-outline-primary text-xs-center">
 
                     <div class="card-block">
-                        <h4 class="card-title text-truncate" data-toggle="tooltip" title="{{ $article->title }}">
+                        <h3 class="card-title text-truncate" data-toggle="tooltip" title="{{ $article->title }}">
                             <a href="{{ $article->article_url }}">
                                 {{ $article->title }}
                             </a>
-                        </h4>
+                        </h3>
 
                         <small class="card-subtitle text-muted">
                             <ul class="list-inline">
@@ -144,7 +144,7 @@
     </div>
 
     <hr/>
-    <h1 class="text-xs-center font-xeta mt-3 mb-3">Latest Comments</h1>
+    <h2 class="text-xs-center font-xeta mt-3 mb-3">Latest Comments</h2>
 
     <div class="row pb-3">
         @forelse ($comments as $comment)
@@ -158,11 +158,11 @@
                     </div>
 
                     <div class="media-body">
-                        <h5 class="media-heading">
+                        <h3 class="media-heading">
                             <a href="{{ $comment->comment_url }}">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i> {{ $comment->article->title }}
                             </a>
-                        </h5>
+                        </h3>
 
                         <small class="text-muted">
                             <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>

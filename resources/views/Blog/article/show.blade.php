@@ -79,54 +79,87 @@
             </div>
 
             <hr />
-            <div class="card card-outline-primary">
-                <div class="card-block" style="display: flex;">
-                    <div class="card-left" style="padding-right: 15px;">
-                        <a href="{{ $article->user->profile_url }}">
-                            <img class="card-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
-                        </a>
-                    </div>
-                    <div class="card-body" style="flex: 1;">
-                        <h4 class="card-title text-truncate">
-                            <a href="{{ $article->user->profile_url }}">
-                                {{ $article->user->full_name }}
-                            </a>
-                        </h4>
+            <div class="author">
+                <div class="author-user float-xs-left text-xs-center">
+                    @if ($article->user->hasRubies)
+                        <i aria-hidden="true" class="fa fa-diamond text-primary comment-user-rubies"  data-toggle="tooltip" title="This user has earned Rubies."></i>
+                    @endif
+                    {{--  User Avatar --}}
+                     <img class="author-user-media rounded-circle img-thumbnail" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
 
-                        <p class="card-subtitle text-muted">
-                            {!! Markdown::convertToHtml($article->user->signature) !!}
-                        </p>
+                     {{-- Handle the user's icons --}}
+                    @if ($article->user->hasRole(['member'], true))
+                        <i aria-hidden="true" class="fas fa-user-tie author-user-roles author-user-member"  data-toggle="tooltip" title="Member"></i>
+                    @endif
+
+                    @if ($article->user->isModerator())
+                        <i aria-hidden="true" class="fas fa-shield-alt author-user-roles author-user-moderator"  data-toggle="tooltip" title="Moderator"></i>
+                    @endif
+
+                    @if ($article->user->hasRole(['administrator', 'developer']))
+                        <i aria-hidden="true" class="fas fa-wrench author-user-roles author-user-administrator"  data-toggle="tooltip" title="Administrator"></i>
+                    @endif
+
+                    @if ($article->user->isDeveloper())
+                        <i aria-hidden="true" class="fas fa-code author-user-roles author-user-developer"  data-toggle="tooltip" title="Developer"></i>
+                    @endif
+
+                    @if ($article->user->online)
+                        <span class="author-user-status">
+                            <i class="online" data-toggle="tooltip" title="The user is online"></i>
+                            <small class="online">Online</small>
+                        </span>
+                    @else
+                        <span class="author-user-status">
+                            <i data-toggle="tooltip" title="The user is offline"></i>
+                            <small class="offline">Offline</small>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="author-body">
+                    <div class="author-body-title text-truncate font-xeta">
+                        <discuss-user
+                        :user="{{ json_encode($article->user) }}"
+                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                    </discuss-user>
                     </div>
+
+                    <p class="author-body-subtitle text-muted">
+                        {!! Markdown::convertToHtml($article->user->signature) !!}
+                    </p>
                 </div>
             </div>
 
-            @if ($comments->isNotEmpty())
-                <h4 class="mt-3 font-xeta">
+
+            <div class="comments">
+                <h3 class="mt-3 font-xeta">
                     {{ $article->comment_count }} Comments
-                </h4>
+                </h3>
 
-                <comments :comments="{{ $comments->getCollection()->toJson() }}"></comments>
+                @forelse ($comments as $comment)
+                    @include('Blog::partials._comment', ['comment' => $comment])
+                @empty
+                    <div class="alert alert-primary" role="alert">
+                        <i class="fa fa-exclamation" aria-hidden="true"></i>
+                        There're no comments yet, post the first reply !
+                    </div>
+                @endforelse
+            </div>
 
-                <div class="col-md 12 text-xs-center">
-                    {{ $comments->render() }}
-                </div>
-
-            @elseif (Auth::user())
-                <hr />
-                <div class="alert alert-primary" role="alert">
-                    <i class="fa fa-exclamation" aria-hidden="true"></i>
-                    There's not comment yet. Post the first reply !
-                </div>
-            @endif
-
+            <div class="col-md 12 text-xs-center">
+                {{ $comments->render() }}
+            </div>
             <hr />
-            @if (Auth::user())
 
-                <div class="comment mb-2">
-                    <div class="comment-media hidden-sm-down">
+            @auth
+                <div class="reply mb-2">
+                    <div class="reply-media hidden-sm-down">
                         {{ Html::image(Auth::user()->avatar_small, 'Avatar', ['class' => 'rounded-circle', 'height' => '80px', 'width' => '80px']) }}
                     </div>
-                    <div class="comment-content">
+                    <div class="reply-content">
                         {!! Form::open(['route' => 'blog.comment.create']) !!}
                             {!! Form::hidden('article_id', $article->id) !!}
 
@@ -151,9 +184,49 @@
         </div>
 
         <div class="col-md-3">
-            @include('partials.blog._sidebar')
+            @include('Blog::partials._sidebar')
         </div>
 
+    </div>
+</div>
+
+{{-- Delete Comment Modal --}}
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePostModalLabel">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete the comment
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {!! Form::open([
+                'method' => 'delete',
+                'id' => 'deleteCommentForm'
+            ]) !!}
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>
+                            Are you sure you want delete this comment ? <strong>This operation is not reversible.</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
+                    <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        Close
+                    </button>
+                </div>
+
+            {!! Form::close() !!}
+        </div>
     </div>
 </div>
 @endsection
