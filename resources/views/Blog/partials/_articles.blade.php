@@ -9,15 +9,18 @@
             <ul class="list-inline mb-0">
                 <li class="list-inline-item">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" title="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
-                        {{ $article->created_at->format('Y-m-d') }}
+                    <time datetime="{{ $article->created_at }}" title="{{ $article->created_at }}" data-toggle="tooltip">
+                        {{ $article->created_at->diffForHumans() }}
                     </time>
                 </li>
                 <li class="list-inline-item">
                     <i class="fa fa-user"></i>
-                    <a href="{{ $article->user->profile_url }}">
-                        {{ $article->user->username }}
-                    </a>
+                    <discuss-user
+                        :user="{{ json_encode($article->user) }}"
+                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                    </discuss-user>
                 </li>
                 <li class="list-inline-item">
                     <i class="fa fa-comments"></i>
