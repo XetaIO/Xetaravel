@@ -29,15 +29,14 @@
  */
 
 .blog {
-
-    &:not(:last-of-type) {
-        border-bottom: none;
-    }
-
     &-post {
         padding-bottom: 30px;
         margin-bottom: 30px;
         border-bottom: 2px dashed #e7edf3;
+
+        &:not(:last-of-type) {
+            border-bottom: none;
+        }
 
         &-title {
           font-size: 40px;
