@@ -44,7 +44,6 @@
 
         &-meta {
             margin-bottom: 1.25rem;
-            color: #999;
           }
 
         &-banner {
@@ -68,9 +67,7 @@
 
  .blog {
     &-article {
-        padding-bottom: 30px;
-        margin-bottom: 30px;
-        border-bottom: 2px dashed #e7edf3;
+        padding-bottom: 20px;
 
         &-title {
           font-size: 40px;
@@ -78,7 +75,6 @@
 
         &-meta {
             margin-bottom: 1.25rem;
-            color: #999;
           }
 
         &-banner {
@@ -112,7 +108,7 @@
 
         &-title {
             font-size: 24px;
-            margin-bottom: 12px;
+            margin: 12px 0;
         }
 
         &-subtitle {

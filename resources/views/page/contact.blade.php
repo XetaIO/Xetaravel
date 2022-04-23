@@ -17,9 +17,9 @@
     <div class="col-md-12">
         <section class="contact">
             <div class="hr-divider">
-                <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                <div class="hr-divider-content hr-divider-heading font-xeta">
                     Contact
-                </h4>
+                </div>
             </div>
 
             <p class="text-xs-center">

@@ -18,9 +18,9 @@
         <div class="col-md-9">
             <section class="mb-3">
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         Sessions
-                    </h4>
+                    </div>
                 </div>
                 <p>
                     This is a list of devices that are logged into your account.

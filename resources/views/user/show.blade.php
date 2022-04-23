@@ -176,13 +176,13 @@
         <div class="col-lg-9">
             <section class="section">
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
+                    <div class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
                         @if (Auth::user() && $user->id == Auth::id())
                             Your Biography
                         @else
                             His Biography
                         @endif
-                    </h4>
+                    </div>
                 </div>
                 <div class="biography pt-1 pb-2">
                     @if (!empty($user->biography))
@@ -198,13 +198,13 @@
                 </div>
 
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
+                    <div class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
                         @if (Auth::user() && $user->id == Auth::id())
                             Your Badges
                         @else
                             His Badges
                         @endif
-                    </h4>
+                    </div>
                 </div>
                 <div class="badges pt-1 pb-2">
                     @if ($user->badges->isNotEmpty())
@@ -226,13 +226,13 @@
 
                 @if ($user->articles->isNotEmpty())
                     <div class="hr-divider">
-                        <h4 class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
+                        <div class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
                             @if (Auth::user() && $user->id == Auth::id())
                                 Your latest Articles in the Blog
                             @else
                                 His latest Articles in the Blog
                             @endif
-                        </h4>
+                        </div>
                     </div>
                     <table class="table table-profile">
                         @foreach ($articles as $article)

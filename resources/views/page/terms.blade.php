@@ -13,9 +13,9 @@
     <div class="col-md-12">
         <section class="terms">
             <div class="hr-divider">
-                <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                <div class="hr-divider-content hr-divider-heading font-xeta">
                     Terms of Service
-                </h4>
+                </div>
             </div>
 
             <p class="updated">

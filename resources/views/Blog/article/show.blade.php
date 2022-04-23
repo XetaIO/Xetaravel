@@ -78,6 +78,12 @@
                 </div>
             </div>
 
+            <div class="hr-divider">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
+                        Author
+                    </div>
+                </div>
+
             <div class="author">
                 <div class="author-user float-xs-left text-xs-center">
                     @if ($article->user->hasRubies)
@@ -117,14 +123,14 @@
                 </div>
 
                 <div class="author-body">
-                    <div class="author-body-title text-truncate font-xeta">
+                    <h2 class="author-body-title text-truncate font-xeta">
                         <discuss-user
-                        :user="{{ json_encode($article->user) }}"
-                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                    </discuss-user>
-                    </div>
+                            :user="{{ json_encode($article->user) }}"
+                            :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                            :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                            :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                        </discuss-user>
+                    </h2>
 
                     <p class="author-body-subtitle text-muted">
                         {!! Markdown::convertToHtml($article->user->signature) !!}
@@ -135,9 +141,9 @@
 
             <div class="comments">
                 <div class="hr-divider">
-                    <h3 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         {{ $article->comment_count }} Comment(s)
-                    </h3>
+                    </div>
                 </div>
 
                 @forelse ($comments as $comment)
@@ -197,10 +203,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deletePostModalLabel">
+                <div class="modal-title" id="deletePostModalLabel">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     Delete the comment
-                </h5>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

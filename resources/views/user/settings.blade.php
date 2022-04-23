@@ -18,9 +18,9 @@
         <div class="col-md-9">
             <section class="mb-3">
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         Change your E-mail
-                    </h4>
+                    </div>
                 </div>
                 {!! Form::open(['route' => 'users.user.settings', 'method' => 'put']) !!}
                     {!! Form::hidden('type', 'email') !!}
@@ -53,9 +53,9 @@
             <section class="mb-3">
                 @if (!is_null(Auth::user()->password))
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         Change your Password
-                    </h4>
+                    </div>
                 </div>
                 {!! Form::open(['route' => 'users.user.settings', 'method' => 'put']) !!}
                     {!! Form::hidden('type', 'password') !!}
@@ -88,9 +88,9 @@
                 {!! Form::close() !!}
             @else
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         Create a Password
-                    </h4>
+                    </div>
                 </div>
                 <div class="alert alert-primary text-xs-center" role="alert">
                     <i class="fa fa-exclamation" aria-hidden="true"></i>
@@ -125,9 +125,9 @@
 
             <section>
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         Delete your Account
-                    </h4>
+                    </div>
                 </div>
                 <div class="form-group text-xs-center">
                     <div class="col-md-12">

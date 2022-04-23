@@ -18,9 +18,9 @@
         <div class="col-md-9">
             <section>
                 <div class="hr-divider">
-                    <h4 class="hr-divider-content hr-divider-heading font-xeta">
+                    <div class="hr-divider-content hr-divider-heading font-xeta">
                         Notifications
-                    </h4>
+                    </div>
                 </div>
 
                 @if ($notifications->isNotEmpty())
