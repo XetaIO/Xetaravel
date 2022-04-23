@@ -55,13 +55,13 @@
     <div class="row">
 
         <div class="col-md-9">
-            <div class="blog-post">
-                <div class="blog-post-meta">
+            <div class="blog-article">
+                <div class="blog-article-meta">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <time datetime="{{ $article->created_at->diffForHumans() }}" title="{{ $article->created_at->diffForHumans() }}" data-toggle="tooltip">
-                                {{ $article->created_at }}
+                            <time datetime="{{ $article->created_at }}" title="{{ $article->created_at }}" data-toggle="tooltip">
+                                {{ $article->created_at->diffForHumans() }}
                             </time>
                         </li>
                         <li class="list-inline-item">
@@ -72,13 +72,12 @@
                         </li>
                     </ul>
                 </div>
-                <img class="blog-post-banner mb-1" src="{{ $article->article_banner }}" alt="Article image">
+                <img class="blog-article-banner mb-1" src="{{ $article->article_banner }}" alt="Article image">
                 <div>
                     {!! Markdown::convertToHtml($article->content) !!}
                 </div>
             </div>
 
-            <hr />
             <div class="author">
                 <div class="author-user float-xs-left text-xs-center">
                     @if ($article->user->hasRubies)
@@ -135,9 +134,11 @@
 
 
             <div class="comments">
-                <h3 class="mt-3 font-xeta">
-                    {{ $article->comment_count }} Comments
-                </h3>
+                <div class="hr-divider">
+                    <h3 class="hr-divider-content hr-divider-heading font-xeta">
+                        {{ $article->comment_count }} Comment(s)
+                    </h3>
+                </div>
 
                 @forelse ($comments as $comment)
                     @include('Blog::partials._comment', ['comment' => $comment])

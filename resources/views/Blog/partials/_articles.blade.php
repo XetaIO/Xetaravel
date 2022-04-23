@@ -28,7 +28,7 @@
 
         <img class="blog-post-banner mb-1" src="{{ $article->article_banner }}" alt="Article image">
 
-        <div>
+        <div class="blog-post-content">
             {!! Markdown::convertToHtml(Str::limit($article->content, 650)) !!}
         </div>
 
@@ -38,7 +38,6 @@
             </a>
         </div>
     </div>
-    <hr />
 @empty
     <div class="alert alert-primary" role="alert">
         <i class="fa fa-exclamation" aria-hidden="true"></i>
