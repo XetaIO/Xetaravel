@@ -136,6 +136,12 @@ Route::group([
     Route::group(['middleware' => ['auth']], function () {
         // Comment Routes
         Route::post('comment/create', 'CommentController@create')
-        ->name('blog.comment.create');
+            ->name('blog.comment.create');
+        Route::delete('comment/delete/{id}', 'CommentController@delete')
+            ->name('blog.comment.delete');
+        Route::put('comment/edit/{id}', 'CommentController@edit')
+            ->name('blog.comment.edit');
+        Route::get('comment/edit-template/{id}', 'CommentController@editTemplate')
+            ->name('blog.comment.editTemplate');
     });
 });

@@ -81,9 +81,9 @@
             <hr />
             <div class="author">
                 <div class="author-block">
-                    <div class="author-left">
+                    <div class="author-user">
                         <a href="{{ $article->user->profile_url }}">
-                            <img class="author-left-media rounded-circle" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
+                            <img class="author-user-media rounded-circle img-thumbnail" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
                         </a>
                     </div>
                     <div class="author-body">
@@ -100,33 +100,33 @@
                 </div>
             </div>
 
-            @if ($comments->isNotEmpty())
+
+            <div class="comments">
                 <h3 class="mt-3 font-xeta">
                     {{ $article->comment_count }} Comments
                 </h3>
 
-                <comments :comments="{{ $comments->getCollection()->toJson() }}"></comments>
+                @forelse ($comments as $comment)
+                    @include('Blog::partials._comment', ['comment' => $comment])
+                @empty
+                    <div class="alert alert-primary" role="alert">
+                        <i class="fa fa-exclamation" aria-hidden="true"></i>
+                        There're no comments yet, post the first reply !
+                    </div>
+                @endforelse
+            </div>
 
-                <div class="col-md 12 text-xs-center">
-                    {{ $comments->render() }}
-                </div>
-
-            @elseif (Auth::user())
-                <hr />
-                <div class="alert alert-primary" role="alert">
-                    <i class="fa fa-exclamation" aria-hidden="true"></i>
-                    There's not comment yet. Post the first reply !
-                </div>
-            @endif
-
+            <div class="col-md 12 text-xs-center">
+                {{ $comments->render() }}
+            </div>
             <hr />
-            @if (Auth::user())
 
-                <div class="comment mb-2">
-                    <div class="comment-media hidden-sm-down">
+            @auth
+                <div class="reply mb-2">
+                    <div class="reply-media hidden-sm-down">
                         {{ Html::image(Auth::user()->avatar_small, 'Avatar', ['class' => 'rounded-circle', 'height' => '80px', 'width' => '80px']) }}
                     </div>
-                    <div class="comment-content">
+                    <div class="reply-content">
                         {!! Form::open(['route' => 'blog.comment.create']) !!}
                             {!! Form::hidden('article_id', $article->id) !!}
 
@@ -151,9 +151,49 @@
         </div>
 
         <div class="col-md-3">
-            @include('partials.blog._sidebar')
+            @include('Blog::partials._sidebar')
         </div>
 
+    </div>
+</div>
+
+{{-- Delete Comment Modal --}}
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePostModalLabel">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete the comment
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {!! Form::open([
+                'method' => 'delete',
+                'id' => 'deleteCommentForm'
+            ]) !!}
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>
+                            Are you sure you want delete this comment ? <strong>This operation is not reversible.</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
+                    <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        Close
+                    </button>
+                </div>
+
+            {!! Form::close() !!}
+        </div>
     </div>
 </div>
 @endsection

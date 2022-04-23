@@ -15,7 +15,7 @@ class BlogSidebarServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('partials.blog._sidebar', function ($view) {
+        View::composer('Blog::partials._sidebar', function ($view) {
             $articles = ArticleRepository::sidebar();
             $categories = CategoryRepository::sidebar();
 

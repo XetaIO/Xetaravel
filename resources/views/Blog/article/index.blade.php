@@ -24,11 +24,11 @@
 
     <div class="row">
         <div class="col-md-9">
-            @include('partials.blog._articles')
+            @include('Blog::partials._articles')
         </div>
 
         <div class="col-md-3">
-            @include('partials.blog._sidebar')
+            @include('Blog::partials._sidebar')
         </div>
 
     </div>

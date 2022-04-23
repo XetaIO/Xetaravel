@@ -5,7 +5,7 @@
 
 				<div class="row">
 					<div class="col-md-6">
-						<h3 class="mb-1">Utils</h3>
+						<h3 class="footer-title mb-1">Utils</h3>
 						<ul class="list-unstyled">
 							<li class="mb-1">
 								{{ link_to(route('users.auth.register'), '<i class="fa fa-user-plus"></i> Register', ['class' => 'btn btn-outline-primary-inverse'], null, false) }}
@@ -27,7 +27,7 @@
 					</div>
 
 					<div class="col-md-6">
-						<h3 class="mb-1">Extra</h3>
+						<h3 class="footer-title mb-1">Extra</h3>
 						<ul class="list-unstyled">
 							<li class="mb-1">
 								<a href="{{ route('page.terms') }}">
@@ -55,7 +55,7 @@
 			</div>
 
 			<div class="col-md-4">
-				<h3 class="mb-1">Subscribe to get the latest news !</h3>
+				<h3 class="footer-title mb-1">Subscribe to get the latest news !</h3>
 
 				 <div class="input-group mb-1">
 						<form method="POST" action="{{ route('newsletter.subscribe') }}" accept-charset="UTF-8" style="display: contents;">

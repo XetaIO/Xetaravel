@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import moment from 'moment'
-import Comments from './components/Comments.vue'
 import Notifications from './components/Notifications.vue'
 import UsersNotifications from './components/UsersNotifications.vue'
 
@@ -20,7 +19,6 @@ const app = new Vue({
     el: '#app-vue',
 
     components: {
-        Comments,
         Notifications,
         UsersNotifications,
 

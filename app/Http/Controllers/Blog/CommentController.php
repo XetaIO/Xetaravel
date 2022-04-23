@@ -84,4 +84,32 @@ class CommentController extends Controller
                 ]
             );
     }
+
+    /**
+     * Handle a delete action for the comment.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(int $id): RedirectResponse
+    {
+        $comment = Comment::findOrFail($id);
+
+        $this->authorize('delete', $comment);
+
+        if ($comment->delete()) {
+            return redirect()
+                ->route(
+                    'blog.article.show',
+                    ['id' => $comment->article->getKey(), 'slug' => $comment->article->slug]
+                )
+                ->with('success', 'This comment has been deleted successfully !');
+        }
+
+        return redirect()
+            ->route('blog.comment.show', ['id' => $comment->getKey()])
+            ->with('danger', 'An error occurred while deleting this comment !');
+    }
 }
