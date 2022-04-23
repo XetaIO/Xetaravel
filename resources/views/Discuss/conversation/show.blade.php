@@ -19,21 +19,21 @@
     <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
 
     @php
-        $config = [
+        $comment = [
             'id' => 'editPostEditor'
         ];
     @endphp
 
     @if($conversation->is_locked == false)
         @php
-            $config = [
+            $comment = [
                 'id' => 'commentEditor',
                 'height' => '350'
             ];
         @endphp
     @endif
 
-    @include('editor/partials/_comment', $config)
+    @include('editor/partials/_comment', $comment)
 
 
     <script src="{{ mix('js/highlight.min.js') }}"></script>
