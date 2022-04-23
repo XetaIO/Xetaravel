@@ -3,6 +3,7 @@ namespace Tests\Http\Controllers\Blog;
 
 use Tests\TestCase;
 use Xetaravel\Models\Article;
+use Xetaravel\Models\Comment;
 use Xetaravel\Models\User;
 
 class CommentControllerTest extends TestCase
@@ -101,5 +102,19 @@ class CommentControllerTest extends TestCase
         $response->assertRedirect(
             '/blog/article/lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit.1?page=1&#comment-1'
         );
+    }
+
+    /**
+     * testDeleteSuccess method
+     *
+     * @return void
+     */
+    public function testDeleteSuccess()
+    {
+        $response = $this->delete('/blog/comment/delete/1');
+        $response->assertStatus(302);
+        $response->assertSessionHas('success');
+
+        $this->assertNull(Comment::find(1));
     }
 }
