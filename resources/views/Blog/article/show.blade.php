@@ -70,6 +70,10 @@
                                 {{ $article->category->title }}
                             </a>
                         </li>
+                        <li class="list-inline-item">
+                            <i class="fa fa-comments"></i>
+                            {{ $article->comment_count }}
+                        </li>
                     </ul>
                 </div>
                 <img class="blog-article-banner mb-1" src="{{ $article->article_banner }}" alt="Article image">
