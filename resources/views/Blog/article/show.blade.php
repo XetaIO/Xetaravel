@@ -51,7 +51,7 @@
     {!! $breadcrumbs->render() !!}
 </div>
 <hr />
-<div class="container pt-2">
+<div class="container pt-2 mb-4">
     <div class="row">
 
         <div class="col-md-9">
@@ -190,6 +190,7 @@
     </div>
 </div>
 
+@auth
 {{-- Delete Comment Modal --}}
 <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -229,4 +230,5 @@
         </div>
     </div>
 </div>
+@endauth
 @endsection
