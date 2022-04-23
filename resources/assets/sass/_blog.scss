@@ -30,7 +30,9 @@
 
 .blog {
     &-post {
-        margin-bottom: 4rem;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        border-bottom: 2px dashed #e7edf3;
 
         &-title {
           font-size: 40px;
@@ -60,24 +62,18 @@
   * Author
   */
 .author {
+    padding: 10px;
     border-radius: 5px;
     border: 2px solid $brand-primary;
 
-    &-block {
-        display: flex;
-        padding: 20px;
-    }
-
     &-user {
-        padding-right: 15px;
-
-        &-media {
-            border: 3px solid rgba(0, 0, 0, 0.1);
-        }
+        position: relative;
+        width: 90px;
     }
 
     &-body {
-        flex: 1 1 0%;
+        min-height: 130px;
+        padding-left: 100px;
 
         &-title {
             font-size: 24px;
@@ -117,74 +113,6 @@
     &-user {
         position: relative;
         width: 70px;
-
-        &-rubies {
-            position: absolute;
-            right: 0;
-            background-color: #fff;
-            border-radius: 50%;
-            border: 2px solid #ddd;
-            padding: 4px 3px 3px;
-            width: 28px;
-            height: 28px;
-        }
-
-        &-roles {
-            border-radius: 50%;
-            border: 2px solid #ddd;
-            padding: 6px 4px;
-            margin-top: 4px;
-            width: 28px;
-            height: 28px;
-            font-size: 12px;
-
-            &.comment-user-administrator {
-                background-color: #f4645f;
-                color: #fff;
-            }
-
-            &.comment-user-developer {
-                background-color: #32aeff;
-                color: #fff;
-            }
-
-            &.comment-user-moderator {
-                background-color: #f1c40f;
-                color: #fff;
-            }
-        }
-
-        &-status {
-            color: #fa6c65;
-            display: block;
-            padding: 5px 0;
-            border-top: none;
-
-            & > i {
-                display: inline-block;
-                height: 12px;
-                width: 12px;
-                box-shadow: 0 0 8px #fa6c65;
-                background: #fa6c65;
-                line-height: 20px;
-                vertical-align: middle;
-                border-radius: 50%;
-
-                &.online {
-                    box-shadow: 0 0 8px #6cc644;
-                    background: #6cc644;
-                }
-            }
-
-            & > .online {
-                color: #6cc644;
-            }
-        }
-
-        &-media {
-            width: 70px;
-            height: 70px;
-        }
     }
 
     &-post {
@@ -206,6 +134,81 @@
             border-bottom: 1px dotted #ddd;
         }
     }
+}
+
+.author-user,
+.comment-user {
+    &-rubies {
+        position: absolute;
+        right: 0;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        padding: 4px 3px 3px;
+        width: 28px;
+        height: 28px;
+    }
+
+    &-roles {
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        padding: 6px 4px;
+        margin-top: 4px;
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+
+        &.comment-user-administrator,
+        &.author-user-administrator {
+            background-color: #f4645f;
+            color: #fff;
+        }
+
+        &.comment-user-developer,
+        &.author-user-developer {
+            background-color: #32aeff;
+            color: #fff;
+        }
+
+        &.comment-user-moderator,
+        &.author-user-moderator {
+            background-color: #f1c40f;
+            color: #fff;
+        }
+    }
+
+    &-status {
+        color: #fa6c65;
+        display: block;
+        padding: 5px 0;
+        border-top: none;
+
+        & > i {
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            box-shadow: 0 0 8px #fa6c65;
+            background: #fa6c65;
+            line-height: 20px;
+            vertical-align: middle;
+            border-radius: 50%;
+
+            &.online {
+                box-shadow: 0 0 8px #6cc644;
+                background: #6cc644;
+            }
+        }
+
+        & > .online {
+            color: #6cc644;
+        }
+    }
+
+    &-media {
+        width: 70px;
+        height: 70px;
+    }
+
 }
 
 /**

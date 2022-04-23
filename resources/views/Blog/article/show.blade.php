@@ -80,23 +80,56 @@
 
             <hr />
             <div class="author">
-                <div class="author-block">
-                    <div class="author-user">
-                        <a href="{{ $article->user->profile_url }}">
-                            <img class="author-user-media rounded-circle img-thumbnail" src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="64px" width="64px">
-                        </a>
-                    </div>
-                    <div class="author-body">
-                        <h2 class="author-body-title text-truncate">
-                            <a href="{{ $article->user->profile_url }}">
-                                {{ $article->user->full_name }}
-                            </a>
-                        </h2>
+                <div class="author-user float-xs-left text-xs-center">
+                    @if ($article->user->hasRubies)
+                        <i aria-hidden="true" class="fa fa-diamond text-primary comment-user-rubies"  data-toggle="tooltip" title="This user has earned Rubies."></i>
+                    @endif
+                    {{--  User Avatar --}}
+                     <img class="author-user-media rounded-circle img-thumbnail" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
 
-                        <p class="author-body-subtitle text-muted">
-                            {!! Markdown::convertToHtml($article->user->signature) !!}
-                        </p>
+                     {{-- Handle the user's icons --}}
+                    @if ($article->user->hasRole(['member'], true))
+                        <i aria-hidden="true" class="fas fa-user-tie author-user-roles author-user-member"  data-toggle="tooltip" title="Member"></i>
+                    @endif
+
+                    @if ($article->user->isModerator())
+                        <i aria-hidden="true" class="fas fa-shield-alt author-user-roles author-user-moderator"  data-toggle="tooltip" title="Moderator"></i>
+                    @endif
+
+                    @if ($article->user->hasRole(['administrator', 'developer']))
+                        <i aria-hidden="true" class="fas fa-wrench author-user-roles author-user-administrator"  data-toggle="tooltip" title="Administrator"></i>
+                    @endif
+
+                    @if ($article->user->isDeveloper())
+                        <i aria-hidden="true" class="fas fa-code author-user-roles author-user-developer"  data-toggle="tooltip" title="Developer"></i>
+                    @endif
+
+                    @if ($article->user->online)
+                        <span class="author-user-status">
+                            <i class="online" data-toggle="tooltip" title="The user is online"></i>
+                            <small class="online">Online</small>
+                        </span>
+                    @else
+                        <span class="author-user-status">
+                            <i data-toggle="tooltip" title="The user is offline"></i>
+                            <small class="offline">Offline</small>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="author-body">
+                    <div class="author-body-title text-truncate font-xeta">
+                        <discuss-user
+                        :user="{{ json_encode($article->user) }}"
+                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                    </discuss-user>
                     </div>
+
+                    <p class="author-body-subtitle text-muted">
+                        {!! Markdown::convertToHtml($article->user->signature) !!}
+                    </p>
                 </div>
             </div>
 
