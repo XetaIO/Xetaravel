@@ -29,6 +29,7 @@ $(function() {
         watch : false,
         editorTheme : 'mdn-like',
         placeholder : 'Type your biography here...',
+        autoFocus : {{ Arr::get($biography, 'autoFocus', config('editor.autoFocus')) }},
         toolbarIcons : function () {
             return [
                 "undo", "redo", "|",

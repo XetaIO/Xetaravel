@@ -20,13 +20,13 @@
     <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
 
     @php
-        $config = [
+        $comment = [
             'id' => 'commentEditor',
             'height' => '350'
         ];
     @endphp
 
-    @include('editor/partials/_comment', $config)
+    @include('editor/partials/_comment', $comment)
 
 
     <script src="{{ mix('js/highlight.min.js') }}"></script>

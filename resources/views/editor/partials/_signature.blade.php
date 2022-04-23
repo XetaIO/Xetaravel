@@ -29,6 +29,7 @@ $(function() {
         watch : false,
         editorTheme : 'mdn-like',
         placeholder : 'Type your signature here...',
+        autoFocus : {{ Arr::get($signature, 'autoFocus', config('editor.autoFocus')) }},
         toolbarIcons : function () {
             return [
                 "undo", "redo", "|",

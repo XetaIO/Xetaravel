@@ -30,6 +30,7 @@ $(function() {
         theme : 'dark',
         editorTheme : 'mdn-like',
         placeholder : 'Type your comment here...',
+        autoFocus : {{ Arr::get($articleConfig, 'autoFocus', config('editor.autoFocus')) }},
         toolbarIcons : function () {
             return [
                 "undo", "redo", "|",

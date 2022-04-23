@@ -29,6 +29,7 @@ return [
     'imageUpload' => 'true',
     'imageFormats' => ["jpg", "gif", "png"],
     'imageUploadURL' => '/xetaravel-editor-md/upload/picture',
+    'autoFocus' => 'false',
 
     /*
     |--------------------------------------------------------------------------
