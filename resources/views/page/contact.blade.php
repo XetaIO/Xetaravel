@@ -13,7 +13,7 @@
 <div class="container pt-6 pb-0">
     {!! $breadcrumbs->render() !!}
 </div>
-<div class="container pt-2  pb-2">
+<div class="container pt-2 pb-4">
     <div class="col-md-12">
         <section class="contact">
             <div class="hr-divider">

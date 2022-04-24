@@ -90,7 +90,7 @@
     {!! $breadcrumbs->render() !!}
 </div>
 <hr />
-<div class="container pt-2">
+<div class="container pt-2 pb-4">
     <div class="row">
         {{-- Sidebar --}}
         <div class="col-md-3">

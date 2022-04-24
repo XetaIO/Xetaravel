@@ -6,7 +6,7 @@
 @endpush
 
 @section('content')
-<div class="container mt-6">
+<div class="container mt-6 pb-4">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="alert alert-primary text-xs-center" role="alert">

@@ -6,7 +6,7 @@
 @endpush
 
 @section('content')
-<div class="container mt-6">
+<div class="container mt-6 pb-4">
     <div class="row">
         @if (config('settings.user.login.enabled'))
             <div class="col-md-4 offset-md-4">

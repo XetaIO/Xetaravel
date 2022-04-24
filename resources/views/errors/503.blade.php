@@ -6,7 +6,7 @@
 @endpush
 
 @section('content')
-<div class="container mt-4">
+<div class="container mt-4 pb-4">
     <div class="error">
         <div class="title font-xeta">
             503

@@ -6,7 +6,7 @@
 @endpush
 
 @section('content')
-<div class="container pt-6">
+<div class="container pt-6 pb-4">
     <div class="text-xs-center">
         <h1 class="font-xeta text-primary animated flash">
             You're banished !
