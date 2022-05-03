@@ -30,7 +30,6 @@ final class ReplyParser implements InlineParserInterface
                     'attributes' => [
                         'class' => 'discuss-conversation-user-reply',
                         'href' => $route,
-                        //'style' => 'display: block;',
                         'data-toggle' => 'tooltip',
                         'title' => 'View the answer of ' . $inlineContext->getMatches()[2]
                     ]

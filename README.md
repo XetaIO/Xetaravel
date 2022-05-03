@@ -1,7 +1,8 @@
-> <h1 align="center">Xetaravel</h1>
+
 > <p align="center">
->   <img src="https://cloud.githubusercontent.com/assets/8210023/25557958/0e505c62-2d1d-11e7-8d19-86b569ee9874.png" alt="Xeta Logo" height="80"/>
+>   <img src="https://user-images.githubusercontent.com/8210023/166291618-ee2e2cca-3501-4f29-892f-de946e927f0f.png" alt="Xeta Logo" height="230"/>
 > </p>
+>
 >
 > |Unit Tests|Coverage|Scrutinizer|Stable Version|Downloads|Laravel|License|
 > |:------:|:-------:|:------:|:-------:|:------:|:-------:|:-------:|
