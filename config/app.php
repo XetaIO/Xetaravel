@@ -190,9 +190,7 @@ return [
         Xetaravel\Providers\RouteServiceProvider::class,
         Xetaravel\Providers\FormServiceProvider::class,
         Xetaravel\Providers\MenuServiceProvider::class,
-        Xetaravel\Http\ViewComposers\BlogSidebarServiceProvider::class,
-        Xetaravel\Http\ViewComposers\DiscussSidebarServiceProvider::class,
-        Xetaravel\Http\ViewComposers\NotificationsServiceProvider::class,
+        Xetaravel\Providers\ViewServiceProvider::class
     ],
 
     /*

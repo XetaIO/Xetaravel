@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiscussLogsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -42,4 +42,4 @@ class CreateDiscussLogsTable extends Migration
     {
         Schema::dropIfExists('discuss_logs');
     }
-}
+};

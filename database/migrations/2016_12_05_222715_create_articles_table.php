@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticlesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -46,4 +46,4 @@ class CreateArticlesTable extends Migration
     {
         Schema::dropIfExists('articles');
     }
-}
+};

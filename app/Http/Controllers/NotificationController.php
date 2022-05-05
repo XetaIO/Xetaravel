@@ -5,6 +5,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Xetaravel\Models\Newsletter;
 use Xetaravel\Models\User;
 
 class NotificationController extends Controller
@@ -20,7 +21,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Show the notifications.
+     * Show the notifications & newsletter.
      *
      * @return \Illuminate\View\View
      */
@@ -34,9 +35,11 @@ class NotificationController extends Controller
 
         $breadcrumbs = $this->breadcrumbs;
 
+        $newsletter = Newsletter::where('email', $user->email)->first();
+
         return view(
             'notification.index',
-            compact('user', 'breadcrumbs', 'notifications', 'hasUnreadNotifications')
+            compact('user', 'breadcrumbs', 'notifications', 'hasUnreadNotifications', 'newsletter')
         );
     }
 

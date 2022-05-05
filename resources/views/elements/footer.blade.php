@@ -58,15 +58,15 @@
 				<h3 class="footer-title mb-1">Subscribe to get the latest news !</h3>
 
 				 <div class="input-group mb-1">
-						<form method="POST" action="{{ route('newsletter.subscribe') }}" accept-charset="UTF-8" style="display: contents;">
+					{!! Form::open(['route' => 'newsletter.subscribe']) !!}
 
-						<input placeholder="Your E-mail..." required="required" name="search" type="email" id="newsletter" class="form-control">
+						{!! Form::bsNewsletter('email', null, null, [
+                                'placeholder' => 'Your E-mail...',
+                                'required' => 'required'
+                            ]) !!}
 
-						{!! Form::token(); !!}
-
-                        {!! Form::button('<i class="far fa-paper-plane"></i> Subscribe', ['type' => 'submit', 'class' => 'input-group-addon btn btn-outline-primary']) !!}
-                    </form>
-                    </div>
+                	{!! Form::close() !!}
+                </div>
 
 			</div>
 		</div>
