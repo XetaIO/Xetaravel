@@ -24,24 +24,6 @@ class NewsletterControllerTest extends TestCase
     }
 
     /**
-     * testSubscribeAlreadyExist method
-     *
-     * @return void
-     */
-    public function testSubscribeAlreadyExist()
-    {
-        $data = [
-            'email' => 'newsletter@xetaravel.io'
-        ];
-        $response = $this->post('/newsletter/subscribe', $data);
-        $response->assertRedirect();
-        $response->assertSessionHas('success');
-
-        $response = $this->post('/newsletter/subscribe', $data);
-        $response->assertSessionHas('danger');
-    }
-
-    /**
      * testUnsubscribe method
      *
      * @return void
