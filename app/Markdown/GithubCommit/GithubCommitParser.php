@@ -33,6 +33,7 @@ final class GithubCommitParser implements InlineParserInterface
                 [
                     'attributes' => [
                         'href' => $route,
+                        'target' => '_blank',
                         'data-toggle' => 'tooltip',
                         'title' => $content
                     ]
