@@ -42,6 +42,6 @@ class NewsletterController extends Controller
         }
 
         return back()
-            ->with('danger', 'An error occurred while deleting this article !');
+            ->with('danger', 'An error occurred while unsubscribed to the Newsletter !');
     }
 }

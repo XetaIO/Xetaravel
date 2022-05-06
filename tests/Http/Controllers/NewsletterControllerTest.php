@@ -41,4 +41,16 @@ class NewsletterControllerTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHas('success');
     }
+
+    /**
+     * testUnsubscribe method
+     *
+     * @return void
+     */
+    public function testUnsubscribeDoesNotExist()
+    {
+        $response = $this->get('/newsletter/unsubscribe/newsletter@xetaravel.io');
+        $response->assertRedirect();
+        $response->assertSessionHas('danger');
+    }
 }
