@@ -63,7 +63,11 @@
                     @if ($conversation->first_post_id !== $conversation->last_post_id)
                         <i class="fa fa-reply"></i>
                         <discuss-user
-                            :user="{{ json_encode($conversation->lastPost->user) }}"
+                            :user="{{ json_encode([
+                                'avatar_small'=> $conversation->lastPost->user->avatar_small,
+                                'profile_url' => $conversation->lastPost->user->profile_url,
+                                'full_name' => $conversation->lastPost->user->full_name
+                            ]) }}"
                             :created-at="{{ var_export($conversation->lastPost->user->created_at->diffForHumans()) }}"
                             :last-login="{{ var_export($conversation->lastPost->user->last_login->diffForHumans()) }}"
                             :background-color="{{ var_export($conversation->lastPost->user->avatar_primary_color) }}">
@@ -75,7 +79,11 @@
                     @else
                         <i class="fa fa-pencil"></i>
                         <discuss-user
-                            :user="{{ json_encode($conversation->user) }}"
+                            :user="{{ json_encode([
+                                'avatar_small'=> $conversation->user->avatar_small,
+                                'profile_url' => $conversation->user->profile_url,
+                                'full_name' => $conversation->user->full_name
+                            ]) }}"
                             :created-at="{{ var_export($conversation->user->created_at->diffForHumans()) }}"
                             :last-login="{{ var_export($conversation->user->last_login->diffForHumans()) }}"
                             :background-color="{{ var_export($conversation->user->avatar_primary_color) }}">

@@ -16,7 +16,11 @@
                 <li class="list-inline-item">
                     <i class="fa fa-user"></i>
                     <discuss-user
-                        :user="{{ json_encode($article->user) }}"
+                        :user="{{ json_encode([
+                            'avatar_small'=> $article->user->avatar_small,
+                            'profile_url' => $article->user->profile_url,
+                            'full_name' => $article->user->full_name
+                        ]) }}"
                         :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
                         :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
                         :background-color="{{ var_export($article->user->avatar_primary_color) }}">
