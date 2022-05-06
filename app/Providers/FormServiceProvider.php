@@ -72,5 +72,11 @@ class FormServiceProvider extends ServiceProvider
             'optionsAttributes' => [],
             'labelClass' => 'form-control-label'
         ]);
+        Form::component('bsNewsletter', 'components.form.newsletter', [
+            'name',
+            'label' => null,
+            'value' => null,
+            'attributes' => []
+        ]);
     }
 }

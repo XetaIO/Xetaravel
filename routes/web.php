@@ -15,7 +15,8 @@ Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']],
     Route::get('contact', 'PageController@showContact')->name('page.contact');
     Route::post('contact', 'PageController@contact');
 
-    Route::post('subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+    Route::post('newsletter/subscribe', 'NewsletterController@store')->name('newsletter.subscribe');
+    Route::get('newsletter/unsubscribe/{email}', 'NewsletterController@delete')->name('newsletter.unsubscribe');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {
