@@ -1,8 +1,6 @@
 <?php
 namespace Xetaravel\Models\Presenters;
 
-use GrahamCampbell\Markdown\Facades\Markdown;
-
 trait DiscussConversationPresenter
 {
     /**

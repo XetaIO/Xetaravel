@@ -35,6 +35,9 @@ Duis autem vel eum iriure *dolor in hendrerit* in vulputate velit esse molestie 
 
 Odio dignissim qui `{!! Markdown::convertToHtml($article->content) !!}` te feugait nulla facilisi. :fr:
 
+* Reworked the Comments UI and added the possibility to delete a Comment in Blog https://github.com/XetaIO/Xetaravel/pull/73
+* Reworked the Author bloc in Blog to follow the same design as Comments https://github.com/XetaIO/Xetaravel/commit/06e9f79f67cecbca7648dac3d7922fa849803d9a
+
 - [x] Discuss namespace
 - [ ] Flood system on Threads and Comments
 - [ ] CKEditor on Threads and Comments
