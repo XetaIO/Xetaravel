@@ -14,7 +14,11 @@
     </span>
     <img src="{{ $log->user->avatar_small }}" class="rounded-circle" />
     <discuss-user
-        :user="{{ json_encode($log->user) }}"
+        :user="{{ json_encode([
+            'avatar_small'=> $log->user->avatar_small,
+            'profile_url' => $log->user->profile_url,
+            'full_name' => $log->user->full_name
+        ]) }}"
         :created-at="{{ var_export($log->user->created_at->diffForHumans()) }}"
         :last-login="{{ var_export($log->user->last_login->diffForHumans()) }}"
         :background-color="{{ var_export($log->user->avatar_primary_color) }}">
@@ -65,7 +69,11 @@
     @elseif ($log->type == 'deleted')
         deleted a comment from
         <discuss-user
-            :user="{{ json_encode($log->postUser) }}"
+            :user="{{ json_encode([
+                'avatar_small'=> $log->postUser->avatar_small,
+                'profile_url' => $log->postUser->profile_url,
+                'full_name' => $log->postUser->full_name
+            ]) }}"
             :created-at="{{ var_export($log->postUser->created_at->diffForHumans()) }}"
             :last-login="{{ var_export($log->postUser->last_login->diffForHumans()) }}"
             :background-color="{{ var_export($log->postUser->avatar_primary_color) }}">

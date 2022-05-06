@@ -66,7 +66,11 @@
                     <li class="list-inline-item font-weight-bold">
                         <i aria-hidden="true" class="fa fa-user"></i>
                         <discuss-user
-                            :user="{{ json_encode($post->user) }}"
+                            :user="{{ json_encode([
+                                'avatar_small'=> $post->user->avatar_small,
+                                'profile_url' => $post->user->profile_url,
+                                'full_name' => $post->user->full_name
+                            ]) }}"
                             :created-at="{{ var_export($post->user->created_at->diffForHumans()) }}"
                             :last-login="{{ var_export($post->user->last_login->diffForHumans()) }}"
                             :background-color="{{ var_export($post->user->avatar_primary_color) }}">
