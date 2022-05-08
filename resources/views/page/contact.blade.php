@@ -15,7 +15,7 @@
 </div>
 <div class="container pt-2 pb-4">
     <div class="col-md-12">
-        <section class="contact">
+        <section class="section contact">
             <div class="hr-divider">
                 <div class="hr-divider-content hr-divider-heading font-xeta">
                     Contact

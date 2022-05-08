@@ -1,0 +1,89 @@
+.section-languages {
+    position: relative;
+    background-color: #F7FAFF;
+
+    .svg-atom {
+        position:absolute;
+        right: 5%;
+        top: 30%;
+    }
+
+    .svg-glass-pot2 {
+        position:absolute;
+        left: 5%;
+        bottom: 0;
+    }
+}
+
+.language {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(-0.80rem);
+    }
+
+    &.language-php {
+        background-color: rgba(79,93,149, 0.2);
+
+        a {
+            color: rgba(79,93,149, 1);
+        }
+    }
+
+    &.language-blade {
+        background-color: rgba(255,45,32, 0.2);
+
+        a {
+            color: rgba(255,45,32, 1);
+        }
+    }
+
+    &.language-sass {
+        background-color: rgba(207,100,154, 0.2);
+
+        a {
+            color: rgba(207,100,154, 1);
+        }
+    }
+
+    &.language-javascript {
+        background-color: rgba(240,219,79, 0.2);
+
+        a {
+            color: rgba(240,219,79, 1);
+        }
+    }
+
+    &.language-typescript {
+        background-color: rgba(0,122,204, 0.2);
+
+        a {
+            color: rgba(0,122,204, 1);
+        }
+    }
+
+    &.language-vue {
+        background-color: rgba(65,184,131, 0.2);
+
+        a {
+            color: rgba(65,184,131, 1);
+        }
+    }
+
+    &-name {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 10px 0;
+        color: #24292d;
+    }
+
+      &-image {
+        margin: 10px 0;
+    }
+}

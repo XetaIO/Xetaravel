@@ -30,6 +30,10 @@ mix.scripts([
     .scripts([
         'resources/assets/js/highlight/highlight.js',
     ], 'public/js/highlight.min.js')
+    .scripts([
+        'resources/assets/js/typed/typed.min.js',
+        'resources/assets/js/parallax/parallax.min.js',
+    ], 'public/js/home.min.js')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/fonts', 'public/fonts')
