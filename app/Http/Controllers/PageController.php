@@ -21,20 +21,11 @@ class PageController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('category', 'user')
+        $article = Article::with('category', 'user')
             ->latest()
-            ->limit(6)
-            ->get();
+            ->first();
 
-        $comments = Comment::with('user')
-            ->whereHas('article', function ($query) {
-                $query->where('is_display', true);
-            })
-            ->latest()
-            ->limit(4)
-            ->get();
-
-        return view('page.index', ['articles' => $articles, 'comments' => $comments]);
+        return view('page.index', ['article' => $article]);
     }
 
     /**

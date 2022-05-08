@@ -16,7 +16,7 @@
             @include('partials.user._sidebar')
         </div>
         <div class="col-md-9">
-            <section class="mb-3">
+            <section class="section mb-3">
                 <div class="hr-divider">
                     <div class="hr-divider-content hr-divider-heading font-xeta">
                         Sessions

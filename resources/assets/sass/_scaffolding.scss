@@ -10,7 +10,7 @@ body {
     }
 }
 
-section {
+.section {
     padding: $section-padding;
     border: 1px solid $section-border-color;
     @include border-radius($border-radius);

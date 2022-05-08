@@ -16,7 +16,7 @@
             @include('partials.user._sidebar')
         </div>
         <div class="col-md-9">
-            <section class="mb-3">
+            <section class="section mb-3">
                 <div class="hr-divider">
                     <div class="hr-divider-content hr-divider-heading font-xeta">
                         Change your E-mail
@@ -50,7 +50,7 @@
                 {!! Form::close() !!}
             </section>
 
-            <section class="mb-3">
+            <section class="section mb-3">
                 @if (!is_null(Auth::user()->password))
                 <div class="hr-divider">
                     <div class="hr-divider-content hr-divider-heading font-xeta">
@@ -123,7 +123,7 @@
             @endif
             </section>
 
-            <section>
+            <section class="section">
                 <div class="hr-divider">
                     <div class="hr-divider-content hr-divider-heading font-xeta">
                         Delete your Account

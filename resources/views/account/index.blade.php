@@ -43,7 +43,7 @@
             @include('partials.user._sidebar')
         </div>
         <div class="col-md-9">
-            <section>
+            <section class="section">
                 <div class="hr-divider">
                     <div class="hr-divider-content hr-divider-heading font-xeta">
                         My Account

@@ -11,7 +11,7 @@
 </div>
 <div class="container pt-2 pb-4">
     <div class="col-md-12">
-        <section class="terms">
+        <section class="section terms">
             <div class="hr-divider">
                 <div class="hr-divider-content hr-divider-heading font-xeta">
                     Terms of Service
