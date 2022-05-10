@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
 use Xetaravel\Mail\Contact;
 
 class PageController extends Controller
@@ -102,5 +101,15 @@ class PageController extends Controller
         }
 
         return view('page.banished');
+    }
+
+    /**
+     *  Display my custom page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aboutme()
+    {
+        return view('page.aboutme');
     }
 }

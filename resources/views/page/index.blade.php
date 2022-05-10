@@ -151,7 +151,7 @@
 </section>
 
 <section class="section-terminal pb-5">
-    <figure class="mb-0" style="">
+    <figure class="mb-0">
 		<svg width="100%" height="150" viewBox="0 0 500 150" preserveAspectRatio="none" style="transform: rotate(180deg);" fill="#FFFFFF">
 			<path d="M0,150 L0,40 Q250,150 500,40 L580,150 Z"></path>
 		</svg>

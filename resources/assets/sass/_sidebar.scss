@@ -28,7 +28,7 @@
     margin-left: -3px;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
     .sidebar {
         position: fixed;
         top: 0;
@@ -125,6 +125,7 @@
         @include transform(translateX(-200px));
 
         .sidebar-avatar {
+            text-align: center;
             @include transform(translateX(0px));
             @include transition(transform 600ms cubic-bezier(.2, .7, .5, 1));
         }
