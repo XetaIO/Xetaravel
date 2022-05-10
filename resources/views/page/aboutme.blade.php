@@ -293,7 +293,7 @@
                         <em>Web Application Developer & Designer, learning since 10+ years in autodidact. Mainly back-end developer with PHP and the frameworks Laravel, Symfony & CakePHP.  I have also worked/work with JavaScript, TypeScript, SASS, VueJS, WebPack, Redis... I’m currently in formation at <a href="https://openclassrooms.com">OpenClassRoom</a>.</em>
                     </p>
                     <ul>
-                        <li>Chalon sur Saône, 71100</li>
+                        <li>St Marcel, 71380</li>
                         <li>
                             <a href="mailto:{{ config('xetaravel.site.contact_email') }}">{{ config('xetaravel.site.contact_email') }}</a>
                         </li>
