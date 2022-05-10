@@ -6,7 +6,8 @@
 .navbar {
   position: relative;
   padding: $navbar-padding-y $navbar-padding-x;
-  border-bottom: $navbar-border-bottom solid $navbar-border-bottom-color;
+  //border-bottom: $navbar-border-bottom solid $navbar-border-bottom-color;
+  box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
   @include transition(background-color 0.2s ease-in);
   @include clearfix;
 

@@ -111,3 +111,7 @@
   font-size: $font-size;
   @include border-radius($border-radius);
 }
+
+@mixin button-shadow($color) {
+  box-shadow: 0px 5px 30px rgba($color, 0.3);
+}

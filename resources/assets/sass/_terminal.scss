@@ -1,9 +1,12 @@
 .section-terminal {
     position:relative;
     background-color: rgb(245, 247, 249);
+    overflow: hidden;
 
     .svg-line {
-        position:absolute;
+        position: absolute;
+        left: 0;
+        top: 25%;
     }
 
     .svg-experiences {

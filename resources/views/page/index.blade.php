@@ -65,10 +65,10 @@
                     This website was made to try <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
                     Project <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
-                <a class="btn btn-outline-primary-inverse" href="{{ route('blog.article.index') }}">
+                <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
                     <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
                 </a>
-                <a class="btn btn-outline-primary-inverse" href="{{ route('discuss.index') }}">
+                <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
                     <i class="fa fa-comment-o" aria-hidden="true"></i> Visit Discuss
                 </a>
             </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <button class="navbar-toggler hidden-lg-up float-xs-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-expanded="false" aria-controls="exCollapsingNavbar2" aria-label="Toggle navigation"></button>
       <a class="navbar-brand font-xeta font-weight-bold" href="{{ route('page.index') }}">
-          <img src="{{ asset('images/logo.svg') }}" width="25" height="25" class="d-inline-block align-middle" alt="Logo">
+          <img src="{{ asset('images/logo.svg') }}" class="d-inline-block align-middle" alt="Logo">
           Xetaravel
       </a>
       <div class="collapse navbar-toggleable-md" id="exCollapsingNavbar2">
