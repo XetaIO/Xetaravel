@@ -1,5 +1,7 @@
 .section-latest-article {
     position:relative;
+    box-shadow: 0px 0px 20px 0.5px rgba(0,0,0,0.05);
+    z-index: 1;
 
     .svg-ruler {
         position:absolute;
@@ -23,7 +25,7 @@
 .latest-article {
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 .275rem .75rem -0.0625rem rgba(19,16,34,.06),0 .125rem .4rem -0.0625rem rgba(19,16,34,.03);
+    box-shadow: 0 2px 20px 5px rgba(19, 16, 34, 0.06);
 
     &-cover {
         min-height: 300px;
@@ -52,16 +54,39 @@
         padding: 10px 20px;
 
         &-featured {
+            display: flex;
+            align-items: center;
             position: absolute;
             right: -10px;
-            top: -10px;
-            padding: 8px;
-            font-family: "Cascadia Mono", sans-serif;
+            top: 10px;
+            margin: -5px 0 5px;
+            padding: 1px 5px;
+            font-size: 13px;
             font-weight: 600;
-            color: #fff;
+            color: #FFF;
             background-color: $brand-primary;
-            box-shadow: 0 .5rem 1.125rem -0.5rem $brand-primary;
-            border-radius: 10px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: $brand-primary;
+            border-radius: 3px 0 3px 3px;
+            box-shadow: 1px 1px 3px $brand-primary;
+
+            &:before {
+                content: "";
+                position: absolute;
+                top: -4px;
+                right: -1px;
+                width: 10px;
+                height: 4px;
+                background-color: $brand-primary;
+                border-top-right-radius: 3px;
+                -webkit-transform: initial;
+                transform: initial;
+            }
+
+            img {
+                margin-right: 5px;
+            }
         }
 
         &-meta {

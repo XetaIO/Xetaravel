@@ -232,10 +232,10 @@
                     </div>
 
                     <div class="col-md-8 latest-article-body">
-                        <div class="latest-article-body-featured">
-                            <img src="{{ asset('images/icons/rocket.svg') }}" alt="Rocket Icon" width="25px" height="25px">
+                        <span class="latest-article-body-featured">
+                            <img src="{{ asset('images/icons/rocket.svg') }}" alt="Rocket Icon" width="20px" height="20px">
                             Featured
-                        </div>
+                        </span>
                         <div class="latest-article-body-meta">
                             <ul class="list-inline">
                                 <li class="list-inline-item latest-article-body-meta-category" data-toggle="tooltip" title="Category">
