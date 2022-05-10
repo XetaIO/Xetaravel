@@ -33,7 +33,12 @@ mix.scripts([
     .scripts([
         'resources/assets/js/typed/typed.min.js',
         'resources/assets/js/parallax/parallax.min.js',
+        'resources/assets/js/parallax/jarallax.min.js',
     ], 'public/js/home.min.js')
+    .scripts([
+        'resources/assets/js/waypoints/noframework.waypoints.min.js',
+    ], 'public/js/noframework.waypoints.min.js')
+    .copyDirectory('resources/assets/files', 'public/files')
     .copyDirectory('resources/assets/music', 'public/music')
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/fonts', 'public/fonts')

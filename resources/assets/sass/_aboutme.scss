@@ -1,0 +1,269 @@
+.section-aboutme {
+    background-image: url(/images/aboutme/bg.jpg);
+    background-position: center;
+    background-size: cover;
+
+    &-title {
+        position: relative;
+        text-transform: uppercase;
+        padding-bottom: 20px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 120px;
+            height: 1px;
+            background: #ddd;
+            bottom: 1px;
+            left: calc(50% - 60px);
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: $brand-primary;
+            bottom: 0;
+            left: calc(50% - 20px);
+        }
+    }
+}
+.aboutme {
+    .aboutme-text {
+        margin-top: 125px;
+        font-family: 'Cascadia Mono', sans-serif;
+        font-weight: 600;
+        color: #ffffff;
+
+        &-title {
+            font-size: 55px;
+        }
+
+        &-job {
+            font-size: 38px;
+
+            span {
+                color: $brand-primary;
+            }
+        }
+    }
+}
+
+.section-whatido {
+    figure {
+        margin-bottom: -8px;
+
+        svg {
+            max-width: 100%;
+        }
+    }
+}
+
+.whatido {
+    &-subtitle {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    &-menu {
+        &-item {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.section-skills {
+    background-color: #f4f3ff;
+
+    svg {
+        margin-bottom: -8px;
+    }
+}
+
+.skills {
+    .progress {
+        height: 60px;
+        display: block;
+        background: none;
+        border-radius: 0;
+
+        .skill {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #45505b;
+        }
+    }
+
+    .progress-bar-wrap {
+        background: #FFFFFF;
+        border-radius: 2px;
+    }
+
+    .progress-bar {
+        width: 1px;
+        height: 15px;
+        transition: 0.9s;
+        background-color: $brand-primary;
+        border-radius: 2px;
+    }
+}
+
+.section-projects {
+    margin-top: -300px;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 190px;
+    box-shadow: 0 0 .625rem -0.1875rem rgba(0,0,0,.13);
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+
+    &:hover {
+        transform: translateY(-0.8rem);
+    }
+
+    &.delay-4 {
+        transition-delay: 300ms;
+    }
+
+    &-image {
+        min-width: 140px;
+        padding: 15px;
+        height: 100%;
+    }
+
+    &-body {
+        margin-left: 15px;
+        padding: 10px;
+        overflow: hidden;
+
+        &-description {
+            span {
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+/**
+ * Jarallax
+ */
+.section-resume,
+.section-aboutme {
+    position: relative;
+    color: #fff;
+
+    &.jarallax {
+        position: relative;
+        z-index: 0;
+
+        .jarallax-img {
+            position: absolute;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+         }
+     }
+ }
+
+ .section-resume {
+     svg {
+         margin-bottom: -10px;
+     }
+ }
+
+.resume {
+    .resume-title {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .resume-item {
+        position: relative;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        margin-top: -2px;
+        border-left: 2px solid $brand-primary;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50px;
+            left: -9px;
+            top: 0;
+            background: #37384d;
+            border: 2px solid $brand-primary;
+        }
+
+        &-title {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        &-years {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 3px 5px;
+            border-radius: 5px;
+            background-color: rgba(247, 248, 249, .1);
+        }
+    }
+}
+
+.section-cv {
+    position: relative;
+}
+
+.cv {
+    align-items: center;
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .aboutme > .aboutme-text {
+        margin-top: 0px;
+        margin-bottom: 100px;
+        text-align: center;
+    }
+
+    .section-projects {
+        margin-top: -250px;
+      }
+}
+
+@media (max-width: 768px) {
+    .aboutme  .aboutme-text-title {
+        font-size: 45px;
+    }
+
+    .aboutme .aboutme-text-job {
+        font-size: 30px;
+    }
+}

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']], function () {
     Route::get('/', 'PageController@index')->name('page.index');
+    Route::get('@me', 'PageController@aboutme')->name('page.aboutme');
 
     Route::get('terms', 'PageController@terms')->name('page.terms');
 
@@ -17,6 +18,8 @@ Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']],
 
     Route::post('newsletter/subscribe', 'NewsletterController@store')->name('newsletter.subscribe');
     Route::get('newsletter/unsubscribe/{email}', 'NewsletterController@delete')->name('newsletter.unsubscribe');
+
+    Route::get('download/{file}', 'DownloadsController@download')->name('downloads.show');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {

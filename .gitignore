@@ -27,6 +27,7 @@ Vagrantfile
 /public/editor-md/
 /public/css
 /public/fonts
+/public/files
 /public/images
 /public/js
 /public/music

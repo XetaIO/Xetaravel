@@ -1,6 +1,9 @@
 <?php
 namespace Xetaravel\Http\Controllers;
 
+use Illuminate\Contracts\View\View as ViewView;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request ;
 use Illuminate\Support\Facades\App;
@@ -102,5 +105,15 @@ class PageController extends Controller
         }
 
         return view('page.banished');
+    }
+
+    /**
+     *  Display my custom page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function aboutme()
+    {
+        return view('page.aboutme');
     }
 }
