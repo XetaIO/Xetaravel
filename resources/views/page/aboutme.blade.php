@@ -120,7 +120,7 @@
 <section class="section-whatido mt-8">
     <div class="container">
         <div class="row whatido">
-            <div class="col-xl-5 col-md-6">
+            <div class="col-xl-5 col-md-6 mb-3">
                 <h3 class="whatido-title mb-2">Web Development (Software)</h3>
                 <ul class="whatido-menu list-unstyled">
                     <li class="whatido-menu-item mb-1">
@@ -330,7 +330,7 @@
                             Creation of a member section (with account management), donation system (Paypal API) & administration panel with the Laravel framework.
                         </li>
                         <li>
-                            Creation of an application for managing the status of the game servers and players connected, with scheldule ()CRON) tasks, and persistence of datas with MySQL.
+                            Creation of an application for managing the status of the game servers and players connected, with scheldule tasks (CRON), and persistence of datas with MySQL.
                         </li>
                         <li>
                             Creation of an automated rewards system for donations, and collecting rewards directly in the game.
