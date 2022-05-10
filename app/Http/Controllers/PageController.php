@@ -1,9 +1,6 @@
 <?php
 namespace Xetaravel\Http\Controllers;
 
-use Illuminate\Contracts\View\View as ViewView;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request ;
 use Illuminate\Support\Facades\App;
@@ -12,7 +9,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
 use Xetaravel\Mail\Contact;
 
 class PageController extends Controller

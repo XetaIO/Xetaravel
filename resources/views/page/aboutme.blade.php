@@ -59,6 +59,38 @@
         }
     });
 
+    /**
+     *  Resume
+     */
+     let resumes = document.getElementById('resume');
+    new Waypoint({
+        element: resumes,
+        offset: '60%',
+        handler: function(direction) {
+            const items = document.getElementsByClassName('resume-item');
+
+            for (let i = 0; i < items.length; i++) {
+                items[i].style.opacity = 1;
+            }
+        }
+    });
+
+    /**
+     *  CV
+     */
+     let cv = document.getElementById('cv');
+    new Waypoint({
+        element: cv,
+        offset: '70%',
+        handler: function(direction) {
+            const items = document.getElementsByClassName('cv-item');
+
+            for (let i = 0; i < items.length; i++) {
+                items[i].style.opacity = 1;
+            }
+        }
+    });
+
 </script>
 @endpush
 
@@ -252,7 +284,7 @@
         <h2 class="section-aboutme-title font-xeta text-xs-center mb-3">
             Resume
         </h2>
-        <div class="row resume mb-1">
+        <div class="row resume mb-1" id="resume">
             <div class="col-md-6">
                 <h3 class="resume-title mb-1 mt-1">Sumary</h3>
                 <div class="resume-item">
@@ -361,7 +393,7 @@
         <h2 class="section-aboutme-title font-xeta text-xs-center mb-3">
             Contact
         </h2>
-        <div class="row cv">
+        <div class="row cv" id="cv">
             <div class="col-xl-5 col-md-6 cv-item">
                 <h3 class="cv-title mb-2">Curriculum Vitae</h3>
                 {{ link_to(route('downloads.show', 'Fevre_Emeric_CV.pdf'), '<i class="fas fa-arrow-alt-circle-down"></i> Download CV', ['class' => 'btn btn-outline-primary btn-lg mb-2'], null, false) }}
