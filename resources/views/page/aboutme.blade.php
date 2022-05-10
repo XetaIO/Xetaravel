@@ -2,7 +2,7 @@
 {!! config(['app.title' => 'About Me']) !!}
 
 @push('meta')
-  <x-meta title="About Me" />
+  <x-meta title="About Me" description="Welcome to my custom personnal page ! You will find a custom made Curriculum Vitae using CSS & JS with all informations you need to know about me !" />
 @endpush
 
 @push('scripts')
