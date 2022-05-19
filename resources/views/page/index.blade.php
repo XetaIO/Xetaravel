@@ -5,30 +5,11 @@
   <x-meta title="Welcome !" />
 @endpush
 
-@push('style')
-    <style>
-    @media (min-width: 993px) {
-        .bg-white {
-            background-color: transparent !important;
-        }
-        .navbar {
-            border-bottom: none;
-        }
-        .navbar-brand {
-            color: #ffffff !important;
-        }
-        .navbar-hello-text {
-            color: #ffffff !important;
-        }
-    }
-    </style>
-@endpush
-
 @push('scripts')
 <script src="{{ mix('js/home.min.js') }}"></script>
 <script type="text/javascript">
     var options = {
-        strings: ['<span class="token comment terminal-unselectable" spellcheck="true"><span class="hljs-comment"># Create the project and install librairies</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">composer</span> create-project xetaio/xetaravel <span class="token operator">&lt;</span>application_name<span class="token operator">&gt;</span><br/><br/><span class="token comment terminal-unselectable" spellcheck="true"><span class="hljs-comment"># Run the migration and seed the database</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">php</span> artisan migrate<br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">php</span> artisan db:seed<br/><br/><span class="token comment terminal-unselectable" spellcheck="true"><span class="hljs-comment"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">php</span> artisan vendor:publish --provider<span class="token operator">=</span><span class="token string"><span class="hljs-string">"Xetaio\\Editor\\EditorServiceProvider"</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">npm</span> run install<br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">npm</span> run production'],
+        strings: ['<span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Create the project and install librairies</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">composer</span> create-project xetaio/xetaravel <span class="token operator">&lt;</span>application_name<span class="token operator">&gt;</span><br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Run the migration and seed the database</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan migrate<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan db:seed<br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan vendor:publish --provider<span class="token operator">=</span><span class="token string"><span class="hljs-string">"Xetaio\\Editor\\EditorServiceProvider"</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run install<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run production'],
         typeSpeed: 40,
         backSpeed: 2,
         backDelay: 50000,
@@ -40,7 +21,7 @@
     var typed = new Typed('.terminal-container-code', options);
 
     var options2 = {
-        strings: ['Welcome on <span class="text-primary font-xeta">Xetaravel</span> !'],
+        strings: ['Welcome on <span class="text-primary font-xetaravel">Xetaravel</span> !'],
         typeSpeed: 100,
         loop: false,
         showCursor: false,
@@ -55,24 +36,31 @@
 @endpush
 
 @section('content')
-<section class="showcase">
-    <div id="particles"></div>
-    <div class="container pt-9 pb-9">
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <h1 class="xetaravel-typed"></h1>
-                <p class="description">
-                    This website was made to try <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
-                    Project <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
+<section class="relative bg-gray-800 py-14 overflow-hidden" style="min-height: 465px;">
+    <div id="particles" class="absolute top-0 bottom-0 right-0 left-0 pointer-events-none" style=""></div>
+    <div class="lg:container w-full mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-slate-300">
+            <div class="flex flex-col items-center justify-center text-center lg:px-8">
+                <h1 class="xetaravel-typed font-bold font-['ubuntu'] text-4xl"></h1>
+                <p class="mb-4">
+                    This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
+                    Project <i class="fa fa-code text-primary font-bold"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
-                <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
-                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
-                </a>
-                <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
-                    <i class="fa fa-comment-o" aria-hidden="true"></i> Visit Discuss
-                </a>
+                <div>
+                    <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg> Visit the Blog
+                    </a>
+                    <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                        </svg> Visit Discuss
+                    </a>
+                </div>
+
             </div>
-            <div class="col-lg-5 offset-lg-1">
+            <div>
                 <div id="parallax-header" class="parallax mx-auto" style="max-width: 526px;">
                     <div class="parallax-layer position-relative" data-depth="0.1">
                         <img src="{{ asset('images/parallax/layer01.svg') }}" alt="Layer">
@@ -107,93 +95,87 @@
     </div>
 </section>
 
-<section class="section-features-box pb-3" id="change-navbar">
-    <figure class="svg-line">
+<section class="relative pt-20 pb-20 overflow-hidden">
+    <figure class="absolute right-0 top-0 -z-10">
         <img src="{{ asset('images/figures/svg-line.svg') }}" alt="SVG Line">
 	</figure>
-    <figure class="svg-glass-pot">
+    <figure class="absolute top-0 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot.svg') }}" alt="SVG Glass Pot">
 	</figure>
-    <figure class="svg-compass">
+    <figure class="absolute right-0 top-2/3 lg:top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-compass.svg') }}" alt="SVG Compass">
 	</figure>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="features-box">
-                    <img class="features-box-image" src="{{ asset('images/icons/code.svg') }}" alt="Code Icon">
-                    <div class="features-box-title font-xeta">Open Source</div>
-                    <p class="text-muted">
-                        The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank">Github</a>. If you want to contribute, feel free to do a PR.
-                    </p>
-                </div>
+    <div class="lg:container w-full mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
+            <div>
+                <img class="h-36 mx-auto" src="{{ asset('images/icons/code.svg') }}" alt="Code Icon">
+                <div class="font-xetaravel text-2xl">Open Source</div>
+                <p class="text-gray-500 dark:text-current">
+                    The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank" class="text-primary">Github</a>. If you want to contribute, feel free to do a PR.
+                </p>
             </div>
-            <div class="col-md-4">
-                <div class="features-box">
-                    <img class="features-box-image" src="{{ asset('images/icons/experiences.svg') }}" alt="Experiences Icon">
-                    <div class="features-box-title font-xeta">Experiences</div>
-                    <p class="text-muted">
-                    I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
-                    </p>
-                </div>
+            <div>
+                <img class="h-36 mx-auto" src="{{ asset('images/icons/experiences.svg') }}" alt="Experiences Icon">
+                <div class="font-xetaravel text-2xl">Experiences</div>
+                <p class="text-gray-500 dark:text-current">
+                I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
+                </p>
             </div>
-            <div class="col-md-4">
-                <div class="features-box">
-                    <img class="features-box-image" src="{{ asset('images/icons/chat.svg') }}" alt="Chat Icon">
-                    <div class="features-box-title font-xeta">Interact</div>
-                    <p class="text-muted">
-                    You can interact with Xetaravel's members in the {{ link_to(route('blog.article.index'), 'Blog') }}, {{ link_to(route('discuss.index'), 'Discuss') }} or directly with me via the {{ link_to(route('page.contact'), 'Contact') }} page.
-                    </p>
-                </div>
+            <div>
+                <img class="h-36 mx-auto" src="{{ asset('images/icons/chat.svg') }}" alt="Chat Icon">
+                <div class="font-xetaravel text-2xl">Interact</div>
+                <p class="text-gray-500 dark:text-current">
+                You can interact with Xetaravel's members in the {{ link_to(route('blog.article.index'), 'Blog', ['class' => 'text-primary']) }}, {{ link_to(route('discuss.index'), 'Discuss', ['class' => 'text-primary']) }} or directly with me via the {{ link_to(route('page.contact'), 'Contact', ['class' => 'text-primary']) }} page.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section-terminal pb-5">
+<section class="relative pb-5 bg-slate-100 overflow-hidden">
     <figure class="mb-0">
-		<svg width="100%" height="150" viewBox="0 0 500 150" preserveAspectRatio="none" style="transform: rotate(180deg);" fill="#FFFFFF">
+		<svg width="100%" height="150" viewBox="0 0 500 150" preserveAspectRatio="none" style="transform: rotate(180deg);" fill="hsl(var(--b1))">
 			<path d="M0,150 L0,40 Q250,150 500,40 L580,150 Z"></path>
 		</svg>
 	</figure>
-    <figure class="svg-line">
+    <figure class="absolute left-0 top-1/2">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#f7c32e">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
 	</figure>
-    <figure class="svg-pen">
+    <figure class="absolute left-[10%] top-2/3">
         <img src="{{ asset('images/figures/svg-pen.svg') }}" alt="SVG Pen">
 	</figure>
-    <figure class="svg-experiences">
+    <figure class="absolute right-0 top-1/3">
         <img src="{{ asset('images/figures/svg-experiences.svg') }}" alt="SVG Experiences">
     </figure>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-header-dot">
-                            <span class="bg-danger rounded-circle"></span>
-                            <span class="bg-warning rounded-circle"></span>
-                            <span class="bg-success rounded-circle"></span>
+    <div class="lg:container w-full mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="col-span-8 px-3 lg:px-0 overflow-scroll">
+                <div class="relative bg-[color:#2d333b] text-neutral-content w-full shadow-sm rounded-md">
+                    <div class="relative py-3 px-4">
+                        <div class="flex">
+                            <span class="bg-red-500 h-3 w-3 mr-1 rounded-full"></span>
+                            <span class="bg-yellow-500 h-3 w-3 mr-1 rounded-full"></span>
+                            <span class="bg-green-500 h-3 w-3 mr-1 rounded-full"></span>
                         </div>
-                        <div class="terminal-header-title">terminal</div>
+                        <div class="absolute top-[6px] left-0 w-full font-['Cascadia_Mono,sans-serif'] font-bold text-center">terminal</div>
                     </div>
 
-                    <div class="terminal-container">
-                        <div class="terminal-container-tabs">
-                            <div class="terminal-container-tabs-bash">
-                                <img src="{{ asset('images/icons/tab-icon.svg') }}" alt="Tab Icon"> Bash
+                    <div class="bg-[color:rgba(27,31,35,.6)] border border-solid border-transparent rounded-b-md mb-8 overflow-hidden">
+                        <div class="flex bg-[color:rgba(27,31,35,.6)]">
+                            <div class="bg-[radial-gradient(136.36%_136.36%_at_50.24%_-36.36%,#3d434c_0,#2d333b_100%)] w-1/5 text-center border-b border-solid border-[color:#1e2127] p-2">
+                                <img class="inline-block align-middle" src="{{ asset('images/icons/tab-icon.svg') }}" alt="Tab Icon"> Bash
                             </div>
-                            <div class="terminal-container-tabs-empty"></div>
+                            <div class="w-4/5"></div>
                         </div>
-                        <pre class="language-shell"><code class="terminal-container-code language-shell hljs"></code></pre>
+                        <pre class="language-shell"><code class="terminal-container-code language-shell hljs bg-[color:#2d333b] text-neutral-content font-['Cascadia_Mono'] h-96 block text-base font-light p-3"></code></pre>
 
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4" style="background-color: #f5f7f9;">
+            <div class="col-span-4" style="background-color: #f5f7f9;">
                 <div class="text-xs-center">
                     <img class="installation-image" src="{{ asset('images/icons/coding.svg') }}" alt="Tab Icon">
                 </div>
@@ -394,11 +376,6 @@
 @endsection
 
 @push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.btn-header-register-login').removeClass('btn-outline-primary').addClass('btn-outline-primary-inverse');
-        });
-    </script>
     <script type="text/javascript">
     particlesJS('particles', {
         "particles": {

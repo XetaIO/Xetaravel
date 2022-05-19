@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,21 +15,35 @@
         @stack('meta')
 
         <!-- Styles -->
-        <link href="{{ mix('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ mix('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
-        <link href="{{ mix('css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/font-awesome-all.min.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/xetaravel.libs.min.css') }}" rel="stylesheet">
         <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <!-- Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('xetaravel.site.analytics_tracker_code') }}"></script>
-        <script>
+        <script type="text/javascript">
+            /**
+             * Gogole Analytics
+             */
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', '{{ config('xetaravel.site.analytics_tracker_code') }}');
+
+            /**
+             * Dark Mode
+             * On page load or when changing themes, best to add inline in `head` to avoid FOUC
+             */
+            if (localStorage.getItem('nightMode') === 'dark' || (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.dataset.theme = "dark";
+            } else {
+                document.documentElement.classList.remove('light');
+                document.documentElement.dataset.theme = "light";
+            }
+
         </script>
 
         <!-- Embed Styles -->
@@ -40,30 +54,42 @@
     </head>
     <body>
 
-        <div id="app-vue">
-            <!-- Header -->
-            @include('elements.header')
+        <div id="xetaravel-vue">
 
-            <!-- Flash Messages -->
-            @include('elements.flash')
+            <div class="drawer">
+                <!-- Toggle Responsive-->
+                <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
 
-            <!-- Content -->
-            @yield('content')
+                <div class="drawer-content flex flex-col">
+                    <!-- Header -->
+                    @include('elements.header')
+
+                    <!-- Flash Messages -->
+                    @include('elements.flash')
+
+                    <main>
+                        <!-- Content -->
+                        @yield('content')
+                    </main>
+
+                    <!-- Footer -->
+                    @include('elements.footer')
+
+                </div>
+
+                <!-- Sidebar -->
+                @include('elements.sidebar')
+            </div>
         </div>
-
-
-        <!-- Footer -->
-        @include('elements.footer')
-
-        <!-- Scripts -->
-        <script src="{{ mix('js/lib.min.js') }}"></script>
 
         <!-- CSRF JS Token -->
         <script type="text/javascript">
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
+
+        <!-- Scripts -->
+        <script src="{{ mix('js/lib.min.js') }}"></script>
         <script src="{{ mix('js/xetaravel.min.js') }}"></script>
-        <script src="https://kit.fontawesome.com/61f38896f8.js" crossorigin="anonymous"></script>
 
         <!-- Embed Scripts -->
         @stack('scripts')

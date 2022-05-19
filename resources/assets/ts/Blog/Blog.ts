@@ -15,12 +15,12 @@ export default class Blog
      */
     protected deleteCommentModal()
     {
-        $('#deleteCommentModal').on('show.bs.modal', function (event: any) {
+        /*$('#deleteCommentModal').on('show.bs.modal', function (event: any) {
             var button = $(event.relatedTarget);
             var route = button.data('form-action');
 
             var modal = $('#deleteCommentModal');
             modal.find('#deleteCommentForm').attr('action', route);
-        });
+        });*/
     }
 }

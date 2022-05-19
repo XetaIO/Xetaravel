@@ -22,9 +22,10 @@ mix.webpackConfig({
 mix.js([
         'resources/assets/js/xetaravel.admin.js',
         'resources/assets/ts/Xetaravel.admin.ts'
-    ], 'public/js/xetaravel.admin.min.js').vue()
+    ], 'public/js/xetaravel.admin.min.js')
     .js([
         'resources/assets/js/xetaravel.js',
         'resources/assets/ts/Xetaravel.ts'
-    ], 'public/js/xetaravel.min.js').vue()
+    ], 'public/js/xetaravel.min.js')
+    .vue()
     .version();

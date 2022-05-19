@@ -47,7 +47,7 @@ export default class Comment
      */
     protected initEditButton()
     {
-        this.buttons = document.getElementsByClassName('postEditButton');
+        /*this.buttons = document.getElementsByClassName('postEditButton');
 
         let __this = this;
 
@@ -83,6 +83,6 @@ export default class Comment
                     });
 
             }, false);
-        });
+        });*/
     }
 }

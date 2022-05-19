@@ -1,19 +1,28 @@
 import './bootstrap';
 import './vue';
+import Dismiss from './libs/dismiss.js'
 
-$(document).ready(function () {
+export default {
+    Dismiss
+}
+
+//const tsParticles = require("tsparticles-engine");
+
+
+
+/*$(document).ready(function () {
     "use strict";
 
     $("body").tooltip({
         selector: "[data-toggle=tooltip]"
     });
 
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover();*/
 
     /**
      * ScrollUp.
      */
-    $.scrollUp({
+    /*$.scrollUp({
         scrollName: "scrollUp",
         scrollDistance: 300,
         scrollFrom: "top",
@@ -27,12 +36,12 @@ $(document).ready(function () {
         scrollImg: 0,
         activeOverlay: 0,
         zIndex: 1001
-    });
+    });*/
 
     /**
      * Navbar
      */
-    var minWidth = 767,
+    /*var minWidth = 767,
         navbar = $('#change-navbar'),
         offset = navbar.offset(),
         width = window.innerWidth;
@@ -53,7 +62,7 @@ $(document).ready(function () {
             }
         });
     }
-});
+});*/
 
 /*app = {
 

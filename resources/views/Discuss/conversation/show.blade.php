@@ -44,7 +44,7 @@
 @endpush
 
 @section('content')
-<div class="discuss-conversation-header-container pb-1 pt-4">
+<div class="discuss-conversation-header pb-1 pt-4">
     <div class="blog-header mt-2">
         <div class="container text-xs-center">
             <ul class="discuss-conversation-header-badges d-inline-block">

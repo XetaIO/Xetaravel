@@ -15,12 +15,19 @@ export default class Discuss
      */
     protected deletePostModal()
     {
-        $('#deletePostModal').on('show.bs.modal', function (event: any) {
+        /*const modal = document.getElementById('deletePostModal');
+        console.log(modal);
+        modal.addEventListener('show.bs.modal', function(event) {
+            console.log(event);
+
+        });*/
+        /*$('#deletePostModal').on('show.bs.modal', function (event: any) {
+            console.log(event);
             var button = $(event.relatedTarget);
             var route = button.data('form-action');
 
             var modal = $('#deletePostModal');
             modal.find('#deletePostForm').attr('action', route);
-        });
+        });*/
     }
 }

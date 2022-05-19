@@ -178,7 +178,7 @@
                 let notifsCount = this.notifications.reduce(function (count, notif) {
                     return count + (notif.read_at === null ? 1 : 0);
                 }, 0);
-                this.$parent.$refs.toggle_notifications.setAttribute("data-number", '(' + notifsCount + ')');
+                this.$parent.$refs.toggle_notifications_number.setAttribute("data-number", '(' + notifsCount + ')');
             },
 
             /**

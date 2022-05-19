@@ -39,3 +39,4 @@ Vagrantfile
 /storage/media-library
 /storage/framework/browscap.ini
 /vendor
+/resources/assets/sass/OLD

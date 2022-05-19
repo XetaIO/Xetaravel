@@ -1,37 +1,42 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "npm run development",
-    "development": "mix",
-    "watch-js": "mix watch -- --watch-poll --env.mixfile=webpack.js.mix",
-    "watch-sass": "mix watch -- --watch-poll --env.mixfile=webpack.sass.mix",
-    "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
-    "hot": "mix watch --hot",
-    "prod": "npm run production",
-    "production": "mix --production"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
-    "@types/node": "^7.10.13",
-    "axios": "^0.21",
-    "jquery": "^3.5.1",
-    "laravel-mix": "^6.0.6",
-    "lodash": "^4.17.19",
-    "postcss": "^8.3.1",
-    "prettier": "2.6.0",
-    "resolve-url-loader": "^5.0",
-    "sass": "^1.49.9",
-    "sass-loader": "^12.1.0",
-    "sprintf-js": "^1.1.2",
-    "ts-loader": "^9.2.8",
-    "typescript": "^3.9.10",
-    "vue": "^2.6.12",
-    "vue-loader": "^15.9.8",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "dependencies": {
-    "moment": "^2.29.0"
-  }
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch-js": "mix watch -- --watch-poll --env.mixfile=webpack.js.mix",
+        "watch-sass": "mix watch --env.mixfile=webpack.sass.mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+        "@popperjs/core": "^2.11.5",
+        "@types/node": "^7.10.13",
+        "autoprefixer": "^10.4.7",
+        "axios": "^0.21",
+        "daisyui": "^2.14.3",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "moment": "^2.29.0",
+        "postcss": "^8.4.13",
+        "postcss-loader": "^6.2.1",
+        "prettier": "2.6.0",
+        "resolve-url-loader": "^5.0",
+        "sass": "^1.51.0",
+        "sass-loader": "^12.6.0",
+        "sprintf-js": "^1.1.2",
+        "tailwindcss": "^3.0.24",
+        "ts-loader": "^9.2.8",
+        "typescript": "^3.9.10",
+        "vue": "^2.6.12",
+        "vue-loader": "^15.9.8",
+        "vue-template-compiler": "^2.6.14"
+    },
+    "dependencies": {
+        "tsparticles": "^2.0.6"
+    }
 }
