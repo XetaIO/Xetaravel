@@ -59,6 +59,11 @@ jobs:
             - name: Publish vendors
               run: php artisan vendor:publish --provider="Xetaio\Editor\EditorServiceProvider"
 
+            - name: Install JS
+              run: |
+                npm install
+                npm run production
+
             - name: Execute tests
               run: vendor/bin/phpunit --coverage-clover build/logs/coverage.xml
               env:
