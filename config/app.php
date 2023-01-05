@@ -177,7 +177,6 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Xetaio\Mentions\Providers\MentionServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Laravel\Tinker\TinkerServiceProvider::class,
         Phattarachai\LaravelMobileDetect\AgentServiceProvider::class,
 
         /*

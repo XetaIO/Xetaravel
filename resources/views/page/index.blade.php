@@ -65,12 +65,24 @@
                     This website was made to try <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
                     Project <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
-                <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
-                    <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
-                </a>
-                <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
-                    <i class="fa fa-comment-o" aria-hidden="true"></i> Visit Discuss
-                </a>
+                <div class="row">
+                    <div class="col-lg-12 mb-3">
+                        <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
+                        </a>
+                        <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
+                            <i class="fa fa-comment-o" aria-hidden="true"></i> Visit Discuss
+                        </a>
+                    </div>
+                    <div class="col-lg-12 mb-2">
+                        <p class="font-weight-bold">
+                            Want to hire me ? Check my online CV !
+                        </p>
+                        <a class="btn btn-primary btn-primary-shadow" href="{{ route('page.aboutme') }}">
+                            <i class="far fa-address-card" aria-hidden="true"></i> Check Emeric's CV
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-5 offset-lg-1">
                 <div id="parallax-header" class="parallax mx-auto" style="max-width: 526px;">
