@@ -43,4 +43,5 @@ mix.scripts([
     .copyDirectory('resources/assets/images', 'public/images')
     .copyDirectory('resources/assets/fonts', 'public/fonts')
     .copyDirectory('resources/assets/editor-md', 'public/editor-md')
+    .sourceMaps()
     .version();

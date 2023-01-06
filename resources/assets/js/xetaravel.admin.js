@@ -3,6 +3,44 @@ require('./bootstrap');
 $(document).ready(function () {
     "use strict";
 
+    /**
+     * Console
+     */
+    let consoleGreenTitle = 'color:#a3f5a3;background:#2f4052;font-weight:bold;';
+    let consoleGreenMessage = "\n %c  %c HELLO ! %c  %c  Don't forget that this website is open-source ! https://github.com/XetaIO/Xetaravel  %c  \n\n";
+    let consoleGreenWidth = 'padding:5px 0;';
+    let consoleGreenColor = 'color:#fff;';
+    let consoleGreenPrimaryBackground = 'background:#5ccc5c;';
+    let consoleGreenCornerBackground = 'background:#a3f5a3;';
+
+    console.log.apply(console, [
+        consoleGreenMessage,
+        consoleGreenPrimaryBackground + consoleGreenWidth,
+        consoleGreenTitle + consoleGreenWidth,
+        consoleGreenCornerBackground + consoleGreenWidth,
+        consoleGreenColor + consoleGreenPrimaryBackground + consoleGreenWidth,
+        consoleGreenCornerBackground + consoleGreenWidth
+    ]);
+
+    let consoleRedTitle = 'color:#e44;background:#2f4052;font-weight:bold;';
+    let consoleRedMessage = "\n %c  %c ATTENTION %c  %c  DONT RUN ANY SCRIPT HERE ! IT WILL HAVE FULL ACCESS TO YOUR BROWSER AND YOUR ACCOUNT ! https://en.wikipedia.org/wiki/Self-XSS  %c  \n\n";
+    let consoleRedWidth = 'padding:5px 0;';
+    let consoleRedColor = 'color:#fff;';
+    let consoleRedPrimaryBackground = 'background:#c22;';
+    let consoleRedCornerBackground = 'background:#e44;';
+
+    console.log.apply(console, [
+        consoleRedMessage,
+        consoleRedPrimaryBackground + consoleRedWidth,
+        consoleRedTitle + consoleRedWidth,
+        consoleRedCornerBackground + consoleRedWidth,
+        consoleRedColor + consoleRedPrimaryBackground + consoleRedWidth,
+        consoleRedCornerBackground + consoleRedWidth
+    ]);
+
+    /**
+     * Bootstrap
+     */
     $("body").tooltip({
         selector: "[data-toggle=tooltip]"
     });

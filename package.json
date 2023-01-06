@@ -12,9 +12,6 @@
     "production": "mix --production"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@types/node": "^18.11.18",
     "autoprefixer": "^10.4.8",
     "axios": "^1.1.2",
     "jquery": "^3.5.1",
@@ -26,8 +23,6 @@
     "sass": "^1.54.4",
     "sass-loader": "^12.6.0",
     "sprintf-js": "^1.1.2",
-    "ts-loader": "^9.2.8",
-    "typescript": "^3.9.10",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.8",
     "vue-template-compiler": "^2.6.14"
