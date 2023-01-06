@@ -180,24 +180,27 @@ $(document).ready(function () {
         }
     };
 
-    sidebarTrigger.addEventListener('click', function(event) {
-        event.preventDefault();
+    // User not connected, no sidebar.
+    if (sidebarTrigger != null) {
+        sidebarTrigger.addEventListener('click', function(event) {
+            event.preventDefault();
 
-        if (sidebar.classList.contains('sidebar-opened')) {
-            closeSidebar();
-        } else {
-            sidebar.classList.remove('sidebar-closed');
-            sidebar.classList.add('sidebar-opened');
-
-            sidebarOverlay.classList.add('sidebar-overlay');
-            sidebar.parentNode.appendChild(sidebarOverlay);
-
-            sidebarOverlay.addEventListener('click', function() {
+            if (sidebar.classList.contains('sidebar-opened')) {
                 closeSidebar();
-                sidebarOverlay.removeEventListener('click', this);
-            });
-        }
-    }, false);
+            } else {
+                sidebar.classList.remove('sidebar-closed');
+                sidebar.classList.add('sidebar-opened');
+
+                sidebarOverlay.classList.add('sidebar-overlay');
+                sidebar.parentNode.appendChild(sidebarOverlay);
+
+                sidebarOverlay.addEventListener('click', function() {
+                    closeSidebar();
+                    sidebarOverlay.removeEventListener('click', this);
+                });
+            }
+        }, false);
+    }
 });
 
 /*app = {

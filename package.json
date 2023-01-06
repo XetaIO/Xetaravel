@@ -3,8 +3,6 @@
   "scripts": {
     "dev": "npm run development",
     "development": "mix",
-    "watch-js": "mix watch -- --watch-poll --env.mixfile=webpack.js.mix",
-    "watch-sass": "mix watch -- --watch-poll --env.mixfile=webpack.sass.mix",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
