@@ -36,7 +36,7 @@
         <img class="blog-post-banner mb-1" src="{{ $article->article_banner }}" alt="Article image">
 
         <div class="blog-post-content">
-            {!! Markdown::convertToHtml(Str::limit($article->content, 650)) !!}
+            {!! Markdown::convert(Str::limit($article->content, 650)) !!}
         </div>
 
         <div class="blog-footer">

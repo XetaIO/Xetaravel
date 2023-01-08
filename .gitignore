@@ -19,6 +19,7 @@ vagrant-ssh
 after.sh
 aliases
 Vagrantfile
+laravel.log
 /node_modules
 /plugins
 /public/storage/

@@ -5,7 +5,7 @@
   <x-meta
     title="{{ e($conversation->title) }}"
     author="{{ $conversation->user->username }}"
-    description="{!! Markdown::convertToHtml($conversation->firstPost->content) !!}"
+    description="{!! Markdown::convert($conversation->firstPost->content) !!}"
 />
 @endpush
 

@@ -12,7 +12,7 @@ trait DiscussPostPresenter
      */
     public function getContentMarkdownAttribute(): string
     {
-        return Markdown::convertToHtml($this->content);
+        return Markdown::convert($this->content);
     }
 
     /**
