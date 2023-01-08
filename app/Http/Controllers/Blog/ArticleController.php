@@ -26,6 +26,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::with('category', 'user')
+            ->orderByDesc('created_at')
             ->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
         return view('Blog::article.index', ['articles' => $articles, 'breadcrumbs' => $this->breadcrumbs]);
