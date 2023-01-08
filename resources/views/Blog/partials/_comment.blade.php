@@ -129,7 +129,7 @@
         {{-- User Signature --}}
         @empty (!$comment->user->signature)
             <div class="comment-post-signature">
-                {!! Markdown::convertToHtml($comment->user->signature) !!}
+                {!! Markdown::convert($comment->user->signature) !!}
             </div>
         @endempty
 

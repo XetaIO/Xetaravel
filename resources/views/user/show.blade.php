@@ -186,7 +186,7 @@
                 </div>
                 <div class="biography pt-1 pb-2">
                     @if (!empty($user->biography))
-                        {!! Markdown::convertToHtml($user->biography) !!}
+                        {!! Markdown::convert($user->biography) !!}
                     @else
                         @if (Auth::user() && $user->id == Auth::id())
                             You don't have set a biography.
@@ -241,7 +241,7 @@
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
                                     {!! Html::link($article->article_url, $article->title, ['class' => 'title text-primary']) !!}
                                     <div>
-                                        {!! Markdown::convertToHtml(Str::limit($article->content, 275)) !!}
+                                        {!! Markdown::convert(Str::limit($article->content, 275)) !!}
                                     </div>
                                     <time>
                                         Created at {{ $article->created_at->format('H:i:s Y-m-d') }}
@@ -269,7 +269,7 @@
                                     {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
                                     {!! Html::link($comment->comment_url, $comment->article->title, ['class' => 'title text-primary']) !!}
                                     <div>
-                                        {!! Markdown::convertToHtml(Str::limit($comment->content, 275)) !!}
+                                        {!! Markdown::convert(Str::limit($comment->content, 275)) !!}
                                     </div>
                                     <time>
                                         Created at {{ $comment->created_at->format('H:i:s Y-m-d') }}

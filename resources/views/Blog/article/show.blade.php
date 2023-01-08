@@ -5,7 +5,7 @@
     <x-meta
         title="{{ $article->title }}"
         author="{{ $article->user->username }}"
-        description="{!! Markdown::convertToHtml($article->content) !!}"
+        description="{!! Markdown::convert($article->content) !!}"
         url="{{ $article->article_url }}"
     />
 @endpush
@@ -78,7 +78,7 @@
                 </div>
                 <img class="blog-article-banner mb-1" src="{{ $article->article_banner }}" alt="Article image">
                 <div>
-                    {!! Markdown::convertToHtml($article->content) !!}
+                    {!! Markdown::convert($article->content) !!}
                 </div>
             </div>
 
@@ -141,7 +141,7 @@
                     </h2>
 
                     <p class="author-body-subtitle text-muted">
-                        {!! Markdown::convertToHtml($article->user->signature) !!}
+                        {!! Markdown::convert($article->user->signature) !!}
                     </p>
                 </div>
             </div>

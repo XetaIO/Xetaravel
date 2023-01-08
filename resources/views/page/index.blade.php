@@ -272,7 +272,7 @@
                         </h3>
 
                         <div class="latest-article-body-text">
-                            {!! Markdown::convertToHtml(Str::limit($article->content, 200)) !!}
+                            {!! Markdown::convert(Str::limit($article->content, 200)) !!}
                         </div>
 
                         <hr/>

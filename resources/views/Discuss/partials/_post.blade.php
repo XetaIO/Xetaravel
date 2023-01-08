@@ -190,7 +190,7 @@
             {{-- User Signature --}}
             @empty (!$post->user->signature)
                 <div class="discuss-conversation-signature">
-                    {!! Markdown::convertToHtml($post->user->signature) !!}
+                    {!! Markdown::convert($post->user->signature) !!}
                 </div>
             @endempty
         </div>
