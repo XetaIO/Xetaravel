@@ -7,12 +7,14 @@
 					<div class="col-md-6">
 						<h3 class="footer-title mb-1">Utils</h3>
 						<ul class="list-unstyled">
-							<li class="mb-1">
-								{{ link_to(route('users.auth.register'), '<i class="fa fa-user-plus"></i> Register', ['class' => 'btn btn-outline-primary-inverse'], null, false) }}
-							</li>
-							<li class="mb-1">
-								{{ link_to(route('users.auth.login'), '<i class="fa fa-sign-in"></i> Login', ['class' => 'btn btn-outline-primary'], null, false) }}
-							</li>
+							@notauth
+								<li class="mb-1">
+									{{ link_to(route('users.auth.register'), '<i class="fa fa-user-plus"></i> Register', ['class' => 'btn btn-outline-primary-inverse'], null, false) }}
+								</li>
+								<li class="mb-1">
+									{{ link_to(route('users.auth.login'), '<i class="fa fa-sign-in"></i> Login', ['class' => 'btn btn-outline-primary'], null, false) }}
+								</li>
+							@endauth
 							<li class="mb-1">
 								<a href="{{ route('blog.article.index') }}">
 									Blog
