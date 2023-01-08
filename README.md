@@ -18,7 +18,7 @@
 > [xetaravel.com](https://xetaravel.com)
 >
 > ## Administration Preview
-> ![Admin](https://cloud.githubusercontent.com/assets/8210023/25923017/d958c432-35db-11e7-8306-92fc3406aed8.png)
+> ![Admin](https://user-images.githubusercontent.com/8210023/211190032-bc1bbcdf-a189-41ae-8636-8b6c287e20e3.png)
 >
 > ## Discuss Preview
 > ![Discuss](https://user-images.githubusercontent.com/8210023/159991685-d2b53d9f-7d55-4cf5-b0c7-6066cee5572a.png)
@@ -67,6 +67,8 @@
 > This project implements many features and will implements more in the future. Here's a list of the features developed in Xetaravel :
 >
 > * ###### Blog
+>     * Articles
+>         * Media
 >     * Categories
 >     * Comments
 >
@@ -88,6 +90,13 @@
 >         * Categories
 >     * Roles Management
 >     * Permissions Management
+>     * Settings Management
+>
+> * ###### Others
+>     * Experiences system (based on posts, comments etc)
+>     * Rubies system (virtual currency) (based on posts, comments etc)
+>     * Newsletter
+>     * Sessions management (multiple connected device)
 >
 > # Contribute
 > If you want to contribute, please [follow this guide](https://github.com/XetaIO/Xetaravel/blob/master/.github/CONTRIBUTING.md).
