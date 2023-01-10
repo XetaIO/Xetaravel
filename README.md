@@ -97,6 +97,8 @@
 >     * Rubies system (virtual currency) (based on posts, comments etc)
 >     * Newsletter
 >     * Sessions management (multiple connected device)
+>     * Notifications
+>     * Badges
 >
 > # Contribute
 > If you want to contribute, please [follow this guide](https://github.com/XetaIO/Xetaravel/blob/master/.github/CONTRIBUTING.md).
