@@ -25,13 +25,8 @@ laravel.log
 /public/storage/
 /public/coverage/
 /public/vendor/editor.md/
-/public/editor-md/
 /public/css/
-/public/fonts/
-/public/files/
-/public/images/
 /public/js/
-/public/music/
 /public/media/
 /public/tests/
 /public/mix.*.js

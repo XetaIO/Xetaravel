@@ -54,9 +54,4 @@ mix.scripts([
     .scripts([
         'resources/assets/js/waypoints/noframework.waypoints.min.js',
     ], 'public/js/noframework.waypoints.min.js')
-    .copyDirectory('resources/assets/files', 'public/files')
-    .copyDirectory('resources/assets/music', 'public/music')
-    .copyDirectory('resources/assets/images', 'public/images')
-    .copyDirectory('resources/assets/fonts', 'public/fonts')
-    .copyDirectory('resources/assets/editor-md', 'public/editor-md')
     .version();

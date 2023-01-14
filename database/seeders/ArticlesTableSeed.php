@@ -121,7 +121,7 @@ class Comment extends Model
         // Update avatars
         foreach ($articles as $article) {
             $model = \Xetaravel\Models\Article::where('slug', $article['slug'])->first();
-            $model->addMedia(resource_path('assets/images/articles/default_banner.jpg'))
+            $model->addMedia(public_path('images/articles/default_banner.jpg'))
                 ->preservingOriginal()
                 ->setName(substr(md5($article['slug']), 0, 10))
                 ->setFileName(substr(md5($article['slug']), 0, 10) . '.jpg')
