@@ -74,7 +74,7 @@ class ArticleController extends Controller
         $article->save();
 
         // Default banner for the article.
-        $banner = resource_path('assets/images/articles/default_banner.jpg');
+        $banner = public_path('images/articles/default_banner.jpg');
 
         if (!is_null($request->file('banner'))) {
             $banner = $request->file('banner');
@@ -151,7 +151,7 @@ class ArticleController extends Controller
 
         if (!is_null($request->file('banner')) || $article->article_banner == '/images/articles/default_banner.jpg') {
             // Default banner for the article.
-            $banner = resource_path('assets/images/articles/default_banner.jpg');
+            $banner = public_path('images/articles/default_banner.jpg');
 
             if (!is_null($request->file('banner'))) {
                 $banner = $request->file('banner');

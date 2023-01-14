@@ -94,7 +94,7 @@ class UsersTableSeed extends Seeder
         // Update avatars
         foreach ($users as $user) {
             $model = \Xetaravel\Models\User::where('username', $user['username'])->first();
-            $model->addMedia(resource_path('assets/images/avatar.png'))
+            $model->addMedia(public_path('images/avatar.png'))
                 ->preservingOriginal()
                 ->setName(substr(md5($user['username']), 0, 10))
                 ->setFileName(substr(md5($user['username']), 0, 10) . '.png')
