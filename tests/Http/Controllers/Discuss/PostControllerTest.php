@@ -55,6 +55,7 @@ class PostControllerTest extends TestCase
 
         $this->post('/discuss/post/create', $data);
         $response = $this->post('/discuss/post/create', $data);
+
         $response->assertSessionHas('danger');
         $response->assertStatus(302);
     }
