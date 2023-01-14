@@ -1,7 +1,7 @@
 import './bootstrap';
 import './vue';
 
-$(document).ready(function () {
+jQuery(function() {
     "use strict";
 
     /**
