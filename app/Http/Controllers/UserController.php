@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Xetaravel\Models\Badge;
 use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Validators\UserValidator;
+use Xetaravel\Utility\UserUtility;
 
 class UserController extends Controller
 {
@@ -77,7 +79,20 @@ class UserController extends Controller
             $user->profile_url
         );
 
-        return view('user.show', compact('user', 'articles', 'comments', 'breadcrumbs'));
+        $badges = Badge::all();
+
+        //$level = UserUtility::getLevel($user->experiences_total);
+        $level = UserUtility::getLevel(650);
+
+        if ($level['maxLevel'] == true) {
+            $level['currentProgression'] = 100;
+        } elseif ($level['matchExactXPLevel'] == true) {
+            $level['currentProgression'] = 0;
+        } else {
+            $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience'])*100;
+        }
+
+        return view('user.show', compact('user', 'articles', 'comments', 'breadcrumbs', 'level', 'badges'));
     }
 
     /**

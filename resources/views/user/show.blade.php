@@ -6,6 +6,157 @@
 @endpush
 
 @section('content')
+<div class="container pt-6 pb-0">
+    <div class="row profile">
+        <div class="col-lg-4">
+            <div class="sidebar-profile">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="avatar">
+                            {!! Html::image($user->avatar_small, 'Avatar', ['width' => '120', 'height' => '120']) !!}
+                        </div>
+                        <div class="mt-1 font-xeta username">
+                            {{ $user->username }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="role">
+                            @foreach ($user->roles as $role)
+                                <span style="{{ $role->css }}">{{ $role->name }}</span>
+                            @endforeach
+                        </div>
+
+                        <span class="joinedDate">
+                    Joined<br>
+                    {{ $user->created_at->format('d-m-Y') }}
+                </span>
+
+                        <ul class="social">
+                            @if ($user->facebook)
+                                <li class="list-inline-item">
+                                    {!! Html::link(
+                                        url('http://facebook.com/' . e($user->facebook)),
+                                        '<i class="fa fa-facebook"></i>',
+                                        [
+                                            'class' => 'text-primary',
+                                            'target' => '_blank',
+                                            'data-toggle' => 'tooltip',
+                                            'data-placement' => 'top',
+                                            'title' => 'http://facebook.com/' . e($user->facebook)
+                                        ],
+                                        null,
+                                        false
+                                    ) !!}
+                                </li>
+                            @endif
+                            @if ($user->twitter)
+                                <li class="list-inline-item">
+                                    {!! Html::link(
+                                        url('http://twitter.com/' . e($user->twitter)),
+                                        '<i class="fa fa-twitter"></i>',
+                                        [
+                                            'class' => 'text-primary',
+                                            'target' => '_blank',
+                                            'data-toggle' => 'tooltip',
+                                            'data-placement' => 'top',
+                                            'title' => 'http://twitter.com/' . e($user->twitter)
+                                        ],
+                                        null,
+                                        false
+                                    ) !!}
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row align-content-end">
+                <div class="col-lg-4 ">
+                    <div class="profile-box">
+                        <i aria-hidden="true" class="fa fa-star profile-box-icon-experiences fa-5x" style="color: #f39c12;"></i>
+                        <div class="features-box-title">
+                            {{ $user->experiences_total }}
+                        </div>
+                        <p class="text-muted">
+                            Total Experiences
+                        </p>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="profile-box">
+                        <i aria-hidden="true" class="fa fa-diamond text-primary profile-box-icon fa-5x"></i>
+                        <div class="features-box-title">
+                            {{ $user->rubies_total }}
+                        </div>
+                        <p class="text-muted">
+                            Total Rubies
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="profile-box">
+                        <i aria-hidden="true" class="fa fa-comment-o profile-box-icon-comment fa-5x"></i>
+                        <div class="profile-box-title">
+                            {{ $user->discuss_post_count }}
+                        </div>
+                        <p class="text-muted">
+                            Total Discuss Messages
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container pt-2 pb-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="badges pt-1 pb-2">
+                    <ul class="list-inline">
+                        @foreach ($badges as $badge)
+                            @if ($badge->slug !== 'topleaderboard')
+                                <li class="list-inline-item">
+                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="top" data-trigger="hover" style="color:{{ $user->badges->contains($badge->id) ? $badge->color : '#ddd' }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between">
+                <div class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{ $level['currentLevelExperience'] }} XP needed for Level {{ $level['currentLevel'] }}">
+                    LEVEL {{ $level['currentLevel'] }}
+                </div>
+                <div class="font-weight-bold">
+                    @if($level['maxLevel'] != true)
+                        <span data-toggle="tooltip" data-placement="top" title="{{ $level['nextLevelExperience'] }} XP needed for Level {{ $level['nextLevel'] }}">
+                            LEVEL {{ $level['nextLevel'] }}
+                        </span>
+                    @else
+                        <span data-toggle="tooltip" data-placement="top" title="You have reached the max level, what a machine !">
+                            MAX LEVEL
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar font-weight-bold" role="progressbar" style="width: {{ $level['currentProgression'] }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $level['currentUserExperience'] }} XP</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <div class="profile-container">
     <div class="profile-header">
         <div class="background-container">
@@ -101,6 +252,11 @@
                             </li>
                         @endif
                     </ul>
+                </div>
+                <div class="col-md-12">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
                 </div>
             </div>
         </div>

@@ -128,17 +128,12 @@
 }
 
 .profile {
-    .section {
-        padding: 25px 30px;
-        border: 1px solid #e1e8ed;
-        border-radius: $border-radius;
-    }
-
     .sidebar-profile {
         text-align: center;
-        padding: 30px 60px 20px;
-        border: 1px solid #e1e8ed;
-        border-radius: $border-radius;
+        padding: 10px 10px 10px ;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 20px 5px rgb(19 16 34 / 6%);
 
         img {
             width: 120px;
@@ -148,12 +143,20 @@
             border-radius: 50%;
         }
 
+        .username {
+            font-size: 22px;
+        }
+
         .role,
         .joinedDate,
         .social {
             display: block;
             padding: 10px 0;
             border-top: 1px dotted #ddd;
+        }
+
+        .role {
+            border-top: 0px;
         }
     }
 
@@ -170,9 +173,24 @@
         }
     }
 
-    .biography,
-    .badges {
-        border-top: 2px solid #eceeef;
+    .profile-box {
+        padding: 20px;
+        text-align: center;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 20px 5px rgb(19 16 34 / 6%);
+
+        .profile-box-icon-experiences {
+            color: $brand-experiences;
+        }
+
+        .profile-box-icon-comment {
+            color: $brand-success;
+        }
+
+        .profile-box-title {
+            font-size: 25px;
+        }
     }
 }
 
@@ -195,140 +213,19 @@
     }
 }
 
-@include media-breakpoint-down(md) {
-    .sidebar-profile {
-        margin-bottom: 30px;
-    }
-}
-
 @include media-breakpoint-up(lg) {
-
-    .sidebar-profile {
-        &.fixed {
-            position: fixed;
-            top: 60px;
-        }
-    }
-}
-
-@include media-breakpoint-down(lg) {
-
     .profile {
-        .sidebar-profile {
-            padding: 30px 30px 20px;
-        }
-    }
-
-    .sidebar-profile.fixed {
-        width: 210px;
-    }
-}
-
-@include media-breakpoint-up(xl) {
-
-    .sidebar-profile.fixed {
-        width: 255px;
-    }
-}
-
-
-
-
-@media (max-width: 560px) {
-    .profile-container {
-        .profile-header-navbar {
-            .socials {
-                display: none;
-            }
+        .sidebar-profile,
+        .profile-box {
+            min-height: 100%;
         }
     }
 }
-@media (max-width: 768px) {
-    .profile-container {
-        padding-top: 0px;
-    }
-}
-@media (max-width: 1100px) {
-    .profile-container {
-        .profile-information {
-            padding-top: 25px;
-        }
-    }
-}
-@media (min-width: 1000px) {
-    .profile-container {
-        .profile-header {
-            height: 280px;
-        }
-    }
-}
-@media (min-width: 1100px) {
-    .profile-container {
-        .profile-header {
-            height: 300px;
-        }
-    }
-}
-@media (min-width: 1200px) {
-    .profile-container {
-        .profile-header {
-            height: 320px;
-        }
-    }
-}
-@media (min-width: 1370px) {
-    .profile-container {
-        .profile-header {
-            height: 360px;
-        }
-    }
-}
-@media (min-width: 1450px) {
-    .profile-container {
-        .profile-header {
-            height: 380px;
-        }
-    }
-}
-@media (min-width: 1510px) {
-    .profile-container {
-        .profile-header {
-            height: 420px;
-        }
-    }
-}
-@media (min-width: 1670px) {
-    .profile-container {
-        .profile-header {
-            height: 460px;
-        }
-    }
-}
-@media (min-width: 1820px) {
-    .profile-container {
-        .profile-header {
-            height: 500px;
-        }
-    }
-}
-@media (min-width: 1990px) {
-    .profile-container {
-        .profile-header {
-            height: 540px;
-        }
-    }
-}
-@media (min-width: 2150px) {
-    .profile-container {
-        .profile-header {
-            height: 580px;
-        }
-    }
-}
-@media (min-width: 2300px) {
-    .profile-container {
-        .profile-header {
-            height: 600px;
+@include media-breakpoint-down(lg) {
+    .profile {
+        .sidebar-profile,
+        .profile-box {
+            margin-bottom: 20px;
         }
     }
 }
