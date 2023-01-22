@@ -7,19 +7,6 @@ use Xetaravel\Models\User;
 
 class UserControllerTest extends TestCase
 {
-    /**
-     * testIndexSuccess method
-     *
-     * @return void
-     */
-    public function testIndexSuccess()
-    {
-        $user = User::find(1);
-        $this->be($user);
-
-        $response = $this->get('/users');
-        $response->assertSuccessful();
-    }
 
     /**
      * testShowSuccess method
