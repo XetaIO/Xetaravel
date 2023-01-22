@@ -25,25 +25,9 @@ class UserController extends Controller
 
         $action = Route::getFacadeRoot()->current()->getActionMethod();
 
-        if (in_array($action, ['index', 'show'])) {
-            $this->breadcrumbs->addCrumb('Users', route('users.user.index'));
+        if (in_array($action, ['show'])) {
+            $this->breadcrumbs->addCrumb('Profile', route('page.index'));
         }
-    }
-
-    /**
-     * Show all the users.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index(): View
-    {
-        $users = User::with('Account')
-            ->orderBy('created_at', 'desc')
-            ->paginate(config('xetaravel.pagination.user.user_per_page'));
-
-        $breadcrumbs = $this->breadcrumbs;
-
-        return view('user.index', compact('users', 'breadcrumbs'));
     }
 
     /**
@@ -70,8 +54,23 @@ class UserController extends Controller
             ->get();
 
         $comments = $user->comments()
+            ->with('article')
             ->latest()
             ->take(config('xetaravel.pagination.user.comments_profile_page'))
+            ->get();
+
+        $discussPosts = $user->discussPosts()
+            ->join('discuss_conversations', 'discuss_posts.conversation_id', '=', 'discuss_conversations.id')
+            ->where('discuss_conversations.first_post_id', '!=', 'discuss_posts.id')
+            ->select(
+                'discuss_posts.*',
+                'discuss_conversations.first_post_id AS conversation_first_post_id',
+                'discuss_conversations.title AS conversation_title',
+                'discuss_conversations.slug AS conversation_slug',
+                'discuss_conversations.id AS conversation_id'
+            )
+            ->orderBy('discuss_posts.created_at', 'DESC')
+            ->take(config('xetaravel.pagination.user.posts_profile_page'))
             ->get();
 
         $breadcrumbs = $this->breadcrumbs->addCrumb(
@@ -81,8 +80,15 @@ class UserController extends Controller
 
         $badges = Badge::all();
 
+        //dd($discussPosts);
+
+        $articles = collect($articles);
+
+        $activities = $articles->merge($comments)->merge($discussPosts)->sortBy('created_at', SORT_NATURAL, true);
+        //dd($activities);
+
         //$level = UserUtility::getLevel($user->experiences_total);
-        $level = UserUtility::getLevel(650);
+        $level = UserUtility::getLevel($user->experiences_total);
 
         if ($level['maxLevel'] == true) {
             $level['currentProgression'] = 100;
@@ -92,7 +98,10 @@ class UserController extends Controller
             $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience'])*100;
         }
 
-        return view('user.show', compact('user', 'articles', 'comments', 'breadcrumbs', 'level', 'badges'));
+        return view(
+            'user.show',
+            compact('user', 'activities', 'articles', 'comments', 'breadcrumbs', 'level', 'badges')
+        );
     }
 
     /**

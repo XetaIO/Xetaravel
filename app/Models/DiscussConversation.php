@@ -107,7 +107,7 @@ class DiscussConversation extends Model
                 $category->save();
             }
 
-            // Set the forgein keys to null, else it won't delete since it delete
+            // Set the foreign keys to null, else it won't delete since it delete
             // the posts before the conversation.
             $model->first_post_id = null;
             $model->last_post_id = null;
