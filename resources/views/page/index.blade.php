@@ -79,7 +79,7 @@
                             Want to hire me ? Check my online CV !
                         </p>
                         <a class="btn btn-primary btn-primary-shadow" href="{{ route('page.aboutme') }}">
-                            <i class="far fa-address-card" aria-hidden="true"></i> Check Emeric's CV
+                            <i class="far fa-address-card" aria-hidden="true"></i> Check my CV
                         </a>
                     </div>
                 </div>
