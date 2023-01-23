@@ -6,282 +6,275 @@
 @endpush
 
 @section('content')
-<div class="profile-container">
-    <div class="profile-header">
-        <div class="background-container">
-            {!! Html::image($user->profile_background, 'Profile background', ['class' => 'background']) !!}
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="profile-information text-xs-center">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <div class="topleaderboard">
-                                @if ($user->badges()->where('slug', 'topleaderboard')->exists())
-                                    <?php $badge = $user->badges()->where('slug', 'topleaderboard')->first(); ?>
-                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="bottom" data-trigger="hover" style="color:{{ $badge->color }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
-                                @endif
-
-                                    {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle']) !!}
-                            </div>
-
-                            <h2 class="username font-xeta">
-                                {{ $user->username }}
-                            </h2>
-                            @if ($user->full_name !== $user->username)
-                                <h4 class="full-name">
-                                    {{ $user->full_name }}
-                                </h4>
-                            @endif
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="profile-header-navbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="statistics list-inline pull-left">
-                        <li class="list-inline-item">
-                            <span class="text">Comments</span>
-                            <span class="number">
-                                {{ $user->comment_count }}
-                            </span>
-                        </li>
-                        <li class="list-inline-item">
-                            <span class="text">Articles</span>
-                            <span class="number">
-                                {{ $user->article_count }}
-                            </span>
-                        </li>
-                    </ul>
-
-                    <ul class="socials list-inline pull-right">
-                        @if ($user->facebook)
-                            <li class="list-inline-item">
-                                {!! Html::link(
-                                    url('http://facebook.com/' . e($user->facebook)),
-                                    '<i class="fa fa-facebook fa-2x"></i>',
-                                    [
-                                        'class' => 'text-primary',
-                                        'target' => '_blank',
-                                        'data-toggle' => 'tooltip',
-                                        'data-placement' => 'top',
-                                        'title' => 'http://facebook.com/' . e($user->facebook)
-                                    ],
-                                    null,
-                                    false
-                                ) !!}
-                            </li>
-                        @endif
-                        @if ($user->twitter)
-                            <li class="list-inline-item">
-                                {!! Html::link(
-                                    url('http://twitter.com/' . e($user->twitter)),
-                                    '<i class="fa fa-twitter fa-2x"></i>',
-                                    [
-                                        'class' => 'text-primary',
-                                        'target' => '_blank',
-                                        'data-toggle' => 'tooltip',
-                                        'data-placement' => 'top',
-                                        'title' => 'http://twitter.com/' . e($user->twitter)
-                                    ],
-                                    null,
-                                    false
-                                ) !!}
-                            </li>
-                        @endif
-                        @if (Auth::user() && $user->id == Auth::id())
-                            <li class="list-inline-item" style="padding: 10px;">
-                                {!! Html::link(route('users.account.index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container pt-1 pb-4">
+<div class="container pt-6">
     <div class="row">
         <div class="col-md-12">
             {!! $breadcrumbs->render() !!}
         </div>
     </div>
-    <div class="row profile">
-        <div class="col-lg-3">
-            <section id="sidebar-profile" class="sidebar-profile section">
-                <div class="avatar">
-                    {!! Html::image($user->avatar_small, 'Avatar', ['width' => '120', 'height' => '120']) !!}
-                </div>
-                <h4 class="mt-1 font-xeta">
-                    {{ $user->username }}
-                </h4>
-
-                <div class="role">
-                    @foreach ($user->roles as $role)
-                        <span style="{{ $role->css }}">{{ $role->name }}</span>
-                    @endforeach
-                </div>
-
-                <span class="joinedDate">
-                    Joined<br>
-                    {{ $user->created_at->format('d-m-Y') }}
-                </span>
-
-                <ul class="social">
-                    @if ($user->facebook)
-                        <li class="list-inline-item">
-                            {!! Html::link(
-                                url('http://facebook.com/' . e($user->facebook)),
-                                '<i class="fa fa-facebook fa-2x"></i>',
-                                [
-                                    'class' => 'text-primary',
-                                    'target' => '_blank',
-                                    'data-toggle' => 'tooltip',
-                                    'data-placement' => 'top',
-                                    'title' => 'http://facebook.com/' . e($user->facebook)
-                                ],
-                                null,
-                                false
-                            ) !!}
-                        </li>
-                    @endif
-                    @if ($user->twitter)
-                        <li class="list-inline-item">
-                            {!! Html::link(
-                                url('http://twitter.com/' . e($user->twitter)),
-                                '<i class="fa fa-twitter fa-2x"></i>',
-                                [
-                                    'class' => 'text-primary',
-                                    'target' => '_blank',
-                                    'data-toggle' => 'tooltip',
-                                    'data-placement' => 'top',
-                                    'title' => 'http://twitter.com/' . e($user->twitter)
-                                ],
-                                null,
-                                false
-                            ) !!}
-                        </li>
-                    @endif
-                </ul>
-            </section>
+    <div class="col-lg-12 mt-2 mb-2">
+        <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
+            Profile
         </div>
+    </div>
+    <div class="row profile">
+        <div class="col-lg-4">
+            <div class="profile-sidebar">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="profile-sidebar-avatar">
+                            @if ($user->badges()->where('slug', 'topleaderboard')->exists())
+                                    <?php $badge = $user->badges()->where('slug', 'topleaderboard')->first(); ?>
+                                <i aria-hidden="true"
+                                   data-toggle="popover"
+                                   class="profile-badges-item {{ $badge->icon }}"
+                                   title="{{ $badge->name }}"
+                                   data-content="{{ $badge->description }}"
+                                   data-placement="bottom"
+                                   data-trigger="hover"
+                                   style="border-color: #eefc24;background-color: {{ $badge->color }} ">
+                                </i>
+                            @endif
+                            {!! Html::image($user->avatar_small, 'Avatar', ['width' => '120', 'height' => '120']) !!}
+                        </div>
+                        <div class="mt-1 font-xeta profile-sidebar-username">
+                            {{ $user->username }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="profile-sidebar-role">
+                            @foreach ($user->roles as $role)
+                                <span style="{{ $role->css }}">{{ $role->name }}</span>
+                            @endforeach
+                        </div>
 
-        <div class="col-lg-9">
-            <section class="section">
-                <div class="hr-divider">
-                    <div class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
-                        @if (Auth::user() && $user->id == Auth::id())
-                            Your Biography
-                        @else
-                            His Biography
-                        @endif
+                        <span class="profile-sidebar-joinedDate">
+                            Joined<br>
+                            {{ $user->created_at->format('d-m-Y') }}
+                        </span>
+
+                        <ul class="profile-sidebar-social">
+                            @if ($user->facebook)
+                                <li class="list-inline-item">
+                                    {!! Html::link(
+                                        url('http://facebook.com/' . e($user->facebook)),
+                                        '<i class="fa fa-facebook"></i>',
+                                        [
+                                            'class' => 'text-primary',
+                                            'target' => '_blank',
+                                            'data-toggle' => 'tooltip',
+                                            'data-placement' => 'top',
+                                            'title' => 'http://facebook.com/' . e($user->facebook)
+                                        ],
+                                        null,
+                                        false
+                                    ) !!}
+                                </li>
+                            @endif
+                            @if ($user->twitter)
+                                <li class="list-inline-item">
+                                    {!! Html::link(
+                                        url('http://twitter.com/' . e($user->twitter)),
+                                        '<i class="fa fa-twitter"></i>',
+                                        [
+                                            'class' => 'text-primary',
+                                            'target' => '_blank',
+                                            'data-toggle' => 'tooltip',
+                                            'data-placement' => 'top',
+                                            'title' => 'http://twitter.com/' . e($user->twitter)
+                                        ],
+                                        null,
+                                        false
+                                    ) !!}
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
-                <div class="biography pt-1 pb-2">
-                    @if (!empty($user->biography))
-                        {!! Markdown::convert($user->biography) !!}
-                    @else
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row" style="height: 100%">
+                <div class="col-lg-4 ">
+                    <div class="profile-box" data-toggle="popover" title="" data-html="true" data-content="<b>{{ $level['experienceNeededNextLevel'] }}</b> <i>experiences to go before next level.</i>" data-trigger="hover" data-placement="bottom">
+                        <i aria-hidden="true" class="fa fa-star profile-box-icon-experiences fa-5x" style="color: #f39c12;"></i>
+                        <div class="features-box-title">
+                            {{ $user->experiences_total }}
+                        </div>
+                        <p class="text-muted">
+                            Total Experiences
+                        </p>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="profile-box">
+                        <i aria-hidden="true" class="fa fa-diamond text-primary profile-box-icon fa-5x"></i>
+                        <div class="features-box-title">
+                            {{ $user->rubies_total }}
+                        </div>
+                        <p class="text-muted">
+                            Total Rubies
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="profile-box">
+                        <i aria-hidden="true" class="fa fa-comment-o profile-box-icon-comment fa-5x"></i>
+                        <div class="profile-box-title">
+                            {{ $user->discuss_post_count }}
+                        </div>
+                        <p class="text-muted">
+                            Total Discuss Messages
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-12 mt-2 mb-2">
+            <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
+                Biography
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="biography-section d-flex">
+                <div class="biography-icon">
+                    <i class="fas fa-quote-left fa-2x text-primary"></i>
+                </div>
+                <div class="biography-content">
+                    @empty($user->biography)
                         @if (Auth::user() && $user->id == Auth::id())
                             You don't have set a biography.
                             {!! Html::link(route('users.account.index'), '<i class="fa fa-plus"></i> Add now', ['class' => 'btn btn-outline-primary'], null, false) !!}
                         @else
                             This user hasn't set a biography yet.
                         @endif
-                    @endif
-                </div>
-
-                <div class="hr-divider">
-                    <div class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
-                        @if (Auth::user() && $user->id == Auth::id())
-                            Your Badges
-                        @else
-                            His Badges
-                        @endif
-                    </div>
-                </div>
-                <div class="badges pt-1 pb-2">
-                    @if ($user->badges->isNotEmpty())
-                        @foreach ($user->badges as $badge)
-                            @if ($badge->slug !== 'topleaderboard')
-                                    <li class="list-inline-item">
-                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="top" data-trigger="hover" style="color:{{ $badge->color }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
-                                </li>
-                            @endif
-                        @endforeach
                     @else
-                        @if (Auth::user() && $user->id == Auth::id())
-                            You don't have unlocked a badge yet.
-                        @else
-                            This user hasn't unlocked a badge yet.
-                        @endif
-                    @endif
+                        {!! Markdown::convert($user->biography) !!}
+                    @endempty
                 </div>
-
-                @if ($user->articles->isNotEmpty())
-                    <div class="hr-divider">
-                        <div class="hr-divider-content hr-divider-heading font-xeta text-xs-center">
-                            @if (Auth::user() && $user->id == Auth::id())
-                                Your latest Articles in the Blog
-                            @else
-                                His latest Articles in the Blog
-                            @endif
-                        </div>
-                    </div>
-                    <table class="table table-profile">
-                        @foreach ($articles as $article)
-                            <tr>
-                                <td>
-                                    {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
-                                    {!! Html::link($article->article_url, $article->title, ['class' => 'title text-primary']) !!}
-                                    <div>
-                                        {!! Markdown::convert(Str::limit($article->content, 275)) !!}
-                                    </div>
-                                    <time>
-                                        Created at {{ $article->created_at->format('H:i:s Y-m-d') }}
-                                    </time>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                @endif
-
-                @if ($user->comments->isNotEmpty())
-                    <div class="hr-divider">
-                        <h4 class="font-xeta text-xs-center">
-                            @if (Auth::user() && $user->id == Auth::id())
-                                Your latest Comments in the Blog
-                            @else
-                                His latest Comments in the Blog
-                            @endif
-                        </h4>
-                    </div>
-                    <table class="table table-profile">
-                        @foreach ($comments as $comment)
-                            <tr>
-                                <td>
-                                    {!! Html::image($user->avatar_small, 'Avatar', ['class' => 'img-thumbnail avatar']) !!}
-                                    {!! Html::link($comment->comment_url, $comment->article->title, ['class' => 'title text-primary']) !!}
-                                    <div>
-                                        {!! Markdown::convert(Str::limit($comment->content, 275)) !!}
-                                    </div>
-                                    <time>
-                                        Created at {{ $comment->created_at->format('H:i:s Y-m-d') }}
-                                    </time>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                @endif
-            </section>
+            </div>
         </div>
     </div>
 </div>
+<div class="container pt-4 pb-4">
+    <div class="row">
+        <div class="col-lg-12 mt-2 mb-2">
+            <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
+                Badges
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="badges">
+                    <ul class="list-inline">
+                        @foreach ($badges as $badge)
+                            @if ($badge->slug !== 'topleaderboard')
+                                <li class="list-inline-item">
+                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="top" data-trigger="hover" style="color:{{ $user->badges->contains($badge->id) ? $badge->color : '#ddd' }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
 
+            </div>
+        </div>
+
+        <div class="col-lg-12 mt-2 mb-2">
+            <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
+                Level
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between">
+                <div class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{ $level['currentLevelExperience'] }} XP needed for Level {{ $level['currentLevel'] }}">
+                    LEVEL {{ $level['currentLevel'] }}
+                </div>
+                <div class="font-weight-bold">
+                    @if($level['maxLevel'] != true)
+                        <span data-toggle="tooltip" data-placement="top" title="{{ $level['nextLevelExperience'] }} XP needed for Level {{ $level['nextLevel'] }}">
+                            LEVEL {{ $level['nextLevel'] }}
+                        </span>
+                    @else
+                        <span data-toggle="tooltip" data-placement="top" title="You have reached the max level, what a machine !">
+                            MAX LEVEL
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar font-weight-bold" role="progressbar" style="width: {{ $level['currentProgression'] }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ $level['currentUserExperience'] }} XP</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container pt-2 pb-4">
+    <div class="row">
+        @if (Auth::user() && $user->id == Auth::id())
+            <div class="col-lg-12 text-xs-right">
+                {!! Html::link(route('users.account.index'), 'Edit my profile', ['class' => 'btn btn-outline-primary']) !!}
+            </div>
+        @endif
+        <div class="col-lg-12">
+            <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
+                Activity
+            </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+            @if($activities->isEmpty())
+                <div class="mb-1 text-xs-center">
+                    This user does not have any activities.
+                </div>
+            @else
+                @foreach($activities as $activity)
+                    <div class="activities-section">
+                        <div class="activities-date">
+                            <time datetime="{{ $activity->created_at->format('Y-m-d H:i:s') }}" title="{{ $activity->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
+                                {{ $activity->created_at->diffForHumans() }}
+                            </time>
+                        </div>
+                        <div class="activities-icon">
+                            @if(get_class($activity) == \Xetaravel\Models\Article::class)
+                                <i class="fa fa-newspaper-o"></i>
+                            @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class && $activity->id === $activity->conversation_first_post_id)
+                                <i class="fas fa-newspaper"></i>
+                            @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class)
+                                <i class="far fa-comments"></i>
+                            @elseif(get_class($activity) == \Xetaravel\Models\Comment::class)
+                                <i class="far fa-comment-alt"></i>
+                            @endif
+                        </div>
+                        <div class="activities-content">
+                            <p class="activities-content-title">
+                                @if(get_class($activity) == \Xetaravel\Models\Article::class)
+                                    Created article <a href="{{ $activity->article_url }}">{{ Str::limit($activity->title, 150) }}</a>
+                                @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class && $activity->id === $activity->conversation_first_post_id)
+                                    Created conversation <a href="{{ route('discuss.conversation.show', ['slug' => $activity->conversation_slug, 'id' => $activity->conversation_id]) }}">{{ Str::limit($activity->conversation_title, 150) }}</a>
+                                @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class)
+                                    Replied to <a href="{{ route('discuss.conversation.show', ['slug' => $activity->conversation_slug, 'id' => $activity->conversation_id]) }}">{{ Str::limit($activity->conversation_title, 150) }}</a>
+                                @elseif(get_class($activity) == \Xetaravel\Models\Comment::class)
+                                    Replied to article <a href="{{ $activity->article->article_url }}">{{ Str::limit($activity->article->title, 150) }}</a>
+                                @endif
+                            </p>
+                            <div class="activities-content-text">
+                                @if(get_class($activity) == \Xetaravel\Models\Article::class)
+                                    {!! Markdown::convert(Str::limit($activity->content, 650)) !!}
+                                @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class && $activity->id === $activity->conversation_first_post_id)
+                                    {!! Markdown::convert(Str::limit($activity->content, 650)) !!}
+                                @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class)
+                                    {!! Markdown::convert(Str::limit($activity->content, 650)) !!}
+                                @elseif(get_class($activity) == \Xetaravel\Models\Comment::class)
+                                    {!! Markdown::convert(Str::limit($activity->content, 650)) !!}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+</div>
 @endsection
