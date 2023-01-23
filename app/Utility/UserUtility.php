@@ -68,7 +68,14 @@ class UserUtility
         20000 //50
     ];
 
-    public static function getLevel(int $userXP)
+    /**
+     * Get the level of a user with his experiences.
+     *
+     * @param int $userXP The XP of the user to get the level.
+     *
+     * @return array
+     */
+    public static function getLevel(int $userXP): array
     {
         $infos = [
             'previousLevelExperience' => 0,
