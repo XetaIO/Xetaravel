@@ -224,8 +224,10 @@
             </div>
         </div>
         <div class="col-lg-10 offset-lg-1">
-            @empty($activities)
-                This user does not have any activities.
+            @if($activities->isEmpty())
+                <div class="mb-1 text-xs-center">
+                    This user does not have any activities.
+                </div>
             @else
                 @foreach($activities as $activity)
                     <div class="activities-section">
@@ -271,7 +273,7 @@
                         </div>
                     </div>
                 @endforeach
-            @endempty
+            @endif
         </div>
     </div>
 </div>
