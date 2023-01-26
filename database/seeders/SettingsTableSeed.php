@@ -52,6 +52,15 @@ class SettingsTableSeed extends Seeder
                 'description' => 'Enable/Disable the Discuss system.',
                 'created_at' => $now,
                 'updated_at' => $now
+            ],
+            [
+                'name' => 'shop.enabled',
+                'value_int' => null,
+                'value_str' => null,
+                'value_bool' => true,
+                'description' => 'Enable/Disable the Shop system.',
+                'created_at' => $now,
+                'updated_at' => $now
             ]
         ];
 

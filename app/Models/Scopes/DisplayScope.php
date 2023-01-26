@@ -15,7 +15,7 @@ class DisplayScope implements Scope
      *
      * @return void
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(Builder $builder, Model $model): void
     {
         $builder->where('is_display', '=', true);
     }

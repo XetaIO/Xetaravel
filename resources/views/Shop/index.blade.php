@@ -1,18 +1,14 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Blog']) !!}
+{!! config(['app.title' => 'Shop']) !!}
 
 @push('meta')
-    <x-meta title="Blog" />
+    <x-meta title="Shop" />
 @endpush
 
 @section('content')
 <div class="container pb-1 pt-4">
-    <div class="blog-header mt-2">
-        <div class="container">
-            <div class="blog-post-title">
-                Blog
-            </div>
-        </div>
+    <div class="shop-title mt-2">
+        Xeticons Shop
     </div>
 </div>
 <hr />
@@ -24,11 +20,11 @@
 
     <div class="row">
         <div class="col-lg-9">
-            @include('Blog::partials._articles')
+            @include('Shop::partials._items')
         </div>
 
         <div class="col-lg-3">
-            @include('Blog::partials._sidebar')
+            @include('Shop::partials._sidebar')
         </div>
 
     </div>

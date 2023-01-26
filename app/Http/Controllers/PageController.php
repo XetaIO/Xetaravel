@@ -66,7 +66,7 @@ class PageController extends Controller
             'message' => 'required|min:10',
         ];
 
-        // Bipass the captcha for the unit testing.
+        // Bypass the captcha for the unit testing.
         if (App::environment() !== 'testing') {
             $rules = array_merge($rules, ['g-recaptcha-response' => 'required|captcha']);
         }
@@ -91,7 +91,7 @@ class PageController extends Controller
     /**
      * Display the banished page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function banished()
     {

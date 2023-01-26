@@ -16,13 +16,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // View
         View::addNamespace('Admin', base_path() . '/resources/views/Admin');
         View::addNamespace('Blog', base_path() . '/resources/views/Blog');
         View::addNamespace('Auth', base_path() . '/resources/views/Auth');
         View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
+        View::addNamespace('Shop', base_path() . '/resources/views/Shop');
 
         // Pagination
         Paginator::defaultView('vendor.pagination.bootstrap-4');
@@ -70,7 +71,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }

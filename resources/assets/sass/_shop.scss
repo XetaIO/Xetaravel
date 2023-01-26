@@ -1,0 +1,39 @@
+/*
+ * Shop
+ */
+
+.shop {
+    &-title {
+        font-size: 40px;
+    }
+}
+
+/*
+ * Shop Item
+ */
+.shop-item {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px 5px rgb(19 16 34 / 6%);
+
+    &-header {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    &-body {
+        margin: auto;
+        max-height: 100px;
+        max-width: 100px;
+
+        &-icon {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    &-footer {
+
+    }
+}

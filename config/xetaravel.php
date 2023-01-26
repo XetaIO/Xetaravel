@@ -45,6 +45,9 @@ return [
         'discuss' => [
             'conversation_per_page' => 15,
             'post_per_page' => 10
+        ],
+        'shop' => [
+            'item_per_page' => 10,
         ]
     ],
 
@@ -88,5 +91,17 @@ return [
         'categories_sidebar' => 15,
         // The number in days.
         'info_message_old_conversation' => 92
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Shop
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+    'shop' => [
+        'categories_sidebar' => 15,
+        'items_sidebar' => 5
     ]
 ];

@@ -1,5 +1,5 @@
 <?php
-namespace Xetaravel\Http\Controllers\Discuss;
+namespace Xetaravel\Http\Controllers\Shop;
 
 use Xetaravel\Http\Controllers\Controller as BaseController;
 
@@ -12,6 +12,7 @@ class Controller extends BaseController
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Discuss', route('discuss.index'));
+        $this->breadcrumbs->removeListElementClasses('breadcrumb');
+        $this->breadcrumbs->addCrumb('Shop', route('shop.index'));
     }
 }

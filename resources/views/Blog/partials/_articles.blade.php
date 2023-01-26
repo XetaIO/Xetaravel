@@ -52,6 +52,6 @@
     </div>
 @endforelse
 
-<div class="col-md 12 text-xs-center">
+<div class="col-lg-12 text-xs-center">
     {{ $articles->render() }}
 </div>

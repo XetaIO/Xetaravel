@@ -5,6 +5,7 @@ namespace Xetaravel\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Xetaravel\Models\Article;
+use Xetaravel\Models\ShopItem;
 use Xetaravel\Models\Scopes\DisplayScope;
 
 class EnableDisplayScopeMiddleware
@@ -20,6 +21,7 @@ class EnableDisplayScopeMiddleware
     public function handle(Request $request, Closure $next)
     {
         Article::addGlobalScope(new DisplayScope);
+        ShopItem::addGlobalScope(new DisplayScope);
 
         return $next($request);
     }

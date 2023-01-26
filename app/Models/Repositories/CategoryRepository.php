@@ -9,7 +9,7 @@ class CategoryRepository
     /**
      * Find the categories for the sidebar.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function sidebar(): Collection
     {
