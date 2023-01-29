@@ -31,9 +31,11 @@ class Badge extends Model
     /**
      * Check if the given user has unlocked this badge.
      *
+     * @param User $user The user to check.
+     *
      * @return bool
      */
-    public function hasUser($user)
+    public function hasUser(User $user): bool
     {
         return $this->users()
             ->where('user_id', $user->getKey())

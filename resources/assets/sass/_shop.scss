@@ -12,6 +12,7 @@
  * Shop Item
  */
 .shop-item {
+    min-height: 100%;
     padding: 10px;
     background-color: #fff;
     border-radius: 8px;
@@ -34,6 +35,15 @@
     }
 
     &-footer {
+        &-category a {
+            padding: 2px 10px;
+            background-color: #f3f6ff;
+            border-radius: 4px;
+        }
 
+        &-price {
+            font-size: 30px;
+            font-weight: bold;
+        }
     }
 }

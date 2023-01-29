@@ -60,25 +60,25 @@ class MentionNotification extends Notification implements ShouldQueue
      *
      * @return array
      */
-    protected function parseInstance(array $data = [])
+    protected function parseInstance(array $data = []): array
     {
         $model = $this->model;
 
         switch (true) {
             case $model instanceof DiscussPost:
-                $data['message'] = '<strong>@%s</strong> has mentionned your name in his post !';
+                $data['message'] = '<strong>@%s</strong> has mentioned your name in his post !';
                 $data['link'] = $model->post_url;
 
                 break;
 
             case $model instanceof Comment:
-                $data['message'] = '<strong>@%s</strong> has mentionned your name in his comment !';
+                $data['message'] = '<strong>@%s</strong> has mentioned your name in his comment !';
                 $data['link'] = $model->comment_url;
 
                 break;
 
             case $model instanceof Article:
-                $data['message'] = '<strong>@%s</strong> has mentionned your name in his article !';
+                $data['message'] = '<strong>@%s</strong> has mentioned your name in his article !';
                 $data['link'] = $model->article_url;
 
                 break;

@@ -5,7 +5,7 @@
     <ol class="list-unstyled">
         @foreach ($items as $item)
             <li>
-                <a href="{{ $item->item_url }}">
+                <a href="{{ $item->shopCategory->category_url }}">
                     {{ $item->title }}
                 </a>
             </li>

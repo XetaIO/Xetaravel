@@ -11,20 +11,6 @@ trait ShopItemPresenter
     protected string $defaultIcon = '/images/shop/default_icon.svg';
 
     /**
-     * Get the item url.
-     *
-     * @return string
-     */
-    public function getItemUrlAttribute(): string
-    {
-        if (!isset($this->slug)) {
-            return '';
-        }
-
-        return route('shop.item.show', ['slug' => $this->slug, 'id' => $this->getKey()]);
-    }
-
-    /**
      * Get the icon.
      *
      * @return string

@@ -131,12 +131,26 @@ class ShopItem extends Model implements HasMedia
     }
 
     /**
-     * Get the user that owns the item.
+     * Get the users that owns the items.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTomany
      */
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Check if the given user has unlocked this item.
+     *
+     * @param User $user The user to check.
+     *
+     * @return bool
+     */
+    public function hasUser(User $user): bool
+    {
+        return $this->users()
+            ->where('user_id', $user->getKey())
+            ->exists();
     }
 }

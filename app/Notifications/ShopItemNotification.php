@@ -4,27 +4,27 @@ namespace Xetaravel\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
-use Xetaravel\Models\Badge;
+use Xetaravel\Models\ShopItem;
 
-class BadgeNotification extends Notification implements ShouldQueue
+class ShopItemNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * The badge instance.
+     * The item instance.
      *
-     * @var Badge
+     * @var ShopItem
      */
-    public Badge $badge;
+    public ShopItem $item;
 
     /**
      * Create a new notification instance.
      *
-     * @param Badge $badge
+     * @param ShopItem $item
      */
-    public function __construct(Badge $badge)
+    public function __construct(ShopItem $item)
     {
-        $this->badge = $badge;
+        $this->item = $item;
     }
 
     /**
@@ -49,11 +49,10 @@ class BadgeNotification extends Notification implements ShouldQueue
     public function toDatabase($notifiable): array
     {
         return [
-            'message' => 'You have unlock the badge <strong>%s</strong> !',
-            'message_key' => [$this->badge->name],
-            'icon' => $this->badge->icon,
-            'color' => $this->badge->color,
-            'type' => 'badge'
+            'message' => 'You have bought the Xeticon <strong>%s</strong> !',
+            'message_key' => [$this->item->title],
+            'icon' => $this->item->item_icon,
+            'type' => 'shop_item'
         ];
     }
 }

@@ -280,6 +280,16 @@ class User extends Model implements
     }
 
     /**
+     * Get the shop_items for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function shopItems()
+    {
+        return $this->belongsToMany(ShopItem::class)->withTimestamps();
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token

@@ -18,8 +18,8 @@ Route::group([
         ->name('shop.index');
 
     // Items Routes
-    Route::get('item/{slug}.{id}', 'ItemController@show')
-        ->name('shop.item.show');
+    Route::post('item/buy', 'ItemController@buy')
+        ->name('shop.item.buy');
 
     // Category Routes
     Route::get('category/{slug}.{id}', 'CategoryController@show')

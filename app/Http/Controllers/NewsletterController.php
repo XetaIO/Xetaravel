@@ -10,7 +10,7 @@ use Xetaravel\Models\Validators\NewsletterValidator;
 class NewsletterController extends Controller
 {
     /**
-     * Subcribe to the Newsletter
+     * Subscribe to the Newsletter
      *
      * @param \Illuminate\Http\Request $request The request object.
      *
@@ -22,11 +22,11 @@ class NewsletterController extends Controller
         NewsletterRepository::create($request->all());
 
         return back()
-            ->with('success', 'You have successfuly subscribed to our Newsletter !');
+            ->with('success', 'You have successfully subscribed to our Newsletter !');
     }
 
     /**
-     * Unsubcribe to the Newsletter.
+     * Unsubscribe to the Newsletter.
      *
      * @param string $email The email that should be used to unsubscribe to the Newsletter.
      *

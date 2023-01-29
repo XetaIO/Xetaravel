@@ -13,7 +13,7 @@ class ShopController extends Controller
      */
     public function index(): View
     {
-        $items = ShopItem::with('shopCategory', 'user')
+        $items = ShopItem::with('shopCategory', 'users')
             ->orderByDesc('created_at')
             ->paginate(config('xetaravel.pagination.shop.item_per_page'));
 

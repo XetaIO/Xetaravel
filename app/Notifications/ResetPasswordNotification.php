@@ -15,14 +15,14 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      *
      * @var string
      */
-    public $token;
+    public string $token;
 
     /**
      * Create a notification instance.
      *
      * @param string $token
      */
-    public function __construct($token)
+    public function __construct(string $token)
     {
         $this->token = $token;
     }
@@ -44,7 +44,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
      *
      * @param mixed $notifiable
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable): MailMessage
     {

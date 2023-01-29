@@ -6,39 +6,33 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->breadcrumbs->removeListElementClasses('breadcrumb');
-        $this->breadcrumbs->addCrumb('Blog', route('blog.article.index'));
-    }
-
     /**
-     * Show the article by his id.
+     * Show the category by his id and all the related items.
+     *
+     * @param string $slug The slug of the category.
+     * @param int $id The id of the category.
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function show(Request $request, $slug, $id)
+    public function show(Request $request, string $slug, int $id)
     {
-        $category = ShopCategory::with('items')
+        $category = ShopCategory::with('shopItems')
             ->where('id', $id)
             ->first();
 
         if (is_null($category)) {
             return redirect()
-                ->route('shop.article.index')
+                ->route('shop.index')
                 ->with('danger', 'This category doesn\'t exist or has been deleted !');
         }
 
-        $articles = $category->articles()->paginate(config('xetaravel.pagination.blog.article_per_page'));
+        $items = $category->shopItems()->paginate(config('xetaravel.pagination.shop.item_per_page'));
 
         $this->breadcrumbs->addCrumb("Category : " . e($category->title), $category->category_url);
 
         return view(
-            'Blog::category.show',
-            ['articles' => $articles, 'category' => $category, 'breadcrumbs' => $this->breadcrumbs]
+            'Shop::category.show',
+            ['items' => $items, 'category' => $category, 'breadcrumbs' => $this->breadcrumbs]
         );
     }
 }
