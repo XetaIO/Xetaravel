@@ -11,9 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-require('./webpack.sass.mix.js');
-require('./webpack.js.mix.js');
-
 /*
  |--------------------------------------------------------------------------
  | WebPack Configuration
