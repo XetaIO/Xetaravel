@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -61,6 +62,23 @@ class MenuServiceProvider extends ServiceProvider
                 )
                 ->add(
                     Link::toRoute('admin.blog.category.index', '<i class="fa fa-tags"></i> Manage Categories')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->setActiveFromRequest();
+        });
+
+        Menu::macro('admin.shop', function () {
+            return Menu::new()
+                ->addClass('nav nav-pills flex-column mb-0')
+                ->setAttribute('role', 'navigation')
+                ->add(
+                    Link::toRoute('admin.shop.item.index', '<i class="fa fa-newspaper-o"></i> Manage Items')
+                        ->addClass('nav-link')
+                        ->addParentClass('nav-item')
+                )
+                ->add(
+                    Link::toRoute('admin.shop.category.index', '<i class="fa fa-tags"></i> Manage Categories')
                         ->addClass('nav-link')
                         ->addParentClass('nav-item')
                 )

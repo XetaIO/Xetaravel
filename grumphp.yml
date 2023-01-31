@@ -3,9 +3,9 @@ grumphp:
     hooks_preset: local
     tasks:
         phpversion:
-            project: '8.0'
+            project: '8.1'
         phpcs:
-            standard: "PSR2"
+            standard: "PSR12"
             ignore_patterns:
                 - "*.blade.php"
                 - bootstrap/

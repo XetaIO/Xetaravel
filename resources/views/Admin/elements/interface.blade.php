@@ -33,6 +33,13 @@
         {!! Menu::{'admin.blog'}() !!}
     @endpermission
 
+    @permission('manage.shop')
+    <p class="p-1 m-0 text-white font-xeta">
+        Shop
+    </p>
+    {!! Menu::{'admin.shop'}() !!}
+    @endpermission
+
     @permission('manage.discuss.categories')
         <p class="p-1 m-0 text-white font-xeta">
             Discuss

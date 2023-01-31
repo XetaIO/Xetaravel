@@ -47,7 +47,7 @@ return [
             'post_per_page' => 10
         ],
         'shop' => [
-            'item_per_page' => 10,
+            'item_per_page' => 12,
         ]
     ],
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Presenters;
 
 trait ShopItemPresenter
@@ -30,7 +31,7 @@ trait ShopItemPresenter
     protected function parseMedia(string $type): string
     {
         if (isset($this->getMedia('item')[0])) {
-            return $this->getMedia('item')[0]->getUrl($type);
+            return $this->getMedia('item')[0]->getFullUrl();
         }
 
         return $this->defaultIcon;

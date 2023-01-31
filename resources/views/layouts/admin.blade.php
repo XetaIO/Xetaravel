@@ -35,6 +35,9 @@
         <!-- Embed Styles -->
         @stack('style')
 
+        <!-- Livewire Styles -->
+        @livewireStyles
+
         <!-- Embed Scripts -->
         @stack('scriptsTop')
     </head>
@@ -67,6 +70,9 @@
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
         <script src="{{ mix('js/xetaravel.admin.min.js') }}"></script>
+
+        <!-- Livewire Scripts -->
+        @livewireScripts
 
         <!-- Embed Scripts -->
         @stack('scripts')

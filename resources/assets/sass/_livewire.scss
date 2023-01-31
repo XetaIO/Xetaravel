@@ -1,0 +1,14 @@
+.livewire-table-direction-button {
+    padding: 0;
+
+    &:hover {
+        .livewire-table-direction-button-both-icon {
+            opacity: 100;
+            transition: opacity 0.2s;
+        }
+    }
+
+    &-both-icon {
+        opacity: 0;
+    }
+}

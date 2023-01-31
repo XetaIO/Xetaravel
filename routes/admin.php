@@ -64,6 +64,52 @@ Route::group([
                 ->name('admin.blog.category.delete');
         });
 
+    /*
+    |--------------------------------------------------------------------------
+    | Shop Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'namespace' => 'Shop',
+        'prefix' => 'shop',
+        'middleware' => ['permission:manage.shop']
+    ], function () {
+
+        // Article Routes
+        Route::get('item', 'ItemController@index')
+            ->name('admin.shop.item.index');
+
+        Route::get('item/create', 'ItemController@showCreateForm')
+            ->name('admin.shop.item.create');
+        Route::post('item/create', 'ItemController@create')
+            ->name('admin.shop.item.create');
+
+        Route::get('item/update/{slug}.{id}', 'ItemController@showUpdateForm')
+            ->name('admin.shop.item.edit');
+        Route::put('item/update/{id}', 'ItemController@update')
+            ->name('admin.shop.item.update');
+
+        Route::delete('item/delete/{id}', 'ItemController@delete')
+            ->name('admin.shop.item.delete');
+
+        // Category Routes
+        Route::get('category', 'CategoryController@index')
+            ->name('admin.shop.category.index');
+
+        Route::get('category/create', 'CategoryController@showCreateForm')
+            ->name('admin.shop.category.create');
+        Route::post('category/create', 'CategoryController@create')
+            ->name('admin.shop.category.create');
+
+        Route::get('category/update/{slug}.{id}', 'CategoryController@showUpdateForm')
+            ->name('admin.shop.category.edit');
+        Route::put('category/update/{id}', 'CategoryController@update')
+            ->name('admin.shop.category.update');
+
+        Route::delete('category/delete/{id}', 'CategoryController@delete')
+            ->name('admin.shop.category.delete');
+    });
+
         /*
         |--------------------------------------------------------------------------
         | Discuss Routes

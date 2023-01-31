@@ -20,6 +20,7 @@ class PermissionsRolesTableSeed extends Seeder
         $role->attachPermission(Permission::where('slug', 'manage.users')->first());
         $role->attachPermission(Permission::where('slug', 'manage.roles')->first());
         $role->attachPermission(Permission::where('slug', 'manage.blog')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.shop')->first());
         $role->attachPermission(Permission::where('slug', 'manage.blog.comments')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());
@@ -33,6 +34,7 @@ class PermissionsRolesTableSeed extends Seeder
         $role->attachPermission(Permission::where('slug', 'access.administration')->first());
         $role->attachPermission(Permission::where('slug', 'manage.users')->first());
         $role->attachPermission(Permission::where('slug', 'manage.blog')->first());
+        $role->attachPermission(Permission::where('slug', 'manage.shop')->first());
         $role->attachPermission(Permission::where('slug', 'manage.blog.comments')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss')->first());
         $role->attachPermission(Permission::where('slug', 'manage.discuss.conversations')->first());

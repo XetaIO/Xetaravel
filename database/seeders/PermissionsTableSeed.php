@@ -32,6 +32,14 @@ class PermissionsTableSeed extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'name' => 'Manage Shop',
+                'slug' => 'manage.shop',
+                'description' => 'The user can manage the shop.',
+                'is_deletable' => false,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
                 'name' => 'Manage Blog Comments',
                 'slug' => 'manage.blog.comments',
                 'description' => 'The user can manage the blog comments.',

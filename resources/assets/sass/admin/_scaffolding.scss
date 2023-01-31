@@ -11,6 +11,16 @@ body {
   color: $body-color;
 }
 
+.opacity-25 {
+    opacity: 0.25;
+}
+.opacity-50 {
+    opacity: 0.5;
+}
+.opacity-75 {
+    opacity: 0.75;
+}
+
 @media (max-width: 768px) {
     body {
         padding-top: 0;

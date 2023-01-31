@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -95,7 +96,7 @@ class UserController extends Controller
         } elseif ($level['matchExactXPLevel'] == true) {
             $level['currentProgression'] = 0;
         } else {
-            $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience'])*100;
+            $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience']) * 100;
         }
 
         return view(

@@ -1,10 +1,12 @@
 <?php
+
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
 use Eloquence\Behaviours\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -13,11 +15,11 @@ use Xetaravel\Models\Presenters\ShopItemPresenter;
 
 class ShopItem extends Model implements HasMedia
 {
-    use Countable,
-        Sluggable,
-        ShopItemPresenter,
-        HasMentionsTrait,
-        InteractsWithMedia;
+    use Countable;
+    use Sluggable;
+    use ShopItemPresenter;
+    use HasMentionsTrait;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +29,7 @@ class ShopItem extends Model implements HasMedia
     protected $fillable = [
         'title',
         'user_id',
-        'category_id',
+        'shop_category_id',
         'content',
         'price',
         'discount',
@@ -97,27 +99,13 @@ class ShopItem extends Model implements HasMedia
     public function countCaches(): array
     {
         return [
-            User::class,
-            ShopCategory::class
+            [
+                'model' => ShopCategory::class,
+                'field' => 'shop_item_count',
+                'foreignKey' => 'shop_category_id',
+                'key' => 'id'
+            ]
         ];
-    }
-
-    /**
-     * Register the related to the Model.
-     *
-     * @param Media|null $media
-     * @return void
-     * @throws InvalidManipulation
-     */
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('item.icon')
-                ->width(100)
-                ->height(100)
-                ->keepOriginalImageFormat();
-
-        $this->addMediaConversion('original')
-                ->keepOriginalImageFormat();
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
@@ -19,12 +20,21 @@ class ShopItemRepository
     /**
      * Create the new article and save it.
      *
-     * @param array $data The data used to create the shop item.
+     * @param array $data The data used to create the article.
      *
      * @return \Xetaravel\Models\ShopItem
      */
     public static function create(array $data): ShopItem
     {
+        return ShopItem::create([
+            'title' => $data['title'],
+            'shop_category_id' => $data['shop_category_id'],
+            'is_display' => isset($data['is_display']) ? true : false,
+            'content' => $data['content'],
+            'price' => $data['price'],
+            'discount' => $data['discount'],
+            'quantity' => $data['quantity'],
+        ]);
     }
 
     /**
