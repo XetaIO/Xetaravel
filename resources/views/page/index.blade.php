@@ -99,7 +99,7 @@
     <figure class="absolute right-0 top-0 -z-10">
         <img src="{{ asset('images/figures/svg-line.svg') }}" alt="SVG Line">
 	</figure>
-    <figure class="absolute top-0 -z-10">
+    <figure class="absolute -bottom-10 -left-20 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot.svg') }}" alt="SVG Glass Pot">
 	</figure>
     <figure class="absolute right-0 top-2/3 lg:top-1/4 -z-10">
@@ -151,7 +151,7 @@
     </figure>
     <div class="lg:container w-full mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="col-span-8 px-3 lg:px-0 overflow-scroll">
+            <div class="col-span-8 px-3 lg:px-0 overflow-auto">
                 <div class="relative bg-[color:#2d333b] text-neutral-content w-full shadow-sm rounded-md">
                     <div class="relative py-3 px-4">
                         <div class="flex">
