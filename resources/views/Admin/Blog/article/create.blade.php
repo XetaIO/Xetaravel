@@ -7,7 +7,7 @@
 
 @push('style')
     {!! editor_css() !!}
-    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/editor-md.custom.min.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')

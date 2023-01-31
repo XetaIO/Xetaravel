@@ -8,7 +8,7 @@
           </button>';
           ?>
 
-        <div id="alert-xetaravel" class="absolute right-0 md:right-5 top-20 flex w-full max-w-sm animate-bounceInDown ml-3 overflow-hidden rounded-lg shadow-md bg-white dark:bg-base-300">
+        <div id="alert-xetaravel" class="absolute right-0 md:right-5 top-20 flex w-full max-w-sm animate-bounceInDown ml-3 overflow-hidden rounded-lg shadow-md bg-white dark:bg-base-300 z-50">
 
             @if ($type == "danger")
             <div class="flex items-center justify-center w-14 bg-red-500">

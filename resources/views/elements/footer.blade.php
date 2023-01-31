@@ -1,5 +1,5 @@
 <footer class="footer footer-center p-10 bg-base-200 text-base-content text-left">
-    <div class="lg:container lg:flex lg:justify-between w-full mx-auto">
+    <div class="lg:container lg:flex lg:justify-between items-start w-full mx-auto">
         <div class="w-full">
             <h4 class="footer-title">Utils</h4>
             <ul>
@@ -81,10 +81,10 @@
             &copy; {{ date('Y', time()) }} {{ config('app.name') }}. All rights reserved.
         </div>
         <div class="w-full">
-            <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank">@Emeric</a>
+            <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank" class="link link-primary">@Emeric</a>
         </div>
         <div class="w-full">
-            Hosted with <a href="https://forge.laravel.com" target="_blank">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank">DigitalOcean</a>
+            Hosted with <a href="https://forge.laravel.com" target="_blank" class="link link-primary">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank" class="link link-primary">DigitalOcean</a>
         </div>
     </div>
 </footer>
