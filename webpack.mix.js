@@ -11,25 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-/*
- |--------------------------------------------------------------------------
- | WebPack Configuration
- |--------------------------------------------------------------------------
- */
- mix.webpackConfig({
-    resolve: {
-        extensions: ['.ts']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader'
-            }
-        ]
-    }
-});
-
 // Others
 mix.scripts([
         /*'resources/assets/js/libs/jquery.min.js',
@@ -53,11 +34,9 @@ mix.scripts([
     .sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.libs.min.css')
     .js([
         'resources/assets/js/xetaravel.admin.js',
-        //'resources/assets/ts/Xetaravel.admin.ts'
     ], 'public/js/xetaravel.admin.min.js')
     .js([
         'resources/assets/js/xetaravel.js',
-        //'resources/assets/ts/Xetaravel.ts'
     ], 'public/js/xetaravel.min.js')
     .vue()
     .scripts([
@@ -71,5 +50,4 @@ mix.scripts([
     .scripts([
         'resources/assets/js/waypoints/noframework.waypoints.min.js',
     ], 'public/js/noframework.waypoints.min.js')
-    .css('resources/assets/css/font-awesome-all.min.css', 'public/css/font-awesome-all.min.css')
     .version();
