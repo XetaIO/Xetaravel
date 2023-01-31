@@ -69,9 +69,9 @@ module.exports = {
     },
 
     // BYPASS TO COMPILE FULL CLASSES FOR DEV
-    safelist: [
+    /*safelist: [
         {
           pattern: /./,
         }
-    ],
+    ],*/
 }

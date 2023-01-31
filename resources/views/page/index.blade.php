@@ -38,7 +38,7 @@
 @section('content')
 <section class="relative bg-gray-800 py-14 overflow-hidden" style="min-height: 465px;">
     <div id="particles" class="absolute top-0 bottom-0 right-0 left-0 pointer-events-none" style=""></div>
-    <div class="lg:container w-full mx-auto">
+    <div class="lg:container mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-slate-300">
             <div class="flex flex-col items-center justify-center text-center lg:px-8">
                 <h1 class="xetaravel-typed font-bold font-['ubuntu'] text-4xl"></h1>
@@ -95,7 +95,7 @@
     </div>
 </section>
 
-<section class="relative pt-20 pb-20 overflow-hidden">
+<section class="relative py-20 overflow-hidden">
     <figure class="absolute right-0 top-0 -z-10">
         <img src="{{ asset('images/figures/svg-line.svg') }}" alt="SVG Line">
 	</figure>
@@ -105,7 +105,7 @@
     <figure class="absolute right-0 top-2/3 lg:top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-compass.svg') }}" alt="SVG Compass">
 	</figure>
-    <div class="lg:container w-full mx-auto">
+    <div class="lg:container mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
             <div>
                 <img class="h-36 mx-auto" src="{{ asset('images/icons/code.svg') }}" alt="Code Icon">
@@ -132,26 +132,21 @@
     </div>
 </section>
 
-<section class="relative pb-5 bg-slate-100 overflow-hidden">
-    <figure class="mb-0">
-		<svg width="100%" height="150" viewBox="0 0 500 150" preserveAspectRatio="none" style="transform: rotate(180deg);" fill="hsl(var(--b1))">
-			<path d="M0,150 L0,40 Q250,150 500,40 L580,150 Z"></path>
-		</svg>
-	</figure>
+<section class="relative py-20 bg-slate-100 overflow-hidden">
     <figure class="absolute left-0 top-1/2">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#f7c32e">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
 	</figure>
-    <figure class="absolute left-[10%] top-2/3">
+    <figure class="absolute left-[10%] top-1/3">
         <img src="{{ asset('images/figures/svg-pen.svg') }}" alt="SVG Pen">
 	</figure>
     <figure class="absolute right-0 top-1/3">
         <img src="{{ asset('images/figures/svg-experiences.svg') }}" alt="SVG Experiences">
     </figure>
-    <div class="lg:container w-full mx-auto">
+    <div class="lg:container mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div class="col-span-8 px-3 lg:px-0 overflow-auto">
+            <div class="lg:col-span-8 col-span-12 px-3 lg:px-0 overflow-auto">
                 <div class="relative bg-[color:#2d333b] text-neutral-content w-full shadow-sm rounded-md">
                     <div class="relative py-3 px-4">
                         <div class="flex">
@@ -175,12 +170,12 @@
                 </div>
             </div>
 
-            <div class="col-span-4" style="background-color: #f5f7f9;">
-                <div class="text-xs-center">
-                    <img class="installation-image" src="{{ asset('images/icons/coding.svg') }}" alt="Tab Icon">
+            <div class="lg:col-span-4 col-span-12 px-3 lg:px-0 text-center">
+                <div class="mb-7">
+                    <img class="h-36 mx-auto" src="{{ asset('images/icons/coding.svg') }}" alt="Coding Icon">
                 </div>
-                <h2 class="installation-title text-xs-center font-xeta">Install the application quickly !</h2>
-                <p class="installation-description">
+                <h2 class="font-xetaravel text-3xl dark:text-slate-600 mb-2">Install the application quickly !</h2>
+                <p class="text-xl dark:text-slate-600">
                     You want to try my website in local ? No problem just follow theses steps and get it ready in seconds !
                 </p>
             </div>
@@ -189,114 +184,130 @@
 </section>
 
 @if ($article)
-<section class="section-latest-article pt-5 pb-5">
-    <figure class="svg-ruler">
+<section class="relative shadow-md py-20 overflow-hidden">
+    <figure class="absolute right-[10%] top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-ruler.svg') }}" alt="SVG Ruler">
 	</figure>
-    <figure class="svg-voyage">
+    <figure class="absolute left-0 top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-voyage.svg') }}" alt="SVG Voyage">
 	</figure>
-    <figure class="svg-line">
+    <figure class="absolute right-0 top-1/3 -z-10">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#2ebef7">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
 	</figure>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <article class="row latest-article">
-                    <div class="col-md-4 latest-article-cover">
-                        <a href="{{ $article->article_url }}" title="{{ $article->title }}">
-                            <img class="latest-article-cover-image" src="{{ $article->article_banner }}" alt="Article Banner">
-                        </a>
-                    </div>
-
-                    <div class="col-md-8 latest-article-body">
-                        <span class="latest-article-body-featured">
-                            <img src="{{ asset('images/icons/rocket.svg') }}" alt="Rocket Icon" width="20px" height="20px">
-                            Featured
-                        </span>
-                        <div class="latest-article-body-meta">
-                            <ul class="list-inline">
-                                <li class="list-inline-item latest-article-body-meta-category" data-toggle="tooltip" title="Category">
-                                    <a href="{{ $article->category->category_url }}">
-                                        <i class="fa fa-tag" aria-hidden="true"></i>
-                                        {{ $article->category->title }}
-                                    </a>
-                                </li>
-                                <li class="list-inline-item latest-article-body-meta-time text-muted">
-                                    <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                                    <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" title="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
-                                        {{ $article->created_at->format('Y-m-d') }}
-                                    </time>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <h3 class="latest-article-body-title text-truncate" data-toggle="tooltip" title="{{ $article->title }}">
-                            <a href="{{ $article->article_url }}">
-                                {{ $article->title }}
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-start-2 col-span-10  lg:col-start-3 lg:col-span-8">
+                <article class="rounded-lg lg:rounded-tr-none shadow-[0_2px_20px_5px_rgba(19,16,34,0.1)] dark:bg-base-300 bg-base-content">
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 lg:col-span-4 rounded-t-lg lg:rounded-l-lg lg:rounded-r-none min-h-[300px] overflow-hidden">
+                            <a class="h-full" href="{{ $article->article_url }}" title="{{ $article->title }}">
+                                <img class="object-cover h-full" src="{{ $article->article_banner }}" alt="Article Banner">
                             </a>
-                        </h3>
-
-                        <div class="latest-article-body-text">
-                            {!! Markdown::convertToHtml(Str::limit($article->content, 200)) !!}
                         </div>
 
-                        <hr/>
+                        <div class="col-span-12 lg:col-span-8 flex flex-col justify-evenly min-h-[300px] py-5 px-4 lg:pl-0 relative">
+                            <span class="absolute -right-2.5 -top-4 lg:top-1 text-white bg-[color:#f4645f] rounded rounded-tr-none color-white font-bold shadow-md p-1 before:bg-[color:#f4645f] before:content-[''] before:h-[5px] before:absolute before:right-0 before:top-[-4px] before:w-[10px] before:rounded-tr">
+                                <img class="inline mr-1" src="{{ asset('images/icons/rocket.svg') }}" alt="Rocket Icon" width="20px" height="20px">
+                                Featured
+                            </span>
+                            <div class="text-slate-300 mb-4">
+                                <ul>
+                                    <li class="inline bg-[color:#f3f6ff] text-primary text-md font-semibold rounded py-1 px-2.5 tooltip" data-tip="Category">
+                                        <a href="{{ $article->category->category_url }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                            </svg>
 
-                        <div class="latest-article-body-footer">
-                            <div class="latest-article-body-footer-author">
-                                <img src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="54px" width="54px">
-                                <discuss-user
-                                    :user="{{ json_encode([
-                                        'avatar_small'=> $article->user->avatar_small,
-                                        'profile_url' => $article->user->profile_url,
-                                        'full_name' => $article->user->full_name
-                                    ]) }}"
-                                    :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                                    :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                                    :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                                </discuss-user>
-                            </div>
-                            <div class="latest-article-body-footer-stats text-muted">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <i class="fa fa-comment" aria-hidden="true"  data-toggle="tooltip" title="Comments"></i>
-                                        {{ $article->comment_count }}
+                                            {{ $article->category->title }}
+                                        </a>
+                                    </li>
+                                    <li class="border-l border-solid border-[color:#e2e5f1] ml-2.5 pl-2.5 tooltip" data-tip="Created at {{ $article->created_at->format('Y-m-d H:i:s') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                        </svg>
+
+                                        <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}">
+                                            {{ $article->created_at->format('Y-m-d') }}
+                                        </time>
                                     </li>
                                 </ul>
+                            </div>
+
+                            <h3 class="truncate ... text-3xl text-primary mb-4" title="{{ $article->title }}">
+                                <a href="{{ $article->article_url }}">
+                                    {{ $article->title }}
+                                </a>
+                            </h3>
+
+                            <div class="text-slate-300">
+                                {!! Markdown::convertToHtml(Str::limit($article->content, 200)) !!}
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="avatar">
+                                        <div class="w-12 h-12 rounded-full">
+                                            <img src="{{ asset($article->user->avatar_small) }}" alt="Avatar">
+                                        </div>
+                                    </div>
+                                    <discuss-user
+                                        :user="{{ json_encode([
+                                            'avatar_small'=> $article->user->avatar_small,
+                                            'profile_url' => $article->user->profile_url,
+                                            'full_name' => $article->user->full_name
+                                        ]) }}"
+                                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                                    </discuss-user>
+                                </div>
+
+
+                                <div class="text-slate-300">
+                                    <ul>
+                                        <li class="tooltip font-bold" data-tip="Comments">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                                            </svg>
+
+                                            {{ $article->comment_count }}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </article>
-
             </div>
         </div>
     </div>
 </section>
 @endif
 
-<section class="section-languages pt-5 pb-5">
-    <figure class="svg-atom">
+<section class="relative py-20">
+    <figure class="absolute right-[10%] top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-atom.svg') }}" alt="SVG Atom">
 	</figure>
-    <figure class="svg-glass-pot2">
+    <figure class="absolute left-[10%] top-2/4 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot2.svg') }}" alt="SVG Glass Pot 2">
 	</figure>
-    <div class="container">
-        <h2 class="text-xs-center font-xeta">
-            <img src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
+    <div class="lg:container mx-auto">
+        <h2 class="text-center font-xetaravel text-4xl">
+            <img class="inline-block" src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
             Used Languages
         </h2>
-        <p class="text-xs-center mb-4">
+        <p class="text-center text-xl mb-4">
             Here is the list of the languages I used to do this website.
         </p>
-        <div class="row languages">
-            <div class="col-lg-2 mb-3">
-                <div class="language language-php">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12  lg:col-span-2 mb-3">
+                <div class="flex flex-col justify-center items-center p-2.5">
                     <div class="language-image">
                         <img src="{{ asset('images/languages/php.svg') }}" alt="PHP Icon" width="55px" height="55px">
                     </div>
@@ -307,7 +318,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-span-12  lg:col-span-2 mb-3">
                 <div class="language language-blade">
                     <div class="language-image">
                         <img src="{{ asset('images/languages/blade.svg') }}" alt="Blade Icon" width="55px" height="55px">
@@ -319,7 +330,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-span-12  lg:col-span-2 mb-3">
                 <div class="language language-sass">
                     <div class="language-image">
                         <img src="{{ asset('images/languages/sass.svg') }}" alt="Sass Icon" width="55px" height="55px">
@@ -331,7 +342,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-span-12  lg:col-span-2 mb-3">
                 <div class="language language-javascript">
                     <div class="language-image">
                         <img src="{{ asset('images/languages/javascript.svg') }}" alt="JavaScript Icon" width="55px" height="55px">
@@ -343,7 +354,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-span-12  lg:col-span-2 mb-3">
                 <div class="language language-typescript">
                     <div class="language-image">
                         <img src="{{ asset('images/languages/typescript.svg') }}" alt="TypeScript Icon" width="55px" height="55px">
@@ -355,7 +366,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
+            <div class="col-span-12  lg:col-span-2 mb-3">
                 <div class="language language-vue">
                     <div class="language-image">
                         <img src="{{ asset('images/languages/vue.svg') }}" alt="Vue Icon" width="55px" height="55px">

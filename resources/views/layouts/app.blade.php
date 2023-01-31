@@ -45,7 +45,7 @@
                 document.documentElement.dataset.theme = "dark";
             } else {
                 document.documentElement.classList.remove('light');
-                document.documentElement.dataset.theme = "light";
+                document.documentElement.dataset.theme = "dark";
             }
 
         </script>
