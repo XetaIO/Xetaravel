@@ -38,8 +38,9 @@ return [
         ],
         'user' => [
             'user_per_page' => 15,
-            'comments_profile_page' => 20,
-            'articles_profile_page' => 15
+            'comments_profile_page' => 5,
+            'articles_profile_page' => 5,
+            'posts_profile_page' => 10
         ],
         'discuss' => [
             'conversation_per_page' => 15,

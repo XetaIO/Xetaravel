@@ -33,7 +33,7 @@ Duis autem vel eum iriure *dolor in hendrerit* in vulputate velit esse molestie 
 - odio dignissim qui blandit praesent luptatum zzril
 - delenit augue duis dolore te feugait nulla facilisi
 
-Odio dignissim qui `{!! Markdown::convertToHtml($article->content) !!}` te feugait nulla facilisi. :fr:
+Odio dignissim qui `{!! Markdown::convert($article->content) !!}` te feugait nulla facilisi. :fr:
 
 * Reworked the Comments UI and added the possibility to delete a Comment in Blog https://github.com/XetaIO/Xetaravel/pull/73
 * Reworked the Author bloc in Blog to follow the same design as Comments https://github.com/XetaIO/Xetaravel/commit/06e9f79f67cecbca7648dac3d7922fa849803d9a
@@ -121,7 +121,7 @@ class Comment extends Model
         // Update avatars
         foreach ($articles as $article) {
             $model = \Xetaravel\Models\Article::where('slug', $article['slug'])->first();
-            $model->addMedia(resource_path('assets/images/articles/default_banner.jpg'))
+            $model->addMedia(public_path('images/articles/default_banner.jpg'))
                 ->preservingOriginal()
                 ->setName(substr(md5($article['slug']), 0, 10))
                 ->setFileName(substr(md5($article['slug']), 0, 10) . '.jpg')

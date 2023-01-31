@@ -1,7 +1,6 @@
 <?php
 namespace Xetaravel\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\DiscussConversation;

@@ -10,8 +10,9 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-//require('./webpack.sass.mix.js');
-//require('./webpack.js.mix.js');
+
+require('./webpack.sass.mix.js');
+require('./webpack.js.mix.js');
 
 /*
  |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ const mix = require('laravel-mix');
     }
 });
 
+// Others
 mix.scripts([
         /*'resources/assets/js/libs/jquery.min.js',
         'resources/assets/js/libs/jquery.easing.min.js',
@@ -73,9 +75,4 @@ mix.scripts([
         'resources/assets/js/waypoints/noframework.waypoints.min.js',
     ], 'public/js/noframework.waypoints.min.js')
     .css('resources/assets/css/font-awesome-all.min.css', 'public/css/font-awesome-all.min.css')
-    .copyDirectory('resources/assets/files', 'public/files')
-    .copyDirectory('resources/assets/music', 'public/music')
-    .copyDirectory('resources/assets/images', 'public/images')
-    .copyDirectory('resources/assets/fonts', 'public/fonts')
-    .copyDirectory('resources/assets/editor-md', 'public/editor-md')
     .version();

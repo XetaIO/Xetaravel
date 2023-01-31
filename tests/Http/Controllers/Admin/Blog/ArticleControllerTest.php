@@ -76,7 +76,7 @@ class ArticleControllerTest extends TestCase
     public function testCreateWithBannerSuccess()
     {
         $file = new UploadedFile(
-            resource_path('assets/images/articles/default_banner.jpg'),
+            public_path('images/articles/default_banner.jpg'),
             'default_banner.jpg',
             'image/jpg',
             null,
@@ -160,7 +160,7 @@ class ArticleControllerTest extends TestCase
     public function testUpdateWithBannerSuccess()
     {
         $file = new UploadedFile(
-            resource_path('assets/images/articles/default_banner.jpg'),
+            public_path('images/articles/default_banner.jpg'),
             'default_banner.jpg',
             'image/jpg',
             null,

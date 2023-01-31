@@ -16,7 +16,7 @@ class NewsletterValidator
     public static function create(array $data): Validator
     {
         $rules = [
-            'email' => 'required|unique:newsletters'
+            'email' => 'required|email|max:50|unique:newsletters'
         ];
 
         return FacadeValidator::make($data, $rules);

@@ -13,7 +13,7 @@ Vue.filter('formatDate', function(date) {
     if (date) {
       return moment(String(date)).format('MM/DD/YYYY  hh:mm:ss')
     }
-  });
+});
 
 const app = new Vue({
     el: '#xetaravel-vue',

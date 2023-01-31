@@ -1,4 +1,5 @@
-window._ = require('lodash');
+import _ from 'lodash';
+window._ = _;
 
 /**
  * Sprintf function.
@@ -18,7 +19,8 @@ import { vsprintf } from "sprintf-js";
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+import axios from 'axios';
+window.axios = axios;
 
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Xetaravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -30,25 +32,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-/*import EchoLibrary from 'laravel-echo'
+// import Echo from 'laravel-echo';
 
-window.Pusher = require('pusher-js');
+// import Pusher from 'pusher-js';
+// window.Pusher = Pusher;
 
-window.Echo = new EchoLibrary({
-    broadcaster: 'pusher',
-    key: '73add875620699f38825',
-    cluster: 'eu',
-    encrypted: true,
-    namespace: 'Xetaravel.Events'
-});
-Echo.channel('Xetaravel.User')
-    .listen('UserUpdated', (e) => {
-        console.log('Echo OK');
-    })
-    .listen('Xetaravel\\Events\\UserUpdated', (e) => {
-        console.log('Echo OK2');
-    })
-    .listen('Xetaravel.Events.UserUpdated', (e) => {
-        console.log('Echo OK3');
-    });
-*/
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     forceTLS: true
+// });

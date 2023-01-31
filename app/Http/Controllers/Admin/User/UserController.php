@@ -184,7 +184,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->clearMediaCollection('avatar');
-        $user->addMedia(resource_path('assets/images/avatar.png'))
+        $user->addMedia(public_path('images/avatar.png'))
             ->preservingOriginal()
             ->setName(substr(md5($user->username), 0, 10))
             ->setFileName(substr(md5($user->username), 0, 10) . '.png')
