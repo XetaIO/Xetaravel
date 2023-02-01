@@ -31,16 +31,15 @@
 
     <script src="{{ asset('js/libs/highlight.min.js') }}"></script>
     <script type="text/javascript">
-        /* HighlightJS */
+        // HighlightJS
         hljs.highlightAll();
 
+        // DarkMode for highlight
         document.addEventListener('DOMContentLoaded', (event) => {
             document.querySelectorAll('pre code').forEach((el) => {
                 el.classList.add('dark:bg-base-300', 'dark:text-slate-300');
             });
         });
-
-
     </script>
 @endpush
 
