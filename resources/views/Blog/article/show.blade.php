@@ -29,10 +29,18 @@
     @include('editor/partials/_comment', $comment)
 
 
-    <script src="{{ mix('js/highlight.min.js') }}"></script>
+    <script src="{{ asset('js/libs/highlight.min.js') }}"></script>
     <script type="text/javascript">
         /* HighlightJS */
-        hljs.initHighlightingOnLoad();
+        hljs.highlightAll();
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((el) => {
+                el.classList.add('dark:bg-base-300', 'dark:text-slate-300');
+            });
+        });
+
+
     </script>
 @endpush
 

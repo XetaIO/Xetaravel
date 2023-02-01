@@ -6,8 +6,10 @@
 @endpush
 
 @push('scripts')
-<script src="{{ mix('js/home.min.js') }}"></script>
-<script src="{{ mix('js/noframework.waypoints.min.js') }}"></script>
+<script src="{{ asset('js/libs/typed.min.js') }}"></script>
+<script src="{{ asset('js/libs/parallax.min.js') }}"></script>
+<script src="{{ asset('js/libs/jarallax.min.js') }}"></script>
+<script src="{{ asset('js/libs/noframework.waypoints.min.js') }}"></script>
 <script type="text/javascript">
     /**
      * Typed

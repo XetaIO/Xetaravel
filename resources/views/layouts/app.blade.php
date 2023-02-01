@@ -92,7 +92,6 @@
         </script>
 
         <!-- Scripts -->
-        <script src="{{ mix('js/lib.min.js') }}"></script>
         <script src="{{ mix('js/xetaravel.min.js') }}"></script>
 
         <!-- Embed Scripts -->

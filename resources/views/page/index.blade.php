@@ -6,7 +6,9 @@
 @endpush
 
 @push('scripts')
-<script src="{{ mix('js/home.min.js') }}"></script>
+<script src="{{ asset('js/libs/typed.min.js') }}"></script>
+<script src="{{ asset('js/libs/parallax.min.js') }}"></script>
+<script src="{{ asset('js/libs/particles.min.js') }}"></script>
 <script type="text/javascript">
     var options = {
         strings: ['<span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Create the project and install librairies</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">composer</span> create-project xetaio/xetaravel <span class="token operator">&lt;</span>application_name<span class="token operator">&gt;</span><br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Run the migration and seed the database</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan migrate<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan db:seed<br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan vendor:publish --provider<span class="token operator">=</span><span class="token string"><span class="hljs-string">"Xetaio\\Editor\\EditorServiceProvider"</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run install<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run production'],

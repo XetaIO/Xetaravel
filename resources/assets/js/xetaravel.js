@@ -6,4 +6,21 @@ export default {
     Dismiss
 }
 
+/*document.addEventListener("DOMContentLoaded", () => {
+    var codes = document.getElementsByClassName('hljs');
+    const codesArray = Array.from(codes);
+
+    codes.forEach(code => {
+        console.log(code);
+        code.classList.add('dark:bg-base-300 dark:text-slate-300');
+    });
+});*/
+
+/*var codes = document.getElementsByClassName('hljs');
+
+codes.forEach(code => {
+    console.log(code);
+    code.classList.add('dark:bg-base-300 dark:text-slate-300');
+});*/
+
 //const tsParticles = require("tsparticles-engine");

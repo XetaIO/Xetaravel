@@ -59,10 +59,10 @@ class Controller extends BaseController
             'listItemLinkElement' => 'a',
             // Classes applied to the list item `listItemElement` element.
             'listItemLinkElementClasses' => [
-                'text-sm inline-flex items-center dark:hover:text-white'
+                'text-sm inline-flex items-center dark:hover:text-white link-hover'
             ],
             // The DOM-Element used to generate the active list item.
-            'listActiveElement' => 'span',
+            'listActiveElement' => 'li',
             // Classes applied to the active item `listActiveElement` element.
             'listActiveElementClasses' => [
                 'text-sm text-gray-400 inline-flex items-center dark:text-gray-500 ml-1 font-medium'

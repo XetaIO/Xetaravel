@@ -15,7 +15,6 @@
         @stack('meta')
 
         <!-- Styles -->
-        <link href="{{ mix('css/font-awesome-all.min.css') }}" rel="stylesheet">
         <link href="{{ mix('css/xetaravel.libs.min.css') }}" rel="stylesheet">
         <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
 
@@ -80,7 +79,6 @@
         </script>
 
         <!-- Scripts -->
-        <script src="{{ mix('js/lib.min.js') }}"></script>
         <script src="{{ mix('js/xetaravel.admin.min.js') }}"></script>
 
         <!-- Embed Scripts -->

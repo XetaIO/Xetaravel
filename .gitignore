@@ -26,7 +26,8 @@ laravel.log
 /public/coverage/
 /public/vendor/editor.md/
 /public/css/
-/public/js/
+/public/js/xetaravel.min.js
+/public/js/xetaravel.admin.min.js
 /public/media/
 /public/tests/
 /public/mix.*.js
