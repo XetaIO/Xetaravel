@@ -63,10 +63,10 @@
             </label>
             <div class="relative">
 				{!! Form::open(['route' => 'newsletter.subscribe']) !!}
-                {!! Form::bsNewsletter('email', null, null, [
-                    'placeholder' => 'Your E-mail...',
-                    'required' => 'required'
-                ]) !!}
+                    {!! Form::bsNewsletter('email', null, null, [
+                        'placeholder' => 'Your E-mail...',
+                        'required' => 'required'
+                    ]) !!}
 
                 {!! Form::close() !!}
             </div>
@@ -81,10 +81,10 @@
             &copy; {{ date('Y', time()) }} {{ config('app.name') }}. All rights reserved.
         </div>
         <div class="w-full">
-            <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank" class="link link-primary">@Emeric</a>
+            <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank" class="link link-hover link-primary">@Emeric</a>
         </div>
         <div class="w-full">
-            Hosted with <a href="https://forge.laravel.com" target="_blank" class="link link-primary">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank" class="link link-primary">DigitalOcean</a>
+            Hosted with <a href="https://forge.laravel.com" target="_blank" class="link link-hover link-primary">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank" class="link link-hover link-primary">DigitalOcean</a>
         </div>
     </div>
 </footer>

@@ -96,13 +96,13 @@
 </section>
 
 <section class="relative py-20 overflow-hidden">
-    <figure class="absolute right-0 top-0 -z-10">
+    <figure class="hidden lg:absolute right-0 top-0 -z-10">
         <img src="{{ asset('images/figures/svg-line.svg') }}" alt="SVG Line">
 	</figure>
-    <figure class="absolute -bottom-10 -left-20 -z-10">
+    <figure class="hidden lg:absolute -bottom-10 -left-20 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot.svg') }}" alt="SVG Glass Pot">
 	</figure>
-    <figure class="absolute right-0 top-2/3 lg:top-1/4 -z-10">
+    <figure class="hidden lg:absolute right-0 top-2/3 lg:top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-compass.svg') }}" alt="SVG Compass">
 	</figure>
     <div class="lg:container mx-auto">
@@ -133,15 +133,15 @@
 </section>
 
 <section class="relative py-20 bg-slate-100 overflow-hidden">
-    <figure class="absolute left-0 top-1/2">
+    <figure class="hidden lg:absolute left-0 top-1/2">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#f7c32e">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
 	</figure>
-    <figure class="absolute left-[10%] top-1/3">
+    <figure class="hidden lg:absolute left-[10%] top-1/3">
         <img src="{{ asset('images/figures/svg-pen.svg') }}" alt="SVG Pen">
 	</figure>
-    <figure class="absolute right-0 top-1/3">
+    <figure class="hidden lg:absolute right-0 top-1/3">
         <img src="{{ asset('images/figures/svg-experiences.svg') }}" alt="SVG Experiences">
     </figure>
     <div class="lg:container mx-auto">
@@ -185,13 +185,13 @@
 
 @if ($article)
 <section class="relative shadow-md py-20 overflow-hidden">
-    <figure class="absolute right-[10%] top-1/3 -z-10">
+    <figure class="hidden lg:absolute right-[10%] top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-ruler.svg') }}" alt="SVG Ruler">
 	</figure>
-    <figure class="absolute left-0 top-1/3 -z-10">
+    <figure class="hidden lg:absolute left-0 top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-voyage.svg') }}" alt="SVG Voyage">
 	</figure>
-    <figure class="absolute right-0 top-1/3 -z-10">
+    <figure class="hidden lg:absolute right-0 top-1/3 -z-10">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#2ebef7">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
@@ -237,7 +237,7 @@
                                 </ul>
                             </div>
 
-                            <h3 class="truncate ... text-3xl text-primary mb-4" title="{{ $article->title }}">
+                            <h3 class="truncate text-3xl text-primary mb-4" title="{{ $article->title }}">
                                 <a href="{{ $article->article_url }}">
                                     {{ $article->title }}
                                 </a>
@@ -291,87 +291,87 @@
 @endif
 
 <section class="relative py-20">
-    <figure class="absolute right-[10%] top-1/4 -z-10">
+    <figure class="hidden lg:absolute right-[5%] top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-atom.svg') }}" alt="SVG Atom">
 	</figure>
-    <figure class="absolute left-[10%] top-2/4 -z-10">
+    <figure class="hidden lg:absolute left-[5%] top-2/4 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot2.svg') }}" alt="SVG Glass Pot 2">
 	</figure>
     <div class="lg:container mx-auto">
-        <h2 class="text-center font-xetaravel text-4xl">
+        <h2 class="text-center font-xetaravel text-4xl mb-3">
             <img class="inline-block" src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
             Used Languages
         </h2>
-        <p class="text-center text-xl mb-4">
+        <p class="text-center text-xl mb-8">
             Here is the list of the languages I used to do this website.
         </p>
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12  lg:col-span-2 mb-3">
-                <div class="flex flex-col justify-center items-center p-2.5">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/php.svg') }}" alt="PHP Icon" width="55px" height="55px">
+        <div class="grid grid-cols-12 gap-6 lg:gap-12">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(79,93,149,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/php.svg') }}" alt="PHP Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#4f5d95] text-2xl font-semibold">
                         <a href="https://www.php.net">
                             PHP
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12  lg:col-span-2 mb-3">
-                <div class="language language-blade">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/blade.svg') }}" alt="Blade Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(255,45,32,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/blade.svg') }}" alt="Blade Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#ff2d20] text-2xl font-semibold">
                         <a href="https://laravel.com/docs/9.x/blade">
                             Blade
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12  lg:col-span-2 mb-3">
-                <div class="language language-sass">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/sass.svg') }}" alt="Sass Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(207,100,154,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/sass.svg') }}" alt="Sass Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#cf649a] text-2xl font-semibold">
                         <a href="https://sass-lang.com/">
                             Sass
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12  lg:col-span-2 mb-3">
-                <div class="language language-javascript">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/javascript.svg') }}" alt="JavaScript Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(240,219,79,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/javascript.svg') }}" alt="JavaScript Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#f0db4f] text-2xl font-semibold">
                         <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript">
                             JavaScript
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12  lg:col-span-2 mb-3">
-                <div class="language language-typescript">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/typescript.svg') }}" alt="TypeScript Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(0,122,204,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/typescript.svg') }}" alt="TypeScript Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#007acc] text-2xl font-semibold">
                         <a href="https://www.typescriptlang.org/">
                             TypeScript
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12  lg:col-span-2 mb-3">
-                <div class="language language-vue">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/vue.svg') }}" alt="Vue Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(65,184,131,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/vue.svg') }}" alt="Vue Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#41b883] text-2xl font-semibold">
                         <a href="https://vuejs.org">
                             Vue
                         </a>

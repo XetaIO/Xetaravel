@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
 
         // Pagination
-        Paginator::defaultView('vendor.pagination.bootstrap-4');
+        Paginator::defaultView('vendor.pagination.tailwind');
 
         // Blade
         Blade::directive('auth', function () {

@@ -23,7 +23,7 @@
 }
 
 .btn-primary-shadow {
-    @apply shadow-[0_5px_30px_hsla(var(--pf)/0.3)] hover:shadow-[0_5px_30px_hsla(var(--pf)/0.3)]
+    @apply shadow-[0_5px_30px_hsla(var(--pf)/0.3)] hover:shadow-[0_5px_30px_hsla(var(--pf)/0.3)];
 }
 
 /**
@@ -31,6 +31,13 @@
  */
 .tooltip::before {
     z-index: 999;
+}
+
+/**
+ * Badges
+ */
+.badge {
+    @apply rounded;
 }
 
 canvas {
