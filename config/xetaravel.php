@@ -74,7 +74,8 @@ return [
      */
     'blog' => [
         'categories_sidebar' => 25,
-        'articles_sidebar' => 5
+        'articles_sidebar' => 5,
+        'users_sidebar' => 5
     ],
 
     /*

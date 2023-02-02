@@ -156,7 +156,7 @@
                             <span class="bg-yellow-500 h-3 w-3 mr-1 rounded-full"></span>
                             <span class="bg-green-500 h-3 w-3 mr-1 rounded-full"></span>
                         </div>
-                        <div class="absolute top-[6px] left-0 w-full font-['Cascadia_Mono,sans-serif'] font-bold text-center">terminal</div>
+                        <div class="absolute top-[6px] left-0 w-full font-['Cascadia_Mono'] font-bold text-center">terminal</div>
                     </div>
 
                     <div class="bg-[color:rgba(27,31,35,.6)] border border-solid border-transparent rounded-b-md mb-8 overflow-hidden">

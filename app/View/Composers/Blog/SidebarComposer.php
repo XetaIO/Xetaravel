@@ -4,6 +4,7 @@ namespace Xetaravel\View\Composers\Blog;
 use Illuminate\View\View;
 use Xetaravel\Models\Repositories\ArticleRepository;
 use Xetaravel\Models\Repositories\CategoryRepository;
+use Xetaravel\Models\Repositories\UserRepository;
 
 class SidebarComposer
 {
@@ -17,7 +18,8 @@ class SidebarComposer
     {
         $articles = ArticleRepository::sidebar();
         $categories = CategoryRepository::sidebar();
+        $users = UserRepository::sidebar();
 
-        $view->with(['articles' => $articles, 'categories' => $categories]);
+        $view->with(['articles' => $articles, 'categories' => $categories, 'users' => $users]);
     }
 }

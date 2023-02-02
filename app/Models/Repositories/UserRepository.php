@@ -1,12 +1,26 @@
 <?php
 namespace Xetaravel\Models\Repositories;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use Xetaravel\Models\User;
 
 class UserRepository
 {
+    /**
+     * Find the authors of articles with most articles for the sidebar.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function sidebar(): Collection
+    {
+        return User::where('article_count', '>=', 1)
+            ->take(config('xetaravel.blog.users_sidebar'))
+            ->orderBy('article_count', 'desc')
+            ->get();
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
