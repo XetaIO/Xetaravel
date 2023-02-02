@@ -19,8 +19,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet">
 
+        <!-- Embed Styles -->
+        @stack('style')
+
         <!-- Styles -->
-        <link href="{{ mix('css/xetaravel.libs.min.css') }}" rel="stylesheet">
         <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -49,9 +51,6 @@
             }
 
         </script>
-
-        <!-- Embed Styles -->
-        @stack('style')
 
         <!-- Embed Scripts -->
         @stack('scriptsTop')

@@ -12,6 +12,8 @@
   "devDependencies": {
     "autoprefixer": "^10.4.8",
     "axios": "^1.2.2",
+    "browser-sync": "^2.27.11",
+    "browser-sync-webpack-plugin": "^2.3.0",
     "daisyui": "^2.49.0",
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.21",
@@ -27,7 +29,6 @@
   },
   "dependencies": {
     "moment": "^2.29.0",
-    "tsparticles": "^2.0.6",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.8"
   }

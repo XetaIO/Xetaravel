@@ -12,7 +12,6 @@
 
 @push('style')
     {!! editor_css() !!}
-    <link href="{{ asset('css/editor-md.custom.min.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')

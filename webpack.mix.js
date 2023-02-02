@@ -16,12 +16,27 @@ mix
     .postCss("resources/assets/css/xetaravel.css", "public/css/xetaravel.min.css", [
         require("tailwindcss"),
     ])
-    .sass('resources/assets/sass/xetaravel.scss', 'public/css/xetaravel.libs.min.css')
     .js([
         'resources/assets/js/xetaravel.admin.js',
     ], 'public/js/xetaravel.admin.min.js')
     .js([
         'resources/assets/js/xetaravel.js',
     ], 'public/js/xetaravel.min.js')
-    .vue()
-    .version();
+    .vue();
+
+if (mix.inProduction() == false) {
+    mix.browserSync({
+        proxy: 'http://xetaravel.io',
+        host: '192.168.56.56',
+        port: 3000,
+        open: false,
+        watchOptions: {
+            usePolling: true,
+            interval: 500,
+        }
+    });
+}
+
+if (mix.inProduction()) {
+    mix.version();
+}

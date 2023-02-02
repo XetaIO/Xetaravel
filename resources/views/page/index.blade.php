@@ -357,13 +357,13 @@
                 </div>
             </div>
             <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
-                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(0,122,204,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(68,168,179,.2)] rounded-md hover:-translate-y-6 transition-transform">
                     <div class="my-2">
-                        <img src="{{ asset('images/languages/typescript.svg') }}" alt="TypeScript Icon" width="65px" height="65px">
+                        <img src="{{ asset('images/languages/tailwind.svg') }}" alt="TypeScript Icon" width="65px" height="65px">
                     </div>
-                    <div class="my-2 text-[color:#007acc] text-2xl font-semibold">
-                        <a href="https://www.typescriptlang.org/">
-                            TypeScript
+                    <div class="my-2 text-[color:#44a8b3] text-2xl font-semibold">
+                        <a href="https://tailwindcss.com/">
+                            Tailwind
                         </a>
                     </div>
                 </div>
