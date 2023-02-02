@@ -1,7 +1,7 @@
 <header>
 
 <!-- Navbar -->
-<nav class="navbar bg-white shadow-md dark:bg-base-300 dark:text-slate-300">
+<nav class="navbar shadow-md dark:bg-base-300 dark:text-slate-300">
     <div class="lg:container w-full mx-auto items-center lg:justify-between">
         <div class="flex-none lg:hidden tooltip tooltip-bottom" data-tip="Menu">
             <label for="xetaravel-drawer" class="btn btn-square btn-ghost">

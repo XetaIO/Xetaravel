@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,17 @@
 
         <!-- Meta -->
         @stack('meta')
+
+        <script type="text/javascript">
+            /**
+             * Dark Mode
+             * On page load or when changing themes, best to add inline in `head` to avoid FOUC
+             */
+            if (localStorage.getItem('nightMode') == 'true' || (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.dataset.theme = "dark";
+                localStorage.setItem("nightMode", true);
+            }
+        </script>
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,18 +48,6 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '{{ config('xetaravel.site.analytics_tracker_code') }}');
-
-            /**
-             * Dark Mode
-             * On page load or when changing themes, best to add inline in `head` to avoid FOUC
-             */
-            if (localStorage.getItem('nightMode') === 'dark' || (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                document.documentElement.dataset.theme = "dark";
-            } else {
-                document.documentElement.classList.remove('light');
-                document.documentElement.dataset.theme = "dark";
-            }
 
         </script>
 

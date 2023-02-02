@@ -50,10 +50,8 @@ const app = new Vue({
 
             if (String(this.nightMode) == 'true') {
                 document.getElementsByTagName('html')[0].dataset.theme = "dark";
-                document.getElementsByTagName('html')[0].setAttribute("class", "dark");
             } else {
                 document.getElementsByTagName('html')[0].dataset.theme = "light";
-                document.getElementsByTagName('html')[0].setAttribute("class", "light");
             }
 		}
     },
@@ -137,18 +135,17 @@ const app = new Vue({
 
     mounted() {
         const darkMode = localStorage.getItem("nightMode");
-        let theme = "light";
+        let theme = "dark";
 
         if (darkMode == 'true') {
-            theme = "dark";
             this.nightMode = true;
-            document.getElementById("nightMode").checked = false;
-        } else {
-            this.nightMode = false;
             document.getElementById("nightMode").checked = true;
+        } else {
+            theme = "light";
+            this.nightMode = false;
+            document.getElementById("nightMode").checked = false;
         }
 
         document.getElementsByTagName('html')[0].dataset.theme = theme;
-        document.getElementsByTagName('html')[0].setAttribute("class", theme);
     }
 });
