@@ -158,13 +158,9 @@
                                 :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
                                 :background-color="{{ var_export($article->user->avatar_primary_color) }}">
                             </discuss-user>
-                            <p>
+                            <div>
                                 {!! Markdown::convert($article->user->signature) !!}
-                                Full-stack Web Developer specialized in PHP. Work with
-                                <a href="https://laravel.com" title="Laravel">Laravel</a>,
-                                <a href="https://cakephp.org" title="CakePHP">CakePHP</a> &amp;
-                                <a href="https://symfony.com" title="Symfony">Symfony</a>.
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </footer>

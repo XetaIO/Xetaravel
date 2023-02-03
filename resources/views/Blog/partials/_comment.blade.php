@@ -36,8 +36,9 @@
 
     <div class="flex flex-col ml-3 self-start mt-5 w-full">
         {{-- Comment Meta --}}
-        <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row justify-between">
             <div class="flex flex-row items-center">
+                {{-- User XP --}}
                 <span class="font-semibold tooltip" data-tip="This user has {{ $comment->user->experiences_total }} XP">
                     <x-icon.star/>
                     {{ $comment->user->experiences_total }}
@@ -45,6 +46,7 @@
 
                 <span class="text-gray-700 mx-2"> - </span>
 
+                {{-- User with Vue --}}
                 <discuss-user
                     class="text-xl font-xetaravel ml-0"
                     :user="{{ json_encode([
@@ -59,6 +61,7 @@
 
                 <span class="text-gray-700 mx-2"> - </span>
 
+                {{-- Date --}}
                 <span class="tooltip" data-tip="{{ $comment->created_at->format('Y-m-d H:i:s') }}">
                     <time datetime="{{ $comment->created_at->format('Y-m-d H:i:s') }}">
                         {{ $comment->created_at->diffForHumans() }}
@@ -67,7 +70,7 @@
                 </ul>
             </div>
 
-
+            {{-- Share --}}
             <discuss-share
                 :post-id="{{ var_export($comment->getKey()) }}"
                 :post-type="{{ var_export('Comment') }}"
@@ -75,13 +78,38 @@
             </discuss-share>
         </div>
 
-        <p>
-            {!! Markdown::convert($article->user->signature) !!}
-            Full-stack Web Developer specialized in PHP. Work with
-            <a href="https://laravel.com" title="Laravel">Laravel</a>,
-            <a href="https://cakephp.org" title="CakePHP">CakePHP</a> &amp;
-            <a href="https://symfony.com" title="Symfony">Symfony</a>.
-        </p>
+        {{-- Comment Content --}}
+        <div>
+            {!! $comment->content_markdown !!}
+        </div>
+
+        <div class="flex flex-row justify-between">
+
+            {{-- User Signature --}}
+            <div class="self-start">
+                @empty (!$comment->user->signature)
+                {!! Markdown::convert($article->user->signature) !!}
+                @endempty
+            </div>
+
+            {{-- Comment Actions --}}
+            @auth
+                @canany(['update', 'delete'], $comment)
+                    <div class="dropdown dropdown-end self-end">
+                    <label tabindex="0" class="btn btn-ghost m-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 h-5" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                        </svg>
+                    </label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                    </ul>
+                    </div>
+                @endcan
+            @endauth
+        </div>
+
     </div>
 </article>
 
