@@ -64,7 +64,7 @@
                 <!-- Toggle Responsive-->
                 <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
 
-                <div class="drawer-content flex flex-col">
+                <div class="drawer-content flex flex-col overflow-hidden">
                     <!-- Header -->
                     @include('elements.header')
 

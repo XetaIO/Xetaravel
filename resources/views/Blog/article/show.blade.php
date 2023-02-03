@@ -36,6 +36,7 @@
 @endpush
 
 @section('content')
+<!-- Breadcrumbs -->
 <section class="lg:container mx-auto mt-12 mb-5  overflow-hidden">
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3 ">
@@ -43,6 +44,8 @@
         </div>
     </div>
 </section>
+
+<!-- Article -->
 <section class="lg:container mx-auto  overflow-hidden">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-9 col-span-12 px-3">
@@ -96,7 +99,7 @@
                     </div>
                 </header>
 
-                <figure class="max-h-[350px] min-h-[250px] max-w-[870px] mx-auto mb-6 overflow-hidden">
+                <figure class="max-h-[350px] min-h-[100px] xs:min-h-[250px] max-w-[870px] mx-auto mb-6 overflow-hidden">
                     <img class="w-full h-full object-cover" src="{{ $article->article_banner }}" alt="Article image">
                 </figure>
 
@@ -105,86 +108,92 @@
                 </div>
 
                 <footer class="my-10">
-                    <h1 class="mb-4 text-xl font-bold">
+                    <h3 class="divider mb-4 text-xl font-bold">
                         Author
-                    </h1>
-                    <div class="flex">
-                        <ul>
-                            <li class="flex items-center">
-                                <div class="flex flex-col items-center">
-                                    <a class="avatar {{ $article->user->online ? 'online' : 'offline' }} p-2" href="{{ $article->user->profile_url }}">
-                                        <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1">
-                                            <img src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
-                                        </div>
-                                    </a>
-                                    <span class="flex items-center">
+                    </h3>
+                    <div class="flex items-center">
+                        <div class="flex flex-col items-center">
+                            <a class="avatar {{ $article->user->online ? 'online' : 'offline' }} m-2" href="{{ $article->user->profile_url }}">
+                                <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
+                                    <img class="rounded-full" src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
+                                </figure>
+                            </a>
+                            <div class="grid grid-cols-2 gap-2">
                                 {{-- Handle the user's icons --}}
                                 @if ($article->user->hasRole(['member'], true))
-                                    <i aria-hidden="true" class="fas fa-user-tie author-user-roles author-user-member"  data-toggle="tooltip" title="Member"></i>
+                                    <div class="col-span-1">
+                                        <x-icon.member/>
+                                    </div>
                                 @endif
 
                                 @if ($article->user->isModerator())
-                                    <span class="rounded-full p-2 bg-yellow-400 border-2 border-solid border-[color:#ffffff] tooltip m-1" data-tip="Moderator">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" class="h-4 w-4" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-                                        </svg>
-                                    </span>
+                                    <div class="col-span-1">
+                                        <x-icon.moderator/>
+                                    </div>
                                 @endif
 
                                 @if ($article->user->hasRole(['administrator', 'developer']))
-                                    <span class="rounded-full p-2 bg-red-400 border-2 border-solid border-[color:#ffffff] tooltip m-1" data-tip="Administrateur">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" class="h-4 w-4" viewBox="0 0 16 16">
-                                            <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"/>
-                                        </svg>
-                                    </span>
+                                    <div class="col-span-1">
+                                        <x-icon.administrator/>
+                                    </div>
                                 @endif
 
                                 @if ($article->user->isDeveloper())
-                                    <span class="rounded-full p-2 bg-blue-400 border-2 border-solid border-[color:#ffffff] tooltip m-1" data-tip="Developer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" class="h-4 w-4" viewBox="0 0 16 16">
-                                            <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
-                                        </svg>
-                                    </span>
+                                    <div class="col-span-1">
+                                        <x-icon.developer/>
+                                    </div>
                                 @endif
-                            </span>
-                                </div>
+                            </div>
+                        </div>
 
-                                <div class="flex flex-col ml-3 self-start mt-5">
-                                    <discuss-user
-                                        class="text-xl font-xetaravel ml-0"
-                                        :user="{{ json_encode([
-                                            'avatar_small'=> $article->user->avatar_small,
-                                            'profile_url' => $article->user->profile_url,
-                                            'full_name' => $article->user->full_name
-                                        ]) }}"
-                                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                                    </discuss-user>
-                                    <p>
-                                        {!! Markdown::convert($article->user->signature) !!}
-                                        Full-stack Web Developer specialized in PHP. Work with
-                                        <a href="https://laravel.com" title="Laravel">Laravel</a>,
-                                        <a href="https://cakephp.org" title="CakePHP">CakePHP</a> &amp;
-                                        <a href="https://symfony.com" title="Symfony">Symfony</a>.
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
+                        <div class="flex flex-col ml-3 self-start mt-5">
+                            <discuss-user
+                                class="text-xl font-xetaravel ml-0"
+                                :user="{{ json_encode([
+                                    'avatar_small'=> $article->user->avatar_small,
+                                    'profile_url' => $article->user->profile_url,
+                                    'full_name' => $article->user->full_name
+                                ]) }}"
+                                :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                                :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                                :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                            </discuss-user>
+                            <p>
+                                {!! Markdown::convert($article->user->signature) !!}
+                                Full-stack Web Developer specialized in PHP. Work with
+                                <a href="https://laravel.com" title="Laravel">Laravel</a>,
+                                <a href="https://cakephp.org" title="CakePHP">CakePHP</a> &amp;
+                                <a href="https://symfony.com" title="Symfony">Symfony</a>.
+                            </p>
+                        </div>
                     </div>
                 </footer>
             </article>
 
-        </div>
+            <section>
+                <h2 class="mb-4 text-xl font-bold">
+                    {{ $article->comment_count }} Comment(s)
+                </h2>
 
-        <div class="lg:col-span-3 col-span-12 px-3">
-            @include('Blog::partials._sidebar')
+                <div>
+                    @forelse ($comments as $comment)
+                        @include('Blog::partials._comment', ['comment' => $comment])
+                    @empty
+                        <div class="alert alert-primary" role="alert">
+                            <i class="fa fa-exclamation" aria-hidden="true"></i>
+                            There're no comments yet, post the first reply !
+                        </div>
+                    @endforelse
+                </div>
+
+            </section>
+
         </div>
+        <aside class="lg:col-span-3 col-span-12 px-3">
+            @include('Blog::partials._sidebar')
+        </aside>
     </div>
 </section>
-
-
-
 
 
 <div class="container pt-2 pb-4">

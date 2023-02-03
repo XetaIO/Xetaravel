@@ -1,3 +1,91 @@
+<article class="flex items-center" id="comment-{{ $comment->id }}">
+    <div class="flex flex-col items-center">
+        <a class="avatar {{ $article->user->online ? 'online' : 'offline' }} m-2" href="{{ $article->user->profile_url }}">
+            <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
+                <img class="rounded-full" src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
+            </figure>
+        </a>
+        <div class="grid grid-cols-2 gap-2">
+            {{-- Handle the user's icons --}}
+            @if ($article->user->hasRole(['member'], true))
+                <div class="col-span-1">
+                    <x-icon.member/>
+                </div>
+            @endif
+
+            @if ($article->user->isModerator())
+                <div class="col-span-1">
+                    <x-icon.moderator/>
+                </div>
+            @endif
+
+            @if ($article->user->hasRole(['administrator', 'developer']))
+                <div class="col-span-1">
+                    <x-icon.administrator/>
+                </div>
+            @endif
+
+            @if ($article->user->isDeveloper())
+                <div class="col-span-1">
+                    <x-icon.developer/>
+                </div>
+            @endif
+        </div>
+    </div>
+
+
+    <div class="flex flex-col ml-3 self-start mt-5 w-full">
+        {{-- Comment Meta --}}
+        <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row items-center">
+                <span class="font-semibold tooltip" data-tip="This user has {{ $comment->user->experiences_total }} XP">
+                    <x-icon.star/>
+                    {{ $comment->user->experiences_total }}
+                </span>
+
+                <span class="text-gray-700 mx-2"> - </span>
+
+                <discuss-user
+                    class="text-xl font-xetaravel ml-0"
+                    :user="{{ json_encode([
+                        'avatar_small'=> $article->user->avatar_small,
+                        'profile_url' => $article->user->profile_url,
+                        'full_name' => $article->user->full_name
+                    ]) }}"
+                    :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                    :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                    :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                </discuss-user>
+
+                <span class="text-gray-700 mx-2"> - </span>
+
+                <span class="tooltip" data-tip="{{ $comment->created_at->format('Y-m-d H:i:s') }}">
+                    <time datetime="{{ $comment->created_at->format('Y-m-d H:i:s') }}">
+                        {{ $comment->created_at->diffForHumans() }}
+                    </time>
+                </span>
+                </ul>
+            </div>
+
+
+            <discuss-share
+                :post-id="{{ var_export($comment->getKey()) }}"
+                :post-type="{{ var_export('Comment') }}"
+                :route-input="{{ var_export(route('blog.comment.show', ['id' => $comment->getKey()])) }}">
+            </discuss-share>
+        </div>
+
+        <p>
+            {!! Markdown::convert($article->user->signature) !!}
+            Full-stack Web Developer specialized in PHP. Work with
+            <a href="https://laravel.com" title="Laravel">Laravel</a>,
+            <a href="https://cakephp.org" title="CakePHP">CakePHP</a> &amp;
+            <a href="https://symfony.com" title="Symfony">Symfony</a>.
+        </p>
+    </div>
+</article>
+
+
 <figure class="comment" id="comment-{{ $comment->id }}">
     <div class="comment-user float-xs-left text-xs-center">
         @if ($comment->user->hasRubies)

@@ -20,6 +20,7 @@ after.sh
 aliases
 Vagrantfile
 laravel.log
+Xetaravel.code-workspace
 /node_modules
 /plugins
 /public/storage/

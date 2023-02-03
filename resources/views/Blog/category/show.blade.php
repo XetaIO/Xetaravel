@@ -15,14 +15,14 @@
 </section>
 
 <section class="lg:container mx-auto  overflow-hidden">
-    <div class="text-center px-5 pb-5">
+    <hgroup class="text-center px-5 pb-5">
         <h1 class="text-4xl font-xetaravel">
             {{ $category->title }}
         </h1>
         <p class="text-gray-400 dark:text-gray-500">
             {{ $category->description }}
         </p>
-    </div>
+    </hgroup>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-9 col-span-12 px-3">
 

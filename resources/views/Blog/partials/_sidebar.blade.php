@@ -1,8 +1,8 @@
 @if($articles->isNotEmpty())
 <div class="mb-10">
-    <h1 class="mb-4 text-xl font-bold">
+    <h2 class="mb-4 text-xl font-bold">
         Recent Posts
-    </h1>
+    </h2>
 
     @foreach ($articles as $article)
     <div class="flex flex-col bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-3">
@@ -41,9 +41,9 @@
 
 @if($categories->isNotEmpty())
 <div class="mb-10">
-    <h1 class="mb-4 text-xl font-bold">
+    <h2 class="mb-4 text-xl font-bold">
         Categories
-    </h1>
+    </h2>
     <div class="flex flex-col bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-3">
         <ul>
         @foreach ($categories as $category)
@@ -59,9 +59,9 @@
 @endif
 
 <div class="mb-10">
-    <h1 class="mb-4 text-xl font-bold">
+    <h2 class="mb-4 text-xl font-bold">
         Authors
-    </h1>
+    </h2>
     <div class="flex flex-col bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-3">
         <ul>
             @foreach ($users as $user)
