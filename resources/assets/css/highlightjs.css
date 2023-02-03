@@ -15,7 +15,7 @@
  }
 
  .hljs {
-   background: #f0f0f0;
+   background-color: rgb(37 42 55);
    color: #686f79;
    display: block;
    overflow-x: auto;

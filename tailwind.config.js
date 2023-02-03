@@ -4,6 +4,7 @@ module.exports = {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./config/*.php"
     ],
     theme: {
         extend: {
@@ -41,7 +42,10 @@ module.exports = {
             'ubuntu': ['"Ubuntu, sans-serif']
         }
     },
-    plugins: [require("daisyui")],
+    plugins: [
+        require('@tailwindcss/typography'),
+        require("daisyui")
+    ],
 
     daisyui: {
         themes: [

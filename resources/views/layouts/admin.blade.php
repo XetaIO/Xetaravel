@@ -11,14 +11,35 @@
         <!-- Title -->
         <title>{{ config('app.title') . ' - ' . config('app.name') }}</title>
 
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
         <!-- Meta -->
         @stack('meta')
 
-        <!-- Styles -->
-        <link href="{{ mix('css/xetaravel.libs.min.css') }}" rel="stylesheet">
-        <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
+        <script type="text/javascript">
+            /**
+             * Dark Mode
+             * On page load or when changing themes, best to add inline in `head` to avoid FOUC
+             */
+            if (localStorage.getItem('nightMode') == 'true' ||
+                (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ) {
+                document.documentElement.dataset.theme = "dark";
+                localStorage.setItem("nightMode", true);
+            }
+        </script>
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet">
+
+        <!-- Embed Styles -->
+        @stack('style')
+
+        <!-- Styles -->
+        <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
 
         <!-- Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('xetaravel.site.analytics_tracker_code') }}"></script>
@@ -44,9 +65,6 @@
             }
 
         </script>
-
-        <!-- Embed Styles -->
-        @stack('style')
 
         <!-- Embed Scripts -->
         @stack('scriptsTop')
