@@ -6,6 +6,17 @@ export default {
     Dismiss
 }
 
+const blogModalsDeleteComment = document.querySelectorAll('.deleteCommentModal');
+
+blogModalsDeleteComment.forEach(function(blogModalDeleteComment) {
+    blogModalDeleteComment.addEventListener('click', () => {
+            const formModalDeleteComment = document.getElementById('deleteCommentModalForm');
+            const actionUrl = this.dataset.action;
+
+            formModalDeleteComment.action = actionUrl;
+    });
+})
+
 /*document.addEventListener("DOMContentLoaded", () => {
     var codes = document.getElementsByClassName('hljs');
     const codesArray = Array.from(codes);

@@ -178,7 +178,7 @@ return [
             'class' => 'text-[color:hsl(var(--p))] bg-[color:var(--tw-prose-pre-bg)] rounded-sm'
         ],
         League\CommonMark\Extension\TaskList\TaskListItemMarker::class => [
-            'class' => 'checkbox h-4 w-4'
+            'class' => 'checkbox h-4 w-4 m-0'
         ],
         League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote::class => [
             'class' => 'text-xl italic font-semibold'
