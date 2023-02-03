@@ -19,7 +19,9 @@
              * Dark Mode
              * On page load or when changing themes, best to add inline in `head` to avoid FOUC
              */
-            if (localStorage.getItem('nightMode') == 'true' || (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            if (localStorage.getItem('nightMode') == 'true' ||
+                (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ) {
                 document.documentElement.dataset.theme = "dark";
                 localStorage.setItem("nightMode", true);
             }

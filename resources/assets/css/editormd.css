@@ -116,13 +116,6 @@
     @apply px-1 min-w-[55px];
   }
 
-  .editormd-form input[type="text"]:focus,
-  .editormd-form input[type="number"]:focus,
-  .editormd-dialog-container select:focus {
-    /*background-color: #ffffff;
-    border-color: #f4645f;*/
-  }
-
   .editormd-dialog-container select {
     @apply select select-bordered h-10 text-current;
   }

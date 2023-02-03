@@ -5,6 +5,13 @@
 @import "highlightjs.css";
 @import "editormd.css";
 
+/**
+ * Offline
+ */
+.avatar.offline:before {
+    @apply bg-[color:hsl(var(--er))]
+}
+
 /*.btn {
     @apply px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 shadow hover:shadow-md items-center text-xs font-bold ease-linear transition-all duration-150 h-10 min-h-min hover:text-primary hover:bg-white gap-1 border-0;
 }

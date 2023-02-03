@@ -1,5 +1,5 @@
 module.exports = {
-    darkMode: ['[data-theme="dark"]'],
+    darkMode: ['class', '[data-theme="dark"]'],
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
