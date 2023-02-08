@@ -2,11 +2,13 @@
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class DiscussUser extends Model
 {
     use Countable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

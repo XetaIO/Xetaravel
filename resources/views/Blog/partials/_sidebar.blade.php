@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="mt-4">
-            <a href="#" class="text-lg font-medium link link-hover dark:text-primary">
+            <a href="{{ $article->article_url }}" class="text-lg font-medium link link-hover dark:text-primary">
                 {{ Str::limit($article->title, 50) }}
             </a>
         </div>

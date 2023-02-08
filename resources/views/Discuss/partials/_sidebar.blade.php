@@ -1,46 +1,46 @@
-<ol class="list-unstyled discuss-categories">
-    <li>
-        <a href="{{ route('discuss.index') }}" class="discuss-categories-link font-xeta">
-            <i class="fa fa-newspaper-o text-primary"></i> All Discussions
+<ol class="mb-3">
+    <li class="mb-1">
+        <a href="{{ route('discuss.index') }}" class="link link-hover hover:text-primary font-xetaravel">
+            <i class="fa-regular fa-newspaper text-primary mr-2"></i> All Discussions
         </a>
     </li>
-    <li>
-        <a href="{{ route('discuss.category.index') }}" class="discuss-categories-link font-xeta">
-            <i class="far fa-list-alt text-primary"></i> All Categories
+    <li class="mb-1">
+        <a href="{{ route('discuss.category.index') }}" class="link link-hover hover:text-primary font-xetaravel">
+            <i class="fa-solid fa-list text-primary mr-2"></i> All Categories
         </a>
     </li>
-    <!-- <li>
-        <a href="#" class="discuss-categories-link">
-            <i class="fa fa-comments-o text-primary"></i> Most Commented
+    <li class="mb-1">
+        <a href="{{ route('discuss.index', ['f' => 'post_count']) }}" class="link link-hover hover:text-primary font-xetaravel">
+            <i class="fa-regular fa-comments text-primary mr-2"></i> Most Commented
         </a>
-    </li> -->
-    <li>
-        <a href="{{ route('discuss.leaderboard') }}" class="discuss-categories-link font-xeta">
-            <i class="far fa-id-card text-primary"></i> Leaderboard
+    </li>
+    <li class="mb-1">
+        <a href="{{ route('discuss.leaderboard') }}" class="link link-hover hover:text-primary font-xetaravel">
+            <i class="fa-regular fa-id-card text-primary mr-2"></i> Leaderboard
         </a>
     </li>
 </ol>
-<ol class="list-unstyled discuss-categories">
+<ol class="mb-3">
     @forelse ($categories as $category)
-        <li>
-            <a href="{{ $category->category_url }}" class="discuss-categories-link font-xeta" data-toggle="tooltip" title="{{ $category->description }}">
-                <span class="discuss-categories-color" style="background-color: {{ $category->color }};"></span>
+        <li class="mb-1">
+            <a href="{{ route('discuss.index', ['c' => $category->getKey()]) }}" class="link link-hover hover:text-primary font-xetaravel flex items-center tooltip" data-tip="{{ $category->description }}">
+                <span class="h-4 w-4 rounded inline-block mr-3" style="background-color: {{ $category->color }};"></span>
                 @if (!is_null($category->icon))
-                    <i class="{{ $category->icon }} discuss-categories-icon"></i>
+                    <i class="{{ $category->icon }} mr-1"></i>
                 @endif
                 {{ $category->title }}
             </a>
         </li>
     @empty
-        <li>
+        <li class="mb-1">
             There's no categories yet.
         </li>
     @endforelse
 
     @if ($categories->count() >= config('xetaravel.discuss.categories_sidebar'))
-        <li>
-            <a href="{{ route('discuss.category.index') }}" class="discuss-categories-link font-xeta">
-                <span class="discuss-categories-color" style="background-color: transparent"></span>
+        <li class="mb-1">
+            <a href="{{ route('discuss.category.index') }}" class="link link-hover hover:text-primary font-xetaravel">
+                <span class="h-4 w-4 rounded inline-block mr-3" style="background-color: transparent"></span>
                 More...
             </a>
         </li>

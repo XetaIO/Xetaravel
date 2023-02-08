@@ -2,7 +2,7 @@
  * CodeMirror `mdn-like` theme.
  */
  .CodeMirror-gutters {
-    @apply !bg-transparent !border-solid !border-l-[6px] !border-[color:hsl(var(--b3))] dark:!border-[color:hsl(var(--n))];
+    @apply !bg-transparent !border-solid !border-l-[6px] !border-[color:hsl(var(--b3))] dark:!border-[color:hsl(var(--b2))];
   }
 
   .cm-s-mdn-like.CodeMirror {
@@ -10,7 +10,7 @@
   }
 
   .CodeMirror {
-    @apply bg-base-200 dark:bg-base-300 dark:bg-none dark:text-slate-400 !text-current;
+    @apply !bg-base-200 dark:!bg-[color:hsl(var(--n))] dark:!bg-none dark:!text-slate-400 !text-current dark:border-r-[color:transparent];
   }
 
   .CodeMirror.cm-s-.CodeMirror-wrap {
@@ -18,25 +18,22 @@
   }
 
   .editormd {
-    @apply bg-base-200 dark:bg-base-300;
-  }
-  .editormd ::-webkit-scrollbar {
-    @apply bg-[color:hsl(var(--b1))] hover:bg-[color:hsl(var(--b2))] h-4 w-4
-  }
-  .editormd ::-webkit-scrollbar-thumb {
-    @apply rounded-none;
+    @apply bg-base-200 dark:bg-[color:hsl(var(--n))] border-[color:hsl(var(--b3))] dark:border-[color:hsl(var(--b1))];
   }
 
 .editormd-code-toolbar {
     @apply text-current;
 }
 .editormd-toolbar {
-    @apply bg-transparent;
+    @apply bg-transparent border-[color:hsl(var(--b3))] dark:border-[color:hsl(var(--b1))];
+}
+.editormd-menu>li.divider {
+  @apply border-[color:hsl(var(--b3))] dark:border-[color:hsl(var(--b1))];
 }
 
- .CodeMirror-activeline-background {
-    @apply !bg-transparent;
-  }
+.CodeMirror-activeline-background {
+  @apply !bg-transparent;
+}
 
 .CodeMirror-cursor,
 .CodeMirror div.CodeMirror-cursor {
@@ -47,7 +44,7 @@
    * Modals
    */
 .editormd-dialog {
-    @apply dark:bg-base-300 dark:text-slate-300;
+    @apply dark:bg-[color:hsl(var(--b3))] dark:text-slate-300;
 }
 
 .editormd-dialog-header:hover {
@@ -78,8 +75,13 @@
   .editormd-dialog-container button,
   .editormd-dialog-footer input[type="submit"],
   .editormd-dialog-footer .editormd-btn,
-  .editormd-dialog-footer button {
+  .editormd-dialog-footer button,
+  .editormd-file-input input[type=file] {
     @apply btn btn-sm;
+  }
+
+  .editormd-file-input:hover input[type=submit] {
+    @apply bg-[color:hsl(var(--nf))];
   }
 
   /* Toolbar Button */
@@ -109,7 +111,7 @@
    */
   .editormd-form input[type="text"],
   .editormd-form input[type="number"] {
-    @apply input input-bordered h-10;
+    @apply input input-bordered h-10 text-current;
   }
 
   .editormd-form input[type="number"] {
@@ -118,4 +120,19 @@
 
   .editormd-dialog-container select {
     @apply select select-bordered h-10 text-current;
+  }
+
+  .editormd ::-webkit-scrollbar {
+    @apply bg-[color:hsl(var(--b1))] hover:bg-[color:hsl(var(--b2))] h-4 w-4
+  }
+  .editormd ::-webkit-scrollbar-thumb {
+    @apply rounded-none;
+  }
+
+  .markdown-body {
+    @apply text-current
+  }
+
+  .cm-s-mdn-like.CodeMirror ::selection {
+    background: #f4645f !important;
   }

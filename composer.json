@@ -33,6 +33,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
+        "livewire/livewire": "^2.11",
         "phattarachai/laravel-mobile-detect": "^1.0",
         "rinvex/countries": "^8.0",
         "spatie/laravel-analytics": "^4.0",

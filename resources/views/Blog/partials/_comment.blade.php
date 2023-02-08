@@ -1,5 +1,6 @@
-<article class="flex items-center" id="comment-{{ $comment->id }}">
-    <div class="flex flex-col items-center">
+<article class="flex flex-col sm:flex-row" id="comment-{{ $comment->id }}">
+
+    <aside class="flex flex-col items-center self-center sm:self-start mt-4">
         {{--  User Avatar --}}
         <a class="avatar {{ $comment->user->online ? 'online' : 'offline' }} m-2" href="{{ $comment->user->profile_url }}">
             <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $comment->user->username }} is {{ $comment->user->online ? 'online' : 'offline' }}">
@@ -9,19 +10,19 @@
 
         {{-- Handle the user's icons --}}
         <x-badge.role :user="$comment->user" />
-    </div>
+    </aside>
 
-    <div class="flex flex-col ml-3 self-start mt-5 w-full">
+    <div class="flex flex-col sm:ml-3 self-start mt-5 w-full group">
         {{-- Comment Meta --}}
-        <div class="flex flex-row justify-between">
-            <div class="flex flex-row items-center">
+        <header class="flex flex-col sm:flex-row justify-between">
+            <div class="flex flex-col sm:flex-row items-center">
                 {{-- User XP --}}
                 <span class="font-semibold tooltip" data-tip="This user has {{ $comment->user->experiences_total }} XP">
                     <x-icon.star/>
                     {{ $comment->user->experiences_total }}
                 </span>
 
-                <span class="text-gray-700 mx-2"> - </span>
+                <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
                 {{-- User with Vue --}}
                 <discuss-user
@@ -36,7 +37,7 @@
                     :background-color="{{ var_export($comment->user->avatar_primary_color) }}">
                 </discuss-user>
 
-                <span class="text-gray-700 mx-2"> - </span>
+                <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
                 {{-- Date --}}
                 <span class="tooltip" data-tip="{{ $comment->created_at->format('Y-m-d H:i:s') }}">
@@ -49,18 +50,19 @@
 
             {{-- Share --}}
             <discuss-share
+                class="sm:opacity-0 sm:group-hover:opacity-100"
                 :post-id="{{ var_export($comment->getKey()) }}"
                 :post-type="{{ var_export('Comment') }}"
                 :route-input="{{ var_export(route('blog.comment.show', ['id' => $comment->getKey()])) }}">
             </discuss-share>
-        </div>
+        </header>
 
         {{-- Comment Content --}}
-        <div>
+        <div class="prose min-w-full my-4">
             {!! $comment->content_markdown !!}
         </div>
 
-        <div class="flex flex-row justify-between">
+        <footer class="flex flex-row justify-between">
             {{-- User Signature --}}
             <div class="self-start">
                 @empty (!$comment->user->signature)
@@ -71,7 +73,7 @@
             {{-- Comment Actions --}}
             @auth
                 @canany(['update', 'delete'], $comment)
-                    <div class="dropdown dropdown-end self-end">
+                    <div class="dropdown dropdown-end self-start sm:opacity-0 sm:group-hover:opacity-100">
                         <label tabindex="0" class="btn btn-link m-1 dark:text-white text-neutral">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
                                 <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
@@ -104,7 +106,12 @@
                     </div>
                 @endcan
             @endauth
-        </div>
+        </footer>
 
     </div>
 </article>
+
+{{-- Divider between each comment --}}
+@if (!$loop->last)
+    <div class="divider"></div>
+@endif

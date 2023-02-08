@@ -9,13 +9,13 @@ export default {
 const blogModalsDeleteComment = document.querySelectorAll('.deleteCommentModal');
 
 blogModalsDeleteComment.forEach(function(blogModalDeleteComment) {
-    blogModalDeleteComment.addEventListener('click', () => {
+    blogModalDeleteComment.addEventListener('click', function(event) {
             const formModalDeleteComment = document.getElementById('deleteCommentModalForm');
-            const actionUrl = this.dataset.action;
+            const actionUrl = event.target.dataset.action;
 
             formModalDeleteComment.action = actionUrl;
     });
-})
+});
 
 /*document.addEventListener("DOMContentLoaded", () => {
     var codes = document.getElementsByClassName('hljs');

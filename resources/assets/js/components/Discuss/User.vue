@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown dropdown-hover dropdown-top dropdown-middle ml-3 !aspect-auto">
+    <div class="dropdown dropdown-hover dropdown-top dropdown-middle !aspect-auto">
         <label tabindex="0" class="text-primary font-bold">
             {{ user.full_name }}
         </label>

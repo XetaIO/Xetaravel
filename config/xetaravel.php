@@ -43,7 +43,7 @@ return [
             'posts_profile_page' => 10
         ],
         'discuss' => [
-            'conversation_per_page' => 15,
+            'conversation_per_page' => 1, //15
             'post_per_page' => 10
         ]
     ],
@@ -73,7 +73,7 @@ return [
     | All blog settings.
      */
     'blog' => [
-        'categories_sidebar' => 25,
+        'categories_sidebar' => 10,
         'articles_sidebar' => 5,
         'users_sidebar' => 5
     ],
@@ -86,7 +86,7 @@ return [
     |
     */
     'discuss' => [
-        'categories_sidebar' => 15,
+        'categories_sidebar' => 2, //15
         // The number in days.
         'info_message_old_conversation' => 92
     ]

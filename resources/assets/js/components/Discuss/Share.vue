@@ -1,8 +1,8 @@
 <template>
     <div class="dropdown dropdown-hover dropdown-top dropdown-middle ml-3">
         <button type="button" class="link link-hover flex gap-2 dark:text-current text-neutral">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
-                <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4" viewBox="0 0 16 16">
+                <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
             </svg>
             Share
         </button>
@@ -23,23 +23,6 @@
             'postId',
             'postType',
             'routeInput'
-        ],
-
-        methods: {
-            getContent: function () {
-                return '<div class="discuss-conversation-meta-share">' +
-                            '<span class="discuss-conversation-meta-share-number font-weight-bold">' +
-                                this.postType + ' #' + this.postId +
-                            '</span>' +
-                            '<input onFocus="this.select()" autofocus="autofocus" class="discuss-conversation-meta-share-input form-control" value="' + this.routeInput + '">' +
-                        '</div>';
-            },
-            getTemplate: function () {
-                return '<div class="popover" role="tooltip" style="min-width: 380px;">' +
-                            '<div class="popover-arrow"></div>' +
-                            '<div class="popover-content"></div>' +
-                        '</div>';
-            }
-    	}
+        ]
     }
 </script>

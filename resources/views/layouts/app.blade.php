@@ -92,7 +92,9 @@
         </script>
 
         <!-- Scripts -->
+        <script src="https://kit.fontawesome.com/e3046f3b08.js" crossorigin="anonymous"></script>
         <script src="{{ mix('js/xetaravel.min.js') }}"></script>
+
 
         <!-- Embed Scripts -->
         @stack('scripts')

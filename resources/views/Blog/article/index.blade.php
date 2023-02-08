@@ -6,7 +6,7 @@
 @endpush
 
 @section('content')
-<section class="lg:container mx-auto mt-12 mb-5  overflow-hidden">
+<section class="lg:container mx-auto mt-12 mb-5 overflow-hidden">
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3 ">
             {!! $breadcrumbs->render() !!}
@@ -14,7 +14,7 @@
     </div>
 </section>
 
-<section class="lg:container mx-auto pt-4  overflow-hidden">
+<section class="lg:container mx-auto pt-4 mb-5 overflow-hidden">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-9 col-span-12 px-3">
             @include('Blog::partials._articles')

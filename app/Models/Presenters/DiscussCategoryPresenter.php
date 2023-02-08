@@ -14,6 +14,6 @@ trait DiscussCategoryPresenter
             return '';
         }
 
-        return route('discuss.category.show', ['slug' => $this->slug, 'id' => $this->getKey()]);
+        return route('discuss.index', ['c' => $this->getKey()]);
     }
 }

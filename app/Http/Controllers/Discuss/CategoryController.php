@@ -30,13 +30,13 @@ class CategoryController extends Controller
     {
         $category = DiscussCategory::findOrFail($id);
 
-        $conversations = DiscussConversation::where('category_id', $category->getKey())
+        /*$conversations = DiscussConversation::where('category_id', $category->getKey())
             ->with('User', 'Category', 'FirstPost', 'LastPost')
             ->orderBy('is_pinned', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(config('xetaravel.pagination.discuss.conversation_per_page'));
+            ->paginate(config('xetaravel.pagination.discuss.conversation_per_page'));*/
 
-        $this->breadcrumbs->addCrumb('Categories', route('discuss.category.index'));
+        $this->breadcrumbs->addCrumb('<i class="fa-solid fa-list"></i> Categories', route('discuss.category.index'));
 
         $icon = "";
 
@@ -49,6 +49,6 @@ class CategoryController extends Controller
             route('discuss.category.show', ['slug' => $category->slug, 'id' => $category->getKey()])
         );
 
-        return view('Discuss::category.show', compact('breadcrumbs', 'conversations', 'category'));
+        return view('Discuss::category.show', compact('breadcrumbs', 'category'));
     }
 }
