@@ -30,7 +30,6 @@ class DiscussController extends Controller
      */
     public function leaderboard(): View
     {
-
         $secondes = 1; //config('badges.users.pillarofcommunity.cache_lifetime_in_secondes'); // 86400 -> 24H
 
         $users = Cache::remember('Badges.users.pillarofcommunity', $secondes, function () {
@@ -44,7 +43,10 @@ class DiscussController extends Controller
             return $users;
         });
 
-        $breadcrumbs = $this->breadcrumbs->addCrumb('Leaderboard', route('discuss.leaderboard'));
+        $breadcrumbs = $this->breadcrumbs->addCrumb(
+            '<i class="fa-regular fa-id-card mr-2"></i> Leaderboard',
+            route('discuss.leaderboard')
+        );
 
         $badge = Badge::where('slug', 'topleaderboard')->first();
 

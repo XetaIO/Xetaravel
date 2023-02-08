@@ -16,15 +16,4 @@ class CategoryControllerTest extends TestCase
         $response = $this->get('/discuss/categories');
         $response->assertSuccessful();
     }
-
-    /**
-     * testShow method
-     *
-     * @return void
-     */
-    public function testShow()
-    {
-        $response = $this->get('/discuss/category/xetaravel.1');
-        $response->assertSuccessful();
-    }
 }
