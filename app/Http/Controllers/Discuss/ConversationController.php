@@ -53,7 +53,10 @@ class ConversationController extends Controller
     {
         $categories = DiscussCategory::pluckLocked('title', 'id');
 
-        $breadcrumbs = $this->breadcrumbs->addCrumb('Start a discussion', route('discuss.conversation.create'));
+        $breadcrumbs = $this->breadcrumbs->addCrumb(
+            '<i class="fa-solid fa-pencil mr-2"></i> Start a discussion',
+            route('discuss.conversation.create')
+        );
 
         return view('Discuss::conversation.create', compact('breadcrumbs', 'categories'));
     }

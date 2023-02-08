@@ -1,6 +1,8 @@
-<div class="form-group {{ $errors->has($name) ? 'has-danger' : '' }}">
+<div class="form-control">
     @if ($label !== false)
-        {!! Form::label($name, $label, ['class' => $labelClass]) !!}
+        <label class="label">
+            <span class="label-text {{ $labelClass }}">{{ $label }}</span>
+        </label>
     @endif
 
     @isset($attributes['editor'])
@@ -10,7 +12,7 @@
     {!! Form::textarea(
         $name,
         $value,
-        array_merge(['class' => $errors->has($name) ? 'form-control form-control-danger' : 'form-control', 'rows' => 5], $attributes)
+        array_merge(['class' => $errors->has($name) ? 'textarea textarea-bordered textarea-error' : 'textarea textarea-bordered', 'rows' => 5], $attributes)
     ) !!}
 
     @isset($attributes['editor'])
@@ -18,8 +20,10 @@
     @endisset
 
     @if ($errors->has($name))
-        <div class="form-control-feedback">
-            {{ $errors->first($name) }}
-        </div>
+        <label class="label">
+            <span class="label-text-alt text-error">
+                {{ $errors->first($name) }}
+            </span>
+        </label>
     @endif
 </div>

@@ -5,7 +5,7 @@
             Subscribe
         </button>
 
-    @if ($errors->has($name))
+    @if (isset($errors) && $errors->has($name))
     <p class="mt-2 text-sm text-red-600 dark:text-red-500">
         <span class="font-medium">Oops!</span>
         {{ $errors->first($name) }}
