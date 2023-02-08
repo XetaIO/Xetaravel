@@ -11,7 +11,6 @@
 
 @push('style')
     {!! editor_css() !!}
-    <link href="{{ asset('css/editor-md.custom.min.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
@@ -51,7 +50,7 @@
 @endpush
 
 @section('content')
-<div class="discuss-conversation-header pb-1 pt-4">
+<section class="discuss-conversation-header pb-1 pt-4">
     <div class="blog-header mt-2">
         <div class="container text-xs-center">
             <ul class="discuss-conversation-header-badges d-inline-block">
@@ -91,20 +90,24 @@
             </h2>
         </div>
     </div>
-</div>
-<hr class="mt-0" />
-<div class="container pt-0 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<hr />
-<div class="container pt-2 pb-4">
-    <div class="row">
+</section>
+
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3">
+            {!! $breadcrumbs->render() !!}
+        </div>
+    </div>
+</section>
+
+<section class="lg:container mx-auto pt-4 mb-5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {{-- Sidebar --}}
-        <div class="col-md-3">
-            <div class="sidebar-module">
+        <div class="lg:col-span-3 col-span-12 px-3">
+            <div class="">
                 @auth
-                    <div class="discuss-new-discussion-btn text-xs-center text-md-left">
-                        <div class="btn-group">
+                    <div class="form-control">
+                        <div class="input-group">
                             @if (!$conversation->is_locked)
                                 <a href="#post-reply" class="btn btn-primary">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -125,28 +128,37 @@
                                 Auth::user()->can('update', $conversation) ||
                                 Auth::user()->can('delete', $conversation)
                             )
-                                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown btn btn-primary">
+                                <label tabindex="0" class="m-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"/>
+                                    </svg>
+                                </label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                     @can('update', $conversation)
-                                        <a class="dropdown-item" href="#editDiscussionModal" data-toggle="modal" data-target="#editDiscussionModal">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                            Edit
-                                        </a>
+                                        <li>
+                                            <label class="editDiscussConversationModal" for="editDiscussConversationModal">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                Edit
+                                            </label>
+                                        </li>
                                     @endcan
 
                                     @can('delete', $conversation)
                                         @can('update', $conversation)
-                                            <div class="dropdown-divider"></div>
+                                            <li class="dropdown-divider"></li>
                                         @endcan
-
-                                        <a class="dropdown-item" href="#deleteDiscussionModal" data-toggle="modal" data-target="#deleteDiscussionModal">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                            Delete
-                                        </a>
+                                        <li>
+                                            <label class="text-red-500 deleteDiscussConversationModal" for="deleteDiscussConversationModal">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                Delete
+                                            </label>
+                                        </li>
                                     @endcan
-                                </div>
+                                </ul>
+                            </div>
                             @endif
                         </div>
                     </div>
@@ -164,7 +176,7 @@
         </div>
 
         {{-- Conversation Posts --}}
-        <div class="col-md-9 mb-3">
+        <div class="lg:col-span-9 col-span-12 px-3">
             @forelse ($postsWithLogs as $post)
                 @include(
                     'Discuss::partials._post',
@@ -263,7 +275,7 @@
             @endif
         </div>
     </div>
-</div>
+</section>
 
 {{-- Edit Conversation Modal --}}
 <div class="modal fade" id="editDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="editDiscussionModal" aria-hidden="true">
@@ -388,7 +400,8 @@
 </div>
 
 {{-- Delete Post Modal --}}
-<div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModal" aria-hidden="true">
+<input type="checkbox" id="deleteDiscussConversationModal" class="modal-toggle" />
+<div class="modal" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

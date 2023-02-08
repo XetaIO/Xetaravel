@@ -1,1 +1,0 @@
-<livewire:discuss.conversation :category="isset($category) ? $category : null"/>
