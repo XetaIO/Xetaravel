@@ -73,7 +73,7 @@
             </ul>
 
             <div class="discuss-conversation-header-categories {{ $conversation->is_solved ? "tag-group" : "" }}">
-                <a href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' =>$conversation->category->getKey()]) }}" class="tag tag-default text-white" style="background-color: {{ $conversation->category->color }};">
+                <a href="{{ $conversation->category->category_url }}" class="tag tag-default text-white" style="background-color: {{ $conversation->category->color }};">
                     @if (!is_null($conversation->category->icon))
                         <i class="{{ $conversation->category->icon }}"></i>
                     @endif

@@ -6,44 +6,44 @@
 @endpush
 
 @section('content')
-<div class="container pt-6 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="container pt-2 pb-4">
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 ">
+            {!! $breadcrumbs->render() !!}
+        </div>
+    </div>
+</section>
 
-    <div class="row">
-        <div class="col-md-3">
-            <div class="discuss-new-discussion-btn text-xs-center text-md-left">
-                {{ link_to(
-                    route('discuss.conversation.create'),
-                    '<i class="fa fa-pencil"></i> Start a Discussion',
-                    ['class' => 'btn btn-primary'],
-                    true,
-                    false
-                ) }}
+<section class="lg:container mx-auto pt-4 mb-5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-3 col-span-12 px-3">
+            <div class="mb-5">
+                <a href="{{ route('discuss.conversation.create') }}" class="btn btn-primary gap-2">
+                    <i class="fa-solid fa-pencil"></i>
+                    Start a Discussion
+                </a>
             </div>
-
             @include('Discuss::partials._sidebar')
         </div>
-        <div class="col-md-9">
-            <div class="row">
+        <div class="lg:col-span-9 col-span-12 px-3">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 @forelse ($categories as $category)
-                    <div class="col-md-4 mb-1">
-                        <div class="discuss-categories-list" style="background-color: {{ $category->color }};">
-                            <div class="discuss-categories-header">
-                                <h5 class="text-white text-truncate text-md-center">
-                                    <a class="text-white" href="{{ route('discuss.category.show', ['slug' => $category->slug, 'id' => $category->getKey()]) }}">
+                    <div class="lg:col-span-4 col-span-12">
+                        <div class="flex flex-col justify-between p-2 rounded-md shadow-md text-white h-full" style="background-color: {{ $category->color }};">
+                            <div class="mb-3">
+                                <h5 class="text-2xl text-center mb-2">
+                                    <a class="" href="{{ $category->category_url }}">
                                         {{ $category->title }}
                                     </a>
                                 </h5>
-                                <div class="discuss-categories-list-description text-white">
+                                <div class="text-sm">
                                     {{ $category->description }}
                                 </div>
                             </div>
 
-                            <div class="discuss-categories-footer text-truncate text-white">
+                            <div class="truncate">
                             @if (!is_null($category->lastConversation))
-                                <a  class="text-white" href="{{ route('discuss.post.show', ['id' => $category->lastConversation->last_post_id]) }}">
+                                <a  class="" href="{{ route('discuss.post.show', ['id' => $category->lastConversation->last_post_id]) }}">
                                     <strong>{{ $category->lastConversation->title }}</strong>
 
                                     <time datetime="{{ $category->lastConversation->created_at->format('Y-m-d H:i:s') }}">
@@ -67,5 +67,5 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection

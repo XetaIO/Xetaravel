@@ -34,6 +34,7 @@
             </div>
             @include('Discuss::partials._sidebar')
         </div>
+
         <div class="lg:col-span-9 col-span-12 px-3">
             <livewire:discuss.conversation />
         </div>

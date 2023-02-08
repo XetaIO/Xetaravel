@@ -16,39 +16,11 @@ class CategoryController extends Controller
     {
         $categories = DiscussCategory::orderBy('level', 'asc')->get();
 
-        $breadcrumbs = $this->breadcrumbs->addCrumb('All Categories', route('discuss.category.index'));
-
-        return view('Discuss::category.index', compact('categories', 'breadcrumbs'));
-    }
-
-    /**
-     * Display all conversations related to the category.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show(string $slug, int $id): View
-    {
-        $category = DiscussCategory::findOrFail($id);
-
-        /*$conversations = DiscussConversation::where('category_id', $category->getKey())
-            ->with('User', 'Category', 'FirstPost', 'LastPost')
-            ->orderBy('is_pinned', 'desc')
-            ->orderBy('created_at', 'desc')
-            ->paginate(config('xetaravel.pagination.discuss.conversation_per_page'));*/
-
-        $this->breadcrumbs->addCrumb('<i class="fa-solid fa-list"></i> Categories', route('discuss.category.index'));
-
-        $icon = "";
-
-        if (!is_null($category->icon)) {
-            $icon = "<i class=\"{$category->icon}\"></i> ";
-        }
-
         $breadcrumbs = $this->breadcrumbs->addCrumb(
-            $icon . e($category->title),
-            route('discuss.category.show', ['slug' => $category->slug, 'id' => $category->getKey()])
+            '<i class="fa-solid fa-list mr-2"></i> All Categories',
+            route('discuss.category.index')
         );
 
-        return view('Discuss::category.show', compact('breadcrumbs', 'category'));
+        return view('Discuss::category.index', compact('categories', 'breadcrumbs'));
     }
 }

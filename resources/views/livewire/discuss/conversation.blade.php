@@ -217,7 +217,7 @@
                 {{-- Category & Users avatars --}}
                 <div class="flex flex-col gap-2 items-center">
                     {{-- Category --}}
-                    <a class="badge tooltip inline-flex text-white font-semibold border-[color:transparent] gap-2" href="{{ route('discuss.category.show', ['slug' => $conversation->category->slug, 'id' => $conversation->category->getKey()]) }}" data-tip="Category" style="background-color: {{ $conversation->category->color }};">
+                    <a class="badge tooltip inline-flex text-white font-semibold border-[color:transparent] gap-2" href="{{ $conversation->category->category_url }}" data-tip="Category" style="background-color: {{ $conversation->category->color }};">
                         @if (!is_null($conversation->category->icon))
                             <i class="{{ $conversation->category->icon }}"></i>
                         @endif

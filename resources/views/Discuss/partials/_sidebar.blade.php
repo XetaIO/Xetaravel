@@ -23,7 +23,7 @@
 <ol class="mb-3">
     @forelse ($categories as $category)
         <li class="mb-1">
-            <a href="{{ route('discuss.index', ['c' => $category->getKey()]) }}" class="link link-hover hover:text-primary font-xetaravel flex items-center tooltip" data-tip="{{ $category->description }}">
+            <a href="{{ $category->category_url }}" class="link link-hover hover:text-primary font-xetaravel flex items-center tooltip" data-tip="{{ $category->description }}">
                 <span class="h-4 w-4 rounded inline-block mr-3" style="background-color: {{ $category->color }};"></span>
                 @if (!is_null($category->icon))
                     <i class="{{ $category->icon }} mr-1"></i>
