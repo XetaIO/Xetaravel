@@ -1,6 +1,6 @@
 <div class="form-gcontrol w-full max-w-xs">
     <label class="cursor-pointer label justify-start">
-        {!! Form::checkbox($name, $value, $checked, array_merge(['class' => $errors->has($name) ?'checkbox checkbox-error' : 'checkbox'], $attributes)) !!}
+        {!! Form::checkbox($name, $value, $checked, array_merge(['class' => $errors->has($name) ? 'checkbox checkbox-error' : 'checkbox'], $attributes)) !!}
         <span class="label-text ml-2 {{ $labelClass }}">{{ $label }}</span>
     </label>
 

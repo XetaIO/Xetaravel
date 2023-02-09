@@ -10,80 +10,81 @@
 @endpush
 
 @section('content')
-<div class="container mt-6 pb-4">
-    <div class="row">
-        @if (config('settings.user.register.enabled'))
-            <div class="col-md-4 offset-md-4">
-                <h2 class="text-xs-center font-xeta mt-2">
-                    Register
-                </h2>
-                {!! Form::open(['route' => 'users.auth.register']) !!}
-                    {!! Form::bsText('username', 'Username', old('username'), [
-                        'placeholder' => 'Your Username...',
-                        'required' => 'required',
-                        'autofocus'
-                    ]) !!}
+<section class="lg:container mx-auto mt-12 mb-5 overflow-hidden">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3">
+            <div class="flex flex-col items-center">
+                @if (config('settings.user.register.enabled'))
+                    <div>
+                        <h1 class="text-3xl font-xetaravel text-center mb-2">
+                            Register
+                        </h1>
 
-                    {!! Form::bsEmail('email', 'E-Mail', old('email'), [
-                        'placeholder' => 'Your E-Mail...',
-                        'required' => 'required'
-                    ]) !!}
+                        <x-form.form method="post" action="{{ route('users.auth.register') }}">
+                            {!! Form::bsText('username', 'Username', old('username'), [
+                                'placeholder' => 'Your Username...',
+                                'required' => 'required',
+                                'autofocus'
+                            ]) !!}
 
-                    {!! Form::bsPassword('password', 'Password', [
-                        'placeholder' => 'Your Password...',
-                        'required' => 'required'
-                    ]) !!}
+                            {!! Form::bsEmail('email', 'E-Mail', old('email'), [
+                                'placeholder' => 'Your E-Mail...',
+                                'required' => 'required'
+                            ]) !!}
 
-                    {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
-                        'placeholder' => 'Confirm your Password...',
-                        'required' => 'required'
-                    ]) !!}
+                            {!! Form::bsPassword('password', 'Password', [
+                                'placeholder' => 'Your Password...',
+                                'required' => 'required'
+                            ]) !!}
 
-                    <div class="form-group {{ $errors->has('g-recaptcha-response') ? 'has-danger' : '' }}">
-                            {!! NoCaptcha::display() !!}
-                            @if ($errors->has('g-recaptcha-response'))
-                                <div class="form-control-feedback">
-                                    {{ $errors->first('g-recaptcha-response') }}
+                            {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
+                                'placeholder' => 'Confirm your Password...',
+                                'required' => 'required'
+                            ]) !!}
+
+                            <div class="form-control my-2">
+                                {!! NoCaptcha::display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <label class="label">
+                                        <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
+                                    </label>
+                                @endif
+                            </div>
+
+                            {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
+
+                            <div class="text-center">
+                                <div class="mb-2">
+                                    <button type="submit" class="btn btn-primary gap-2">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                        Register
+                                    </button>
                                 </div>
-                            @endif
-                        </div>
-
-                    {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the " . link_to(route('page.terms'), 'Terms') . ".") !!}
-
-                    <div class="form-group text-xs-center">
-                        <div class="col-md-12 mb-1">
-                            {!! Form::button('<i class="fa fa-user-plus" aria-hidden="true"></i> Register', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
-                        </div>
-                        <div class="col-md-12">
-                            {!! link_to(
-                                route('auth.driver.redirect', ['driver' => 'github']),
-                                'Register with Github <i class="fa fa-github"></i>',
-                                ['class' => 'btn btn-outline-secondary'],
-                                true,
-                                false
-                            )!!}
-                        </div>
-                        <div class="col-md-12">
-                            <a class="btn btn-link" href="{{ route('users.auth.login') }}">
-                                Already an account?
-                            </a>
-                        </div>
+                                <div class="mb-2">
+                                    <a class="btn gap-2" href="{{ route('auth.driver.redirect', ['driver' => 'github']) }}">
+                                        Register with Github <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                                <div >
+                                    <a class="link link-hover link-primary" href="{{ route('users.auth.login') }}">
+                                        Already an account?
+                                    </a>
+                                </div>
+                            </div>
+                        </x-form.form>
                     </div>
-                {!! Form::close() !!}
+                @else
+                    <div>
+                        <h1 class="text-3xl font-xetaravel text-center mb-4">
+                            Whoops
+                        </h1>
+                        <x-alert type="error" class="max-w-lg mb-4">
+                            The registration system is currently disabled, please try again later.
+                        </x-alert>
+                    </div>
+                @endif
             </div>
-        @else
-            <div class="col-md-4 offset-md-4">
-                <h2 class="text-xs-center mt-2">
-                    Whoops
-                </h2>
-            </div>
-            <div class="col-md-8  offset-md-2 text-xs-center mt-6">
-                <div role="alert" class="alert alert-danger">
-                    <i aria-hidden="true" class="fa fa-exclamation fa-2x pb-1"></i><br>
-                    The registration system is currently disabled, please try again later.
-                </div>
-            </div>
-        @endif
+        </div>
     </div>
-</div>
+</section>
 @endsection

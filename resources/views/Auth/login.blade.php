@@ -6,57 +6,65 @@
 @endpush
 
 @section('content')
-<div class="container mt-6 pb-4">
-    <div class="row">
-        @if (config('settings.user.login.enabled'))
-            <div class="col-md-4 offset-md-4">
-                <h2 class="text-xs-center font-xeta mt-2">
-                    Login
-                </h2>
-                {!! Form::open(['route' => 'users.auth.login']) !!}
-                    {!! Form::bsEmail('email', 'E-Mail', old('email'), [
-                        'placeholder' => 'Your E-Mail...',
-                        'required' => 'required',
-                        'autofocus'
-                    ]) !!}
+<section class="lg:container mx-auto mt-12 mb-5 overflow-hidden">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3">
+            <div class="flex flex-col items-center">
+                @if (config('settings.user.login.enabled'))
+                    <div>
+                        <h1 class="text-3xl font-xetaravel text-center mb-2">
+                            Login
+                        </h1>
 
-                    {!! Form::bsPassword('password', 'Password', [
-                        'placeholder' => 'Your Password...',
-                        'required' => 'required'
-                    ]) !!}
+                        <x-form.form method="post" action="{{ route('users.auth.login') }}">
+                            {!! Form::bsEmail('email', 'E-Mail', old('email'), [
+                                'placeholder' => 'Your E-Mail...',
+                                'required' => 'required',
+                                'autofocus'
+                            ]) !!}
 
-                    {!! Form::bsCheckbox("remember", null, old('remember'), "Remember Me") !!}
+                            {!! Form::bsPassword('password', 'Password', [
+                                'placeholder' => 'Your Password...',
+                                'required' => 'required'
+                            ]) !!}
 
-                    <div class="form-group text-xs-center">
-                        {!! Form::button('<i class="fa fa-sign-in" aria-hidden="true"></i> Login', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
+                            {!! Form::bsCheckbox("remember", null, old('remember'), "Remember Me") !!}
+
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn btn-primary gap-2">
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    Login
+                                </button>
+                            </div>
+                        </x-form.form>
+
+                        <div class="text-center mb-3">
+                            <a class="btn gap-2" href="{{ route('auth.driver.redirect', ['driver' => 'github']) }}">
+                                Login with Github <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
                     </div>
-                {!! Form::close() !!}
 
-                <div class="text-xs-center">
-                    {!! link_to(route('auth.driver.redirect', ['driver' => 'github']), 'Login with Github <i class="fa fa-github"></i>', ['class' => 'btn btn-outline-secondary'], true, false) !!}
-                </div>
+                    <div class="text-center">
+                        <a class="link link-hover link-primary mr-2" href="{{ route('users.auth.password.request') }}">
+                            Forgot Your Password?
+                        </a>
+                        <a class="link link-hover link-primary" href="{{ route('users.auth.register') }}">
+                            Not registered yet?
+                        </a>
+                    </div>
+                @else
+                    <div>
+                        <h1 class="text-3xl font-xetaravel text-center mb-4">
+                            Whoops
+                        </h1>
+                        <x-alert type="error" class="max-w-lg mb-4">
+                            The login system is currently disabled, please try again later.
+                        </x-alert>
+                    </div>
+                @endif
             </div>
-            <div class="col-md-12 text-xs-center">
-                <a class="btn btn-link" href="{{ route('users.auth.password.request') }}">
-                    Forgot Your Password?
-                </a>
-                <a class="btn btn-link" href="{{ route('users.auth.register') }}">
-                    Not registered yet?
-                </a>
-            </div>
-        @else
-            <div class="col-md-4 offset-md-4">
-                <h2 class="text-xs-center mt-2">
-                    Whoops
-                </h2>
-            </div>
-            <div class="col-md-8  offset-md-2 text-xs-center mt-6">
-                <div role="alert" class="alert alert-danger">
-                    <i aria-hidden="true" class="fa fa-exclamation fa-2x pb-1"></i><br>
-                    The login system is currently disabled, please try again later.
-                </div>
-            </div>
-        @endif
+        </div>
     </div>
-</div>
+</section>
 @endsection
