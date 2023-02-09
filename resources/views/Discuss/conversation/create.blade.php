@@ -57,8 +57,8 @@
                 <h3 class="text-2xl text-center">
                     Start a discussion
                 </h3>
-                <x-form.form method="post" action="{{ route('discuss.conversation.create') }}">
 
+                <x-form.form method="post" action="{{ route('discuss.conversation.create') }}">
                     {!! Form::bsText(
                         'title',
                         'Title',

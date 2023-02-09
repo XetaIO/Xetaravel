@@ -45,7 +45,6 @@
                         {{ $comment->created_at->diffForHumans() }}
                     </time>
                 </span>
-                </ul>
             </div>
 
             {{-- Share --}}

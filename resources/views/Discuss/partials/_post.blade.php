@@ -1,200 +1,179 @@
 @if (get_class($post) !== \Xetaravel\Models\DiscussLog::class)
-    <div id="post-{{ $post->id }}" class="discuss-conversation {{ $isSolvedPost ? 'discuss-conversation-solved bg-success' : ''}}">
-        <div class="discuss-conversation-user float-xs-left text-xs-center">
-            @if ($isSolvedPost)
-                <span class="discuss-conversation-user-solved rounded-circle" data-toggle="tooltip" title="This answer helped the author.">
-                    <i class="fa fa-3x fa-check text-success discuss-conversation-user-solved-icon"></i>
-
-                    @if ($post->user->hasRubies)
-                        <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earned Rubies."></i>
-                    @endif
-
-                    <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
-                </span>
-            @else
-                @if ($post->user->hasRubies)
-                    <i aria-hidden="true" class="fa fa-diamond text-primary discuss-conversation-user-rubies"  data-toggle="tooltip" title="This user has earned Rubies."></i>
+    <article id="post-{{ $post->id }}" class="flex flex-col sm:flex-row {{ $isSolvedPost ? 'bg-green-500 text-white rounded' : ''}}">
+        <aside class="flex flex-col items-center self-center sm:self-start mt-4">
+            {{--  User Avatar --}}
+            <a class="avatar {{ $post->user->online ? 'online' : 'offline' }} m-2" href="{{ $post->user->profile_url }}">
+                @if ($isSolvedPost)
+                    <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="This answer helped the author.">
+                        <span class="absolute top-0 left-0 bottom-0 right-0 h-full w-full bg-white rounded-full opacity-60"></span>
+                        <i class="absolute fa-solid fa-check text-4xl text-green-500 top-4 left-4"></i>
+                @else
+                    <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $post->user->username }} is {{ $post->user->online ? 'online' : 'offline' }}">
                 @endif
+                    <img class="rounded-full" src="{{ $post->user->avatar_small }}"  alt="{{ $post->user->full_name }} avatar" />
+                </figure>
+            </a>
 
-                <img src="{{ $post->user->avatar_small }}" alt="{{ $post->user->username }}" class="rounded-circle img-thumbnail" />
-            @endif
-
-            <!-- Handle the user's icons -->
-            @if ($post->user->hasRole(['member'], true))
-                <i aria-hidden="true" class="fas fa-user-tie discuss-conversation-user-roles discuss-conversation-user-member"  data-toggle="tooltip" title="Member"></i>
-            @endif
-
-            @if ($post->user->isModerator())
-                <i aria-hidden="true" class="fas fa-shield-alt discuss-conversation-user-roles discuss-conversation-user-moderator"  data-toggle="tooltip" title="Moderator"></i>
-            @endif
-
-            @if ($post->user->hasRole(['administrator', 'developer']))
-                <i aria-hidden="true" class="fas fa-wrench discuss-conversation-user-roles discuss-conversation-user-administrator"  data-toggle="tooltip" title="Administrator"></i>
-            @endif
-
-            @if ($post->user->isDeveloper())
-                <i aria-hidden="true" class="fas fa-code discuss-conversation-user-roles discuss-conversation-user-developer"  data-toggle="tooltip" title="Developer"></i>
-            @endif
-
-            @if ($post->user->online)
-                <span class="discuss-conversation-user-status">
-                    <i class="online" data-toggle="tooltip" title="The user is online"></i>
-                    <small class="online">Online</small>
-                </span>
-            @else
-                <span class="discuss-conversation-user-status">
-                    <i data-toggle="tooltip" title="The user is offline"></i>
-                    <small class="offline">Offline</small>
-                </span>
-            @endif
+            {{-- Handle the user's icons --}}
+            <x-badge.role :user="$post->user" />
+        </aside>
 
 
-        </div>
 
-        <div class="discuss-conversation-post">
-
+        <div class="flex flex-col sm:ml-3 self-start my-5 w-full group">
             {{-- Conversation Meta --}}
-            <div class="discuss-conversation-meta">
-                <ul class="list-inline mb-0">
-
-                    <li class="list-inline-item discuss-conversation-post-meta-experiences" data-toggle="tooltip" title="This user has {{ $post->user->experiences_total }} XP">
-                        <i aria-hidden="true" class="fa fa-star"></i>
+            <header class="flex flex-col sm:flex-row justify-between">
+                <div class="flex flex-col sm:flex-row items-center">
+                    {{-- User XP --}}
+                    <span class="font-semibold tooltip" data-tip="This user has {{ $post->user->experiences_total }} XP">
+                        <x-icon.star/>
                         {{ $post->user->experiences_total }}
-                    </li>
+                    </span>
+
+                    <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
                     {{-- User with Vue --}}
-                    <li class="list-inline-item font-weight-bold">
-                        <i aria-hidden="true" class="fa fa-user"></i>
-                        <discuss-user
-                            :user="{{ json_encode([
-                                'avatar_small'=> $post->user->avatar_small,
-                                'profile_url' => $post->user->profile_url,
-                                'full_name' => $post->user->full_name
-                            ]) }}"
-                            :created-at="{{ var_export($post->user->created_at->diffForHumans()) }}"
-                            :last-login="{{ var_export($post->user->last_login->diffForHumans()) }}"
-                            :background-color="{{ var_export($post->user->avatar_primary_color) }}">
-                        </discuss-user>
-                    </li>
+                    <discuss-user
+                        class="text-xl font-xetaravel ml-0"
+                        :user="{{ json_encode([
+                            'avatar_small'=> $post->user->avatar_small,
+                            'profile_url' => $post->user->profile_url,
+                            'full_name' => $post->user->full_name
+                        ]) }}"
+                        :created-at="{{ var_export($post->user->created_at->diffForHumans()) }}"
+                        :last-login="{{ var_export($post->user->last_login->diffForHumans()) }}"
+                        :background-color="{{ var_export($post->user->avatar_primary_color) }}">
+                    </discuss-user>
+
+                    <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
                     {{-- Date --}}
-                    <li class="list-inline-item" data-toggle="tooltip" title="{{ $post->created_at->format('Y-m-d H:i:s') }}">
-                        <i aria-hidden="true" class="fa fa-calendar"></i>
+                    <span class="tooltip" data-tip="{{ $post->created_at->format('Y-m-d H:i:s') }}">
                         <time datetime="{{ $post->created_at->format('Y-m-d H:i:s') }}">
                             {{ $post->created_at->diffForHumans() }}
                         </time>
-                    </li>
+                    </span>
 
                     {{-- Edited --}}
                     @if ($post->is_edited)
-                        <li class="list-inline-item">
-                            <span data-toggle="tooltip" title="<strong>{{ $post->editedUser->username }}</strong> edited {{ $post->edited_at->diffForHumans() }}" data-html="true">
-                                <i aria-hidden="true" class="fa fa-pencil"></i>
-                                Edited
-                            </span>
-                        </li>
-                    @endif
+                        <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
-                    {{-- Share --}}
-                    <li class="discuss-conversation-post-meta-share list-inline-item float-xs-right">
-                        <discuss-share
-                            :post-id="{{ var_export($post->getKey()) }}"
-                            :post-type="{{ var_export('Post') }}"
-                            :route-input="{{ var_export(route('discuss.post.show', ['id' => $post->getKey()])) }}">
-                        </discuss-share>
-                    </li>
-                </ul>
-            </div>
+                        <span class="tooltip" data-tip="{{ $post->editedUser->username }} edited {{ $post->edited_at->diffForHumans() }}">
+                            <i class="fa-solid fa-pencil"></i>
+                            Edited
+                        </span>
+                    @endif
+                </div>
+
+                {{-- Share --}}
+                <discuss-share
+                    class="sm:opacity-0 sm:group-hover:opacity-100 sm:mr-3"
+                    :is-solved="{{ var_export($isSolvedPost) }}"
+                    :post-id="{{ var_export($post->getKey()) }}"
+                    :post-type="{{ var_export('Comment') }}"
+                    :route-input="{{ var_export(route('blog.comment.show', ['id' => $post->getKey()])) }}">
+                </discuss-share>
+            </header>
+
 
             {{-- Conversation Content --}}
-            <div class="discuss-conversation-content">
+            <div class="prose min-w-full my-4 {{ $isSolvedPost ? 'text-white' : 'text-current'}} discuss-conversation-content">
                 {!! $post->content_markdown !!}
             </div>
 
             {{-- Conversation Edit --}}
             <div class="discuss-conversation-edit"></div>
 
-            {{-- Conversation Actions --}}
-            @auth
-            <div class="discuss-conversation-actions">
-                <ul class="list-inline mb-0">
+            <footer class="flex flex-row justify-between border-t border-dashed border-slate-500 mr-2">
+                {{-- User Signature --}}
+                <div class="self-start">
+                    @empty (!$post->user->signature)
+                    {!! Markdown::convert($post->user->signature) !!}
+                    @endempty
+                </div>
 
-                    @canany(['update', 'delete'], $post)
-                        {{-- Others actions --}}
-                        <li class="list-inline-item float-xs-right">
-                            <div class="dropdown">
-                                <button href="#" class="btn btn-link" type="button" id="dropdownActionsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-fw fa-ellipsis-h"></i>
-                                </button>
-                                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownActionsMenu">
+                {{-- Comment Actions --}}
+                @auth
+                    <div class="flex flex-row-reverse items-center gap-2">
+                        @canany(['update', 'delete'], $post)
+                            <div class="dropdown dropdown-end self-start sm:opacity-0 sm:group-hover:opacity-100">
+                                <label tabindex="0" class="btn btn-link m-1 text-current">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
+                                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                    </svg>
+                                </label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                     {{-- Moderation actions --}}
                                     @can('update', $post)
-                                        <a class="dropdown-item postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}" href="#">
-                                            <i class="fa fa-pencil"></i>
-                                            Edit
-                                        </a>
+                                        <li>
+                                            <label class="postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}">
+                                                <i class="fa-solid fa-pencil"></i>
+                                                Edit
+                                            </label>
+                                        </li>
                                     @endcan
-
                                     @if ($post->id !== $conversation->first_post_id)
                                         @can('delete', $post)
-                                            <h6 class="dropdown-header">Moderation</h6>
-                                            <a class="dropdown-item" data-toggle="modal" href="#deletePostModal" data-target="#deletePostModal" data-form-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
-                                                <i class="fa fa-trash"></i>
-                                                Delete
-                                            </a>
+                                            <li class="text-center">
+                                                Moderation
+                                            </li>
+                                            <li>
+                                                <label class="deleteConversationPostModal text-red-500" for="deleteConversationPostModal" data-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                    Delete
+                                                </label>
+                                            </li>
                                         @endcan
                                     @endif
-                                </div>
+                                </ul>
                             </div>
-                        </li>
-                    @endcan
-
-                    {{-- Like action --}}
-                    <!--<li class="list-inline-item float-xs-right">
-                        <a href="#" class="btn btn-link">
-                            Like
-                        </a>
-                    </li>-->
-
-                    {{-- Reply action --}}
-                    @if (!$conversation->is_locked)
-                        <li class="list-inline-item float-xs-right">
-                            @auth
-                                <a href="#" class="btn btn-link postReplyButton" data-content="{{ '@' . $post->user->username }}#{{ $post->id }}">
-                                    <i class="fa fa-reply"></i>
-                                    Reply
-                                </a>
-                            @else
-                                <a href="{{ route('users.auth.login') }}" class="btn btn-link">
-                                    <i class="fa fa-reply"></i>
-                                    Reply
-                                </a>
-                            @endauth
-                        </li>
-                    @endif
-
-                    {{-- Solved action --}}
-                    @if ($post->id !== $conversation->first_post_id && is_null($conversation->solved_post_id))
-                        @can('solved', $conversation)
-                            <li class="list-inline-item float-xs-right">
-                                <a href="{{ route('discuss.post.solved', ['id' => $post->id]) }}" class="btn btn-link text-success" data-toggle="tooltip" title="Mark this response as solved.">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            </li>
                         @endcan
-                    @endif
-                </ul>
-            </div>
-            @endauth
 
-            {{-- User Signature --}}
-            @empty (!$post->user->signature)
-                <div class="discuss-conversation-signature">
-                    {!! Markdown::convert($post->user->signature) !!}
-                </div>
-            @endempty
+                        {{-- Like action --}}
+                        <!--<span class="sm:opacity-0 sm:group-hover:opacity-100">
+                            <a href="#" class="btn btn-link">
+                                Like
+                            </a>
+                        </span>-->
+
+                        {{-- Reply action --}}
+                        @if (!$conversation->is_locked)
+                            <span class="sm:opacity-0 sm:group-hover:opacity-100">
+                                @auth
+                                    <label class="link link-hover link-primary postReplyButton" data-content="{{ '@' . $post->user->username }}#{{ $post->id }}">
+                                        <i class="fa fa-reply"></i>
+                                        Reply
+                                    </label>
+                                @else
+                                    <label href="{{ route('users.auth.login') }}" class="link link-hover link-primary">
+                                        <i class="fa fa-reply"></i>
+                                        Reply
+                                    </label>
+                                @endauth
+                            </span>
+                        @endif
+
+                        {{-- Solved action --}}
+                        @if ($post->id !== $conversation->first_post_id && is_null($conversation->solved_post_id))
+                            @can('solved', $conversation)
+                                <span class="sm:opacity-0 sm:group-hover:opacity-100 px-2">
+                                    <a href="{{ route('discuss.post.solved', ['id' => $post->id]) }}" class="link link-hover link-success tooltip" data-tip="Mark this response as solved.">
+                                        <i class="fa-solid fa-check fa-lg"></i>
+                                    </a>
+                                </span>
+                            @endcan
+                        @endif
+                    <div>
+                @endauth
+            </footer>
+
         </div>
-    </div>
+    </article>
 @else
     @include('Discuss::partials._log', ['log' => $post])
+@endif
+
+{{-- Divider between each post/logs --}}
+@if (!$loop->last)
+    <div class="divider"></div>
 @endif

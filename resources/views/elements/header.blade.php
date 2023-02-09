@@ -88,7 +88,7 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-end hidden lg:flex justify-end">
+        <div class="navbar-end hidden lg:flex justify-end gap-2">
             <div class="tooltip tooltip-bottom normal-case flex items-center" data-tip="Toggle dark mode">
                 <label class="swap swap-rotate mr-2">
                     <input id="nightMode" class="toggle border-current" type="checkbox" v-model="nightMode"/>

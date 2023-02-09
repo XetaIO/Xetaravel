@@ -129,7 +129,7 @@ class ConversationController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(string $slug, int $id) : RedirectResponse
+    public function delete(string $slug, int $id): RedirectResponse
     {
         $conversation = DiscussConversation::findOrFail($id);
 

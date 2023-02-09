@@ -31,7 +31,6 @@
             ];
         @endphp
     @endif
-
     @include('editor/partials/_comment', $comment)
 
 
@@ -104,23 +103,20 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {{-- Sidebar --}}
         <div class="lg:col-span-3 col-span-12 px-3">
-            <div class="">
+            <div class="mb-5">
                 @auth
                     <div class="form-control">
                         <div class="input-group">
                             @if (!$conversation->is_locked)
-                                <a href="#post-reply" class="btn btn-primary">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <a href="#post-reply" class="btn btn-primary gap-2">
+                                    <i class="fa-solid fa-pencil"></i>
                                     Reply
                                 </a>
                             @else
-                                {{ link_to(
-                                    route('discuss.conversation.create'),
-                                    '<i class="fa fa-pencil"></i> Start a Discussion',
-                                    ['class' => 'btn btn-primary'],
-                                    true,
-                                    false
-                                ) }}
+                                <a class="btn btn-primary gap-2" href="{{ route('discuss.conversation.create') }}">
+                                    <i class="fa-solid fa-pencil"></i>
+                                    Start a Discussion
+                                </a>
                             @endif
 
                             @if (
@@ -136,11 +132,11 @@
                                             clip-rule="evenodd"/>
                                     </svg>
                                 </label>
-                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-base-content dark:text-white">
                                     @can('update', $conversation)
                                         <li>
                                             <label class="editDiscussConversationModal" for="editDiscussConversationModal">
-                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                                <i class="fa-solid fa-pen-to-square"></i>
                                                 Edit
                                             </label>
                                         </li>
@@ -151,8 +147,8 @@
                                             <li class="dropdown-divider"></li>
                                         @endcan
                                         <li>
-                                            <label class="text-red-500 deleteDiscussConversationModal" for="deleteDiscussConversationModal">
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            <label class="deleteDiscussConversationModal text-red-500 " for="deleteDiscussConversationModal">
+                                                <i class="fa-solid fa-trash-can"></i>
                                                 Delete
                                             </label>
                                         </li>
@@ -163,16 +159,14 @@
                         </div>
                     </div>
                 @else
-                    <div class="discuss-new-discussion-btn">
-                        <a href="{{ route('users.auth.login') }}" class="btn btn-primary">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                            Reply
-                        </a>
-                    </div>
+                    <a href="{{ route('users.auth.login') }}" class="btn btn-primary gap-2">
+                        <i class="fa-solid fa-pencil"></i>
+                        Reply
+                    </a>
                 @endauth
-
-                @include('Discuss::partials._sidebar')
             </div>
+
+            @include('Discuss::partials._sidebar')
         </div>
 
         {{-- Conversation Posts --}}
@@ -189,39 +183,49 @@
                 )
             @empty
                 @if (!$conversation->is_solved && !$conversation->is_locked)
-                    <div class="alert alert-primary" role="alert">
-                        <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    <x-alert type="primary" class="mt-5">
                         There're no comments yet, post the first reply !
-                    </div>
+                    </x-alert>
                 @endif
             @endforelse
 
-            <div class="col-md 12 text-xs-center">
-                {{ $posts->render() }}
+            {{-- Posts pagination --}}
+            <div class="grid grid-cols-1">
+                {{ $posts->links() }}
             </div>
 
             @if ($conversation->is_locked)
-                <div class="alert alert-primary" role="alert">
-                    <i class="fa fa-exclamation" aria-hidden="true"></i>
+                <x-alert type="primary" class="mt-5">
                     This discussion is closed, you can not reply !
-                </div>
+                </x-alert>
             @else
                 @if (
                     $conversation->created_at <= \Carbon\Carbon::now()->subDays(config('xetaravel.discuss.info_message_old_conversation')) &&
                     !$conversation->is_locked
                 )
-                    <div class="alert alert-info" role="alert">
-                        <i class="fa fa-info" aria-hidden="true"></i>
+                    <x-alert type="info" class="mt-5">
                         This discussion is not active anymore since at least 3 months !
-                    </div>
+                    </x-alert>
                 @endif
 
+                {{--  Reply --}}
                 @auth
-                    <div id="post-reply" class="discuss-conversation-comment mb-2">
-                        <div class="discuss-conversation-comment-media float-xs-left hidden-sm-down">
-                            {{ Html::image(Auth::user()->avatar_small, 'Avatar', ['class' => 'rounded-circle img-thumbnail']) }}
+                    <div class="divider text-lg font-bold">
+                        <i class="fa-solid fa-reply"></i>
+                        Reply
+                    </div>
+                    <div id="post-reply" class="flex flex-col sm:flex-row items-center">
+                        <div class="self-start mx-auto">
+                            {{--  User Avatar --}}
+                            <a class="avatar online m-2" href="{{ Auth::user()->profile_url }}">
+                                <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
+                                    <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
+                                </figure>
+                            </a>
                         </div>
-                        <div class="discuss-conversation-comment-content">
+
+                        {{-- Editor --}}
+                        <div class="self-start ml-3 mt-3 w-full">
                             {!! Form::open(['route' => 'discuss.post.create']) !!}
                                 {!! Form::hidden('conversation_id', $conversation->id) !!}
 
@@ -233,11 +237,9 @@
                                 ]) !!}
 
                                 @permission ('manage.discuss.conversations')
-                                    <div class="form-group">
-                                        <h5 class="text-muted">
-                                            Moderation
-                                        </h5>
-                                    </div>
+                                    <h3 class="text-xl py-2">
+                                        Moderation
+                                    </h3>
 
                                     {!! Form::bsCheckbox(
                                         'is_locked',
@@ -262,15 +264,17 @@
                                     ) !!}
                                 @endpermission
 
-                                {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i> Reply', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
+                                <button type="submit" class="btn btn-primary gap-2">
+                                    <i class="fa-solid fa-pencil"></i>
+                                    Reply
+                                </button>
                             {!! Form::close() !!}
                         </div>
                     </div>
                 @else
-                    <div class="alert alert-primary" role="alert">
-                        <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    <x-alert type="primary" class="mt-5">
                         You need to be logged in to comment to this discussion !
-                    </div>
+                    </x-alert>
                 @endauth
             @endif
         </div>
@@ -278,166 +282,111 @@
 </section>
 
 {{-- Edit Conversation Modal --}}
-<div class="modal fade" id="editDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="editDiscussionModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editDiscussionModalLabel">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    Edit the discussion
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+<input type="checkbox" id="editDiscussConversationModal" class="modal-toggle" />
+<label for="editDiscussConversationModal" class="modal cursor-pointer">
+    <label class="modal-box relative">
+        <label for="editDiscussConversationModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <h3 class="font-bold text-lg">
+            Edit the discussion
+        </h3>
+
+        {!! Form::model($conversation, [
+            'route' => ['discuss.conversation.update', 'id' => $conversation->id, 'slug' => $conversation->slug],
+            'method' => 'put'
+        ]) !!}
+
+                {!! Form::bsText(
+                    'title',
+                    null,
+                    null,
+                    [
+                        'required' => 'required',
+                        'placeholder' => 'Discussion title...'
+                    ]
+                ) !!}
+
+                {!! Form::bsSelect(
+                    'category_id',
+                    $categories,
+                    'Category',
+                    null,
+                    ['required' => 'required']
+                ) !!}
+
+                @permission ('manage.discuss.conversations')
+                    <h3 class="text-xl py-2">
+                        Moderation
+                    </h3>
+
+                    {!! Form::bsCheckbox(
+                        'is_locked',
+                        null,
+                        null,
+                        'Check to lock this discussion'
+                    ) !!}
+
+                    {!! Form::bsCheckbox(
+                        'is_pinned',
+                        null,
+                        null,
+                        'Check to pin this discussion'
+                    ) !!}
+                @endpermission
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Edit
                 </button>
+                <label for="editDiscussConversationModal" class="btn">Close</label>
             </div>
-
-            {!! Form::model($conversation, [
-                'route' => ['discuss.conversation.update', 'id' => $conversation->id, 'slug' => $conversation->slug],
-                'method' => 'put'
-            ]) !!}
-                <div class="modal-body">
-                    {!! Form::bsText(
-                        'title',
-                        null,
-                        null,
-                        [
-                            'required' => 'required',
-                            'placeholder' => 'Discussion title...'
-                        ]
-                    ) !!}
-
-                    {!! Form::bsSelect(
-                        'category_id',
-                        $categories,
-                        'Category',
-                        null,
-                        ['required' => 'required']
-                    ) !!}
-
-                    @permission ('manage.discuss.conversations')
-                        <div class="form-group">
-                            <h5 class="text-muted">
-                                Moderation
-                            </h5>
-                        </div>
-
-                        {!! Form::bsCheckbox(
-                            'is_locked',
-                            null,
-                            null,
-                            'Check to lock this discussion',
-                            [
-                                'label' => 'Is Locked ?',
-                                'labelClass' => 'custom-control custom-checkbox d-block'
-                            ]
-                        ) !!}
-
-                        {!! Form::bsCheckbox(
-                            'is_pinned',
-                            null,
-                            null,
-                            'Check to pin this discussion',
-                            [
-                                'label' => 'Is Pinned ?',
-                                'labelClass' => 'custom-control custom-checkbox d-block'
-                            ]
-                        ) !!}
-                    @endpermission
-                </div>
-
-
-                <div class="modal-actions">
-                    {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i> Edit', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-primary']) !!}
-                    <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        Close
-                    </button>
-                </div>
-
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
+        {!! Form::close() !!}
+    </label>
+</label>
 
 {{-- Delete Conversation Modal --}}
-<div class="modal fade" id="deleteDiscussionModal" tabindex="-1" role="dialog" aria-labelledby="deleteDiscussionModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteDiscussionModalLabel">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    Delete the discussion
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+<input type="checkbox" id="deleteDiscussConversationModal" class="modal-toggle" />
+<label for="deleteDiscussConversationModal" class="modal cursor-pointer">
+    <label class="modal-box relative">
+        <label for="deleteDiscussConversationModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <h3 class="font-bold text-lg">
+            Delete the discussion
+        </h3>
+        <x-form.form method="delete" action="{{ route('discuss.conversation.delete', ['slug' => $conversation->slug, 'id' => $conversation->id]) }}">
+            <p>
+                    Are you sure you want delete this discussion ? <strong>This operation is not reversible.</strong>
+            </p>
+            <div class="modal-action">
+                <button type="submit" class="btn btn-error gap-2">
+                    <i class="fa-solid fa-trash-can"></i>
+                    Yes, I confirm !
                 </button>
+                <label for="deleteDiscussConversationModal" class="btn">Close</label>
             </div>
-
-            {!! Form::model($conversation, [
-                'route' => ['discuss.conversation.delete', 'id' => $conversation->id, 'slug' => $conversation->slug],
-                'method' => 'delete'
-            ]) !!}
-                <div class="modal-body">
-                    <div class="form-group">
-                        <p>
-                            Are you sure you want delete this discussion ? <strong>This operation is not reversible.</strong>
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="modal-actions">
-                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
-                    <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        Close
-                    </button>
-                </div>
-
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
+        </x-form.form>
+    </label>
+</label>
 
 {{-- Delete Post Modal --}}
-<input type="checkbox" id="deleteDiscussConversationModal" class="modal-toggle" />
-<div class="modal" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deletePostModalLabel">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    Delete the post
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+<input type="checkbox" id="deleteConversationPostModal" class="modal-toggle" />
+<label for="deleteConversationPostModal" class="modal cursor-pointer">
+    <label class="modal-box relative">
+        <label for="deleteConversationPostModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+        <h3 class="font-bold text-lg">
+            Delete the post
+        </h3>
+        <x-form.form method="delete" id="deleteConversationPostModalForm">
+            <p>
+                    Are you sure you want delete this discussion ? <strong>This operation is not reversible.</strong>
+            </p>
+            <div class="modal-action">
+                <button type="submit" class="btn btn-error gap-2">
+                    <i class="fa-solid fa-trash-can"></i>
+                    Yes, I confirm !
                 </button>
+                <label for="deleteConversationPostModal" class="btn">Close</label>
             </div>
+        </x-form.form>
+    </label>
+</label>
 
-            {!! Form::open([
-                'route' => ['discuss.post.delete', 'id' => $post->id],
-                'method' => 'delete',
-                'id' => 'deletePostForm'
-            ]) !!}
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <p>
-                            Are you sure you want delete this post ? <strong>This operation is not reversible.</strong>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="modal-actions">
-                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
-                    <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        Close
-                    </button>
-                </div>
-
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
 @endsection
