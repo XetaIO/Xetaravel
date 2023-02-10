@@ -6,134 +6,148 @@
 @endpush
 
 @section('content')
-<div class="container pt-6">
-    <div class="row">
-        <div class="col-md-12">
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3">
             {!! $breadcrumbs->render() !!}
         </div>
     </div>
-    <div class="col-lg-12 mt-2 mb-2">
-        <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
-            Profile
+</section>
+
+<section class="lg:container mx-auto pt-4 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12">
+            <h1 class="text-2xl text-center font-bold font-xetaravel uppercase mb-5">
+                {{ e($user->username) }}  profile
+            </h1>
         </div>
     </div>
-    <div class="row profile">
-        <div class="col-lg-4">
-            <div class="profile-sidebar">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="profile-sidebar-avatar">
-                            @if ($user->badges()->where('slug', 'topleaderboard')->exists())
-                                    <?php $badge = $user->badges()->where('slug', 'topleaderboard')->first(); ?>
-                                <i aria-hidden="true"
-                                   data-toggle="popover"
-                                   class="profile-badges-item {{ $badge->icon }}"
-                                   title="{{ $badge->name }}"
-                                   data-content="{{ $badge->description }}"
-                                   data-placement="bottom"
-                                   data-trigger="hover"
-                                   style="border-color: #eefc24;background-color: {{ $badge->color }} ">
-                                </i>
-                            @endif
-                            {!! Html::image($user->avatar_small, 'Avatar', ['width' => '120', 'height' => '120']) !!}
-                        </div>
-                        <div class="mt-1 font-xeta profile-sidebar-username">
-                            {{ $user->username }}
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="profile-sidebar-role">
-                            @foreach ($user->roles as $role)
-                                <span style="{{ $role->css }}">{{ $role->name }}</span>
-                            @endforeach
-                        </div>
 
-                        <span class="profile-sidebar-joinedDate">
-                            Joined<br>
-                            {{ $user->created_at->format('d-m-Y') }}
-                        </span>
-
-                        <ul class="profile-sidebar-social">
-                            @if ($user->facebook)
-                                <li class="list-inline-item">
-                                    {!! Html::link(
-                                        url('http://facebook.com/' . e($user->facebook)),
-                                        '<i class="fa fa-facebook"></i>',
-                                        [
-                                            'class' => 'text-primary',
-                                            'target' => '_blank',
-                                            'data-toggle' => 'tooltip',
-                                            'data-placement' => 'top',
-                                            'title' => 'http://facebook.com/' . e($user->facebook)
-                                        ],
-                                        null,
-                                        false
-                                    ) !!}
-                                </li>
-                            @endif
-                            @if ($user->twitter)
-                                <li class="list-inline-item">
-                                    {!! Html::link(
-                                        url('http://twitter.com/' . e($user->twitter)),
-                                        '<i class="fa fa-twitter"></i>',
-                                        [
-                                            'class' => 'text-primary',
-                                            'target' => '_blank',
-                                            'data-toggle' => 'tooltip',
-                                            'data-placement' => 'top',
-                                            'title' => 'http://twitter.com/' . e($user->twitter)
-                                        ],
-                                        null,
-                                        false
-                                    ) !!}
-                                </li>
-                            @endif
-                        </ul>
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12 lg:col-span-4 mx-3 lg:mx-0">
+            <div class="flex flex-col sm:flex-row bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 w-full h-full">
+                <div class="w-1/2 text-center">
+                    {{--  User Avatar --}}
+                    <div class="relative avatar {{ $user->online ? 'online' : 'offline' }} m-2">
+                        <figure class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $user->username }} is {{ $user->online ? 'online' : 'offline' }}">
+                            <img class="rounded-full" src="{{ $user->avatar_small }}"  alt="{{ $user->full_name }} avatar" />
+                        </figure>
+                        {{-- Badge Pillar of cummunity --}}
+                        @if ($user->badges()->where('slug', 'topleaderboard')->exists())
+                            <?php $badge = $user->badges()->where('slug', 'topleaderboard')->first(); ?>
+                            <span class="absolute top-1 left-1">
+                                <x-badge.icon.pillarofcommunity />
+                            </span>
+                        @endif
                     </div>
+                    {{-- User username --}}
+                    <div class="font-xetaravel font-bold text-xl">
+                        {{ $user->username }}
+                    </div>
+                </div>
+                <div class="w-1/2">
+                    <div class="profile-sidebar-role">
+                        @foreach ($user->roles as $role)
+                            <span style="{{ $role->css }}">{{ $role->name }}</span>
+                        @endforeach
+                    </div>
+
+                    <span class="profile-sidebar-joinedDate">
+                        Joined<br>
+                        {{ $user->created_at->format('d-m-Y') }}
+                    </span>
+
+                    <ul class="profile-sidebar-social">
+                        @if ($user->facebook)
+                            <li class="list-inline-item">
+                                {!! Html::link(
+                                    url('http://facebook.com/' . e($user->facebook)),
+                                    '<i class="fa fa-facebook"></i>',
+                                    [
+                                        'class' => 'text-primary',
+                                        'target' => '_blank',
+                                        'data-toggle' => 'tooltip',
+                                        'data-placement' => 'top',
+                                        'title' => 'http://facebook.com/' . e($user->facebook)
+                                    ],
+                                    null,
+                                    false
+                                ) !!}
+                            </li>
+                        @endif
+                        @if ($user->twitter)
+                            <li class="list-inline-item">
+                                {!! Html::link(
+                                    url('http://twitter.com/' . e($user->twitter)),
+                                    '<i class="fa fa-twitter"></i>',
+                                    [
+                                        'class' => 'text-primary',
+                                        'target' => '_blank',
+                                        'data-toggle' => 'tooltip',
+                                        'data-placement' => 'top',
+                                        'title' => 'http://twitter.com/' . e($user->twitter)
+                                    ],
+                                    null,
+                                    false
+                                ) !!}
+                            </li>
+                        @endif
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="row" style="height: 100%">
-                <div class="col-lg-4 ">
-                    <div class="profile-box" data-toggle="popover" title="" data-html="true" data-content="<b>{{ $level['experienceNeededNextLevel'] }}</b> <i>experiences to go before next level.</i>" data-trigger="hover" data-placement="bottom">
-                        <i aria-hidden="true" class="fa fa-star profile-box-icon-experiences fa-5x" style="color: #f39c12;"></i>
-                        <div class="features-box-title">
-                            {{ $user->experiences_total }}
-                        </div>
-                        <p class="text-muted">
-                            Total Experiences
-                        </p>
-                    </div>
 
-                </div>
-                <div class="col-lg-4">
-                    <div class="profile-box">
-                        <i aria-hidden="true" class="fa fa-diamond text-primary profile-box-icon fa-5x"></i>
-                        <div class="features-box-title">
-                            {{ $user->rubies_total }}
+        <div class="col-span-12 lg:col-span-8">
+            <div class="grid grid-cols-12 gap-4 text-center h-full mx-3 lg:mx-0">
+                <div class="col-span-12 lg:col-span-4 h-full">
+                    <div class="flex flex-col justify-between  bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full tooltip" data-tip="{{ $level['experienceNeededNextLevel'] }} experiences to go before next level.">
+                        <i class="fa-solid fa-star text-[color:hsl(var(--wa))] text-8xl"></i>
+                        <div>
+                            <div class="font-bold text-2xl font-xetaravel">
+                                {{ $user->experiences_total }}
+                            </div>
+                            <p class="text-muted">
+                                Total Experiences
+                            </p>
                         </div>
-                        <p class="text-muted">
-                            Total Rubies
-                        </p>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="profile-box">
-                        <i aria-hidden="true" class="fa fa-comment-o profile-box-icon-comment fa-5x"></i>
-                        <div class="profile-box-title">
-                            {{ $user->discuss_post_count }}
+
+                <div class="col-span-12 lg:col-span-4 h-full">
+                    <div class="flex flex-col justify-between bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
+                        <i class="fa-regular fa-gem text-primary text-8xl"></i>
+                        <div>
+                            <div class="font-bold text-2xl font-xetaravel">
+                                {{ $user->rubies_total }}
+                            </div>
+                            <p class="text-muted">
+                                Total Rubies
+                            </p>
                         </div>
-                        <p class="text-muted">
-                            Total Discuss Messages
-                        </p>
                     </div>
                 </div>
+
+                <div class="col-span-12 lg:col-span-4 h-full">
+                    <div class="flex flex-col justify-between bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
+                        <i class="fa-regular fa-comments text-[color:#5ccc5c] text-8xl"></i>
+                        <div>
+                            <div class="font-bold text-2xl font-xetaravel">
+                                {{ $user->discuss_post_count }}
+                            </div>
+                            <p class="text-muted">
+                                Total Discuss Messages
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </div>
-</div>
-<div class="container pt-4">
+</section>
+
+<section class="lg:container mx-auto pt-4 mb-5">
     <div class="row">
         <div class="col-lg-12 mt-2 mb-2">
             <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
@@ -160,26 +174,27 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container pt-4 pb-4">
+</section>
+
+<!--<section class="lg:container mx-auto pt-4 mb-5">
     <div class="row">
         <div class="col-lg-12 mt-2 mb-2">
             <div class="title-section text-xs-center font-weight-bold font-xeta text-uppercase">
                 Badges
             </div>
         </div>
+
         <div class="col-lg-12">
             <div class="badges">
-                    <ul class="list-inline">
-                        @foreach ($badges as $badge)
-                            @if ($badge->slug !== 'topleaderboard')
-                                <li class="list-inline-item">
-                                    <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="top" data-trigger="hover" style="color:{{ $user->badges->contains($badge->id) ? $badge->color : '#ddd' }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
-
+                <ul class="list-inline">
+                    @foreach ($badges as $badge)
+                        @if ($badge->slug !== 'topleaderboard')
+                            <li class="list-inline-item">
+                                <i aria-hidden="true" data-toggle="popover" class="profile-badges-item {{ $badge->icon }}" title="{{ $badge->name }}" data-content="{{ $badge->description }}" data-placement="top" data-trigger="hover" style="color:{{ $user->badges->contains($badge->id) ? $badge->color : '#ddd' }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
         </div>
 
@@ -188,6 +203,7 @@
                 Level
             </div>
         </div>
+
         <div class="col-lg-12">
             <div class="d-flex justify-content-between">
                 <div class="font-weight-bold" data-toggle="tooltip" data-placement="top" title="{{ $level['currentLevelExperience'] }} XP needed for Level {{ $level['currentLevel'] }}">
@@ -210,8 +226,9 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container pt-2 pb-4">
+</section>-->
+
+<section class="lg:container mx-auto pt-4 mb-5">
     <div class="row">
         @if (Auth::user() && $user->id == Auth::id())
             <div class="col-lg-12 text-xs-right">
@@ -276,5 +293,5 @@
             @endif
         </div>
     </div>
-</div>
+</section>
 @endsection

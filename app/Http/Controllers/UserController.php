@@ -26,7 +26,7 @@ class UserController extends Controller
         $action = Route::getFacadeRoot()->current()->getActionMethod();
 
         if (in_array($action, ['show'])) {
-            $this->breadcrumbs->addCrumb('Profile', route('page.index'));
+            $this->breadcrumbs->addCrumb('<i class="fa-regular fa-id-card mr-2"></i> Profile', route('page.index'));
         }
     }
 
