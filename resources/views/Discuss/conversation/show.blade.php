@@ -49,48 +49,6 @@
 @endpush
 
 @section('content')
-<section class="discuss-conversation-header pb-1 pt-4">
-    <div class="blog-header mt-2">
-        <div class="container text-xs-center">
-            <ul class="discuss-conversation-header-badges d-inline-block">
-                @if ($conversation->is_pinned)
-                    <li class="discuss-conversation-header-badges-item">
-                        <span class="tag tag-info" data-toggle="tooltip" title="Pinned">
-                            <i class="fa fa-thumb-tack"></i>
-                        </span>
-                    </li>
-                @endif
-
-                @if ($conversation->is_locked)
-                    <li class="discuss-conversation-header-badges-item">
-                        <span class="tag tag-primary" data-toggle="tooltip" title="Locked">
-                            <i class="fa fa-lock"></i>
-                        </span>
-                    </li>
-                @endif
-            </ul>
-
-            <div class="discuss-conversation-header-categories {{ $conversation->is_solved ? "tag-group" : "" }}">
-                <a href="{{ $conversation->category->category_url }}" class="tag tag-default text-white" style="background-color: {{ $conversation->category->color }};">
-                    @if (!is_null($conversation->category->icon))
-                        <i class="{{ $conversation->category->icon }}"></i>
-                    @endif
-                    {{ $conversation->category->title }}
-                </a>
-                @if ($conversation->is_solved)
-                    <span class="tag tag-success text-white">
-                        <i class="fa fa-check" aria-hidden="true"></i> Solved
-                    </span>
-                @endif
-            </div>
-
-            <h2 class="text-truncate">
-                {{ $conversation->title }}
-            </h2>
-        </div>
-    </div>
-</section>
-
 <section class="lg:container mx-auto mt-12 mb-5">
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3">
@@ -170,7 +128,49 @@
         </div>
 
         {{-- Conversation Posts --}}
-        <div class="lg:col-span-9 col-span-12 px-3">
+        <div class="lg:col-span-9 col-span-12 p-6 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <div class="mb-5">
+                <h1 class="line-clamp-3 md:line-clamp-5 text-4xl font-xetaravel mb-3">
+                    {{ $conversation->title }}
+                </h1>
+
+                <ul class=" flex -flex-row text-white font-bold">
+                    @if ($conversation->is_pinned)
+                        <li class="px-2 first:rounded-l-md last:rounded-r-md bg-cyan-400">
+                            <span class="tooltip" data-tip="This conversation is pinned.">
+                                <i class="fa-solid fa-thumbtack"></i>
+                            </span>
+                        </li>
+                    @endif
+
+                    @if ($conversation->is_locked)
+                        <li class="px-2 first:rounded-l-md last:rounded-r-md bg-red-400">
+                            <span class="tooltip" data-tip="This conversation is locked.">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                        </li>
+                    @endif
+
+                    <li class="px-2 first:rounded-l-md last:rounded-r-md" style="background-color: {{ $conversation->category->color }};">
+                        <a href="{{ $conversation->category->category_url }}" class="tooltip"  data-tip="Category">
+                            @if (!is_null($conversation->category->icon))
+                                <i class="{{ $conversation->category->icon }}"></i>
+                            @endif
+                            {{ $conversation->category->title }}
+                        </a>
+                    </li>
+
+                    @if ($conversation->is_solved)
+                    <li class="px-2 first:rounded-l-md last:rounded-r-md bg-green-500">
+                        <span class="tooltip" data-tip="This conversation is solved.">
+                            <i class="fa-solid fa-check"></i>
+                            Solved
+                        </span>
+                    </li>
+                    @endif
+                </ul>
+            </div>
+
             @forelse ($postsWithLogs as $post)
                 @include(
                     'Discuss::partials._post',

@@ -69,7 +69,6 @@ postEditButton.forEach(function (button) {
  const postReplyButton = document.getElementsByClassName('postReplyButton');
  Array.from(postReplyButton).forEach(function (button) {
      button.addEventListener('click', function (event) {
-         event.preventDefault();
 
          let content = button.getAttribute("data-content");
 

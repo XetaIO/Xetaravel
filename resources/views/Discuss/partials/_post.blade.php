@@ -140,10 +140,10 @@
                         @if (!$conversation->is_locked)
                             <span class="sm:opacity-0 sm:group-hover:opacity-100">
                                 @auth
-                                    <label class="link link-hover link-primary postReplyButton" data-content="{{ '@' . $post->user->username }}#{{ $post->id }}">
+                                    <a class="link link-hover link-primary postReplyButton" data-content="{{ '@' . $post->user->username }}#{{ $post->id }}" href="#post-reply">
                                         <i class="fa fa-reply"></i>
                                         Reply
-                                    </label>
+                                    </a>
                                 @else
                                     <label href="{{ route('users.auth.login') }}" class="link link-hover link-primary">
                                         <i class="fa fa-reply"></i>

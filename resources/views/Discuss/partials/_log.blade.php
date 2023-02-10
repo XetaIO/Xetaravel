@@ -38,14 +38,14 @@
     {{-- Category Changed --}}
     @if ($log->type == 'category')
         added the
-        <a href="{{ $log->newCategory->category_url }}" class="p-1 rounded-sm text-white" style="background-color: {{ $log->newCategory->color }};">
+        <a href="{{ $log->newCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
             @if (!is_null($log->newCategory->icon))
                 <i class="{{ $log->newCategory->icon }}"></i>
             @endif
             {{ $log->newCategory->title }}
         </a>
         and removed
-        <a href="{{ $log->oldCategory->category_url }}" class="p-1 rounded-sm text-white" style="background-color: {{ $log->oldCategory->color }};">
+        <a href="{{ $log->oldCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
             @if (!is_null($log->oldCategory->icon))
                 <i class="{{ $log->oldCategory->icon }}"></i>
             @endif
