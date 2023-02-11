@@ -46,7 +46,7 @@ class PageController extends Controller
      */
     public function showContact(): View
     {
-        $this->breadcrumbs->addCrumb('Contact', route('page.contact'));
+        $this->breadcrumbs->addCrumb('<i class="fa-regular fa-envelope mr-2"></i> Contact', route('page.contact'));
 
         return view('page.contact', ['breadcrumbs' => $this->breadcrumbs]);
     }

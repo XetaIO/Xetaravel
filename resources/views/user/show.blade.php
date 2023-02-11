@@ -8,7 +8,7 @@
 @section('content')
 <section class="lg:container mx-auto mt-12 mb-5">
     <div class="grid grid-cols-1">
-        <div class="col-span-12 mx-3">
+        <div class="col-span-12 mx-3 lg:mx-0">
             {!! $breadcrumbs->render() !!}
         </div>
     </div>
@@ -22,7 +22,7 @@
                 {{ e($user->username) }}  profile
             </h1>
         </div>
-        <div class="col-span-12 mb-3 mx-3">
+        <div class="col-span-12 mb-3 mx-3 lg:mx-0">
             @if (Auth::user() && $user->id == Auth::id())
                 <div class="text-right">
                     <a class="btn btn-primary gap-2" href="{{ route('users.account.index') }}">

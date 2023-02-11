@@ -14,14 +14,14 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         // Collective Form
-        Form::component('bsText', 'components.form.text', [
+        Form::component('bsText', 'components.form.text2', [
             'name',
             'label' => null,
             'value' => null,
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsEmail', 'components.form.email', [
+        Form::component('bsEmail', 'components.form.email2', [
             'name',
             'label' => null,
             'value' => null,
@@ -33,7 +33,7 @@ class FormServiceProvider extends ServiceProvider
             'value' => null,
             'attributes' => []
         ]);
-        Form::component('bsTextarea', 'components.form.textarea', [
+        Form::component('bsTextarea', 'components.form.textarea2', [
             'name',
             'label' => null,
             'value' => null,

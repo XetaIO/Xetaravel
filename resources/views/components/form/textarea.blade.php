@@ -1,23 +1,24 @@
+@props([
+    'label' => false,
+    'name' => ''
+])
+
 <div class="form-control">
     @if ($label !== false)
         <label class="label">
-            <span class="label-text {{ $labelClass }}">{{ $label }}</span>
+            <span class="label-text">{{ $label }}</span>
         </label>
     @endif
 
-    @isset($attributes['editor'])
-        <div id="{{ $attributes['editor'] }}">
-    @endisset
+    @if($attributes->has('editor'))
+        <div id="{{ $attributes->get('editor') }}">
+    @endif
 
-    {!! Form::textarea(
-        $name,
-        $value,
-        array_merge(['class' => $errors->has($name) ? 'textarea textarea-bordered textarea-error' : 'textarea textarea-bordered', 'rows' => 5], $attributes)
-    ) !!}
+    <textarea name="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'textarea textarea-bordered textarea-error w-full' : 'textarea textarea-bordered w-full', 'rows' => 5]) }} >{{ empty($slot->toHtml()) ? old($name) : $slot }}</textarea>
 
-    @isset($attributes['editor'])
+    @if($attributes->has('editor'))
         </div>
-    @endisset
+    @endif
 
     @if ($errors->has($name))
         <label class="label">
