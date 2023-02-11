@@ -34,7 +34,7 @@ class PageController extends Controller
      */
     public function terms()
     {
-        $this->breadcrumbs->addCrumb('Terms', route('page.terms'));
+        $this->breadcrumbs->addCrumb('<i class="fa-solid fa-file-shield mr-2"></i> Terms', route('page.terms'));
 
         return view('page.terms', ['breadcrumbs' => $this->breadcrumbs]);
     }

@@ -6,93 +6,117 @@
 @endpush
 
 @section('content')
-<div class="container pt-6 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="container pt-2 pb-4">
-    <div class="col-md-12">
-        <section class="section terms">
-            <div class="hr-divider">
-                <div class="hr-divider-content hr-divider-heading font-xeta">
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 lg:mx-0">
+            {!! $breadcrumbs->render() !!}
+        </div>
+    </div>
+</section>
+
+<section class="lg:container mx-auto py-6">
+    <div class="col-span-12">
+        <div class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-3 px-5">
+
+            {{-- Title --}}
+            <div class="text-center mb-4">
+                <h1 class="divider font-xetaravel text-3xl">
                     Terms of Service
-                </div>
+                </h1>
             </div>
 
-            <p class="updated">
-                Last update : November 1, 2021
+            {{-- Last Update --}}
+            <p class="mb-4">
+                Last update : February 11, 2023
             </p>
 
-
-            <h4 id="summary">
-                <a href="#summary">
-                    <i class="fa fa-link"></i>
+            {{-- Menu List --}}
+            <h2 id="summary" class="font-semibold text-2xl group">
+                <a class="hidden group-hover:inline-block text-primary" href="#summary" title="Summary">
+                    <i class="fa-solid fa-link"></i>
                 </a>
                 Summary
-            </h4>
+            </h2>
 
-            <ol>
-                <li>
-                    <h5>
-                        <a href="#general-information">General Information</a>
-                    </h5>
+            <ol class="list-decimal pl-10">
+                <li class="mb-1">
+                    <h3 class="font-semibold text-xl">
+                        <a class="link link-hover link-primary" href="#general-information" title="General Information">
+                            General Information
+                        </a>
+                    </h3>
                 </li>
-                <li>
-                    <h5>
-                        <a href="#account-terms">Account Terms</a>
-                    </h5>
+                <li class="mb-1">
+                    <h3 class="font-semibold text-xl">
+                        <a class="link link-hover link-primary" href="#account-terms" title="Account Terms">
+                            Account Terms
+                        </a>
+                    </h3>
                 </li>
-                <li>
-                    <h5>
-                        <a href="#copyright-and-content-ownership">Copyright and Content Ownership</a>
-                    </h5>
+                <li class="mb-1">
+                    <h3 class="font-semibold text-xl">
+                        <a class="link link-hover link-primary" href="#copyright-and-content-ownership" title="Copyright and Content Ownership">
+                            Copyright and Content Ownership
+                        </a>
+                    </h3>
                 </li>
-                <li>
-                    <h5>
-                        <a href="#general-conditions">General Conditions</a>
-                    </h5>
+                <li class="mb-1">
+                    <h3 class="font-semibold text-xl">
+                        <a class="link link-hover link-primary" href="#general-conditions" title="General Conditions">
+                            General Conditions
+                        </a>
+                    </h3>
                 </li>
-                <li>
-                    <h5>
-                        <a href="#privacy-policy-terms">Privacy Policy Terms</a>
-                    </h5>
+                <li class="mb-1">
+                    <h3 class="font-semibold text-xl">
+                        <a class="link link-hover link-primary" href="#privacy-policy-terms" title="Privacy Policy Terms">
+                            Privacy Policy Terms
+                        </a>
+                    </h3>
 
-                    <ol>
-                        <li>
-                            <h5>
-                                <a href="#privacy-policy-terms_cookies">Cookies</a>
-                            </h5>
+                    <ol class="list-decimal pl-10">
+                        <li class="mb-1">
+                            <h3 class="font-semibold text-xl">
+                                <a class="link link-hover link-primary" href="#privacy-policy-terms_cookies" title="Cookies">
+                                    Cookies
+                                </a>
+                            </h3>
                         </li>
-                        <li>
-                            <h5>
-                                <a href="#privacy-policy-terms_data-storage">Data Storage</a>
-                            </h5>
+                        <li class="mb-1">
+                            <h3 class="font-semibold text-xl">
+                                <a class="link link-hover link-primary" href="#privacy-policy-terms_data-storage" title="Data Storage">
+                                    Data Storage
+                                </a>
+                            </h3>
                         </li>
-                        <li>
-                            <h5>
-                                <a href="#privacy-policy-terms_information-gathering-and-usage">Information Gathering and Usage</a>
-                            </h5>
+                        <li class="mb-1">
+                            <h3 class="font-semibold text-xl">
+                                <a class="link link-hover link-primary" href="#privacy-policy-terms_information-gathering-and-usage" title="Information Gathering and Usage">
+                                    Information Gathering and Usage
+                                </a>
+                            </h3>
                         </li>
                     </ol>
                 </li>
             </ol>
 
 
-            <h4 id="general-information" class="mt-2">
-                <a href="#general-information">
-                    <i class="fa fa-link"></i>
+            <h2 id="general-information" class="font-semibold text-2xl mt-6 group">
+                <a class="hidden group-hover:inline-block text-primary" href="#general-information" title="General Information">
+                    <i class="fa-solid fa-link"></i>
                 </a>
                 General Information
-            </h4>
+            </h2>
             <p>
                 Violation of any of the terms below will result in the termination of your Account. While Xetaravel prohibits such conduct and Content on the Service, you understand and agree that Xetaravel cannot be responsible for the Content posted on the Service and you nonetheless may be exposed to such materials. You agree to use the Service at your own risk.
             </p>
 
-            <h4 id="account-terms" class="mt-2">
-                <a href="#account-terms">
-                    <i class="fa fa-link"></i>
+            <h2 id="account-terms" class="font-semibold text-2xl mt-6 group">
+                <a class="hidden group-hover:inline-block text-primary" href="#account-terms" title="Account Terms">
+                    <i class="fa-solid fa-link"></i>
                 </a>
                     Account Terms
-            </h4>
+            </h2>
             <ol>
                 <li>
                     You must be 13 years or older to use this Service.
@@ -116,17 +140,17 @@
                     One person or legal entity may not maintain more than one Account.
                 </li>
                 <li>
-                    When deleting your Account, all your Content will not be deleted directly. If you want all your Content to be deleted, please ask <a href="{{ route('page.contact') }}">here</a>.
+                    When deleting your Account, all your Content will not be deleted directly. If you want all your Content to be deleted, please ask <a class="link link-hover link-primary" href="{{ route('page.contact') }}">here</a>.
                 </li>
             </ol>
 
 
-            <h4 id="copyright-and-content-ownership" class="mt-2">
-                <a href="#copyright-and-content-ownership">
-                    <i class="fa fa-link"></i>
+            <h2 id="copyright-and-content-ownership" class="font-semibold text-2xl mt-6 group">
+                <a class="hidden group-hover:inline-block text-primary" href="#copyright-and-content-ownership" title="Copyright and Content Ownership">
+                    <i class="fa-solid fa-link"></i>
                 </a>
                 Copyright and Content Ownership
-            </h4>
+            </h2>
             <ol>
                 <li>
                     The look and feel of the Service is copyright ©{{ date('Y', time()) }} Xetaravel. All rights reserved. You may not duplicate, copy, or reuse any portion of the HTML/CSS, Javascript, or visual design elements or concepts without express written permission from Xetaravel.
@@ -136,12 +160,12 @@
                 </li>
             </ol>
 
-            <h4 id="general-conditions" class="mt-2">
-                <a href="#general-conditions">
-                    <i class="fa fa-link"></i>
+            <h2 id="general-conditions" class="font-semibold text-2xl mt-6 group">
+                <a class="hidden group-hover:inline-block text-primary" href="#general-conditions" title="General Conditions">
+                    <i class="fa-solid fa-link"></i>
                 </a>
                 General Conditions
-            </h4>
+            </h2>
             <ol>
                 <li>
                     Your use of the Service is at your sole risk. The service is provided on an "as is" and "as available" basis.
@@ -165,26 +189,26 @@
                     You understand that the technical processing and transmission of the Service, including your Content, may be transferred unencrypted.
                 </li>
                 <li>
-                    Questions about the Terms of Service should be sent to <a href="mailto:zoro.fmt@gmail.com">zoro.fmt@gmail.com</a>.
+                    Questions about the Terms of Service should be sent to <a href="mailto:emeric@xetaravel.com">emeric@xetaravel.com</a>.
                 </li>
             </ol>
 
-            <h4 id="privacy-policy-terms" class="mt-2">
-                <a href="#privacy-policy-terms">
-                    <i class="fa fa-link"></i>
+            <h2 id="privacy-policy-terms" class="font-semibold text-2xl mt-6 group">
+                <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms" title="Privacy Policy Terms">
+                    <i class="fa-solid fa-link"></i>
                 </a>
                 Privacy Policy Terms
-            </h4>
-            <ol>
+            </h2>
+            <ol class="list-decimal pl-10">
                 <li>
-                     <h5 id="privacy-policy-terms_cookies">
-                        <a href="#privacy-policy-terms_cookies">
-                            <i class="fa fa-link"></i>
+                     <h3 id="privacy-policy-terms_cookies" class="font-semibold text-xl group">
+                        <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms_cookies" title="Cookies">
+                            <i class="fa-solid fa-link"></i>
                         </a>
                         Cookies
-                    </h5>
+                    </h3>
 
-                    <ol>
+                    <ol class="list-decimal pl-10">
                         <li>
                             A cookie is a small amount of data, which often includes an anonymous unique identifier, that is sent to your browser from a web site's computers and stored on your computer's hard drive.
                         </li>
@@ -197,28 +221,28 @@
                     </ol>
                 </li>
                 <li>
-                    <h5 id="privacy-policy-terms_data-storage">
-                        <a href="#privacy-policy-terms_data-storage">
-                            <i class="fa fa-link"></i>
+                    <h3 id="privacy-policy-terms_data-storage" class="font-semibold text-xl group">
+                        <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms_data-storage" title="Data Storage">
+                            <i class="fa-solid fa-link"></i>
                         </a>
                         Data Storage
-                    </h5>
+                    </h3>
 
-                    <ol>
+                    <ol class="list-decimal pl-10">
                         <li>
                             Xetaravel uses third-party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run Xetaravel. Although Xetaravel owns the code, databases, and all rights to the Xetaravel application, you retain all rights to your data.
                         </li>
                     </ol>
                 </li>
                 <li>
-                    <h5 id="privacy-policy-terms_information-gathering-and-usage">
-                        <a href="#privacy-policy-terms_information-gathering-and-usage">
-                            <i class="fa fa-link"></i>
+                    <h3 id="privacy-policy-terms_information-gathering-and-usage" class="font-semibold text-xl group">
+                        <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms_information-gathering-and-usage" title="Information Gathering and Usage">
+                            <i class="fa-solid fa-link"></i>
                         </a>
                         Information Gathering and Usage
-                    </h5>
+                    </h3>
 
-                    <ol>
+                    <ol class="list-decimal pl-10">
                         <li>
                             Xetaravel uses collected information for the following general purposes: products and services payments, billing, identification and authentication, services improvement, contact, and research.
                         </li>
@@ -227,8 +251,7 @@
             </ol>
 
 
-        </section>
+        </div>
     </div>
-</div>
-
+</section>
 @endsection
