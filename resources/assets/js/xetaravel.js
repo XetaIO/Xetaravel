@@ -12,7 +12,28 @@ const checkboxDrawer = document.getElementById('xetaravel-drawer');
 checkboxDrawer.addEventListener('change', function() {
     let drawer = document.getElementsByClassName('drawer')[0];
     drawer.classList.toggle('h-full');
- })
+})
+
+
+ // Scroll to Top
+let buttonBackToTop = document.getElementById('btn-back-to-top');
+// When the user clicks on the button, scroll to the top of the document
+buttonBackToTop.addEventListener('click', function() {
+    //document.body.scrollTop = 0;
+    //document.documentElement.scrollTop = 0;
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+// When the user scrolls down 40px from the top of the document, show the button
+window.onscroll = function () {
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        buttonBackToTop.style.display = 'block';
+    } else {
+        buttonBackToTop.style.display = 'none';
+    }
+};
 
 // Blog comment delete button
 const blogModalsDeleteComment = document.querySelectorAll('.deleteCommentModal');
@@ -85,23 +106,5 @@ Array.from(postReplyButton).forEach(function (button) {
 
     }, false);
 });
-
-
-/*document.addEventListener("DOMContentLoaded", () => {
-    var codes = document.getElementsByClassName('hljs');
-    const codesArray = Array.from(codes);
-
-    codes.forEach(code => {
-        console.log(code);
-        code.classList.add('dark:bg-base-300 dark:text-slate-300');
-    });
-});*/
-
-/*var codes = document.getElementsByClassName('hljs');
-
-codes.forEach(code => {
-    console.log(code);
-    code.classList.add('dark:bg-base-300 dark:text-slate-300');
-});*/
 
 //const tsParticles = require("tsparticles-engine");

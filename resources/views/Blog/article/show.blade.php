@@ -65,7 +65,7 @@
                         <div class="flex justify-center items-center">
                             {{-- Author avatar --}}
                             <a href="{{ $article->user->profile_url }}">
-                                <img class="rounded-full mr-2" src="{{ asset($article->user->avatar_small) }}" width="40" height="40" alt="{{ $article->user->username }} Avatar">
+                                <img class="w-12 h-12 rounded-full mr-2" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
                             </a>
 
                             <div>
@@ -133,7 +133,7 @@
 
                             {{--  Author Avatar --}}
                             <a class="avatar {{ $article->user->online ? 'online' : 'offline' }} m-2" href="{{ $article->user->profile_url }}">
-                                <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
+                                <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
                                     <img class="rounded-full" src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
                                 </figure>
                             </a>
@@ -201,7 +201,7 @@
                         <div class="self-start mx-auto">
                             {{--  User Avatar --}}
                                 <a class="avatar online m-2" href="{{ Auth::user()->profile_url }}">
-                                    <figure class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
+                                    <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
                                         <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
                                     </figure>
                                 </a>

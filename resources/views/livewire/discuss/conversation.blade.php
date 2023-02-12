@@ -130,7 +130,7 @@
                 {{--  User Avatar --}}
                 <div class="hidden sm:flex flex-col">
                     <a class="avatar {{ $conversation->user->online ? 'online' : 'offline' }} m-2" href="{{ $conversation->user->profile_url }}">
-                        <figure class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $conversation->user->username }} is {{ $conversation->user->online ? 'online' : 'offline' }}">
+                        <figure class="w-12 h-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $conversation->user->username }} is {{ $conversation->user->online ? 'online' : 'offline' }}">
                             <img class="rounded-full" src="{{ $conversation->user->avatar_small }}"  alt="{{ $conversation->user->full_name }} avatar" />
                         </figure>
                     </a>

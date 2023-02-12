@@ -34,7 +34,7 @@
 
         <footer class="flex items-center mt-4">
             <a href="{{ $article->user->profile_url }}">
-                <img class="rounded-full flex-shrink-0" src="{{ $article->user->avatar_small }}" width="40" height="40" alt="{{ $article->user->full_name }} avatar">
+                <img class="w-12 h-12 rounded-full flex-shrink-0 mr-3" src="{{ $article->user->avatar_small }}" alt="{{ $article->user->full_name }} avatar">
             </a>
             <div>
                     <discuss-user

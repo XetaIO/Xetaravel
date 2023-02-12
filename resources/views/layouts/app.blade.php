@@ -85,6 +85,9 @@
             </div>
         </div>
 
+        <!-- Scroll to Top button -->
+        <x-scrolltotop />
+
         <!-- CSRF JS Token -->
         <script type="text/javascript">
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}

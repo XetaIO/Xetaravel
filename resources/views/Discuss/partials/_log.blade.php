@@ -16,7 +16,7 @@
 
     {{-- User avatar --}}
     <figure class="inline-block w-5 h-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 mr-2 xl:mr-0">
-        <img class="rounded-full" src="{{ $post->user->avatar_small }}"  alt="{{ $post->user->full_name }} avatar" />
+        <img class="w-5 h-5 rounded-full" src="{{ $post->user->avatar_small }}"  alt="{{ $post->user->full_name }} avatar" />
     </figure>
 
     {{-- User --}}
