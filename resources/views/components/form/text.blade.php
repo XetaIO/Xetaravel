@@ -6,12 +6,12 @@
 
 <div class="form-control">
     @if ($label !== false)
-        <label class="label">
+        <label class="label" for="{{ $name }}">
             <span class="label-text">{{ $label }}</span>
         </label>
     @endif
 
-    <input type="text" name="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full' : 'input input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
+    <input type="text" name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full' : 'input input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
 
     @if ($errors->has($name))
         <label class="label">

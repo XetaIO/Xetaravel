@@ -18,26 +18,26 @@
 
                 <ul>
                     <li :key="notification.id" v-for="notification in notifications" class="hover:bg-slate-200 cursor-pointer flex dark:hover:bg-slate-700 rounded mb-3">
-                        <div class="indicator">
-                        <a v-on:mouseover.prevent="markNotificationAsRead(notification)"
-                            :href="getNotificationUrl(notification)" :class="'notification-' + notification.id" class="p-3 flex items-center">
+                        <div class="indicator w-full">
+                            <a v-on:mouseover.prevent="markNotificationAsRead(notification)"
+                                :href="getNotificationUrl(notification)" :class="'notification-' + notification.id" class="p-3 flex items-center">
 
-                            <!-- Image -->
-                            <img v-if="notification.data.hasOwnProperty('image')" :src="'/' + notification.data.image" alt="Image">
+                                <!-- Image -->
+                                <img class="mr-3" v-if="notification.data.hasOwnProperty('image')" :src="'/' + notification.data.image" alt="Image">
 
-                            <i v-else-if="notification.data.type == 'badge'" :class="notification.data.icon" :style="'color:' + notification.data.color" class="text-3xl mr-2"></i>
+                                <i v-else-if="notification.data.type == 'badge'" :class="notification.data.icon" :style="'color:' + notification.data.color" class="text-3xl mr-3"></i>
 
-                            <i v-else-if="notification.data.type == 'mention'" class="fa fa-at fa-3x text-primary"
-                                aria-hidden="true"></i>
+                                <i v-else-if="notification.data.type == 'mention'" class="fa-solid fa-at text-3xl text-primary mr-3"
+                                    aria-hidden="true"></i>
 
-                            <img v-else src="/images/logo.svg" alt="Image">
+                                <img class="mr-3" v-else src="/images/logo.svg" alt="Image">
 
-                            <!-- Message -->
-                            <span v-html="notification.data.hasOwnProperty('message_key') ? formatMessage(notification) : notification.data.message" class="message"></span>
+                                <!-- Message -->
+                                <span v-html="notification.data.hasOwnProperty('message_key') ? formatMessage(notification) : notification.data.message" class="w-full"></span>
 
-                            <!-- Badge new -->
-                            <span v-if="notification.read_at === null" :class="'notification-' + notification.id + '-new'" class="badge badge-sm indicator-item badge-primary right-3">New</span>
-                        </a>
+                                <!-- Badge new -->
+                                <span v-if="notification.read_at === null" :class="'notification-' + notification.id + '-new'" class="badge badge-sm indicator-item badge-primary right-3">New</span>
+                            </a>
                         </div>
                     </li>
 

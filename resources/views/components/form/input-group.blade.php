@@ -1,38 +1,27 @@
-{{-- Required for association field --}}
-@php
-    $errorName = str_replace('[', '.', $name);
-    $errorName = str_replace(']', '', $errorName);
-@endphp
+@props([
+    'label' => false,
+    'name' => '',
+    'value' => '',
+    'type' => 'text'
+])
 
-<div class="form-group {{ $errors->has($errorName) ? 'has-danger' : '' }}">
-    @if (!is_null($label))
-        {!! Form::label($name, $label) !!}
+<div class="form-control">
+    @if ($label !== false)
+        <label class="label" for="{{ $name }}">
+            <span class="label-text">{{ $label }}</span>
+        </label>
     @endif
-
-    <div class="input-group">
-        <span
-            for="{{ $name }}"
-            style="{{ isset($attributes['spanStyle']) ? $attributes['spanStyle'] : '' }}"
-            class="{{ isset($attributes['spanClass']) ? $attributes['spanClass'] : 'input-group-addon' }}">
-            {!! isset($attributes['span']) ? $attributes['span'] : $label !!}
+    <label class="input-group {!! $attributes->has('data-input-group-verticale') ? $attributes->get('data-input-group-verticale') : ''  !!}">
+        <span {!! $attributes->has('data-span-class') ? 'class="' . $attributes->get('data-span-class') .'"' : ''  !!}>
+            {{ $slot }}
         </span>
-        @if (isset($attributes['type']) && $attributes['type'] == 'password')
-            {!! Form::password(
-                $name,
-                array_merge(['class' => $errors->has($errorName) ? 'form-control form-control-danger' : 'form-control'], $attributes)
-            ) !!}
-        @else
-            {!! Form::text(
-                $name,
-                $value,
-                array_merge(['class' => $errors->has($errorName) ? 'form-control form-control-danger' : 'form-control'], $attributes)
-            ) !!}
-        @endif
-    </div>
 
-    @if ($errors->has($errorName))
-        <div class="form-control-feedback">
-            {{ $errors->first($errorName) }}
-        </div>
+        <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full' : 'input input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
+    </label>
+
+    @if ($errors->has($name))
+        <label class="label">
+            <span class="label-text-alt text-error">{{ $errors->first($name) }}</span>
+        </label>
     @endif
 </div>

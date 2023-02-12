@@ -1,5 +1,5 @@
 
-<div {{ $attributes->merge(['class' => 'flex w-full animate-bounceInDown overflow-hidden rounded-lg shadow-md bg-white dark:bg-base-300 z-10']) }}>
+<div {{ $attributes->merge(['class' => 'flex w-full overflow-hidden rounded-lg shadow-md bg-white dark:bg-base-300 z-10']) }}>
 
     @if ($type == "error")
     <div class="flex items-center justify-center w-14 bg-red-500">

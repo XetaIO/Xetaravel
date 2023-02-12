@@ -17,7 +17,10 @@ class NotificationController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Notifications', route('users.notification.index'));
+        $this->breadcrumbs->addCrumb(
+            '<i class="fa-solid fa-user-tag mr-2"></i> Notifications',
+            route('users.notification.index')
+        );
     }
 
     /**

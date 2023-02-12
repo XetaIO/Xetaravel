@@ -21,7 +21,7 @@ class AccountController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Account', route('users.account.index'));
+        $this->breadcrumbs->addCrumb('<i class="fa-solid fa-user-pen mr-2"></i> Account', route('users.account.index'));
     }
 
     /**

@@ -11,7 +11,7 @@
         </label>
     @endif
 
-    <input type="email" name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full' : 'input input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
+    <input type="file" name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'file-input file-input-bordered file-input-error w-full' : 'file-input file-input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
 
     @if ($errors->has($name))
         <label class="label">

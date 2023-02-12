@@ -40,7 +40,7 @@ class FormServiceProvider extends ServiceProvider
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsPassword', 'components.form.password', ['name', 'label' => null, 'attributes' => []]);
+        Form::component('bsPassword', 'components.form.password2', ['name', 'label' => null, 'attributes' => []]);
         Form::component('bsCheckbox', 'components.form.checkbox', [
             'name',
             'value' => 1,
@@ -57,7 +57,7 @@ class FormServiceProvider extends ServiceProvider
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsInputGroup', 'components.form.input-group', [
+        Form::component('bsInputGroup', 'components.form.input-group2', [
             'name',
             'label' => null,
             'value' => null,

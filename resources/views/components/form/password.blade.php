@@ -1,12 +1,17 @@
-<div class="form-control">
-    <label class="label">
-        <span class="label-text">{{ $label }}</span>
-    </label>
+@props([
+    'label' => false,
+    'name' => '',
+    'value' => ''
+])
 
-    {!! Form::password(
-        $name,
-        array_merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full max-w-xs' : 'input input-bordered w-full max-w-xs'], $attributes)
-    ) !!}
+<div class="form-control">
+    @if ($label !== false)
+        <label class="label" for="{{ $name }}">
+            <span class="label-text">{{ $label }}</span>
+        </label>
+    @endif
+
+    <input type="password" name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full' : 'input input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
 
     @if ($errors->has($name))
         <label class="label">

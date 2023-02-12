@@ -16,25 +16,27 @@ class MenuServiceProvider extends ServiceProvider
     {
         Menu::macro('user.profile', function () {
             return Menu::new()
-                ->addClass('nav nav-menu flex-column')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700')
+                ->setAttribute('role', 'list')
                 ->add(
-                    Link::toRoute('users.account.index', '<i class="fas fa-user-edit"></i> Account')
-                        ->addClass('nav-link')
+                    Link::toRoute('users.account.index', '<i class="fa-solid fa-user-pen"></i> Account')
                 )
                 ->add(
-                    Link::toRoute('users.notification.index', '<i class="fas fa-user-tag"></i> Notifications')
-                        ->addClass('nav-link')
+                    Link::toRoute('users.notification.index', '<i class="fa-solid fa-user-tag"></i> Notifications')
                 )
                 ->add(
-                    Link::toRoute('users.user.settings', '<i class="fas fa-user-cog"></i> Settings')
-                        ->addClass('nav-link')
+                    Link::toRoute('users.user.settings', '<i class="fa-solid fa-user-gear"></i> Settings')
                 )
                 ->add(
-                    Link::toRoute('users.security.index', '<i class="fas fa-user-lock"></i> Security')
-                        ->addClass('nav-link')
+                    Link::toRoute('users.security.index', '<i class="fa-solid fa-user-shield"></i> Security')
                 )
-                ->setActiveFromRequest();
+                ->setActiveClass('bordered')
+                ->setActiveFromRequest()
+                ->each(function (Link $link) {
+                    if (!$link->isActive()) {
+                        $link->addParentClass('hover-bordered');
+                    }
+                });
         });
 
         // Administration

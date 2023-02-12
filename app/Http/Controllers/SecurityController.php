@@ -16,7 +16,10 @@ class SecurityController extends Controller
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Security', route('users.security.index'));
+        $this->breadcrumbs->addCrumb(
+            '<i class="fa-solid fa-user-shield mr-2"></i> Security',
+            route('users.security.index')
+        );
     }
 
     /**
