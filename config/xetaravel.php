@@ -12,7 +12,7 @@ return [
     'site' => [
         'copyright' => 'Emeric Fèvre',
         'title' => 'Welcome to Xetaravel',
-        'description' => 'This website was made to try Laravel and to do my personnal website and I have decided to release it to help people starting with Laravel.',
+        'description' => 'This website was made to try Laravel and to do my personal website and I have decided to release it to help people starting with Laravel.',
         'github_url' => 'https://github.com/XetaIO/Xetaravel',
         'contact_email' => 'emeric@xetaravel.com',
         'analytics_tracker_code' => 'UA-224686157-1',
@@ -43,7 +43,7 @@ return [
             'posts_profile_page' => 10
         ],
         'discuss' => [
-            'conversation_per_page' => 1, //15
+            'conversation_per_page' => 15,
             'post_per_page' => 10
         ]
     ],
@@ -86,7 +86,7 @@ return [
     |
     */
     'discuss' => [
-        'categories_sidebar' => 2, //15
+        'categories_sidebar' => 15,
         // The number in days.
         'info_message_old_conversation' => 92
     ]
