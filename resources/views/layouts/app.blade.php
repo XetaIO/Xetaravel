@@ -59,7 +59,7 @@
 
         <div id="xetaravel-vue">
 
-            <div class="drawer">
+            <div class="drawer h-full">
                 <!-- Toggle Responsive-->
                 <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
 

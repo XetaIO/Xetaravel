@@ -12,26 +12,9 @@
     @apply bg-[color:hsl(var(--er))]
 }
 
-/*.btn {
-    @apply px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 shadow hover:shadow-md items-center text-xs font-bold ease-linear transition-all duration-150 h-10 min-h-min hover:text-primary hover:bg-white gap-1 border-0;
-}
-
-.btn-circle {
-    @apply shadow-none rounded-full px-0 py-0 h-12;
-}
-
-.btn-ghost {
-    @apply shadow-none;
-}
-
-.btn-link {
-    @apply shadow-none hover:shadow-none;
-}
-
-.btn-square {
-    @apply p-0;
-}*/
-
+/**
+ * Button
+ */
 .btn-primary-shadow {
     @apply shadow-[0_5px_30px_hsla(var(--pf)/0.3)] hover:shadow-[0_5px_30px_hsla(var(--pf)/0.3)];
 }

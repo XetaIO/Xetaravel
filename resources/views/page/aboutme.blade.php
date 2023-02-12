@@ -32,10 +32,9 @@
     /**
      *  Skills
      */
-    let skilsContent = document.getElementById('skills');
     new Waypoint({
-        element: skilsContent,
-        offset: '80%',
+        element: document.getElementById('skills'),
+        offset: '50%',
         handler: function(direction) {
             const progress = document.getElementsByClassName('progress-bar');
 
@@ -48,10 +47,9 @@
     /**
      *  Projetcs
      */
-    let projects = document.getElementById('projects');
     new Waypoint({
-        element: projects,
-        offset: '80%',
+        element: document.getElementById('projects'),
+        offset: '50%',
         handler: function(direction) {
             const project = document.getElementsByClassName('project');
 
@@ -64,10 +62,9 @@
     /**
      *  Resume
      */
-     let resumes = document.getElementById('resume');
     new Waypoint({
-        element: resumes,
-        offset: '60%',
+        element: document.getElementById('resume'),
+        offset: '50%',
         handler: function(direction) {
             const items = document.getElementsByClassName('resume-item');
 
@@ -80,10 +77,9 @@
     /**
      *  CV
      */
-     let cv = document.getElementById('cv');
     new Waypoint({
-        element: cv,
-        offset: '70%',
+        element: document.getElementById('cv'),
+        offset: '50%',
         handler: function(direction) {
             const items = document.getElementsByClassName('cv-item');
 
@@ -97,53 +93,58 @@
 @endpush
 
 @section('content')
-<section class="section-aboutme pt-9 pb-5 jarallax"data-jarallax data-speed="0.2" >
+<section class="pt-16 pb-5 jarallax"data-jarallax data-speed="0.2" >
     <div class="jarallax-img" style="background-image: url({{ asset('images/aboutme/cubes-bg.jpg') }});"></div>
-    <div class="container">
-        <div class="row aboutme">
-            <div class="col-lg-6 aboutme-text">
-                <h1 class="aboutme-text-title">Emeric Fevre</h1>
-                <h2 class="aboutme-text-job">I'm a <span id="aboutme-typed" data-typed="Web Application Developer, Web Application Designer, Star Citizen Pilot, Geek"></span></h2>
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-12 gap-2 mx-3 md:mx-0">
+            <div class="col-span-12 md:col-span-5 md:col-start-3 mt-10 md:mt-20 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold font-xetaravel text-white">Emeric Fevre</h1>
+                <h2 class="text-3xl md:text-5xl font-bold font-xetaravel text-white">I'm a <span id="aboutme-typed" class="text-primary" data-typed="Web Application Developer, Web Application Designer, Star Citizen Pilot, Geek"></span></h2>
             </div>
-            <div class="col-lg-5">
-                <div id="parallax-aboutme" class="parallax">
-                    <div class="parallax-layer position-relative" data-depth="0.3"><img src="{{ asset('images/aboutme/layer01.png') }}" alt="Layer"></div>
-                    <div class="parallax-layer" style="z-index: 2;" data-depth="0.5"><img src="{{ asset('images/aboutme/layer02.png') }}" alt="Layer"></div>
-                    <div class="parallax-layer" data-depth="0.3"><img src="{{ asset('images/aboutme/layer03.png') }}" alt="Layer"></div>
-                    <div class="parallax-layer" style="z-index: 3;" data-depth="0.2"><img src="{{ asset('images/aboutme/layer04.png') }}" alt="Layer"></div>
-                    <div class="parallax-layer" data-depth="0.25"><img src="{{ asset('images/aboutme/layer05.png') }}" alt="Layer"></div>
-                    <div class="parallax-layer" style="z-index: 4;" data-depth="0.35"><img src="{{ asset('images/aboutme/layer06.png') }}" alt="Layer"></div>
+            <div class="col-span-12 md:col-span-3">
+                <div id="parallax-aboutme" class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full" data-depth="0.3"><img class="block w-full" src="{{ asset('images/aboutme/layer01.png') }}" alt="Layer"></div>
+                    <div class="absolute top-0 left-0 w-full h-full" style="z-index: 2;" data-depth="0.5"><img class="block w-full" src="{{ asset('images/aboutme/layer02.png') }}" alt="Layer"></div>
+                    <div class="absolute top-0 left-0 w-full h-full" data-depth="0.3"><img class="block w-full" src="{{ asset('images/aboutme/layer03.png') }}" alt="Layer"></div>
+                    <div class="absolute top-0 left-0 w-full h-full" style="z-index: 3;" data-depth="0.2"><img class="block w-full" src="{{ asset('images/aboutme/layer04.png') }}" alt="Layer"></div>
+                    <div class="absolute top-0 left-0 w-full h-full" data-depth="0.25"><img class="block w-full" src="{{ asset('images/aboutme/layer05.png') }}" alt="Layer"></div>
+                    <div class="absolute top-0 left-0 w-full h-full" style="z-index: 4;" data-depth="0.35"><img class="block w-full" src="{{ asset('images/aboutme/layer06.png') }}" alt="Layer"></div>
                   </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section-whatido mt-8">
-    <div class="container">
-        <div class="row whatido">
-            <div class="col-xl-5 col-md-6 mb-3">
-                <h3 class="whatido-title mb-2">Web Development (Software)</h3>
-                <ul class="whatido-menu list-unstyled">
-                    <li class="whatido-menu-item mb-1">
+<section class="mt-32 -mb-[2px]">
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-12 gap-2 mx-3 md:mx-0">
+            <div class="col-span-12 md:col-span-4 md:col-start-3">
+                <h2 class="text-3xl font-semibold mb-6">Web Development (Software)</h2>
+                <ul class="">
+                    <li class="flex items-center gap-4 mb-4">
                         <img class="mr-1" src="{{ asset('images/aboutme/check.png') }}" alt="Check icon" width="20px" height="20px">
-                        <span>Back-end web applications with frameworks <a href="https://laravel.com" target="_blank">Laravel</a>, <a href="https://symfony.com" target="_blank">Symfony</a> & <a href="https://cakephp.org" target="_blank">CakePHP</a>.</span>
+                        <span>Back-end web applications with frameworks <a class="link link-hover link-primary" href="https://laravel.com" target="_blank">Laravel</a>, <a class="link link-hover link-primary" href="https://symfony.com" target="_blank">Symfony</a> & <a class="link link-hover link-primary" href="https://cakephp.org" target="_blank">CakePHP</a>.</span>
                     </li>
-                    <li class="whatido-menu-item mb-1">
+                    <li class="flex items-center gap-4 mb-4">
                         <img class="mr-1" src="{{ asset('images/aboutme/check.png') }}" alt="Check icon" width="20px" height="20px">
-                        <span>Front-end web application with frameworks <a href="https://vuejs.org" target="_blank">Vue</a> & <a href="https://angular.io/" target="_blank">Angular</a>. Styling with <a href="https://lesscss.org" target="_blank">LESS</a> and <a href="https://sass-lang.com" target="_blank">SASS</a>.</span>
+                        <span>Front-end web application with frameworks <a class="link link-hover link-primary" href="https://vuejs.org" target="_blank">Vue</a> & <a class="link link-hover link-primary" href="https://angular.io/" target="_blank">Angular</a>. Styling with <a class="link link-hover link-primary" href="https://lesscss.org" target="_blank">LESS</a>, <a class="link link-hover link-primary" href="https://sass-lang.com" target="_blank">SASS</a>, <a class="link link-hover link-primary" href="https://getbootstrap.com/" target="_blank">Bootstrap</a> and <a class="link link-hover link-primary" href="https://tailwindcss.com/" target="_blank">Tailwind</a>.</span>
                     </li>
-                    <li class="whatido-menu-item mb-1">
+                    <li class=" flex items-center gap-4 mb-4">
                         <img class="mr-1" src="{{ asset('images/aboutme/check.png') }}" alt="Check icon" width="20px" height="20px">
                         <span>Unit Testing, Git, CI/CD, DevOps</span>
                     </li>
                 </ul>
-                <h4 class="whatido-subtitle mt-2">Tools and Technologies:</h4>
-                <p>PHP, JS, TS, SASS, Laravel, Symfony, CakePHP, Vue, Angular, MySQL, Photoshop</p>
+                <h4 class="text-2xl font-semibold mt-6">
+                    Tools and Technologies:
+                </h4>
+                <p>
+                    PHP, JS, TS, SASS, Laravel, Symfony, CakePHP, Vue, Angular, MySQL, Photoshop
+                </p>
             </div>
-            <div class="col-xl-6 offset-xl-1 col-md-6">
-                <figure class="whatido">
-                    <img src="{{ asset('images/aboutme/whatido.svg') }}" alt="SVG Whatido">
+
+            <div class="col-span-12 md:col-span-5 md:col-start-8 py-6 md:py-0">
+                <figure class="-mb-2">
+                    <img class="mx-auto" src="{{ asset('images/aboutme/whatido.svg') }}" alt="SVG Whatido">
                 </figure>
             </div>
         </div>
@@ -155,123 +156,124 @@
     </figure>
 </section>
 
-<section class="section-skills pt-5">
-    <div class="container pb-7">
-        <h2 class="section-aboutme-title font-xeta text-xs-center mb-3">
+<section id="skills" class="bg-[color:#f4f3ff] pt-20" data-aos-id="skills" data-aos="fade-in">
+    <div class="lg:container mx-auto pb-28">
+        <h2 class="text-4xl uppercase font-xetaravel text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Skills
         </h2>
-        <div class="row skills" id="skills">
-            <div class="col-lg-6">
-                <div class="progress">
-                    <span class="skill">
-                        HTML <i class="val">100%</i>
+        <div class="grid grid-cols-12 gap-2 dark:text-[color:hsl(var(--b1)/0.8)] mx-3 md:mx-0">
+            <div class="col-span-12 md:col-span-5 md:col-start-2">
+                <div class="font-semibold text-md uppercase mb-5">
+                    <span class="flex justify-between">
+                        HTML <span class="italic">100%</span>
                     </span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="bg-white rounded h-4">
+                        <div role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar rounded bg-primary h-4 transition-all duration-1000 ease-linear" style="width:1px;transition: width .6s ease;"></div>
                     </div>
                 </div>
-                <div class="progress">
-                    <span class="skill">
-                        CSS <i class="val">90%</i>
+                <div class="font-semibold text-md uppercase mb-5">
+                    <span class="flex justify-between">
+                        CSS <span class="italic">90%</span>
                     </span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="bg-white rounded h-4">
+                        <div role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" class="progress-bar rounded bg-primary h-4 transition-all duration-1000 ease-linear" style="width:1px;transition: width .6s ease;"></div>
                     </div>
                 </div>
-                <div class="progress">
-                    <span class="skill">
-                        JavaScript <i class="val">60%</i>
+                <div class="font-semibold text-md uppercase mb-5">
+                    <span class="flex justify-between">
+                        JavaScript <span class="italic">60%</span>
                     </span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="bg-white rounded h-4">
+                        <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" class="progress-bar rounded bg-primary h-4 transition-all duration-1000 ease-linear" style="width:1px;transition: width .6s ease;"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="progress">
-                    <span class="skill">
-                        PHP <i class="val">90%</i>
+            <div class="col-span-12 md:col-span-5 md:col-start-7">
+                <div class="font-semibold text-md uppercase mb-5">
+                    <span class="flex justify-between">
+                        PHP <span class="italic">90%</span>
                     </span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="bg-white rounded h-4">
+                        <div role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" class="progress-bar rounded bg-primary h-4 transition-all duration-1000 ease-linear" style="width:1px;transition: width .6s ease;"></div>
                     </div>
                 </div>
-                <div class="progress">
-                    <span class="skill">
-                        MySQL <i class="val">70%</i>
+                <div class="font-semibold text-md uppercase mb-5">
+                    <span class="flex justify-between">
+                        MySQL <span class="italic">70%</span>
                     </span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="bg-white rounded h-4">
+                        <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar rounded bg-primary h-4 transition-all duration-1000 ease-linear" style="width:1px;transition: width .6s ease;"></div>
                     </div>
                 </div>
-                <div class="progress">
-                    <span class="skill">
-                        Laravel <i class="val">80%</i>
+                <div class="font-semibold text-md uppercase mb-5">
+                    <span class="flex justify-between">
+                        Laravel <span class="italic">80%</span>
                     </span>
-                    <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="bg-white rounded h-4">
+                        <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" class="progress-bar rounded bg-primary h-4 transition-all duration-1000 ease-linear" style="width:1px;transition: width .6s ease;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <figure class="pt-9">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="#fff">
+    <figure class="pt-36 relative -bottom-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="hsl(var(--b1))">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
 </section>
 
-<section class="section-projects mb-4">
-    <div class="container">
-        <h2 class="section-aboutme-title font-xeta text-xs-center mb-3">
+<section id="projects" class="mb-10 -mt-48 lg:-mt-72 relative">
+    <div class="lg:container mx-auto">
+        <h2 class="text-4xl uppercase font-xetaravel text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Projects
         </h2>
-        <div class="row" id="projects">
-            <div class="col-lg-6 mb-3">
-                <div class="project">
-                    <img class="project-image" src="{{ asset('images/logo.svg') }}" width="140" alt="Xetaravel logo">
-                    <div class="project-body">
-                        <h3 class="project-body-title font-xeta text-primary text-truncate">Xetaravel</h3>
-                        <p class="project-body-description">
+
+        <div class="grid grid-cols-12 gap-4 mx-3 lg:mx-0">
+            <div class="col-span-12 lg:col-span-5 lg:col-start-2 mb-6">
+                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
+                    <img class="min-w-[140px] p-3" src="{{ asset('images/logo.svg') }}" alt="Xetaravel logo">
+                    <div class="ml-5 overflow-hidden">
+                        <h3 class="text-3xl font-xetaravel text-primary truncate">Xetaravel</h3>
+                        <p class="overflow-hidden break-words">
                             Realization of a Blog, Forum (Discuss), Admin Panel open-source with the Laravel framework.<br/>
-                            <span class="">Source Code: </span><a href="https://github.com/XetaIO/Xetaravel">XetaIO/Xetaravel</a>
+                            <span class="font-semibold">Source Code: </span><a class="link link-hover link-primary" href="https://github.com/XetaIO/Xetaravel">XetaIO/Xetaravel</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 mb-3">
-                <div class="project">
-                    <img class="project-image" src="{{ asset('images/aboutme/xeta.png') }}" width="140" alt="Xeta logo">
-                    <div class="project-body">
-                        <h3 class="project-body-title font-xeta text-primary text-truncate">Xeta</h3>
-                        <p class="project-body-description">
+            <div class="col-span-12 lg:col-span-5 lg:col-start-7 mb-6">
+                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
+                    <img class="w-[140px] p-3" src="{{ asset('images/aboutme/xeta.png') }}" alt="Xeta logo">
+                    <div class="ml-5 overflow-hidden">
+                        <h3 class="text-3xl font-xetaravel text-primary truncate">Xeta</h3>
+                        <p class="overflow-hidden break-words">
                             Realization of a Blog, Admin Panel open-source with the CakePHP framework.<br/>
-                            <span class="">Source Code: </span><a href="https://github.com/XetaIO/Xeta">XetaIO/Xeta</a>
+                            <span class="font-semibold">Source Code: </span><a class="link link-hover link-primary" href="https://github.com/XetaIO/Xeta">XetaIO/Xeta</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 mb-3">
-                <div class="project delay-4">
-                    <img class="project-image" src="{{ asset('images/aboutme/fmt.png') }}" width="140"  alt="FrenchModdingTeam logo">
-                    <div class="project-body">
-                        <h3 class="project-body-title font-xeta text-primary text-truncate">FrenchModdingTeam</h3>
-                        <p class="project-body-description">
+            <div class="col-span-12 lg:col-span-5 lg:col-start-2 mb-6">
+                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                    <img class="w-[140px] p-3" src="{{ asset('images/aboutme/fmt.png') }}" alt="FrenchModdingTeam logo">
+                    <div class="ml-5 overflow-hidden">
+                        <h3 class="text-3xl font-xetaravel text-primary truncate">FrenchModdingTeam</h3>
+                        <p class="overflow-hidden break-words">
                             Realization of a e-commerce for selling applications connected with the website via a secure API with the CakePHP framework.<br/>
-                            <span class="">Site : </span><a href="https://www.frenchmoddingteam.com">https://www.frenchmoddingteam.com</a>
+                            <span class="font-semibold">Site : </span><a class="link link-hover link-primary" href="https://www.frenchmoddingteam.com">https://www.frenchmoddingteam.com</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 mb-3">
-                <div class="project delay-4">
-                    <img class="project-image" src="{{ asset('images/aboutme/division.png') }}" width="140"  alt="FrenchModdingTeam logo">
-                    <div class="project-body">
-                        <h3 class="project-body-title font-xeta text-primary text-truncate">ARK Division</h3>
-                        <p class="project-body-description">
+            <div class="col-span-12 lg:col-span-5 lg:col-start-7 mb-6">
+                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                    <img class="w-[140px] p-3" src="{{ asset('images/aboutme/division.png') }}" alt="FrenchModdingTeam logo">
+                    <div class="ml-5 overflow-hidden">
+                        <h3 class="text-3xl font-xetaravel text-primary truncate">ARK Division</h3>
+                        <p class="overflow-hidden break-words">
                             Realization of a donation system with members account, serveurs status update with the Laravel framework.<br/>
-                            <span class="">Site : </span><a href="https://discuss.ark-division.fr">https://discuss.ark-division.fr</a>
+                            <span class="font-semibold">Site : </span><a class="link link-hover link-primary" href="https://discuss.ark-division.fr">https://discuss.ark-division.fr</a>
                         </p>
                     </div>
                 </div>
@@ -280,54 +282,55 @@
     </div>
 </section>
 
-<section class="section-resume jarallax pt-4 mb-6"data-jarallax data-speed="0.2" >
+<section class="section-resume jarallax pt-16 mb-6"data-jarallax data-speed="0.2" >
     <div class="jarallax-img" style="background-image: url({{ asset('images/aboutme/cubes-bg.jpg') }});"></div>
-    <div class="container">
-        <h2 class="section-aboutme-title font-xeta text-xs-center mb-3">
+    <div class="lg:container mx-auto">
+        <h2 class="text-4xl uppercase font-xetaravel text-center relative text-white before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Resume
         </h2>
-        <div class="row resume mb-1" id="resume">
-            <div class="col-md-6">
-                <h3 class="resume-title mb-1 mt-1">Sumary</h3>
-                <div class="resume-item">
-                    <h4 class="resume-item-title text-primary">Emeric Fevre</h4>
-                    <p>
-                        <em>Web Application Developer & Designer, learning since 10+ years in autodidact. Mainly back-end developer with PHP and the frameworks Laravel, Symfony & CakePHP.  I have also worked/work with JavaScript, TypeScript, SASS, VueJS, WebPack, Redis... I’m currently in formation at <a href="https://openclassrooms.com">OpenClassRoom</a>.</em>
+
+        <div id="resume" class="grid grid-cols-12 gap-4 mx-3 lg:mx-0 text-white">
+            <div class="col-span-12 lg:col-span-6">
+                <h3 class="text-3xl font-bold mb-4 mt-4">Sumary</h3>
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none">Emeric Fevre</h4>
+                    <p class="mb-4">
+                        <em>Web Application Developer & Designer, learning since 10+ years in autodidact. Mainly back-end developer with PHP and the frameworks Laravel, Symfony & CakePHP.  I have also worked/work with JavaScript, TypeScript, SASS, VueJS, WebPack, Redis... I’m currently in formation at <a class="link link-hover link-primary" href="https://openclassrooms.com">OpenClassRoom</a>.</em>
                     </p>
-                    <ul>
+                    <ul class="list-disc pl-10">
                         <li>St Marcel, 71380</li>
                         <li>
-                            <a href="mailto:{{ config('xetaravel.site.contact_email') }}">{{ config('xetaravel.site.contact_email') }}</a>
+                            <a class="link link-hover link-primary" href="mailto:{{ config('xetaravel.site.contact_email') }}">{{ config('xetaravel.site.contact_email') }}</a>
                         </li>
                     </ul>
                 </div>
 
-                <h3 class="resume-title mb-1 mt-1">Education</h3>
-                <div class="resume-item">
-                    <h4 class="resume-item-title text-primary">Professionnal Certification Level 5  Developer & Integrator Web</h4>
-                    <h5 class="resume-item-years">2022</h5>
+                <h3 class="text-3xl font-bold mb-4 mt-4">Education</h3>
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Professionnal Certification Level 5  Developer & Integrator Web</h4>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2022</span>
                     <p>
-                        <em>Online formation with <a href="https://openclassrooms.com">OpenClassRoom</a>.</em>
+                        <em>Online formation with <a class="link link-hover link-primary" href="https://openclassrooms.com">OpenClassRoom</a>.</em>
                     </p>
                 </div>
-                <div class="resume-item">
-                    <h4 class="resume-item-title text-primary">Professional Certification Level 4 Carpenter</h4>
-                    <h5 class="resume-item-years">2007</h5>
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Professional Certification Level 4 Carpenter</h4>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2007</span>
                     <p>
-                        <em>Obtained at the CFA <a href="https://www.compagnons-du-devoir.com">Compagnons du Devoir</a> at Dijon.</em>
+                        <em>Obtained at the CFA <a class="link link-hover link-primary" href="https://www.compagnons-du-devoir.com">Compagnons du Devoir</a> at Dijon.</em>
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <h3 class="resume-title mb-1 mt-1">Professional Experience</h3>
-                <div class="resume-item">
-                    <h4 class="resume-item-title text-primary">Full-stack Developer & Network Administrator</h4>
-                    <h5 class="resume-item-years">2020 - Present</h5>
+            <div class="col-span-12 lg:col-span-6">
+                <h3 class="text-3xl font-bold mb-4 mt-4">Professional Experience</h3>
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Full-stack Developer & Network Administrator</h4>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2020 - Present</span>
                     <p>
-                        <em>Volunteer at the association <a href="https://ark-division.fr">Division Gaming France</a> (RNA : W863010817).</em>
+                        <em>Volunteer at the association <a class="link link-hover link-primary" href="https://ark-division.fr">Division Gaming France</a> (RNA : W863010817).</em>
                     </p>
-                    <ul>
+                    <ul class="list-disc pl-10">
                         <li>
                             Creation of a member section (with account management), donation system (Paypal API) & administration panel with the Laravel framework.
                         </li>
@@ -342,22 +345,22 @@
                         </li>
                     </ul>
                 </div>
-                <div class="resume-item">
-                    <h4 class="resume-item-title text-primary">Full-stack Developer</h4>
-                    <h5 class="resume-item-years">2016 - Present</h5>
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Full-stack Developer</h4>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2016 - Present</span>
                     <p>
                         <em>Autodidact</em>
                     </p>
-                    <ul>
+                    <ul class="list-disc pl-10">
                         <li>
-                            Creation of my personnal website with the Laravel framework : <a href="https://xetaravel.com">https://xetaravel.com</a>.
+                            Creation of my personnal website with the Laravel framework : <a class="link link-hover link-primary" href="https://xetaravel.com">https://xetaravel.com</a>.
                         </li>
                         <li>
                             Creation of many Laravel and CakePHP plugins open-source.
                         </li>
                         <li>
-                            Creation of a Discuss forum with <a href="https://github.com/XetaIO/Xetaravel#features">many features</a> (<a href="https://xetaravel.com/discuss">see it in live</a>):
-                            <ul>
+                            Creation of a Discuss forum with <a class="link link-hover link-primary" href="https://github.com/XetaIO/Xetaravel#features">many features</a> (<a class="link link-hover link-primary" href="https://xetaravel.com/discuss">see it in live</a>):
+                            <ul class="list-disc pl-10">
                                 <li>
                                     Categories
                                 </li>
@@ -384,28 +387,39 @@
         </div>
     </div>
     <figure>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="#fff">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="hsl(var(--b1))">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
 </section>
 
-<section class="section-cv mb-4">
-    <div class="container">
-        <h2 class="section-aboutme-title font-xeta text-xs-center mb-3">
+<section class="section-cv mb-4 relative mt-[2px]">
+    <div class="lg:container mx-auto">
+        <h2 class="text-4xl uppercase font-xetaravel text-center relative before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Contact
         </h2>
-        <div class="row cv" id="cv">
-            <div class="col-xl-5 col-md-6 cv-item">
-                <h3 class="cv-title mb-2">Curriculum Vitae</h3>
-                {{ link_to(route('downloads.show', 'Fevre_Emeric_CV.pdf'), '<i class="fas fa-arrow-alt-circle-down"></i> Download CV', ['class' => 'btn btn-outline-primary btn-lg mb-2'], null, false) }}
 
-                <h3 class="cv-title mb-2">Contact Me</h3>
-                {{ link_to("mailto:" . config('xetaravel.site.contact_email'), '<i class="far fa-paper-plane"></i> Contact', ['class' => 'btn btn-outline-primary btn-lg mb-2'], null, false) }}
+        <div id="cv" class="grid grid-cols-12 gap-4 items-center text-center mx-3 lg:mx-0">
+            <div class="col-span-12 lg:col-span-4 lg:col-start-3 cv-item transition duration-500 ease-in-out opacity-0">
+                <h3 class="text-2xl font-semibold mb-6">
+                    Curriculum Vitae
+                </h3>
+                <a class="btn btn-lg gap-2 mb-9" href="{{ route('downloads.show', 'Fevre_Emeric_CV.pdf') }}">
+                    <i class="fa-solid fa-cloud-arrow-down"></i>
+                    Download CV
+                </a>
+
+                <h3 class="text-2xl font-semibold mb-6">
+                    Contact Me
+                </h3>
+                <a class="btn btn-lg gap-2 mb-9" href="mailto:{{ config('xetaravel.site.contact_email') }}">
+                    <i class="fa-regular fa-paper-plane"></i>
+                    Contact
+                </a>
             </div>
-            <div class="col-xl-6 offset-xl-1 col-md-6 cv-item">
+            <div class="col-span-12 lg:col-span-5 lg:col-start-7 cv-item transition duration-500 ease-in-out opacity-0">
                 <figure>
-                    <img src="{{ asset('images/aboutme/cv.svg') }}" alt="SVG CV">
+                    <img class="mx-auto" src="{{ asset('images/aboutme/cv.svg') }}" alt="SVG CV">
                 </figure>
             </div>
         </div>

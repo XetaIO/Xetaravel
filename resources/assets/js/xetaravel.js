@@ -6,6 +6,14 @@ export default {
     Dismiss
 }
 
+// Used to toggle the class h-full for drawer.
+// Need height 100% for Waypoints framework to work.
+const checkboxDrawer = document.getElementById('xetaravel-drawer');
+checkboxDrawer.addEventListener('change', function() {
+    let drawer = document.getElementsByClassName('drawer')[0];
+    drawer.classList.toggle('h-full');
+ })
+
 // Blog comment delete button
 const blogModalsDeleteComment = document.querySelectorAll('.deleteCommentModal');
 blogModalsDeleteComment.forEach(function(blogModalDeleteComment) {
@@ -65,18 +73,19 @@ postEditButton.forEach(function (button) {
     }, false);
 });
 
- // Discuss conversation post Reply Button
- const postReplyButton = document.getElementsByClassName('postReplyButton');
- Array.from(postReplyButton).forEach(function (button) {
-     button.addEventListener('click', function (event) {
+// Discuss conversation post Reply Button
+const postReplyButton = document.getElementsByClassName('postReplyButton');
+Array.from(postReplyButton).forEach(function (button) {
+    button.addEventListener('click', function (event) {
 
-         let content = button.getAttribute("data-content");
+        let content = button.getAttribute("data-content");
 
-         _commentEditor.setCursor({ line: 0, ch: 0 });
-         _commentEditor.insertValue(content + '\n');
+        _commentEditor.setCursor({ line: 0, ch: 0 });
+        _commentEditor.insertValue(content + '\n');
 
-     }, false);
- });
+    }, false);
+});
+
 
 /*document.addEventListener("DOMContentLoaded", () => {
     var codes = document.getElementsByClassName('hljs');
