@@ -4,6 +4,7 @@ module.exports = {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./app/**/*.php",
         "./config/*.php"
     ],
     theme: {
@@ -40,6 +41,9 @@ module.exports = {
         fontFamily: {
             'xetaravel': ['"Miriam Libre"'],
             'ubuntu': ['"Ubuntu, sans-serif']
+        },
+        container: {
+            center: true
         }
     },
     plugins: [

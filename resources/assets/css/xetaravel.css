@@ -32,8 +32,3 @@
 .badge {
     @apply rounded;
 }
-
-canvas {
-    display: block;
-    position: absolute;
-}

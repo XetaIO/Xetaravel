@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -42,84 +43,79 @@ class MenuServiceProvider extends ServiceProvider
         // Administration
         Menu::macro('admin.administration', function () {
             return Menu::new()
-                ->addClass('nav nav-pills flex-column mb-0')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu')
                 ->add(
-                    Link::toRoute('admin.page.index', '<i class="fa fa-dashboard"></i> Dashboard')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.page.index', '<i class="fa-solid fa-gauge"></i> Dashboard')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
-                ->setActiveFromRequest('/admin');
+                ->setActiveFromRequest('/admin')
+                ->setActiveClassOnLink();
         });
 
         Menu::macro('admin.blog', function () {
             return Menu::new()
-                ->addClass('nav nav-pills flex-column mb-0')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu')
                 ->add(
-                    Link::toRoute('admin.blog.article.index', '<i class="fa fa-newspaper-o"></i> Manage Articles')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.blog.article.index', '<i class="fa-regular fa-newspaper"></i> Manage Articles')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
                 ->add(
-                    Link::toRoute('admin.blog.category.index', '<i class="fa fa-tags"></i> Manage Categories')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.blog.category.index', '<i class="fa-solid fa-tags"></i> Manage Categories')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
-                ->setActiveFromRequest();
+                ->setActiveFromRequest()
+                ->setActiveClassOnLink();
         });
 
         Menu::macro('admin.discuss', function () {
             return Menu::new()
-                ->addClass('nav nav-pills flex-column mb-0')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu')
                 ->add(
-                    Link::toRoute('admin.discuss.category.index', '<i class="fa fa-tags"></i> Manage Categories')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.discuss.category.index', '<i class="fa-solid fa-tags"></i> Manage Categories')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
-                ->setActiveFromRequest();
+                ->setActiveFromRequest()
+                ->setActiveClassOnLink();
         });
 
         Menu::macro('admin.user', function () {
             return Menu::new()
-                ->addClass('nav nav-pills flex-column mb-0')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu')
                 ->add(
-                    Link::toRoute('admin.user.user.index', '<i class="fa fa-users"></i> Manage Users')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.user.user.index', '<i class="fa-solid fa-users"></i> Manage Users')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
-                ->setActiveFromRequest();
+                ->setActiveFromRequest()
+                ->setActiveClassOnLink();
         });
 
         Menu::macro('admin.role', function () {
             return Menu::new()
-                ->addClass('nav nav-pills flex-column mb-0')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu')
                 ->add(
-                    Link::toRoute('admin.role.role.index', '<i class="fa fa-user-circle-o"></i> Manage Roles')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.role.role.index', '<i class="fa-solid fa-user-tie"></i> Manage Roles')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
                 ->add(
-                    Link::toRoute('admin.role.permission.index', '<i class="fa fa-wrench"></i> Manage Permissions')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute(
+                        'admin.role.permission.index',
+                        '<i class="fa-solid fa-user-shield"></i> Manage Permissions'
+                    )
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
-                ->setActiveFromRequest();
+                ->setActiveFromRequest()
+                ->setActiveClassOnLink();
         });
 
         Menu::macro('admin.setting', function () {
             return Menu::new()
-                ->addClass('nav nav-pills flex-column mb-0')
-                ->setAttribute('role', 'navigation')
+                ->addClass('menu')
                 ->add(
-                    Link::toRoute('admin.setting.index', '<i class="fa fa-cogs"></i> Manage Settings')
-                        ->addClass('nav-link')
-                        ->addParentClass('nav-item')
+                    Link::toRoute('admin.setting.index', '<i class="fa-solid fa-wrench"></i> Manage Settings')
+                        ->addClass('rounded-[var(--rounded-btn)]')
                 )
-                ->setActiveFromRequest();
+                ->setActiveFromRequest()
+                ->setActiveClassOnLink();
         });
     }
 }

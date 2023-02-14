@@ -46,21 +46,13 @@ class PageController extends Controller
             });
             array_push($viewDatas, 'browsersData');
 
-            $countriesData = Cache::remember('Analytics.countries', $secondes, function () {
-                return $this->buildCountriesGraph();
-            });
-            array_push($viewDatas, 'countriesData');
-
             $devicesGraph = Cache::remember('Analytics.devices', $secondes, function () {
                 return $this->buildDevicesGraph();
             });
             array_push($viewDatas, 'devicesGraph');
 
-            $topCountries = array_slice($countriesData->rows, 0, 3);
-            array_push($viewDatas, 'topCountries');
-
             $operatingSystemGraph = Cache::remember('Analytics.operatingsystem', $secondes, function () {
-                return $this->buildOperatingSytemGraph();
+                return $this->buildOperatingSystemGraph();
             });
             array_push($viewDatas, 'operatingSystemGraph');
 
