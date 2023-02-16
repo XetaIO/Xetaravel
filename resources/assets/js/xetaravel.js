@@ -19,8 +19,6 @@ checkboxDrawer.addEventListener('change', function() {
 let buttonBackToTop = document.getElementById('btn-back-to-top');
 // When the user clicks on the button, scroll to the top of the document
 buttonBackToTop.addEventListener('click', function() {
-    //document.body.scrollTop = 0;
-    //document.documentElement.scrollTop = 0;
     window.scrollTo({
         top: 0,
         behavior: 'smooth'

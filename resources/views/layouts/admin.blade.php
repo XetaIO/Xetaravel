@@ -33,6 +33,7 @@
 
         <!-- Embed Styles -->
         @stack('style')
+        @livewireStyles
 
         <!-- Styles -->
         <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
@@ -96,7 +97,7 @@
         <!-- Scripts -->
         <script src="https://kit.fontawesome.com/e3046f3b08.js" crossorigin="anonymous"></script>
         <script src="{{ mix('js/xetaravel.admin.min.js') }}"></script>
-
+        @livewireScripts
 
         <!-- Embed Scripts -->
         @stack('scripts')

@@ -30,7 +30,7 @@ return [
     */
     'pagination' => [
         'blog' => [
-            'article_per_page' => 1,
+            'article_per_page' => 15,
             'comment_per_page' => 10
         ],
         'notification' => [
