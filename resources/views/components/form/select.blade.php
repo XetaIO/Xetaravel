@@ -1,29 +1,23 @@
-{{-- Required for multiple select --}}
-@php
-    $errorName = str_replace('[', '', $name);
-    $errorName = str_replace(']', '', $errorName);
-@endphp
+@props([
+    'label' => false,
+    'name' => '',
+    'value' => ''
+])
 
 <div class="form-control">
     @if ($label !== false)
-        <label class="label">
-            <span class="label-text {{ $labelClass }}">{{ $label }}</span>
+        <label class="label" for="{{ $name }}">
+            <span class="label-text">{{ $label }}</span>
         </label>
     @endif
 
-    {!! Form::select(
-        $name,
-        $list,
-        $selected,
-        array_merge(
-            ['class' => $errors->has($errorName) ? 'select select-bordered select-error w-full max-w-xs' : 'select select-bordered w-full max-w-xs'], $attributes
-        ),
-        $optionsAttributes
-    ) !!}
+    <select {{ $name ? 'name=' . $name . ' id=' . $name : '' }} {{ $attributes->merge(['class' => $errors->has($name) ? 'select select-bordered select-error w-full' : 'select select-bordered w-full']) }} >
+        {{ $slot }}
+    </select>
 
-    @if ($errors->has($errorName))
+    @if ($errors->has($name))
         <label class="label">
-            <span class="label-text-alt text-error">{{ $errors->first($errorName) }}</span>
+            <span class="label-text-alt text-error">{{ $errors->first($name) }}</span>
         </label>
     @endif
 </div>

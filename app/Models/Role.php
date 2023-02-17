@@ -3,11 +3,10 @@ namespace Xetaravel\Models;
 
 use Ultraware\Roles\Contracts\RoleHasRelations as RoleHasRelationsContract;
 use Ultraware\Roles\Traits\RoleHasRelations;
-use Ultraware\Roles\Traits\Slugable;
 
 class Role extends Model implements RoleHasRelationsContract
 {
-    use Slugable, RoleHasRelations;
+    use RoleHasRelations;
 
     /**
      * The attributes that are mass assignable.
@@ -19,26 +18,26 @@ class Role extends Model implements RoleHasRelationsContract
         'slug',
         'description',
         'css',
-        'level'
+        'level',
+        'is_deletable'
     ];
 
     /**
-     * The "booting" method of the model.
+     * The attributes that should be cast has a certain type.
      *
-     * @return void
+     * @var array
      */
-    protected static function boot()
+    protected $cast = [
+        'is_deletable' => 'boolean'
+    ];
+
+    /**
+     * Return the field to slug.
+     *
+     * @return string
+     */
+    public function slugStrategy(): string
     {
-        parent::boot();
-
-        // Generated the slug before updating.
-        static::updating(function ($model) {
-            $model->setSlugAttribute($model->name);
-        });
-
-        // Generated the slug before creating.
-        static::creating(function ($model) {
-            $model->setSlugAttribute($model->name);
-        });
+        return 'name';
     }
 }

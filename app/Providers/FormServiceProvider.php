@@ -63,7 +63,7 @@ class FormServiceProvider extends ServiceProvider
             'value' => null,
             'attributes' => []
         ]);
-        Form::component('bsSelect', 'components.form.select', [
+        Form::component('bsSelect', 'components.form.select2', [
             'name',
             'list' => [],
             'label' => null,

@@ -106,6 +106,10 @@ trait WithBulkActions
     {
         $deleteCount = $this->selectedRowsQuery->count();
 
+        if ($deleteCount <= 0) {
+            return;
+        }
+
         if ($this->selectedRowsQuery->delete()) {
             $this->fireFlash('delete', 'success', $deleteCount);
         } else {
