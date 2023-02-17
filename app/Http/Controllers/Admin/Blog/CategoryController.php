@@ -1,14 +1,8 @@
 <?php
 namespace Xetaravel\Http\Controllers\Admin\Blog;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaravel\Http\Controllers\Admin\Controller;
-use Xetaravel\Models\Category;
-use Xetaravel\Models\Repositories\CategoryRepository;
-use Xetaravel\Models\Validators\CategoryValidator;
 
 class CategoryController extends Controller
 {

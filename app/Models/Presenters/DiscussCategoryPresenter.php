@@ -10,7 +10,7 @@ trait DiscussCategoryPresenter
      */
     public function getCategoryUrlAttribute(): string
     {
-        if (!isset($this->slug)) {
+        if ($this->getKey() == null) {
             return '';
         }
 

@@ -1,13 +1,21 @@
-<div class="form-group {{ $errors->has($name) ? 'has-danger' : '' }}">
-    {!! Form::label($name, $label, ['class' => 'form-control-label']) !!}
-    {!! Form::number(
-        $name,
-        $value,
-        array_merge(['class' => $errors->has($name) ? 'form-control form-control-danger' : 'form-control'], $attributes)
-    ) !!}
+@props([
+    'label' => false,
+    'name' => '',
+    'value' => ''
+])
+
+<div class="form-control">
+    @if ($label !== false)
+        <label class="label" for="{{ $name }}">
+            <span class="label-text">{{ $label }}</span>
+        </label>
+    @endif
+
+    <input type="number" name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'input input-bordered input-error w-full' : 'input input-bordered w-full']) }} value="{{ $value ? $value : old($name) }}" />
+
     @if ($errors->has($name))
-        <div class="form-control-feedback">
-            {{ $errors->first($name) }}
-        </div>
+        <label class="label">
+            <span class="label-text-alt text-error">{{ $errors->first($name) }}</span>
+        </label>
     @endif
 </div>

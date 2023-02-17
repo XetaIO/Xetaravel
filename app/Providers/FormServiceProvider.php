@@ -27,7 +27,7 @@ class FormServiceProvider extends ServiceProvider
             'value' => null,
             'attributes' => []
         ]);
-        Form::component('bsNumber', 'components.form.number', [
+        Form::component('bsNumber', 'components.form.number2', [
             'name',
             'label' => null,
             'value' => null,
@@ -41,7 +41,7 @@ class FormServiceProvider extends ServiceProvider
             'labelClass' => 'form-control-label'
         ]);
         Form::component('bsPassword', 'components.form.password2', ['name', 'label' => null, 'attributes' => []]);
-        Form::component('bsCheckbox', 'components.form.checkbox', [
+        Form::component('bsCheckbox', 'components.form.checkbox2', [
             'name',
             'value' => 1,
             'checked' => null,

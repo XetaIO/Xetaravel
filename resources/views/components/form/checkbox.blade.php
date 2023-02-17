@@ -1,7 +1,21 @@
-<div class="form-gcontrol w-full max-w-xs">
+@props([
+    'label' => false,
+    'name' => '',
+    'value' => ''
+])
+
+<div class="form-control w-full max-w-xs">
+    @if ($label !== false)
+        <label class="label" for="{{ $name }}">
+            <span class="label-text">{{ $label }}</span>
+        </label>
+    @endif
+
     <label class="cursor-pointer label justify-start">
-        {!! Form::checkbox($name, $value, $checked, array_merge(['class' => $errors->has($name) ? 'checkbox checkbox-error' : 'checkbox'], $attributes)) !!}
-        <span class="label-text ml-2 {{ $labelClass }}">{{ $label }}</span>
+        <input type="checkbox" {{ $attributes->merge(['class' => $errors->has($name) ? 'checkbox checkbox-error' : 'checkbox']) }} />
+        @if ($label !== false)
+            <span class="label-text ml-2">{{ $slot }}</span>
+        @endif
     </label>
 
     @if ($errors->has($name))
