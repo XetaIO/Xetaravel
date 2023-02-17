@@ -161,9 +161,9 @@
                     {!! $isCreating ? 'Create Category' : 'Edit Category' !!}
                 </h3>
 
-                <x-form.text wire:model="model.title" wire:keyup='generateSlug' name="model.title" label="Title" placeholder="Title" />
+                <x-form.text wire:model="model.title" wire:keyup='generateSlug' name="model.title" label="Title" placeholder="Title..." />
 
-                <x-form.text wire:model="model.slug" name="model.slug" label="Slug" placeholder="Slug" disabled />
+                <x-form.text wire:model="model.slug" name="model.slug" label="Slug" disabled />
 
                 <x-form.text wire:model="model.icon" name="model.icon" label="Icon" placeholder="fa-solid fa-..." />
 
@@ -173,7 +173,7 @@
 
                 <x-form.text wire:model="model.level" name="model.level" label="Level" placeholder="1" />
 
-                <x-form.textarea wire:model="model.description" name="model.description" label="Description" id="description" placeholder="Title" />
+                <x-form.textarea wire:model="model.description" name="model.description" label="Description" placeholder="Description..." />
 
                 <x-form.checkbox wire:model="model.is_locked" name="is_locked" value="checked" label="Locked">
                     Check to lock the category

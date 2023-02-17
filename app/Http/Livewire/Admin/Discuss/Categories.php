@@ -100,7 +100,7 @@ class Categories extends Component
     {
         return [
             'model.title' => 'required|min:5',
-            'model.slug' => 'unique:discuss_categories,title,' . $this->model->id,
+            'model.slug' => 'unique:discuss_categories,slug,' . $this->model->id,
             'model.description' => 'required|min:10',
             'model.color' => 'min:7|max:9',
             'model.icon' => 'required',
@@ -119,6 +119,11 @@ class Categories extends Component
         $this->model->slug = Str::slug($this->model->{$this->model->slugStrategy()});
     }
 
+    /**
+     * Set the color from the color model to display the color in the modal.
+     *
+     * @return void
+     */
     public function generateColor(): void
     {
         $this->color = $this->model->color;

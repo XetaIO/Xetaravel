@@ -1,6 +1,6 @@
 <?php
 
-namespace Xetaravel\Http\Livewire\Admin\Blog;
+namespace Xetaravel\Http\Livewire\Admin\Roles;
 
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\View\View;
@@ -12,9 +12,9 @@ use Xetaravel\Http\Livewire\Traits\WithCachedRows;
 use Xetaravel\Http\Livewire\Traits\WithSorting;
 use Xetaravel\Http\Livewire\Traits\WithBulkActions;
 use Xetaravel\Http\Livewire\Traits\WithPerPagePagination;
-use Xetaravel\Models\Category;
+use Xetaravel\Models\Permission;
 
-class Categories extends Component
+class Permissions extends Component
 {
     use WithPagination;
     use WithSorting;
@@ -43,9 +43,9 @@ class Categories extends Component
     /**
      * The model used in the component.
      *
-     * @var Category
+     * @var Permission
      */
-    public Category $model;
+    public Permission $model;
 
     /**
      * Used to show the Edit/Create modal.
@@ -81,7 +81,6 @@ class Categories extends Component
     public function mount(): void
     {
         $this->model = $this->makeBlankModel();
-        $this->perPage = config('xetaravel.pagination.blog.article_per_page');
     }
 
     /**
@@ -92,9 +91,10 @@ class Categories extends Component
     public function rules()
     {
         return [
-            'model.title' => 'required|min:5',
-            'model.slug' => 'unique:categories,slug,' . $this->model->id,
-            'model.description' => 'required|min:10'
+            'model.name' => 'required|min:5|max:30|unique:permissions,name,' . $this->model->id,
+            'model.slug' => 'unique:permissions,slug,' . $this->model->id,
+            'model.description' => 'required|min:5|max:150',
+            'model.is_deletable' => 'required|boolean',
         ];
     }
 
@@ -105,17 +105,17 @@ class Categories extends Component
      */
     public function generateSlug(): void
     {
-        $this->model->slug = Str::slug($this->model->{$this->model->slugStrategy()});
+        $this->model->slug = Str::slug($this->model->{$this->model->slugStrategy()}, config('roles.separator'));
     }
 
     /**
      * Create a blank model and return it.
      *
-     * @return Category
+     * @return Permission
      */
-    public function makeBlankModel(): Category
+    public function makeBlankModel(): Permission
     {
-        return Category::make();
+        return Permission::make();
     }
 
     /**
@@ -125,8 +125,8 @@ class Categories extends Component
      */
     public function render()
     {
-        return view('livewire.admin.blog.categories', [
-            'categories' => $this->rows
+        return view('livewire.admin.roles.permissions', [
+            'permissions' => $this->rows
         ]);
     }
 
@@ -137,8 +137,8 @@ class Categories extends Component
      */
     public function getRowsQueryProperty(): Builder
     {
-        $query = Category::query()
-            ->search('title', $this->search);
+        $query = Permission::query()
+            ->search('name', $this->search);
 
         return $this->applySorting($query);
     }
@@ -173,20 +173,21 @@ class Categories extends Component
     }
 
     /**
-     * Set the model (used in modal) to the category we want to edit.
+     * Set the model (used in modal) to the permission we want to edit.
      *
-     * @param Category $category The category id to update. (Livewire will automatically fetch the model by the id)
+     * @param Permission $permission The permission id to update.
+     * (Livewire will automatically fetch the model by the id)
      *
      * @return void
      */
-    public function edit(Category $category): void
+    public function edit(Permission $permission): void
     {
         $this->isCreating = false;
         $this->useCachedRows();
 
-        // Set the model to the category we want to edit.
-        if ($this->model->isNot($category)) {
-            $this->model = $category;
+        // Set the model to the permission we want to edit.
+        if ($this->model->isNot($permission)) {
+            $this->model = $permission;
         }
         $this->showModal = true;
     }
@@ -214,7 +215,7 @@ class Categories extends Component
      *
      * @param string $action The action that fire the flash message.
      * @param string $type The type of the message, success or danger.
-     * @param int $deleteCount If set, the number of categories that has been deleted.
+     * @param int $deleteCount If set, the number of permissions that has been deleted.
      *
      * @return void
      */
@@ -225,24 +226,36 @@ class Categories extends Component
                 if ($type == 'success') {
                     session()->flash(
                         'success',
-                        $this->isCreating ? "The category has been created successfully !" :
-                            "The category <b>{$this->model->title}</b> has been edited successfully !"
+                        $this->isCreating ? "The permission has been created successfully !" :
+                            "The permission <b>{$this->model->title}</b> has been edited successfully !"
                     );
                 } else {
-                    session()->flash('danger', "An error occurred while saving the category !");
+                    session()->flash('danger', "An error occurred while saving the permission !");
                 }
                 break;
 
             case 'delete':
                 if ($type == 'success') {
-                    session()->flash('success', "<b>{$deleteCount}</b> categories has been deleted successfully !");
+                    session()->flash('success', "<b>{$deleteCount}</b> permissions has been deleted successfully !");
                 } else {
-                    session()->flash('danger', "An error occurred while deleting the categories !");
+                    session()->flash('danger', "An error occurred while deleting the permissions !");
                 }
                 break;
         }
 
         // Emit the alert event to the front so the DIsmiss can trigger the flash message.
         $this->emit('alert');
+    }
+
+    /**
+     * Get all select rows that are deletable by their id, preparing for deleting them.
+     *
+     * @return mixed
+     */
+    public function getSelectedRowsQueryProperty()
+    {
+        return (clone $this->rowsQuery)
+            ->unless($this->selectAll, fn($query) => $query->whereKey($this->selected))
+            ->where('is_deletable', '=', true);
     }
 }
