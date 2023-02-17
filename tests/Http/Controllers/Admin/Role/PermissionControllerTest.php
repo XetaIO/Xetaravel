@@ -3,8 +3,6 @@ namespace Tests\Http\Controllers\Admin\Role;
 
 use Tests\TestCase;
 use Xetaravel\Models\User;
-use Xetaravel\Models\Permission;
-use Xetaravel\Models\Role;
 
 class PermissionControllerTest extends TestCase
 {
