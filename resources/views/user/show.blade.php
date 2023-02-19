@@ -41,7 +41,7 @@
                 <div class="w-full md:w-1/2">
                     {{--  User Avatar --}}
                     <div class="relative avatar {{ $user->online ? 'online' : 'offline' }} m-2">
-                        <figure class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $user->username }} is {{ $user->online ? 'online' : 'offline' }}">
+                        <figure class="h-24 w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $user->username }} is {{ $user->online ? 'online' : 'offline' }}">
                             <img class="rounded-full" src="{{ $user->avatar_small }}"  alt="{{ $user->full_name }} avatar" />
                         </figure>
                         {{-- Badge Pillar of cummunity --}}

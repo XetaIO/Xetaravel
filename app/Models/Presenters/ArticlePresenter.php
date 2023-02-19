@@ -17,7 +17,7 @@ trait ArticlePresenter
      */
     public function getArticleUrlAttribute(): string
     {
-        if (!isset($this->slug)) {
+        if (!isset($this->slug) || $this->getKey() == null) {
             return '';
         }
 

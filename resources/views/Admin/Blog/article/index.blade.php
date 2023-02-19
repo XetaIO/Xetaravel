@@ -6,106 +6,28 @@
 @endpush
 
 @section('content')
-<div class="col-sm-12 col-md-10 offset-md-2 p-2">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="col-sm-12 col-md-10 offset-md-2 pl-2 pr-2 pb-2">
-    <div class="card card-inverse bg-inverse">
-        <h5 class="card-header">
-            Manage Articles
-        </h5>
-        <div class="card-block">
-            {{ link_to(route('admin.blog.article.create'), '<i class="fa fa-plus"></i> New Article', ['class' => 'btn btn-outline-primary mb-2'], null, false) }}
-            @if ($articles->isNotEmpty())
-                <table class="table table-hover table-inverse">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Author</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Comments</th>
-                            <th>Is display</th>
-                            <th>Created</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($articles as $article)
-                            <tr>
-                                <th scope="row">
-                                    {{ $article->id }}
-                                </th>
-                                <td>
-                                    {{ link_to($article->user->profile_url, $article->user->username) }}
-                                </td>
-                                <td>
-                                    {{ link_to($article->article_url, Str::limit($article->title, 60)) }}
-                                </td>
-                                <td>
-                                    {{ link_to($article->category->category_url, $article->category->title) }}
-                                </td>
-                                <td>
-                                    {{ $article->comment_count }}
-                                </td>
-                                <td class="font-weight-bold {{ $article->is_display ? 'text-success' : 'text-danger' }}">
-                                    {{ $article->is_display ? 'Yes' : 'No' }}
-                                </td>
-                                <td>
-                                    {{ $article->created_at->formatLocalized('%d %B %Y - %T') }}
-                                </td>
-                                <td>
-                                    {{ link_to(
-                                        route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]),
-                                        '<i class="fa fa-edit"></i>',
-                                        [
-                                            'class' => 'btn btn-sm btn-outline-info',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Edit this article'
-                                        ],
-                                        null,
-                                        false
-                                    ) }}
-                                    {{ link_to(
-                                        route('admin.blog.article.delete', ['id' => $article->id]),
-                                        '<i class="fa fa-remove"></i>',
-                                        [
-                                            'class' => 'btn btn-sm btn-outline-danger',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Delete this article',
-                                            'onclick' => "event.preventDefault();document.getElementById('delete-form-{$article->id}').submit();"
-                                        ],
-                                        null,
-                                        false
-                                    ) }}
-                                    {!! Form::open([
-                                        'route' => ['admin.blog.article.delete', 'id' => $article->id],
-                                        'method' => 'delete',
-                                        'id' => "delete-form-{$article->id}",
-                                        'style' => 'display: none;'
-                                    ]) !!}
-                                    {!! Form::close() !!}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                <div class="col-md 12 text-xs-center">
-                    {{ $articles->render() }}
-                </div>
-            @else
-                <div class="col-md-12">
-                    <div class="alert alert-primary" role="alert">
-                        <i class="fa fa-exclamation" aria-hidden="true"></i>
-                        There's no article yet, create your first article now !
-                    </div>
-                </div>
-            @endif
-        </div>
-        <div class="card-footer text-muted">
-            There're {{ $articles->count() }} articles. {{ $articles->where('is_display', false)->count() }} articles are not display.
+<section class="m-3 lg:m-10">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 ">
+            {!! $breadcrumbs->render() !!}
         </div>
     </div>
-</div>
+</section>
+
+<section class="m-3 lg:m-10">
+    <hgroup class="text-center px-5 pb-5">
+        <h1 class="text-4xl font-xetaravel">
+            Manage Articles
+        </h1>
+        <p class="text-gray-400 dark:text-gray-500">
+            Manage the blog articles.
+        </p>
+    </hgroup>
+
+    <div class="grid grid-cols-12 gap-6 mb-7">
+        <div class="col-span-12 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+            <livewire:admin.blog.articles />
+        </div>
+    </div>
+</section>
 @endsection

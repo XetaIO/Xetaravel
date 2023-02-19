@@ -14,7 +14,7 @@
         <div id="{{ $attributes->get('editor') }}">
     @endif
 
-    <textarea name="{{ $name }}" id="{{ $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'textarea textarea-bordered textarea-error w-full' : 'textarea textarea-bordered w-full', 'rows' => 5]) }} >{{ empty($slot->toHtml()) ? old($name) : $slot }}</textarea>
+    <textarea name="{{ $name }}" id="{{ $attributes->has('editor') ? $attributes->get('editor') : $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'textarea textarea-bordered textarea-error w-full' : 'textarea textarea-bordered w-full', 'rows' => 5]) }} >{{ empty($slot->toHtml()) ? old($name) : $slot }}</textarea>
 
     @if($attributes->has('editor'))
         </div>
