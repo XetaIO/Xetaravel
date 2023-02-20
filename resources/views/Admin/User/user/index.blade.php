@@ -6,146 +6,28 @@
 @endpush
 
 @section('content')
-<div class="col-sm-12 col-md-10 offset-md-2 p-2">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="col-sm-12 col-md-10 offset-md-2 pl-2 pr-2 pb-2">
-    <div class="card card-inverse bg-inverse">
-        <h5 class="card-header">
-            Search an User
-        </h5>
-
-        <div class="card-block">
-            {!! Form::open(['route' => 'admin.user.user.search', 'method' => 'get']) !!}
-
-                {!! Form::bsText(
-                    'search',
-                    'Search',
-                    null,
-                    [
-                        'class' => 'form-control form-control-inverse col-md-5',
-                        'required' => 'required',
-                        'autofocus'
-                    ],
-                    'form-control-label form-control-label-inverse'
-                ) !!}
-
-                {!! Form::bsRadio(
-                    'type',
-                    'username',
-                    1,
-                    'Username',
-                    [
-                        'label' => 'Type',
-                        'labelClass' => 'custom-control custom-radio form-control-inverse d-block'
-                    ],
-                    'form-control-label form-control-label-inverse'
-                ) !!}
-                {!! Form::bsRadio(
-                    'type',
-                    'email',
-                    false,
-                    'E-mail',
-                    ['labelClass' => 'custom-control custom-radio form-control-inverse d-block']
-                ) !!}
-                {!! Form::bsRadio(
-                    'type',
-                    'register_ip',
-                    false,
-                    'Registered IP',
-                    ['labelClass' => 'custom-control custom-radio form-control-inverse d-block']
-                ) !!}
-                {!! Form::bsRadio(
-                    'type',
-                    'last_login_ip',
-                    false,
-                    'Last login IP',
-                    ['labelClass' => 'custom-control custom-radio form-control-inverse d-block']
-                ) !!}
-
-                <div class="form-group">
-                    <div class="col-md-12">
-                        {!! Form::button('<i class="fa fa-search" aria-hidden="true"></i> Search', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
-                    </div>
-                </div>
-
-            {!! Form::close() !!}
+<section class="m-3 lg:m-10">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 ">
+            {!! $breadcrumbs->render() !!}
         </div>
-
-        @if ($latestUsers->isNotEmpty())
-            <div class="card-footer">
-                <h5 class="mb-1">
-                    Latest registered users
-                </h5>
-
-                <table class="table table-hover table-inverse">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Roles</th>
-                            <th>Registered IP</th>
-                            <th>Last login IP</th>
-                            <th>Comments</th>
-                            <th>Created</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($latestUsers as $user)
-                            <tr>
-                                <th scope="row">
-                                    {{ $user->id }}
-                                </th>
-                                <td>
-                                    {{ link_to($user->profile_url, $user->username) }}
-                                </td>
-                                <td>
-                                    {{ $user->email }}
-                                </td>
-                                <td>
-                                    @forelse ($user->roles as $role)
-                                        <span style="{{ $role->css }}">
-                                            {{ $role->name }}
-                                        </span>
-                                        <br />
-                                    @empty
-                                        This user does not have a role.
-                                    @endforelse
-                                </td>
-                                <td>
-                                    {{ $user->register_ip }}
-                                </td>
-                                <td>
-                                    {{ $user->last_login_ip }}
-                                </td>
-                                <td>
-                                    {{ $user->comment_count }}
-                                </td>
-                                <td>
-                                    {{ $user->created_at->formatLocalized('%d %B %Y - %T') }}
-                                </td>
-                                <td>
-                                    {{ link_to(
-                                        route('admin.user.user.edit', ['slug' => $user->slug, 'id' => $user->id]),
-                                        '<i class="fa fa-edit"></i>',
-                                        [
-                                            'class' => 'btn btn-sm btn-outline-info',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Edit this user'
-                                        ],
-                                        null,
-                                        false
-                                    ) }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-            </div>
-        @endif
     </div>
-</div>
+</section>
+
+<section class="m-3 lg:m-10">
+    <hgroup class="text-center px-5 pb-5">
+        <h1 class="text-4xl font-xetaravel">
+            Manage Users
+        </h1>
+        <p class="text-gray-400 dark:text-gray-500">
+            Manage the users of the website.
+        </p>
+    </hgroup>
+
+    <div class="grid grid-cols-12 gap-6 mb-7">
+        <div class="col-span-12 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+            <livewire:admin.users />
+        </div>
+    </div>
+</section>
 @endsection

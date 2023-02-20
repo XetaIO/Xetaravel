@@ -4,6 +4,12 @@
     'value' => ''
 ])
 
+{{-- Required for multiple select --}}
+@php
+    $errorName = str_replace('[', '', $name);
+    $errorName = str_replace(']', '', $errorName);
+@endphp
+
 <div class="form-control">
     @if ($label !== false)
         <label class="label" for="{{ $name }}">
@@ -11,13 +17,13 @@
         </label>
     @endif
 
-    <select {{ $name ? 'name=' . $name . ' id=' . $name : '' }} {{ $attributes->merge(['class' => $errors->has($name) ? 'select select-bordered select-error w-full' : 'select select-bordered w-full']) }} >
+    <select {{ $name ? 'name=' . $name . ' id=' . $name : '' }} {{ $attributes->merge(['class' => $errors->has($errorName) ? 'select select-bordered select-error w-full' : 'select select-bordered w-full']) }} >
         {{ $slot }}
     </select>
 
-    @if ($errors->has($name))
+    @error($errorName)
         <label class="label">
-            <span class="label-text-alt text-error">{{ $errors->first($name) }}</span>
+            <span class="label-text-alt text-error">{{ $message }}</span>
         </label>
-    @endif
+    @enderror
 </div>

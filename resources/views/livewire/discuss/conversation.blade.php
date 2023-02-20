@@ -197,12 +197,12 @@
                             {{ $conversation->post_count_formated }} Comments
                         </span>
 
-                        <span class="ml-0 md:ml-2 hidden md:inline-block">-</span>
+                        <!--<span class="ml-0 md:ml-2 hidden md:inline-block">-</span>
                         {{-- Views --}}
                         <span class="ml-0 md:ml-2 tooltip" data-tip="This conversation has 100 views.">
                             <i class="fa-regular fa-eye"></i>
                             100 Views
-                        </span>
+                        </span>-->
 
                         {{-- Solved badge --}}
                         @if ($conversation->is_solved)

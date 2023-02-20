@@ -1,6 +1,6 @@
 <?php
 
-namespace Xetaravel\Http\Livewire\Admin\Blog;
+namespace Xetaravel\Http\Livewire\Admin;
 
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\View\View;
@@ -9,16 +9,14 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Xetaravel\Http\Livewire\Traits\WithCachedRows;
 use Xetaravel\Http\Livewire\Traits\WithSorting;
-use Xetaravel\Http\Livewire\Traits\WithBulkActions;
 use Xetaravel\Http\Livewire\Traits\WithPerPagePagination;
-use Xetaravel\Models\Article;
+use Xetaravel\Models\User;
 
-class Articles extends Component
+class Users extends Component
 {
     use WithPagination;
     use WithSorting;
     use WithCachedRows;
-    use WithBulkActions;
     use WithPerPagePagination;
 
     /**
@@ -50,17 +48,7 @@ class Articles extends Component
      * Number of rows displayed on a page.
      * @var int
      */
-    public int $perPage = 10;
-
-    /**
-     * The Livewire Component constructor.
-     *
-     * @return void
-     */
-    public function mount(): void
-    {
-        $this->perPage = config('xetaravel.pagination.blog.article_per_page');
-    }
+    public int $perPage = 15;
 
     /**
      * Function to render the component.
@@ -69,8 +57,8 @@ class Articles extends Component
      */
     public function render()
     {
-        return view('livewire.admin.blog.articles', [
-            'articles' => $this->rows
+        return view('livewire.admin.users', [
+            'users' => $this->rows
         ]);
     }
 
@@ -81,8 +69,12 @@ class Articles extends Component
      */
     public function getRowsQueryProperty(): Builder
     {
-        $query = Article::query()
-            ->search('title', $this->search);
+        $search = $this->search;
+        $query = User::query()
+            ->where('username', 'LIKE', '%' . $search . '%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->orWhere('register_ip', 'LIKE', '%' . $search . '%')
+            ->orWhere('last_login_ip', 'LIKE', '%' . $search . '%');
 
         return $this->applySorting($query);
     }
@@ -97,31 +89,5 @@ class Articles extends Component
         return $this->cache(function () {
             return $this->applyPagination($this->rowsQuery);
         });
-    }
-
-    /**
-     * Display a flash message regarding the action that fire it and the type of the message, then emit an
-     * `alert ` event.
-     *
-     * @param string $action The action that fire the flash message.
-     * @param string $type The type of the message, success or danger.
-     * @param int $deleteCount If set, the number of categories that has been deleted.
-     *
-     * @return void
-     */
-    public function fireFlash(string $action, string $type, int $deleteCount = 0)
-    {
-        switch ($action) {
-            case 'delete':
-                if ($type == 'success') {
-                    session()->flash('success', "<b>{$deleteCount}</b> articles has been deleted successfully !");
-                } else {
-                    session()->flash('danger', "An error occurred while deleting the articles !");
-                }
-                break;
-        }
-
-        // Emit the alert event to the front so the DIsmiss can trigger the flash message.
-        $this->emit('alert');
     }
 }
