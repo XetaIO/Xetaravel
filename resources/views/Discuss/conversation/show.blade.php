@@ -183,7 +183,7 @@
                 )
             @empty
                 @if (!$conversation->is_solved && !$conversation->is_locked)
-                    <x-alert type="primary" class="mt-5">
+                    <x-alert type="primary" class="dark:bg-base-200 mt-5">
                         There're no comments yet, post the first reply !
                     </x-alert>
                 @endif
@@ -195,7 +195,7 @@
             </div>
 
             @if ($conversation->is_locked)
-                <x-alert type="primary" class="mt-5">
+                <x-alert type="primary" class="dark:bg-base-200 mt-5">
                     This discussion is closed, you can not reply !
                 </x-alert>
             @else
@@ -203,7 +203,7 @@
                     $conversation->created_at <= \Carbon\Carbon::now()->subDays(config('xetaravel.discuss.info_message_old_conversation')) &&
                     !$conversation->is_locked
                 )
-                    <x-alert type="info" class="mt-5">
+                    <x-alert type="info" class="dark:bg-base-200 mt-5">
                         This discussion is not active anymore since at least 3 months !
                     </x-alert>
                 @endif
@@ -272,7 +272,7 @@
                         </div>
                     </div>
                 @else
-                    <x-alert type="primary" class="mt-5">
+                    <x-alert type="primary" class="dark:bg-base-200 mt-5">
                         You need to be logged in to comment to this discussion !
                     </x-alert>
                 @endauth
