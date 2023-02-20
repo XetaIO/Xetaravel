@@ -18,10 +18,12 @@
 > [xetaravel.com](https://xetaravel.com)
 >
 > ## Administration Preview
-> ![Admin](https://user-images.githubusercontent.com/8210023/211190032-bc1bbcdf-a189-41ae-8636-8b6c287e20e3.png)
+> ![Admin](https://user-images.githubusercontent.com/8210023/220206696-98c7d503-0a87-47cb-9a5d-8f704c709010.png)
+>
+> ![Admin2](https://user-images.githubusercontent.com/8210023/220206856-297b15ce-a067-4eec-8deb-9fa09988b8bd.png)
 >
 > ## Discuss Preview
-> ![Discuss](https://user-images.githubusercontent.com/8210023/159991685-d2b53d9f-7d55-4cf5-b0c7-6066cee5572a.png)
+> ![Discuss](https://user-images.githubusercontent.com/8210023/220207034-0c6b01dc-8257-4a36-91a2-c54d9cc40798.png)
 >
 > # Installation
 > ## Requirements
