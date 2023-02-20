@@ -1,4 +1,29 @@
 const mix = require('laravel-mix');
+const TerserPlugin = require("terser-webpack-plugin");
+
+class RemoveLicenseFilePlugin {
+    apply(compiler) {
+        compiler.hooks.emit.tap("RemoveLicenseFilePlugin", (compilation) => {
+            // compilation has assets to output
+            // console.log(compilation.assets);
+            for (let name in compilation.assets) {
+                if (name.endsWith("LICENSE.txt")) {
+                    delete compilation.assets[name];
+                }
+            }
+        });
+    }
+}
+
+
+/*
+ |--------------------------------------------------------------------------
+ | Webpack Configuration
+ |--------------------------------------------------------------------------
+ */
+mix.webpackConfig({
+    plugins: [new RemoveLicenseFilePlugin()],
+});
 
 /*
  |--------------------------------------------------------------------------
