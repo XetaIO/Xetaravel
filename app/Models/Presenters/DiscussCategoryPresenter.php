@@ -10,10 +10,10 @@ trait DiscussCategoryPresenter
      */
     public function getCategoryUrlAttribute(): string
     {
-        if (!isset($this->slug)) {
+        if ($this->getKey() == null) {
             return '';
         }
 
-        return route('discuss.category.show', ['slug' => $this->slug, 'id' => $this->getKey()]);
+        return route('discuss.index', ['c' => $this->getKey()]);
     }
 }

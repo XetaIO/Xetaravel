@@ -13,6 +13,7 @@ class Controller extends BaseController
     {
         parent::__construct();
 
-        $this->breadcrumbs->addCrumb('Discuss', route('discuss.index'));
+        $this->breadcrumbs->addCrumb('<i class="fa-regular fa-comments mr-2"></i>' .
+        ' Discuss', route('discuss.index'));
     }
 }

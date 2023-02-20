@@ -1,15 +1,13 @@
 <?php
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\Sluggable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\Presenters\DiscussCategoryPresenter;
 
 class DiscussCategory extends Model
 {
-    use Sluggable,
-        DiscussCategoryPresenter;
+    use DiscussCategoryPresenter;
 
     /**
      * The attributes that are mass assignable.
@@ -18,11 +16,21 @@ class DiscussCategory extends Model
      */
     protected $fillable = [
         'title',
+        'slug',
         'color',
         'is_locked',
         'level',
         'icon',
         'description'
+    ];
+
+    /**
+     * The attributes that should be cast has a certain type.
+     *
+     * @var array
+     */
+    protected $cast = [
+        'is_locked' => 'boolean'
     ];
 
     /**
@@ -42,11 +50,6 @@ class DiscussCategory extends Model
     protected static function boot()
     {
         parent::boot();
-
-        // Generated the slug before updating.
-        static::updating(function ($model) {
-            $model->generateSlug();
-        });
 
         // Reset the last_conversation_id field and handle the conversations deleting.
         static::deleting(function ($model) {

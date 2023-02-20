@@ -1,0 +1,138 @@
+/**
+ * CodeMirror `mdn-like` theme.
+ */
+ .CodeMirror-gutters {
+    @apply !bg-transparent !border-solid !border-l-[6px] !border-[color:hsl(var(--b3))] dark:!border-[color:hsl(var(--b2))];
+  }
+
+  .cm-s-mdn-like.CodeMirror {
+    @apply bg-none;
+  }
+
+  .CodeMirror {
+    @apply !bg-base-200 dark:!bg-[color:hsl(var(--n))] dark:!bg-none dark:!text-slate-400 !text-current dark:border-r-[color:transparent];
+  }
+
+  .CodeMirror.cm-s-.CodeMirror-wrap {
+    @apply !h-[370px];
+  }
+
+  .editormd {
+    @apply bg-base-200 dark:bg-[color:hsl(var(--n))] border-[color:hsl(var(--b3))] dark:border-[color:hsl(var(--b1))];
+  }
+
+.editormd-code-toolbar {
+    @apply text-current;
+}
+.editormd-toolbar {
+    @apply bg-transparent border-[color:hsl(var(--b3))] dark:border-[color:hsl(var(--b1))];
+}
+.editormd-menu>li.divider {
+  @apply border-[color:hsl(var(--b3))] dark:border-[color:hsl(var(--b1))];
+}
+
+.CodeMirror-activeline-background {
+  @apply !bg-transparent;
+}
+
+.CodeMirror-cursor,
+.CodeMirror div.CodeMirror-cursor {
+    @apply border-l-2 border-[color:#222] border-solid dark:border-[color:#b7b7b7];
+}
+
+  /**
+   * Modals
+   */
+.editormd-dialog {
+    @apply dark:bg-[color:hsl(var(--b3))] dark:text-slate-300;
+}
+
+.editormd-dialog-header:hover {
+    @apply bg-[color:transparent];
+}
+
+.editormd-form {
+    @apply dark:text-slate-300;
+}
+
+  /**
+   * Editor Mask
+   *
+   */
+  .editormd-mask {
+    background-color: #000 !important;
+    opacity: .2 !important;
+  }
+
+  /**
+   * Button
+   */
+  .editormd-form input[type="submit"],
+  .editormd-form .editormd-btn,
+  .editormd-form button,
+  .editormd-dialog-container input[type="submit"],
+  .editormd-dialog-container .editormd-btn,
+  .editormd-dialog-container button,
+  .editormd-dialog-footer input[type="submit"],
+  .editormd-dialog-footer .editormd-btn,
+  .editormd-dialog-footer button,
+  .editormd-file-input input[type=file] {
+    @apply btn btn-sm;
+  }
+
+  .editormd-file-input:hover input[type=submit] {
+    @apply bg-[color:hsl(var(--nf))];
+  }
+
+  /* Toolbar Button */
+  .editormd-menu > li > a {
+    color: #f4645f;
+    border: 1px solid transparent;
+    -webkit-transition: all 150ms ease-out;
+    -moz-transition: all 150ms ease-out;
+    transition: all 150ms ease-out;
+  }
+
+  .editormd-menu > li > a:hover, .editormd-menu > li > a.active {
+    color: #ffffff;
+    border-color: transparent;
+    background: #f4645f;
+  }
+
+  .editormd-menu > li > a > .fa {
+    padding: 5px 8px;
+  }
+  .editormd-menu > li > a > .editormd-bold {
+    padding: 5px;
+  }
+
+  /**
+   * Form
+   */
+  .editormd-form input[type="text"],
+  .editormd-form input[type="number"] {
+    @apply input input-bordered h-10 text-current;
+  }
+
+  .editormd-form input[type="number"] {
+    @apply px-1 min-w-[55px];
+  }
+
+  .editormd-dialog-container select {
+    @apply select select-bordered h-10 text-current;
+  }
+
+  .editormd ::-webkit-scrollbar {
+    @apply bg-[color:hsl(var(--b1))] hover:bg-[color:hsl(var(--b2))] h-4 w-4
+  }
+  .editormd ::-webkit-scrollbar-thumb {
+    @apply rounded-none;
+  }
+
+  .markdown-body {
+    @apply text-current
+  }
+
+  .cm-s-mdn-like.CodeMirror ::selection {
+    background: #f4645f !important;
+  }

@@ -26,7 +26,7 @@ class UserController extends Controller
         $action = Route::getFacadeRoot()->current()->getActionMethod();
 
         if (in_array($action, ['show'])) {
-            $this->breadcrumbs->addCrumb('Profile', route('page.index'));
+            $this->breadcrumbs->addCrumb('<i class="fa-regular fa-id-card mr-2"></i> Profile', route('page.index'));
         }
     }
 
@@ -111,7 +111,10 @@ class UserController extends Controller
      */
     public function showSettingsForm(): View
     {
-        $this->breadcrumbs->addCrumb('Settings', route('users.user.settings'));
+        $this->breadcrumbs->addCrumb(
+            '<i class="fa-solid fa-user-gear mr-2"></i> Settings',
+            route('users.user.settings')
+        );
 
         return view('user.settings', ['breadcrumbs' => $this->breadcrumbs]);
     }

@@ -12,9 +12,6 @@
         <title>{{ config('app.title') . ' - ' . config('app.name') }}</title>
 
         <!-- Styles -->
-        <link href="{{ mix('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ mix('css/bootstrap.plugins.min.css') }}" rel="stylesheet">
-        <link href="{{ mix('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />

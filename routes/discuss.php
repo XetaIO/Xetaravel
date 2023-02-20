@@ -27,8 +27,6 @@ Route::group([
     // Category Routes
     Route::get('categories', 'CategoryController@index')
         ->name('discuss.category.index');
-    Route::get('category/{slug}.{id}', 'CategoryController@show')
-        ->name('discuss.category.show');
 
     // Post Routes
     Route::get('post/show/{id}', 'PostController@show')

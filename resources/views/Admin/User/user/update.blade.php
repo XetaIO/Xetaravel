@@ -7,7 +7,6 @@
 
 @push('style')
     {!! editor_css() !!}
-    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
@@ -33,315 +32,177 @@
 @endpush
 
 @section('content')
-{{-- Header --}}
-<div class="col-sm-12 col-md-10 offset-md-2 pl-0 pr-0">
-    <div class="profile-container">
-        <div class="profile-header">
-            <div class="background-container">
-                {!! Html::image($user->profile_background, 'Profile background', ['class' => 'background']) !!}
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="profile-information text-xs-center">
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle']) !!}
-                                <h2 class="username font-xeta">
-                                    {{ $user->username }}
-                                </h2>
-                                <h4 class="full-name">
-                                    {{ $user->full_name }}
-                                </h4>
-                            </li>
-                            <li class="col-md-6 offset-md-3 mt-3 mb-2">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="d-inline-block mr-2">
-                                            <h5 class="base-header">
-                                                Comments
-                                            </h5>
-                                            <h6 class="base-header major">
-                                                {{ $user->comment_count }}
-                                            </h6>
-                                        </div>
-                                        <div class="d-inline-block mr-2">
-                                            <h5 class="base-header">
-                                                Articles
-                                            </h5>
-                                            <h6 class="base-header major">
-                                                {{ $user->article_count }}
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        @if ($user->facebook)
-                                            <div class="d-inline-block mr-2">
-                                                {!! Html::link(
-                                                    url('http://facebook.com/' . e($user->facebook)),
-                                                    '<i class="fa fa-facebook fa-2x"></i>',
-                                                    [
-                                                        'class' => 'text-primary',
-                                                        'target' => '_blank',
-                                                        'data-toggle' => 'tooltip',
-                                                        'data-placement' => 'top',
-                                                        'title' => 'http://facebook.com/' . e($user->facebook)
-                                                    ],
-                                                    null,
-                                                    false
-                                                ) !!}
-                                            </div>
-                                        @endif
-                                        @if ($user->twitter)
-                                            <div class="d-inline-block mr-2">
-                                                {!! Html::link(
-                                                    url('http://twitter.com/' . e($user->twitter)),
-                                                    '<i class="fa fa-twitter fa-2x"></i>',
-                                                    [
-                                                        'class' => 'text-primary',
-                                                        'target' => '_blank',
-                                                        'data-toggle' => 'tooltip',
-                                                        'data-placement' => 'top',
-                                                        'title' => 'http://twitter.com/' . e($user->twitter)
-                                                    ],
-                                                    null,
-                                                    false
-                                                ) !!}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<section class="m-3 lg:m-10">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 ">
+            {!! $breadcrumbs->render() !!}
         </div>
     </div>
-</div>
+</section>
 
-{{-- Breadcrumbs --}}
-<div class="col-sm-12 col-md-10 offset-md-2 p-2">
-    {!! $breadcrumbs->render() !!}
-</div>
+<section class="m-3 lg:m-10">
+    <hgroup class="text-center px-5 pb-5">
+        <h1 class="text-4xl font-xetaravel">
+            Update <span class="font-bold">{{ e($user->username) }}</span>
+        </h1>
+        <p class="text-gray-400 dark:text-gray-500">
+            Update the user.
+        </p>
+    </hgroup>
 
-{{-- User Informations --}}
-<div class="col-sm-12 col-md-10 offset-md-2 pl-2 pr-2 pb-2">
-    <div class="card card-inverse bg-inverse">
-        <h5 class="card-header text-xs-center">
-            Edit {{ $user->username }}
-        </h5>
-
-        <div class="card-block">
-            <div class="row">
-                <div class="col-md-3 text-xs-center">
-                    <h5>
+    <div class="grid grid-cols-12 gap-6 mb-7">
+        <div class="col-span-12 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 lg:col-span-3 text-center">
+                    {{-- Avatar --}}
+                    <div class="text-xl mb-5">
                         Avatar
-                    </h5>
-
-                    {!! Html::image($user->avatar_small, e($user->username), ['class' => 'rounded-circle img-thumbnail mb-1']) !!}
-                    <br />
-
-                    {{ link_to(
-                        route('admin.user.user.deleteavatar', $user->id),
-                        '<i class="fa fa-remove"></i> Delete avatar',
-                        [
-                            'class' => 'btn btn-outline-primary mb-1',
-                            'onclick' => 'event.preventDefault();document.getElementById(\'delete-avatar-form\').submit();'],
-                        null,
-                        false
-                    ) }}
-
-                    {!! Form::open([
-                        'route' => ['admin.user.user.deleteavatar', $user->id],
-                        'id' => 'delete-avatar-form',
-                        'method' => 'delete',
-                        'style' => 'display: none;'
-                    ]) !!}
-                    {!! Form::close() !!}
-
-                    <p class="mb-1">
-                        Member since {{ $user->created_at->formatLocalized('%d %B %Y - %T') }}
-                    </p>
-
-                    <button type="button" class="btn btn-outline-danger mb-1" data-toggle="modal" data-target="#deleteAccountModal">
-                        <i class="fa fa-remove" aria-hidden="true"></i> Delete account
-                    </button>
-
-                    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModal" aria-hidden="true">
-                        <div class="modal-dialog text-body-primary" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteAccountModalLabel">
-                                        Delete <strong>{{ $user->username }}</strong> Account
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                {!! Form::open([
-                                    'route' => ['admin.user.user.delete', $user->id],
-                                    'method' => 'delete'
-                                ]) !!}
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <p>
-                                                Are you sure you want delete this account ? <strong>This operation is not reversible.</strong>
-                                            </p>
-                                        </div>
-                                        {!! Form::bsInputGroup(
-                                            'password',
-                                            null,
-                                            null,
-                                            [
-                                                'span' => '<i class="fa fa-lock"></i>',
-                                                'required' => 'required',
-                                                'type' => 'password',
-                                                'placeholder' => 'Your password...'
-                                            ]
-                                        ) !!}
-                                    </div>
-
-                                    <div class="modal-actions">
-                                        {!! Form::button('Yes, I confirm !', ['type' => 'submit', 'class' => 'ma ma-btn ma-btn-danger']) !!}
-                                        <button type="button" class="ma ma-btn ma-btn-success" data-dismiss="modal">
-                                            Close
-                                        </button>
-                                    </div>
-
-                                {!! Form::close() !!}
-                            </div>
+                    </div>
+                    <div class="avatar mb-5">
+                        <div class=" h-36 w-36 rounded-xl ring ring-white ring-offset-base-100 ring-offset-2">
+                            <img src="{{ $user->avatar_medium }}"  alt="{{ $user->username }} avatar"/>
                         </div>
                     </div>
+                    <div class="mb-5">
+                        <a class="btn btn-error gap-2" href="{{ route('admin.user.user.deleteavatar', $user->id) }}" onclick="event.preventDefault();document.getElementById('delete-avatar-form').submit();">
+                            <i class="fa-solid fa-xmark"></i>
+                            Delete avatar
+                        </a>
+
+                        <x-form.form method="delete" action="{{ route('admin.user.user.deleteavatar', $user->id) }}" id="delete-avatar-form" class="hidden"></x-form.form>
+                    </div>
+
+                    {{-- Delete User --}}
+                    <label for="deleteModal" class="btn btn-error gap-2 mb-5">
+                        <i class="fa-solid fa-xmark"></i>
+                        Delete account
+                    </label>
                 </div>
-                <div class="col-md-6">
-                    {!! Form::model($user, ['route' => ['admin.user.user.update', $user->id], 'method' => 'put']) !!}
 
-                        {!! Form::bsText(
-                            'username',
-                            'Username',
-                            null,
-                            ['class' => 'form-control form-control-inverse']
-                        ) !!}
+                {{-- Edit User Information --}}
+                <div class="col-span-12 lg:col-span-6">
+                    <x-form.form method="put" action="{{ route('admin.user.user.update', $user->id) }}">
 
-                        {!! Form::bsText(
-                            'email',
-                            'E-mail',
-                            null,
-                            ['class' => 'form-control form-control-inverse']
-                        ) !!}
+                        <x-form.text name="username" label="Username" value="{{ old('username', $user->username) }}" />
 
-                        {!! Form::bsSelect(
-                            'roles[]',
-                            $roles,
-                            'Roles',
-                            $user->roles->pluck('id')->toArray(),
-                            ['class' => 'form-control form-control-inverse col-md-4', 'multiple'],
-                            $optionsAttributes
-                        ) !!}
+                        <x-form.text name="account[first_name]" label="First Name" value="{{ old('account[first_name]', optional($user->account)->first_name) }}" />
 
-                        {!! Form::bsText(
-                            'account[first_name]',
-                            'First Name',
-                            null,
-                            ['class' => 'form-control form-control-inverse']
-                        ) !!}
+                        <x-form.text name="account[last_name]" label="Last Name" value="{{ old('account[last_name]', optional($user->account)->last_name) }}" />
 
-                        {!! Form::bsText(
-                            'account[last_name]',
-                            'Last Name',
-                            null,
-                            ['class' => 'form-control form-control-inverse']
-                        ) !!}
+                        <x-form.text name="email" label="Email" value="{{ old('email', $user->email) }}" />
 
-                        {!! Form::bsInputGroup(
-                            'account[facebook]',
-                            'Facebook',
-                            null,
-                            [
-                                'span' => 'http://facebook.com/',
-                                'spanStyle' => 'min-width:180px;',
-                                'spanClass' => 'input-group-addon input-group-addon-inverse',
-                                'class' => 'form-control form-control-inverse'
-                            ]
-                        ) !!}
+                        <x-form.select  name="roles[]"  label="Roles" multiple required>
+                            @foreach($roles as $id => $name)
+                                <option {{ $user->hasRole($id) ? 'selected' : '' }} value="{{ $id }}" style="{{ $optionsAttributes[$id]['style'] }}">{{$name}}</option>
+                            @endforeach
+                        </x-form.select>
 
-                        {!! Form::bsInputGroup(
-                            'account[twitter]',
-                            'Twitter',
-                            null,
-                            [
-                                'span' => 'http://twitter.com/',
-                                'spanStyle' => 'min-width:180px;',
-                                'spanClass' => 'input-group-addon input-group-addon-inverse',
-                                'class' => 'form-control form-control-inverse'
-                            ]
-                        ) !!}
+                        <x-form.input-group name="account[facebook]" label="Facebook" data-span-class="dark:bg-[hsl(var(--n)/var(--tw-bg-opacity))] min-w-[180px]" data-input-group-verticale="input-group-vertical lg:flex-row" value="{{ old('account[facebook]', optional($user->account)->facebook) }}">
+                            http://facebook.com/
+                        </x-form.input-group>
 
-                        {!! Form::bsTextarea(
-                            'account[biography]',
-                            'Biography',
-                            null,
-                            ['editor' => 'biographyEditor', 'style' => 'display:none;']
-                        ) !!}
+                        <x-form.input-group name="account[twitter]" label="Twitter" data-span-class="dark:bg-[hsl(var(--n)/var(--tw-bg-opacity))] min-w-[180px]" data-input-group-verticale="input-group-vertical lg:flex-row" value="{{ old('account[twitter]', optional($user->account)->twitter) }}">
+                            http://twitter.com/
+                        </x-form.input-group>
 
-                        {!! Form::bsTextarea(
-                            'account[signature]',
-                            'Signature',
-                            null,
-                            ['editor' => 'signatureEditor', 'style' => 'display:none;']
-                        ) !!}
+                        <x-form.textarea name="account[biography]" editor="biographyEditor" label="Biography" class="hidden">
+                            {{ optional($user->account)->biography }}
+                        </x-form.textarea>
 
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                {!! Form::button('<i class="fa fa-edit" aria-hidden="true"></i> Update', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
-                            </div>
+                        <x-form.textarea name="account[signature]" editor="signatureEditor" label="Signature" class="hidden">
+                            {{ optional($user->account)->signature }}
+                        </x-form.textarea>
+
+                        <div class="mb-5">
+                            <button type="submit" class="btn gap-2">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Update
+                            </button>
                         </div>
-                    {!! Form::close() !!}
+                    </x-form.form>
                 </div>
 
-                <div class="col-md-3">
-                    <h4>
+                {{-- Other User information --}}
+                <div class="col-span-12 lg:col-span-3">
+                    <div class="text-xl mb-5">
                         Others Informations
-                    </h4>
-                    <div class="form-group">
-                        <label class="form-control-label">
-                            Last Login IP
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <label class=" text-lg">
+                            Last Login IP :
                         </label>
-                        <p class="form-control-static text-muted">
-                            {{ $user->last_login_ip }}
-                        </p>
+                        <div class="prose">
+                            <code class="text-[color:hsl(var(--p))] bg-[color:var(--tw-prose-pre-bg)] rounded-sm">
+                                {{ $user->last_login_ip }}
+                            </code>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-control-label">
-                            Registered IP
+                    <div class="flex items-center gap-2 mb-4">
+                        <label class=" text-lg">
+                            Registered IP :
                         </label>
-                        <p class="form-control-static text-muted">
-                            {{ $user->register_ip }}
-                        </p>
+                        <div class="prose">
+                            <code class="text-[color:hsl(var(--p))] bg-[color:var(--tw-prose-pre-bg)] rounded-sm">
+                                {{ $user->register_ip }}
+                            </code>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-control-label ">
-                            Registered
+                    <div class="flex items-center gap-2 mb-4">
+                        <label class=" text-lg">
+                            Registered :
                         </label>
-                        <p class="form-control-static text-muted">
-                            {{ $user->created_at->formatLocalized('%d %B %Y - %T') }}
-                        </p>
+                        <div class="prose">
+                            <code class="text-[color:hsl(var(--p))] bg-[color:var(--tw-prose-pre-bg)] rounded-sm">
+                                {{ $user->created_at->formatLocalized('%d %B %Y - %T') }}
+                            </code>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-control-label">
-                            Last Updated
+                    <div class="flex items-center gap-2 mb-4">
+                        <label class=" text-lg">
+                            Last Updated :
                         </label>
-                        <p class="form-control-static text-muted">
-                            {{ $user->updated_at->formatLocalized('%d %B %Y - %T') }}
-                        </p>
+                        <div class="prose">
+                            <code class="text-[color:hsl(var(--p))] bg-[color:var(--tw-prose-pre-bg)] rounded-sm">
+                                {{ $user->updated_at->formatLocalized('%d %B %Y - %T') }}
+                            </code>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-</div>
+
+    {{-- Delete Account Modal --}}
+    <input type="checkbox" id="deleteModal" class="modal-toggle" />
+    <label for="deleteModal" class="modal cursor-pointer">
+        <label class="modal-box relative">
+            <label for="deleteModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <h3 class="font-bold text-lg">
+                Delete <strong>{{ $user->username }}</strong> Account
+            </h3>
+            <p>
+                Are you sure you want delete this account ? <span class="font-bold text-red-500">This operation is not reversible.</span>
+            </p>
+
+            <x-form.form method="delete" action="{{ route('admin.user.user.delete', $user->id) }}">
+
+                <x-form.input-group name="password" type="password" label="Your password">
+                    <i class="fa-solid fa-lock"></i>
+                </x-form.input-group>
+
+
+                <div class="modal-action">
+                    <button type="submit" class="btn btn-error gap-2">
+                        Yes, I confirm !
+                    </button>
+                    <label for="deleteModal" class="btn">Close</label>
+                </div>
+            </x-form.form>
+        </label>
+    </label>
+</section>
 @endsection

@@ -1,213 +1,108 @@
 import './bootstrap';
 import './vue';
+import Dismiss from './libs/dismiss.js';
 
-jQuery(function() {
-    "use strict";
+export default {
+    Dismiss
+}
 
-    /**
-     * Console
-     */
-    let consoleGreenTitle = 'color:#a3f5a3;background:#2f4052;font-weight:bold;';
-    let consoleGreenMessage = "\n %c  %c HELLO ! %c  %c  Don't forget that this website is open-source ! https://github.com/XetaIO/Xetaravel  %c  \n\n";
-    let consoleGreenWidth = 'padding:5px 0;';
-    let consoleGreenColor = 'color:#fff;';
-    let consoleGreenPrimaryBackground = 'background:#5ccc5c;';
-    let consoleGreenCornerBackground = 'background:#a3f5a3;';
+// Used to toggle the class h-full for drawer.
+// Need height 100% for Waypoints framework to work.
+const checkboxDrawer = document.getElementById('xetaravel-drawer');
+checkboxDrawer.addEventListener('change', function() {
+    let drawer = document.getElementsByClassName('drawer')[0];
+    drawer.classList.toggle('h-full');
+})
 
-    console.log.apply(console, [
-        consoleGreenMessage,
-        consoleGreenPrimaryBackground + consoleGreenWidth,
-        consoleGreenTitle + consoleGreenWidth,
-        consoleGreenCornerBackground + consoleGreenWidth,
-        consoleGreenColor + consoleGreenPrimaryBackground + consoleGreenWidth,
-        consoleGreenCornerBackground + consoleGreenWidth
-    ]);
 
-    let consoleRedTitle = 'color:#e44;background:#2f4052;font-weight:bold;';
-    let consoleRedMessage = "\n %c  %c ATTENTION %c  %c  DONT RUN ANY SCRIPT HERE ! IT WILL HAVE FULL ACCESS TO YOUR BROWSER AND YOUR ACCOUNT ! https://en.wikipedia.org/wiki/Self-XSS  %c  \n\n";
-    let consoleRedWidth = 'padding:5px 0;';
-    let consoleRedColor = 'color:#fff;';
-    let consoleRedPrimaryBackground = 'background:#c22;';
-    let consoleRedCornerBackground = 'background:#e44;';
-
-    console.log.apply(console, [
-        consoleRedMessage,
-        consoleRedPrimaryBackground + consoleRedWidth,
-        consoleRedTitle + consoleRedWidth,
-        consoleRedCornerBackground + consoleRedWidth,
-        consoleRedColor + consoleRedPrimaryBackground + consoleRedWidth,
-        consoleRedCornerBackground + consoleRedWidth
-    ]);
-
-    /**
-     * Bootstrap
-     */
-    $("body").tooltip({
-        selector: "[data-toggle=tooltip]"
+ // Scroll to Top
+let buttonBackToTop = document.getElementById('btn-back-to-top');
+// When the user clicks on the button, scroll to the top of the document
+buttonBackToTop.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
-
-    $('[data-toggle="popover"]').popover();
-
-    /**
-     * ScrollUp.
-     */
-    $.scrollUp({
-        scrollName: "scrollUp",
-        scrollDistance: 300,
-        scrollFrom: "top",
-        scrollSpeed: 1000,
-        easingType: "easeInOutCubic",
-        animation: "fade",
-        animationInSpeed: 200,
-        animationOutSpeed: 200,
-        scrollText: '<i class="fa fa-chevron-up"></i>',
-        scrollTitle: " ",
-        scrollImg: 0,
-        activeOverlay: 0,
-        zIndex: 1001
-    });
-
-    /**
-     * Navbar
-     */
-    var minWidth = 767,
-        navbar = $('#change-navbar'),
-        offset = navbar.offset(),
-        width = window.innerWidth;
-
-    if (navbar.length && width >= minWidth){
-        $(document).scroll(function() {
-            var scrollStart = $(this).scrollTop();
-            if (scrollStart > (offset.top - 60)) {
-                $('.navbar').attr('style', 'background-color: #FFFFFF  !important;');
-                $('.navbar-hello-text').removeClass('text-white').attr('style', 'color: #506a85 !important;');
-                $('.navbar-brand').removeClass('text-white').attr('style', 'color: #506a85 !important;');
-                $('.btn-header-register-login').removeClass('btn-outline-primary-inverse').addClass('btn-outline-primary');
-            } else {
-                $('.navbar').attr('style', 'background-color: transparent !important;');
-                $('.navbar-hello-text').addClass('text-white').removeAttr('style');
-                $('.navbar-brand').addClass('text-white').removeAttr('style');
-                $('.btn-header-register-login').removeClass('btn-outline-primary').addClass('btn-outline-primary-inverse');
-            }
-        });
+});
+// When the user scrolls down 40px from the top of the document, show the button
+window.onscroll = function () {
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        buttonBackToTop.style.display = 'block';
+    } else {
+        buttonBackToTop.style.display = 'none';
     }
+};
 
+// Blog comment delete button
+const blogModalsDeleteComment = document.querySelectorAll('.deleteCommentModal');
+blogModalsDeleteComment.forEach(function(blogModalDeleteComment) {
+    blogModalDeleteComment.addEventListener('click', function(event) {
+            const formModalDeleteComment = document.getElementById('deleteCommentModalForm');
+            const actionUrl = event.target.dataset.action;
 
-    /**
-     * Discuss
-     */
-    $('#deletePostModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var route = button.data('form-action');
-
-        var modal = $('#deletePostModal');
-        modal.find('#deletePostForm').attr('action', route);
+            formModalDeleteComment.action = actionUrl;
     });
-
-    // Post Button
-    var postReplyButton = document.getElementsByClassName('postReplyButton');
-    Array.from(postReplyButton).forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            let content = button.getAttribute("data-content");
-
-            _commentEditor.setCursor({ line: 0, ch: 0 });
-            _commentEditor.insertValue(content + '\n');
-
-        }, false);
-    });
-
-    var postEditButton = document.getElementsByClassName('postEditButton');
-    Array.from(postEditButton).forEach(function (button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            let id = button.getAttribute("data-id");
-            let route = button.getAttribute("data-route");
-
-            axios.get(route)
-                .then(function (response) {
-                    let post = document.getElementById('disccuss-post-edit-' + id);
-
-                    if (response.data.error == true || post !== null) {
-                        return;
-                    }
-
-                    let content = $('#post-' + id + ' .discuss-conversation-content');
-                    let edit = $('#post-' + id + ' .discuss-conversation-edit');
-
-                    content.addClass('d-none');
-                    edit.append(response.data.form);
-
-                    var editPostEditor = editormd("editPostEditor-" + id, {
-                        width: "100%",
-                        height: 340,
-                        markdown: response.data.markdown
-                    });
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-        }, false);
-    });
-
-    /**
-     * Blog
-     */
-    $('#deleteCommentModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var route = button.data('form-action');
-
-        var modal = $('#deleteCommentModal');
-        modal.find('#deleteCommentForm').attr('action', route);
-    });
-
-    /**
-     * Sidebar
-     */
-    let sidebar = document.getElementById("sidebar");
-    let sidebarTrigger = document.getElementById('sidebar-trigger');
-    let sidebarOverlay = document.createElement('div');
-    let closeSidebar = function () {
-        sidebar.classList.remove('sidebar-opened');
-        sidebar.classList.add('sidebar-closed');
-
-        let parent = sidebarOverlay.parentNode;
-        if (parent != null) {
-            sidebarOverlay.parentNode.removeChild(sidebarOverlay);
-        }
-    };
-
-    // User not connected, no sidebar.
-    if (sidebarTrigger != null) {
-        sidebarTrigger.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            if (sidebar.classList.contains('sidebar-opened')) {
-                closeSidebar();
-            } else {
-                sidebar.classList.remove('sidebar-closed');
-                sidebar.classList.add('sidebar-opened');
-
-                sidebarOverlay.classList.add('sidebar-overlay');
-                sidebar.parentNode.appendChild(sidebarOverlay);
-
-                sidebarOverlay.addEventListener('click', function() {
-                    closeSidebar();
-                    sidebarOverlay.removeEventListener('click', this);
-                });
-            }
-        }, false);
-    }
 });
 
-/*app = {
+// Discuss conversation post delete button
+const discussModalsDeletePost = document.querySelectorAll('.deleteConversationPostModal');
+discussModalsDeletePost.forEach(function(discussModalDeletePost) {
+    discussModalDeletePost.addEventListener('click', function(event) {
+            const formModalDeletePost = document.getElementById('deleteConversationPostModalForm');
+            const actionUrl = event.target.dataset.action;
 
-    init: function() {
-        alert('test');
-    }
+            formModalDeletePost.action = actionUrl;
+    });
+});
 
-};
-module.exports = app;*/
+// Discuss conversation post Edit Button
+const postEditButton = document.querySelectorAll('.postEditButton');
+postEditButton.forEach(function (button) {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        let id = event.target.dataset.id;
+        let route = event.target.dataset.route;
+
+        axios.get(route)
+            .then(function (response) {
+                let post = document.getElementById('discuss-post-edit-' + id);
+
+                if (response.data.error == true || post !== null) {
+                    return;
+                }
+
+                let content = document.getElementById('post-' + id).getElementsByClassName('discuss-conversation-content')[0];
+                let edit = document.getElementById('post-' + id).getElementsByClassName('discuss-conversation-edit')[0];
+
+                content.classList.add('hidden');
+                var scriptEl = document.createRange().createContextualFragment(response.data.form);
+                edit.append(scriptEl);
+
+                let editPostEditor = editormd("editPostEditor-" + id, {
+                    width: "100%",
+                    height: 340,
+                    markdown: response.data.markdown
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }, false);
+});
+
+// Discuss conversation post Reply Button
+const postReplyButton = document.getElementsByClassName('postReplyButton');
+Array.from(postReplyButton).forEach(function (button) {
+    button.addEventListener('click', function (event) {
+
+        let content = button.getAttribute("data-content");
+
+        _commentEditor.setCursor({ line: 0, ch: 0 });
+        _commentEditor.insertValue(content + '\n');
+
+    }, false);
+});
+
+//const tsParticles = require("tsparticles-engine");

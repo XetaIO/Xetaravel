@@ -1,59 +1,71 @@
 <template>
-    <div class="dropdown navbar-notifications float-xs-right pr-1">
+    <div class="dropdown dropdown-end">
         <!-- Toggle notification menu -->
-        <a ref="toggle_notifications" class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i ref="toggle_icon_notifications" class="icon fa fa-bell-o"></i>
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-            <div class="dropdown-header text-xs-center">
-                News Notifications
+        <label tabindex="0" class="btn btn-ghost btn-circle">
+            <div class="indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" ref="toggle_icon_notifications" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                <span ref="toggle_notifications_number" class="badge badge-sm indicator-item badge-primary" v-bind:class="{ hidden: !hasUnreadNotifs }"></span>
             </div>
+        </label>
 
-            <div class="dropdown-divider mb-0"></div>
+        <div tabindex="0" class="mt-3 card card-compact dropdown-content w-96 bg-base-100 shadow">
+            <div class="card-body">
+                <h3 class="card-title  justify-center">
+                    Notifications
+                </h3>
 
-            <!-- Notifications -->
-            <a  v-bind:key="notification" v-for="notification in notifications"
-                v-on:mouseover.prevent="markNotificationAsRead(notification)"
-                :href="getNotificationUrl(notification)" :class="'notification-' + notification.id + ' dropdown-item notification-item'">
+                <div class="divider my-0"></div>
 
-                <!-- Image -->
-                <img v-if="notification.data.hasOwnProperty('image')" :src="'/' + notification.data.image" alt="Image">
+                <ul>
+                    <li :key="notification.id" v-for="notification in notifications" class="hover:bg-slate-200 cursor-pointer flex dark:hover:bg-slate-700 rounded mb-3">
+                        <div class="indicator w-full">
+                            <a v-on:mouseover.prevent="markNotificationAsRead(notification)"
+                                :href="getNotificationUrl(notification)" :class="'notification-' + notification.id" class="p-3 flex items-center">
 
-                <i v-else-if="notification.data.type == 'badge'" :class="notification.data.icon + ' fa-2x'" :style="'color:' + notification.data.color"></i>
+                                <!-- Image -->
+                                <img class="mr-3" v-if="notification.data.hasOwnProperty('image')" :src="'/' + notification.data.image" alt="Image">
 
-                <i v-else-if="notification.data.type == 'mention'" class="fa fa-at fa-3x text-primary"
-                    aria-hidden="true"></i>
+                                <i v-else-if="notification.data.type == 'badge'" :class="notification.data.icon" :style="'color:' + notification.data.color" class="text-3xl mr-3"></i>
 
-                <img v-else src="/images/logo.svg" alt="Image">
+                                <i v-else-if="notification.data.type == 'mention'" class="fa-solid fa-at text-3xl text-primary mr-3"
+                                    aria-hidden="true"></i>
 
-                <!-- Message -->
-                <span v-html="notification.data.hasOwnProperty('message_key') ? formatMessage(notification) : notification.data.message"
-                    class="message"></span>
+                                <img class="mr-3" v-else src="/images/logo.svg" alt="Image">
 
-                <!-- Badge new -->
-                <strong v-if="notification.read_at === null" :class="'notification-' + notification.id + '-new'" class="new">
-                    <span></span>
-                    New
-                </strong>
-            </a>
+                                <!-- Message -->
+                                <span v-html="notification.data.hasOwnProperty('message_key') ? formatMessage(notification) : notification.data.message" class="w-full"></span>
 
-            <!-- Mark all as read -->
-            <button v-if="hasUnreadNotifs" v-on:click.prevent="markAllNotificationsAsRead" class="dropdown-item text-xs-center">
-                    Mark all notifications as read
-            </button>
+                                <!-- Badge new -->
+                                <span v-if="notification.read_at === null" :class="'notification-' + notification.id + '-new'" class="badge badge-sm indicator-item badge-primary right-3">New</span>
+                            </a>
+                        </div>
+                    </li>
 
-            <p v-if="!Array.isArray(notifications) || !notifications.length" class="dropdown-item mb-0 text-xs-center">
-                You don't have any notifications.
-            </p>
+                    <li>
+                        <p v-if="!Array.isArray(notifications) || !notifications.length" class="m-2 text-center">
+                            You don't have any notifications.
+                        </p>
+                    </li>
+                </ul>
 
-            <div class="dropdown-divider"></div>
+                <!-- Mark all as read -->
+                <div v-if="hasUnreadNotifs" class="mb-1">
+                    <button v-on:click.prevent="markAllNotificationsAsRead" class="btn btn-primary btn-block">
+                            Mark all notifications as read
+                    </button>
+                </div>
 
-            <!-- All notifications. -->
-            <a :href="routeUserNotifications" class="dropdown-item text-xs-center">
-                All Notifications
-            </a>
+                <div class="divider my-0"></div>
+
+                <!-- Go to User Notification panel-->
+                <div class="card-actions">
+                    <a :href="routeUserNotifications" class="btn btn-ghost btn-block text-primary">
+                        All Notifications
+                    </a>
+                </div>
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -90,8 +102,6 @@
             this.$watch(() => { return this.$parent.hasUnreadNotifs },
                 function (newVal, oldVal) {
                     if (this.hasUnreadNotifs != newVal) {
-                        console.log('Parent Notifications : triggrered');
-
                         this.hasUnreadNotifs = newVal;
                     }
                 }
@@ -186,7 +196,7 @@
                 let notifsCount = this.notifications.reduce(function (count, notif) {
                     return count + (notif.read_at === null ? 1 : 0);
                 }, 0)
-                this.$parents.$refs.toggle_notifications.setAttribute("data-number", '(' + notifsCount + ')');
+                this.$parent.$refs.toggle_notifications_number.textContent = notifsCount;
             },
 
             /**

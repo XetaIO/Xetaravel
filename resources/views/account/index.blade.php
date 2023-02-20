@@ -7,7 +7,6 @@
 
 @push('style')
     {!! editor_css() !!}
-    <link href="{{ mix('css/editor-md.custom.min.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
@@ -17,7 +16,7 @@
     @php
         $signature = [
             'id' => 'signatureEditor',
-            'height' => '200',
+            'height' => '350',
         ];
     @endphp
     @include('editor/partials/_signature', $signature)
@@ -25,107 +24,79 @@
     @php
         $biography = [
             'id' => 'biographyEditor',
-            'height' => '250'
+            'height' => '350'
         ];
     @endphp
-    @include('editor/partials/_biography', [$biography, $signature])
-
+    @include('editor/partials/_biography', $biography)
 @endpush
 
 @section('content')
-<div class="container pt-6 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="container pt-2 pb-4">
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 lg:mx-0">
+            {!! $breadcrumbs->render() !!}
+        </div>
+    </div>
+</section>
 
-    <div class="row">
-        <div class="col-md-3">
+<section class="lg:container mx-auto pt-4 mb-5">
+    <div class="grid grid-cols-12 gap-8">
+
+        <div class="lg:col-span-3 col-span-12 mx-3 lg:mx-0">
             @include('partials.user._sidebar')
         </div>
-        <div class="col-md-9">
-            <section class="section">
-                <div class="hr-divider">
-                    <div class="hr-divider-content hr-divider-heading font-xeta">
-                        My Account
-                    </div>
-                </div>
 
-                {!! Form::model($user, ['route' => 'users.account.update', 'files'=>'true', 'method' => 'put']) !!}
-                    <div class="row">
-                        <div class="col-md-5 col-lg-4">
-                            <div class="form-group {{ $errors->has('avatar') ? 'has-danger' : '' }}">
+        <div class="lg:col-span-9 col-span-12 mx-3 lg:mx-0">
+            <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
+                <h2 class="divider text-2xl font-xetaravel mb-6">
+                    My Account
+                </h2>
 
-                                <div class="fileinput fileinput-exists" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
-                                        <img src="{{ $user->avatar_medium }}" alt="Default Avatar">
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail">
-                                        <img src="{{ $user->avatar_medium }}" alt="User Avatar">
-                                    </div>
-                                    <div>
-                                        <span class="btn btn-outline-primary btn-file">
-                                            <i class="fa fa-refresh"></i>
-                                            <span class="fileinput-exists">Change</span>
-                                             {!! Form::file('avatar') !!}
-                                        </span>
+                <x-form.form method="put" action="{{ route('users.account.update') }}" enctype="multipart/form-data">
+                    <div class="grid grid-cols-12 gap-4 mb-7">
+                        <div class="col-span-12 lg:col-span-6">
+                            <div class="form-control items-center">
+
+                                <div class="avatar mb-5">
+                                    <div class=" w-52 rounded-xl ring ring-white ring-offset-base-100 ring-offset-2">
+                                        <img src="{{ $user->avatar_medium }}"  alt="{{ $user->username }} avatar"/>
                                     </div>
                                 </div>
-                                @if ($errors->has('avatar'))
-                                    <div class="form-control-feedback">
-                                        {{ $errors->first('avatar') }}
-                                    </div>
-                                @endif
+
+                                <x-form.file name="avatar" class="max-w-sm" />
                             </div>
                         </div>
-                        <div class="col-md-7 col-lg-8">
-                            {!! Form::bsText(
-                                'first_name',
-                                'First Name',
-                                null,
-                                ['placeholder' => 'Your First Name...']
-                            ) !!}
-                            {!! Form::bsText(
-                                'last_name',
-                                'Last Name',
-                                null,
-                                ['placeholder' => 'Your Last Name...']
-                            ) !!}
+                        <div class="col-span-12 lg:col-span-6">
+                            <x-form.text name="first_name" label="First Name" placeholder="Your First Name..." value="{{ $user->account->first_name }}" />
+                            <x-form.text name="last_name" label="Last Name" placeholder="Your Last Name..." value="{{ $user->account->last_name }}" />
                         </div>
                     </div>
-                    {!! Form::bsInputGroup(
-                        'facebook',
-                        'Facebook',
-                        null,
-                        [
-                            'span' => 'http://facebook.com/',
-                            'spanStyle' => 'min-width:180px;',
-                            'placeholder' => 'Your Facebook here...'
-                        ]
-                    ) !!}
 
-                    {!! Form::bsInputGroup(
-                        'twitter',
-                        'Twitter',
-                        null,
-                        [
-                            'span' => 'http://twitter.com/',
-                            'spanStyle' => 'min-width:180px;',
-                            'placeholder' => 'Your Twitter here...'
-                        ]
-                    ) !!}
+                    <x-form.input-group name="facebook" label="Facebook" data-span-class="dark:bg-[hsl(var(--n)/var(--tw-bg-opacity))] min-w-[180px]" data-input-group-verticale="input-group-vertical lg:flex-row" placeholder="Your Facebook here..." value="{{ $user->account->facebook }}">
+                        http://facebook.com/
+                    </x-form.input-group>
 
-                    {!! Form::bsTextarea('biography', 'Biography', null, ['editor' => 'biographyEditor', 'style' => 'display:none;']) !!}
+                    <x-form.input-group name="twitter" label="Twitter" data-span-class="dark:bg-[hsl(var(--n)/var(--tw-bg-opacity))] min-w-[180px]" data-input-group-verticale="input-group-vertical lg:flex-row" placeholder="Your Twitter here..." value="{{ $user->account->twitter }}">
+                        http://twitter.com/
+                    </x-form.input-group>
 
-                    {!! Form::bsTextarea('signature', 'Signature', null, ['editor' => 'signatureEditor', 'style' => 'display:none;']) !!}
+                    <x-form.textarea name="biography" editor="biographyEditor" label="Biography" class="hidden">
+                        {{ $user->account->biography }}
+                    </x-form.textarea>
 
-                    <div class="form-group text-xs-center">
-                        <div class="col-md-12">
-                            {!! Form::button('<i class="fa fa-floppy-o" aria-hidden="true"></i> Save', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
-                        </div>
+                    <x-form.textarea name="signature" editor="signatureEditor" label="Signature" class="hidden">
+                        {{ $user->account->signature }}
+                    </x-form.textarea>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary gap-2">
+                            <i class="fa-regular fa-floppy-disk"></i>
+                            Save
+                        </button>
                     </div>
-                {!! Form::close() !!}
+                </x-form.form>
             </section>
         </div>
     </div>
-</div>
+</section>
 @endsection

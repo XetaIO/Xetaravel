@@ -1,25 +1,30 @@
-<div class="form-group {{ $errors->has($name) ? 'has-danger' : '' }}">
+@props([
+    'label' => false,
+    'name' => ''
+])
+
+<div class="form-control">
     @if ($label !== false)
-        {!! Form::label($name, $label, ['class' => $labelClass]) !!}
+        <label class="label" for="{{ $name }}">
+            <span class="label-text">{{ $label }}</span>
+        </label>
     @endif
 
-    @isset($attributes['editor'])
-        <div id="{{ $attributes['editor'] }}">
-    @endisset
+    @if($attributes->has('editor'))
+        <div id="{{ $attributes->get('editor') }}">
+    @endif
 
-    {!! Form::textarea(
-        $name,
-        $value,
-        array_merge(['class' => $errors->has($name) ? 'form-control form-control-danger' : 'form-control', 'rows' => 5], $attributes)
-    ) !!}
+    <textarea name="{{ $name }}" id="{{ $attributes->has('editor') ? $attributes->get('editor') : $name }}" {{ $attributes->merge(['class' => $errors->has($name) ? 'textarea textarea-bordered textarea-error w-full' : 'textarea textarea-bordered w-full', 'rows' => 5]) }} >{{ empty($slot->toHtml()) ? old($name) : $slot }}</textarea>
 
-    @isset($attributes['editor'])
+    @if($attributes->has('editor'))
         </div>
-    @endisset
+    @endif
 
     @if ($errors->has($name))
-        <div class="form-control-feedback">
-            {{ $errors->first($name) }}
-        </div>
+        <label class="label">
+            <span class="label-text-alt text-error">
+                {{ $errors->first($name) }}
+            </span>
+        </label>
     @endif
 </div>

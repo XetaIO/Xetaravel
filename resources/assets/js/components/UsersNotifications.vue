@@ -2,44 +2,44 @@
     <div class="UsersNotifications">
 
         <!-- Mark all as read -->
-        <button v-if="hasUnreadNotifs" v-on:click.prevent="markAllNotificationsAsRead" class="btn btn-sm btn-outline-primary mark-all-notifications-as-read text-xs-center">
-                <i class="fa fa-check" aria-hidden="true"></i> Mark all notifications as read
+        <button type="button" v-if="hasUnreadNotifs" v-on:click.prevent="markAllNotificationsAsRead" class="btn gap-2 mark-all-notifications-as-read mb-5">
+            <i class="fa-solid fa-check"></i>
+            Mark all notifications as read
         </button>
 
-        <table class="table table-hover table-notifications">
+        <ul class="w-full">
 
-            <tr v-bind:key="notification" v-for="notification in notifications"
+            <li v-bind:key="notification" v-for="notification in notifications"
                 v-on:mouseover.prevent="markNotificationAsRead(notification)"
-                :class="'notification-' + notification.id + ' alert notification-item'">
+                class="flex justify-between items-center relative bg-base-200 dark:bg-base-100 hover:bg-base-300 hover:dark:bg-base-200 rounded-lg p-5 mb-3"
+                :class="'notification-' + notification.id + (notification.read_at === null ? ' rounded-tr-none' : '')">
 
-                <td style="position: relative;">
-
+                <div class="flex items-center">
                     <!-- Image -->
-                    <img v-if="notification.data.hasOwnProperty('image')" :src="'/' + notification.data.image" alt="Image" width="60">
+                    <img class="mr-3" v-if="notification.data.hasOwnProperty('image')" :src="'/' + notification.data.image" alt="Image" width="60">
 
-                    <i v-else-if="notification.data.type == 'badge'" :class="notification.data.icon + ' fa-2x'" :style="'color:' + notification.data.color"></i>
+                    <i v-else-if="notification.data.type == 'badge'" :class="notification.data.icon + ' text-5xl mr-3'" :style="'color:' + notification.data.color"></i>
 
-                    <i v-else-if="notification.data.type == 'mention'" class="fa fa-at fa-4x text-primary" style="vertical-align: middle;" aria-hidden="true"></i>
+                    <i v-else-if="notification.data.type == 'mention'" class="fa-solid fa-at text-5xl text-primary mr-3" style="vertical-align: middle;" aria-hidden="true"></i>
 
-                    <img v-else src="/images/logo.svg" alt="Image" width="60">
+                    <img class="mr-3" v-else src="/images/logo.svg" alt="Image" width="60">
 
                     <!-- Message -->
-                    <span v-html="notification.data.hasOwnProperty('message_key') ? formatMessage(notification) : notification.data.message" class="message"></span>
+                    <span v-html="notification.data.hasOwnProperty('message_key') ? formatMessage(notification) : notification.data.message" class="w-full"></span>
+                </div>
 
-                    <!-- Badge new -->
-                    <strong v-if="notification.read_at === null" :class="'notification-' + notification.id + '-new'" class="new">
-                        <span></span>
-                        New
-                    </strong>
+                <!-- Badge new -->
+                <span v-if="notification.read_at === null" :class="'notification-' + notification.id + '-new'" class="absolute -right-2.5 -top-4 lg:top-1 text-sm text-white bg-[color:#f4645f] rounded rounded-tr-none color-white font-bold shadow-md px-1 before:bg-[color:#f4645f] before:content-[''] before:h-[5px] before:absolute before:right-0 before:top-[-4px] before:w-[10px] before:rounded-tr">
+                    New
+                </span>
 
-                    <!-- Delete -->
-                    <button v-on:click.prevent="deleteNotification(notification)" type="button" class="close text-danger" data-toggle="tooltip" title="Delete this notification" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </td>
-            </tr>
+                <!-- Delete -->
+                <button v-on:click.prevent="deleteNotification(notification)" type="button" class="text-error tooltip" data-tip="Delete this notification">
+                    <i class="fa-solid fa-xmark fa-xl"></i>
+                </button>
+            </li>
 
-        </table>
+        </ul>
     </div>
 </template>
 
@@ -178,7 +178,7 @@
                 let notifsCount = this.notifications.reduce(function (count, notif) {
                     return count + (notif.read_at === null ? 1 : 0);
                 }, 0);
-                this.$parent.$refs.toggle_notifications.setAttribute("data-number", '(' + notifsCount + ')');
+                this.$parent.$refs.toggle_notifications_number.setAttribute("data-number", '(' + notifsCount + ')');
             },
 
             /**

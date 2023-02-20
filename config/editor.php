@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify the configuration options for Editor.md. For all the
-    | configuration options, please see the offcial website of Editor.md :
+    | configuration options, please see the official website of Editor.md :
     | https://pandao.github.io/editor.md/
     |
     */
@@ -24,8 +24,8 @@ return [
     'codeFold' => 'true',
     'flowChart' => 'false',
     'sequenceDiagram' => 'false',
-    'path'=> '/vendor/editor.md/lib/',
-    'pluginPath' => 'editor-md/plugins',
+    'path' => '/vendor/editor.md/lib/',
+    'pluginPath' => '/vendor/editor.md/plugins',
     'imageUpload' => 'true',
     'imageFormats' => ["jpg", "gif", "png"],
     'imageUploadURL' => '/xetaravel-editor-md/upload/picture',
@@ -39,5 +39,5 @@ return [
     | Here you may specify where to upload the files.
     |
     */
-   'basaUploadPath' => 'editor-md/uploads/content/'
+   'baseUploadPath' => 'editor-md/uploads/content/'
 ];

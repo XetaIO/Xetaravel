@@ -6,22 +6,26 @@
 @endpush
 
 @section('content')
-<div class="container pt-6 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="container pt-2 pb-4">
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 lg:mx-0">
+            {!! $breadcrumbs->render() !!}
+        </div>
+    </div>
+</section>
 
-    <div class="row">
-        <div class="col-md-3">
+<section class="lg:container mx-auto pt-4 mb-5">
+    <div class="grid grid-cols-12 gap-8">
+
+        <div class="lg:col-span-3 col-span-12 mx-3 lg:mx-0">
             @include('partials.user._sidebar')
         </div>
-        <div class="col-md-9">
-            <section class="section mb-3">
-                <div class="hr-divider">
-                    <div class="hr-divider-content hr-divider-heading font-xeta">
-                        Notifications
-                    </div>
-                </div>
+
+        <div class="lg:col-span-9 col-span-12 mx-3 lg:mx-0">
+            <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
+                <h2 class="divider text-2xl font-xetaravel">
+                    Notifications
+                </h2>
 
                 @if ($notifications->isNotEmpty())
                     <users-notifications
@@ -40,17 +44,18 @@
 
 
             @if ($newsletter)
-                <section>
-                    <div class="hr-divider">
-                        <div class="hr-divider-content hr-divider-heading font-xeta">
-                            Newsletter
-                        </div>
-                    </div>
-                    <p>
-                        You are subscribed to the Newsletter with the email <code>{{ $newsletter->email }}</code> since : <code>{{ $newsletter->created_at->formatLocalized('%d %B %Y - %T') }}</code>.
+                <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
+                    <h2 class="divider text-2xl font-xetaravel">
+                        Newsletter
+                    </h2>
+                    <p class="mb-6">
+                        You are subscribed to the Newsletter with the email <code class="bg-base-200 dark:bg-base-100 p-1 rounded">{{ $newsletter->email }}</code> since : <code class="bg-base-200 dark:bg-base-100 p-1 rounded">{{ $newsletter->created_at->formatLocalized('%d %B %Y - %T') }}</code>.
                     </p>
-                    <div class="text-xs-center">
-                        {{ link_to(route('newsletter.unsubscribe', $newsletter->email), '<i class="fa fa-remove"></i> Unsubscribe', ['class' => 'btn btn-outline-danger'], null, false) }}
+                    <div class="text-center">
+                        <a class="btn btn-error gap-2" href="{{ route('newsletter.unsubscribe', $newsletter->email) }}">
+                            <i class="fa-solid fa-xmark"></i>
+                            Unsubscribe
+                        </a>
                     </div>
 
                 </section>
@@ -58,5 +63,5 @@
 
         </div>
     </div>
-</div>
+</section>
 @endsection

@@ -32,34 +32,6 @@ class UserControllerTest extends TestCase
     }
 
     /**
-     * testSearchSuccess method
-     *
-     * @return void
-     */
-    public function testSearchSuccess()
-    {
-        $response = $this->get('/admin/user/search?search=admin&type=username');
-        $response->assertSuccessful();
-        $response->assertSee('admin@xetaravel.io');
-
-        $response = $this->get('/admin/user/search?search=admin&type=email');
-        $response->assertSuccessful();
-        $response->assertSee('admin@xetaravel.io');
-
-        $response = $this->get('/admin/user/search?search=127&type=register_ip');
-        $response->assertSuccessful();
-        $response->assertSee('admin@xetaravel.io');
-
-        $response = $this->get('/admin/user/search?search=127&type=last_login_ip');
-        $response->assertSuccessful();
-        $response->assertSee('admin@xetaravel.io');
-
-        $response = $this->get('/admin/user/search?search=admin&type=unknown');
-        $response->assertSuccessful();
-        $response->assertSee('admin@xetaravel.io');
-    }
-
-    /**
      * testShowUpdateFormSuccess method
      *
      * @return void

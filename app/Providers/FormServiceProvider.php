@@ -14,34 +14,34 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         // Collective Form
-        Form::component('bsText', 'components.form.text', [
+        Form::component('bsText', 'components.form.text2', [
             'name',
             'label' => null,
             'value' => null,
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsEmail', 'components.form.email', [
+        Form::component('bsEmail', 'components.form.email2', [
             'name',
             'label' => null,
             'value' => null,
             'attributes' => []
         ]);
-        Form::component('bsNumber', 'components.form.number', [
+        Form::component('bsNumber', 'components.form.number2', [
             'name',
             'label' => null,
             'value' => null,
             'attributes' => []
         ]);
-        Form::component('bsTextarea', 'components.form.textarea', [
+        Form::component('bsTextarea', 'components.form.textarea2', [
             'name',
             'label' => null,
             'value' => null,
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsPassword', 'components.form.password', ['name', 'label' => null, 'attributes' => []]);
-        Form::component('bsCheckbox', 'components.form.checkbox', [
+        Form::component('bsPassword', 'components.form.password2', ['name', 'label' => null, 'attributes' => []]);
+        Form::component('bsCheckbox', 'components.form.checkbox2', [
             'name',
             'value' => 1,
             'checked' => null,
@@ -49,7 +49,7 @@ class FormServiceProvider extends ServiceProvider
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsRadio', 'components.form.radio', [
+        Form::component('bsRadio', 'components.form.radio2', [
             'name',
             'value' => 1,
             'checked' => null,
@@ -57,13 +57,13 @@ class FormServiceProvider extends ServiceProvider
             'attributes' => [],
             'labelClass' => 'form-control-label'
         ]);
-        Form::component('bsInputGroup', 'components.form.input-group', [
+        Form::component('bsInputGroup', 'components.form.input-group2', [
             'name',
             'label' => null,
             'value' => null,
             'attributes' => []
         ]);
-        Form::component('bsSelect', 'components.form.select', [
+        Form::component('bsSelect', 'components.form.select2', [
             'name',
             'list' => [],
             'label' => null,

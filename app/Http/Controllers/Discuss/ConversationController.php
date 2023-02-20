@@ -53,7 +53,10 @@ class ConversationController extends Controller
     {
         $categories = DiscussCategory::pluckLocked('title', 'id');
 
-        $breadcrumbs = $this->breadcrumbs->addCrumb('Start a discussion', route('discuss.conversation.create'));
+        $breadcrumbs = $this->breadcrumbs->addCrumb(
+            '<i class="fa-solid fa-pencil mr-2"></i> Start a discussion',
+            route('discuss.conversation.create')
+        );
 
         return view('Discuss::conversation.create', compact('breadcrumbs', 'categories'));
     }
@@ -126,7 +129,7 @@ class ConversationController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(string $slug, int $id) : RedirectResponse
+    public function delete(string $slug, int $id): RedirectResponse
     {
         $conversation = DiscussConversation::findOrFail($id);
 

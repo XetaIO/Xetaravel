@@ -1,5 +1,5 @@
 @php
-$form = '<div id="disccuss-post-edit-' . $post->getKey() . '">
+$form = '<div id="discuss-post-edit-' . $post->getKey() . '">
             <form method="POST" action="' . route('discuss.post.edit', ['id' => $post->getKey()]) . '" accept-charset="UTF-8">
                 <input name="_method" type="hidden" value="PUT">
                 <input name="_token" type="hidden" value="' . csrf_token() . '">
@@ -8,26 +8,31 @@ $form = '<div id="disccuss-post-edit-' . $post->getKey() . '">
                         <textarea class="form-control" rows="5" placeholder="Your message here..." required="required" editor="editPostEditor-' . $post->getKey() . '" style="display:none;" name="content" cols="50"></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-primary">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                <button type="submit" class="btn btn-primary gap-2">
+                    <i class="fa-solid fa-pencil"></i>
                     Edit
                 </button>
-                <button type="button" data-id="' . $post->getKey() . '" class="btn btn-outline-secondary cancelEditButton">
-                    <i class="fa fa-remove" aria-hidden="true"></i>
+                <button type="button" data-id="' . $post->getKey() . '" class="btn gap-2 cancelEditButton">
+                    <i class="fa-solid fa-xmark"></i>
                     Cancel
                 </button>
             </form>
             <script type="text/javascript">
-            $(function() {
-                $(".cancelEditButton").click(function (event) {
-                    event.preventDefault();
+                (function () {
+                    const cancelEditButton = document.querySelectorAll(\'.cancelEditButton\');
+                    cancelEditButton.forEach(function (button) {
+                        button.addEventListener(\'click\', function (event) {
+                            event.preventDefault();
 
-                    var id = $(this).attr("data-id");
+                            let id = event.target.dataset.id;
+                            let content = document.getElementById(\'post-\' + id).getElementsByClassName(\'discuss-conversation-content\')[0];
+                            content.classList.remove(\'hidden\');
 
-                    $("#post-" + id + " .discuss-conversation-content").removeClass("d-none");
-                    $("#disccuss-post-edit-" + id).remove();
-                });
-            });
+                            let edit = document.getElementById(\'discuss-post-edit-\' + id);
+                            edit.remove();
+                        });
+                    });
+                })();
             </script>
         </div>';
 @endphp

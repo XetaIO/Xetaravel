@@ -6,37 +6,35 @@
 @endpush
 
 @section('content')
-<div class="container pt-6 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<div class="container pt-2 pb-4">
-
-    <div class="row">
-        <div class="col-md-3">
-            <div class="sidebar-module">
-                <div class="discuss-new-discussion-btn text-truncate">
-                    {{ link_to(
-                        route('discuss.conversation.create'),
-                        '<i class="fa fa-pencil"></i> Start a Discussion',
-                        ['class' => 'btn btn-primary'],
-                        true,
-                        false
-                    ) }}
-                </div>
-
-                @include('Discuss::partials._sidebar')
-            </div>
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 ">
+            {!! $breadcrumbs->render() !!}
         </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb text-md-center">
-                        <h5 class="mb-0">
+    </div>
+</section>
+
+<section class="lg:container mx-auto pt-4 mb-5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-3 col-span-12 px-3">
+            <div class="mb-5">
+                <a href="{{ route('discuss.conversation.create') }}" class="btn btn-primary gap-2">
+                    <i class="fa-solid fa-pencil"></i>
+                    Start a Discussion
+                </a>
+            </div>
+            @include('Discuss::partials._sidebar')
+        </div>
+
+        <div class="lg:col-span-9 col-span-12 px-3">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="col-span-12">
+                    <div class="flex border border-gray-200 p-3 px-5 rounded-lg dark:bg-base-300 dark:border-gray-700">
+                        <h5 class="text-2xl text-center mb-0 w-full">
                                 Community Pillar
                         </h5>
                     </div>
                 </div>
-
                 @php
                     $i = 0;
                 @endphp
@@ -47,42 +45,50 @@
                     @endphp
 
                     @if ($i == 4)
-                        <div class="col-md-12">
-                            <div class="breadcrumb mt-4 text-md-center">
-                                <h5 class="mb-0">
+                        <div class="col-span-12">
+                            <div class="flex border border-gray-200 p-3 px-5 rounded-lg dark:bg-base-300 dark:border-gray-700">
+                                <h5 class="text-2xl text-center mb-0 w-full">
                                         The most active in the Community
                                 </h5>
                             </div>
                         </div>
                     @endif
-                    <div class="col-md-4">
-                        <div class="leaderboard">
-                            <span class="leaderboard-number">
-                                <b>{{ $i }}</b>
+                    <div class="lg:col-span-4 col-span-12">
+                        <div class="relative text-center border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 p-3 pt-4 w-full">
+                            <span class="absolute font-bold left-8 top-8 h-10 w-10 border border-gray-200 dark:border-gray-700  rounded-md p-1.5">
+                                {{ $i }}
                             </span>
-                            <div class="leaderboard-body">
-                                <a href="{{ $user->profile_url }}" style="position: relative;">
-                                    <img src="{{ $user->avatar_small }}" alt="{{ $user->username }}"  class="leaderboard-body-image img-thumbnail {{ $badge->icon }}" style="height:100px; width:100px; {{ $i <=3 ? "border-color: #f7a925;" : ""}}"/>
-                                    @if ($i <= 3)
-                                        <i aria-hidden="true" class="fas fa-medal leaderboard-body-badge"  data-toggle="popover" data-trigger="hover" data-placement="top" title="{{ $badge->name }}" data-content="{{ $badge->description }}"></i>
-                                    @endif
-                                </a>
-                                <h5 class="leaderboard-user">
-                                    {{ $user->username }}
-                                </h5>
-                                <div class="leaderboard-infos">
-                                    <div class="leaderboard-text text-muted">
-                                        <h5 class="leaderboard-text-title" style="{{ $i <= 3 ? "color:#f7a925" : "" }}">
-                                            {{ $user->experiences_total }}
-                                        </h5>
+                            <a class="block" href="{{ $user->profile_url }}" title="{{ $user->username }}">
+                                <div class="avatar relative">
+                                    <div class="w-24 rounded ring ring-offset-base-100 ring-offset-2" style="{{ $i <=3 ? "--tw-ring-color: #f7a925;" : "" }}">
+                                        <img class="{{ $badge->icon }}" src="{{ $user->avatar_small }}" alt="{{ $user->username }} avatar" />
+                                        @if ($i <= 3)
+                                            <span class="absolute -top-3 -right-3">
+                                                <x-badge.icon.pillarofcommunity />
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </a>
+                            <h5 class="text-2xl my-3">
+                                {{ $user->username }}
+                            </h5>
+                            <div class="grid grid-cols-2 gap-5 justify-evenly mx-2">
+                                <div class="rounded-md border border-gray-200 dark:border-gray-700 p-4 truncate">
+                                    <h5 class="text-xl" style="{{ $i <= 3 ? "color:#f7a925" : "" }}">
+                                        {{ $user->experiences_total }}
+                                    </h5>
+                                    <span class="">
                                         Experience
-                                    </div>
-                                    <div class="leaderboard-text text-muted">
-                                        <h5 class="leaderboard-text-title" style="{{ $i <= 3 ? "color:#f7a925" : "" }}">
-                                            {{ $user->discuss_post_count }}
-                                        </h5>
-                                        Posts
-                                    </div>
+                                    </span>
+                                </div>
+                                <div class="rounded-md border border-gray-200 dark:border-gray-700 p-4">
+                                    <h5 class="text-xl" style="{{ $i <= 3 ? "color:#f7a925" : "" }}">
+                                        {{ $user->discuss_post_count }}
+                                    </h5>
+                                   <span class="">
+                                    Posts
+                                   </span>
                                 </div>
                             </div>
                         </div>
@@ -91,5 +97,5 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection

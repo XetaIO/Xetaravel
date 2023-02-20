@@ -1,6 +1,7 @@
 <?php
 namespace Xetaravel\Providers;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Builder
+        Builder::macro('search', function ($field, $string) {
+            return $string ? $this->where($field, 'like', '%' . $string . '%') : $this;
+        });
+
         // View
         View::addNamespace('Admin', base_path() . '/resources/views/Admin');
         View::addNamespace('Blog', base_path() . '/resources/views/Blog');
@@ -25,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
 
         // Pagination
-        Paginator::defaultView('vendor.pagination.bootstrap-4');
+        Paginator::defaultView('vendor.pagination.tailwind');
 
         // Blade
         Blade::directive('auth', function () {

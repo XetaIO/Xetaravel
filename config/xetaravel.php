@@ -12,7 +12,7 @@ return [
     'site' => [
         'copyright' => 'Emeric Fèvre',
         'title' => 'Welcome to Xetaravel',
-        'description' => 'This website was made to try Laravel and to do my personnal website and I have decided to release it to help people starting with Laravel.',
+        'description' => 'This website was made to try Laravel and to do my personal website and I have decided to release it to help people starting with Laravel.',
         'github_url' => 'https://github.com/XetaIO/Xetaravel',
         'contact_email' => 'emeric@xetaravel.com',
         'analytics_tracker_code' => 'UA-224686157-1',
@@ -30,7 +30,7 @@ return [
     */
     'pagination' => [
         'blog' => [
-            'article_per_page' => 10,
+            'article_per_page' => 15,
             'comment_per_page' => 10
         ],
         'notification' => [
@@ -73,8 +73,9 @@ return [
     | All blog settings.
      */
     'blog' => [
-        'categories_sidebar' => 25,
-        'articles_sidebar' => 5
+        'categories_sidebar' => 10,
+        'articles_sidebar' => 5,
+        'users_sidebar' => 5
     ],
 
     /*

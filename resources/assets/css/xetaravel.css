@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "highlightjs.css";
+@import "editormd.css";
+
+/**
+ * Offline
+ */
+.avatar.offline:before {
+    @apply bg-[color:hsl(var(--er))]
+}
+
+/**
+ * Button
+ */
+.btn-primary-shadow {
+    @apply shadow-[0_5px_30px_hsla(var(--pf)/0.3)] hover:shadow-[0_5px_30px_hsla(var(--pf)/0.3)];
+}
+
+/**
+ * Tooltip
+ */
+.tooltip::before {
+    z-index: 999;
+}
+
+/**
+ * Badges
+ */
+.badge {
+    @apply rounded;
+}

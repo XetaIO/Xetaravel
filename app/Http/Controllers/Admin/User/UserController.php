@@ -23,59 +23,12 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $latestUsers = User::with(['roles'])
-            ->limit(5)
-            ->latest()
-            ->get();
+        $breadcrumbs = $this->breadcrumbs->addCrumb(
+            '<i class="fa-solid fa-users mr-2"></i> Manage Users',
+            route('admin.user.user.index')
+        );
 
-        $breadcrumbs = $this->breadcrumbs->addCrumb('Manage Users', route('admin.user.user.index'));
-
-        return view('Admin::User.user.index', compact('latestUsers', 'breadcrumbs'));
-    }
-    /**
-     * Search users related to the type.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\View\View
-     */
-    public function search(Request $request): View
-    {
-        $query = User::with(['roles'])->select();
-        $search = str_replace('%', '\\%', trim($request->input('search')));
-        $type = trim($request->input('type'));
-
-        switch ($type) {
-            case 'username':
-                $query->where('username', 'like', '%' . $search . '%');
-                break;
-
-            case 'email':
-                $query->where('email', 'like', '%' . $search . '%');
-                break;
-
-            case 'register_ip':
-                $query->where('register_ip', 'like', '%' . $search . '%');
-                break;
-
-            case 'last_login_ip':
-                $query->where('last_login_ip', 'like', '%' . $search . '%');
-                break;
-
-            default:
-                $query->where('username', 'like', '%' . $search . '%');
-                $type = 'username';
-                break;
-        }
-        $users = $query
-            ->paginate(10)
-            ->appends($request->except('page'));
-
-        $breadcrumbs = $this->breadcrumbs
-            ->addCrumb('Manage Users', route('admin.user.user.index'))
-            ->addCrumb('Search an user', route('admin.user.user.search'));
-
-        return view('Admin::User.user.search', compact('users', 'breadcrumbs', 'type', 'search'));
+        return view('Admin::User.user.index', compact('breadcrumbs'));
     }
 
     /**
@@ -103,9 +56,9 @@ class UserController extends Controller
 
         $breadcrumbs = $this->breadcrumbs
             ->setListElementClasses('breadcrumb breadcrumb-inverse bg-inverse mb-0')
-            ->addCrumb('Manage Users', route('admin.user.user.index'))
+            ->addCrumb('<i class="fa-solid fa-users mr-2"></i> Manage Users', route('admin.user.user.index'))
             ->addCrumb(
-                'Edit ' . e($user->username),
+                '<i class="fa-solid fa-pen-to-square mr-2"></i> Edit ' . e($user->username),
                 route('admin.user.user.update', $user->slug, $user->id)
             );
 
@@ -139,7 +92,7 @@ class UserController extends Controller
         $user->roles()->sync($request->get('roles'));
 
         return redirect()
-            ->back()
+            ->route('admin.user.user.index')
             ->with('success', 'This user has been updated successfully !');
     }
 

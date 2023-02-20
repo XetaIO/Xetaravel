@@ -117,56 +117,13 @@ trait AnalyticsComponent
     }
 
     /**
-     * Build the countries graph from the beginning.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return \Google_Service_Analytics_GaData
-     */
-    public function buildCountriesGraph(): \Google_Service_Analytics_GaData
-    {
-        $startDate = Carbon::createFromFormat('Y-m-d', config('analytics.start_date'));
-
-        $countriesData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $this->endDate),
-            'ga:pageviews,ga:sessions',
-            [
-                'dimensions' => 'ga:countryIsoCode',
-                'sort' => '-ga:pageviews'
-            ]
-        );
-
-        foreach ($countriesData->rows as $country) {
-            $countries[$country[0]] = [
-                'ga:pageviews' => $country[1],
-                'ga:sessions' => $country[2],
-                'percent' => $this->getPercentage($country[1], $countriesData->totalsForAllResults['ga:pageviews'])
-            ];
-
-            if (!in_array($country[0], ['ZZ'])) {
-                $countryInstance = country((string) strtolower($country[0]));
-                $countries[$country[0]] += [
-                    'countryName' => $countryInstance->getName()
-                ];
-            } else {
-                $countries[$country[0]] += [
-                    'countryName' => 'Unknown'
-                ];
-            }
-        }
-        $countriesData->rows = $countries;
-
-        return $countriesData;
-    }
-
-    /**
      * Build the devices graph from the last 7 months.
      *
      * @codeCoverageIgnore
      *
-     * @return string
+     * @return array
      */
-    public function buildDevicesGraph(): string
+    public function buildDevicesGraph(): array
     {
         $startDate = Carbon::now()->subMonths(7);
 
@@ -202,7 +159,6 @@ trait AnalyticsComponent
             $devicesGraph[$device[1]][$device[0]] = $device[2];
         }
         $devicesGraph = array_reverse($devicesGraph);
-        $devicesGraph = collect($devicesGraph)->toJson();
 
         return $devicesGraph;
     }
@@ -212,9 +168,9 @@ trait AnalyticsComponent
      *
      * @codeCoverageIgnore
      *
-     * @return string
+     * @return array
      */
-    public function buildOperatingSytemGraph(): string
+    public function buildOperatingSystemGraph(): array
     {
         $startDate = Carbon::now()->subMonths(7);
 
@@ -226,8 +182,7 @@ trait AnalyticsComponent
                 'sort' => '-ga:operatingSystem',
                 'filters' => 'ga:operatingSystem==Windows,'
                     .'ga:operatingSystem==Macintosh,'
-                    .'ga:operatingSystem==Linux,'
-                    .'ga:operatingSystem==(not set)'
+                    .'ga:operatingSystem==Linux'
             ]
         );
 
@@ -239,8 +194,7 @@ trait AnalyticsComponent
                 'period' => $date->format('Y-m-d'),
                 'Windows' => 0,
                 'Macintosh' => 0,
-                'Linux' => 0,
-                '(not set)' => 0
+                'Linux' => 0
             ];
         }
 
@@ -248,7 +202,6 @@ trait AnalyticsComponent
             $operatingSystemGraph[$os[1]][$os[0]] = $os[2];
         }
         $operatingSystemGraph = array_reverse($operatingSystemGraph);
-        $operatingSystemGraph = collect($operatingSystemGraph)->toJson();
 
         return $operatingSystemGraph;
     }

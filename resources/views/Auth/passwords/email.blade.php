@@ -10,33 +10,38 @@
 @endpush
 
 @section('content')
-<div class="container mt-6 pb-4">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <h2 class="text-xs-center font-xeta mt-2">
-                Reset Password
-            </h2>
+<section class="lg:container mx-auto mt-12 mb-5 overflow-hidden">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3">
+            <div class="flex flex-col items-center">
+                <h1 class="text-3xl font-xetaravel text-center mb-2">
+                    Reset Password
+                </h1>
 
-            {!! Form::open(['route' => 'users.auth.password.email']) !!}
-                {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
-                    'placeholder' => 'Your E-Mail...',
-                    'required' => 'required'
-                ]) !!}
+                <x-form.form method="post" action="{{ route('users.auth.password.email') }}">
+                    {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
+                        'placeholder' => 'Your E-Mail...',
+                        'required' => 'required'
+                    ]) !!}
 
-                <div class="form-group {{ $errors->has('g-recaptcha-response') ? 'has-danger' : '' }}">
-                    {!! NoCaptcha::display() !!}
-                    @if ($errors->has('g-recaptcha-response'))
-                        <div class="form-control-feedback">
-                            {{ $errors->first('g-recaptcha-response') }}
-                        </div>
-                    @endif
-                </div>
+                    <div class="form-control my-2">
+                        {!! NoCaptcha::display() !!}
+                        @if ($errors->has('g-recaptcha-response'))
+                            <label class="label">
+                                <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
+                            </label>
+                        @endif
+                    </div>
 
-                <div class="form-group text-xs-center">
-                    {!! Form::button('<i class="fa fa-paper-plane-o" aria-hidden="true"></i> Send Password Reset Link', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
-                </div>
-            {!! Form::close() !!}
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-primary gap-2">
+                            <i class="fa-regular fa-paper-plane"></i>
+                            Send Password Reset Link
+                        </button>
+                    </div>
+                </x-form.form>
+            </div>
         </div>
     </div>
-</div>
+</section>
 @endsection

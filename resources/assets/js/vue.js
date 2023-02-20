@@ -16,7 +16,7 @@ Vue.filter('formatDate', function(date) {
 });
 
 const app = new Vue({
-    el: '#app-vue',
+    el: '#xetaravel-vue',
 
     components: {
         Notifications,
@@ -32,7 +32,8 @@ const app = new Vue({
         unreadNotificationsCount: Number,
         routeUserNotifications: String,
         routeMarkNotificationAsRead: String,
-        routeMarkAllNotificationsAsRead: String
+        routeMarkAllNotificationsAsRead: String,
+        nightMode: localStorage.getItem("nightMode") || false,
     },
 
     watch: {
@@ -42,8 +43,19 @@ const app = new Vue({
             }
 
             this.updateBell();
-        }
+        },
+
+        nightMode: function() {
+			localStorage.setItem("nightMode", JSON.stringify(this.nightMode));
+
+            if (String(this.nightMode) == 'true') {
+                document.getElementsByTagName('html')[0].dataset.theme = "dark";
+            } else {
+                document.getElementsByTagName('html')[0].dataset.theme = "light";
+            }
+		}
     },
+
 
     methods: {
 
@@ -101,13 +113,11 @@ const app = new Vue({
          */
         updateBell: function () {
             if (this.hasUnreadNotifs) {
-                this.$refs.toggle_notifications.setAttribute("data-number", '(' + this.unreadNotificationsCount + ')');
-                this.$refs.toggle_icon_notifications.classList.add('animated', 'infinite', 'ringing');
-                this.$refs.toggle_icon_notifications.classList.remove('text-body');
+                this.$refs.toggle_notifications_number.textContent = this.unreadNotificationsCount;
+                this.$refs.toggle_icon_notifications.classList.add('animate-ringing');
             } else {
-                this.$refs.toggle_notifications.removeAttribute('data-number');
-                this.$refs.toggle_icon_notifications.classList.remove('animated', 'infinite', 'ringing');
-                this.$refs.toggle_icon_notifications.classList.add('text-body');
+                this.$refs.toggle_notifications_number.textContent = "0";
+                this.$refs.toggle_icon_notifications.classList.remove('animate-ringing');
             }
         },
 
@@ -121,5 +131,21 @@ const app = new Vue({
         formatMessage: function (notification) {
             return vsprintf(notification.data.message, notification.data.message_key);
         }
+    },
+
+    mounted() {
+        const darkMode = localStorage.getItem("nightMode");
+        let theme = "dark";
+
+        if (darkMode == 'true') {
+            this.nightMode = true;
+            document.getElementById("nightMode").checked = true;
+        } else {
+            theme = "light";
+            this.nightMode = false;
+            document.getElementById("nightMode").checked = false;
+        }
+
+        document.getElementsByTagName('html')[0].dataset.theme = theme;
     }
 });

@@ -4,7 +4,14 @@ window._ = _;
 /**
  * Sprintf function.
  */
-var vsprintf = require("sprintf-js").vsprintf;
+import { vsprintf } from "sprintf-js";
+
+/**
+ * Chart JS
+ */
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

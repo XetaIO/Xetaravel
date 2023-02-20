@@ -1,13 +1,11 @@
 <?php
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\Sluggable;
 use Xetaravel\Models\Presenters\CategoryPresenter;
 
 class Category extends Model
 {
-    use Sluggable,
-        CategoryPresenter;
+    use CategoryPresenter;
 
     /**
      * The attributes that are mass assignable.
@@ -16,6 +14,7 @@ class Category extends Model
      */
     protected $fillable = [
         'title',
+        'slug',
         'description'
     ];
 
@@ -27,21 +26,6 @@ class Category extends Model
     protected $appends = [
         'category_url'
     ];
-
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Generated the slug before updating.
-        static::updating(function ($model) {
-            $model->generateSlug();
-        });
-    }
 
     /**
      * Return the field to slug.

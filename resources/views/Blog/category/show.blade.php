@@ -6,33 +6,33 @@
 @endpush
 
 @section('content')
-<div class="container pb-1 pt-4">
-    <div class="blog-header mt-2">
-        <div class="container">
-            <h1 class="blog-title">
-                {{ $category->title }}
-            </h1>
-            <p class="lead blog-description text-muted">
-                {{ $category->description }}
-            </p>
+<section class="lg:container mx-auto mt-12 mb-5  overflow-hidden">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3 ">
+            {!! $breadcrumbs->render() !!}
         </div>
     </div>
-</div>
-<hr />
-<div class="container pt-0 pb-0">
-    {!! $breadcrumbs->render() !!}
-</div>
-<hr />
-<div class="container pt-2 pb-4">
-    <div class="row">
-        <div class="col-md-9">
+</section>
+
+<section class="lg:container mx-auto  overflow-hidden">
+    <hgroup class="text-center px-5 pb-5">
+        <h1 class="text-4xl font-xetaravel">
+            {{ $category->title }}
+        </h1>
+        <p class="text-gray-400 dark:text-gray-500">
+            {{ $category->description }}
+        </p>
+    </hgroup>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-9 col-span-12 px-3">
+
             @include('Blog::partials._articles')
         </div>
 
-        <div class="col-md-3">
+        <div class="lg:col-span-3 col-span-12 px-3">
             @include('Blog::partials._sidebar')
         </div>
 
     </div>
-</div>
+</section>
 @endsection

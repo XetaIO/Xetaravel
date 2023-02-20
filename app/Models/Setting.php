@@ -8,6 +8,15 @@ class Setting extends Model
     use SettingPresenter;
 
     /**
+     * All type with their labels. (Used in admin panel for radio buttons)
+     */
+    public const TYPES = [
+        'value_int' => 'Value Integer',
+        'value_str' => 'Value String',
+        'value_bool' => 'Value Boolean'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -23,7 +32,6 @@ class Setting extends Model
         'is_deletable'
     ];
 
-
     /**
      * The accessors to append to the model's array form.
      *
@@ -35,49 +43,41 @@ class Setting extends Model
     ];
 
     /**
-     * The "booting" method of the model.
+     * Function to set the value regarding the type to the model and return it.
      *
-     * @return void
+     * @param string $value The value to assign.
+     * @param string $type The type of the value.
+     * @param Setting $model The model where the value will be assigned.
+     *
+     * @return mixed
      */
-    protected static function boot()
+    protected static function castValue(string $value, string $type, Setting $model)
     {
-        parent::boot();
-
-        // Get the type of the value before to save.
-        static::updating(function ($model) {
-            $model = self::castValue($model->value, $model);
-
-            unset($model->value);
-        });
-    }
-
-    private static function castValue($value, $model)
-    {
-        switch (gettype($value)) {
-            case 'int':
-            case 'integer':
-                $model->value_int = $value;
-                $model->value_str = null;
+        switch ($type) {
+            case "value_int":
+                $model->value_int = intval($value);
                 $model->value_bool = null;
-
-                return $model;
+                $model->value_str = null;
                 break;
 
-            case 'bool':
-            case 'boolean':
+            case "value_bool":
+                $model->value_bool = boolval($value);
                 $model->value_int = null;
                 $model->value_str = null;
-                $model->value_bool = $value;
+                break;
 
-                return $model;
+            case "value_str":
+                $model->value_str = $value;
+                $model->value_int = null;
+                $model->value_bool = null;
                 break;
 
             default:
-                $model->value_int = null;
                 $model->value_str = $value;
+                $model->value_int = null;
                 $model->value_bool = null;
-
-                return $model;
+                break;
         }
+        return $model;
     }
 }

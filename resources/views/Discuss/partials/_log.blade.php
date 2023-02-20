@@ -1,18 +1,25 @@
-<div class="discuss-conversation discuss-conversation-log discuss-conversation-log-{{ $log->type }}">
-    <span class="discuss-conversation-log-icon">
+<div class="inline-block xl:flex xl:flex-row items-center gap-2 {{ $log->type }}">
+    {{-- Icon --}}
+    <span class="mr-2 xl:mr-0">
         @if ($log->type == 'category')
-            <i class="fa fa-tag"></i>
+            <i class="fa-solid fa-tag fa-xl"></i>
         @elseif ($log->type == 'title')
-            <i class="fa fa-pencil"></i>
+            <i class="fa-solid fa-pencil fa-xl"></i>
         @elseif ($log->type == 'locked')
-            <i class="fa fa-lock"></i>
+            <i class="fa-solid fa-lock fa-xl"></i>
         @elseif ($log->type == 'pinned')
-            <i class="fa fa-thumb-tack"></i>
+            <i class="fa-solid fa-thumbtack  fa-xl"></i>
         @elseif ($log->type == 'deleted')
-            <i class="fa fa-trash"></i>
+            <i class="fa-solid fa-trash  fa-xl"></i>
         @endif
     </span>
-    <img src="{{ $log->user->avatar_small }}" class="rounded-circle" />
+
+    {{-- User avatar --}}
+    <figure class="inline-block w-5 h-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 mr-2 xl:mr-0">
+        <img class="w-5 h-5 rounded-full" src="{{ $post->user->avatar_small }}"  alt="{{ $post->user->full_name }} avatar" />
+    </figure>
+
+    {{-- User --}}
     <discuss-user
         :user="{{ json_encode([
             'avatar_small'=> $log->user->avatar_small,
@@ -31,14 +38,14 @@
     {{-- Category Changed --}}
     @if ($log->type == 'category')
         added the
-        <a href="{{ route('discuss.category.show', ['slug' => $log->newCategory->slug, 'id' => $log->newCategory->id]) }}" class="tag tag-default text-white" style="background-color: {{ $log->newCategory->color }};">
+        <a href="{{ $log->newCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
             @if (!is_null($log->newCategory->icon))
                 <i class="{{ $log->newCategory->icon }}"></i>
             @endif
             {{ $log->newCategory->title }}
         </a>
         and removed
-        <a href="{{ route('discuss.category.show', ['slug' => $log->oldCategory->slug, 'id' => $log->oldCategory->id]) }}" class="tag tag-default text-white" style="background-color: {{ $log->oldCategory->color }};">
+        <a href="{{ $log->oldCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
             @if (!is_null($log->oldCategory->icon))
                 <i class="{{ $log->oldCategory->icon }}"></i>
             @endif
@@ -50,9 +57,9 @@
     {{-- Title Changed --}}
     @elseif ($log->type == 'title')
         changed the title from
-        <strong>{{ $log->data['old'] }}</strong>
+        <span class="font-bold">{{ $log->data['old'] }}</span>
         to
-        <strong>{{ $log->data['new'] }}</strong>
+        <span class="font-bold">{{ $log->data['new'] }}</span>
         {!! $time !!}
 
     {{-- Conversation Locked --}}

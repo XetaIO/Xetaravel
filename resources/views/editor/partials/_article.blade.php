@@ -27,9 +27,8 @@ $(function() {
         imageUploadURL : "{{ Arr::get($articleConfig, 'imageUploadURL', config('editor.imageUploadURL')) }}?_token={{ csrf_token() }}&from=xetaravel-editor-md",
         pluginPath : "{{ asset(Arr::get($articleConfig, 'pluginPath', config('editor.pluginPath'))) }}/",
         watch : false,
-        theme : 'dark',
         editorTheme : 'mdn-like',
-        placeholder : 'Type your comment here...',
+        placeholder : 'Type your article here...',
         autoFocus : {{ Arr::get($articleConfig, 'autoFocus', config('editor.autoFocus')) }},
         toolbarIcons : function () {
             return [

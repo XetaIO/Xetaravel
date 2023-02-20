@@ -5,30 +5,13 @@
   <x-meta title="Welcome !" />
 @endpush
 
-@push('style')
-    <style>
-    @media (min-width: 993px) {
-        .bg-white {
-            background-color: transparent !important;
-        }
-        .navbar {
-            border-bottom: none;
-        }
-        .navbar-brand {
-            color: #ffffff !important;
-        }
-        .navbar-hello-text {
-            color: #ffffff !important;
-        }
-    }
-    </style>
-@endpush
-
 @push('scripts')
-<script src="{{ mix('js/home.min.js') }}"></script>
+<script src="{{ asset('js/libs/typed.min.js') }}"></script>
+<script src="{{ asset('js/libs/parallax.min.js') }}"></script>
+<script src="{{ asset('js/libs/particles.min.js') }}"></script>
 <script type="text/javascript">
     var options = {
-        strings: ['<span class="token comment terminal-unselectable" spellcheck="true"><span class="hljs-comment"># Create the project and install librairies</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">composer</span> create-project xetaio/xetaravel <span class="token operator">&lt;</span>application_name<span class="token operator">&gt;</span><br/><br/><span class="token comment terminal-unselectable" spellcheck="true"><span class="hljs-comment"># Run the migration and seed the database</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">php</span> artisan migrate<br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">php</span> artisan db:seed<br/><br/><span class="token comment terminal-unselectable" spellcheck="true"><span class="hljs-comment"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">php</span> artisan vendor:publish --provider<span class="token operator">=</span><span class="token string"><span class="hljs-string">"Xetaio\\Editor\\EditorServiceProvider"</span></span><br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">npm</span> run install<br/><span class="hljs-meta terminal-unselectable">&gt;</span><span class="terminal-unselectable"> $ </span><span class="token function">npm</span> run production'],
+        strings: ['<span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Create the project and install librairies</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">composer</span> create-project xetaio/xetaravel <span class="token operator">&lt;</span>application_name<span class="token operator">&gt;</span><br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Run the migration and seed the database</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan migrate<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan db:seed<br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan vendor:publish --provider<span class="token operator">=</span><span class="token string"><span class="hljs-string">"Xetaio\\Editor\\EditorServiceProvider"</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run install<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run production'],
         typeSpeed: 40,
         backSpeed: 2,
         backDelay: 50000,
@@ -40,7 +23,7 @@
     var typed = new Typed('.terminal-container-code', options);
 
     var options2 = {
-        strings: ['Welcome on <span class="text-primary font-xeta">Xetaravel</span> !'],
+        strings: ['Welcome on <span class="text-primary font-xetaravel">Xetaravel</span> !'],
         typeSpeed: 100,
         loop: false,
         showCursor: false,
@@ -55,36 +38,31 @@
 @endpush
 
 @section('content')
-<section class="showcase">
-    <div id="particles"></div>
-    <div class="container pt-9 pb-9">
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <h1 class="xetaravel-typed"></h1>
-                <p class="description">
-                    This website was made to try <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
-                    Project <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-weight-bold" href="https://laravel.com" target="_blank">Laravel</a>.
+<section class="relative bg-gray-800 py-14 overflow-hidden" style="min-height: 465px;">
+    <div id="particles" class="absolute top-0 bottom-0 right-0 left-0 pointer-events-none" style=""></div>
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-slate-300">
+            <div class="flex flex-col items-center justify-center text-center lg:px-8">
+                <h1 class="xetaravel-typed font-bold font-['ubuntu'] text-4xl"></h1>
+                <p class="mb-4">
+                    This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
+                    Project <i class="fa fa-code text-primary font-bold"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
-                <div class="row">
-                    <div class="col-lg-12 mb-3">
-                        <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
-                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> Visit the Blog
-                        </a>
-                        <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
-                            <i class="fa fa-comment-o" aria-hidden="true"></i> Visit Discuss
-                        </a>
-                    </div>
-                    <div class="col-lg-12 mb-2">
-                        <p class="font-weight-bold">
-                            Want to hire me ? Check my online CV !
-                        </p>
-                        <a class="btn btn-primary btn-primary-shadow" href="{{ route('page.aboutme') }}">
-                            <i class="far fa-address-card" aria-hidden="true"></i> Check my CV
-                        </a>
-                    </div>
+                <div>
+                    <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg> Visit the Blog
+                    </a>
+                    <a class="btn btn-primary btn-primary-shadow" href="{{ route('discuss.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                        </svg> Visit Discuss
+                    </a>
                 </div>
+
             </div>
-            <div class="col-lg-5 offset-lg-1">
+            <div>
                 <div id="parallax-header" class="parallax mx-auto" style="max-width: 526px;">
                     <div class="parallax-layer position-relative" data-depth="0.1">
                         <img src="{{ asset('images/parallax/layer01.svg') }}" alt="Layer">
@@ -119,98 +97,87 @@
     </div>
 </section>
 
-<section class="section-features-box pb-3" id="change-navbar">
-    <figure class="svg-line">
+<section class="relative py-20 overflow-hidden">
+    <figure class="hidden lg:absolute right-0 top-0 -z-10">
         <img src="{{ asset('images/figures/svg-line.svg') }}" alt="SVG Line">
 	</figure>
-    <figure class="svg-glass-pot">
+    <figure class="hidden lg:absolute -bottom-10 -left-20 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot.svg') }}" alt="SVG Glass Pot">
 	</figure>
-    <figure class="svg-compass">
+    <figure class="hidden lg:absolute right-0 top-2/3 lg:top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-compass.svg') }}" alt="SVG Compass">
 	</figure>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="features-box">
-                    <img class="features-box-image" src="{{ asset('images/icons/code.svg') }}" alt="Code Icon">
-                    <div class="features-box-title font-xeta">Open Source</div>
-                    <p class="text-muted">
-                        The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank">Github</a>. If you want to contribute, feel free to do a PR.
-                    </p>
-                </div>
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
+            <div>
+                <img class="h-36 mx-auto" src="{{ asset('images/icons/code.svg') }}" alt="Code Icon">
+                <div class="font-xetaravel text-2xl">Open Source</div>
+                <p class="text-gray-500 dark:text-current">
+                    The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank" class="text-primary">Github</a>. If you want to contribute, feel free to do a PR.
+                </p>
             </div>
-            <div class="col-md-4">
-                <div class="features-box">
-                    <img class="features-box-image" src="{{ asset('images/icons/experiences.svg') }}" alt="Experiences Icon">
-                    <div class="features-box-title font-xeta">Experiences</div>
-                    <p class="text-muted">
-                    I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
-                    </p>
-                </div>
+            <div>
+                <img class="h-36 mx-auto" src="{{ asset('images/icons/experiences.svg') }}" alt="Experiences Icon">
+                <div class="font-xetaravel text-2xl">Experiences</div>
+                <p class="text-gray-500 dark:text-current">
+                I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
+                </p>
             </div>
-            <div class="col-md-4">
-                <div class="features-box">
-                    <img class="features-box-image" src="{{ asset('images/icons/chat.svg') }}" alt="Chat Icon">
-                    <div class="features-box-title font-xeta">Interact</div>
-                    <p class="text-muted">
-                    You can interact with Xetaravel's members in the {{ link_to(route('blog.article.index'), 'Blog') }}, {{ link_to(route('discuss.index'), 'Discuss') }} or directly with me via the {{ link_to(route('page.contact'), 'Contact') }} page.
-                    </p>
-                </div>
+            <div>
+                <img class="h-36 mx-auto" src="{{ asset('images/icons/chat.svg') }}" alt="Chat Icon">
+                <div class="font-xetaravel text-2xl">Interact</div>
+                <p class="text-gray-500 dark:text-current">
+                You can interact with Xetaravel's members in the {{ link_to(route('blog.article.index'), 'Blog', ['class' => 'text-primary']) }}, {{ link_to(route('discuss.index'), 'Discuss', ['class' => 'text-primary']) }} or directly with me via the {{ link_to(route('page.contact'), 'Contact', ['class' => 'text-primary']) }} page.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section-terminal pb-5">
-    <figure class="mb-0">
-		<svg width="100%" height="150" viewBox="0 0 500 150" preserveAspectRatio="none" style="transform: rotate(180deg);" fill="#FFFFFF">
-			<path d="M0,150 L0,40 Q250,150 500,40 L580,150 Z"></path>
-		</svg>
-	</figure>
-    <figure class="svg-line">
+<section class="relative py-20 bg-slate-100 overflow-hidden">
+    <figure class="hidden lg:absolute left-0 top-1/2">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#f7c32e">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
 	</figure>
-    <figure class="svg-pen">
+    <figure class="hidden lg:absolute left-[10%] top-1/3">
         <img src="{{ asset('images/figures/svg-pen.svg') }}" alt="SVG Pen">
 	</figure>
-    <figure class="svg-experiences">
+    <figure class="hidden lg:absolute right-0 top-1/3">
         <img src="{{ asset('images/figures/svg-experiences.svg') }}" alt="SVG Experiences">
     </figure>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-header-dot">
-                            <span class="bg-danger rounded-circle"></span>
-                            <span class="bg-warning rounded-circle"></span>
-                            <span class="bg-success rounded-circle"></span>
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-8 col-span-12 px-3 lg:px-0 overflow-auto">
+                <div class="relative bg-[color:#2d333b] text-neutral-content w-full shadow-sm rounded-md">
+                    <div class="relative py-3 px-4">
+                        <div class="flex">
+                            <span class="bg-red-500 h-3 w-3 mr-1 rounded-full"></span>
+                            <span class="bg-yellow-500 h-3 w-3 mr-1 rounded-full"></span>
+                            <span class="bg-green-500 h-3 w-3 mr-1 rounded-full"></span>
                         </div>
-                        <div class="terminal-header-title">terminal</div>
+                        <div class="absolute top-[6px] left-0 w-full font-['Cascadia_Mono'] font-bold text-center">terminal</div>
                     </div>
 
-                    <div class="terminal-container">
-                        <div class="terminal-container-tabs">
-                            <div class="terminal-container-tabs-bash">
-                                <img src="{{ asset('images/icons/tab-icon.svg') }}" alt="Tab Icon"> Bash
+                    <div class="bg-[color:rgba(27,31,35,.6)] border border-solid border-transparent rounded-b-md mb-8 overflow-hidden">
+                        <div class="flex bg-[color:rgba(27,31,35,.6)]">
+                            <div class="bg-[radial-gradient(136.36%_136.36%_at_50.24%_-36.36%,#3d434c_0,#2d333b_100%)] w-1/5 text-center border-b border-solid border-[color:#1e2127] p-2">
+                                <img class="inline-block align-middle" src="{{ asset('images/icons/tab-icon.svg') }}" alt="Tab Icon"> Bash
                             </div>
-                            <div class="terminal-container-tabs-empty"></div>
+                            <div class="w-4/5"></div>
                         </div>
-                        <pre class="language-shell"><code class="terminal-container-code language-shell hljs"></code></pre>
+                        <pre class="language-shell"><code class="terminal-container-code language-shell hljs bg-[color:#2d333b] text-neutral-content font-['Cascadia_Mono'] h-96 block text-base font-light p-3"></code></pre>
 
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4" style="background-color: #f5f7f9;">
-                <div class="text-xs-center">
-                    <img class="installation-image" src="{{ asset('images/icons/coding.svg') }}" alt="Tab Icon">
+            <div class="lg:col-span-4 col-span-12 px-3 lg:px-0 text-center">
+                <div class="mb-7">
+                    <img class="h-36 mx-auto" src="{{ asset('images/icons/coding.svg') }}" alt="Coding Icon">
                 </div>
-                <h2 class="installation-title text-xs-center font-xeta">Install the application quickly !</h2>
-                <p class="installation-description">
+                <h2 class="font-xetaravel text-3xl dark:text-slate-600 mb-2">Install the application quickly !</h2>
+                <p class="text-xl dark:text-slate-600">
                     You want to try my website in local ? No problem just follow theses steps and get it ready in seconds !
                 </p>
             </div>
@@ -219,178 +186,194 @@
 </section>
 
 @if ($article)
-<section class="section-latest-article pt-5 pb-5">
-    <figure class="svg-ruler">
+<section class="relative shadow-md py-20 overflow-hidden">
+    <figure class="hidden lg:absolute right-[10%] top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-ruler.svg') }}" alt="SVG Ruler">
 	</figure>
-    <figure class="svg-voyage">
+    <figure class="hidden lg:absolute left-0 top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-voyage.svg') }}" alt="SVG Voyage">
 	</figure>
-    <figure class="svg-line">
+    <figure class="hidden lg:absolute right-0 top-1/3 -z-10">
         <svg width="820" height="300" viewBox="0 0 820 300" fill="#2ebef7">
             <path d="M752.5,51.9c-4.5,3.9-8.9,7.8-13.4,11.8c-51.5,45.3-104.8,92.2-171.7,101.4c-39.9,5.5-80.2-3.4-119.2-12.1 c-32.3-7.2-65.6-14.6-98.9-13.9c-66.5,1.3-128.9,35.2-175.7,64.6c-11.9,7.5-23.9,15.3-35.5,22.8c-40.5,26.4-82.5,53.8-128.4,70.7 c-2.1,0.8-4.2,1.5-6.2,2.2L0,301.9c3.3-1.1,6.7-2.3,10.2-3.5c46.1-17,88.1-44.4,128.7-70.9c11.6-7.6,23.6-15.4,35.4-22.8 c46.7-29.3,108.9-63.1,175.1-64.4c33.1-0.6,66.4,6.8,98.6,13.9c39.1,8.7,79.6,17.7,119.7,12.1C634.8,157,688.3,110,740,64.6 c4.5-3.9,9-7.9,13.4-11.8C773.8,35,797,16.4,822.2,1l-0.7-1C796.2,15.4,773,34,752.5,51.9z"></path>
         </svg>
 	</figure>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-
-                <article class="row latest-article">
-                    <div class="col-md-4 latest-article-cover">
-                        <a href="{{ $article->article_url }}" title="{{ $article->title }}">
-                            <img class="latest-article-cover-image" src="{{ $article->article_banner }}" alt="Article Banner">
-                        </a>
-                    </div>
-
-                    <div class="col-md-8 latest-article-body">
-                        <span class="latest-article-body-featured">
-                            <img src="{{ asset('images/icons/rocket.svg') }}" alt="Rocket Icon" width="20px" height="20px">
-                            Featured
-                        </span>
-                        <div class="latest-article-body-meta">
-                            <ul class="list-inline">
-                                <li class="list-inline-item latest-article-body-meta-category" data-toggle="tooltip" title="Category">
-                                    <a href="{{ $article->category->category_url }}">
-                                        <i class="fa fa-tag" aria-hidden="true"></i>
-                                        {{ $article->category->title }}
-                                    </a>
-                                </li>
-                                <li class="list-inline-item latest-article-body-meta-time text-muted">
-                                    <i class="fa fa-calendar" aria-hidden="true"  data-toggle="tooltip" title="Date"></i>
-                                    <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" title="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-toggle="tooltip">
-                                        {{ $article->created_at->format('Y-m-d') }}
-                                    </time>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <h3 class="latest-article-body-title text-truncate" data-toggle="tooltip" title="{{ $article->title }}">
-                            <a href="{{ $article->article_url }}">
-                                {{ $article->title }}
+    <div class="lg:container mx-auto">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-start-2 col-span-10  lg:col-start-3 lg:col-span-8">
+                <article class="rounded-lg lg:rounded-tr-none shadow-[0_2px_20px_5px_rgba(19,16,34,0.1)] dark:bg-base-300 bg-base-content">
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 lg:col-span-4 rounded-t-lg lg:rounded-l-lg lg:rounded-r-none min-h-[300px] overflow-hidden">
+                            <a class="h-full" href="{{ $article->article_url }}" title="{{ $article->title }}">
+                                <img class="object-cover h-full" src="{{ $article->article_banner }}" alt="Article Banner">
                             </a>
-                        </h3>
-
-                        <div class="latest-article-body-text">
-                            {!! Markdown::convert(Str::limit($article->content, 200)) !!}
                         </div>
 
-                        <hr/>
+                        <div class="col-span-12 lg:col-span-8 flex flex-col justify-evenly min-h-[300px] py-5 px-4 lg:pl-0 relative">
+                            <span class="absolute -right-2.5 -top-4 lg:top-1 text-white bg-[color:#f4645f] rounded rounded-tr-none color-white font-bold shadow-md p-1 before:bg-[color:#f4645f] before:content-[''] before:h-[5px] before:absolute before:right-0 before:top-[-4px] before:w-[10px] before:rounded-tr">
+                                <img class="inline mr-1" src="{{ asset('images/icons/rocket.svg') }}" alt="Rocket Icon" width="20px" height="20px">
+                                Featured
+                            </span>
+                            <div class="text-slate-300 mb-4">
+                                <ul>
+                                    <li class="inline bg-[color:#f3f6ff] text-primary text-md font-semibold rounded py-1 px-2.5 tooltip" data-tip="Category">
+                                        <a href="{{ $article->category->category_url }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                            </svg>
 
-                        <div class="latest-article-body-footer">
-                            <div class="latest-article-body-footer-author">
-                                <img src="{{ asset($article->user->avatar_small) }}" alt="Avatar" height="54px" width="54px">
-                                <discuss-user
-                                    :user="{{ json_encode([
-                                        'avatar_small'=> $article->user->avatar_small,
-                                        'profile_url' => $article->user->profile_url,
-                                        'full_name' => $article->user->full_name
-                                    ]) }}"
-                                    :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                                    :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                                    :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                                </discuss-user>
-                            </div>
-                            <div class="latest-article-body-footer-stats text-muted">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <i class="fa fa-comment" aria-hidden="true"  data-toggle="tooltip" title="Comments"></i>
-                                        {{ $article->comment_count }}
+                                            {{ $article->category->title }}
+                                        </a>
+                                    </li>
+                                    <li class="border-l border-solid border-[color:#e2e5f1] ml-2.5 pl-2.5 tooltip" data-tip="Created at {{ $article->created_at->format('Y-m-d H:i:s') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                        </svg>
+
+                                        <time datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}">
+                                            {{ $article->created_at->format('Y-m-d') }}
+                                        </time>
                                     </li>
                                 </ul>
+                            </div>
+
+                            <h3 class="truncate text-3xl text-primary mb-4" title="{{ $article->title }}">
+                                <a href="{{ $article->article_url }}">
+                                    {{ $article->title }}
+                                </a>
+                            </h3>
+
+                            <div class="text-slate-300">
+                                {!! Markdown::convertToHtml(Str::limit($article->content, 200)) !!}
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="avatar">
+                                        <div class="w-12 h-12 rounded-full">
+                                            <img src="{{ asset($article->user->avatar_small) }}" alt="Avatar">
+                                        </div>
+                                    </div>
+                                    <discuss-user
+                                        :user="{{ json_encode([
+                                            'avatar_small'=> $article->user->avatar_small,
+                                            'profile_url' => $article->user->profile_url,
+                                            'full_name' => $article->user->full_name
+                                        ]) }}"
+                                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
+                                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
+                                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
+                                    </discuss-user>
+                                </div>
+
+
+                                <div class="text-slate-300">
+                                    <ul>
+                                        <li class="tooltip font-bold" data-tip="Comments">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                                            </svg>
+
+                                            {{ $article->comment_count }}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </article>
-
             </div>
         </div>
     </div>
 </section>
 @endif
 
-<section class="section-languages pt-5 pb-5">
-    <figure class="svg-atom">
+<section class="relative py-20">
+    <figure class="hidden lg:absolute right-[5%] top-1/4 -z-10">
         <img src="{{ asset('images/figures/svg-atom.svg') }}" alt="SVG Atom">
 	</figure>
-    <figure class="svg-glass-pot2">
+    <figure class="hidden lg:absolute left-[5%] top-2/4 -z-10">
         <img src="{{ asset('images/figures/svg-glass-pot2.svg') }}" alt="SVG Glass Pot 2">
 	</figure>
-    <div class="container">
-        <h2 class="text-xs-center font-xeta">
-            <img src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
+    <div class="lg:container mx-auto">
+        <h2 class="text-center font-xetaravel text-4xl mb-3">
+            <img class="inline-block" src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
             Used Languages
         </h2>
-        <p class="text-xs-center mb-4">
+        <p class="text-center text-xl mb-8">
             Here is the list of the languages I used to do this website.
         </p>
-        <div class="row languages">
-            <div class="col-lg-2 mb-3">
-                <div class="language language-php">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/php.svg') }}" alt="PHP Icon" width="55px" height="55px">
+        <div class="grid grid-cols-12 gap-6 lg:gap-12">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(79,93,149,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/php.svg') }}" alt="PHP Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#4f5d95] text-2xl font-semibold">
                         <a href="https://www.php.net">
                             PHP
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
-                <div class="language language-blade">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/blade.svg') }}" alt="Blade Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(255,45,32,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/blade.svg') }}" alt="Blade Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#ff2d20] text-2xl font-semibold">
                         <a href="https://laravel.com/docs/9.x/blade">
                             Blade
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
-                <div class="language language-sass">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/sass.svg') }}" alt="Sass Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(207,100,154,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/sass.svg') }}" alt="Sass Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#cf649a] text-2xl font-semibold">
                         <a href="https://sass-lang.com/">
                             Sass
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
-                <div class="language language-javascript">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/javascript.svg') }}" alt="JavaScript Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(240,219,79,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/javascript.svg') }}" alt="JavaScript Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#f0db4f] text-2xl font-semibold">
                         <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript">
                             JavaScript
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
-                <div class="language language-typescript">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/typescript.svg') }}" alt="TypeScript Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(68,168,179,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/tailwind.svg') }}" alt="TypeScript Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
-                        <a href="https://www.typescriptlang.org/">
-                            TypeScript
+                    <div class="my-2 text-[color:#44a8b3] text-2xl font-semibold">
+                        <a href="https://tailwindcss.com/">
+                            Tailwind
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 mb-3">
-                <div class="language language-vue">
-                    <div class="language-image">
-                        <img src="{{ asset('images/languages/vue.svg') }}" alt="Vue Icon" width="55px" height="55px">
+            <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
+                <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(65,184,131,.2)] rounded-md hover:-translate-y-6 transition-transform">
+                    <div class="my-2">
+                        <img src="{{ asset('images/languages/vue.svg') }}" alt="Vue Icon" width="65px" height="65px">
                     </div>
-                    <div class="language-name">
+                    <div class="my-2 text-[color:#41b883] text-2xl font-semibold">
                         <a href="https://vuejs.org">
                             Vue
                         </a>
@@ -406,11 +389,6 @@
 @endsection
 
 @push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.btn-header-register-login').removeClass('btn-outline-primary').addClass('btn-outline-primary-inverse');
-        });
-    </script>
     <script type="text/javascript">
     particlesJS('particles', {
         "particles": {

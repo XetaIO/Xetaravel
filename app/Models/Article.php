@@ -96,8 +96,8 @@ class Article extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('article.banner')
-                ->width(825)
-                ->height(250)
+                ->width(870)
+                ->height(350)
                 ->keepOriginalImageFormat();
 
         $this->addMediaConversion('original')

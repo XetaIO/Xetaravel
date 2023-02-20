@@ -6,16 +6,16 @@
 @endpush
 
 @section('content')
-<div class="container pt-6 pb-4">
-    <div class="text-xs-center">
-        <h1 class="font-xeta text-primary animated flash">
+<section class="lg:container mx-auto mt-12 mb-5">
+    <div class="text-center">
+        <h1 class="text-5xl font-bold font-xetaravel text-error">
             You're banished !
         </h1>
     </div>
-    <div class="text-xs-center pt-5">
-        <img src="{{ asset('images/hippo.png') }}"  width="350">
+    <div class="text-center pt-5">
+        <img class="max-w-sm mx-auto" src="{{ asset('images/hippo.png') }}" title="Banished logo">
     </div>
-</div>
+</section>
 <audio preload="auto" autobuffer controls autoplay="autoplay" id="pacman" style="opacity: 0">
 	<source src="{{ asset('music/Pacman.mp3') }}" type="audio/mpeg" />
 	<source src="{{ asset('music/Pacman.ogg') }}" type="audio/ogg" />

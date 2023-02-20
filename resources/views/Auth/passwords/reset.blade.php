@@ -6,36 +6,41 @@
 @endpush
 
 @section('content')
-<div class="container mt-6 pb-4">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <h2 class="text-xs-center font-xeta mt-2">
-                Reset Password
-            </h2>
+<section class="lg:container mx-auto mt-12 mb-5 overflow-hidden">
+    <div class="grid grid-cols-1">
+        <div class="col-span-12 mx-3">
+            <div class="flex flex-col items-center">
+                <h1 class="text-3xl font-xetaravel text-center mb-2">
+                    Reset Password
+                </h1>
 
-            {!! Form::open(['route' => 'users.auth.password.handlereset']) !!}
-                {!! Form::hidden('token', $token) !!}
+                <x-form.form method="post" action="{{ route('users.auth.password.handlereset') }}">
+                    {!! Form::hidden('token', $token) !!}
 
-                {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
-                    'placeholder' => 'Your E-Mail...',
-                    'required' => 'required'
-                ]) !!}
+                    {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
+                        'placeholder' => 'Your E-Mail...',
+                        'required' => 'required'
+                    ]) !!}
 
-                {!! Form::bsPassword('password', 'Password', [
-                    'placeholder' => 'Your new Password...',
-                    'required' => 'required'
-                ]) !!}
+                    {!! Form::bsPassword('password', 'Password', [
+                        'placeholder' => 'Your new Password...',
+                        'required' => 'required'
+                    ]) !!}
 
-                {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
-                    'placeholder' => 'Confirm your new Password...',
-                    'required' => 'required'
-                ]) !!}
+                    {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
+                        'placeholder' => 'Confirm your new Password...',
+                        'required' => 'required'
+                    ]) !!}
 
-                <div class="form-group text-xs-center">
-                    {!! Form::button('<i class="fa fa-refresh" aria-hidden="true"></i> Reset Password', ['type' => 'submit', 'class' => 'btn btn-outline-primary']) !!}
-                </div>
-            {!! Form::close() !!}
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-primary gap-2">
+                            <i class="fa-solid fa-rotate"></i>
+                            Reset Password
+                        </button>
+                    </div>
+                </x-form.form>
+            </div>
         </div>
     </div>
-</div>
+</section>
 @endsection
