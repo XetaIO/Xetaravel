@@ -32,3 +32,12 @@
 .badge {
     @apply rounded;
 }
+
+/**
+ * Emoji
+ *
+ * Used in Markdown to reset the Prose CSS rules.
+ */
+.emoji {
+    @apply m-0 inline-block;
+}
