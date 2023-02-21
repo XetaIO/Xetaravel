@@ -1,7 +1,6 @@
 <?php
 namespace Tests\Http\Controllers\Admin\User;
 
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use Xetaravel\Models\User;
 

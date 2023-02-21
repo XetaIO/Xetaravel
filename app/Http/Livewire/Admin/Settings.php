@@ -6,7 +6,6 @@ use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Xetaravel\Http\Livewire\Traits\WithCachedRows;
@@ -64,6 +63,7 @@ class Settings extends Component
 
     /**
      * Used to set the modal to Create action (true) or Edit action (false).
+     *
      * @var bool
      */
     public bool $isCreating = false;
@@ -74,9 +74,27 @@ class Settings extends Component
      */
     public int $perPage = 10;
 
+    /**
+     * The slug displayed in the form and used to replace the name.
+     *
+     * @var string
+     */
     public string $slug = '';
 
+    /**
+     * The type of value.
+     *
+     * @see Xetaravel\Models\Setting::TYPES
+     *
+     * @var string
+     */
     public $type = 'value_bool';
+
+    /**
+     * The value of the setting.
+     *
+     * @var string
+     */
     public $value = '';
 
     /**
