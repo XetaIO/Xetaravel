@@ -111,11 +111,11 @@ class RolesTest extends TestCase
     }
 
     /**
-     * testSettingsDeleteSelected method
+     * testRolesDeleteSelected method
      *
      * @return void
      */
-    public function testSettingsDeleteSelected()
+    public function testRolesDeleteSelected()
     {
         $this->actingAs(User::find(1));
         $model = Role::find(1);
@@ -132,11 +132,11 @@ class RolesTest extends TestCase
     }
 
     /**
-     * testSettingsDeleteSelectedNotDeletable method
+     * testRolesDeleteSelectedNotDeletable method
      *
      * @return void
      */
-    public function testSettingsDeleteSelectedNotDeletable()
+    public function testRolesDeleteSelectedNotDeletable()
     {
         $this->actingAs(User::find(1));
         $model = Role::find(1);
