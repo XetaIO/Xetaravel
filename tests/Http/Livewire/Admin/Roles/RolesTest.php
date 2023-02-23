@@ -1,7 +1,6 @@
 <?php
 namespace Tests\Http\Livewire\Admin;
 
-use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Xetaravel\Http\Livewire\Admin\Roles\Roles;
