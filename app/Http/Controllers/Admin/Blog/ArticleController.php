@@ -182,8 +182,6 @@ class ArticleController extends Controller
                 ->toMediaCollection('article');
         }
 
-
-
         return redirect()
             ->route('admin.blog.article.index')
             ->with('success', 'Your article has been updated successfully !');

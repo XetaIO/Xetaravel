@@ -20,11 +20,11 @@ class ArticlesTest extends TestCase
     }
 
     /**
-     * testCategoriesDeleteSelected method
+     * testArticlesDeleteSelected method
      *
      * @return void
      */
-    public function testCategoriesDeleteSelected()
+    public function testArticlesDeleteSelected()
     {
         $this->actingAs(User::find(1));
 
