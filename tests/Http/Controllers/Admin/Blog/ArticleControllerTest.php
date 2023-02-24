@@ -187,29 +187,4 @@ class ArticleControllerTest extends TestCase
         $this->assertSame($data['category_id'], $article->category_id);
         $this->assertStringContainsString('-article.banner.jpg', $article->article_banner);
     }
-
-    /**
-     * testDeleteSuccess method
-     *
-     * @return void
-     */
-    public function testDeleteSuccess()
-    {
-        $response = $this->delete('/admin/blog/article/delete/1');
-        $response->assertStatus(302);
-        $response->assertSessionHas('success');
-
-        $this->assertNull(Article::find(1));
-    }
-
-    /**
-     * testDeleteArticleNotFound method
-     *
-     * @return void
-     */
-    public function testDeleteArticleNotFound()
-    {
-        $response = $this->delete('/admin/blog/article/delete/1337');
-        $response->assertStatus(404);
-    }
 }

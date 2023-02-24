@@ -188,26 +188,4 @@ class ArticleController extends Controller
             ->route('admin.blog.article.index')
             ->with('success', 'Your article has been updated successfully !');
     }
-
-    /**
-     * Handle the delete request for the article.
-     *
-     * @param int $id The id of the article to delete.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete(int $id): RedirectResponse
-    {
-        $article = Article::findOrFail($id);
-
-        if ($article->delete()) {
-            return redirect()
-                ->route('admin.blog.article.index')
-                ->with('success', 'This article has been deleted successfully !');
-        }
-
-        return redirect()
-            ->route('admin.blog.article.index')
-            ->with('danger', 'An error occurred while deleting this article !');
-    }
 }
