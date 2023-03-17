@@ -45,7 +45,7 @@
 > Finally, you need to install and build the JS, CSS etc :
 > ```bash
 > php artisan vendor:publish --provider="Xetaio\Editor\EditorServiceProvider"
-> npm run install
+> npm install
 > npm run production
 > ```
 >
