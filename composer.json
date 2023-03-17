@@ -83,10 +83,8 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate",
-            "npm install",
-            "npm run development",
-            "XetaravelInstaller\\Installer::postInstall"
+            "XetaravelInstaller\\Installer::postInstall",
+            "php artisan key:generate"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
