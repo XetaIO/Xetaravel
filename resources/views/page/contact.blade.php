@@ -57,7 +57,7 @@
                                 </div>
                             </x-form.form>
                         @else
-                            <x-alert>
+                            <x-alert type="error">
                                 The contact page is actually disabled, please try again later.
                             </x-alert>
                         @endif
