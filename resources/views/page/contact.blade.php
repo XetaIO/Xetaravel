@@ -33,28 +33,35 @@
 
                 <div class="grid grid-cols-12">
                     <div class="col-span-12 lg:col-span-6 px-3">
-                        <x-form.form method="post" action="{{ route('page.contact') }}">
-                            <x-form.text name="name" label="Name" placeholder="Your name..." required autofocus />
-                            <x-form.email name="email" label="E-mail" placeholder="Your E-mail..." required />
-                            <x-form.text name="subject" label="Subject" placeholder="Subject..." required autofocus />
-                            <x-form.textarea name="message" label="Message" placeholder="Type your message here..." required></x-form.textarea>
+                        @if ((config('settings.contact.enabled')))
+                            <x-form.form method="post" action="{{ route('page.contact') }}">
+                                <x-form.text name="name" label="Name" placeholder="Your name..." required autofocus />
+                                <x-form.email name="email" label="E-mail" placeholder="Your E-mail..." required />
+                                <x-form.text name="subject" label="Subject" placeholder="Subject..." required autofocus />
+                                <x-form.textarea name="message" label="Message" placeholder="Type your message here..." required></x-form.textarea>
 
-                            <div class="form-control my-2">
-                                {!! NoCaptcha::display() !!}
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <label class="label">
-                                        <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
-                                    </label>
-                                @endif
-                            </div>
+                                <div class="form-control my-2">
+                                    {!! NoCaptcha::display() !!}
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <label class="label">
+                                            <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
+                                        </label>
+                                    @endif
+                                </div>
 
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary gap-2">
-                                    <i class="fa-regular fa-paper-plane"></i>
-                                    Send
-                                </button>
-                            </div>
-                        </x-form.form>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary gap-2">
+                                        <i class="fa-regular fa-paper-plane"></i>
+                                        Send
+                                    </button>
+                                </div>
+                            </x-form.form>
+                        @else
+                            <x-alert>
+                                The contact page is actually disabled, please try again later.
+                            </x-alert>
+                        @endif
+
                     </div>
 
                     <div class="col-span-12 lg:col-span-6 px-3">

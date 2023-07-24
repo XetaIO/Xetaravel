@@ -51,7 +51,7 @@
             </section>
 
             <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
-            @if (is_null(Auth::user()->password))
+            @if (!is_null(Auth::user()->password))
                 <h2 class="divider text-2xl font-xetaravel">
                     Change your Password
                 </h2>

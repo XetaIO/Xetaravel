@@ -74,7 +74,7 @@ module.exports = {
                     "--pf": "2 87% 66%"
                 }
             }
-    ],
+        ],
     },
 
     // BYPASS TO COMPILE FULL CLASSES FOR DEV
