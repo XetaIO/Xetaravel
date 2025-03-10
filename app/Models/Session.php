@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -33,15 +36,15 @@ class Session extends Model
     /**
      * Scope a query to only include non expired session.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  Builder  $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function scopeExpires(Builder $query)
+    public function scopeExpires(Builder $query): Builder
     {
         $timeout = 5; // Timeout in minutes
-
         $expire = time() - (60 * $timeout);
+
         return $query->where('last_activity', '>=', $expire);
     }
 }

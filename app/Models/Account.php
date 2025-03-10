@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
 class Account extends Model

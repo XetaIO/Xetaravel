@@ -1,8 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Xetaravel\Observers\RubyObserver;
 
+#[ObservedBy([RubyObserver::class])]
 class Ruby extends Model
 {
     /**
@@ -28,28 +35,11 @@ class Ruby extends Model
     ];
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Set the user id to the new log before saving it.
-        static::creating(function ($model) {
-            if (is_null($model->user_id)) {
-                $model->user_id = Auth::id();
-            }
-        });
-    }
-
-    /**
      * Get the user that owns the log.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -57,9 +47,9 @@ class Ruby extends Model
     /**
      * Get the obtainable relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
-    public function obtainable()
+    public function obtainable(): MorphTo
     {
         return $this->morphTo();
     }

@@ -29,7 +29,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->ipAddress('register_ip');
             $table->ipAddress('last_login_ip')->nullable();
-            $table->dateTime('last_login')->nullable();
+            $table->dateTime('last_login_date')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });

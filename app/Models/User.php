@@ -1,46 +1,44 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\Sluggable;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Ultraware\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
-use Ultraware\Roles\Traits\HasRoleAndPermission;
+use Spatie\Permission\Traits\HasRoles;
 use Xetaravel\Models\Presenters\UserPresenter;
-use Xetaravel\Notifications\Auth\VerifyEmail;
 use Xetaravel\Notifications\Auth\ResetPassword;
+use Xetaravel\Notifications\Auth\VerifyEmail;
+use Xetaravel\Observers\UserObserver;
 
-class User extends Model implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract,
-    HasRoleAndPermissionContract,
-    HasMedia,
-    MustVerifyEmailContract
+#[ObservedBy([UserObserver::class])]
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasMedia, MustVerifyEmailContract
 {
-    use Authenticatable,
-        Authorizable,
-        CanResetPassword,
-        Notifiable,
-        Sluggable,
-        HasRoleAndPermission,
-        InteractsWithMedia,
-        UserPresenter,
-        MustVerifyEmail,
-        SoftDeletes;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use HasRoles;
+    use InteractsWithMedia;
+    use MustVerifyEmail;
+    use Notifiable;
+    use UserPresenter;
 
     /**
      * The attributes that are mass assignable.
@@ -55,8 +53,8 @@ class User extends Model implements
         'github_id',
         'register_ip',
         'last_login_ip',
-        'last_login',
-        'email_verified_at'
+        'last_login_date',
+        'email_verified_at',
     ];
 
     /**
@@ -66,7 +64,7 @@ class User extends Model implements
      */
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
     ];
 
     /**
@@ -94,75 +92,54 @@ class User extends Model implements
         'twitter',
 
         // Session Model
-        'online'
+        'online',
+
+        // Role Model
+        'level',
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * The attributes that should be cast.
      */
-    protected $dates = [
-        'last_login'
-    ];
-
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
+    protected function casts(): array
     {
-        parent::boot();
-
-        // Generated the slug before updating.
-        static::updating(function ($model) {
-            $model->generateSlug();
-        });
-    }
-
-    /**
-     * Return the field to slug.
-     *
-     * @return string
-     */
-    public function slugStrategy(): string
-    {
-        return 'username';
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'last_login_date' => 'datetime',
+        ];
     }
 
     /**
      * Register the related to the Model.
-     *
-     * @return void
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail.small')
-                ->width(100)
-                ->height(100)
-                ->keepOriginalImageFormat();
+            ->width(100)
+            ->height(100)
+            ->keepOriginalImageFormat();
 
         $this->addMediaConversion('thumbnail.medium')
-                ->width(200)
-                ->height(200)
-                ->keepOriginalImageFormat();
+            ->width(200)
+            ->height(200)
+            ->keepOriginalImageFormat();
 
         $this->addMediaConversion('thumbnail.big')
-                ->width(300)
-                ->height(300)
-                ->keepOriginalImageFormat();
+            ->width(300)
+            ->height(300)
+            ->keepOriginalImageFormat();
 
         $this->addMediaConversion('original')
-                ->keepOriginalImageFormat();
+            ->keepOriginalImageFormat();
     }
 
     /**
      * Get the comments for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
@@ -170,9 +147,9 @@ class User extends Model implements
     /**
      * Get the articles for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function articles()
+    public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
     }
@@ -180,29 +157,19 @@ class User extends Model implements
     /**
      * Get the account for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function account()
+    public function account(): HasOne
     {
         return $this->hasOne(Account::class);
     }
 
     /**
-     * Get the roles for the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    /*public function roles()
-    {
-        return $this->belongsToMany(Role::class)->withTimestamps();
-    }*/
-
-    /**
      * Get the badges for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function badges()
+    public function badges(): BelongsToMany
     {
         return $this->belongsToMany(Badge::class)->withTimestamps();
     }
@@ -210,21 +177,21 @@ class User extends Model implements
     /**
      * Get the notifications for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
-    public function notifications()
+    public function notifications(): MorphMany
     {
         return $this->morphMany(DatabaseNotification::class, 'notifiable')
-                        ->orderBy('read_at', 'asc')
-                        ->orderBy('created_at', 'desc');
+            ->orderBy('read_at', 'asc')
+            ->orderBy('created_at', 'desc');
     }
 
     /**
      * Get the discuss posts for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function discussPosts()
+    public function discussPosts(): HasMany
     {
         return $this->hasMany(DiscussPost::class);
     }
@@ -232,9 +199,9 @@ class User extends Model implements
     /**
      * Get the discuss conversations for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function discussConversations()
+    public function discussConversations(): HasMany
     {
         return $this->hasMany(DiscussConversation::class);
     }
@@ -242,9 +209,9 @@ class User extends Model implements
     /**
      * Get the discuss users for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function discussUsers()
+    public function discussUsers(): HasMany
     {
         return $this->hasMany(DiscussUser::class);
     }
@@ -252,9 +219,9 @@ class User extends Model implements
     /**
      * Get the discuss logs for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function discussLogs()
+    public function discussLogs(): HasMany
     {
         return $this->hasMany(DiscussLog::class);
     }
@@ -262,9 +229,9 @@ class User extends Model implements
     /**
      * Get the rubies for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function rubies()
+    public function rubies(): HasMany
     {
         return $this->hasMany(Ruby::class);
     }
@@ -272,9 +239,9 @@ class User extends Model implements
     /**
      * Get the experiences for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function experiences()
+    public function experiences(): HasMany
     {
         return $this->hasMany(Experience::class);
     }
@@ -286,7 +253,7 @@ class User extends Model implements
      *
      * @return void
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new ResetPassword($token));
     }
@@ -296,41 +263,18 @@ class User extends Model implements
      *
      * @return void
      */
-    public function sendEmailVerificationNotification()
+    public function sendEmailVerificationNotification(): void
     {
-        $this->notify(new VerifyEmail);
+        $this->notify(new VerifyEmail());
     }
 
     /**
-     * Get all permissions from roles.
+     * Get the setting for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return MorphMany
      */
-    public function rolePermissions(): Builder
+    public function settings(): MorphMany
     {
-        $permissionModel = app(config('roles.models.permission'));
-
-        return $permissionModel
-            ::select([
-                'permissions.*',
-                'permission_role.created_at as pivot_created_at',
-                'permission_role.updated_at as pivot_updated_at'
-            ])
-            ->join('permission_role', 'permission_role.permission_id', '=', 'permissions.id')
-            ->join('roles', 'roles.id', '=', 'permission_role.role_id')
-            ->whereIn('roles.id', $this->getRoles()->pluck('id')->toArray())
-            ->orWhere('roles.level', '<', $this->level())
-            ->groupBy([
-                'permissions.id',
-                'permissions.name',
-                'permissions.slug',
-                'permissions.description',
-                'permissions.model',
-                'permissions.created_at',
-                'permissions.updated_at',
-                'permissions.is_deletable',
-                'pivot_created_at',
-                'pivot_updated_at'
-            ]);
+        return $this->morphMany(Setting::class, 'model');
     }
 }

@@ -1,5 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class UserLog extends Model
 {
@@ -36,9 +42,9 @@ class UserLog extends Model
     /**
      * Get the user that owns the log.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -46,9 +52,9 @@ class UserLog extends Model
     /**
      * Get the loggable relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
-    public function loggable()
+    public function loggable(): MorphTo
     {
         return $this->morphTo();
     }

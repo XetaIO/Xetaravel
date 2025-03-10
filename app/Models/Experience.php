@@ -1,12 +1,21 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\SumCache\Summable;
-use Illuminate\Support\Facades\Auth;
+use Eloquence\Behaviours\SumCache\HasSums;
+use Eloquence\Behaviours\SumCache\SummedBy;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Xetaravel\Observers\ExperienceObserver;
 
+
+#[ObservedBy([ExperienceObserver::class])]
 class Experience extends Model
 {
-    use Summable;
+    use HasSums;
 
     /**
      * The attributes that are mass assignable.
@@ -32,40 +41,12 @@ class Experience extends Model
     ];
 
     /**
-     * The "booting" method of the model.
+     * Get the user that owns the experience.
      *
-     * @return void
+     * @return BelongsTo
      */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Set the user id to the new log before saving it.
-        static::creating(function ($model) {
-            if (is_null($model->user_id)) {
-                $model->user_id = Auth::id();
-            }
-        });
-    }
-
-    /**
-     * Return the sum cache configuration.
-     *
-     * @return array
-     */
-    public function sumCaches()
-    {
-        return [
-            'experiences_total' => [User::class, 'amount', 'user_id', 'id']
-        ];
-    }
-
-    /**
-     * Get the user that owns the log.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
+    #[SummedBy(from: 'amount', as: 'experiences_total')]
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -73,9 +54,9 @@ class Experience extends Model
     /**
      * Get the obtainable relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
-    public function obtainable()
+    public function obtainable(): MorphTo
     {
         return $this->morphTo();
     }
