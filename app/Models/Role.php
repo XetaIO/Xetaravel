@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Xetaravel\Models;
 
 use Xetaravel\Models\Presenters\RolePresenter;
-use \Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends SpatieRole
 {

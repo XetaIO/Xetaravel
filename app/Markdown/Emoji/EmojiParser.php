@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Markdown\Emoji;
 
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;

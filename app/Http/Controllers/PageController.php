@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -83,9 +84,9 @@ class PageController extends Controller
 
         Mail::to(config('xetaravel.site.contact_email'))->send(new Contact($details));
 
-         return redirect()
-            ->route('page.contact')
-            ->with('success', 'Thanks for contacting me ! I will answer you as fast as I can !');
+        return redirect()
+           ->route('page.contact')
+           ->with('success', 'Thanks for contacting me ! I will answer you as fast as I can !');
     }
 
     /**

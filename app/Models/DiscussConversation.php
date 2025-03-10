@@ -13,15 +13,14 @@ use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussConversationPresenter;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
-use Xetaravel\Models\User;
 
 class DiscussConversation extends Model
 {
-    use Countable,
-        Sluggable,
-        FloodGate,
-        DiscussConversationPresenter,
-        HasMentionsTrait;
+    use Countable;
+    use Sluggable;
+    use FloodGate;
+    use DiscussConversationPresenter;
+    use HasMentionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -268,15 +267,15 @@ class DiscussConversation extends Model
             $logs = $logs->where('created_at', '<=', $posts->last()->created_at)
                 ->where('created_at', '>=', $previousPost->created_at);
 
-        // When there're only one page.
+            // When there're only one page.
         } elseif ($this->lastPage == 1) {
             $logs = $logs->where('created_at', '>=', $this->created_at);
 
-        // When there're several pages and the current page is the first page.
+            // When there're several pages and the current page is the first page.
         } elseif ($page == 1) {
             $logs = $logs->where('created_at', '<=', $posts->last()->created_at);
 
-        // When there're several page and the current page is the last page
+            // When there're several page and the current page is the last page
         } elseif ($page == $this->lastPage) {
             $logs = $logs->where('created_at', '>', $previousPost->created_at);
         }

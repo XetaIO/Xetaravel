@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Markdown\GithubCommit;
 
 use League\CommonMark\Parser\Inline\InlineParserInterface;
@@ -8,7 +9,7 @@ use League\CommonMark\Parser\InlineParserContext;
 final class GithubCommitParser implements InlineParserInterface
 {
     // Regex used to match Github commit link.
-    const REGEXP_COMMIT = '\bhttps?:\/\/github\.com\/(?<repo>[\w-]+\/[\w-]+)\/commit\/(?<commit>[0-9a-f]{7,40})';
+    public const REGEXP_COMMIT = '\bhttps?:\/\/github\.com\/(?<repo>[\w-]+\/[\w-]+)\/commit\/(?<commit>[0-9a-f]{7,40})';
 
     public function getMatchDefinition(): InlineParserMatch
     {

@@ -11,17 +11,15 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
-use Xetaravel\Models\Category;
 use Xetaravel\Models\Presenters\ArticlePresenter;
-use Xetaravel\Models\User;
 
 class Article extends Model implements HasMedia
 {
-    use Countable,
-        Sluggable,
-        ArticlePresenter,
-        HasMentionsTrait,
-        InteractsWithMedia;
+    use Countable;
+    use Sluggable;
+    use ArticlePresenter;
+    use HasMentionsTrait;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.

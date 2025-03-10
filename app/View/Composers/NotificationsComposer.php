@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\View\Composers;
 
 use Illuminate\Support\Facades\Auth;

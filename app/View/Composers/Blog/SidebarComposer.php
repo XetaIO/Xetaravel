@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\View\Composers\Blog;
 
 use Illuminate\View\View;

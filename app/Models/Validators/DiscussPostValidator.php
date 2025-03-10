@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Validators;
 
 use Illuminate\Support\Facades\Validator as FacadeValidator;
@@ -30,7 +31,7 @@ class DiscussPostValidator
      *
      * @return \Illuminate\Validation\Validator
      */
-    public static function edit(array $data) : Validator
+    public static function edit(array $data): Validator
     {
         $rules = [
             'content' => 'required|min:10'

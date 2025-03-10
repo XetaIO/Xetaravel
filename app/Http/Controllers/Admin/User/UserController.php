@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Admin\User;
 
 use Illuminate\Http\RedirectResponse;

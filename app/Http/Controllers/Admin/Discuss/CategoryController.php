@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Admin\Discuss;
 
 use Illuminate\View\View;

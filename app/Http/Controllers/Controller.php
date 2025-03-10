@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -9,7 +10,9 @@ use Xety\Breadcrumbs\Breadcrumbs;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * The current Breadcrumbs instance.

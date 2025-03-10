@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Admin;
 
 use Xetaravel\Http\Controllers\Controller as BaseController;

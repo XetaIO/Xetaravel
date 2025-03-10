@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Session extends Model
 {
-
     /**
      * Indicates if the ID are auto-incrementing.
      *

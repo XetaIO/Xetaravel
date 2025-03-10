@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Validators;
 
 use Illuminate\Support\Facades\Validator as FacadeValidator;

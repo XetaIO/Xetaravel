@@ -1,10 +1,10 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
-use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\Badge;
 use Xetaravel\Models\User;
 

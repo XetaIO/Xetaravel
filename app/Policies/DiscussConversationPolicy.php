@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Policies;
 
 use Xetaravel\Models\User;

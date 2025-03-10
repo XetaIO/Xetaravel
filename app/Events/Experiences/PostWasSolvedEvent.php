@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Events\Experiences;
 
 use Xetaravel\Models\DiscussPost;

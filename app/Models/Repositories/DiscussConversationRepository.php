@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Repositories;
 
 use Carbon\Carbon;
@@ -13,7 +14,6 @@ use Xetaravel\Models\DiscussUser;
 
 class DiscussConversationRepository
 {
-
     /**
      * Create the new conversation and save it.
      *

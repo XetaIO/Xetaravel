@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Notifications\Auth;
 
 use Illuminate\Bus\Queueable;
@@ -7,7 +8,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 
 class VerifyEmail extends Notification implements ShouldQueue
@@ -46,7 +46,7 @@ class VerifyEmail extends Notification implements ShouldQueue
             return call_user_func(static::$toMailCallback, $notifiable, $verificationUrl);
         }
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->level('primary')
             ->subject('Email Verification')
             ->line('Please click the button below to verify your email address:')

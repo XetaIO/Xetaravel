@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Events\Discuss;
 
 use Xetaravel\Models\DiscussConversation;

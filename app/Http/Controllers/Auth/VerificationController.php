@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Auth\Access\AuthorizationException;
@@ -9,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
-use Xetaravel\Providers\RouteServiceProvider;
 
 class VerificationController extends Controller
 {
@@ -71,11 +71,11 @@ class VerificationController extends Controller
         $user = User::find($request->route('id'));
 
         if (!hash_equals((string) $request->route('id'), (string) $user->getKey())) {
-            throw new AuthorizationException;
+            throw new AuthorizationException();
         }
 
         if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
-            throw new AuthorizationException;
+            throw new AuthorizationException();
         }
 
         $user = User::find($request->route('id'));

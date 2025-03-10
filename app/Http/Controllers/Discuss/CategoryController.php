@@ -1,9 +1,9 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\View\View;
 use Xetaravel\Models\DiscussCategory;
-use Xetaravel\Models\DiscussConversation;
 
 class CategoryController extends Controller
 {

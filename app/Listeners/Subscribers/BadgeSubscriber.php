@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Listeners\Subscribers;
 
 use Carbon\Carbon;

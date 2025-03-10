@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Exception;
@@ -8,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as ProviderUser;
 use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseSF;

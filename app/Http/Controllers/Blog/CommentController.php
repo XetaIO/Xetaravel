@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Blog;
 
 use Illuminate\Http\RedirectResponse;

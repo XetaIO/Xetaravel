@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Providers;
 
 use Illuminate\Database\Query\Builder;

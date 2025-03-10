@@ -1,9 +1,9 @@
 <?php
+
 namespace Xetaravel\Listeners\Subscribers;
 
 use Xetaravel\Events\Rubies\PostWasSolvedEvent;
 use Xetaravel\Models\Ruby;
-use Xetaravel\Models\User;
 
 class RubySubscriber
 {
@@ -65,7 +65,7 @@ class RubySubscriber
      *
      * @return bool
      */
-    protected function create(array $data) : bool
+    protected function create(array $data): bool
     {
         if (!isset($data['data'])) {
             $data['data'] = [];
@@ -74,7 +74,7 @@ class RubySubscriber
 
         switch ($ruby->event_type) {
             case PostWasSolvedEvent::class:
-                    $ruby->user->increment('rubies_total', $this->rubies[PostWasSolvedEvent::class]);
+                $ruby->user->increment('rubies_total', $this->rubies[PostWasSolvedEvent::class]);
                 break;
         }
 

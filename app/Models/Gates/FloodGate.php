@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Gates;
 
 use Carbon\Carbon;

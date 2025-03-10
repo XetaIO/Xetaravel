@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Markdown\GithubCommit;
 
 use League\CommonMark\Environment\EnvironmentBuilderInterface;

@@ -6,18 +6,16 @@ namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
 use Illuminate\Support\Facades\Auth;
-use Xetaravel\Models\Article;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Presenters\CommentPresenter;
-use Xetaravel\Models\User;
 
 class Comment extends Model
 {
-    use Countable,
-        FloodGate,
-        CommentPresenter,
-        HasMentionsTrait;
+    use Countable;
+    use FloodGate;
+    use CommentPresenter;
+    use HasMentionsTrait;
 
     /**
      * The attributes that are mass assignable.

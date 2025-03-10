@@ -13,10 +13,10 @@ use Xetaravel\Models\Repositories\DiscussPostRepository;
 
 class DiscussPost extends Model
 {
-    use Countable,
-        DiscussPostPresenter,
-        FloodGate,
-        HasMentionsTrait;
+    use Countable;
+    use DiscussPostPresenter;
+    use FloodGate;
+    use HasMentionsTrait;
 
     /**
      * The attributes that are mass assignable.

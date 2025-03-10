@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Admin\Blog;
 
 use Illuminate\Http\RedirectResponse;
@@ -97,7 +98,7 @@ class ArticleController extends Controller
             ->preservingOriginal()
             ->setName(substr(md5($article->slug), 0, 10))
             ->setFileName(
-                substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg'  : $banner->extension())
+                substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg' : $banner->extension())
             )
             ->toMediaCollection('article');
 
@@ -177,7 +178,7 @@ class ArticleController extends Controller
                 ->preservingOriginal()
                 ->setName(substr(md5($article->slug), 0, 10))
                 ->setFileName(
-                    substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg'  : $banner->extension())
+                    substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg' : $banner->extension())
                 )
                 ->toMediaCollection('article');
         }

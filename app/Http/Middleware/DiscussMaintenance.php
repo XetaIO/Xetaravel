@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Middleware;
 
 use Closure;

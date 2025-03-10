@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Markdown\GithubPullRequest;
 
 use League\CommonMark\Environment\EnvironmentBuilderInterface;

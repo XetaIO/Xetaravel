@@ -1,9 +1,8 @@
 <?php
+
 namespace XetaravelInstaller;
 
 use Composer\Script\Event;
-use Exception;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Provides installation hooks for when Xetaravel is installed via

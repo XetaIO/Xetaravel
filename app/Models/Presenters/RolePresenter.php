@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Presenters;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;

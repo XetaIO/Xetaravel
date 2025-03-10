@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Markdown\GithubPullRequest;
 
 use League\CommonMark\Parser\Inline\InlineParserInterface;
@@ -8,7 +9,7 @@ use League\CommonMark\Parser\InlineParserContext;
 final class GithubPullRequestParser implements InlineParserInterface
 {
     // Regex used to match Github pull request link.
-    const REGEXP_PURLLREQUEST = '\bhttps?:\/\/github\.com\/(?<repo>[\w-]+\/[\w-]+)\/'.
+    public const REGEXP_PURLLREQUEST = '\bhttps?:\/\/github\.com\/(?<repo>[\w-]+\/[\w-]+)\/'.
         '(?<type>issues|pull)\/(?<issue>\d+)';
 
     public function getMatchDefinition(): InlineParserMatch

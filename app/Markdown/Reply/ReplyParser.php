@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Markdown\Reply;
 
 use League\CommonMark\Parser\Inline\InlineParserInterface;
@@ -8,7 +9,7 @@ use League\CommonMark\Parser\InlineParserContext;
 final class ReplyParser implements InlineParserInterface
 {
     // Regex used to match Replies
-    const REGEXP_REPLY = '\@(?<user>[\w]{4,20})\#(?<post>[0-9]{1,16})';
+    public const REGEXP_REPLY = '\@(?<user>[\w]{4,20})\#(?<post>[0-9]{1,16})';
 
     public function getMatchDefinition(): InlineParserMatch
     {

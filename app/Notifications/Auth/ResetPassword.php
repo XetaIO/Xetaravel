@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Notifications\Auth;
 
 use Illuminate\Bus\Queueable;
@@ -48,7 +49,7 @@ class ResetPassword extends Notification implements ShouldQueue
      */
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->line('You received this email because we received a password reset request for your account.')
             ->line('If you have not requested a password reset, no further action is required ' .
                         'and you can ignore this email.')

@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Auth\Events\Registered;

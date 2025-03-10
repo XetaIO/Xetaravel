@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Carbon\Carbon;
@@ -176,7 +177,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function edit(Request $request, int $id) : RedirectResponse
+    public function edit(Request $request, int $id): RedirectResponse
     {
         $post = DiscussPost::findOrFail($id);
 

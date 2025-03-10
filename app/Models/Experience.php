@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Xetaravel\Observers\ExperienceObserver;
 
-
 #[ObservedBy([ExperienceObserver::class])]
 class Experience extends Model
 {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\Http\Request;
@@ -8,7 +9,6 @@ use Illuminate\View\View;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
-use Xetaravel\Models\DiscussLog;
 use Xetaravel\Events\Experiences\ConversationWasCreatedEvent;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Validators\DiscussConversationValidator;

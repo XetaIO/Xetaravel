@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Blog;
 
 use Xetaravel\Http\Controllers\Controller;

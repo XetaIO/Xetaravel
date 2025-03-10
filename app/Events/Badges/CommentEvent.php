@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Events\Badges;
 
 use Xetaravel\Models\User;

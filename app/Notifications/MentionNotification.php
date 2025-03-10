@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Notifications;
 
 use Illuminate\Bus\Queueable;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Events\Rubies;
 
 use Xetaravel\Models\DiscussPost;

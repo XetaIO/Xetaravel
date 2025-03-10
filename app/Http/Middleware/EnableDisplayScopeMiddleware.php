@@ -19,7 +19,7 @@ class EnableDisplayScopeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        Article::addGlobalScope(new DisplayScope);
+        Article::addGlobalScope(new DisplayScope());
 
         return $next($request);
     }

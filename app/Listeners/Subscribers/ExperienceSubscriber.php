@@ -1,15 +1,14 @@
 <?php
+
 namespace Xetaravel\Listeners\Subscribers;
 
 use Xetaravel\Events\Experiences\ConversationWasCreatedEvent;
 use Xetaravel\Events\Experiences\PostWasCreatedEvent;
 use Xetaravel\Events\Experiences\PostWasSolvedEvent;
 use Xetaravel\Models\Experience;
-use Xetaravel\Models\User;
 
 class ExperienceSubscriber
 {
-
     /**
      * The experience earned for the related event.
      *
@@ -111,7 +110,7 @@ class ExperienceSubscriber
      *
      * @return bool
      */
-    protected function create(array $data) : bool
+    protected function create(array $data): bool
     {
         if (!isset($data['data'])) {
             $data['data'] = [];

@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;

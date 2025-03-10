@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Http\Controllers\Blog;
 
 use Xetaravel\Http\Controllers\Controller;
@@ -7,7 +8,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
     public function __construct()
     {
         parent::__construct();

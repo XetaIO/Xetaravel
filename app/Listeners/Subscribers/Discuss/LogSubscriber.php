@@ -1,4 +1,5 @@
 <?php
+
 namespace Xetaravel\Listeners\Subscribers\Discuss;
 
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
@@ -7,7 +8,6 @@ use Xetaravel\Events\Discuss\ConversationWasPinnedEvent;
 use Xetaravel\Events\Discuss\PostWasDeletedEvent;
 use Xetaravel\Events\Discuss\TitleWasChangedEvent;
 use Xetaravel\Models\DiscussLog;
-use Xetaravel\Models\User;
 
 class LogSubscriber
 {
