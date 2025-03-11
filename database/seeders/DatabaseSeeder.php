@@ -11,22 +11,22 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         // Users
         $this->call(UsersTableSeed::class);
         $this->call(AccountsTableSeed::class);
 
         // Blog
-        $this->call(CategoriesTableSeed::class);
-        $this->call(ArticlesTableSeed::class);
-        $this->call(CommentsTableSeed::class);
+        $this->call(BlogCategoriesTableSeed::class);
+        $this->call(BlogArticlesTableSeed::class);
+        $this->call(BlogCommentsTableSeed::class);
 
         // Permissions
         $this->call(RolesTableSeed::class);
         $this->call(PermissionsTableSeed::class);
-        $this->call(PermissionsRolesTableSeed::class);
-        $this->call(RoleUserTableSeed::class);
+        $this->call(RoleHasPermissionsTableSeeder::class);
+        $this->call(ModelHasPermissionsTableSeeder::class);
 
         // Badges
         $this->call(BadgesTableSeed::class);

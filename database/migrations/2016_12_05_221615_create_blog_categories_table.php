@@ -10,14 +10,14 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('title');
             $table->string('slug')->unique()->index();
             $table->text('description');
-            $table->integer('article_count')->unsigned()->default(0);
+            $table->integer('blog_article_count')->unsigned()->default(0);
             $table->timestamps();
         });
     }
@@ -27,8 +27,8 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('blog_categories');
     }
 };

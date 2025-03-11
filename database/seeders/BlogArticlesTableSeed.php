@@ -5,16 +5,18 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Xetaravel\Models\Article;
 
-class ArticlesTableSeed extends Seeder
+class BlogArticlesTableSeed extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
+        $now = Carbon::now();
         $articles = [
             [
                 'user_id' => 1,
@@ -112,8 +114,8 @@ class Comment extends Model
 ```',
                 'comment_count' => 1,
                 'is_display' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'created_at' => $now,
+                'updated_at' => $now
             ]
         ];
 
@@ -121,7 +123,7 @@ class Comment extends Model
 
         // Update avatars
         foreach ($articles as $article) {
-            $model = \Xetaravel\Models\Article::where('slug', $article['slug'])->first();
+            $model = Article::where('slug', $article['slug'])->first();
             $model->addMedia(public_path('images/articles/default_banner.jpg'))
                 ->preservingOriginal()
                 ->setName(substr(md5($article['slug']), 0, 10))

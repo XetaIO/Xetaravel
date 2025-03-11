@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\CountCache\Countable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
+use Eloquence\Behaviours\CountCache\CountedBy;
+use Eloquence\Behaviours\CountCache\HasCounts;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Xetaravel\Observers\DiscussUserObserver;
 
+#[ObservedBy([DiscussUserObserver::class])]
 class DiscussUser extends Model
 {
-    use Countable;
-    use SoftDeletes;
+    use HasCounts;
 
     /**
      * The attributes that are mass assignable.
@@ -24,48 +26,22 @@ class DiscussUser extends Model
     ];
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Set the user id to the new user before saving it.
-        static::creating(function ($model) {
-            $model->user_id = Auth::id();
-        });
-    }
-
-    /**
-     * Return the count cache configuration.
-     *
-     * @return array
-     */
-    public function countCaches(): array
-    {
-        return [
-            'user_count' => [DiscussConversation::class, 'conversation_id', 'id']
-        ];
-    }
-
-    /**
      * Get the user that owns the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class)->withTrashed();
+        return $this->belongsTo(User::class);
     }
 
     /**
      * Get the conversation that owns the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function conversation()
+    #[CountedBy(as: 'user_count')]
+    public function conversation(): BelongsTo
     {
         return $this->belongsTo(DiscussConversation::class);
     }

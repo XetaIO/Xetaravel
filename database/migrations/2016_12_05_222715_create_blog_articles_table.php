@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
@@ -11,9 +10,9 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('blog_articles', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
@@ -25,15 +24,11 @@ return new class () extends Migration {
             $table->timestamps();
         });
 
-        /**
-         * Only create foreign key on production/development.
-         */
-        if (App::environment() !== 'testing') {
-            Schema::table('articles', function (Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-                $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            });
-        }
+        Schema::table('blog_articles', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -41,8 +36,8 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('blog_articles');
     }
 };

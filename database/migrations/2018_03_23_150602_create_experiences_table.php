@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
@@ -11,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->increments('id');
@@ -23,14 +22,9 @@ return new class () extends Migration {
             $table->timestamps();
         });
 
-        /**
-         * Only create foreign key on production/development.
-         */
-        if (App::environment() !== 'testing') {
-            Schema::table('experiences', function (Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            });
-        }
+        Schema::table('experiences', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
@@ -38,7 +32,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('experiences');
     }

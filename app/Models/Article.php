@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\CountCache\Countable;
-use Eloquence\Behaviours\Sluggable;
-use Illuminate\Support\Facades\Auth;
+use Eloquence\Behaviours\CountCache\CountedBy;
+use Eloquence\Behaviours\CountCache\HasCounts;
+use Eloquence\Behaviours\HasSlugs;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Presenters\ArticlePresenter;
+use Xetaravel\Observers\ArticleObserver;
 
+#[ObservedBy([ArticleObserver::class])]
 class Article extends Model implements HasMedia
 {
-    use Countable;
-    use Sluggable;
     use ArticlePresenter;
     use HasMentionsTrait;
+    use HasCounts;
+    use HasSlugs;
     use InteractsWithMedia;
 
     /**
@@ -47,26 +52,6 @@ class Article extends Model implements HasMedia
     ];
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Generated the slug before updating.
-        static::updating(function ($model) {
-            $model->generateSlug();
-        });
-
-        // Set the user id to the new article before saving it.
-        static::creating(function ($model) {
-            $model->user_id = Auth::id();
-        });
-    }
-
-    /**
      * Return the field to slug.
      *
      * @return string
@@ -77,20 +62,9 @@ class Article extends Model implements HasMedia
     }
 
     /**
-     * Return the count cache configuration.
-     *
-     * @return array
-     */
-    public function countCaches(): array
-    {
-        return [
-            User::class,
-            Category::class
-        ];
-    }
-
-    /**
      * Register the related to the Model.
+     *
+     * @param Media|null $media
      *
      * @return void
      */
@@ -108,9 +82,10 @@ class Article extends Model implements HasMedia
     /**
      * Get the category that owns the article.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function category()
+    #[CountedBy]
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
@@ -118,9 +93,10 @@ class Article extends Model implements HasMedia
     /**
      * Get the user that owns the article.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    #[CountedBy]
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -128,9 +104,9 @@ class Article extends Model implements HasMedia
     /**
      * Get the comments for the article.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }

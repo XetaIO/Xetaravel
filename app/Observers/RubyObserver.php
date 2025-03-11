@@ -10,7 +10,7 @@ use Xetaravel\Models\Ruby;
 class RubyObserver
 {
     /**
-     * Handle the Ruby "creating" event.
+     * Handle the "creating" event.
      */
     public function creating(Ruby $ruby): void
     {

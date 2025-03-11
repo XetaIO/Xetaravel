@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Xetaravel\Models\User;
 
 class UsersTableSeed extends Seeder
 {
@@ -13,80 +14,82 @@ class UsersTableSeed extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
+        $now = Carbon::now();
+
         $users = [
             [
                 'username' => 'Admin',
                 'email' => 'admin@xetaravel.io',
                 'password' => bcrypt('admin'),
                 'slug' => 'admin',
-                'article_count' => 1,
-                'comment_count' => 0,
+                'blog_article_count' => 1,
+                'blog_comment_count' => 0,
                 'discuss_conversation_count' => 1,
                 'discuss_post_count' => 1,
                 'experiences_total' => 90,
                 'rubies_total' => 50,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
-                'last_login' => Carbon::now(),
-                'email_verified_at' => Carbon::now(),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'last_login_date' => $now,
+                'email_verified_at' => $now,
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'username' => 'Moderator',
                 'email' => 'moderator@xetaravel.io',
                 'password' => bcrypt('moderator'),
                 'slug' => 'moderator',
-                'article_count' => 0,
-                'comment_count' => 1,
+                'blog_article_count' => 0,
+                'blog_comment_count' => 1,
                 'discuss_conversation_count' => 0,
                 'discuss_post_count' => 1,
                 'experiences_total' => 75,
                 'rubies_total' => 0,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
-                'last_login' => Carbon::now(),
+                'last_login_date' => $now,
                 'email_verified_at' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'username' => 'Member',
                 'email' => 'member@xetaravel.io',
                 'password' => bcrypt('member'),
                 'slug' => 'member',
-                'article_count' => 0,
-                'comment_count' => 0,
+                'blog_article_count' => 0,
+                'blog_comment_count' => 0,
                 'discuss_conversation_count' => 0,
                 'discuss_post_count' => 0,
                 'experiences_total' => 0,
                 'rubies_total' => 0,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
-                'last_login' => Carbon::now(),
+                'last_login_date' => $now,
                 'email_verified_at' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'username' => 'Banished',
                 'email' => 'banished@xetaravel.io',
                 'password' => bcrypt('banished'),
                 'slug' => 'banished',
-                'article_count' => 0,
-                'comment_count' => 0,
+                'blog_article_count' => 0,
+                'blog_comment_count' => 0,
                 'discuss_conversation_count' => 0,
                 'discuss_post_count' => 0,
                 'experiences_total' => 0,
                 'rubies_total' => 0,
                 'register_ip' => '127.0.0.1',
                 'last_login_ip' => '127.0.0.1',
-                'last_login' => Carbon::now(),
+                'last_login_date' => $now,
                 'email_verified_at' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'created_at' => $now,
+                'updated_at' => $now,
             ]
         ];
 
@@ -94,7 +97,7 @@ class UsersTableSeed extends Seeder
 
         // Update avatars
         foreach ($users as $user) {
-            $model = \Xetaravel\Models\User::where('username', $user['username'])->first();
+            $model = User::where('username', $user['username'])->first();
             $model->addMedia(public_path('images/avatar.png'))
                 ->preservingOriginal()
                 ->setName(substr(md5($user['username']), 0, 10))

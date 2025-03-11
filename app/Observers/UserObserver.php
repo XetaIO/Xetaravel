@@ -10,7 +10,7 @@ use Xetaravel\Models\User;
 class UserObserver
 {
     /**
-     * Handle the User "deleting" event.
+     * Handle the "deleting" event.
      */
     public function deleting(User $user): void
     {

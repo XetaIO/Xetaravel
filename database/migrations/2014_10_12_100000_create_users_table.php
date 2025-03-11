@@ -10,7 +10,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->unsigned();
@@ -19,8 +19,8 @@ return new class () extends Migration {
             $table->string('password')->nullable();
             $table->string('slug', 20)->unique();
             $table->string('github_id')->nullable()->unique();
-            $table->integer('comment_count')->unsigned()->default(0);
-            $table->integer('article_count')->unsigned()->default(0);
+            $table->integer('blog_comment_count')->unsigned()->default(0);
+            $table->integer('blog_article_count')->unsigned()->default(0);
             $table->integer('discuss_conversation_count')->default(0);
             $table->integer('discuss_post_count')->default(0);
             $table->integer('experiences_total')->default(0);
@@ -39,7 +39,7 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }

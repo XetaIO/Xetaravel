@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models;
 
+use Eloquence\Behaviours\HasSlugs;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Xetaravel\Models\Presenters\CategoryPresenter;
 
 class Category extends Model
 {
     use CategoryPresenter;
+    use HasSlugs;
 
     /**
      * The attributes that are mass assignable.
@@ -43,9 +46,9 @@ class Category extends Model
     /**
      * Get the articles for the category.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function articles()
+    public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
     }

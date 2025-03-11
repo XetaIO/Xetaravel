@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models;
 
+use Eloquence\Behaviours\HasSlugs;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\Presenters\DiscussCategoryPresenter;
+use Xetaravel\Observers\DiscussCategoryObserver;
 
+#[ObservedBy([DiscussCategoryObserver::class])]
 class DiscussCategory extends Model
 {
     use DiscussCategoryPresenter;
+    use HasSlugs;
 
     /**
      * The attributes that are mass assignable.
@@ -28,15 +35,6 @@ class DiscussCategory extends Model
     ];
 
     /**
-     * The attributes that should be cast has a certain type.
-     *
-     * @var array
-     */
-    protected $cast = [
-        'is_locked' => 'boolean'
-    ];
-
-    /**
      * The accessors to append to the model's array form.
      *
      * @var array
@@ -46,23 +44,13 @@ class DiscussCategory extends Model
     ];
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
+     * The attributes that should be cast.
      */
-    protected static function boot()
+    protected function casts(): array
     {
-        parent::boot();
-
-        // Reset the last_conversation_id field and handle the conversations deleting.
-        static::deleting(function ($model) {
-            $model->last_conversation_id = null;
-            $model->save();
-
-            foreach ($model->conversations as $conversation) {
-                $conversation->delete();
-            }
-        });
+        return [
+            'is_locked' => 'boolean'
+        ];
     }
 
     /**
@@ -78,9 +66,9 @@ class DiscussCategory extends Model
     /**
      * Get the conversations for the category.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function conversations()
+    public function conversations(): HasMany
     {
         return $this->hasMany(DiscussConversation::class, 'category_id', 'id');
     }
@@ -88,9 +76,9 @@ class DiscussCategory extends Model
     /**
      * Get the last conversation of the category.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function lastConversation()
+    public function lastConversation(): HasOne
     {
         return $this->hasOne(DiscussConversation::class, 'id', 'last_conversation_id');
     }
@@ -101,9 +89,9 @@ class DiscussCategory extends Model
      * @param string $value
      * @param string|null $column
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
-    public static function pluckLocked($value, $column = null): Collection
+    public static function pluckLocked(string $value, string $column = null): Collection
     {
         if (Auth::user() && Auth::user()->hasPermission('manage.discuss.conversations')) {
             return self::pluck($value, $column);

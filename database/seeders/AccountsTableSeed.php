@@ -13,8 +13,9 @@ class AccountsTableSeed extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
+        $now = Carbon::now();
         $accounts = [
             [
                 'user_id' => 1,
@@ -22,8 +23,8 @@ class AccountsTableSeed extends Seeder
                 'last_name' => 'Istrator',
                 'facebook' => 'AdminFB',
                 'twitter' => 'AdminTW',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
                 'user_id' => 2,
@@ -31,8 +32,8 @@ class AccountsTableSeed extends Seeder
                 'last_name' => 'Rator',
                 'facebook' => 'ModeratorFB',
                 'twitter' => 'ModeratorTW',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'created_at' => $now,
+                'updated_at' => $now
             ]
         ];
 

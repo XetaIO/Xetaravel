@@ -13,7 +13,7 @@ class BlogCommentPolicy
     /**
      * Authorize all actions if the user has the given permission.
      *
-     * @param \Xetaravel\Models\User $user
+     * @param User $user
      * @param string $ability
      *
      * @return true|void
@@ -28,7 +28,7 @@ class BlogCommentPolicy
     /**
      * Determine whether the user can update the discuss post.
      *
-     * @param \Xetaravel\Models\User $user
+     * @param User $user
      * @param \Xetaravel\Models\Comment $comment
      *
      * @return bool
@@ -41,7 +41,7 @@ class BlogCommentPolicy
     /**
      * Determine whether the user can delete the discuss post.
      *
-     * @param \Xetaravel\Models\User $user
+     * @param User $user
      * @param \Xetaravel\Models\Comment $comment
      *
      * @return bool

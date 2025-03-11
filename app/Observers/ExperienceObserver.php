@@ -10,7 +10,7 @@ use Xetaravel\Models\Experience;
 class ExperienceObserver
 {
     /**
-     * Handle the Ruby "creating" event.
+     * Handle the "creating" event.
      */
     public function creating(Experience $experience): void
     {
