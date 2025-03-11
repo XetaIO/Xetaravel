@@ -60,7 +60,7 @@ jobs:
             - name: Install JS
               run: |
                 npm install
-                npm build
+                npm run build
 
             - name: Execute tests
               run: php artisan test --coverage
