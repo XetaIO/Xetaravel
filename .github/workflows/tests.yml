@@ -60,7 +60,7 @@ jobs:
             - name: Install JS
               run: |
                 npm install
-                vite build
+                npm build
 
             - name: Execute tests
               run: php artisan test --coverage
