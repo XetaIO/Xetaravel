@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;

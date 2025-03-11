@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Providers;
 
+use BDS\Settings\Settings;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-use Xetaravel\Models\Setting;
+use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,8 +23,16 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
+        // Models
+        //Model::preventLazyLoading();
+        //Model::preventAccessingMissingAttributes();
+
+        // Routes
+        //Route::namespace('Xetaravel\Http\Controllers');
+        Route::pattern('id', '[0-9]+');
+
         // Builder
         Builder::macro('search', function ($field, $string) {
             return $string ? $this->where($field, 'like', '%' . $string . '%') : $this;
@@ -34,42 +47,54 @@ class AppServiceProvider extends ServiceProvider
         // Pagination
         Paginator::defaultView('vendor.pagination.tailwind');
 
-        // Blade
-        Blade::directive('auth', function () {
-            return "<?php if (Auth::check()): ?>";
-        });
-        Blade::directive('endauth', function () {
-            return "<?php endif; ?>";
+        // Set default password rule for the application.
+        Password::defaults(function () {
+            $rule = Password::min(8);
+
+            return App::isProduction() || App::isLocal()
+                ? $rule->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                : $rule;
         });
 
-        Blade::directive('notauth', function () {
-            return "<?php if (!Auth::check()): ?>";
-        });
-        Blade::directive('endnotauth', function () {
-            return "<?php endif; ?>";
+        // ResetPassword
+        ResetPassword::createUrlUsing(function ($notifiable, $token) {
+            // Add `auth.` to the route to respect the namespace.
+            return url(route('auth.password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
         });
 
-        if (App::environment() !== 'testing' && Schema::hasTable('settings')) {
-            // Set the all Settings in the config array.
-            $settings = Setting::all([
-                'name',
-                'value_int',
-                'value_str',
-                'value_bool',
-            ])
-            ->keyBy('name') // key every setting by its name
-            ->transform(function ($setting) {
-                return $setting->value; // return only the value
-            })
-            ->toArray();
+        /**
+         * All credits from this blade directive goes to Konrad Kalemba.
+         * Just copied and modified for my very specifc use case.
+         *
+         * https://github.com/konradkalemba/blade-components-scoped-slots
+         */
+        Blade::directive('scope', function ($expression) {
+            // Split the expression by `top-level` commas (not in parentheses)
+            $directiveArguments = preg_split("/,(?![^\(\(]*[\)\)])/", $expression);
+            $directiveArguments = array_map('trim', $directiveArguments);
 
-            $array = [];
-            // Convert the `dot` syntax to array.
-            foreach ($settings as $setting => $value) {
-                data_set($array, $setting, $value);
-            }
-            config(['settings' => $array]);
-        }
+            [$name, $functionArguments] = $directiveArguments;
+
+            /**
+             *  Slot names can`t contains dot , eg: `user.city`.
+             *  So we convert `user.city` to `user___city`
+             *
+             *  Later, on component you must replace it back.
+             */
+            $name = str_replace('.', '___', $name);
+
+            return "<?php \$__env->slot({$name}, function({$functionArguments}) use (\$__env) { ?>";
+        });
+
+        Blade::directive('endscope', function () {
+            return '<?php }); ?>';
+        });
     }
 
     /**
@@ -79,6 +104,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Register the Settings class
+        $this->app->singleton(Settings::class, function (Application $app) {
+            return new Settings($app['cache.store']);
+        });
     }
 }

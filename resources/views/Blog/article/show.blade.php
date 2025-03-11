@@ -45,22 +45,22 @@
     </div>
 </section>
 
-<!-- Article -->
+<!-- BlogArticle -->
 <section class="lg:container mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-9 col-span-12 px-3">
 
-            {{-- Article --}}
+            {{-- BlogArticle --}}
             <article class="bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg px-6 pb-6 mb-10">
 
-                {{-- Article Header --}}
+                {{-- BlogArticle Header --}}
                 <header class="mb-6">
-                    {{-- Article title --}}
+                    {{-- BlogArticle title --}}
                     <h1 class="text-4xl font-xetaravel py-8">
                         {{ $article->title }}
                     </h1>
 
-                    {{-- Article meta --}}
+                    {{-- BlogArticle meta --}}
                     <div class="flex justify-between items-center mt-2">
                         <div class="flex justify-center items-center">
                             {{-- Author avatar --}}
@@ -109,12 +109,12 @@
                     </div>
                 </header>
 
-                {{-- Article Banner --}}
+                {{-- BlogArticle Banner --}}
                 <figure class="max-h-[350px] min-h-[100px] xs:min-h-[250px] max-w-[870px] mx-auto mb-6 overflow-hidden">
                     <img class="w-full h-full object-cover" src="{{ $article->article_banner }}" alt="Article image">
                 </figure>
 
-                {{-- Article content --}}
+                {{-- BlogArticle content --}}
                 <div class="prose min-w-full">
                     {!! Markdown::convert($article->content) !!}
                 </div>
@@ -241,7 +241,7 @@
 </section>
 
 @auth
-{{-- Delete Comment Modal --}}
+{{-- Delete BlogComment Modal --}}
 <input type="checkbox" id="deleteCommentModal" class="modal-toggle" />
 <label for="deleteCommentModal" class="modal cursor-pointer">
     <label class="modal-box relative">

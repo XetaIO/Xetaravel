@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Route;
 | Regular Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']], function () {
-    Route::get('/', 'PageController@index')->name('page.index');
+Route::group(['middleware' => ['display']], function () {
+    Route::get('/', [Xetaravel\Http\Controllers\PageController::class, 'index'])->name('page.index');
     Route::get('@me', 'PageController@aboutme')->name('page.aboutme');
 
     Route::get('terms', 'PageController@terms')->name('page.terms');
@@ -22,7 +22,7 @@ Route::group(['middleware' => ['permission:access.site,allowGuest', 'display']],
     Route::get('download/{file}', 'DownloadsController@download')->name('downloads.show');
 });
 
-Route::group(['middleware' => ['auth', 'permission:show.banished']], function () {
+Route::group(['middleware' => ['auth', 'permission:show banished']], function () {
     Route::get('banished', 'PageController@banished')->name('page.banished');
 });
 
@@ -123,22 +123,22 @@ Route::group([
     'middleware' => ['permission:access.site,allowGuest', 'display']
 ], function () {
 
-    // Article Routes
+    // BlogArticle Routes
     Route::get('/', 'ArticleController@index')
         ->name('blog.article.index');
     Route::get('article/{slug}.{id}', 'ArticleController@show')
         ->name('blog.article.show');
 
-    // Category Routes
+    // BlogCategory Routes
     Route::get('category/{slug}.{id}', 'CategoryController@show')
         ->name('blog.category.show');
 
-    // Comment Routes
+    // BlogComment Routes
     Route::get('comment/show/{id}', 'CommentController@show')
         ->name('blog.comment.show');
 
     Route::group(['middleware' => ['auth']], function () {
-        // Comment Routes
+        // BlogComment Routes
         Route::post('comment/create', 'CommentController@create')
             ->name('blog.comment.create');
         Route::delete('comment/delete/{id}', 'CommentController@delete')

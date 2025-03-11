@@ -8,7 +8,7 @@ use Eloquence\Behaviours\HasSlugs;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Xetaravel\Models\Presenters\CategoryPresenter;
 
-class Category extends Model
+class BlogCategory extends Model
 {
     use CategoryPresenter;
     use HasSlugs;
@@ -50,6 +50,6 @@ class Category extends Model
      */
     public function articles(): HasMany
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(BlogArticle::class);
     }
 }

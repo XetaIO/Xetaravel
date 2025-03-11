@@ -3,7 +3,7 @@
 namespace Xetaravel\Policies;
 
 use Xetaravel\Models\User;
-use Xetaravel\Models\Comment;
+use Xetaravel\Models\BlogComment;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BlogCommentPolicy
@@ -29,11 +29,11 @@ class BlogCommentPolicy
      * Determine whether the user can update the discuss post.
      *
      * @param User $user
-     * @param \Xetaravel\Models\Comment $comment
+     * @param \Xetaravel\Models\BlogComment $comment
      *
      * @return bool
      */
-    public function update(User $user, Comment $comment)
+    public function update(User $user, BlogComment $comment)
     {
         return $user->id === $comment->user_id;
     }
@@ -42,11 +42,11 @@ class BlogCommentPolicy
      * Determine whether the user can delete the discuss post.
      *
      * @param User $user
-     * @param \Xetaravel\Models\Comment $comment
+     * @param \Xetaravel\Models\BlogComment $comment
      *
      * @return bool
      */
-    public function delete(User $user, Comment $comment)
+    public function delete(User $user, BlogComment $comment)
     {
         return $user->id === $comment->user_id;
     }

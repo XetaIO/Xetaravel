@@ -35,7 +35,7 @@
     $time = "<time datetime=\"{$log->created_at->format('Y-m-d H:i:s')}\" data-toggle=\"tooltip\" title=\"{$log->created_at->format('Y-m-d H:i:s')}\">{$log->created_at->diffForHumans()}</time>";
     @endphp
 
-    {{-- Category Changed --}}
+    {{-- BlogCategory Changed --}}
     @if ($log->type == 'category')
         added the
         <a href="{{ $log->newCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">

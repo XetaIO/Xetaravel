@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Xetaravel\Models\Article;
+use Illuminate\Http\Response;
+use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\Scopes\DisplayScope;
 
 class EnableDisplayScopeMiddleware
@@ -12,14 +16,14 @@ class EnableDisplayScopeMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param Request $request
+     * @param  \Closure(Request): (Response|RedirectResponse)  $next
      *
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
-        Article::addGlobalScope(new DisplayScope());
+        BlogArticle::addGlobalScope(new DisplayScope());
 
         return $next($request);
     }

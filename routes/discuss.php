@@ -24,7 +24,7 @@ Route::group([
     Route::get('conversation/{slug}.{id}', 'ConversationController@show')
         ->name('discuss.conversation.show');
 
-    // Category Routes
+    // BlogCategory Routes
     Route::get('categories', 'CategoryController@index')
         ->name('discuss.category.index');
 

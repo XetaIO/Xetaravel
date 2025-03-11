@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -11,11 +14,11 @@ class DiscussMaintenance
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param Request $request
+     * @param Closure $next
+     *
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         // If the discuss is disabled and the user is not admin.
         if ((!Auth::user() && config('settings.discuss.enabled') == false) ||

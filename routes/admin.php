@@ -29,7 +29,7 @@ Route::group([
         'middleware' => ['permission:manage.blog']
     ], function () {
 
-        // Article Routes
+        // BlogArticle Routes
         Route::get('article', 'ArticleController@index')
             ->name('admin.blog.article.index');
 
@@ -46,7 +46,7 @@ Route::group([
         Route::delete('article/delete/{id}', 'ArticleController@delete')
             ->name('admin.blog.article.delete');
 
-        // Category Routes
+        // BlogCategory Routes
         Route::get('category', 'CategoryController@index')
             ->name('admin.blog.category.index');
     });
@@ -62,7 +62,7 @@ Route::group([
         'middleware' => ['permission:manage.discuss']
     ], function () {
 
-        // Category Routes
+        // BlogCategory Routes
         Route::get('category', 'CategoryController@index')
             ->name('admin.discuss.category.index');
     });

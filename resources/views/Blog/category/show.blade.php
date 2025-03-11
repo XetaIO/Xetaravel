@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{!! config(['app.title' => 'Category : ' . e($category->title)]) !!}
+{!! config(['app.title' => 'BlogCategory : ' . e($category->title)]) !!}
 
 @push('meta')
     <x-meta title="Category : {{ e($category->title) }}" />

@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Http\Controllers\Admin\Controller;
-use Xetaravel\Models\Article;
-use Xetaravel\Models\Category;
+use Xetaravel\Models\BlogArticle;
+use Xetaravel\Models\BlogCategory;
 use Xetaravel\Models\Repositories\ArticleRepository;
 use Xetaravel\Models\Validators\ArticleValidator;
 
@@ -53,7 +53,7 @@ class ArticleController extends Controller
      */
     public function showCreateForm(): View
     {
-        $categories = Category::pluck('title', 'id');
+        $categories = BlogCategory::pluck('title', 'id');
 
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb(
@@ -117,7 +117,7 @@ class ArticleController extends Controller
      */
     public function showUpdateForm(string $slug, int $id)
     {
-        $article = Article::with('category', 'user', 'comments')
+        $article = BlogArticle::with('category', 'user', 'comments')
             ->where('id', $id)
             ->first();
 
@@ -126,7 +126,7 @@ class ArticleController extends Controller
                 ->route('admin.blog.article.index')
                 ->with('danger', 'This article doesn\'t exist or has been deleted !');
         }
-        $categories = Category::pluck('title', 'id');
+        $categories = BlogCategory::pluck('title', 'id');
 
         $breadcrumbs = $this->breadcrumbs
             ->addCrumb(
@@ -154,7 +154,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $article = Article::findOrFail($id);
+        $article = BlogArticle::findOrFail($id);
 
         ArticleValidator::update($request->all(), $id)->validate();
         $article = ArticleRepository::update($request->all(), $article);

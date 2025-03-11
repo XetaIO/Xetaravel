@@ -18,7 +18,7 @@ use Xetaravel\Models\Presenters\ArticlePresenter;
 use Xetaravel\Observers\ArticleObserver;
 
 #[ObservedBy([ArticleObserver::class])]
-class Article extends Model implements HasMedia
+class BlogArticle extends Model implements HasMedia
 {
     use ArticlePresenter;
     use HasMentionsTrait;
@@ -87,7 +87,7 @@ class Article extends Model implements HasMedia
     #[CountedBy]
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(BlogCategory::class);
     }
 
     /**
@@ -108,6 +108,6 @@ class Article extends Model implements HasMedia
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(BlogComment::class);
     }
 }

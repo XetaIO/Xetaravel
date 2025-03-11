@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Presenters;
 
 use GrahamCampbell\Markdown\Facades\Markdown;

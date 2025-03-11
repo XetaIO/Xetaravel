@@ -70,7 +70,7 @@
                     class="sm:opacity-0 sm:group-hover:opacity-100 sm:mr-3"
                     :is-solved="{{ var_export($isSolvedPost) }}"
                     :post-id="{{ var_export($post->getKey()) }}"
-                    :post-type="{{ var_export('Comment') }}"
+                    :post-type="{{ var_export('BlogComment') }}"
                     :route-input="{{ var_export(route('blog.comment.show', ['id' => $post->getKey()])) }}">
                 </discuss-share>
             </header>
@@ -92,7 +92,7 @@
                     @endempty
                 </div>
 
-                {{-- Comment Actions --}}
+                {{-- BlogComment Actions --}}
                 @auth
                     <div class="flex flex-row-reverse items-center gap-2">
                         @canany(['update', 'delete'], $post)

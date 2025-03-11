@@ -3,7 +3,7 @@
 namespace Xetaravel\Http\Controllers\Blog;
 
 use Xetaravel\Http\Controllers\Controller;
-use Xetaravel\Models\Category;
+use Xetaravel\Models\BlogCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function show(Request $request, $slug, $id)
     {
-        $category = Category::with('articles')
+        $category = BlogCategory::with('articles')
             ->where('id', $id)
             ->first();
 
@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
         $articles = $category->articles()->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
-        $this->breadcrumbs->addCrumb("Category : " . e($category->title), $category->category_url);
+        $this->breadcrumbs->addCrumb("BlogCategory : " . e($category->title), $category->category_url);
 
         return view(
             'Blog::category.show',

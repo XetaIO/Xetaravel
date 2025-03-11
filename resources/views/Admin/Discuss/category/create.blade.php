@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-{!! config(['app.title' => 'Create a Category']) !!}
+{!! config(['app.title' => 'Create a BlogCategory']) !!}
 
 @push('meta')
     <x-meta title="Create a Category" />
@@ -23,7 +23,7 @@
                     null,
                     [
                         'class' => 'form-control form-control-inverse col-md-6',
-                        'placeholder' => 'Category title...',
+                        'placeholder' => 'BlogCategory title...',
                         'required' => 'required',
                         'autofocus'
                     ]

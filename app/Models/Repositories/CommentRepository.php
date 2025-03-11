@@ -2,7 +2,7 @@
 
 namespace Xetaravel\Models\Repositories;
 
-use Xetaravel\Models\Comment;
+use Xetaravel\Models\BlogComment;
 
 class CommentRepository
 {
@@ -12,11 +12,11 @@ class CommentRepository
      * @param array $data The data used to create the comment.
      * @param \Xetaravel\Models\User $user The current user.
      *
-     * @return \Xetaravel\Models\Comment
+     * @return \Xetaravel\Models\BlogComment
      */
-    public static function create(array $data): Comment
+    public static function create(array $data): BlogComment
     {
-        return Comment::create([
+        return BlogComment::create([
             'article_id' => $data['article_id'],
             'content' => $data['content']
         ]);

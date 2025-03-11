@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\User;
 
-class UsersTableSeed extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

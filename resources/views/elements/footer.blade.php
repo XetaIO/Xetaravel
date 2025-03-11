@@ -64,13 +64,7 @@
                 <span class="label-text">Enter your email address</span>
             </label>
             <div class="relative">
-				{!! Form::open(['route' => 'newsletter.subscribe']) !!}
-                    {!! Form::bsNewsletter('email', null, null, [
-                        'placeholder' => 'Your E-mail...',
-                        'required' => 'required'
-                    ]) !!}
-
-                {!! Form::close() !!}
+				
             </div>
             </div>
         </div>

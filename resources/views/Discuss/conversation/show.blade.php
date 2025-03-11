@@ -308,7 +308,7 @@
                 {!! Form::bsSelect(
                     'category_id',
                     $categories,
-                    'Category',
+                    'BlogCategory',
                     null,
                     ['required' => 'required']
                 ) !!}

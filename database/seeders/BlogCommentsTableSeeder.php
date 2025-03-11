@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BlogCommentsTableSeed extends Seeder
+class BlogCommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,6 +26,6 @@ class BlogCommentsTableSeed extends Seeder
             ]
         ];
 
-        DB::table('comments')->insert($comments);
+        DB::table('blog_comments')->insert($comments);
     }
 }

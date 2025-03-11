@@ -18,7 +18,6 @@ class Setting extends Model
      * @var array
      */
     protected $fillable = [
-        'site_id',
         'key',
         'value',
         'model_type',

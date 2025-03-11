@@ -22,7 +22,7 @@ return new class () extends Migration {
 
         Schema::table('blog_comments', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->foreign('article_id')->references('id')->on('blog_articles')->onDelete('cascade');
         });
     }
 

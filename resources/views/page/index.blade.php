@@ -127,7 +127,7 @@
                 <img class="h-36 mx-auto" src="{{ asset('images/icons/chat.svg') }}" alt="Chat Icon">
                 <div class="font-xetaravel text-2xl">Interact</div>
                 <p class="text-gray-500 dark:text-current">
-                You can interact with Xetaravel's members in the {{ link_to(route('blog.article.index'), 'Blog', ['class' => 'text-primary']) }}, {{ link_to(route('discuss.index'), 'Discuss', ['class' => 'text-primary']) }} or directly with me via the {{ link_to(route('page.contact'), 'Contact', ['class' => 'text-primary']) }} page.
+                You can interact with Xetaravel's members in the <a class="text-primary" href="{{ route('blog.article.index') }}">Blog</a>,<a class="text-primary" href="{{ route('discuss.index') }}">Discuss</a> or directly with me via the <a class="text-primary" href="{{ route('page.contact') }}">Contact</a> page.
                 </p>
             </div>
         </div>
@@ -258,16 +258,7 @@
                                             <img src="{{ asset($article->user->avatar_small) }}" alt="Avatar">
                                         </div>
                                     </div>
-                                    <discuss-user
-                                        :user="{{ json_encode([
-                                            'avatar_small'=> $article->user->avatar_small,
-                                            'profile_url' => $article->user->profile_url,
-                                            'full_name' => $article->user->full_name
-                                        ]) }}"
-                                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                                    </discuss-user>
+
                                 </div>
 
 

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-{!! config(['app.title' => 'Update Article']) !!}
+{!! config(['app.title' => 'Update BlogArticle']) !!}
 
 @push('meta')
     <x-meta title="Update Article" />

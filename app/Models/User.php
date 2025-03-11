@@ -141,7 +141,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(BlogComment::class);
     }
 
     /**
@@ -151,7 +151,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     public function articles(): HasMany
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(BlogArticle::class);
     }
 
     /**

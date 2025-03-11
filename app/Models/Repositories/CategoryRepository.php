@@ -3,7 +3,7 @@
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
-use Xetaravel\Models\Category;
+use Xetaravel\Models\BlogCategory;
 
 class CategoryRepository
 {
@@ -14,6 +14,6 @@ class CategoryRepository
      */
     public static function sidebar(): Collection
     {
-        return Category::take(config('xetaravel.blog.categories_sidebar'))->orderBy('title', 'asc')->get();
+        return BlogCategory::take(config('xetaravel.blog.categories_sidebar'))->orderBy('title', 'asc')->get();
     }
 }

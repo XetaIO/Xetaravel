@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Xetaravel\Models\Article;
+use Xetaravel\Models\BlogArticle;
 
-class BlogArticlesTableSeed extends Seeder
+class BlogArticlesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -38,7 +38,7 @@ Duis autem vel eum iriure *dolor in hendrerit* in vulputate velit esse molestie 
 
 Odio dignissim qui `{!! Markdown::convert($article->content) !!}` te feugait nulla facilisi. :fr:
 
-* Reworked the Comments UI and added the possibility to delete a Comment in Blog https://github.com/XetaIO/Xetaravel/pull/73
+* Reworked the Comments UI and added the possibility to delete a BlogComment in Blog https://github.com/XetaIO/Xetaravel/pull/73
 * Reworked the Author bloc in Blog to follow the same design as Comments https://github.com/XetaIO/Xetaravel/commit/06e9f79f67cecbca7648dac3d7922fa849803d9a
 
 - [x] Discuss namespace
@@ -58,11 +58,11 @@ Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming 
 namespace Xetaravel\Models;
 
 use Eloquence\Behaviours\CountCache\Countable;
-use Xetaravel\Models\Article;
+use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\Gates\CommentGate;
 use Xetaravel\Models\User;
 
-class Comment extends Model
+class BlogComment extends Model
 {
     use Countable,
         CommentGate;
@@ -87,7 +87,7 @@ class Comment extends Model
     {
         return [
             User::class,
-            Article::class
+            BlogArticle::class
         ];
     }
 
@@ -108,7 +108,7 @@ class Comment extends Model
      */
     public function article()
     {
-        return $this->belongsTo(Article::class);
+        return $this->belongsTo(BlogArticle::class);
     }
 }
 ```',
@@ -119,11 +119,11 @@ class Comment extends Model
             ]
         ];
 
-        DB::table('articles')->insert($articles);
+        DB::table('blog_articles')->insert($articles);
 
         // Update avatars
         foreach ($articles as $article) {
-            $model = Article::where('slug', $article['slug'])->first();
+            $model = BlogArticle::where('slug', $article['slug'])->first();
             $model->addMedia(public_path('images/articles/default_banner.jpg'))
                 ->preservingOriginal()
                 ->setName(substr(md5($article['slug']), 0, 10))

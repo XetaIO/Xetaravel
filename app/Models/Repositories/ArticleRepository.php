@@ -3,7 +3,7 @@
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
-use Xetaravel\Models\Article;
+use Xetaravel\Models\BlogArticle;
 
 class ArticleRepository
 {
@@ -14,7 +14,7 @@ class ArticleRepository
      */
     public static function sidebar(): Collection
     {
-        return Article::latest()->take(config('xetaravel.blog.articles_sidebar'))->get();
+        return BlogArticle::latest()->take(config('xetaravel.blog.articles_sidebar'))->get();
     }
 
     /**
@@ -22,11 +22,11 @@ class ArticleRepository
      *
      * @param array $data The data used to create the article.
      *
-     * @return \Xetaravel\Models\Article
+     * @return \Xetaravel\Models\BlogArticle
      */
-    public static function create(array $data): Article
+    public static function create(array $data): BlogArticle
     {
-        return Article::create([
+        return BlogArticle::create([
             'title' => $data['title'],
             'category_id' => $data['category_id'],
             'is_display' => isset($data['is_display']) ? true : false,
@@ -38,11 +38,11 @@ class ArticleRepository
      * Update the article data and save it.
      *
      * @param array $data The data used to update the article.
-     * @param \Xetaravel\Models\Article $article The article to update.
+     * @param \Xetaravel\Models\BlogArticle $article The article to update.
      *
-     * @return \Xetaravel\Models\Article
+     * @return \Xetaravel\Models\BlogArticle
      */
-    public static function update(array $data, Article $article): Article
+    public static function update(array $data, BlogArticle $article): BlogArticle
     {
         $article->title = $data['title'];
         $article->category_id = $data['category_id'];

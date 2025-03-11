@@ -158,34 +158,4 @@ return [
         'unique'     => 'document',
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default Attributes
-    |--------------------------------------------------------------------------
-    |
-    | The option allows you to apply default HTML classes and other attributes using configuration options.
-    |
-    */
-
-    'default_attributes' => [
-        League\CommonMark\Extension\Table\Table::class => [
-            'class' => 'table',
-        ],
-        League\CommonMark\Extension\CommonMark\Node\Inline\Link::class => [
-            'class' => 'link link-primary link-hover'
-        ],
-        League\CommonMark\Extension\CommonMark\Node\Inline\Code::class => [
-            'class' => 'text-[color:hsl(var(--p))] bg-[color:var(--tw-prose-pre-bg)] rounded-sm'
-        ],
-        League\CommonMark\Extension\TaskList\TaskListItemMarker::class => [
-            'class' => 'checkbox h-4 w-4 m-0'
-        ],
-        League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote::class => [
-            'class' => 'text-xl italic font-semibold'
-        ],
-        League\CommonMark\Extension\CommonMark\Node\Block\Heading::class => [
-            'class' => ''
-        ]
-    ],
-
 ];

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-{!! config(['app.title' => 'Update Category']) !!}
+{!! config(['app.title' => 'Update BlogCategory']) !!}
 
 @push('meta')
     <x-meta title="Update Category" />
@@ -21,7 +21,7 @@
                     'title',
                     'Title',
                     null,
-                    ['class' => 'form-control form-control-inverse col-md-6', 'placeholder' => 'Category title...']
+                    ['class' => 'form-control form-control-inverse col-md-6', 'placeholder' => 'BlogCategory title...']
                 ) !!}
 
 

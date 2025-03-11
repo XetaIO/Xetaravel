@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Xetaravel\Events\Badges\CommentEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaio\Mentions\Parser\MentionParser;
-use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
+use Xetaravel\Models\BlogArticle;
+use Xetaravel\Models\BlogComment;
 use Xetaravel\Models\Repositories\CommentRepository;
 use Xetaravel\Models\User;
 use Xetaravel\Models\Validators\CommentValidator;
@@ -25,9 +25,9 @@ class CommentController extends Controller
      */
     public function create(Request $request): RedirectResponse
     {
-        Article::findOrFail($request->article_id);
+        BlogArticle::findOrFail($request->article_id);
 
-        if (Comment::isFlooding('xetaravel.flood.blog.comment')) {
+        if (BlogComment::isFlooding('xetaravel.flood.blog.comment')) {
             return back()
                 ->withInput()
                 ->with('danger', 'Wow, keep calm bro, and try to not flood !');
@@ -60,9 +60,9 @@ class CommentController extends Controller
      */
     public function show(Request $request, int $id): RedirectResponse
     {
-        $comment = Comment::findOrFail($id);
+        $comment = BlogComment::findOrFail($id);
 
-        $commentsBefore = Comment::where([
+        $commentsBefore = BlogComment::where([
             ['article_id', $comment->article_id],
             ['created_at', '<', $comment->created_at]
         ])->count();
@@ -96,7 +96,7 @@ class CommentController extends Controller
      */
     public function delete(int $id): RedirectResponse
     {
-        $comment = Comment::findOrFail($id);
+        $comment = BlogComment::findOrFail($id);
 
         $this->authorize('delete', $comment);
 

@@ -14,35 +14,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Users
-        $this->call(UsersTableSeed::class);
-        $this->call(AccountsTableSeed::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(AccountsTableSeeder::class);
 
         // Blog
-        $this->call(BlogCategoriesTableSeed::class);
-        $this->call(BlogArticlesTableSeed::class);
-        $this->call(BlogCommentsTableSeed::class);
+        $this->call(BlogCategoriesTableSeeder::class);
+        $this->call(BlogArticlesTableSeeder::class);
+        $this->call(BlogCommentsTableSeeder::class);
 
         // Permissions
-        $this->call(RolesTableSeed::class);
-        $this->call(PermissionsTableSeed::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
         $this->call(RoleHasPermissionsTableSeeder::class);
         $this->call(ModelHasPermissionsTableSeeder::class);
+        $this->call(ModelHasRolesTableSeeder::class);
 
         // Badges
-        $this->call(BadgesTableSeed::class);
-        $this->call(BadgesUsersTableSeed::class);
+        $this->call(BadgesTableSeeder::class);
+        $this->call(BadgesUsersTableSeeder::class);
 
         // Discuss
-        $this->call(DiscussCategoriesTableSeed::class);
-        $this->call(DiscussConversationsTableSeed::class);
-        $this->call(DiscussPostsTableSeed::class);
-        $this->call(DiscussUsersTableSeed::class);
-        $this->call(DiscussLogsTableSeed::class);
+        $this->call(DiscussCategoriesTableSeeder::class);
+        $this->call(DiscussConversationsTableSeeder::class);
+        $this->call(DiscussPostsTableSeeder::class);
+        $this->call(DiscussUsersTableSeeder::class);
+        $this->call(DiscussLogsTableSeeder::class);
 
         // Experiences & Rubies
-        $this->call(ExperiencesTableSeed::class);
+        $this->call(ExperiencesTableSeeder::class);
 
         // Settings
-        $this->call(SettingsTableSeed::class);
+        $this->call(SettingsTableSeeder::class);
     }
 }

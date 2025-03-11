@@ -5,7 +5,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RolesTableSeed extends Seeder
+class RolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,7 +19,7 @@ class RolesTableSeed extends Seeder
             [
                 'name' => 'Developer',
                 'description' => '',
-                'css' => 'font-weight: bold; color: #ef3c3c;',
+                'color' => '#ef3c3c',
                 'level' => 100,
                 'guard_name' => 'web',
                 'created_at' => $now,
@@ -28,7 +28,7 @@ class RolesTableSeed extends Seeder
             [
                 'name' => 'Administrator',
                 'description' => '',
-                'css' => 'font-weight: bold; color: #14e8e1;',
+                'color' => '#14e8e1',
                 'level' => 90,
                 'guard_name' => 'web',
                 'created_at' => $now,
@@ -37,7 +37,7 @@ class RolesTableSeed extends Seeder
             [
                 'name' => 'Moderator',
                 'description' => '',
-                'css' => 'font-weight: bold; color: #5ccc5c;',
+                'color' => '#5ccc5c',
                 'level' => 80,
                 'guard_name' => 'web',
                 'created_at' => $now,
@@ -46,7 +46,7 @@ class RolesTableSeed extends Seeder
             [
                 'name' => 'User',
                 'description' => '',
-                'css' => 'font-weight: bold;',
+                'color' => '',
                 'level' => 10,
                 'guard_name' => 'web',
                 'created_at' => $now,
@@ -55,7 +55,7 @@ class RolesTableSeed extends Seeder
             [
                 'name' => 'Banished',
                 'description' => '',
-                'css' => 'font-weight: bold; color: #843729;',
+                'color' => '#843729',
                 'level' => 0,
                 'guard_name' => 'web',
                 'created_at' => $now,

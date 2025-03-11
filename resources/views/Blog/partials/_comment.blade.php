@@ -13,7 +13,7 @@
     </aside>
 
     <div class="flex flex-col sm:ml-3 self-start mt-5 w-full group">
-        {{-- Comment Meta --}}
+        {{-- BlogComment Meta --}}
         <header class="flex flex-col sm:flex-row justify-between">
             <div class="flex flex-col sm:flex-row items-center">
                 {{-- User XP --}}
@@ -51,12 +51,12 @@
             <discuss-share
                 class="sm:opacity-0 sm:group-hover:opacity-100"
                 :post-id="{{ var_export($comment->getKey()) }}"
-                :post-type="{{ var_export('Comment') }}"
+                :post-type="{{ var_export('BlogComment') }}"
                 :route-input="{{ var_export(route('blog.comment.show', ['id' => $comment->getKey()])) }}">
             </discuss-share>
         </header>
 
-        {{-- Comment Content --}}
+        {{-- BlogComment Content --}}
         <div class="prose min-w-full my-4">
             {!! $comment->content_markdown !!}
         </div>
@@ -69,7 +69,7 @@
                 @endempty
             </div>
 
-            {{-- Comment Actions --}}
+            {{-- BlogComment Actions --}}
             @auth
                 @canany(['update', 'delete'], $comment)
                     <div class="dropdown dropdown-end self-start sm:opacity-0 sm:group-hover:opacity-100">

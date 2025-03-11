@@ -6,14 +6,14 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DiscussLogsTableSeed extends Seeder
+class DiscussLogsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $now = Carbon::now()->addMinutes(2);
 

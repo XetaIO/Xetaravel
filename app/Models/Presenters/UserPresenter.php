@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Presenters;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -72,10 +74,6 @@ trait UserPresenter
      */
     public function getFullNameAttribute(): string
     {
-        if ($this->trashed()) {
-            return $this->username;
-        }
-
         $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
 
         if (empty(trim($fullName))) {
@@ -184,10 +182,6 @@ trait UserPresenter
     {
         if (!isset($this->slug)) {
             return '';
-        }
-
-        if ($this->trashed()) {
-            return route('users.user.show', ['slug' => strtolower($this->username)]);
         }
 
         return route('users.user.show', ['slug' => $this->slug]);

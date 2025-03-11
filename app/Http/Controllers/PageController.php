@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
-use Xetaravel\Models\Article;
+use Xetaravel\Models\BlogArticle;
 use Xetaravel\Mail\Contact;
 
 class PageController extends Controller
@@ -17,11 +19,11 @@ class PageController extends Controller
     /**
      * Show the home page.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|object|View
      */
     public function index()
     {
-        $article = Article::with('category', 'user')
+        $article = BlogArticle::with('category', 'user')
             ->latest()
             ->first();
 

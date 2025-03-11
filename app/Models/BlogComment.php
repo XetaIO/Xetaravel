@@ -14,7 +14,7 @@ use Xetaravel\Models\Presenters\CommentPresenter;
 use Xetaravel\Observers\CommentObserver;
 
 #[ObservedBy([CommentObserver::class])]
-class Comment extends Model
+class BlogComment extends Model
 {
     use CommentPresenter;
     use FloodGate;
@@ -61,6 +61,6 @@ class Comment extends Model
     #[CountedBy]
     public function article(): BelongsTo
     {
-        return $this->belongsTo(Article::class);
+        return $this->belongsTo(BlogArticle::class);
     }
 }
