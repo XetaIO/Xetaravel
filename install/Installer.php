@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace XetaravelInstaller;
 
 use Composer\Script\Event;

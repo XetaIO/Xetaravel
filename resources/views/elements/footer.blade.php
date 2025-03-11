@@ -64,7 +64,7 @@
                 <span class="label-text">Enter your email address</span>
             </label>
             <div class="relative">
-				
+
             </div>
             </div>
         </div>
