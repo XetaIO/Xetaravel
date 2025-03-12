@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Xetaravel\Settings;
 
-use BDS\Models\Setting;
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Xetaravel\Models\Setting;
 
 class Settings
 {
@@ -69,7 +69,7 @@ class Settings
      * @param Model|array|null $context
      * Pattern :
      *  [
-     *      'type' => 'BDS\Models\User',
+     *      'type' => 'Xetaravel\Models\User',
      *      'id' => 1
      *  ]
      *

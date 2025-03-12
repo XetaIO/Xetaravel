@@ -1,9 +1,9 @@
-<footer class="footer sm:footer-horizontal p-10 bg-base-200 text-base-content">
+<footer class="footer sm:footer-horizontal md:justify-items-center p-10 bg-base-200 text-base-content">
 
         <nav>
             <h6 class="footer-title">Utils</h6>
             @guest
-                <a href="{{  route('users.auth.register')  }}" class="btn btn-outline px-4 py-2 rounded mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs gap-1">
+                <a href="{{  route('users.auth.register')  }}" class="btn btn-outline btn-primary px-4 py-2 rounded mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg"  class="h-6 w-6 fill-current" viewBox="0 0 640 512"><path d="M224 256c70.7 0 128-57.31 128-128S294.7 0 224 0C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3C0 496.5 15.52 512 34.66 512h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304zM616 200h-48v-48C568 138.8 557.3 128 544 128s-24 10.75-24 24v48h-48C458.8 200 448 210.8 448 224s10.75 24 24 24h48v48C520 309.3 530.8 320 544 320s24-10.75 24-24v-48h48C629.3 248 640 237.3 640 224S629.3 200 616 200z"/></svg>
                     Register
                 </a>
@@ -66,12 +66,14 @@
 <footer class="footer footer-horizontal footer-center p-10 bg-base-200 text-base-content">
     <hr class=" border-gray-200 sm:mx-auto dark:border-gray-700 my-2 h-0.5 w-full" />
 
-    <div class="lg:container lg:text-center w-full mx-auto">
+    <div class="w-full mx-auto">
         <div class="w-full">
             &copy; {{ date('Y', time()) }} {{ config('app.name') }}. All rights reserved.
         </div>
         <div class="w-full">
-            <i class="fa fa-code text-primary" style="font-weight: bold;"></i> with <i class="fa fa-heart" style="color: #fa6c65"></i> and <i class="fa fa-coffee" style="color: #826644"></i> by <a href="https://github.com/Xety" target="_blank" class="link link-hover link-primary">@Emeric</a>
+            <x-icon name="fas-code" class="h-5 w-5 font-bold inline"></x-icon> with
+            <x-icon name="fas-heart" class="h-4 w-4 inline" style="color: #fa1212"></x-icon> and
+            <x-icon name="fas-coffee" class="h-5 w-5 inline" style="color: #826644"></x-icon> by <a href="https://github.com/Xety" target="_blank" class="link link-hover link-primary">@Emeric</a>
         </div>
         <div class="w-full">
             Hosted with <a href="https://forge.laravel.com" target="_blank" class="link link-hover link-primary">Laravel Forge</a> and <a href="https://www.digitalocean.com" target="_blank" class="link link-hover link-primary">DigitalOcean</a>

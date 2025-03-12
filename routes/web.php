@@ -33,8 +33,7 @@ Route::group(['middleware' => ['auth', 'permission:show banished']], function ()
 */
 Route::group([
     'prefix' => 'auth',
-    'namespace' => 'Auth',
-    'middleware' => 'permission:access.site,allowGuest'
+    'namespace' => 'Auth'
 ], function () {
     Route::get('{driver}/redirect', 'SocialiteController@redirectToProvider')
         ->name('auth.driver.redirect');
@@ -51,7 +50,7 @@ Route::group([
 | Users Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allowGuest']], function () {
+Route::group(['prefix' => 'users'], function () {
 
     Route::get('profile/@{slug}', 'UserController@show')->name('users.user.show');
     Route::get('/', 'UserController@index')->name('users.user.index');
@@ -59,9 +58,11 @@ Route::group(['prefix' => 'users', 'middleware' => ['permission:access.site,allo
     // Auth Namespace
     Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes
-        Route::get('login', 'LoginController@showLoginForm')->name('users.auth.login');
-        Route::post('login', 'LoginController@login');
-        Route::post('logout', 'LoginController@logout')->name('users.auth.logout');
+        Route::get('login', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
+            ->name('users.auth.login');
+        Route::post('login', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'login']);
+        Route::post('logout', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'logout'])
+            ->name('users.auth.logout');
 
         // Registration Routes
         Route::get('register', 'RegisterController@showRegistrationForm')->name('users.auth.register');

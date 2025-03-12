@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Auth;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\View\View;
 use Xetaravel\Events\Badges\RegisterEvent;
@@ -30,21 +34,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected string $redirectTo = '/';
 
     /**
      * The maximum number of attempts to allow.
      *
      * @return int
      */
-    protected $maxAttempts = 5;
+    protected int $maxAttempts = 5;
 
     /**
      * The number of minutes to throttle for.
      *
      * @return int
      */
-    protected $decayMinutes = 10;
+    protected int $decayMinutes = 10;
 
     /**
      * Create a new controller instance.
@@ -57,7 +61,7 @@ class LoginController extends Controller
     /**
      * Show the application's login form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showLoginForm(): View
     {
@@ -93,7 +97,7 @@ class LoginController extends Controller
 
             $user = $request->user()->getKey();
 
-            $this->logout($request, true);
+            $this->logout($request);
 
             return redirect(route('users.auth.verification.notice', base64_encode($user)));
 
@@ -121,27 +125,33 @@ class LoginController extends Controller
             ->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
-                $this->username() => Lang::get('auth.failed'),
-                'password' => Lang::get('auth.failed')
+                $this->username() => trans('auth.failed'),
+                'password' => trans('auth.failed')
             ]);
     }
 
     /**
      * Log the user out of the application.
      *
-     * @param \Illuminate\Http\Request $request The request object.
+     * @param Request $request The request object.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse|JsonResponse
      */
-    public function logout(Request $request): RedirectResponse
+    public function logout(Request $request): RedirectResponse|JsonResponse
     {
         $this->guard()->logout();
 
-        $request->session()->flush();
-        $request->session()->regenerate();
+        $request->session()->invalidate();
 
-        return redirect('/')
-            ->with('success', 'Thanks for your visit. See you soon !');
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/')->success('Thanks for your visit. See you soon !');
     }
 
     /**

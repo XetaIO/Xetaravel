@@ -10,37 +10,35 @@
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3">
             <div class="flex flex-col items-center">
-                @if (config('settings.user.login.enabled'))
+                @if (settings('app_login_enabled'))
                     <div>
                         <h1 class="text-3xl font-xetaravel text-center mb-2">
                             Login
                         </h1>
 
-                        <x-form.form method="post" action="{{ route('users.auth.login') }}">
-                            {!! Form::bsEmail('email', 'E-Mail', old('email'), [
-                                'placeholder' => 'Your E-Mail...',
-                                'required' => 'required',
-                                'autofocus'
-                            ]) !!}
+                        <x-form method="post" action="{{ route('users.auth.login') }}">
+                            <x-input class="input-primary" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
+                            <x-password class="input-primary" label="Password" placeholder="Your Password..." required inline />
 
-                            {!! Form::bsPassword('password', 'Password', [
-                                'placeholder' => 'Your Password...',
-                                'required' => 'required'
-                            ]) !!}
-
-                            {!! Form::bsCheckbox("remember", null, old('remember'), "Remember Me") !!}
+                            <fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
+                                <legend class="fieldset-legend">Login options</legend>
+                                <label class="fieldset-label">
+                                    <input name="remember" type="checkbox" checked="checked" class="checkbox" />
+                                    Remember me
+                                </label>
+                            </fieldset>
 
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary gap-2">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    <x-icon name="fas-right-to-bracket" class="h-4 w-4 inline"></x-icon>
                                     Login
                                 </button>
                             </div>
-                        </x-form.form>
+                        </x-form>
 
                         <div class="text-center mb-3">
                             <a class="btn gap-2" href="{{ route('auth.driver.redirect', ['driver' => 'github']) }}">
-                                Login with Github <i class="fa-brands fa-github"></i>
+                                Login with Github <x-icon name="fab-github" class="h-4 w-4 inline"></x-icon>
                             </a>
                         </div>
                     </div>
@@ -58,9 +56,12 @@
                         <h1 class="text-3xl font-xetaravel text-center mb-4">
                             Whoops
                         </h1>
-                        <x-alert type="error" class="max-w-lg mb-4">
-                            The login system is currently disabled, please try again later.
-                        </x-alert>
+                        <div role="alert" class="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>The login system is currently disabled, please try again later..</span>
+                        </div>
                     </div>
                 @endif
             </div>

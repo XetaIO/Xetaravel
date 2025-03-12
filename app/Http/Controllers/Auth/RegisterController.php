@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Auth\Events\Registered;
