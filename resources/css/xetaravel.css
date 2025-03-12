@@ -1,5 +1,18 @@
 @import 'tailwindcss';
 
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+}
+@plugin "daisyui/theme" {
+    name: "light";
+    --color-primary: #f4645f;
+}
+@plugin "daisyui/theme" {
+    name: "dark";
+    default: true;
+    --color-primary: #f4645f;
+}
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source "../**/*.blade.php";
