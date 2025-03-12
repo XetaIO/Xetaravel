@@ -45,7 +45,7 @@ jobs:
 
             - name: Copy .env
               run: |
-                php -r "file_exists('.env') || copy('.env.example', '.env');"
+                php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
             - name: Install dependencies
               run: composer update --prefer-dist --no-interaction
