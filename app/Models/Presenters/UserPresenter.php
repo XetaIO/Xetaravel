@@ -15,26 +15,14 @@ trait UserPresenter
      *
      * @var string
      */
-    protected $defaultAvatar = '/images/avatar.png';
+    protected string $defaultAvatar = '/images/avatar.png';
 
     /**
      * The default primary color used when there is no primary color defined.
      *
      * @var string
      */
-    protected $defaultAvatarPrimaryColor = '#B4AEA4';
-
-    /**
-     * Get the user's username.
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function username(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $this->trashed() ? 'Deleted' : $value
-        );
-    }
+    protected string $defaultAvatarPrimaryColor = '#B4AEA4';
 
     /**
      * Get the account first name.

@@ -19,9 +19,9 @@ class Controller extends BaseController
     /**
      * The current Breadcrumbs instance.
      *
-     * @var \Xety\Breadcrumbs\Breadcrumbs
+     * @var Breadcrumbs
      */
-    protected $breadcrumbs;
+    protected Breadcrumbs $breadcrumbs;
 
     /**
      * Constructor.

@@ -52,8 +52,8 @@ Route::group([
 */
 Route::group(['prefix' => 'users'], function () {
 
-    Route::get('profile/@{slug}', 'UserController@show')->name('users.user.show');
-    Route::get('/', 'UserController@index')->name('users.user.index');
+    Route::get('profile/@{slug}', [Xetaravel\Http\Controllers\UserController::class, 'show'])->name('users.user.show');
+    Route::get('/', [Xetaravel\Http\Controllers\UserController::class, 'index'])->name('users.user.index');
 
     // Auth Namespace
     Route::group(['namespace' => 'Auth'], function () {
@@ -65,25 +65,25 @@ Route::group(['prefix' => 'users'], function () {
             ->name('users.auth.logout');
 
         // Registration Routes
-        Route::get('register', 'RegisterController@showRegistrationForm')->name('users.auth.register');
-        Route::post('register', 'RegisterController@register');
+        Route::get('register', [Xetaravel\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('users.auth.register');
+        Route::post('register', [Xetaravel\Http\Controllers\Auth\RegisterController::class, 'register']);
 
         // Password Reset Routes
-        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')
+        Route::get('password/reset', [Xetaravel\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])
             ->name('users.auth.password.request');
-        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
+        Route::post('password/email', [Xetaravel\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
             ->name('users.auth.password.email');
-        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')
+        Route::get('password/reset/{token}', [Xetaravel\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])
             ->name('users.auth.password.reset');
-        Route::post('password/reset', 'ResetPasswordController@reset')
+        Route::post('password/reset', [Xetaravel\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
             ->name('users.auth.password.handlereset');
 
         // Email Verification Routes
-        Route::get('email/verify/{hash}', 'VerificationController@show')
+        Route::get('email/verify/{hash}', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'show'])
             ->name('users.auth.verification.notice');
-        Route::get('email/verify/{id}/{hash}', 'VerificationController@verify')
+        Route::get('email/verify/{id}/{hash}', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'verify'])
             ->name('users.auth.verification.verify');
-        Route::post('email/resend', 'VerificationController@resend')
+        Route::post('email/resend', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'resend'])
             ->name('users.auth.verification.resend');
     });
 

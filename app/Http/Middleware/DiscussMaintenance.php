@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class DiscussMaintenance
 {
@@ -17,21 +20,25 @@ class DiscussMaintenance
      * @param Request $request
      * @param Closure $next
      *
+     * @return RedirectResponse|mixed
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         // If the discuss is disabled and the user is not admin.
-        if ((!Auth::user() && config('settings.discuss.enabled') == false) ||
-            (config('settings.discuss.enabled') == false && Auth::user()->level() < 4)
+        if ((!Auth::user() && !settings('discuss_enabled')) ||
+            (!settings('discuss_enabled') && Auth::user()->level() < 4)
         ) {
             return redirect()
                         ->route('page.index')
-                        ->with('danger', 'Le système de discussion est temporairement désactivé.');
+                        ->error('Le système de discussion est temporairement désactivé. ');
         }
 
         // If the discuss is disabled and the user is admin.
-        if (config('settings.discuss.enabled') == false && Auth::user()->level() >= 4) {
-            Session::flash('danger', 'Le système de discussion est actuellement désactivé.');
+        if (!settings('discuss_enabled') && Auth::user()->level() >= 100) {
+            Session::flash('error', 'Le système de discussion est actuellement désactivé.');
         }
 
         return $next($request);

@@ -1,7 +1,7 @@
 <aside class="drawer-side">
     <label for="xetaravel-drawer" class="drawer-overlay"></label>
     <!--Website Menu-->
-    <div class="menu w-80 bg-base-100">
+    <div class="menu w-80 bg-base-100 min-h-full">
         <ul class="p-4">
             <li>
                 <a class="flex items-center justify-center font-bold text-3xl font-xetaravel  hover:bg-transparent focus:bg-transparent active:bg-transparent" href="{{ route('page.index') }}">
@@ -43,8 +43,8 @@
                     <span>Blog</span>
                 </a>
             </li>
-            @if (config('settings.discuss.enabled') ||
-                        (!config('settings.discuss.enabled') && !is_null(Auth::user()) && Auth::user()->level() >= 4))
+            @if (settings('discuss_enabled') ||
+                        (!settings('discuss_enabled') && !is_null(Auth::user()) && Auth::user()->level >= 90))
                 <li>
                     <a href="{{ route('discuss.index') }}" class="group hover:shadow rounded-[var(--rounded-btn)]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary group-active:text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Xetaravel\Http\Controllers\Auth;
 
-use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\View\View;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
@@ -55,7 +52,10 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->only('logout');
     }
 
     /**
@@ -89,6 +89,8 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
+
+
 
         if ($this->attemptLogin($request)) {
             if ($request->user()->hasVerifiedEmail()) {

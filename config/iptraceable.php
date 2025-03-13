@@ -13,6 +13,6 @@ return [
     */
     'fields' => [
         'last_login_ip' => 'last_login_ip',
-        'last_login_date' => 'last_login'
+        'last_login_date' => 'last_login_date'
     ]
 ];

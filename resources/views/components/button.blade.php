@@ -2,17 +2,17 @@
     <a href="{!! $link !!}"
 @else
     <button
+        {{ $attributes->whereDoesntStartWith('class')->merge(['type' => 'button']) }}
 @endif
 
         wire:key="{{ $uuid }}"
-        {{ $attributes->whereDoesntStartWith('class')->merge(['type' => 'button']) }}
         {{ $attributes->class(['btn', "!inline-flex lg:tooltip $tooltipPosition" => $tooltip]) }}
 
         @if($link && $external)
             target="_blank"
         @endif
 
-        @if($link && !$external && !$noWireNavigate)
+        @if($link && !$external && $wireNavigate)
             wire:navigate
         @endif
 
@@ -34,15 +34,15 @@
         <!-- ICON -->
         @if($icon)
             <span class="block" @if($spinner) wire:loading.class="hidden" wire:target="{{ $spinnerTarget() }}" @endif>
-                            <x-icon :name="$icon" />
-                        </span>
+                <x-icon :name="$icon" :class="$iconClasses" />
+            </span>
         @endif
 
         <!-- LABEL / SLOT -->
         @if($label)
             <span @class(["hidden lg:block" => $responsive ])>
-                            {{ $label }}
-                        </span>
+                {{ $label }}
+            </span>
             @if(strlen($badge ?? '') > 0)
                 <span class="badge badge-sm {{ $badgeClasses }}">{{ $badge }}</span>
             @endif
@@ -53,8 +53,8 @@
         <!-- ICON RIGHT -->
         @if($iconRight)
             <span class="block" @if($spinner) wire:loading.class="hidden" wire:target="{{ $spinnerTarget() }}" @endif>
-                            <x-icon :name="$iconRight" />
-                        </span>
+                <x-icon :name="$iconRight" :class="$iconClasses" />
+            </span>
         @endif
 
         <!-- SPINNER RIGHT -->

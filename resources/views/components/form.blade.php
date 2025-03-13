@@ -2,6 +2,8 @@
     {{ $attributes->whereDoesntStartWith('class') }}
     {{ $attributes->class(['grid grid-flow-row auto-rows-min gap-3']) }}
 >
+    <!-- CSRF -->
+    @csrf
 
     {{ $slot }}
 

@@ -15,11 +15,12 @@ class Button extends Component
     public function __construct(
         public ?string $label = null,
         public ?string $icon = null,
+        public ?string $iconClasses = null,
         public ?string $iconRight = null,
         public ?string $spinner = null,
         public ?string $link = null,
         public ?bool $external = false,
-        public ?bool $noWireNavigate = false,
+        public ?bool $wireNavigate = false,
         public ?bool $responsive = false,
         public ?string $badge = null,
         public ?string $badgeClasses = null,

@@ -17,29 +17,17 @@
                         </h1>
 
                         <x-form method="post" action="{{ route('users.auth.login') }}">
-                            <x-input class="input-primary" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
-                            <x-password class="input-primary" label="Password" placeholder="Your Password..." required inline />
-
-                            <fieldset class="fieldset p-4 bg-base-100 border border-base-300 rounded-box w-64">
-                                <legend class="fieldset-legend">Login options</legend>
-                                <label class="fieldset-label">
-                                    <input name="remember" type="checkbox" checked="checked" class="checkbox" />
-                                    Remember me
-                                </label>
-                            </fieldset>
+                            <x-input class="input-primary" name="email" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
+                            <x-password class="input-primary" name="password" label="Password" placeholder="Your Password..." required inline />
+                            <x-checkbox label="Remember me" name="remember" />
 
                             <div class="text-center mb-3">
-                                <button type="submit" class="btn btn-primary gap-2">
-                                    <x-icon name="fas-right-to-bracket" class="h-4 w-4 inline"></x-icon>
-                                    Login
-                                </button>
+                                <x-button icon="fas-right-to-bracket" icon-classes="h-4 w-4" type="submit" label="Login" class="btn-primary gap-2" />
                             </div>
                         </x-form>
 
                         <div class="text-center mb-3">
-                            <a class="btn gap-2" href="{{ route('auth.driver.redirect', ['driver' => 'github']) }}">
-                                Login with Github <x-icon name="fab-github" class="h-4 w-4 inline"></x-icon>
-                            </a>
+                            <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" icon-classes="h-4 w-4" label="Login with Github" class="gap-2" />
                         </div>
                     </div>
 
