@@ -9,8 +9,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Masmerise\Toaster\Toaster;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
+use Xetaravel\Models\User;
 
 class LoginController extends Controller
 {
@@ -71,14 +73,23 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
     {
         $this->validateLogin($request);
+
+        // Check if the login is not disabled, if yes check if the user is allowed to bypass it.
+        $user = User::where($this->username(), $request->{$this->username()})->first();
+
+        if (!settings('app_login_enabled') && !$user->hasPermissionTo('bypass login')) {
+            return redirect()
+                ->route('/')
+                ->error('The login system is currently disabled, please try again later.');
+        }
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -117,9 +128,9 @@ class LoginController extends Controller
     /**
      * Get the failed login response instance.
      *
-     * @param \Illuminate\Http\Request $request The request object.
+     * @param Request $request The request object.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     protected function sendFailedLoginResponse(Request $request): RedirectResponse
     {
@@ -133,44 +144,30 @@ class LoginController extends Controller
     }
 
     /**
-     * Log the user out of the application.
-     *
-     * @param Request $request The request object.
-     *
-     * @return RedirectResponse|JsonResponse
-     */
-    public function logout(Request $request): RedirectResponse|JsonResponse
-    {
-        $this->guard()->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        if ($response = $this->loggedOut($request)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect('/')->success('Thanks for your visit. See you soon !');
-    }
-
-    /**
      * The user has been authenticated.
      *
-     * @param \Illuminate\Http\Request $request The request object.
-     * @param \Xetaravel\Models\User $user The user that has been logged in.
+     * @param Request $request The request object.
+     * @param User $user The user that has been logged in.
      *
      * @return void
      */
-    protected function authenticated(Request $request, $user)
+    protected function authenticated(Request $request, User $user)
     {
         event(new RegisterEvent($user));
 
-        $request->session()->flash(
-            'success',
-            'Welcome back <strong>' . e($user->username) . '</strong>! You\'re successfully connected !'
-        );
+        Toaster::success("Welcome back <b>{$user->username}</b> !  You're successfully connected !");
+    }
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/')
+            ->success('Thanks for your visit. See you soon !');
     }
 }
