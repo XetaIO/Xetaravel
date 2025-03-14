@@ -68,6 +68,12 @@ jobs:
                   DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
             - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v2
+              uses: codecov/codecov-action@v5
               with:
-                files: build/logs/coverage.xml
+                token: ${{ secrets.CODECOV_TOKEN }}
+
+            - name: Upload test results to Codecov
+              if: ${{ !cancelled() }}
+              uses: codecov/test-results-action@v1
+              with:
+               token: ${{ secrets.CODECOV_TOKEN }}
