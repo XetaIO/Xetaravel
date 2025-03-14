@@ -51,7 +51,7 @@ trait UserPresenter
      */
     public function getHasRubiesAttribute(): bool
     {
-        return $this->rubies_total > 0 ? true : false;
+        return $this->rubies_total > 0;
     }
 
     /**
@@ -74,9 +74,11 @@ trait UserPresenter
     /**
      * Get the experiences total formated.
      *
-     * @return integer
+     * @param $experiencesTotal
+     *
+     * @return string
      */
-    public function getExperiencesTotalAttribute($experiencesTotal): int
+    public function getExperiencesTotalAttribute($experiencesTotal): string
     {
         return number_format($experiencesTotal, 0, ".", " ");
     }
@@ -204,13 +206,27 @@ trait UserPresenter
     /**
      * Get the status of the user : online or offline
      *
-     * @return string
+     * @return Attribute
      */
-    public function getOnlineAttribute(): string
+    protected function online(): Attribute
     {
         $online = Session::expires()->where('user_id', $this->id)->first();
 
-        return is_null($online) ? false : true;
+        return Attribute::make(
+            get: fn () => !is_null($online)
+        );
+    }
+
+    /**
+     * Get the max role level of the user.
+     *
+     * @return Attribute
+     */
+    protected function level(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($role = $this->roles->sortByDesc('level')->first()) ? $role->level : 0
+        );
     }
 
     /**

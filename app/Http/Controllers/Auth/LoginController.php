@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Masmerise\Toaster\Toaster;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
@@ -74,9 +75,11 @@ class LoginController extends Controller
      * Handle a login request to the application.
      *
      * @param Request $request
-     * @return RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function login(Request $request)
     {
@@ -108,13 +111,11 @@ class LoginController extends Controller
                 return $this->sendLoginResponse($request);
             }
 
-            $user = $request->user()->getKey();
+            //$user = $request->user()->getKey();
 
             $this->logout($request);
 
-            return redirect(route('users.auth.verification.notice', base64_encode($user)));
-
-            //return $this->sendLoginResponse($request);
+            return redirect(route('users.auth.verification.notice', sha1($user->getEmailForVerification())));
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
