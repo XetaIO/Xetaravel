@@ -10,6 +10,7 @@ use Eloquence\Behaviours\HasSlugs;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -71,12 +72,9 @@ class BlogArticle extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('article.banner')
-                ->width(870)
-                ->height(350)
-                ->keepOriginalImageFormat();
-
-        $this->addMediaConversion('original')
-                ->keepOriginalImageFormat();
+            ->fit(Fit::Contain, 870, 350)
+            ->keepOriginalImageFormat()
+            ->nonQueued();
     }
 
     /**

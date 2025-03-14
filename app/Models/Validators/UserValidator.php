@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Validators;
 
 use Illuminate\Support\Facades\App;
@@ -10,35 +12,11 @@ use Illuminate\Validation\Validator;
 class UserValidator
 {
     /**
-     * Get the validator for an incoming registration request.
-     *
-     * @param array $data The data to validate.
-     *
-     * @return \Illuminate\Validation\Validator
-     */
-    public static function create(array $data): Validator
-    {
-        $rules = [
-            'username' => 'required|alpha_num|min:4|max:20|unique:users',
-            'email' => 'required|email|max:50|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'terms' => 'required|min:1'
-        ];
-
-        // Bipass the captcha for the unit testing.
-        if (App::environment() !== 'testing') {
-            $rules = array_merge($rules, ['g-recaptcha-response' => 'required|captcha']);
-        }
-
-        return FacadeValidator::make($data, $rules);
-    }
-
-    /**
      * Get the validator for an incoming registration request with a social provider.
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function createWithProvider(array $data): Validator
     {
@@ -56,7 +34,7 @@ class UserValidator
      * @param array $data The data to validate.
      * @param int $id The actual user id to ignore the username rule.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function update(array $data, int $id): Validator
     {
@@ -89,7 +67,7 @@ class UserValidator
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function updateEmail(array $data): Validator
     {
@@ -105,7 +83,7 @@ class UserValidator
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function updatePassword(array $data): Validator
     {
@@ -122,7 +100,7 @@ class UserValidator
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function createPassword(array $data): Validator
     {

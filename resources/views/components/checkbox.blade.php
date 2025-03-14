@@ -17,7 +17,7 @@
                 {{-- LABEL --}}
                 <div @class(["order-1" => $right])>
                     <div class="text-sm font-medium">
-                        {{ $label }}
+                        {!! $label !!}
 
                         @if($attributes->get('required'))
                             <span class="text-error">*</span>

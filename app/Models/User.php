@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models;
 
+use Eloquence\Behaviours\HasSlugs;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -35,6 +37,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authorizable;
     use CanResetPassword;
     use HasRoles;
+    use HasSlugs;
     use InteractsWithMedia;
     use MustVerifyEmail;
     use Notifiable;
@@ -111,27 +114,34 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
+     * Return the field to slug.
+     *
+     * @return string
+     */
+    public function slugStrategy(): string
+    {
+        return 'username';
+    }
+
+    /**
      * Register the related to the Model.
      */
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail.small')
-            ->width(100)
-            ->height(100)
-            ->keepOriginalImageFormat();
+            ->fit(Fit::Contain, 100, 100)
+            ->keepOriginalImageFormat()
+            ->nonQueued();
 
         $this->addMediaConversion('thumbnail.medium')
-            ->width(200)
-            ->height(200)
-            ->keepOriginalImageFormat();
+            ->fit(Fit::Contain, 200, 200)
+            ->keepOriginalImageFormat()
+            ->nonQueued();
 
         $this->addMediaConversion('thumbnail.big')
-            ->width(300)
-            ->height(300)
-            ->keepOriginalImageFormat();
-
-        $this->addMediaConversion('original')
-            ->keepOriginalImageFormat();
+            ->fit(Fit::Contain, 300, 300)
+            ->keepOriginalImageFormat()
+            ->nonQueued();
     }
 
     /**

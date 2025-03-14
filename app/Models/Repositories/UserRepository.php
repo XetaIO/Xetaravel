@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
@@ -29,7 +31,7 @@ class UserRepository
      * @param array $providerData The additional data provided by the provider.
      * @param bool $provider Whether the user is registered with a Social Provider.
      *
-     * @return \Xetaravel\Models\User
+     * @return User
      */
     public static function create(array $data, array $providerData = [], bool $provider = false): User
     {
@@ -40,7 +42,7 @@ class UserRepository
             'email' => $data['email'],
             'register_ip' => $ip,
             'last_login_ip' => $ip,
-            'last_login' => new \DateTime()
+            'last_login_date' => new \DateTime()
         ];
 
         if ($provider === false) {
@@ -58,7 +60,7 @@ class UserRepository
      * Update the user informations after a valid update request.
      *
      * @param array $data The data used to update the user.
-     * @param \Xetaravel\Models\User $user The user to update.
+     * @param User $user The user to update.
      *
      * @return bool
      */
@@ -74,7 +76,7 @@ class UserRepository
      * Update the user's email after a valid email update.
      *
      * @param array $data The data used to update the user.
-     * @param \Xetaravel\Models\User $user The user to update.
+     * @param User $user The user to update.
      *
      * @return bool
      */
@@ -89,7 +91,7 @@ class UserRepository
      * Update the user's password after a valid password update.
      *
      * @param array $data The data used to update the user.
-     * @param \Xetaravel\Models\User $user The user to update.
+     * @param User $user The user to update.
      *
      * @return bool
      */
@@ -104,7 +106,7 @@ class UserRepository
      * Create the user's password after a valid password create. (For Discord Users)
      *
      * @param array $data The data used to update the user.
-     * @param \Xetaravel\Models\User $user The user to update.
+     * @param User $user The user to update.
      *
      * @return bool
      */

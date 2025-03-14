@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\MediaLibrary\PathGenerator;
 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -10,6 +12,8 @@ class XetaravelPathGenerator implements PathGenerator
     /**
      * Get the path for the given media, relative to the root storage path.
      *
+     * @param Media $media
+     *
      * @return string
      */
     public function getPath(Media $media): string
@@ -19,6 +23,8 @@ class XetaravelPathGenerator implements PathGenerator
 
     /**
      * Get the path for conversions of the given media, relative to the root storage path.
+     *
+     * @param Media $media
      *
      * @return string
      */

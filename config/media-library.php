@@ -6,7 +6,7 @@ return [
      * The disk on which to store added files and derived images by default. Choose
      * one or more of the disks you've configured in config/filesystems.php.
      */
-    'disk_name' => env('MEDIA_DISK', 'public'),
+    'disk_name' => env('MEDIA_DISK', 'media'),
 
     /*
      * The maximum file size of an item in bytes.
@@ -81,7 +81,7 @@ return [
     /*
      * The class that contains the strategy for determining a media file's path.
      */
-    'path_generator' => Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class,
+    'path_generator' => Xetaravel\MediaLibrary\PathGenerator\XetaravelPathGenerator::class,
 
     /*
      * The class that contains the strategy for determining how to remove files.
@@ -92,7 +92,7 @@ return [
      * Here you can specify which path generator should be used for the given class.
      */
     'custom_path_generators' => [
-        Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class => Xetaravel\MediaLibrary\PathGenerator\XetaravelPathGenerator::class
+        //Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class => Xetaravel\MediaLibrary\PathGenerator\XetaravelPathGenerator::class
         // or
         // 'model_morph_alias' => PathGenerator::class
     ],

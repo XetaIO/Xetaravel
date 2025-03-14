@@ -18,7 +18,6 @@ class Checkbox extends Component
         public ?string $hintClass = 'fieldset-label',
 
         // Validations
-        public ?string $errorField = null,
         public ?string $errorClass = 'text-error',
         public ?bool $omitError = false,
         public ?bool $firstErrorOnly = false,
@@ -33,7 +32,7 @@ class Checkbox extends Component
 
     public function errorFieldName(): ?string
     {
-        return $this->errorField ?? $this->modelName();
+        return $this->modelName() ?? $this->attributes->whereStartsWith('name')->first();
     }
 
     /**

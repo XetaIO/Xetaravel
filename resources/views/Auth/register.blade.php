@@ -14,35 +14,19 @@
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3">
             <div class="flex flex-col items-center">
-                @if (config('settings.user.register.enabled'))
+                @if (settings('app_register_enabled'))
                     <div>
                         <h1 class="text-3xl font-xetaravel text-center mb-2">
                             Register
                         </h1>
 
-                        <x-form.form method="post" action="{{ route('users.auth.register') }}">
-                            {!! Form::bsText('username', 'Username', old('username'), [
-                                'placeholder' => 'Your Username...',
-                                'required' => 'required',
-                                'autofocus'
-                            ]) !!}
+                        <x-form method="post" action="{{ route('users.auth.register') }}">
+                            <x-input class="input-primary" name="username" label="Username" value="{{ old('username') }}" placeholder="Your E-Mail..." icon="fas-user" required autofocus inline />
+                            <x-input class="input-primary" name="email" label="Email" value="{{ old('email') }}" placeholder="Your E-Mail..." icon="fas-at" required inline />
+                            <x-password class="input-primary" name="password" label="Password" placeholder="Your Password..." required inline />
+                            <x-password class="input-primary" name="password_confirmation" label="Confirm Password" placeholder="Confirm your Password..." required inline />
 
-                            {!! Form::bsEmail('email', 'E-Mail', old('email'), [
-                                'placeholder' => 'Your E-Mail...',
-                                'required' => 'required'
-                            ]) !!}
-
-                            {!! Form::bsPassword('password', 'Password', [
-                                'placeholder' => 'Your Password...',
-                                'required' => 'required'
-                            ]) !!}
-
-                            {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
-                                'placeholder' => 'Confirm your Password...',
-                                'required' => 'required'
-                            ]) !!}
-
-                            <div class="form-control my-2">
+                            <div class="form-control mx-auto">
                                 {!! NoCaptcha::display() !!}
                                 @if ($errors->has('g-recaptcha-response'))
                                     <label class="label">
@@ -51,19 +35,14 @@
                                 @endif
                             </div>
 
-                            {!! Form::bsCheckbox("terms", null, false, "By clicking on \"Register\", you accept that you have read and understand the Terms.") !!}
+                            <x-checkbox label="By clicking on 'Register', you accept that you have read and understand the <a class='link link-primary' href='{{ route('page.terms') }}'>Terms</a>." name="terms" />
 
                             <div class="text-center">
                                 <div class="mb-2">
-                                    <button type="submit" class="btn btn-primary gap-2">
-                                        <i class="fa-solid fa-user-plus"></i>
-                                        Register
-                                    </button>
+                                    <x-button icon="fas-user-plus" icon-classes="h-4 w-4" type="submit" label="Register" class="btn-primary gap-2" />
                                 </div>
                                 <div class="mb-2">
-                                    <a class="btn gap-2" href="{{ route('auth.driver.redirect', ['driver' => 'github']) }}">
-                                        Register with Github <i class="fa-brands fa-github"></i>
-                                    </a>
+                                    <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" icon-classes="h-4 w-4" label="Register with Github" class="gap-2" />
                                 </div>
                                 <div >
                                     <a class="link link-hover link-primary" href="{{ route('users.auth.login') }}">
@@ -71,7 +50,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </x-form.form>
+                        </x-form>
                     </div>
                 @else
                     <div>

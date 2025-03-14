@@ -31,7 +31,6 @@ class Input extends Component
         public mixed $append = null,
 
         // Validations
-        public ?string $errorField = null,
         public ?string $errorClass = 'text-error',
         public ?bool $omitError = false,
         public ?bool $firstErrorOnly = false,
@@ -46,7 +45,7 @@ class Input extends Component
 
     public function errorFieldName(): ?string
     {
-        return $this->errorField ?? $this->modelName();
+        return $this->modelName() ?? $this->attributes->whereStartsWith('name')->first();
     }
 
     public function moneySettings(): string
