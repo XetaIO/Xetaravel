@@ -69,7 +69,7 @@ class VerifyEmail extends Notification implements ShouldQueue
             Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
             [
                 'id' => $notifiable->getKey(),
-                'hash' => sha1($notifiable->getEmailForVerification()),
+                'hash' => base64_encode($notifiable->getEmailForVerification()),
             ]
         );
     }

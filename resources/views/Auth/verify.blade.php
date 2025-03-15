@@ -10,10 +10,10 @@
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3">
             <div class="flex flex-col items-center">
-                @if (config('settings.user.email.verification.enabled'))
+                @if (settings('user_email_verification_enabled'))
                     <div class="col-md-8 offset-md-2">
-                        <h1 class="text-xs-center font-xeta mt-2">
-                            Verify your Email!
+                        <h1 class="text-3xl font-xetaravel text-center mb-2">
+                            Verify your Email
                         </h1>
 
                         @if (session('resent'))
@@ -30,15 +30,13 @@
                             </p>
                         </x-alert>
 
-                        <x-form.form method="post" action="{{ route('auth.verification.resend') }}">
-                            {!! Form::hidden('hash', $hash); !!}
+                        <x-form method="post" action="{{ route('auth.verification.resend') }}">
+                            <x-input type="hidden" class="hidden" name="hash" value="{{ $hash }}" />
+
                             <div class="text-center mb-3">
-                                <button type="submit" class="btn btn-primary gap-2">
-                                    <i class="fa-regular fa-paper-plane"></i>
-                                    Resend
-                                </button>
+                                <x-button icon="far-paper-plane" icon-classes="h-4 w-4" type="submit" label="Resend" class="btn-primary gap-2" />
                             </div>
-                    </x-form.form>
+                        </x-form>
                     </div>
                 @else
                     <div>

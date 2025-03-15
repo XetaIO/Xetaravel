@@ -6,46 +6,165 @@
 @endpush
 
 @push('scripts')
-<script src="{{ asset('js/libs/typed.min.js') }}"></script>
-<script src="{{ asset('js/libs/parallax.min.js') }}"></script>
-<script src="{{ asset('js/libs/particles.min.js') }}"></script>
+    @vite('resources/js/typed.js')
+    @vite('resources/js/parallax.js')
+    @vite('resources/js/highlight.js')
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
 <script type="text/javascript">
-    var options = {
-        strings: ['<span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Create the project and install librairies</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">composer</span> create-project xetaio/xetaravel <span class="token operator">&lt;</span>application_name<span class="token operator">&gt;</span><br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Run the migration and seed the database</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan migrate<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan db:seed<br/><br/><span class="token comment select-none" spellcheck="true"><span class="hljs-comment"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">php</span> artisan vendor:publish --provider<span class="token operator">=</span><span class="token string"><span class="hljs-string">"Xetaio\\Editor\\EditorServiceProvider"</span></span><br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run install<br/><span class="hljs-meta select-none">&gt;</span><span class="select-none"> $ </span><span class="token function">npm</span> run production'],
-        typeSpeed: 40,
-        backSpeed: 2,
-        backDelay: 50000,
-        loop: true,
-        showCursor: false,
-        contentType: 'html'
-    };
+    document.addEventListener("DOMContentLoaded", function() {
+        const options = {
+            strings: ["<span class=\"token comment select-none\" spellcheck=\"true\"><span class=\"hljs-comment\"># Create the project and install librairies</span></span><br/><span class=\"hljs-meta select-none\">&gt;</span><span class=\"select-none\"> $ </span><span class=\"token function\">composer</span> create-project xetaio/xetaravel <span class=\"token operator\">&lt;</span>application_name<span class=\"token operator\">&gt;</span><br/><br/><span class=\"token comment select-none\" spellcheck=\"true\"><span class=\"hljs-comment\"># Run the migration and seed the database</span></span><br/><span class=\"hljs-meta select-none\">&gt;</span><span class=\"select-none\"> $ </span><span class=\"token function\">php</span> artisan migrate<br/><span class=\"hljs-meta select-none\">&gt;</span><span class=\"select-none\"> $ </span><span class=\"token function\">php</span> artisan db:seed<br/><br/><span class=\"token comment select-none\" spellcheck=\"true\"><span class=\"hljs-comment\"># Finally, you need to install and build the JS, CSS and Vue</span></span><br/><span class=\"hljs-meta select-none\">&gt;</span><span class=\"select-none\"> $ </span><span class=\"token function\">php</span> artisan vendor:publish --provider<span class=\"token operator\">=</span><span class=\"token string\"><span class=\"hljs-string\">\"Xetaio\\Editor\\EditorServiceProvider\"</span></span><br/><span class=\"hljs-meta select-none\">&gt;</span><span class=\"select-none\"> $ </span><span class=\"token function\">npm</span> run install<br/><span class=\"hljs-meta select-none\">&gt;</span><span class=\"select-none\"> $ </span><span class=\"token function\">npm</span> run production"],
+            typeSpeed: 40,
+            backSpeed: 2,
+            backDelay: 50000,
+            loop: true,
+            showCursor: false,
+            contentType: "html"
+        };
+        new Typed(".terminal-container-code", options);
 
-    var typed = new Typed('.terminal-container-code', options);
+        const options2 = {
+            strings: ["Welcome on <span class=\"text-primary font-xetaravel\">Xetaravel</span> !"],
+            typeSpeed: 100,
+            loop: false,
+            showCursor: false,
+            contentType: "html"
+        };
+        new Typed(".xetaravel-typed", options2);
 
-    var options2 = {
-        strings: ['Welcome on <span class="text-primary font-xetaravel">Xetaravel</span> !'],
-        typeSpeed: 100,
-        loop: false,
-        showCursor: false,
-        contentType: 'html'
-    };
-    var typed = new Typed('.xetaravel-typed', options2);
+        const scene = document.getElementById("parallax-header");
+        const parallaxInstance = new Parallax(scene);
 
-    var scene = document.getElementById('parallax-header');
-    var parallaxInstance = new Parallax(scene);
-
+        particlesJS('particles', {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true,
+            "config_demo": {
+                "hide_card": false,
+                "background_color": "#b61924",
+                "background_image": "",
+                "background_position": "50% 50%",
+                "background_repeat": "no-repeat",
+                "background_size": "cover"
+            }
+        });
+    });
 </script>
 @endpush
 
 @section('content')
 <section class="relative bg-gray-800 py-14 overflow-hidden" style="min-height: 465px;">
-    <div id="particles" class="absolute top-0 bottom-0 right-0 left-0 pointer-events-none" style=""></div>
+    <div id="particles" class="absolute top-0 bottom-0 right-0 left-0 pointer-events-none"></div>
     <div class="lg:container mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-slate-300">
             <div class="flex flex-col items-center justify-center text-center lg:px-8">
                 <h1 class="xetaravel-typed font-bold font-['ubuntu'] text-4xl"></h1>
                 <p class="mb-4">
-                    This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personnal website and I have decided to release it to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
+                    This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personal website and I have decided to release it to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
                     Project <i class="fa fa-code text-primary font-bold"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
                 <div>
@@ -86,10 +205,13 @@
                         <img src="{{ asset('images/parallax/laravel.svg') }}" alt="Layer">
                     </div>
                     <div class="parallax-layer" data-depth="0.2">
-                        <img src="{{ asset('images/parallax/sass.svg') }}" alt="Layer">
+                        <img src="{{ asset('images/parallax/tailwind.svg') }}" alt="Layer">
                     </div>
                     <div class="parallax-layer" data-depth="0.4">
                         <img src="{{ asset('images/parallax/javascript.svg') }}" alt="Layer">
+                    </div>
+                    <div class="parallax-layer" data-depth="0.4">
+                        <img src="{{ asset('images/parallax/forge.svg') }}" alt="Layer">
                     </div>
                 </div>
             </div>
@@ -253,9 +375,38 @@
 
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <div class="avatar">
+                                    <div class="avatar mr-2">
                                         <div class="w-12 h-12 rounded-full">
-                                            <img src="{{ asset($article->user->avatar_small) }}" alt="Avatar">
+                                            <img src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->full_name }} Avatar">
+                                        </div>
+                                    </div>
+
+                                    <div class="dropdown dropdown-hover dropdown-top dropdown-middle !aspect-auto">
+                                        <label tabindex="0" class="text-primary font-bold cursor-pointer">
+                                            Emeric Fèvre
+                                        </label>
+                                        <div tabindex="0" class="dropdown-content card card-compact shadow bg-base-100 rounded-box min-w-fit">
+                                            <div class="card-body flex flex-row">
+                                                <div class="avatar">
+                                                    <div class="w-24 rounded-full ring ring-[color:#fff]">
+                                                        <img src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->full_name }} Avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col justify-around  min-w-[250px] ml-2">
+                                                    <div class="card-title truncate">
+                                                        <a href="{{ $article->user->profile_url }}" class="text-primary">{{ $article->user->full_name }}</a>
+                                                    </div>
+                                                    <ul class="flex">
+                                                        <li data-tip="Last seen" class="tooltip">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                                            {{ $article->user->last_login_date->diffForHumans() }}
+                                                        </li>
+                                                        <li data-tip="Registered" class="tooltip ml-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"></path></svg>
+                                                            {{ $article->user->created_at->diffForHumans() }}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -293,10 +444,10 @@
     <div class="lg:container mx-auto">
         <h2 class="text-center font-xetaravel text-4xl mb-3">
             <img class="inline-block" src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
-            Used Languages
+            Used Technologies
         </h2>
         <p class="text-center text-xl mb-8">
-            Here is the list of the languages I used to do this website.
+            Here is the list of the technologies I used to do this website.
         </p>
         <div class="grid grid-cols-12 gap-6 lg:gap-12">
             <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
@@ -317,7 +468,7 @@
                         <img src="{{ asset('images/languages/blade.svg') }}" alt="Blade Icon" width="65px" height="65px">
                     </div>
                     <div class="my-2 text-[color:#ff2d20] text-2xl font-semibold">
-                        <a href="https://laravel.com/docs/9.x/blade">
+                        <a href="https://laravel.com/docs/12.x/blade">
                             Blade
                         </a>
                     </div>
@@ -326,11 +477,11 @@
             <div class="col-span-12  lg:col-span-2 mx-3 lg:mx-0">
                 <div class="flex flex-col justify-center items-center h-full p-2.5 bg-[color:rgba(207,100,154,.2)] rounded-md hover:-translate-y-6 transition-transform">
                     <div class="my-2">
-                        <img src="{{ asset('images/languages/sass.svg') }}" alt="Sass Icon" width="65px" height="65px">
+                        <img src="{{ asset('images/languages/livewire.svg') }}" alt="Sass Icon" width="65px" height="65px">
                     </div>
-                    <div class="my-2 text-[color:#cf649a] text-2xl font-semibold">
-                        <a href="https://sass-lang.com/">
-                            Sass
+                    <div class="my-2 text-[color:#EE5D99] text-2xl font-semibold">
+                        <a href="https://livewire.laravel.com/">
+                            Livewire
                         </a>
                     </div>
                 </div>
@@ -374,128 +525,4 @@
         </div>
     </div>
 </section>
-
-
-
 @endsection
-
-@push('scripts')
-    <script type="text/javascript">
-    particlesJS('particles', {
-        "particles": {
-            "number": {
-                "value": 60,
-                "density": {
-                    "enable": true,
-                    "value_area": 800
-                }
-            },
-            "color": {
-                "value": "#ffffff"
-            },
-            "shape": {
-                "type": "circle",
-                "stroke": {
-                    "width": 0,
-                    "color": "#000000"
-                },
-                "polygon": {
-                    "nb_sides": 5
-                },
-                "image": {
-                    "src": "img/github.svg",
-                    "width": 100,
-                    "height": 100
-                }
-            },
-            "opacity": {
-                "value": 0.5,
-                "random": false,
-                "anim": {
-                    "enable": false,
-                    "speed": 1,
-                    "opacity_min": 0.1,
-                    "sync": false
-                }
-            },
-            "size": {
-                "value": 5,
-                "random": true,
-                "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
-                    "sync": false
-                }
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": 6,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
-            }
-        },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "repulse"
-                },
-                "onclick": {
-                    "enable": true,
-                    "mode": "push"
-                },
-                "resize": true
-            },
-            "modes": {
-                "grab": {
-                    "distance": 400,
-                    "line_linked": {
-                        "opacity": 1
-                    }
-                },
-                "bubble": {
-                    "distance": 400,
-                    "size": 40,
-                    "duration": 2,
-                    "opacity": 8,
-                    "speed": 3
-                },
-                "repulse": {
-                    "distance": 200
-                },
-                "push": {
-                    "particles_nb": 4
-                },
-                "remove": {
-                    "particles_nb": 2
-                }
-            }
-        },
-        "retina_detect": true,
-        "config_demo": {
-            "hide_card": false,
-            "background_color": "#b61924",
-            "background_image": "",
-            "background_position": "50% 50%",
-            "background_repeat": "no-repeat",
-            "background_size": "cover"
-        }
-    });
-    </script>
-@endpush

@@ -31,3 +31,137 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/**
+ * HighlightJS
+ */
+pre,
+code {
+    font-family: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+}
+
+pre code {
+    font-size: 1.07em;
+    padding: 1em .5em !important;
+    font-weight: 300;
+    border-radius: 3px;
+}
+
+.hljs {
+    color: #686f79;
+    display: block;
+    overflow-x: auto;
+    padding: .5em;
+}
+
+.hljs-comment,
+.hljs-quote {
+    color: #aaa;
+    font-style: italic;
+}
+
+.token.punctuation .hljs-function .hljs-params {
+    color: inherit;
+}
+
+.hljs-params {
+    color: #e5c07b;
+}
+
+.token.variable,
+.token.variable .hljs-function .hljs-params,
+.token.this .hljs-keyword,
+.hljs-variable {
+    color: #e06c75;
+}
+
+.token.keyword,
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+    color: #c678dd;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+    color: #007698;
+}
+
+.hljs-string {
+    color: #abc306;
+}
+
+.token.keyword .hljs-function .hljs-title,
+.hljs-doctag {
+    color: #c678dd;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+    color: #26A6A6;
+}
+
+.token.function {
+    color: #26A6A6;
+}
+
+.hljs-subst {
+    font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title,
+.token.class-name,
+.token.scope {
+    color: #FF5D38;
+}
+
+.token.punctuation {
+    color: #686f79;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+    color: #22a4c9;
+    font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+    color: #aaad00;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+    color: #e83134;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+    color: #22a4c9;
+}
+
+.hljs-meta {
+    color: #db4957;
+    font-weight: bold;
+}
+
+.hljs-deletion {
+    background: #fcebec;
+}
+
+.hljs-addition {
+    background: #e5e4d1;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}

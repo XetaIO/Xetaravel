@@ -77,7 +77,7 @@
 
             <!-- User Menu-->
             <ul class="p-4">
-                @permission('access.administration')
+                @can('access administration')
                     <li>
                         <a  href="{{ route('admin.page.index') }}" class="hover:shadow text-accent active:bg-accent active:text-[color:hsl(var(--pc))] rounded-[var(--rounded-btn)]">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -86,7 +86,7 @@
                             <span >Dashboard</span>
                         </a>
                     </li>
-                @endpermission
+                @endcan
                 <li>
                     <a href="{{ Auth::user()->profile_url }}"  class="hover:shadow rounded-[var(--rounded-btn)]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">

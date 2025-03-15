@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Xetaravel\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request ;
 use Illuminate\Support\Facades\App;
@@ -19,7 +21,7 @@ class PageController extends Controller
     /**
      * Show the home page.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|object|View
+     * @return Factory|\Illuminate\Contracts\View\View|Application|object|View
      */
     public function index()
     {

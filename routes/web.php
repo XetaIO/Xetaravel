@@ -126,32 +126,32 @@ Route::group(['prefix' => 'users'], function () {
 Route::group([
     'namespace' => 'Blog',
     'prefix' => 'blog',
-    'middleware' => ['permission:access.site,allowGuest', 'display']
+    'middleware' => ['display']
 ], function () {
 
     // BlogArticle Routes
-    Route::get('/', 'ArticleController@index')
+    Route::get('/', [Xetaravel\Http\Controllers\Blog\ArticleController::class, 'index'])
         ->name('blog.article.index');
-    Route::get('article/{slug}.{id}', 'ArticleController@show')
+    Route::get('article/{slug}.{id}', [Xetaravel\Http\Controllers\Blog\ArticleController::class, 'show'])
         ->name('blog.article.show');
 
     // BlogCategory Routes
-    Route::get('category/{slug}.{id}', 'CategoryController@show')
+    Route::get('category/{slug}.{id}', [Xetaravel\Http\Controllers\Blog\CategoryController::class, 'show'])
         ->name('blog.category.show');
 
     // BlogComment Routes
-    Route::get('comment/show/{id}', 'CommentController@show')
+    Route::get('comment/show/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'show'])
         ->name('blog.comment.show');
 
     Route::group(['middleware' => ['auth']], function () {
         // BlogComment Routes
-        Route::post('comment/create', 'CommentController@create')
+        Route::post('comment/create', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'create'])
             ->name('blog.comment.create');
-        Route::delete('comment/delete/{id}', 'CommentController@delete')
+        Route::delete('comment/delete/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'delete'])
             ->name('blog.comment.delete');
-        Route::put('comment/edit/{id}', 'CommentController@edit')
+        Route::put('comment/edit/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'edit'])
             ->name('blog.comment.edit');
-        Route::get('comment/edit-template/{id}', 'CommentController@editTemplate')
+        Route::get('comment/edit-template/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'editTemplate'])
             ->name('blog.comment.editTemplate');
     });
 });

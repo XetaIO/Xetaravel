@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Masmerise\Toaster\Toaster;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\User;
@@ -76,7 +77,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
@@ -103,18 +104,12 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-
+        if (!$user->hasVerifiedEmail()) {
+            return redirect(route('auth.verification.notice', base64_encode($user->getEmailForVerification())));
+        }
 
         if ($this->attemptLogin($request)) {
-            if ($request->user()->hasVerifiedEmail()) {
-                return $this->sendLoginResponse($request);
-            }
-
-            //$user = $request->user()->getKey();
-
-            $this->logout($request);
-
-            return redirect(route('auth.verification.notice', sha1($user->getEmailForVerification())));
+            return $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

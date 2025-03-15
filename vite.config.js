@@ -12,7 +12,6 @@ export default defineConfig({
                 'resources/js/jarallax.js',
                 'resources/js/waypoints.js',
                 'resources/js/parallax.js',
-                'resources/js/particles.js',
                 'resources/js/typed.js'
             ],
             refresh: true,

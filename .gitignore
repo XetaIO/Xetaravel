@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/media
+/public/tests
 /public/editor-md
 /storage/*.key
 /storage/pail

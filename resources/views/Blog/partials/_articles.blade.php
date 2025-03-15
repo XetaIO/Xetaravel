@@ -37,16 +37,7 @@
                 <img class="w-12 h-12 rounded-full flex-shrink-0 mr-3" src="{{ $article->user->avatar_small }}" alt="{{ $article->user->full_name }} avatar">
             </a>
             <div>
-                    <discuss-user
-                        :user="{{ json_encode([
-                            'avatar_small'=> $article->user->avatar_small,
-                            'profile_url' => $article->user->profile_url,
-                            'full_name' => $article->user->full_name
-                        ]) }}"
-                        :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                        :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                        :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                    </discuss-user>
+
                 <span class="text-gray-700"> - </span>
                 <span class="text-gray-500">
                     <time datetime="{{ $article->created_at }}" class="tooltip" data-tip="{{ $article->created_at }}">

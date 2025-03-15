@@ -78,7 +78,7 @@ class LoginControllerTest extends TestCase
         ]);
 
         $this->assertGuest();
-        $response->assertRedirect('/auth/email/verify/' . sha1($user->email));
+        $response->assertRedirect('/auth/email/verify/' . base64_encode($user->email));
     }
 
     public function test_can_logout()

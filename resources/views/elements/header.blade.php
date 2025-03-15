@@ -117,7 +117,7 @@
                         </div>
                     </label>
                     <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        @permission('access.administration')
+                        @can('access administration')
                             <li>
                                 <div class="tooltip tooltip-top text-accent" data-tip="Access to the site administration.">
                                     <a href="{{ route('admin.page.index') }}" class="flex items-center gap-4">
@@ -130,7 +130,7 @@
 
                             </li>
                             <div class="divider my-0"></div>
-                        @endpermission
+                        @endcan
                         <li>
                             <div class="tooltip tooltip-top" data-tip="Visit my profile !">
                                 <a href="{{ Auth::user()->profile_url }}" class="flex items-center gap-4">
