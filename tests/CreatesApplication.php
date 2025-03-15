@@ -16,6 +16,8 @@ trait CreatesApplication
 
         $app->make(Kernel::class)->bootstrap();
 
+        config(['media-library.disk_name' => 'tests']);
+
         return $app;
     }
 }

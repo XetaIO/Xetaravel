@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Models\Repositories\SettingRepository;
-use Xetaravel\Models\Setting;
 use Xetaravel\Models\User;
 use Xetaravel\Settings\Settings;
 

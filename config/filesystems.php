@@ -53,6 +53,11 @@ return [
             'url' => env('APP_URL').'/media',
         ],
 
+        'tests' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/tests/storage/media',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
