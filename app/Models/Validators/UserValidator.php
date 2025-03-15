@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models\Validators;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator as FacadeValidator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;

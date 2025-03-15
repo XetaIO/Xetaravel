@@ -7,7 +7,6 @@ use Xetaravel\Models\User;
 
 class ModelHasPermissionsTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
