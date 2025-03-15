@@ -29,13 +29,15 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected string $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
     }
 
@@ -44,12 +46,12 @@ class ResetPasswordController extends Controller
      *
      * If no token is present, display the link request form.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string|null $token
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function showResetForm(Request $request, $token = null): View
+    public function showResetForm(Request $request, string $token = null): View
     {
         return view('Auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
@@ -61,11 +63,11 @@ class ResetPasswordController extends Controller
      *
      * @param string $response
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    protected function sendResetResponse($response): RedirectResponse
+    protected function sendResetResponse(string $response): RedirectResponse
     {
         return redirect($this->redirectPath())
-            ->with('success', 'Your password has been reset!');
+            ->success('Your password has been reset!');
     }
 }

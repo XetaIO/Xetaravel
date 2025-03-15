@@ -3,8 +3,11 @@
 /public/build
 /public/hot
 /public/storage
+/public/media
+/public/editor-md
 /storage/*.key
 /storage/pail
+/storage/media-library
 /vendor
 .env
 .env.backup
@@ -23,3 +26,4 @@ yarn-error.log
 /.zed
 composer.lock
 package-lock.json
+junit.xml

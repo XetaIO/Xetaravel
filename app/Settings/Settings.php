@@ -16,9 +16,6 @@ class Settings
         'model_id' => null
     ];
 
-    /** @var null|int */
-    protected null|int $siteId = null;
-
     public function __construct(
         protected Cache $cache,
     ) {

@@ -16,7 +16,7 @@
                             Login
                         </h1>
 
-                        <x-form method="post" action="{{ route('users.auth.login') }}">
+                        <x-form method="post" action="{{ route('auth.login') }}">
                             <x-input class="input-primary" name="email" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
                             <x-password class="input-primary" name="password" label="Password" placeholder="Your Password..." required inline />
                             <x-checkbox label="Remember me" name="remember" />
@@ -32,10 +32,10 @@
                     </div>
 
                     <div class="text-center">
-                        <a class="link link-hover link-primary mr-2" href="{{ route('users.auth.password.request') }}">
+                        <a class="link link-hover link-primary mr-2" href="{{ route('auth.password.request') }}">
                             Forgot Your Password?
                         </a>
-                        <a class="link link-hover link-primary" href="{{ route('users.auth.register') }}">
+                        <a class="link link-hover link-primary" href="{{ route('auth.register') }}">
                             Not registered yet?
                         </a>
                     </div>

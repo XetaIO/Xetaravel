@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('users.auth.login') }}" class="btn btn-primary gap-2">
+                    <a href="{{ route('auth.login') }}" class="btn btn-primary gap-2">
                         <i class="fa-solid fa-pencil"></i>
                         Reply
                     </a>

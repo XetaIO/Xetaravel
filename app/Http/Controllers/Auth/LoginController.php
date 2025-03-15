@@ -89,8 +89,7 @@ class LoginController extends Controller
         $user = User::where($this->username(), $request->{$this->username()})->first();
 
         if (!settings('app_login_enabled') && !$user->hasPermissionTo('bypass login')) {
-            return redirect()
-                ->route('/')
+            return redirect('/')
                 ->error('The login system is currently disabled, please try again later.');
         }
 
@@ -115,7 +114,7 @@ class LoginController extends Controller
 
             $this->logout($request);
 
-            return redirect(route('users.auth.verification.notice', sha1($user->getEmailForVerification())));
+            return redirect(route('auth.verification.notice', sha1($user->getEmailForVerification())));
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

@@ -14,31 +14,16 @@
                     Reset Password
                 </h1>
 
-                <x-form.form method="post" action="{{ route('users.auth.password.handlereset') }}">
-                    {!! Form::hidden('token', $token) !!}
-
-                    {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
-                        'placeholder' => 'Your E-Mail...',
-                        'required' => 'required'
-                    ]) !!}
-
-                    {!! Form::bsPassword('password', 'Password', [
-                        'placeholder' => 'Your new Password...',
-                        'required' => 'required'
-                    ]) !!}
-
-                    {!! Form::bsPassword('password_confirmation', 'Confirm Password', [
-                        'placeholder' => 'Confirm your new Password...',
-                        'required' => 'required'
-                    ]) !!}
+                <x-form method="post" action="{{ route('auth.password.handlereset') }}">
+                    <x-input type="hidden" class="hidden" name="token" value="{{ $token }}" />
+                    <x-input class="input-primary" name="email" label="Email" value="{{ old('email') }}" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
+                    <x-password class="input-primary" name="password" label="Password" placeholder="Your Password..." required inline />
+                    <x-password class="input-primary" name="password_confirmation" label="Confirm Password" placeholder="Confirm your Password..." required inline />
 
                     <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-primary gap-2">
-                            <i class="fa-solid fa-rotate"></i>
-                            Reset Password
-                        </button>
+                        <x-button icon="fas-rotate" icon-classes="h-4 w-4" type="submit" label="Reset Password" class="btn-primary gap-2" />
                     </div>
-                </x-form.form>
+                </x-form>
             </div>
         </div>
     </div>

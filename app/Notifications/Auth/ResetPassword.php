@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Notifications\Auth;
 
 use Illuminate\Bus\Queueable;
@@ -16,14 +18,14 @@ class ResetPassword extends Notification implements ShouldQueue
      *
      * @var string
      */
-    public $token;
+    public string $token;
 
     /**
      * Create a notification instance.
      *
      * @param string $token
      */
-    public function __construct($token)
+    public function __construct(string $token)
     {
         $this->token = $token;
     }
@@ -35,7 +37,7 @@ class ResetPassword extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function via($notifiable): array
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
@@ -45,9 +47,9 @@ class ResetPassword extends Notification implements ShouldQueue
      *
      * @param mixed $notifiable
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable): MailMessage
+    public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage())
             ->line('You received this email because we received a password reset request for your account.')
@@ -55,7 +57,7 @@ class ResetPassword extends Notification implements ShouldQueue
                         'and you can ignore this email.')
             ->action(
                 'Reset my Password',
-                url(config('app.url') . route('users.auth.password.reset', $this->token, false))
+                url(config('app.url') . route('auth.password.reset', $this->token, false))
             )
             ->level('primary')
             ->subject('Password Reset - ' . config('app.name'))

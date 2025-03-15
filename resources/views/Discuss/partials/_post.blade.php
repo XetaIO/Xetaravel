@@ -145,7 +145,7 @@
                                         Reply
                                     </a>
                                 @else
-                                    <label href="{{ route('users.auth.login') }}" class="link link-hover link-primary">
+                                    <label href="{{ route('auth.login') }}" class="link link-hover link-primary">
                                         <i class="fa fa-reply"></i>
                                         Reply
                                     </label>

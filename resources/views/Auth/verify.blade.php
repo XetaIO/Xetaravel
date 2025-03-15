@@ -30,7 +30,7 @@
                             </p>
                         </x-alert>
 
-                        <x-form.form method="post" action="{{ route('users.auth.verification.resend') }}">
+                        <x-form.form method="post" action="{{ route('auth.verification.resend') }}">
                             {!! Form::hidden('hash', $hash); !!}
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary gap-2">

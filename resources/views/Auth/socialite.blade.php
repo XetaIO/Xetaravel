@@ -37,7 +37,7 @@
                                     Register
                                 </button>
                             </div>
-                            <a class="link link-hover link-primary" href="{{ route('users.auth.login') }}">
+                            <a class="link link-hover link-primary" href="{{ route('auth.login') }}">
                                 Already an account?
                             </a>
                         </div>

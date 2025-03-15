@@ -51,7 +51,7 @@ class SocialiteController extends Controller
     {
         if (is_null($request->session()->get('socialite.driver'))) {
             return redirect()
-                ->route('users.auth.login')
+                ->route('auth.login')
                 ->with('danger', 'You are not authorized to view this page!');
         }
         return view('Auth.socialite', compact('driver'));
@@ -124,7 +124,7 @@ class SocialiteController extends Controller
             $driver = Str::title($driver);
 
             return redirect()
-                ->route('users.auth.login')
+                ->route('auth.login')
                 ->with('danger', "An error occurred while getting your information from {$driver} !");
         }
 
@@ -155,7 +155,7 @@ class SocialiteController extends Controller
         if (!$user->hasVerifiedEmail()) {
             $user = $user->getKey();
 
-            return redirect(route('users.auth.verification.notice', base64_encode($user)));
+            return redirect(route('auth.verification.notice', base64_encode($user)));
         }
 
         Auth::login($user, true);

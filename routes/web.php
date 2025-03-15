@@ -8,18 +8,25 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::group(['middleware' => ['display']], function () {
-    Route::get('/', [Xetaravel\Http\Controllers\PageController::class, 'index'])->name('page.index');
-    Route::get('@me', 'PageController@aboutme')->name('page.aboutme');
+    Route::get('/', [Xetaravel\Http\Controllers\PageController::class, 'index'])
+        ->name('page.index');
+    Route::get('@me', [Xetaravel\Http\Controllers\PageController::class, 'aboutme'])
+        ->name('page.aboutme');
 
-    Route::get('terms', 'PageController@terms')->name('page.terms');
+    Route::get('terms', [Xetaravel\Http\Controllers\PageController::class, 'terms'])
+        ->name('page.terms');
 
-    Route::get('contact', 'PageController@showContact')->name('page.contact');
-    Route::post('contact', 'PageController@contact');
+    Route::get('contact', [Xetaravel\Http\Controllers\PageController::class, 'showContact'])
+        ->name('page.contact');
+    Route::post('contact', [Xetaravel\Http\Controllers\PageController::class, 'contact']);
 
-    Route::post('newsletter/subscribe', 'NewsletterController@store')->name('newsletter.subscribe');
-    Route::get('newsletter/unsubscribe/{email}', 'NewsletterController@delete')->name('newsletter.unsubscribe');
+    Route::post('newsletter/subscribe', [Xetaravel\Http\Controllers\NewsletterController::class, 'store'])
+        ->name('newsletter.subscribe');
+    Route::get('newsletter/unsubscribe/{email}', [Xetaravel\Http\Controllers\NewsletterController::class, 'delete'])
+        ->name('newsletter.unsubscribe');
 
-    Route::get('download/{file}', 'DownloadsController@download')->name('downloads.show');
+    Route::get('download/{file}', [Xetaravel\Http\Controllers\DownloadsController::class, 'download'])
+        ->name('downloads.show');
 });
 
 Route::group(['middleware' => ['auth', 'permission:show banished']], function () {
@@ -28,21 +35,51 @@ Route::group(['middleware' => ['auth', 'permission:show banished']], function ()
 
 /*
 |--------------------------------------------------------------------------
-| Socialite Routes
+| Authentication/Socialite Routes
 |--------------------------------------------------------------------------
 */
 Route::group([
     'prefix' => 'auth',
     'namespace' => 'Auth'
 ], function () {
-    Route::get('{driver}/redirect', 'SocialiteController@redirectToProvider')
+    Route::get('{driver}/redirect', [Xetaravel\Http\Controllers\Auth\SocialiteController::class, 'redirectToProvider'])
         ->name('auth.driver.redirect');
-    Route::get('{driver}/callback', 'SocialiteController@handleProviderCallback')
+    Route::get('{driver}/callback', [Xetaravel\Http\Controllers\Auth\SocialiteController::class, 'handleProviderCallback'])
         ->name('auth.driver.callback');
-    Route::get('{driver}/register/form', 'SocialiteController@showRegistrationForm')
+    Route::get('{driver}/register/form', [Xetaravel\Http\Controllers\Auth\SocialiteController::class, 'showRegistrationForm'])
         ->name('auth.driver.register');
-    Route::post('{driver}/register/validate', 'SocialiteController@register')
+    Route::post('{driver}/register/validate', [Xetaravel\Http\Controllers\Auth\SocialiteController::class, 'register'])
         ->name('auth.driver.register.validate');
+
+    // Authentication Routes
+    Route::get('login', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
+        ->name('auth.login');
+    Route::post('login', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'login']);
+    Route::post('logout', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'logout'])
+        ->name('auth.logout');
+
+    // Registration Routes
+    Route::get('register', [Xetaravel\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])
+        ->name('auth.register');
+    Route::post('register', [Xetaravel\Http\Controllers\Auth\RegisterController::class, 'register']);
+
+    // Password Reset Routes
+    Route::get('password/reset', [Xetaravel\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])
+        ->name('auth.password.request');
+    Route::post('password/email', [Xetaravel\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
+        ->name('auth.password.email');
+    Route::get('password/reset/{token}', [Xetaravel\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])
+        ->name('auth.password.reset');
+    Route::post('password/reset', [Xetaravel\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
+        ->name('auth.password.handlereset');
+
+    // Email Verification Routes
+    Route::get('email/verify/{hash}', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'show'])
+        ->name('auth.verification.notice');
+    Route::get('email/verify/{id}/{hash}', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'verify'])
+        ->name('auth.verification.verify');
+    Route::post('email/resend', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'resend'])
+        ->name('auth.verification.resend');
 });
 
 /*
@@ -54,38 +91,6 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('profile/@{slug}', [Xetaravel\Http\Controllers\UserController::class, 'show'])->name('users.user.show');
     Route::get('/', [Xetaravel\Http\Controllers\UserController::class, 'index'])->name('users.user.index');
-
-    // Auth Namespace
-    Route::group(['namespace' => 'Auth'], function () {
-        // Authentication Routes
-        Route::get('login', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
-            ->name('users.auth.login');
-        Route::post('login', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'login']);
-        Route::post('logout', [Xetaravel\Http\Controllers\Auth\LoginController::class, 'logout'])
-            ->name('users.auth.logout');
-
-        // Registration Routes
-        Route::get('register', [Xetaravel\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('users.auth.register');
-        Route::post('register', [Xetaravel\Http\Controllers\Auth\RegisterController::class, 'register']);
-
-        // Password Reset Routes
-        Route::get('password/reset', [Xetaravel\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])
-            ->name('users.auth.password.request');
-        Route::post('password/email', [Xetaravel\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
-            ->name('users.auth.password.email');
-        Route::get('password/reset/{token}', [Xetaravel\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])
-            ->name('users.auth.password.reset');
-        Route::post('password/reset', [Xetaravel\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])
-            ->name('users.auth.password.handlereset');
-
-        // Email Verification Routes
-        Route::get('email/verify/{hash}', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'show'])
-            ->name('users.auth.verification.notice');
-        Route::get('email/verify/{id}/{hash}', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'verify'])
-            ->name('users.auth.verification.verify');
-        Route::post('email/resend', [Xetaravel\Http\Controllers\Auth\VerificationController::class, 'resend'])
-            ->name('users.auth.verification.resend');
-    });
 
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {

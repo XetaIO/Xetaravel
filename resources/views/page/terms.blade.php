@@ -33,7 +33,7 @@
             {{-- Menu List --}}
             <h2 id="summary" class="font-semibold text-2xl group">
                 <a class="hidden group-hover:inline-block text-primary" href="#summary" title="Summary">
-                    <i class="fa-solid fa-link"></i>
+                    <x-icon name="fas-link" class="h-4 w-4" />
                 </a>
                 Summary
             </h2>
@@ -103,7 +103,7 @@
 
             <h2 id="general-information" class="font-semibold text-2xl mt-6 group">
                 <a class="hidden group-hover:inline-block text-primary" href="#general-information" title="General Information">
-                    <i class="fa-solid fa-link"></i>
+                    <x-icon name="fas-link" class="h-4 w-4" />
                 </a>
                 General Information
             </h2>
@@ -113,7 +113,7 @@
 
             <h2 id="account-terms" class="font-semibold text-2xl mt-6 group">
                 <a class="hidden group-hover:inline-block text-primary" href="#account-terms" title="Account Terms">
-                    <i class="fa-solid fa-link"></i>
+                    <x-icon name="fas-link" class="h-4 w-4" />
                 </a>
                     Account Terms
             </h2>
@@ -147,7 +147,7 @@
 
             <h2 id="copyright-and-content-ownership" class="font-semibold text-2xl mt-6 group">
                 <a class="hidden group-hover:inline-block text-primary" href="#copyright-and-content-ownership" title="Copyright and Content Ownership">
-                    <i class="fa-solid fa-link"></i>
+                    <x-icon name="fas-link" class="h-4 w-4" />
                 </a>
                 Copyright and Content Ownership
             </h2>
@@ -162,7 +162,7 @@
 
             <h2 id="general-conditions" class="font-semibold text-2xl mt-6 group">
                 <a class="hidden group-hover:inline-block text-primary" href="#general-conditions" title="General Conditions">
-                    <i class="fa-solid fa-link"></i>
+                    <x-icon name="fas-link" class="h-4 w-4" />
                 </a>
                 General Conditions
             </h2>
@@ -195,7 +195,7 @@
 
             <h2 id="privacy-policy-terms" class="font-semibold text-2xl mt-6 group">
                 <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms" title="Privacy Policy Terms">
-                    <i class="fa-solid fa-link"></i>
+                    <x-icon name="fas-link" class="h-4 w-4" />
                 </a>
                 Privacy Policy Terms
             </h2>
@@ -203,7 +203,7 @@
                 <li>
                      <h3 id="privacy-policy-terms_cookies" class="font-semibold text-xl group">
                         <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms_cookies" title="Cookies">
-                            <i class="fa-solid fa-link"></i>
+                            <x-icon name="fas-link" class="h-4 w-4" />
                         </a>
                         Cookies
                     </h3>
@@ -223,7 +223,7 @@
                 <li>
                     <h3 id="privacy-policy-terms_data-storage" class="font-semibold text-xl group">
                         <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms_data-storage" title="Data Storage">
-                            <i class="fa-solid fa-link"></i>
+                            <x-icon name="fas-link" class="h-4 w-4" />
                         </a>
                         Data Storage
                     </h3>
@@ -237,7 +237,7 @@
                 <li>
                     <h3 id="privacy-policy-terms_information-gathering-and-usage" class="font-semibold text-xl group">
                         <a class="hidden group-hover:inline-block text-primary" href="#privacy-policy-terms_information-gathering-and-usage" title="Information Gathering and Usage">
-                            <i class="fa-solid fa-link"></i>
+                            <x-icon name="fas-link" class="h-4 w-4" />
                         </a>
                         Information Gathering and Usage
                     </h3>

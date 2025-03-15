@@ -1,19 +1,23 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
     --font-xetaravel: "Miriam Libre";
 }
 
 @plugin "daisyui" {
-    themes: light --default, dark --prefersdark;
+    themes: light --default, dark;
 }
 @plugin "daisyui/theme" {
     name: "light";
+    default: true;
     --color-primary: #f4645f;
+    --color-base-content: #48566a;
+    --color-primary-content: #ffffff;
 }
 @plugin "daisyui/theme" {
     name: "dark";
-    default: true;
     --color-primary: #f4645f;
 }
 

@@ -67,6 +67,10 @@ class RegisterController extends Controller
      */
     public function register(CreateRequest $request): RedirectResponse
     {
+        if (!settings('app_register_enabled')) {
+            return redirect('/')
+                ->error('The register system is currently disabled, please try again later.');
+        }
         $validated = $request->validated();
 
         event(new Registered($user = UserRepository::create($validated)));

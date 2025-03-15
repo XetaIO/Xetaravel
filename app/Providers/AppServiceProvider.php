@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Xetaravel\Providers;
 
-use BDS\Settings\Settings;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Query\Builder;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Validation\Rules\Password;
+use Xetaravel\Settings\Settings;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -102,7 +102,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // Register the Settings class
         $this->app->singleton(Settings::class, function (Application $app) {

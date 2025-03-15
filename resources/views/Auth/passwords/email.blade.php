@@ -18,11 +18,8 @@
                     Reset Password
                 </h1>
 
-                <x-form.form method="post" action="{{ route('users.auth.password.email') }}">
-                    {!! Form::bsEmail('email', 'E-Mail Address', old('email'), [
-                        'placeholder' => 'Your E-Mail...',
-                        'required' => 'required'
-                    ]) !!}
+                <x-form method="post" action="{{ route('auth.password.email') }}">
+                    <x-input class="input-primary" name="email" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
 
                     <div class="form-control my-2">
                         {!! NoCaptcha::display() !!}
@@ -34,12 +31,9 @@
                     </div>
 
                     <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-primary gap-2">
-                            <i class="fa-regular fa-paper-plane"></i>
-                            Send Password Reset Link
-                        </button>
+                        <x-button icon="far-paper-plane" icon-classes="h-4 w-4" type="submit" label="Send Password Reset Link" class="btn-primary gap-2" />
                     </div>
-                </x-form.form>
+                </x-form>
             </div>
         </div>
     </div>
