@@ -22,7 +22,7 @@ class VerifyEmail extends Notification implements ShouldQueue
      *
      * @var Closure|null
      */
-    public static ?Closure $toMailCallback;
+    public static ?Closure $toMailCallback = null;
 
     /**
      * Get the notification's channels.
