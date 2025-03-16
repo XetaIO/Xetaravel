@@ -155,3 +155,14 @@ Route::group([
             ->name('blog.comment.editTemplate');
     });
 });
+
+
+Route::middleware(['web', 'auth'])->post('/upload', function (Request $request) {
+    $disk = $request->disk ?? 'public';
+    $folder = $request->folder ?? 'editor';
+
+    $file = Storage::disk($disk)->put($folder, $request->file('file'), 'public');
+    $url = Storage::disk($disk)->url($file);
+
+    return ['location' => $url];
+})->name('upload');

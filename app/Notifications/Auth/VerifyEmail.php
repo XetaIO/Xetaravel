@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Notifications\Auth;
 
+use Closure;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -17,17 +20,18 @@ class VerifyEmail extends Notification implements ShouldQueue
     /**
      * The callback that should be used to build the mail message.
      *
-     * @var \Closure|null
+     * @var Closure|null
      */
-    public static $toMailCallback;
+    public static ?Closure $toMailCallback;
 
     /**
      * Get the notification's channels.
      *
      * @param  mixed  $notifiable
-     * @return array|string
+     *
+     * @return array
      */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
@@ -36,9 +40,9 @@ class VerifyEmail extends Notification implements ShouldQueue
      * Build the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         $verificationUrl = $this->verificationUrl($notifiable);
 
@@ -62,7 +66,7 @@ class VerifyEmail extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return string
      */
-    protected function verificationUrl($notifiable)
+    protected function verificationUrl(mixed $notifiable): string
     {
         return URL::temporarySignedRoute(
             'auth.verification.verify',
@@ -77,10 +81,11 @@ class VerifyEmail extends Notification implements ShouldQueue
     /**
      * Set a callback that should be used when building the notification mail message.
      *
-     * @param  \Closure  $callback
+     * @param Closure $callback
+     *
      * @return void
      */
-    public static function toMailUsing($callback)
+    public static function toMailUsing(Closure $callback): void
     {
         static::$toMailCallback = $callback;
     }

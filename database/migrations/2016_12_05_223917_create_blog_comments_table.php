@@ -15,14 +15,14 @@ return new class () extends Migration {
         Schema::create('blog_comments', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('article_id')->unsigned()->index();
+            $table->integer('blog_article_id')->unsigned()->index();
             $table->longText('content');
             $table->timestamps();
         });
 
         Schema::table('blog_comments', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('article_id')->references('id')->on('blog_articles')->onDelete('cascade');
+            $table->foreign('blog_article_id')->references('id')->on('blog_articles')->onDelete('cascade');
         });
     }
 

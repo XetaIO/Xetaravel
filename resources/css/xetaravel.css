@@ -33,6 +33,13 @@
 }
 
 /**
+ * Offline
+ */
+.avatar-offline:before {
+    @apply bg-[color:var(--color-error)]
+}
+
+/**
  * HighlightJS
  */
 pre,

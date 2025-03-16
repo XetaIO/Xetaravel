@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\View\Composers\Blog;
 
 use Illuminate\View\View;
@@ -12,10 +14,11 @@ class SidebarComposer
     /**
      * Bind data to the view.
      *
-     * @param  \Illuminate\View\View  $view
+     * @param View $view
+     *
      * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $articles = ArticleRepository::sidebar();
         $categories = CategoryRepository::sidebar();

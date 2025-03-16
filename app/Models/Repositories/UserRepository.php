@@ -18,9 +18,9 @@ class UserRepository
      */
     public static function sidebar(): Collection
     {
-        return User::where('article_count', '>=', 1)
+        return User::where('blog_article_count', '>=', 1)
             ->take(config('xetaravel.blog.users_sidebar'))
-            ->orderBy('article_count', 'desc')
+            ->orderBy('blog_article_count', 'desc')
             ->get();
     }
 

@@ -11,24 +11,13 @@
 @endpush
 
 @push('style')
-    {!! editor_css() !!}
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 @endpush
 
 @push('scripts')
-    {!! editor_js() !!}
-    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+    @vite('resources/js/highlight.js')
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
-    @php
-        $comment = [
-            'id' => 'commentEditor',
-            'height' => '350'
-        ];
-    @endphp
-
-    @include('editor/partials/_comment', $comment)
-
-
-    <script src="{{ asset('js/libs/highlight.min.js') }}"></script>
     <script type="text/javascript">
         // HighlightJS
         hljs.highlightAll();
@@ -70,18 +59,18 @@
 
                             <div>
                                 <time class="tooltip" datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-tip="{{ $article->created_at->format('Y-m-d H:i:s') }}">
-                                    {{ $article->created_at->formatLocalized('%b %d, %Y') }}
+                                    {{ $article->created_at->isoFormat('ll') }}
                                 </time>
                                 <span class="text-gray-700"> - </span>
                                 <span class="font-semibold tooltip" data-tip="Comments">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                                     </svg>
-                                    {{ $article->comment_count }}
+                                    {{ $article->blog_comment_count }}
                                 </span>
 
                                 {{-- Edit button --}}
-                                @permission('manage.blog')
+                                @can('manage blog article')
                                     <span class="text-gray-700"> - </span>
                                     <a class="btn btn-sm" href="{{ route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-3 w-3 mr-1" viewBox="0 0 16 16">
@@ -89,7 +78,7 @@
                                         </svg>
                                         Edit
                                     </a>
-                                @endpermission
+                                @endcan
                             </div>
                         </div>
 
@@ -132,7 +121,7 @@
                         <div class="flex flex-col items-center">
 
                             {{--  Author Avatar --}}
-                            <a class="avatar {{ $article->user->online ? 'online' : 'offline' }} m-2" href="{{ $article->user->profile_url }}">
+                            <a class="avatar {{ $article->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $article->user->profile_url }}">
                                 <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
                                     <img class="rounded-full" src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
                                 </figure>
@@ -144,17 +133,14 @@
 
                         {{-- Author name & signature --}}
                         <div class="flex flex-col ml-3 self-start mt-5">
-                            <discuss-user
-                                class="text-xl font-xetaravel ml-0"
-                                :user="{{ json_encode([
-                                    'avatar_small'=> $article->user->avatar_small,
-                                    'profile_url' => $article->user->profile_url,
-                                    'full_name' => $article->user->full_name
-                                ]) }}"
-                                :created-at="{{ var_export($article->user->created_at->diffForHumans()) }}"
-                                :last-login="{{ var_export($article->user->last_login->diffForHumans()) }}"
-                                :background-color="{{ var_export($article->user->avatar_primary_color) }}">
-                            </discuss-user>
+                            {{-- User --}}
+                            <x-user.user
+                                :user-name="$article->user->full_name"
+                                :user-avatar-small="$article->user->avatar_small"
+                                :user-profile="$article->user->profile_url"
+                                :user-last-login="$article->user->last_login_date->diffForHumans()"
+                                :user-registered="$article->user->created_at->diffForHumans()"
+                            />
                             <div>
                                 {!! Markdown::convert($article->user->signature) !!}
                             </div>
@@ -163,75 +149,8 @@
                 </footer>
             </article>
 
-            {{-- Comments --}}
-            <section class="bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-10">
-                <h2 class="divider text-xl font-bold">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                    </svg>
-                    {{ $article->comment_count }} Comment(s)
-                </h2>
-
-                @forelse ($comments as $comment)
-                    @include('Blog::partials._comment', ['comment' => $comment])
-                @empty
-                    <div class="alert alert-info shadow-lg mb-5">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span>
-                                There're no comments yet, post the first reply !
-                            </span>
-                        </div>
-                    </div>
-                @endforelse
-
-                {{-- Coments pagination --}}
-                <div class="grid grid-cols-1">
-                    {{ $comments->links() }}
-                </div>
-
-                {{--  Reply --}}
-                @auth
-                    <div class="divider text-lg font-bold">
-                        <i class="fa-solid fa-reply"></i>
-                        Reply
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row items-center">
-                        <div class="self-start mx-auto">
-                            {{--  User Avatar --}}
-                                <a class="avatar online m-2" href="{{ Auth::user()->profile_url }}">
-                                    <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
-                                        <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
-                                    </figure>
-                                </a>
-                        </div>
-
-                        {{-- Editor --}}
-                        <div class="self-start ml-3 mt-3 w-full">
-                            {!! Form::open(['route' => 'blog.comment.create']) !!}
-                                {!! Form::hidden('article_id', $article->id) !!}
-
-                                {!! Form::bsTextarea('content', false, old('message'), [
-                                    'placeholder' => 'Your message here...',
-                                    'required' => 'required',
-                                    'editor' => 'commentEditor',
-                                    'class' => 'hidden'
-                                ]) !!}
-
-                                <button type="submit" class="btn btn-primary gap-2">
-                                    <i class="fa-solid fa-pencil"></i>
-                                    Comment
-                                </button>
-                            {!! Form::close() !!}
-                        </div>
-                    </div>
-                @else
-                    <x-alert type="primary" class="mt-5">
-                        You need to be logged in to comment to this article !
-                    </x-alert>
-                @endif
-            </section>
+            {{-- Bloc Coments --}}
+            <livewire:blog.comment :article="$article"/>
 
         </div>
         <aside class="lg:col-span-3 col-span-12 px-3">

@@ -20,7 +20,7 @@ class BlogCommentPolicy
      */
     public function before(User $user, string $ability)
     {
-        if ($user->hasPermission('manage.blog.comments')) {
+        if ($user->hasPermissionTo('manage blog article')) {
             return true;
         }
     }
@@ -29,11 +29,11 @@ class BlogCommentPolicy
      * Determine whether the user can update the discuss post.
      *
      * @param User $user
-     * @param \Xetaravel\Models\BlogComment $comment
+     * @param BlogComment $comment
      *
      * @return bool
      */
-    public function update(User $user, BlogComment $comment)
+    public function update(User $user, BlogComment $comment): bool
     {
         return $user->id === $comment->user_id;
     }
@@ -42,11 +42,11 @@ class BlogCommentPolicy
      * Determine whether the user can delete the discuss post.
      *
      * @param User $user
-     * @param \Xetaravel\Models\BlogComment $comment
+     * @param BlogComment $comment
      *
      * @return bool
      */
-    public function delete(User $user, BlogComment $comment)
+    public function delete(User $user, BlogComment $comment): bool
     {
         return $user->id === $comment->user_id;
     }

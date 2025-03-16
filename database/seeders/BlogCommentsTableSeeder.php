@@ -19,7 +19,7 @@ class BlogCommentsTableSeeder extends Seeder
         $comments = [
             [
                 'user_id' => 2,
-                'article_id' => 1,
+                'blog_article_id' => 1,
                 'content' => 'Lorem **ipsum dolor sit amet**, consectetuer adipiscing elit, sed diam nonummy nibh *euismod tincidunt* ut laoreet dolore `magna aliquam` erat volutpat.',
                 'created_at' => $now,
                 'updated_at' => $now

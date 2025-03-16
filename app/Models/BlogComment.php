@@ -27,7 +27,7 @@ class BlogComment extends Model
      * @var array
      */
     protected $fillable = [
-        'article_id',
+        'blog_article_id',
         'user_id',
         'content'
     ];

@@ -2,7 +2,7 @@
 
     <aside class="flex flex-col items-center self-center sm:self-start mt-4">
         {{--  User Avatar --}}
-        <a class="avatar {{ $comment->user->online ? 'online' : 'offline' }} m-2" href="{{ $comment->user->profile_url }}">
+        <a class="avatar {{ $comment->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $comment->user->profile_url }}">
             <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $comment->user->username }} is {{ $comment->user->online ? 'online' : 'offline' }}">
                 <img class="rounded-full" src="{{ $comment->user->avatar_small }}"  alt="{{ $comment->user->full_name }} avatar" />
             </figure>
@@ -24,18 +24,14 @@
 
                 <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
-                {{-- User with Vue --}}
-                <discuss-user
-                    class="text-xl font-xetaravel ml-0"
-                    :user="{{ json_encode([
-                        'avatar_small'=> $comment->user->avatar_small,
-                        'profile_url' => $comment->user->profile_url,
-                        'full_name' => $comment->user->full_name
-                    ]) }}"
-                    :created-at="{{ var_export($comment->user->created_at->diffForHumans()) }}"
-                    :last-login="{{ var_export($comment->user->last_login->diffForHumans()) }}"
-                    :background-color="{{ var_export($comment->user->avatar_primary_color) }}">
-                </discuss-user>
+                {{-- User --}}
+                <x-user.user
+                    :user-name="$comment->user->full_name"
+                    :user-avatar-small="$comment->user->avatar_small"
+                    :user-profile="$comment->user->profile_url"
+                    :user-last-login="$comment->user->last_login_date->diffForHumans()"
+                    :user-registered="$comment->user->created_at->diffForHumans()"
+                />
 
                 <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 

@@ -20,7 +20,7 @@ class BlogArticlesTableSeeder extends Seeder
         $articles = [
             [
                 'user_id' => 1,
-                'category_id' => 1,
+                'blog_category_id' => 1,
                 'title' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
                 'slug' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit',
                 'content' => '**Lorem ipsum** dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
@@ -112,7 +112,7 @@ class BlogComment extends Model
     }
 }
 ```',
-                'comment_count' => 1,
+                'blog_comment_count' => 1,
                 'is_display' => 1,
                 'created_at' => $now,
                 'updated_at' => $now

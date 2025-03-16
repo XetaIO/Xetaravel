@@ -6,15 +6,18 @@ namespace Xetaravel\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Validation\Rules\Password;
 use Xetaravel\Settings\Settings;
+use Xetaravel\View\Composers\Blog\SidebarComposer as BlogSidebarComposer;
+use Xetaravel\View\Composers\Discuss\SidebarComposer as DiscussSidebarComposer;
+use Xetaravel\View\Composers\NotificationsComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,11 +29,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Models
-        //Model::preventLazyLoading();
+        Model::preventLazyLoading();
         //Model::preventAccessingMissingAttributes();
 
         // Routes
-        //Route::namespace('Xetaravel\Http\Controllers');
         Route::pattern('id', '[0-9]+');
 
         // Builder
@@ -43,9 +45,12 @@ class AppServiceProvider extends ServiceProvider
         View::addNamespace('Blog', base_path() . '/resources/views/Blog');
         View::addNamespace('Auth', base_path() . '/resources/views/Auth');
         View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
+        View::composer('partials._notifications', NotificationsComposer::class);
+        View::composer('Blog::partials._sidebar', BlogSidebarComposer::class);
+        View::composer('Discuss::partials._sidebar', DiscussSidebarComposer::class);
 
         // Pagination
-        Paginator::defaultView('vendor.pagination.tailwind');
+        //Paginator::defaultView('vendor.pagination.tailwind');
 
         // Set default password rule for the application.
         Password::defaults(function () {

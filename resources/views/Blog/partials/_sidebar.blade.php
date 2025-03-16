@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="mt-4">
-            <a href="{{ $article->article_url }}" class="text-lg font-medium link link-hover dark:text-primary">
+            <a href="{{ $article->article_url }}" class="text-lg font-medium font-xetaravel link link-hover link-primary">
                 {{ Str::limit($article->title, 50) }}
             </a>
         </div>
@@ -31,7 +31,7 @@
                 </a>
             </div>
             <span class="font-light text-sm">
-                {{ $article->created_at->formatLocalized('%b %d, %Y') }}
+                {{ $article->created_at->isoFormat('ll') }}
             </span>
         </div>
     </div>
@@ -48,8 +48,8 @@
         <ul>
         @foreach ($categories as $category)
             <li class="mb-2">
-                <a href="{{ $category->category_url }}" class="font-bold mx-1 link link-hover">
-                    - {{ $category->title }} ({{ $category->article_count }})
+                <a href="{{ $category->category_url }}" class="font-bold font-xetaravel mx-1 link link-hover">
+                    - {{ $category->title }} ({{ $category->blog_article_count }})
                 </a>
             </li>
         @endforeach
@@ -70,11 +70,11 @@
                     <img src="{{ $user->avatar_small }}" alt="{{ $article->user->full_name }} avatar" class="w-10 h-10 object-cover rounded-full mr-4">
                 </a>
                 <p class="flex flex-col items-center">
-                    <a href="{{ $article->user->profile_url }}" class="font-semibold mx-1 link link-hover truncate">
+                    <a href="{{ $article->user->profile_url }}" class="font-semibold font-xetaravel mx-1 link link-hover truncate">
                         {{ $article->user->full_name }}
                     </a>
                     <span class="text-sm font-light">
-                        Created  {{ $article->user->article_count }} Post(s)
+                        Created  {{ $article->user->blog_article_count }} Article(s)
                     </span>
                 </p>
             </li>

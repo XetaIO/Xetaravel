@@ -35,7 +35,7 @@ class BlogArticle extends Model implements HasMedia
     protected $fillable = [
         'title',
         'user_id',
-        'category_id',
+        'blog_category_id',
         'is_display',
         'content'
     ];
@@ -85,7 +85,7 @@ class BlogArticle extends Model implements HasMedia
     #[CountedBy]
     public function category(): BelongsTo
     {
-        return $this->belongsTo(BlogCategory::class);
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 
     /**
