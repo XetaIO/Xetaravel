@@ -44,12 +44,7 @@
             </div>
 
             {{-- Share --}}
-            <discuss-share
-                class="sm:opacity-0 sm:group-hover:opacity-100"
-                :post-id="{{ var_export($comment->getKey()) }}"
-                :post-type="{{ var_export('BlogComment') }}"
-                :route-input="{{ var_export(route('blog.comment.show', ['id' => $comment->getKey()])) }}">
-            </discuss-share>
+            <x-blog.share :post-id="$comment->getKey()" :post-type="'BlogComment'" :route="route('blog.comment.show', ['id' => $comment->getKey()])" :is-solved="false" />
         </header>
 
         {{-- BlogComment Content --}}

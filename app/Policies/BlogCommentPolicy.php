@@ -26,6 +26,19 @@ class BlogCommentPolicy
     }
 
     /**
+     * Determine whether the user can create a blog comment.
+     *
+     * @param User $user
+     * @param BlogComment $comment
+     *
+     * @return bool
+     */
+    public function create(User $user, BlogComment $comment): bool
+    {
+        return $user->hasPermissionTo('create blog comment');
+    }
+
+    /**
      * Determine whether the user can update the discuss post.
      *
      * @param User $user

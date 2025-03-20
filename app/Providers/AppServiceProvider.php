@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Xetaravel\Models\BlogComment;
+use Xetaravel\Policies\BlogCommentPolicy;
 use Xetaravel\Settings\Settings;
 use Xetaravel\View\Composers\Blog\SidebarComposer as BlogSidebarComposer;
 use Xetaravel\View\Composers\Discuss\SidebarComposer as DiscussSidebarComposer;
@@ -30,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Models
         Model::preventLazyLoading();
-        //Model::preventAccessingMissingAttributes();
+        Model::preventAccessingMissingAttributes();
 
         // Routes
         Route::pattern('id', '[0-9]+');

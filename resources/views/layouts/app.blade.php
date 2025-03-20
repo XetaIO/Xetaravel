@@ -57,7 +57,7 @@ Conçu et développé par Emeric Fèvre.
             <!-- Toggle Responsive-->
             <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
 
-            <div class="drawer-content flex flex-col overflow-hidden">
+            <div class="drawer-content flex flex-col overflow-hidden min-h-screen">
                 <!-- Header -->
                 @include('elements.header')
 

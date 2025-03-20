@@ -21,10 +21,10 @@ return new class () extends Migration {
             $table->string('github_id')->nullable()->unique();
             $table->integer('blog_comment_count')->unsigned()->default(0);
             $table->integer('blog_article_count')->unsigned()->default(0);
-            $table->integer('discuss_conversation_count')->default(0);
-            $table->integer('discuss_post_count')->default(0);
-            $table->integer('experiences_total')->default(0);
-            $table->integer('rubies_total')->default(0);
+            $table->integer('discuss_conversation_count')->unsigned()->default(0);
+            $table->integer('discuss_post_count')->unsigned()->default(0);
+            $table->integer('experiences_total')->unsigned()->default(0);
+            $table->integer('rubies_total')->unsigned()->default(0);
             $table->rememberToken();
             $table->ipAddress('register_ip');
             $table->ipAddress('last_login_ip')->nullable();

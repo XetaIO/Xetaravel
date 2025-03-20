@@ -26,8 +26,10 @@
                                     this.$watch('value', (newValue) => {
                                         if (newValue !== this.editor.value()) {
                                             this.value = newValue || ''
+                                            this.editor.codemirror.setValue('')
                                             this.destroyEditor()
                                             this.initEditor()
+
                                         }
                                     })
                                 },
@@ -57,7 +59,6 @@
                                                    .finally(() => this.uploading = false)
                                             }
                                         })
-
                                     this.editor.codemirror.on('change', () => this.value = this.editor.value())
                                 }
                             }"

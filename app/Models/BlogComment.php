@@ -47,7 +47,7 @@ class BlogComment extends Model
      *
      * @return BelongsTo
      */
-    #[CountedBy]
+    #[CountedBy(as: 'blog_comment_count')]
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -58,9 +58,9 @@ class BlogComment extends Model
      *
      * @return BelongsTo
      */
-    #[CountedBy]
+    #[CountedBy(as: 'blog_comment_count')]
     public function article(): BelongsTo
     {
-        return $this->belongsTo(BlogArticle::class);
+        return $this->belongsTo(BlogArticle::class, 'blog_article_id');
     }
 }

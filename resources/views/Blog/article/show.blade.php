@@ -19,8 +19,10 @@
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
     <script type="text/javascript">
-        // HighlightJS
-        hljs.highlightAll();
+        document.addEventListener("DOMContentLoaded", function() {
+            // HighlightJS
+            hljs.highlightAll();
+        });
     </script>
 @endpush
 
@@ -149,7 +151,7 @@
                 </footer>
             </article>
 
-            {{-- Bloc Coments --}}
+            {{-- Coments --}}
             <livewire:blog.comment :article="$article"/>
 
         </div>

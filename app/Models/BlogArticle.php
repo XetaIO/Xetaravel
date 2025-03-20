@@ -82,7 +82,7 @@ class BlogArticle extends Model implements HasMedia
      *
      * @return BelongsTo
      */
-    #[CountedBy]
+    #[CountedBy(as: 'blog_article_count')]
     public function category(): BelongsTo
     {
         return $this->belongsTo(BlogCategory::class, 'blog_category_id');
@@ -93,7 +93,7 @@ class BlogArticle extends Model implements HasMedia
      *
      * @return BelongsTo
      */
-    #[CountedBy]
+    #[CountedBy(as: 'blog_article_count')]
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

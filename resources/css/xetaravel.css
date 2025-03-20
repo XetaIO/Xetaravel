@@ -1,10 +1,7 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
-@theme {
-    --font-xetaravel: "Miriam Libre";
-}
 
 @plugin "daisyui" {
     themes: light --default, dark;
@@ -28,8 +25,14 @@
 @source "../**/*.vue";
 
 @theme {
+    --font-xetaravel: "Miriam Libre";
+    --tw-prose-pre-bg: var(--color-base-content);
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+pre {
+    @apply  dark:bg-base-100 bg-neutral-800;
 }
 
 /**
@@ -171,4 +174,36 @@ pre code {
 
 .hljs-strong {
     font-weight: bold;
+}
+
+
+/**
+ * EasyMDE
+ */
+.EasyMDEContainer h1 {
+    @apply text-4xl font-bold mb-5
+}
+
+.EasyMDEContainer h2 {
+    @apply text-2xl font-bold mb-3
+}
+
+.EasyMDEContainer h3 {
+    @apply text-lg font-bold mb-3
+}
+
+.EasyMDEContainer .CodeMirror {
+    @apply bg-base-100 text-base-content
+}
+
+.EasyMDEContainer .CodeMirror {
+    @apply bg-base-100 text-base-content
+}
+
+.EasyMDEContainer .CodeMirror-cursor {
+    @apply border border-b-base-100
+}
+
+.EasyMDEContainer .editor-toolbar > button:hover, .EasyMDEContainer .editor-toolbar > .active {
+    @apply bg-base-100 text-base-content
 }

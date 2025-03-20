@@ -26,7 +26,7 @@
                     <img src="{{ $article->user->avatar_small }}" alt="{{ $article->user->full_name }} avatar" class="w-8 h-8 object-cover rounded-full">
                 </a>
 
-                <a href="{{ $article->user->profile_url }}" class="link link-hover text-sm mx-3">
+                <a href="{{ $article->user->profile_url }}" class="link link-hover text-sm font-xetaravel mx-3">
                     {{ $article->user->full_name }}
                 </a>
             </div>

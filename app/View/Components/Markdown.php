@@ -55,6 +55,7 @@ class Markdown extends Component
                 'link', 'upload-image', 'table', '|',
                 'preview', 'side-by-side'
             ],
+            //'forceSync' => true
         ], $this->config);
 
         // Table default CSS class `.table` breaks the layout.
