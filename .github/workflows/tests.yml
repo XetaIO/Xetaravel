@@ -63,7 +63,7 @@ jobs:
                 npm run build
 
             - name: Execute tests
-              run: vendor/bin/phpunit --coverage-clover coverage.xml
+              run: vendor/bin/phpunit --coverage-clover build/logs/coverage.xml
               env:
                   DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
