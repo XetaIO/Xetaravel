@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +16,7 @@ class DiscussController extends Controller
      * Display all conversations.
      * Handled by Livewire.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {
@@ -26,7 +28,7 @@ class DiscussController extends Controller
     /**
      * Display the Leaderboard.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function leaderboard(): View
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -23,22 +25,22 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
-            \Xetaio\IpTraceable\Http\Middleware\IpTraceable::class
+            Xetaio\IpTraceable\Http\Middleware\IpTraceable::class
         ]);
 
         $middleware->alias([
-            'auth' => \Xetaravel\Http\Middleware\Authenticate::class,
-            'discuss.maintenance' => \Xetaravel\Http\Middleware\DiscussMaintenance::class,
-            'display' => \Xetaravel\Http\Middleware\EnableDisplayScopeMiddleware::class,
+            'auth' => Xetaravel\Http\Middleware\Authenticate::class,
+            'discuss.maintenance' => Xetaravel\Http\Middleware\DiscussMaintenance::class,
+            'display' => Xetaravel\Http\Middleware\EnableDisplayScopeMiddleware::class,
 
             // Packages Middleware
-            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
-            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
-            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+            'role' => Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->renderable(function (\Exception $e) {
+        $exceptions->renderable(function (Exception $e) {
             // Error 404 model not found
             if ($e->getPrevious() instanceof ModelNotFoundException) {
                 return Redirect::route('page.index')

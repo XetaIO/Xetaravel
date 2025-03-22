@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Console\Commands;
 
 use Illuminate\Console\Command;

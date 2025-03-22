@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use Carbon\Carbon;
@@ -100,8 +102,8 @@ class UsersTableSeeder extends Seeder
             $model = User::where('username', $user['username'])->first();
             $model->addMedia(public_path('images/avatar.png'))
                 ->preservingOriginal()
-                ->setName(substr(md5($user['username']), 0, 10))
-                ->setFileName(substr(md5($user['username']), 0, 10) . '.png')
+                ->setName(mb_substr(md5($user['username']), 0, 10))
+                ->setFileName(mb_substr(md5($user['username']), 0, 10) . '.png')
                 ->withCustomProperties(['primaryColor' => '#B4AEA4'])
                 ->toMediaCollection('avatar');
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Markdown\GithubCommit;
 
 use League\CommonMark\Node\Node;
@@ -8,6 +10,7 @@ use League\CommonMark\Renderer\NodeRendererInterface;
 use League\CommonMark\Util\HtmlElement;
 use League\CommonMark\Util\Xml;
 use League\CommonMark\Xml\XmlNodeRendererInterface;
+use Stringable;
 
 final class GithubCommitRenderer implements NodeRendererInterface, XmlNodeRendererInterface
 {
@@ -18,7 +21,7 @@ final class GithubCommitRenderer implements NodeRendererInterface, XmlNodeRender
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer): \Stringable
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): Stringable
     {
         GithubCommit::assertInstanceOf($node);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Markdown\Emoji;
 
 use League\CommonMark\Environment\EnvironmentBuilderInterface;

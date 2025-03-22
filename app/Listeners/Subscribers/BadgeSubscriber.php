@@ -35,6 +35,32 @@ class BadgeSubscriber
     ];
 
     /**
+     * Send a notification for each new badge unlocked.
+     *
+     * @param array $result The result of the synchronization.
+     * @param Collection $badges The badges collection related to the listener.
+     * @param User $user The user to notify.
+     *
+     * @return bool
+     */
+    protected function sendNotifications(array $result, Collection $badges, User $user): bool
+    {
+        if (empty($result['attached'])) {
+            return true;
+        }
+
+        $sendNotification = function ($badgeId, $key, $badges) use ($user) {
+            $badgeCollection = $badges->filter(function ($badge) use ($badgeId) {
+                return $badge->id === $badgeId;
+            })->first();
+
+            $user->notify(new BadgeNotification($badgeCollection));
+        };
+
+        return array_walk($result['attached'], $sendNotification, $badges);
+    }
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param Dispatcher $events
@@ -175,31 +201,5 @@ class BadgeSubscriber
         $result = $user->badges()->syncWithoutDetaching($badges);
 
         return $this->sendNotifications($result, $badges, $user);
-    }
-
-    /**
-     * Send a notification for each new badge unlocked.
-     *
-     * @param array $result The result of the synchronization.
-     * @param Collection $badges The badges collection related to the listener.
-     * @param User $user The user to notify.
-     *
-     * @return bool
-     */
-    protected function sendNotifications(array $result, Collection $badges, User $user): bool
-    {
-        if (empty($result['attached'])) {
-            return true;
-        }
-
-        $sendNotification = function ($badgeId, $key, $badges) use ($user) {
-            $badgeCollection = $badges->filter(function ($badge) use ($badgeId) {
-                return $badge->id === $badgeId;
-            })->first();
-
-            $user->notify(new BadgeNotification($badgeCollection));
-        };
-
-        return array_walk($result['attached'], $sendNotification, $badges);
     }
 }

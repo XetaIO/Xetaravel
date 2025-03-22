@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
@@ -22,7 +24,7 @@ class ArticleRepository
      *
      * @param array $data The data used to create the article.
      *
-     * @return \Xetaravel\Models\BlogArticle
+     * @return BlogArticle
      */
     public static function create(array $data): BlogArticle
     {
@@ -38,9 +40,9 @@ class ArticleRepository
      * Update the article data and save it.
      *
      * @param array $data The data used to update the article.
-     * @param \Xetaravel\Models\BlogArticle $article The article to update.
+     * @param BlogArticle $article The article to update.
      *
-     * @return \Xetaravel\Models\BlogArticle
+     * @return BlogArticle
      */
     public static function update(array $data, BlogArticle $article): BlogArticle
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Admin\User;
 
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +22,7 @@ class UserController extends Controller
     /**
      * Show the search page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {
@@ -35,11 +37,11 @@ class UserController extends Controller
     /**
      * Show the update form.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string $slug The slug of the user.
      * @param int $id The id of the user.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
     public function showUpdateForm(Request $request, string $slug, int $id)
     {
@@ -69,10 +71,10 @@ class UserController extends Controller
     /**
      * Handle an user update request for the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id The id of the user to update.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, int $id): RedirectResponse
     {
@@ -100,10 +102,10 @@ class UserController extends Controller
     /**
      * Handle the delete request for the user.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id The id of the user to delete.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(Request $request, int $id): RedirectResponse
     {
@@ -131,7 +133,7 @@ class UserController extends Controller
      *
      * @param int $id The id of the user.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAvatar(int $id): RedirectResponse
     {
@@ -140,8 +142,8 @@ class UserController extends Controller
         $user->clearMediaCollection('avatar');
         $user->addMedia(public_path('images/avatar.png'))
             ->preservingOriginal()
-            ->setName(substr(md5($user->username), 0, 10))
-            ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+            ->setName(mb_substr(md5($user->username), 0, 10))
+            ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
             ->toMediaCollection('avatar');
 
         return redirect()

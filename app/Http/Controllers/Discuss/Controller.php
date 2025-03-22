@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Xetaravel\Http\Controllers\Controller as BaseController;

@@ -50,7 +50,7 @@ class PageController extends Controller
     /**
      * Display the contact page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showContact(): View
     {
@@ -62,9 +62,9 @@ class PageController extends Controller
     /**
      * Send an E-mail to .
      *
-     * @param \Illuminate\Http\Request $request The current request.
+     * @param Request $request The current request.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function contact(Request $request): RedirectResponse
     {

@@ -38,6 +38,23 @@ class ExperienceSubscriber
     ];
 
     /**
+     * Create the experience.
+     *
+     * @param array $data The data used to create the experience.
+     *
+     * @return bool
+     */
+    protected function create(array $data): bool
+    {
+        if (!isset($data['data'])) {
+            $data['data'] = [];
+        }
+        $experience = Experience::create($data);
+
+        return !(is_null($experience));
+    }
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param Dispatcher $events
@@ -126,22 +143,5 @@ class ExperienceSubscriber
         ];
 
         return $this->create($data);
-    }
-
-    /**
-     * Create the experience.
-     *
-     * @param array $data The data used to create the experience.
-     *
-     * @return bool
-     */
-    protected function create(array $data): bool
-    {
-        if (!isset($data['data'])) {
-            $data['data'] = [];
-        }
-        $experience = Experience::create($data);
-
-        return !(is_null($experience));
     }
 }

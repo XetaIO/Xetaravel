@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Validators;
 
 use Illuminate\Support\Facades\Validator as FacadeValidator;
@@ -12,7 +14,7 @@ class CommentValidator
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function create(array $data): Validator
     {

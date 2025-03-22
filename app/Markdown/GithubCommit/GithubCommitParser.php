@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Markdown\GithubCommit;
 
 use League\CommonMark\Parser\Inline\InlineParserInterface;
 use League\CommonMark\Parser\Inline\InlineParserMatch;
 use League\CommonMark\Parser\InlineParserContext;
+
+use function mb_strlen;
 
 final class GithubCommitParser implements InlineParserInterface
 {
@@ -21,9 +25,9 @@ final class GithubCommitParser implements InlineParserInterface
         $route = $inlineContext->getFullMatch();
 
         // Push the cursor to the lenght of the full match.
-        $inlineContext->getCursor()->advanceBy(\strlen($route));
+        $inlineContext->getCursor()->advanceBy(mb_strlen($route));
 
-        $commit = substr($inlineContext->getMatches()[3], 0, 7);
+        $commit = mb_substr($inlineContext->getMatches()[3], 0, 7);
 
         $content = "{$inlineContext->getMatches()[1]}@{$commit}";
 

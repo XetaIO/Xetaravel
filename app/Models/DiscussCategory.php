@@ -54,6 +54,23 @@ class DiscussCategory extends Model
     }
 
     /**
+     * Pluck the categories by the given fields and the locked state.
+     *
+     * @param string $value
+     * @param string|null $column
+     *
+     * @return Collection
+     */
+    public static function pluckLocked(string $value, string $column = null): Collection
+    {
+        if (Auth::user() && Auth::user()->hasPermission('manage.discuss.conversations')) {
+            return self::pluck($value, $column);
+        }
+
+        return self::where('is_locked', false)->pluck($value, $column);
+    }
+
+    /**
      * Return the field to slug.
      *
      * @return string
@@ -81,22 +98,5 @@ class DiscussCategory extends Model
     public function lastConversation(): HasOne
     {
         return $this->hasOne(DiscussConversation::class, 'id', 'last_conversation_id');
-    }
-
-    /**
-     * Pluck the categories by the given fields and the locked state.
-     *
-     * @param string $value
-     * @param string|null $column
-     *
-     * @return Collection
-     */
-    public static function pluckLocked(string $value, string $column = null): Collection
-    {
-        if (Auth::user() && Auth::user()->hasPermission('manage.discuss.conversations')) {
-            return self::pluck($value, $column);
-        }
-
-        return self::where('is_locked', false)->pluck($value, $column);
     }
 }

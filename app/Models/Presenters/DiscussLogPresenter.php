@@ -45,7 +45,7 @@ trait DiscussLogPresenter
     /**
      * Get the user related to the deleted post.
      *
-     * @return null|\Xetaravel\Models\User
+     * @return null|User
      */
     public function getPostUserAttribute()
     {
@@ -59,7 +59,7 @@ trait DiscussLogPresenter
     /**
      * Get the old category.
      *
-     * @return null|\Xetaravel\Models\DiscussCategory
+     * @return null|DiscussCategory
      */
     public function getOldCategoryAttribute()
     {
@@ -73,7 +73,7 @@ trait DiscussLogPresenter
     /**
      * Get the new category.
      *
-     * @return null|\Xetaravel\Models\DiscussCategory
+     * @return null|DiscussCategory
      */
     public function getNewCategoryAttribute()
     {

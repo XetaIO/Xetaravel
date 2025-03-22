@@ -37,7 +37,7 @@ class DiscussConversationObserver
 
         // If the conversation is the last_conversation of the category,
         // find the new last_conversation and update the category.
-        if ($category->last_conversation_id == $discussConversation->getKey()) {
+        if ($category->last_conversation_id === $discussConversation->getKey()) {
             $previousConversation = DiscussConversationRepository::findPreviousConversation($discussConversation);
 
             if (is_null($previousConversation)) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Policies;
 
 use Xetaravel\Models\User;
@@ -13,7 +15,7 @@ class DiscussConversationPolicy
     /**
      * Authorize all actions if the user has the given permission.
      *
-     * @param \Xetaravel\Models\User $user
+     * @param User $user
      * @param string $ability
      *
      * @return true|void
@@ -28,8 +30,8 @@ class DiscussConversationPolicy
     /**
      * Determine whether the user can update the discuss conversation.
      *
-     * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussConversation $discussConversation
+     * @param User $user
+     * @param DiscussConversation $discussConversation
      *
      * @return bool
      */
@@ -41,8 +43,8 @@ class DiscussConversationPolicy
     /**
      * Determine whether the user can delete the discuss conversation.
      *
-     * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussConversation $discussConversation
+     * @param User $user
+     * @param DiscussConversation $discussConversation
      *
      * @return bool
      */
@@ -56,8 +58,8 @@ class DiscussConversationPolicy
      * User must be the creator of the conversation to be able to make a
      * post as solved.
      *
-     * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussConversation $discussConversation
+     * @param User $user
+     * @param DiscussConversation $discussConversation
      *
      * @return bool
      */

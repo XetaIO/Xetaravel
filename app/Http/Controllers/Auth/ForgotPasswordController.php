@@ -36,6 +36,18 @@ class ForgotPasswordController extends Controller
     }
 
     /**
+     * Get the response for a successful password reset link.
+     *
+     * @return RedirectResponse
+     */
+    protected function sendResetLinkResponse(): RedirectResponse
+    {
+        return redirect()
+            ->route('auth.login')
+            ->success('We have e-mailed your password reset link!');
+    }
+
+    /**
      * Display the form to request a password reset link.
      *
      * @return View
@@ -63,20 +75,8 @@ class ForgotPasswordController extends Controller
             $this->credentials($request)
         );
 
-        return $response == Password::RESET_LINK_SENT
+        return $response === Password::RESET_LINK_SENT
                     ? $this->sendResetLinkResponse()
                     : $this->sendResetLinkFailedResponse($request, $response);
-    }
-
-    /**
-     * Get the response for a successful password reset link.
-     *
-     * @return RedirectResponse
-     */
-    protected function sendResetLinkResponse(): RedirectResponse
-    {
-        return redirect()
-            ->route('auth.login')
-            ->success('We have e-mailed your password reset link!');
     }
 }

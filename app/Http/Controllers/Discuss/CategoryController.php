@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\View\View;
@@ -10,7 +12,7 @@ class CategoryController extends Controller
     /**
      * View all categories.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {

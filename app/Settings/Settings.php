@@ -22,6 +22,35 @@ class Settings
     }
 
     /**
+     * Generate the key used by the cache driver to store the value.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    protected function getCacheKey(string $key): string
+    {
+        $cacheKey = $this->normalizeKey($key);
+
+        // Add context to the cache key.
+        $context = serialize($this->context);
+        $cacheKey .= "::c::{$context}";
+
+        return $cacheKey;
+    }
+
+    protected function normalizeKey(string $key): string
+    {
+        // We want to preserve period characters in the key, however everything else is fair game
+        // to convert to a slug.
+        return Str::of($key)
+            ->replace('.', '-dot-')
+            ->slug()
+            ->replace('-dot-', '.')
+            ->__toString();
+    }
+
+    /**
      * Get the value for the given key, siteId and context fromm the cache or from the database if no cache key.
      *
      * @param string $key
@@ -101,35 +130,6 @@ class Settings
         ];
 
         return $this;
-    }
-
-    /**
-     * Generate the key used by the cache driver to store the value.
-     *
-     * @param string $key
-     *
-     * @return string
-     */
-    protected function getCacheKey(string $key): string
-    {
-        $cacheKey = $this->normalizeKey($key);
-
-        // Add context to the cache key.
-        $context = serialize($this->context);
-        $cacheKey .= "::c::{$context}";
-
-        return $cacheKey;
-    }
-
-    protected function normalizeKey(string $key): string
-    {
-        // We want to preserve period characters in the key, however everything else is fair game
-        // to convert to a slug.
-        return Str::of($key)
-            ->replace('.', '-dot-')
-            ->slug()
-            ->replace('-dot-', '.')
-            ->__toString();
     }
 
 }

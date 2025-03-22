@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Utility;
 
 use Carbon\Carbon;
@@ -70,81 +72,6 @@ class UserUtility
     ];
 
     /**
-     * Get the level of a user with his experiences.
-     *
-     * @param int $userXP The XP of the user to get the level.
-     *
-     * @return array
-     */
-    public static function getLevel(int $userXP): array
-    {
-        $infos = [
-            'previousLevelExperience' => 0,
-            'previousLevel' => 0,
-            'currentLevel' => 0,
-            'currentLevelExperience' => 0,
-            'currentUserExperience' => 0,
-            'nextLevel' => 1,
-            'experienceNeededNextLevel' => 400,
-            'nextLevelExperience' => 400,
-            'matchExactXPLevel' => false,
-            'maxLevel' => false
-        ];
-
-        if ($userXP == 0) {
-            return $infos;
-        }
-
-        for ($i = 0; $i < count(static::$levels); $i++) {
-            // The XP of the user match the exact XP of the rank and there's another rank after this one.
-            if ($userXP == static::$levels[$i] && isset(static::$levels[$i + 1])) {
-                return array_merge($infos, [
-                    'previousLevelExperience' => static::$levels[$i - 1],
-                    'previousLevel' => $i - 1,
-                    'currentLevel' => $i,
-                    'currentLevelExperience' => static::$levels[$i],
-                    'currentUserExperience' => $userXP,
-                    'nextLevel' => $i + 1,
-                    'experienceNeededNextLevel' => static::$levels[$i + 1] - $userXP,
-                    'nextLevelExperience' => static::$levels[$i + 1],
-                    'matchExactXPLevel' => true
-                ]);
-            } else {
-                // If there's another rank after this one and the user XP is higher than the current rank.
-                if (isset(static::$levels[$i + 1]) && $userXP > static::$levels[$i]) {
-                    // If the user XP is higher than the current rank but lower than the next rank.
-                    if ($userXP > static::$levels[$i] && $userXP < static::$levels[$i + 1]) {
-                        return array_merge($infos, [
-                            'previousLevelExperience' => static::$levels[$i],
-                            'previousLevel' => $i == 0 ? 0 : $i - 1,
-                            'currentLevel' => $i,
-                            'currentLevelExperience' => static::$levels[$i],
-                            'currentUserExperience' => $userXP,
-                            'nextLevel' => $i + 1,
-                            'experienceNeededNextLevel' => static::$levels[$i + 1] - $userXP,
-                            'nextLevelExperience' => static::$levels[$i + 1]
-                        ]);
-                    }
-                } else {
-                    // The user has reached the max lvl
-                    return array_merge($infos, [
-                        'previousLevelExperience' => static::$levels[$i],
-                        'previousLevel' => $i == 0 ? 0 : $i - 1,
-                        'currentLevel' => $i,
-                        'currentLevelExperience' => static::$levels[$i],
-                        'currentUserExperience' => $userXP,
-                        'nextLevel' => 0,
-                        'experienceNeededNextLevel' => 0,
-                        'nextLevelExperience' => 0,
-                        'matchExactXPLevel' => (static::$levels[$i] - $userXP) == 0 ? true : false,
-                        'maxLevel' => true
-                    ]);
-                }
-            }
-        }
-    }
-
-    /**
      * The prefix of the background images.
      *
      * @var string
@@ -196,6 +123,81 @@ class UserUtility
         '30' => '15',
         '31' => '1'
     ];
+
+    /**
+     * Get the level of a user with his experiences.
+     *
+     * @param int $userXP The XP of the user to get the level.
+     *
+     * @return array
+     */
+    public static function getLevel(int $userXP): array
+    {
+        $infos = [
+            'previousLevelExperience' => 0,
+            'previousLevel' => 0,
+            'currentLevel' => 0,
+            'currentLevelExperience' => 0,
+            'currentUserExperience' => 0,
+            'nextLevel' => 1,
+            'experienceNeededNextLevel' => 400,
+            'nextLevelExperience' => 400,
+            'matchExactXPLevel' => false,
+            'maxLevel' => false
+        ];
+
+        if ($userXP === 0) {
+            return $infos;
+        }
+
+        for ($i = 0; $i < count(static::$levels); $i++) {
+            // The XP of the user match the exact XP of the rank and there's another rank after this one.
+            if ($userXP === static::$levels[$i] && isset(static::$levels[$i + 1])) {
+                return array_merge($infos, [
+                    'previousLevelExperience' => static::$levels[$i - 1],
+                    'previousLevel' => $i - 1,
+                    'currentLevel' => $i,
+                    'currentLevelExperience' => static::$levels[$i],
+                    'currentUserExperience' => $userXP,
+                    'nextLevel' => $i + 1,
+                    'experienceNeededNextLevel' => static::$levels[$i + 1] - $userXP,
+                    'nextLevelExperience' => static::$levels[$i + 1],
+                    'matchExactXPLevel' => true
+                ]);
+            }
+            // If there's another rank after this one and the user XP is higher than the current rank.
+            if (isset(static::$levels[$i + 1]) && $userXP > static::$levels[$i]) {
+                // If the user XP is higher than the current rank but lower than the next rank.
+                if ($userXP > static::$levels[$i] && $userXP < static::$levels[$i + 1]) {
+                    return array_merge($infos, [
+                        'previousLevelExperience' => static::$levels[$i],
+                        'previousLevel' => $i === 0 ? 0 : $i - 1,
+                        'currentLevel' => $i,
+                        'currentLevelExperience' => static::$levels[$i],
+                        'currentUserExperience' => $userXP,
+                        'nextLevel' => $i + 1,
+                        'experienceNeededNextLevel' => static::$levels[$i + 1] - $userXP,
+                        'nextLevelExperience' => static::$levels[$i + 1]
+                    ]);
+                }
+            } else {
+                // The user has reached the max lvl
+                return array_merge($infos, [
+                    'previousLevelExperience' => static::$levels[$i],
+                    'previousLevel' => $i === 0 ? 0 : $i - 1,
+                    'currentLevel' => $i,
+                    'currentLevelExperience' => static::$levels[$i],
+                    'currentUserExperience' => $userXP,
+                    'nextLevel' => 0,
+                    'experienceNeededNextLevel' => 0,
+                    'nextLevelExperience' => 0,
+                    'matchExactXPLevel' => (static::$levels[$i] - $userXP) === 0 ? true : false,
+                    'maxLevel' => true
+                ]);
+            }
+
+        }
+    }
 
     /**
      * Get the profile background by the current day.

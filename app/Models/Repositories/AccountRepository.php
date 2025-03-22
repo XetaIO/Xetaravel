@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Xetaravel\Models\Account;
@@ -12,7 +14,7 @@ class AccountRepository
      * @param array $data The data used to update/create the user.
      * @param int $id The user id related to the account.
      *
-     * @return \Xetaravel\Models\Account
+     * @return Account
      */
     public static function update(array $data, int $id): Account
     {

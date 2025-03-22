@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Listeners\Subscribers\Discuss;
 
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
@@ -25,6 +27,23 @@ class LogSubscriber
     ];
 
     /**
+     * Create the log.
+     *
+     * @param array $data The data used to create the log.
+     *
+     * @return bool
+     */
+    protected function create(array $data): bool
+    {
+        if (!isset($data['data'])) {
+            $data['data'] = [];
+        }
+        $log = DiscussLog::create($data);
+
+        return !(is_null($log));
+    }
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param Illuminate\Events\Dispatcher $events
@@ -34,14 +53,14 @@ class LogSubscriber
     public function subscribe($events)
     {
         foreach ($this->events as $event => $action) {
-            $events->listen($event, LogSubscriber::class . '@' . $action);
+            $events->listen($event, self::class . '@' . $action);
         }
     }
 
     /**
      * Handle a CategoryWasChanged event.
      *
-     * @param \Xetaravel\Events\Discuss\CategoryWasChangedEvent $event The event that was fired.
+     * @param CategoryWasChangedEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -63,7 +82,7 @@ class LogSubscriber
     /**
      * Handle a ConversationWasLocked event.
      *
-     * @param \Xetaravel\Events\Discuss\ConversationWasLockedEvent $event The event that was fired.
+     * @param ConversationWasLockedEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -81,7 +100,7 @@ class LogSubscriber
     /**
      * Handle a ConversationWasPinned event.
      *
-     * @param \Xetaravel\Events\Discuss\ConversationWasPinnedEvent $event The event that was fired.
+     * @param ConversationWasPinnedEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -99,7 +118,7 @@ class LogSubscriber
     /**
      * Handle a PostWasDeleted event.
      *
-     * @param \Xetaravel\Events\Discuss\PostWasDeletedEvent $event The event that was fired.
+     * @param PostWasDeletedEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -120,7 +139,7 @@ class LogSubscriber
     /**
      * Handle a TitleWasChanged event.
      *
-     * @param \Xetaravel\Events\Discuss\TitleWasChangedEvent $event The event that was fired.
+     * @param TitleWasChangedEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -137,22 +156,5 @@ class LogSubscriber
         ];
 
         return $this->create($data);
-    }
-
-    /**
-     * Create the log.
-     *
-     * @param array $data The data used to create the log.
-     *
-     * @return bool
-     */
-    protected function create(array $data): bool
-    {
-        if (!isset($data['data'])) {
-            $data['data'] = [];
-        }
-        $log = DiscussLog::create($data);
-
-        return !(is_null($log));
     }
 }

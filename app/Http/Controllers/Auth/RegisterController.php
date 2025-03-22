@@ -49,6 +49,32 @@ class RegisterController extends Controller
     }
 
     /**
+     * The user has been registered.
+     *
+     * @param Request $request The request object.
+     * @param User $user The user that has been registered.
+     *
+     * @return void
+     */
+    protected function registered(Request $request, User $user)
+    {
+        // Set the user role.
+        $role = Role::where('name', 'User')->first();
+        $user->assignRole($role);
+
+        // Set the default avatar.
+        $user->clearMediaCollection('avatar');
+        $user->addMedia(public_path('images/avatar.png'))
+            ->preservingOriginal()
+            ->setName(mb_substr(md5($user->username), 0, 10))
+            ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
+            ->withCustomProperties(['primaryColor' => '#B4AEA4'])
+            ->toMediaCollection('avatar');
+
+        Toaster::success("Your account has been created successfully !");
+    }
+
+    /**
      * Show the application registration form.
      *
      * @return View
@@ -80,31 +106,5 @@ class RegisterController extends Controller
         $this->registered($request, $user);
 
         return redirect($this->redirectPath());
-    }
-
-    /**
-     * The user has been registered.
-     *
-     * @param Request $request The request object.
-     * @param User $user The user that has been registered.
-     *
-     * @return void
-     */
-    protected function registered(Request $request, User $user)
-    {
-        // Set the user role.
-        $role = Role::where('name', 'User')->first();
-        $user->assignRole($role);
-
-        // Set the default avatar.
-        $user->clearMediaCollection('avatar');
-        $user->addMedia(public_path('images/avatar.png'))
-            ->preservingOriginal()
-            ->setName(substr(md5($user->username), 0, 10))
-            ->setFileName(substr(md5($user->username), 0, 10) . '.png')
-            ->withCustomProperties(['primaryColor' => '#B4AEA4'])
-            ->toMediaCollection('avatar');
-
-        Toaster::success("Your account has been created successfully !");
     }
 }

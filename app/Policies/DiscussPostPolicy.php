@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Policies;
 
 use Xetaravel\Models\User;
@@ -13,7 +15,7 @@ class DiscussPostPolicy
     /**
      * Authorize all actions if the user has the given permission.
      *
-     * @param \Xetaravel\Models\User $user
+     * @param User $user
      * @param string $ability
      *
      * @return true|void
@@ -28,8 +30,8 @@ class DiscussPostPolicy
     /**
      * Determine whether the user can update the discuss post.
      *
-     * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussPost $discussPost
+     * @param User $user
+     * @param DiscussPost $discussPost
      *
      * @return bool
      */
@@ -41,8 +43,8 @@ class DiscussPostPolicy
     /**
      * Determine whether the user can delete the discuss post.
      *
-     * @param \Xetaravel\Models\User $user
-     * @param \Xetaravel\Models\DiscussPost $discussPost
+     * @param User $user
+     * @param DiscussPost $discussPost
      *
      * @return bool
      */

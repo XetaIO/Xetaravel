@@ -42,6 +42,19 @@ class ResetPasswordController extends Controller
     }
 
     /**
+     * Get the response for a successful password reset.
+     *
+     * @param string $response
+     *
+     * @return RedirectResponse
+     */
+    protected function sendResetResponse(string $response): RedirectResponse
+    {
+        return redirect($this->redirectPath())
+            ->success('Your password has been reset!');
+    }
+
+    /**
      * Display the password reset view for the given token.
      *
      * If no token is present, display the link request form.
@@ -56,18 +69,5 @@ class ResetPasswordController extends Controller
         return view('Auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
-    }
-
-    /**
-     * Get the response for a successful password reset.
-     *
-     * @param string $response
-     *
-     * @return RedirectResponse
-     */
-    protected function sendResetResponse(string $response): RedirectResponse
-    {
-        return redirect($this->redirectPath())
-            ->success('Your password has been reset!');
     }
 }

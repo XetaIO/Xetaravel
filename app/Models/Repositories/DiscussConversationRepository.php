@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Carbon\Carbon;
@@ -19,7 +21,7 @@ class DiscussConversationRepository
      *
      * @param array $data The data used to create the conversation.
      *
-     * @return \Xetaravel\Models\DiscussConversation
+     * @return DiscussConversation
      */
     public static function create(array $data): DiscussConversation
     {
@@ -63,9 +65,9 @@ class DiscussConversationRepository
      * Update the conversation data and save it.
      *
      * @param array $data The data used to update the conversation.
-     * @param \Xetaravel\Models\DiscussConversation $conversation The conversation to update.
+     * @param DiscussConversation $conversation The conversation to update.
      *
-     * @return \Xetaravel\Models\DiscussConversation
+     * @return DiscussConversation
      */
     public static function update(array $data, DiscussConversation $conversation): DiscussConversation
     {
@@ -73,11 +75,11 @@ class DiscussConversationRepository
             $data['is_pinned'] = isset($data['is_pinned']) ? true : false;
             $data['is_locked'] = isset($data['is_locked']) ? true : false;
 
-            if ($conversation->is_pinned != $data['is_pinned'] && $data['is_pinned'] === true) {
+            if ($conversation->is_pinned !== $data['is_pinned'] && $data['is_pinned'] === true) {
                 event(new ConversationWasPinnedEvent($conversation));
             }
 
-            if ($conversation->is_locked != $data['is_locked'] && $data['is_locked'] === true) {
+            if ($conversation->is_locked !== $data['is_locked'] && $data['is_locked'] === true) {
                 event(new ConversationWasLockedEvent($conversation));
             }
 
@@ -85,13 +87,13 @@ class DiscussConversationRepository
             $conversation->is_pinned = $data['is_pinned'];
         }
 
-        if ($conversation->title != $data['title']) {
+        if ($conversation->title !== $data['title']) {
             event(new TitleWasChangedEvent($conversation, $data['title'], $conversation->title));
 
             $conversation->title = $data['title'];
         }
 
-        if ($conversation->category_id != $data['category_id']) {
+        if ($conversation->category_id !== $data['category_id']) {
             event(new CategoryWasChangedEvent($conversation, $data['category_id'], $conversation->category_id));
 
             $conversation->category_id = $data['category_id'];
@@ -110,9 +112,9 @@ class DiscussConversationRepository
     /**
      * Find the previous conversation related to the given conversation.
      *
-     * @param \Xetaravel\Models\DiscussConversation $conversation
+     * @param DiscussConversation $conversation
      *
-     * @return \Xetaravel\Models\DiscussConversation|null
+     * @return DiscussConversation|null
      */
     public static function findPreviousConversation(DiscussConversation $conversation)
     {

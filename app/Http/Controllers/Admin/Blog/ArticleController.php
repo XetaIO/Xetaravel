@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Admin\Blog;
 
 use Illuminate\Http\RedirectResponse;
@@ -34,7 +36,7 @@ class ArticleController extends Controller
     /**
      * Show all articles.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {
@@ -49,7 +51,7 @@ class ArticleController extends Controller
     /**
      * Show the article create form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showCreateForm(): View
     {
@@ -71,9 +73,9 @@ class ArticleController extends Controller
     /**
      * Handle an article create request for the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function create(Request $request): RedirectResponse
     {
@@ -96,9 +98,9 @@ class ArticleController extends Controller
         $article->clearMediaCollection('article');
         $article->addMedia($banner)
             ->preservingOriginal()
-            ->setName(substr(md5($article->slug), 0, 10))
+            ->setName(mb_substr(md5($article->slug), 0, 10))
             ->setFileName(
-                substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg' : $banner->extension())
+                mb_substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg' : $banner->extension())
             )
             ->toMediaCollection('article');
 
@@ -113,7 +115,7 @@ class ArticleController extends Controller
      * @param string $slug The slug of the article.
      * @param int $id The id of the article.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
     public function showUpdateForm(string $slug, int $id)
     {
@@ -147,10 +149,10 @@ class ArticleController extends Controller
     /**
      * Handle an article update request for the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id The id of the article.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, int $id): RedirectResponse
     {
@@ -165,7 +167,7 @@ class ArticleController extends Controller
         $article->content = $content;
         $article->save();
 
-        if (!is_null($request->file('banner')) || $article->article_banner == '/images/articles/default_banner.jpg') {
+        if (!is_null($request->file('banner')) || $article->article_banner === '/images/articles/default_banner.jpg') {
             // Default banner for the article.
             $banner = public_path('images/articles/default_banner.jpg');
 
@@ -176,9 +178,9 @@ class ArticleController extends Controller
             $article->clearMediaCollection('article');
             $article->addMedia($banner)
                 ->preservingOriginal()
-                ->setName(substr(md5($article->slug), 0, 10))
+                ->setName(mb_substr(md5($article->slug), 0, 10))
                 ->setFileName(
-                    substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg' : $banner->extension())
+                    mb_substr(md5($article->slug), 0, 10) . '.' . (is_string($banner) ? 'jpg' : $banner->extension())
                 )
                 ->toMediaCollection('article');
         }

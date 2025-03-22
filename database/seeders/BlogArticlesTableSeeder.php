@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use Carbon\Carbon;
@@ -126,8 +128,8 @@ class BlogComment extends Model
             $model = BlogArticle::where('slug', $article['slug'])->first();
             $model->addMedia(public_path('images/articles/default_banner.jpg'))
                 ->preservingOriginal()
-                ->setName(substr(md5($article['slug']), 0, 10))
-                ->setFileName(substr(md5($article['slug']), 0, 10) . '.jpg')
+                ->setName(mb_substr(md5($article['slug']), 0, 10))
+                ->setFileName(mb_substr(md5($article['slug']), 0, 10) . '.jpg')
                 ->toMediaCollection('article');
         }
     }

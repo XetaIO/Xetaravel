@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use Xetaravel\Models\User;
+use DateTimeImmutable;
 
 class UserRepository
 {
@@ -42,7 +43,7 @@ class UserRepository
             'email' => $data['email'],
             'register_ip' => $ip,
             'last_login_ip' => $ip,
-            'last_login_date' => new \DateTime()
+            'last_login_date' => new DateTimeImmutable()
         ];
 
         if ($provider === false) {

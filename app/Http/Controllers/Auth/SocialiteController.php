@@ -46,105 +46,6 @@ class SocialiteController extends Controller
     protected string $driver;
 
     /**
-     * Show the registration form.
-     *
-     * @param Request $request The request object.
-     * @param string $driver The driver used.
-     *
-     * @return Factory|View|Application|\Illuminate\View\View|object|RedirectResponse
-     */
-    public function showRegistrationForm(Request $request, string $driver)
-    {
-        if (is_null($request->session()->get('socialite.driver'))) {
-            return redirect()
-                ->route('auth.login')
-                ->error('You are not authorized to view this page!');
-        }
-        return view('Auth.socialite', compact('driver'));
-    }
-
-    /**
-     * Register an user that has been forced to modify his email or
-     * username due to a conflit with the database.
-     *
-     * @param CreateRequest $request The request object.
-     * @param string $driver The driver used.
-     *
-     * @return RedirectResponse
-     *
-     * @throws FileCannotBeAdded
-     */
-    public function register(CreateRequest $request, string $driver): RedirectResponse
-    {
-        $request->validated();
-        $this->driver = $driver;
-
-        $user = Socialite::driver($driver)->userFromToken($request->session()->get('socialite.token'));
-
-        $user->nickname = $request->input('username');
-        $user->email = $request->input('email');
-
-        $user = $this->registered($user);
-
-        $request->session()->forget('socialite');
-
-        return $this->login($request, $user);
-    }
-
-    /**
-     * Redirect the user to the Provider authentication page.
-     *
-     * @param Request $request The request object.
-     * @param string $driver The driver used.
-     *
-     * @return RedirectResponseSF
-     */
-    public function redirectToProvider(Request $request, string $driver): RedirectResponseSF
-    {
-        return Socialite::driver($driver)
-                ->setScopes(['identify', 'email'])
-                ->redirectUrl(route('auth.driver.callback', ['driver' => $driver]))
-                ->redirect();
-    }
-
-    /**
-     * Obtain the user information from the Provider and process to the
-     * registration or login regarding the type of callback.
-     *
-     * @param Request $request The request object.
-     * @param string $driver The driver used.
-     *
-     * @return RedirectResponse
-     */
-    public function handleProviderCallback(Request $request, string $driver): RedirectResponse
-    {
-        $this->driver = $driver;
-
-        try {
-            $user = Socialite::driver($driver)->user();
-        } catch (Exception $e) {
-            $driver = Str::title($driver);
-
-            return redirect()
-                ->route('auth.login')
-                ->error("An error occurred while getting your information from {$driver} !");
-        }
-
-        // Check if the user is already registered
-        if (!$member = User::where($driver . '_id', $user->id)->first()) {
-            $register = $this->handleRegister($request, $user);
-        }
-
-        if (isset($register) && $register instanceof RedirectResponse) {
-            return $register;
-        } elseif (!isset($register) || !$register instanceof User) {
-            $register = $member;
-        }
-
-        return $this->login($request, $register);
-    }
-
-    /**
      * Login the user and trigger the authenticated function.
      *
      * @param Request $request The request object.
@@ -255,19 +156,119 @@ class SocialiteController extends Controller
             // Set the default avatar.
             $user->addMedia(public_path('images/avatar.png'))
                 ->preservingOriginal()
-                ->setName(substr(md5($user->username), 0, 10))
-                ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+                ->setName(mb_substr(md5($user->username), 0, 10))
+                ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
                 ->withCustomProperties(['primaryColor' => '#B4AEA4'])
                 ->toMediaCollection('avatar');
         } else {
             $user->clearMediaCollection('avatar');
             $user->addMediaFromUrl($providerUser->avatar)
                 ->preservingOriginal()
-                ->setName(substr(md5($user->username), 0, 10))
-                ->setFileName(substr(md5($user->username), 0, 10) . '.png')
+                ->setName(mb_substr(md5($user->username), 0, 10))
+                ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
                 ->toMediaCollection('avatar');
         }
 
         return $user;
+    }
+
+    /**
+     * Show the registration form.
+     *
+     * @param Request $request The request object.
+     * @param string $driver The driver used.
+     *
+     * @return Factory|View|Application|\Illuminate\View\View|object|RedirectResponse
+     */
+    public function showRegistrationForm(Request $request, string $driver)
+    {
+        if (is_null($request->session()->get('socialite.driver'))) {
+            return redirect()
+                ->route('auth.login')
+                ->error('You are not authorized to view this page!');
+        }
+        return view('Auth.socialite', compact('driver'));
+    }
+
+    /**
+     * Register an user that has been forced to modify his email or
+     * username due to a conflit with the database.
+     *
+     * @param CreateRequest $request The request object.
+     * @param string $driver The driver used.
+     *
+     * @return RedirectResponse
+     *
+     * @throws FileCannotBeAdded
+     */
+    public function register(CreateRequest $request, string $driver): RedirectResponse
+    {
+        $request->validated();
+        $this->driver = $driver;
+
+        $user = Socialite::driver($driver)->userFromToken($request->session()->get('socialite.token'));
+
+        $user->nickname = $request->input('username');
+        $user->email = $request->input('email');
+
+        $user = $this->registered($user);
+
+        $request->session()->forget('socialite');
+
+        return $this->login($request, $user);
+    }
+
+    /**
+     * Redirect the user to the Provider authentication page.
+     *
+     * @param Request $request The request object.
+     * @param string $driver The driver used.
+     *
+     * @return RedirectResponseSF
+     */
+    public function redirectToProvider(Request $request, string $driver): RedirectResponseSF
+    {
+        return Socialite::driver($driver)
+                ->setScopes(['identify', 'email'])
+                ->redirectUrl(route('auth.driver.callback', ['driver' => $driver]))
+                ->redirect();
+    }
+
+    /**
+     * Obtain the user information from the Provider and process to the
+     * registration or login regarding the type of callback.
+     *
+     * @param Request $request The request object.
+     * @param string $driver The driver used.
+     *
+     * @return RedirectResponse
+     */
+    public function handleProviderCallback(Request $request, string $driver): RedirectResponse
+    {
+        $this->driver = $driver;
+
+        try {
+            $user = Socialite::driver($driver)->user();
+        } catch (Exception $e) {
+            $driver = Str::title($driver);
+
+            return redirect()
+                ->route('auth.login')
+                ->error("An error occurred while getting your information from {$driver} !");
+        }
+
+        // Check if the user is already registered
+        if (!$member = User::where($driver . '_id', $user->id)->first()) {
+            $register = $this->handleRegister($request, $user);
+        }
+
+        if (isset($register) && $register instanceof RedirectResponse) {
+            return $register;
+        }
+        if (!isset($register) || !$register instanceof User) {
+            $register = $member;
+        }
+
+        return $this->login($request, $register);
     }
 }

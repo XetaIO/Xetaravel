@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -28,7 +30,7 @@ class AccountController extends Controller
     /**
      * Show the account update form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {
@@ -40,9 +42,9 @@ class AccountController extends Controller
     /**
      * Handle an account update request for the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request): RedirectResponse
     {
@@ -74,8 +76,8 @@ class AccountController extends Controller
             $user->clearMediaCollection('avatar');
             $user->addMedia($request->file('avatar'))
                 ->preservingOriginal()
-                ->setName(substr(md5($user->username), 0, 10))
-                ->setFileName(substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
+                ->setName(mb_substr(md5($user->username), 0, 10))
+                ->setFileName(mb_substr(md5($user->username), 0, 10) . '.' . $request->file('avatar')->extension())
                 ->withCustomProperties(['primaryColor' => $color])
                 ->toMediaCollection('avatar');
         }

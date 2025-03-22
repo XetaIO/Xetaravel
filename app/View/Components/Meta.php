@@ -7,6 +7,7 @@ namespace Xetaravel\View\Components;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
 use Illuminate\View\Component;
+use Closure;
 
 class Meta extends Component
 {
@@ -75,7 +76,7 @@ class Meta extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return \Illuminate\Contracts\View\View|Closure|string
      */
     public function render()
     {

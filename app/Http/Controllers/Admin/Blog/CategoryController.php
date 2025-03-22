@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Admin\Blog;
 
 use Illuminate\View\View;
@@ -26,7 +28,7 @@ class CategoryController extends Controller
     /**
      * Show all categories.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -32,11 +34,78 @@ class UserController extends Controller
     }
 
     /**
+     * Handle a E-mail update request for the user.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    protected function updateEmail(Request $request): RedirectResponse
+    {
+        UserValidator::updateEmail($request->all())->validate();
+        UserRepository::updateEmail($request->all(), Auth::user());
+
+        return redirect()
+            ->route('users.user.settings')
+            ->with('success', 'Your E-mail has been updated successfully !');
+    }
+
+    /**
+     * Handle a Password update request for the user.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    protected function updatePassword(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        if (!Hash::check($request->input('oldpassword'), $user->password)) {
+            return redirect()
+                ->route('users.user.settings')
+                ->with('danger', 'Your current Password does not match !');
+        }
+
+        UserValidator::updatePassword($request->all())->validate();
+        UserRepository::updatePassword($request->all(), $user);
+
+        return redirect()
+            ->route('users.user.settings')
+            ->with('success', 'Your Password has been updated successfully !');
+    }
+
+    /**
+     * Handle a Password create request for the user.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    protected function createPassword(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        if (!is_null($user->password)) {
+            return redirect()
+                ->route('users.user.settings')
+                ->with('danger', 'You have already set a password.');
+        }
+
+        UserValidator::createPassword($request->all())->validate();
+        UserRepository::createPassword($request->all(), $user);
+
+        return redirect()
+            ->route('users.user.settings')
+            ->with('success', 'Your password has been created successfully!');
+    }
+
+    /**
      * Show the user profile page.
      *
      * @param string $slug The slug of the user.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
     public function show(Request $request, string $slug)
     {
@@ -91,9 +160,9 @@ class UserController extends Controller
         //$level = UserUtility::getLevel($user->experiences_total);
         $level = UserUtility::getLevel($user->experiences_total);
 
-        if ($level['maxLevel'] == true) {
+        if ($level['maxLevel'] === true) {
             $level['currentProgression'] = 100;
-        } elseif ($level['matchExactXPLevel'] == true) {
+        } elseif ($level['matchExactXPLevel'] === true) {
             $level['currentProgression'] = 0;
         } else {
             $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience']) * 100;
@@ -108,7 +177,7 @@ class UserController extends Controller
     /**
      * Show the settings form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showSettingsForm(): View
     {
@@ -123,9 +192,9 @@ class UserController extends Controller
     /**
      * Handle an update request for the user.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request): RedirectResponse
     {
@@ -151,9 +220,9 @@ class UserController extends Controller
     /**
      * Handle the delete request for the user.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(Request $request): RedirectResponse
     {
@@ -175,72 +244,5 @@ class UserController extends Controller
         return redirect()
             ->route('page.index')
             ->with('danger', 'An error occurred while deleting your account !');
-    }
-
-    /**
-     * Handle a E-mail update request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function updateEmail(Request $request): RedirectResponse
-    {
-        UserValidator::updateEmail($request->all())->validate();
-        UserRepository::updateEmail($request->all(), Auth::user());
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your E-mail has been updated successfully !');
-    }
-
-    /**
-     * Handle a Password update request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function updatePassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        if (!Hash::check($request->input('oldpassword'), $user->password)) {
-            return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'Your current Password does not match !');
-        }
-
-        UserValidator::updatePassword($request->all())->validate();
-        UserRepository::updatePassword($request->all(), $user);
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your Password has been updated successfully !');
-    }
-
-    /**
-     * Handle a Password create request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function createPassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        if (!is_null($user->password)) {
-            return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'You have already set a password.');
-        }
-
-        UserValidator::createPassword($request->all())->validate();
-        UserRepository::createPassword($request->all(), $user);
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your password has been created successfully!');
     }
 }

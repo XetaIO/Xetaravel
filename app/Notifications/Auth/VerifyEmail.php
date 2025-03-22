@@ -25,6 +25,36 @@ class VerifyEmail extends Notification implements ShouldQueue
     public static ?Closure $toMailCallback = null;
 
     /**
+     * Get the verification URL for the given notifiable.
+     *
+     * @param  mixed  $notifiable
+     * @return string
+     */
+    protected function verificationUrl(mixed $notifiable): string
+    {
+        return URL::temporarySignedRoute(
+            'auth.verification.verify',
+            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+            [
+                'id' => $notifiable->getKey(),
+                'hash' => base64_encode($notifiable->getEmailForVerification()),
+            ]
+        );
+    }
+
+    /**
+     * Set a callback that should be used when building the notification mail message.
+     *
+     * @param Closure $callback
+     *
+     * @return void
+     */
+    public static function toMailUsing(Closure $callback): void
+    {
+        static::$toMailCallback = $callback;
+    }
+
+    /**
      * Get the notification's channels.
      *
      * @param  mixed  $notifiable
@@ -58,35 +88,5 @@ class VerifyEmail extends Notification implements ShouldQueue
             ->line('If you have not created an account on the ' . config('app.name') . ' site, ' .
             'no further action is required and you can ignore this email.')
             ->from(config('xetaravel.site.contact_email'), config('app.name'));
-    }
-
-    /**
-     * Get the verification URL for the given notifiable.
-     *
-     * @param  mixed  $notifiable
-     * @return string
-     */
-    protected function verificationUrl(mixed $notifiable): string
-    {
-        return URL::temporarySignedRoute(
-            'auth.verification.verify',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
-            [
-                'id' => $notifiable->getKey(),
-                'hash' => base64_encode($notifiable->getEmailForVerification()),
-            ]
-        );
-    }
-
-    /**
-     * Set a callback that should be used when building the notification mail message.
-     *
-     * @param Closure $callback
-     *
-     * @return void
-     */
-    public static function toMailUsing(Closure $callback): void
-    {
-        static::$toMailCallback = $callback;
     }
 }

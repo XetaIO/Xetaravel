@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -26,7 +28,7 @@ class SecurityController extends Controller
     /**
      * Show the security index page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(Request $request): View
     {
@@ -56,7 +58,7 @@ class SecurityController extends Controller
 
             $record->infos = $infos;
 
-            array_push($sessions, $record);
+            $sessions[] = $record;
         }
 
         $sessionId = $request->session()->getId();

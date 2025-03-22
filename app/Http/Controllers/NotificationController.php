@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -27,7 +29,7 @@ class NotificationController extends Controller
     /**
      * Show the notifications & newsletter.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(): View
     {
@@ -50,10 +52,10 @@ class NotificationController extends Controller
     /**
      * Delete a notification by its ID.
      *
-     * @param \Illuminate\Http\Request $request The current request.
+     * @param Request $request The current request.
      * @param string $slug The notification ID.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function delete(Request $request, string $slug): JsonResponse
     {
@@ -74,9 +76,9 @@ class NotificationController extends Controller
     /**
      * Mark a notification as read.
      *
-     * @param \Illuminate\Http\Request $request The current request.
+     * @param Request $request The current request.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function markAsRead(Request $request): JsonResponse
     {
@@ -97,7 +99,7 @@ class NotificationController extends Controller
     /**
      * Mark all notifications as read.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function markAllAsRead(): JsonResponse
     {

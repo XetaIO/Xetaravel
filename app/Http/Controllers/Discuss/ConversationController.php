@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +17,17 @@ use Xetaravel\Models\Validators\DiscussConversationValidator;
 
 class ConversationController extends Controller
 {
+    /**
+     * Get the current page for the conversation.
+     *
+     * @param Request $request
+     *
+     * @return int
+     */
+    protected function getCurrentPage(Request $request): int
+    {
+        return !is_null($request->get('page')) ? (int) $request->get('page') : 1;
+    }
     /**
      * Show the conversation by its id.
      *
@@ -47,7 +60,7 @@ class ConversationController extends Controller
     /**
      * Show the create form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showCreateForm(): View
     {
@@ -64,9 +77,9 @@ class ConversationController extends Controller
     /**
      * Handle a conversation create request for the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function create(Request $request)
     {
@@ -101,11 +114,11 @@ class ConversationController extends Controller
     /**
      * Handle a conversation update request for the application.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string $slug The slug of the conversation to update.
      * @param int $id The id of the conversation to update.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, string $slug, int $id)
     {
@@ -127,7 +140,7 @@ class ConversationController extends Controller
      * @param string $slug The slug of the conversation to delete.
      * @param int $id The id of the conversation to delete.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(string $slug, int $id): RedirectResponse
     {
@@ -143,17 +156,5 @@ class ConversationController extends Controller
 
         return back()
             ->with('danger', 'An error occurred while deleting this discussion !');
-    }
-
-    /**
-     * Get the current page for the conversation.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return int
-     */
-    protected function getCurrentPage(Request $request): int
-    {
-        return !is_null($request->get('page')) ? (int) $request->get('page') : 1;
     }
 }

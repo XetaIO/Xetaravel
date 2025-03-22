@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Xetaravel\Models\Session;
@@ -10,9 +12,9 @@ class SessionRepository
      * Update the session and save it.
      *
      * @param array $data The data used to update the session.
-     * @param \Xetaravel\Models\Session $session The session to update.
+     * @param Session $session The session to update.
      *
-     * @return \Xetaravel\Models\Session
+     * @return Session
      */
     public static function update(array $data, Session $session): Session
     {

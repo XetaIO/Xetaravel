@@ -22,8 +22,8 @@ use Xetaravel\Observers\ArticleObserver;
 class BlogArticle extends Model implements HasMedia
 {
     use ArticlePresenter;
-    use HasMentionsTrait;
     use HasCounts;
+    use HasMentionsTrait;
     use HasSlugs;
     use InteractsWithMedia;
 

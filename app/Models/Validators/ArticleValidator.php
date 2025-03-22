@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Validators;
 
 use Eloquence\Behaviours\Slug;
@@ -14,7 +16,7 @@ class ArticleValidator
      *
      * @param array $data The data to validate.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function create(array $data): Validator
     {
@@ -35,7 +37,7 @@ class ArticleValidator
      * @param array $data The data to validate.
      * @param int $id The actual article id to ignore the slug rule.
      *
-     * @return \Illuminate\Validation\Validator
+     * @return Validator
      */
     public static function update(array $data, int $id): Validator
     {

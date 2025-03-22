@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -28,30 +30,6 @@ class MentionNotification extends Notification implements ShouldQueue
     public function __construct($model)
     {
         $this->model = $model;
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param mixed $notifiable
-     *
-     * @return array
-     */
-    public function via($notifiable): array
-    {
-        return ['database'];
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param mixed $notifiable
-     *
-     * @return array
-     */
-    public function toDatabase($notifiable): array
-    {
-        return $this->parseInstance(['type' => 'mention']);
     }
 
     /**
@@ -93,5 +71,29 @@ class MentionNotification extends Notification implements ShouldQueue
         $data['message'] = sprintf($data['message'], $model->user->username);
 
         return $data;
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param mixed $notifiable
+     *
+     * @return array
+     */
+    public function via($notifiable): array
+    {
+        return ['database'];
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param mixed $notifiable
+     *
+     * @return array
+     */
+    public function toDatabase($notifiable): array
+    {
+        return $this->parseInstance(['type' => 'mention']);
     }
 }

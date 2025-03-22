@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +15,7 @@ class NewsletterController extends Controller
     /**
      * Subcribe to the Newsletter
      *
-     * @param \Illuminate\Http\Request $request The request object.
+     * @param Request $request The request object.
      *
      * @return \Illuminate\Http\Response
      */
@@ -31,7 +33,7 @@ class NewsletterController extends Controller
      *
      * @param string $email The email that should be used to unsubscribe to the Newsletter.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(string $email): RedirectResponse
     {

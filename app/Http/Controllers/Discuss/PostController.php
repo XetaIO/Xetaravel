@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Discuss;
 
 use Carbon\Carbon;
@@ -22,9 +24,9 @@ class PostController extends Controller
     /**
      * Create a post for a conversation.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function create(Request $request): RedirectResponse
     {
@@ -59,10 +61,10 @@ class PostController extends Controller
     /**
      * Redirect an user to a conversation, page and post.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id The ID of the post.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function show(Request $request, int $id): RedirectResponse
     {
@@ -95,10 +97,10 @@ class PostController extends Controller
     /**
      * Handle a delete action for the post.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(int $id): RedirectResponse
     {
@@ -106,7 +108,7 @@ class PostController extends Controller
 
         $this->authorize('delete', $post);
 
-        if ($post->conversation->first_post_id == $post->getKey()) {
+        if ($post->conversation->first_post_id === $post->getKey()) {
             return redirect()
                 ->route('discuss.post.show', ['id' => $post->getKey()])
                 ->with('danger', 'You can not delete the first post of a discussion !');
@@ -133,7 +135,7 @@ class PostController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function solved(int $id): RedirectResponse
     {
@@ -141,7 +143,7 @@ class PostController extends Controller
 
         $this->authorize('solved', $post->conversation);
 
-        if ($post->getKey() == $post->conversation->solved_post_id) {
+        if ($post->getKey() === $post->conversation->solved_post_id) {
             return back()
                 ->with('danger', 'This post is already the solved post !');
         }
@@ -174,7 +176,7 @@ class PostController extends Controller
      * @param Request $request
      * @param int $id The id of the post to edit.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function edit(Request $request, int $id): RedirectResponse
     {

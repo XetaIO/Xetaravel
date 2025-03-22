@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,7 @@ class DiscussUserRepository
      *
      * @param array $data The data used to create the user.
      *
-     * @return \Xetaravel\Models\DiscussUser
+     * @return DiscussUser
      */
     public static function create(array $data): DiscussUser
     {

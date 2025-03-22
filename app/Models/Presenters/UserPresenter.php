@@ -25,6 +25,66 @@ trait UserPresenter
     protected string $defaultAvatarPrimaryColor = '#B4AEA4';
 
     /**
+     * Get the status of the user : online or offline
+     *
+     * @return Attribute
+     */
+    protected function online(): Attribute
+    {
+        $online = Session::expires()->where('user_id', $this->id)->first();
+
+        return Attribute::make(
+            get: fn () => !is_null($online)
+        );
+    }
+
+    /**
+     * Get the max role level of the user.
+     *
+     * @return Attribute
+     */
+    protected function level(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($role = $this->roles->sortByDesc('level')->first()) ? $role->level : 0
+        );
+    }
+
+    /**
+     * Parse a media and return it if isset or return the default avatar.
+     *
+     * @param string $type The type of the media to get.
+     *
+     * @return string
+     */
+    protected function parseMedia(string $type): string
+    {
+        if (isset($this->getMedia('avatar')[0])) {
+            return $this->getMedia('avatar')[0]->getUrl($type);
+        }
+
+        return $this->defaultAvatar;
+    }
+
+    /**
+     * Parse an attribute and return its value or empty if null.
+     *
+     * @param Object|null $relation The relation or the user object.
+     *       Can be `$this` or `$this->account` for exemple
+     * @param string|null $attribute The attribute to parse.
+     *
+     * @return string
+     */
+    protected function parse($relation, $attribute): string
+    {
+        if ($relation === null || $relation->{$attribute} === null) {
+            return '';
+        }
+
+        return $relation->{$attribute};
+    }
+
+    /**
      * Get the account first name.
      *
      * @return string
@@ -64,7 +124,7 @@ trait UserPresenter
     {
         $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
 
-        if (empty(trim($fullName))) {
+        if (empty(mb_trim($fullName))) {
             return $this->username;
         }
 
@@ -201,65 +261,5 @@ trait UserPresenter
     public function getDiscussPostCountAttribute($count): int
     {
         return $count - $this->discuss_conversation_count;
-    }
-
-    /**
-     * Get the status of the user : online or offline
-     *
-     * @return Attribute
-     */
-    protected function online(): Attribute
-    {
-        $online = Session::expires()->where('user_id', $this->id)->first();
-
-        return Attribute::make(
-            get: fn () => !is_null($online)
-        );
-    }
-
-    /**
-     * Get the max role level of the user.
-     *
-     * @return Attribute
-     */
-    protected function level(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => ($role = $this->roles->sortByDesc('level')->first()) ? $role->level : 0
-        );
-    }
-
-    /**
-     * Parse a media and return it if isset or return the default avatar.
-     *
-     * @param string $type The type of the media to get.
-     *
-     * @return string
-     */
-    protected function parseMedia(string $type): string
-    {
-        if (isset($this->getMedia('avatar')[0])) {
-            return $this->getMedia('avatar')[0]->getUrl($type);
-        }
-
-        return $this->defaultAvatar;
-    }
-
-    /**
-     * Parse an attribute and return its value or empty if null.
-     *
-     * @param Object|null $relation The relation or the user object.
-     *       Can be `$this` or `$this->account` for exemple
-     * @param string|null $attribute The attribute to parse.
-     *
-     * @return string
-     */
-    protected function parse($relation, $attribute): string
-    {
-        if ($relation === null || $relation->{$attribute} === null) {
-            return '';
-        }
-
-        return $relation->{$attribute};
     }
 }

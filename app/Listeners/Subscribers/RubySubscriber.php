@@ -29,6 +29,29 @@ class RubySubscriber
     ];
 
     /**
+     * Create the ruby.
+     *
+     * @param array $data The data used to create the ruby.
+     *
+     * @return bool
+     */
+    protected function create(array $data): bool
+    {
+        if (!isset($data['data'])) {
+            $data['data'] = [];
+        }
+        $ruby = Ruby::create($data);
+
+        switch ($ruby->event_type) {
+            case PostWasSolvedEvent::class:
+                $ruby->user->increment('rubies_total', $this->rubies[PostWasSolvedEvent::class]);
+                break;
+        }
+
+        return !(is_null($ruby));
+    }
+
+    /**
      * Register the listeners for the subscriber.
      *
      * @param Dispatcher $events
@@ -59,28 +82,5 @@ class RubySubscriber
         ];
 
         return $this->create($data);
-    }
-
-    /**
-     * Create the ruby.
-     *
-     * @param array $data The data used to create the ruby.
-     *
-     * @return bool
-     */
-    protected function create(array $data): bool
-    {
-        if (!isset($data['data'])) {
-            $data['data'] = [];
-        }
-        $ruby = Ruby::create($data);
-
-        switch ($ruby->event_type) {
-            case PostWasSolvedEvent::class:
-                $ruby->user->increment('rubies_total', $this->rubies[PostWasSolvedEvent::class]);
-                break;
-        }
-
-        return !(is_null($ruby));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,7 @@ class DiscussPostRepository
      *
      * @param array $data The data used to create the post.
      *
-     * @return \Xetaravel\Models\DiscussPost
+     * @return DiscussPost
      */
     public static function create(array $data): DiscussPost
     {
@@ -30,11 +32,11 @@ class DiscussPostRepository
             $data['is_pinned'] = isset($data['is_pinned']) ? true : false;
             $data['is_locked'] = isset($data['is_locked']) ? true : false;
 
-            if ($conversation->is_pinned != $data['is_pinned'] && $data['is_pinned'] == true) {
+            if ($conversation->is_pinned !== $data['is_pinned'] && $data['is_pinned'] === true) {
                 event(new ConversationWasPinnedEvent($conversation));
             }
 
-            if ($conversation->is_locked != $data['is_locked'] && $data['is_locked'] == true) {
+            if ($conversation->is_locked !== $data['is_locked'] && $data['is_locked'] === true) {
                 event(new ConversationWasLockedEvent($conversation));
             }
 
@@ -52,9 +54,9 @@ class DiscussPostRepository
     /**
      * Find the previous post related to the given post.
      *
-     * @param \Xetaravel\Models\DiscussPost $post
+     * @param DiscussPost $post
      *
-     * @return \Xetaravel\Models\DiscussPost|null
+     * @return DiscussPost|null
      */
     public static function findPreviousPost(DiscussPost $post, bool $withSolved = false)
     {

@@ -14,13 +14,29 @@ trait ArticlePresenter
     protected $defaultBanner = '/images/articles/default_banner.jpg';
 
     /**
+     * Parse a media and return it if isset or return the default banner.
+     *
+     * @param string $type The type of the media to get.
+     *
+     * @return string
+     */
+    protected function parseMedia(string $type): string
+    {
+        if (isset($this->getMedia('article')[0])) {
+            return $this->getMedia('article')[0]->getUrl($type);
+        }
+
+        return $this->defaultBanner;
+    }
+
+    /**
      * Get the article url.
      *
      * @return string
      */
     public function getArticleUrlAttribute(): string
     {
-        if (!isset($this->slug) || $this->getKey() == null) {
+        if (!isset($this->slug) || $this->getKey() === null) {
             return '';
         }
 
@@ -35,21 +51,5 @@ trait ArticlePresenter
     public function getArticleBannerAttribute(): string
     {
         return $this->parseMedia('article.banner');
-    }
-
-    /**
-     * Parse a media and return it if isset or return the default banner.
-     *
-     * @param string $type The type of the media to get.
-     *
-     * @return string
-     */
-    protected function parseMedia(string $type): string
-    {
-        if (isset($this->getMedia('article')[0])) {
-            return $this->getMedia('article')[0]->getUrl($type);
-        }
-
-        return $this->defaultBanner;
     }
 }

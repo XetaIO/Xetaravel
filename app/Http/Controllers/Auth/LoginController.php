@@ -63,6 +63,52 @@ class LoginController extends Controller
     }
 
     /**
+     * Get the failed login response instance.
+     *
+     * @param Request $request The request object.
+     *
+     * @return RedirectResponse
+     */
+    protected function sendFailedLoginResponse(Request $request): RedirectResponse
+    {
+        return redirect()
+            ->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([
+                $this->username() => trans('auth.failed'),
+                'password' => trans('auth.failed')
+            ]);
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param Request $request The request object.
+     * @param User $user The user that has been logged in.
+     *
+     * @return void
+     */
+    protected function authenticated(Request $request, User $user)
+    {
+        event(new RegisterEvent($user));
+
+        Toaster::success("Welcome back <b>{$user->username}</b> !  You're successfully connected !");
+    }
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/')
+            ->success('Thanks for your visit. See you soon !');
+    }
+
+    /**
      * Show the application's login form.
      *
      * @return View
@@ -118,51 +164,5 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-    }
-
-    /**
-     * Get the failed login response instance.
-     *
-     * @param Request $request The request object.
-     *
-     * @return RedirectResponse
-     */
-    protected function sendFailedLoginResponse(Request $request): RedirectResponse
-    {
-        return redirect()
-            ->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors([
-                $this->username() => trans('auth.failed'),
-                'password' => trans('auth.failed')
-            ]);
-    }
-
-    /**
-     * The user has been authenticated.
-     *
-     * @param Request $request The request object.
-     * @param User $user The user that has been logged in.
-     *
-     * @return void
-     */
-    protected function authenticated(Request $request, User $user)
-    {
-        event(new RegisterEvent($user));
-
-        Toaster::success("Welcome back <b>{$user->username}</b> !  You're successfully connected !");
-    }
-
-    /**
-     * The user has logged out of the application.
-     *
-     * @param Request $request
-     *
-     * @return mixed
-     */
-    protected function loggedOut(Request $request)
-    {
-        return redirect('/')
-            ->success('Thanks for your visit. See you soon !');
     }
 }

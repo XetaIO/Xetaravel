@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Markdown\Reply;
 
 use League\CommonMark\Parser\Inline\InlineParserInterface;
 use League\CommonMark\Parser\Inline\InlineParserMatch;
 use League\CommonMark\Parser\InlineParserContext;
+
+use function mb_strlen;
 
 final class ReplyParser implements InlineParserInterface
 {
@@ -22,7 +26,7 @@ final class ReplyParser implements InlineParserInterface
         $route = route('discuss.post.show', ['id' => $inlineContext->getMatches()[3]]);
 
         // Push the cursor to the lenght of the full match.
-        $inlineContext->getCursor()->advanceBy(\strlen($reply));
+        $inlineContext->getCursor()->advanceBy(mb_strlen($reply));
 
         $inlineContext->getContainer()
             ->appendChild(new Reply(

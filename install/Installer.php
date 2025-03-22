@@ -88,7 +88,7 @@ class Installer
         $databaseName = $io->ask('What is the database password ? ', 'secret');
         $content = str_replace('__XETARAVEL_DATABASE_PASSWORD__', $databaseName, $content, $count);
 
-        if ($count == 0) {
+        if ($count === 0) {
             $io->writeError('<warning>No database placeholder to replace in the `.env` file.</warning>');
 
             return;

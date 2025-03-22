@@ -26,36 +26,6 @@ use Xetaravel\View\Composers\NotificationsComposer;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
-        $this->configureCommands();
-        $this->configureDates();
-        $this->configureModels();
-        $this->configurePasswords();
-        $this->configureRoutes();
-        $this->configureUrls();
-        $this->configureViews();
-        $this->configureVite();
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        // Register the Settings class
-        $this->app->singleton(Settings::class, function (Application $app) {
-            return new Settings($app['cache.store']);
-        });
-    }
-
-    /**
      * Configure the application's commands.
      */
     private function configureCommands(): void
@@ -175,5 +145,34 @@ class AppServiceProvider extends ServiceProvider
     private function configureVite(): void
     {
         Vite::useAggressivePrefetching();
+    }
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
+        $this->configureCommands();
+        $this->configureDates();
+        $this->configureModels();
+        $this->configurePasswords();
+        $this->configureRoutes();
+        $this->configureUrls();
+        $this->configureViews();
+        $this->configureVite();
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        // Register the Settings class
+        $this->app->singleton(Settings::class, function (Application $app) {
+            return new Settings($app['cache.store']);
+        });
     }
 }
