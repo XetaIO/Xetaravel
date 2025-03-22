@@ -13,11 +13,9 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('mentions', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
-            $table->string('model_type');
-            $table->integer('model_id')->unsigned();
-            $table->string('recipient_type');
-            $table->integer('recipient_id')->unsigned();
+            $table->increments('id');
+            $table->morphs('model');
+            $table->morphs('recipient');
             $table->timestamps();
         });
     }

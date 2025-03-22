@@ -5,39 +5,28 @@ declare(strict_types=1);
 namespace Xetaravel\Livewire\Forms;
 
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\BlogComment;
 
 class CommentForm extends Form
 {
+    /**
+     * The article id where the comment belong to.
+     *
+     * @var int|null
+     */
     #[Locked]
     public ?int $blog_article_id = null;
 
+    /**
+     * The content of the comment.
+     *
+     * @var string|null
+     */
+    #[Validate('required|min:10')]
     public ?string $content = null;
-
-    /**
-     * Rules used for validating the model.
-     *
-     * @return array
-     */
-    public function rules(): array
-    {
-        return [
-            'content' => 'required|min:10'
-        ];
-    }
-
-    /**
-     * Translated attribute used in failed messages.
-     *
-     * @return array
-     */
-    public function validationAttributes(): array
-    {
-        return [
-            'content' => 'commentaire'
-        ];
-    }
 
     /**
      * Function to store the model.
@@ -46,9 +35,16 @@ class CommentForm extends Form
      */
     public function store(): BlogComment
     {
-        return BlogComment::create($this->only([
+        $comment = BlogComment::create($this->only([
             'blog_article_id',
             'content'
         ]));
+
+        $parser = new MentionParser($comment);
+        $content = $parser->parse($this->content);
+        $comment->content = $content;
+        $comment->save();
+
+        return $comment;
     }
 }

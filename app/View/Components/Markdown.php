@@ -32,16 +32,6 @@ class Markdown extends Component
         $this->uploadUrl = route('upload', absolute: false);
     }
 
-    public function modelName(): ?string
-    {
-        return $this->attributes->whereStartsWith('wire:model')->first();
-    }
-
-    public function errorFieldName(): ?string
-    {
-        return $this->modelName() ?? $this->attributes->whereStartsWith('name')->first();
-    }
-
     public function setup(): string
     {
         $setup = array_merge([
@@ -67,6 +57,16 @@ class Markdown extends Component
             ->trim('{}')
             ->replace("'table'", $table)
             ->toString();
+    }
+
+    public function modelName(): ?string
+    {
+        return $this->attributes->whereStartsWith('wire:model')->first();
+    }
+
+    public function errorFieldName(): ?string
+    {
+        return $this->modelName() ?? $this->attributes->whereStartsWith('name')->first();
     }
 
     /**

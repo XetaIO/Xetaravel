@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Listeners\Subscribers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Events\Dispatcher;
 use Xetaravel\Events\Badges\ExperiencesEvent;
-use Xetaravel\Events\Badges\PostEvent;
-use Xetaravel\Events\Badges\PostSolvedEvent;
 use Xetaravel\Events\Badges\LeaderboardEvent;
+use Xetaravel\Events\Badges\PostEvent;
 use Xetaravel\Events\Badges\RegisterEvent;
-use Xetaravel\Events\Badges\CommentEvent;
+use Xetaravel\Events\Blog\CommentWasCreatedEvent;
+use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\Badge;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\User;
@@ -22,10 +25,11 @@ class BadgeSubscriber
      *
      * @var array
      */
-    protected $events = [
+    protected array $events = [
+        CommentWasCreatedEvent::class => 'onNewComment',
         RegisterEvent::class => 'onNewRegister',
         PostEvent::class => 'onNewPost',
-        PostSolvedEvent::class => 'onNewPostSolved',
+        PostWasSolvedEvent::class => 'onNewPostSolved',
         ExperiencesEvent::class => 'onNewExperiences',
         LeaderboardEvent::class => 'onNewLeaderboard'
     ];
@@ -33,31 +37,31 @@ class BadgeSubscriber
     /**
      * Register the listeners for the subscriber.
      *
-     * @param Illuminate\Events\Dispatcher $events
+     * @param Dispatcher $events
      *
      * @return void
      */
-    public function subscribe($events)
+    public function subscribe(Dispatcher $events): void
     {
         foreach ($this->events as $event => $action) {
-            $events->listen($event, BadgeSubscriber::class . '@' . $action);
+            $events->listen($event, self::class . '@' . $action);
         }
     }
 
     /**
      * Listener related to the comment badge.
      *
-     * @param \Xetaravel\Events\CommentEvent $event The event that was fired.
+     * @param CommentWasCreatedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function onNewComment(CommentEvent $event): bool
+    public function onNewComment(CommentWasCreatedEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'onNewComment')->get();
 
         $collection = $badges->filter(function ($badge) use ($user) {
-            return $badge->rule <= $user->comment_count;
+            return $badge->rule <= $user->blog_comment_count;
         });
 
         $result = $user->badges()->syncWithoutDetaching($collection);
@@ -68,7 +72,7 @@ class BadgeSubscriber
     /**
      * Listener related to the posts badge.
      *
-     * @param \Xetaravel\Events\PostEvent $event The event that was fired.
+     * @param PostEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -89,11 +93,11 @@ class BadgeSubscriber
     /**
      * Listener related to the post solved badge.
      *
-     * @param \Xetaravel\Events\PostSolvedEvent $event The event that was fired.
+     * @param PostWasSolvedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function onNewPostSolved(PostSolvedEvent $event): bool
+    public function onNewPostSolved(PostWasSolvedEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'onNewPostSolved')->get();
@@ -114,7 +118,7 @@ class BadgeSubscriber
     /**
      * Listener related to the experiences badge.
      *
-     * @param \Xetaravel\Events\ExperiencesEvent $event The event that was fired.
+     * @param ExperiencesEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -135,7 +139,7 @@ class BadgeSubscriber
     /**
      * Listener related to the register badge.
      *
-     * @param \Xetaravel\Events\RegisterEvent $event The event that was fired.
+     * @param RegisterEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -159,7 +163,7 @@ class BadgeSubscriber
     /**
      * Listener related to the leaderboard badge.
      *
-     * @param \Xetaravel\Events\RegisterEvent $event The event that was fired.
+     * @param LeaderboardEvent $event The event that was fired.
      *
      * @return bool
      */
@@ -177,8 +181,8 @@ class BadgeSubscriber
      * Send a notification for each new badge unlocked.
      *
      * @param array $result The result of the synchronization.
-     * @param \Illuminate\Database\Eloquent\Collection $badges The badges collection related to the listener.
-     * @param \Xetaravel\Models\User $user The user to notify.
+     * @param Collection $badges The badges collection related to the listener.
+     * @param User $user The user to notify.
      *
      * @return bool
      */
@@ -190,7 +194,7 @@ class BadgeSubscriber
 
         $sendNotification = function ($badgeId, $key, $badges) use ($user) {
             $badgeCollection = $badges->filter(function ($badge) use ($badgeId) {
-                return $badge->id == $badgeId;
+                return $badge->id === $badgeId;
             })->first();
 
             $user->notify(new BadgeNotification($badgeCollection));

@@ -1,20 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Events\Badges;
 
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Xetaravel\Models\User;
 
 class RegisterEvent
 {
-    public $user;
+    use Dispatchable;
+    use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @param \Xetaravel\Models\User $user
-     */
-    public function __construct(User $user)
+    public function __construct(public User $user)
     {
-        $this->user = $user;
     }
 }

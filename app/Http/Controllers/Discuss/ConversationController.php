@@ -2,14 +2,14 @@
 
 namespace Xetaravel\Http\Controllers\Discuss;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Xetaio\Mentions\Parser\MentionParser;
+use Xetaravel\Events\Discuss\ConversationWasCreatedEvent;
 use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
-use Xetaravel\Events\Experiences\ConversationWasCreatedEvent;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Validators\DiscussConversationValidator;
 

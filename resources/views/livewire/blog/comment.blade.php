@@ -46,7 +46,7 @@
             <div class="self-start ml-3 mt-3 w-full">
                 <x-markdown wire:model.live="form.content" name="form.content" label="Comment" placeholder="Your message here..." />
 
-                <x-button wire:click="create" icon-right="fas-pencil" icon-classes="h-4 w-4" label="Comment" class="btn-primary gap-2" />
+                <x-button wire:click="create" icon="fas-pencil" icon-classes="h-4 w-4" label="Comment" class="btn-primary gap-2" spinner />
             </div>
         </div>
     @else
@@ -54,4 +54,20 @@
             You need to be logged in to comment to this article !
         </x-alert>
     @endif
+
+    @auth
+        {{-- Delete BlogComment Modal --}}
+        <x-modal wire:model="deleteCommentModal" title="Delete the comment">
+            <x-form no-separator>
+                <p>
+                    Are you sure you want delete this comment ? <strong>This operation is not reversible.</strong>
+                </p>
+
+                <x-slot:actions>
+                    <x-button label="Yes, I confirm !" class="btn-primary" icon="fas-trash-alt" icon-classes="h-4 w-4" wire:click="delete()" spinner />
+                    <x-button label="Cancel" @click="$wire.deleteCommentModal = false" />
+                </x-slot:actions>
+            </x-form>
+        </x-modal>
+    @endauth
 </section>

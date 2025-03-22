@@ -1,25 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Events\Discuss;
 
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Xetaravel\Models\DiscussConversation;
 
 class ConversationWasPinnedEvent
 {
-    /**
-     * The conversation instance.
-     *
-     * @var \Xetaravel\Models\DiscussConversation
-     */
-    public $conversation;
+    use Dispatchable;
+    use SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @param \Xetaravel\Models\DiscussConversation $conversation
-     */
-    public function __construct(DiscussConversation $conversation)
+    public function __construct(public DiscussConversation $discussConversation)
     {
-        $this->conversation = $conversation;
     }
 }

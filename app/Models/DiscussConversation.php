@@ -160,7 +160,7 @@ class DiscussConversation extends Model
      */
     public function editedUser(): HasOne
     {
-        return $this->hasOne(User::class, 'id', 'edited_user_id')->withTrashed();
+        return $this->hasOne(User::class, 'id', 'edited_user_id');
     }
 
     /**
@@ -200,22 +200,22 @@ class DiscussConversation extends Model
                 ->where('created_at', '>=', $previousPost->created_at);
 
             // When there are only one page.
-        } elseif ($this->lastPage == 1) {
+        } elseif ($this->lastPage === 1) {
             $logs = $logs->where('created_at', '>=', $this->created_at);
 
             // When there are several pages and the current page is the first page.
-        } elseif ($page == 1) {
+        } elseif ($page === 1) {
             $logs = $logs->where('created_at', '<=', $posts->last()->created_at);
 
-            // When there're several page and the current page is the last page
-        } elseif ($page == $this->lastPage) {
+            // When there are several page and the current page is the last page
+        } elseif ($page === $this->lastPage) {
             $logs = $logs->where('created_at', '>', $previousPost->created_at);
         }
         $postsWithLogs = $posts->merge($logs->get())->sortBy('created_at');
 
         // If the conversation has a solved post, prepend it
         // then prepend the first post to the collection
-        if ($this->lastPage == 1 || $page == 1) {
+        if ($this->lastPage === 1 || $page === 1) {
             if (!is_null($this->solved_post_id)) {
                 $postsWithLogs->prepend(DiscussPost::findOrFail($this->solved_post_id));
             }

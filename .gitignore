@@ -28,3 +28,6 @@ yarn-error.log
 composer.lock
 package-lock.json
 junit.xml
+.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php

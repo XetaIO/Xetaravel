@@ -23,7 +23,7 @@ class ExperiencesTableSeeder extends Seeder
                 'amount' => 90,
                 'obtainable_type' => 'Xetaravel\\Models\\DiscussConversation',
                 'obtainable_id' => 1,
-                'event_type' => 'Xetaravel\\Events\\Experiences\\ConversationWasCreatedEvent',
+                'event_type' => 'Xetaravel\\Events\\Discuss\\ConversationWasCreatedEvent',
                 'data' => '[]',
                 'created_at' => $now,
                 'updated_at' => $now
@@ -33,7 +33,7 @@ class ExperiencesTableSeeder extends Seeder
                 'amount' => 75,
                 'obtainable_type' => 'Xetaravel\\Models\\DiscussPost',
                 'obtainable_id' => 2,
-                'event_type' => 'Xetaravel\\Events\\Experiences\\PostWasCreatedEvent',
+                'event_type' => 'Xetaravel\\Events\\Discuss\\PostWasCreatedEvent',
                 'data' => '[]',
                 'created_at' => $now,
                 'updated_at' => $now

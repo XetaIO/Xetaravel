@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Xetaravel\Providers;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Xetaravel\Settings\Settings;
@@ -28,30 +32,60 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Models
-        Model::preventLazyLoading();
-        Model::preventAccessingMissingAttributes();
+        $this->configureCommands();
+        $this->configureDates();
+        $this->configureModels();
+        $this->configurePasswords();
+        $this->configureRoutes();
+        $this->configureUrls();
+        $this->configureViews();
+        $this->configureVite();
+    }
 
-        // Routes
-        Route::pattern('id', '[0-9]+');
-
-        // Builder
-        Builder::macro('search', function ($field, $string) {
-            return $string ? $this->where($field, 'like', '%' . $string . '%') : $this;
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        // Register the Settings class
+        $this->app->singleton(Settings::class, function (Application $app) {
+            return new Settings($app['cache.store']);
         });
+    }
 
-        // View
-        View::addNamespace('Admin', base_path() . '/resources/views/Admin');
-        View::addNamespace('Blog', base_path() . '/resources/views/Blog');
-        View::addNamespace('Auth', base_path() . '/resources/views/Auth');
-        View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
-        View::composer('partials._notifications', NotificationsComposer::class);
-        View::composer('Blog::partials._sidebar', BlogSidebarComposer::class);
-        View::composer('Discuss::partials._sidebar', DiscussSidebarComposer::class);
+    /**
+     * Configure the application's commands.
+     */
+    private function configureCommands(): void
+    {
+        DB::prohibitDestructiveCommands(
+            $this->app->isProduction(),
+        );
+    }
 
-        // Pagination
-        //Paginator::defaultView('vendor.pagination.tailwind');
+    /**
+     * Configure the application's dates.
+     */
+    private function configureDates(): void
+    {
+        Date::use(CarbonImmutable::class);
+    }
 
+    /**
+     * Configure the application's models.
+     */
+    private function configureModels(): void
+    {
+        Model::shouldBeStrict();
+    }
+
+    /**
+     * Configure the application's passwords.
+     */
+    private function configurePasswords(): void
+    {
         // Set default password rule for the application.
         Password::defaults(function () {
             $rule = Password::min(8);
@@ -72,6 +106,39 @@ class AppServiceProvider extends ServiceProvider
                 'email' => $notifiable->getEmailForPasswordReset(),
             ], false));
         });
+    }
+
+    /**
+     * Configure the application's routes.
+     */
+    private function configureRoutes(): void
+    {
+        Route::pattern('id', '[0-9]+');
+    }
+
+    /**
+     * Configure the application's URLs.
+     */
+    private function configureUrls(): void
+    {
+        URL::forceScheme('https');
+    }
+
+    /**
+     * Configure the application's views.
+     */
+    private function configureViews(): void
+    {
+        View::addNamespace('Admin', base_path() . '/resources/views/Admin');
+        View::addNamespace('Blog', base_path() . '/resources/views/Blog');
+        View::addNamespace('Auth', base_path() . '/resources/views/Auth');
+        View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
+        View::composer('partials._notifications', NotificationsComposer::class);
+        View::composer('Blog::partials._sidebar', BlogSidebarComposer::class);
+        View::composer('Discuss::partials._sidebar', DiscussSidebarComposer::class);
+
+        // Pagination
+        //Paginator::defaultView('vendor.pagination.tailwind');
 
         /**
          * All credits from this blade directive goes to Konrad Kalemba.
@@ -103,15 +170,10 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register any application services.
-     *
-     * @return void
+     * Configure the application's Vite instance.
      */
-    public function register(): void
+    private function configureVite(): void
     {
-        // Register the Settings class
-        $this->app->singleton(Settings::class, function (Application $app) {
-            return new Settings($app['cache.store']);
-        });
+        Vite::useAggressivePrefetching();
     }
 }

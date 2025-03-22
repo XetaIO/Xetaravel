@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Listeners\Subscribers;
 
-use Xetaravel\Events\Experiences\ConversationWasCreatedEvent;
-use Xetaravel\Events\Experiences\PostWasCreatedEvent;
-use Xetaravel\Events\Experiences\PostWasSolvedEvent;
+use Illuminate\Events\Dispatcher;
+use Xetaravel\Events\Blog\CommentWasCreatedEvent;
+use Xetaravel\Events\Discuss\ConversationWasCreatedEvent;
+use Xetaravel\Events\Discuss\PostWasCreatedEvent;
+use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\Experience;
 
 class ExperienceSubscriber
@@ -14,10 +18,11 @@ class ExperienceSubscriber
      *
      * @var array
      */
-    protected $experiences = [
+    protected array $experiences = [
         PostWasSolvedEvent::class => 120,
         ConversationWasCreatedEvent::class => 90,
-        PostWasCreatedEvent::class => 75
+        PostWasCreatedEvent::class => 75,
+        CommentWasCreatedEvent::class => 75
     ];
 
     /**
@@ -25,39 +30,40 @@ class ExperienceSubscriber
      *
      * @var array
      */
-    protected $events = [
+    protected array $events = [
         PostWasCreatedEvent::class => 'postWasCreated',
         PostWasSolvedEvent::class => 'postWasSolved',
-        ConversationWasCreatedEvent::class => 'conversationWasCreated'
+        ConversationWasCreatedEvent::class => 'conversationWasCreated',
+        CommentWasCreatedEvent::class => 'commentWasCreated',
     ];
 
     /**
      * Register the listeners for the subscriber.
      *
-     * @param Illuminate\Events\Dispatcher $events
+     * @param Dispatcher $events
      *
      * @return void
      */
-    public function subscribe($events)
+    public function subscribe(Dispatcher $events): void
     {
         foreach ($this->events as $event => $action) {
-            $events->listen($event, ExperienceSubscriber::class . '@' . $action);
+            $events->listen($event, self::class . '@' . $action);
         }
     }
 
     /**
      * Handle a PostWasCreated event.
      *
-     * @param \Xetaravel\Events\Experiences\PostWasCreatedEvent $event The event that was fired.
+     * @param PostWasCreatedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function postWasCreated(PostWasCreatedEvent $event)
+    public function postWasCreated(PostWasCreatedEvent $event): bool
     {
         $data = [
             'amount' => $this->experiences[PostWasCreatedEvent::class],
-            'obtainable_id' => $event->post->getKey(),
-            'obtainable_type' => get_class($event->post),
+            'obtainable_id' => $event->discussPost->getKey(),
+            'obtainable_type' => get_class($event->discussPost),
             'event_type' => PostWasCreatedEvent::class
         ];
 
@@ -67,17 +73,17 @@ class ExperienceSubscriber
     /**
      * Handle a PostWasSolved event.
      *
-     * @param \Xetaravel\Events\Experiences\PostWasSolvedEvent $event The event that was fired.
+     * @param PostWasSolvedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function postWasSolved(PostWasSolvedEvent $event)
+    public function postWasSolved(PostWasSolvedEvent $event): bool
     {
         $data = [
-            'user_id' => $event->post->user_id,
+            'user_id' => $event->discussPost->user_id,
             'amount' => $this->experiences[PostWasSolvedEvent::class],
-            'obtainable_id' => $event->post->getKey(),
-            'obtainable_type' => get_class($event->post),
+            'obtainable_id' => $event->discussPost->getKey(),
+            'obtainable_type' => get_class($event->discussPost),
             'event_type' => PostWasSolvedEvent::class
         ];
 
@@ -87,17 +93,36 @@ class ExperienceSubscriber
     /**
      * Handle a ConversationWasCreated event.
      *
-     * @param \Xetaravel\Events\Experiences\ConversationWasCreatedEvent $event The event that was fired.
+     * @param ConversationWasCreatedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function conversationWasCreated(ConversationWasCreatedEvent $event)
+    public function conversationWasCreated(ConversationWasCreatedEvent $event): bool
     {
         $data = [
             'amount' => $this->experiences[ConversationWasCreatedEvent::class],
-            'obtainable_id' => $event->conversation->getKey(),
-            'obtainable_type' => get_class($event->conversation),
+            'obtainable_id' => $event->discussConversation->getKey(),
+            'obtainable_type' => get_class($event->discussConversation),
             'event_type' => ConversationWasCreatedEvent::class
+        ];
+
+        return $this->create($data);
+    }
+
+    /**
+     * Handle a CommentWasCreated event.
+     *
+     * @param CommentWasCreatedEvent $event The event that was fired.
+     *
+     * @return bool
+     */
+    public function commentWasCreated(CommentWasCreatedEvent $event): bool
+    {
+        $data = [
+            'amount' => $this->experiences[CommentWasCreatedEvent::class],
+            'obtainable_id' => $event->blogComment->getKey(),
+            'obtainable_type' => get_class($event->blogComment),
+            'event_type' => CommentWasCreatedEvent::class
         ];
 
         return $this->create($data);

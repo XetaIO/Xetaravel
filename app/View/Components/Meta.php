@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\View\Components;
 
 use Illuminate\Support\Str;

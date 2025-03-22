@@ -30,11 +30,15 @@
 
                 {{-- THE LABEL THAT HOLDS THE INPUT --}}
                 <label
+                    @if($isDisabled())
+                        disabled
+                    @endif
+
                     {{
                         $attributes->whereStartsWith('class')->class([
                             "input w-full",
                             "join-item" => $prepend || $append,
-                            "border-dashed" => $attributes->has("readonly") && $attributes->get("readonly") == true,
+                            "border-dashed" => $isReadonly(),
                             "!input-error" => $errorFieldName() && $errors->has($errorFieldName()) && !$omitError
                         ])
                     }}

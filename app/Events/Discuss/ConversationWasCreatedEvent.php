@@ -7,16 +7,16 @@ namespace Xetaravel\Events\Discuss;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Xetaravel\Models\DiscussConversation;
+use Xetaravel\Models\User;
 
-class TitleWasChangedEvent
+class ConversationWasCreatedEvent
 {
     use Dispatchable;
     use SerializesModels;
 
     public function __construct(
-        public DiscussConversation $conversation,
-        public string $title,
-        public string $oldTitle
+        public User $user,
+        public DiscussConversation $discussConversation
     ) {
     }
 }

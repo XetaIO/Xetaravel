@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\View\Components;
 
 use Closure;
@@ -46,6 +48,16 @@ class Input extends Component
     public function errorFieldName(): ?string
     {
         return $this->modelName() ?? $this->attributes->whereStartsWith('name')->first();
+    }
+
+    public function isReadonly(): bool
+    {
+        return $this->attributes->has('readonly') && $this->attributes->get('readonly') === true;
+    }
+
+    public function isDisabled(): bool
+    {
+        return $this->attributes->has('disabled') && $this->attributes->get('disabled') === true;
     }
 
     public function moneySettings(): string

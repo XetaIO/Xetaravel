@@ -9,14 +9,17 @@ use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Masmerise\Toaster\Toastable;
+use Xetaravel\Events\Blog\CommentWasCreatedEvent;
 use Xetaravel\Livewire\Forms\CommentForm;
 use Xetaravel\Livewire\Traits\WithCachedRows;
 use Xetaravel\Livewire\Traits\WithPerPagePagination;
 use Xetaravel\Livewire\Traits\WithSorting;
 use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\BlogComment;
+use Xetaravel\Models\User;
 
 class Comment extends Component
 {
@@ -26,14 +29,12 @@ class Comment extends Component
     use WithPerPagePagination;
     use WithSorting;
 
-    public BlogArticle $article;
-
     /**
-     * The number of comment for this article.
+     * The article where the comments belong to.
      *
-     * @var int|null
+     * @var BlogArticle
      */
-    public ?int $blogCommentCount = null;
+    public BlogArticle $article;
 
     /**
      * The form used to create a comment.
@@ -47,7 +48,7 @@ class Comment extends Component
      *
      * @var int
      */
-    public int $perPage = 3;
+    public int $perPage = 10;
 
     /**
      * The field to sort by.
@@ -73,17 +74,42 @@ class Comment extends Component
     ];
 
     /**
-     * The content of the comment.
+     * The modal used to delete a comment.
      *
-     * @var string
+     * @var bool
      */
-    public string $content = '';
+    public bool $deleteCommentModal = false;
+
+    /**
+     * The comment id to delete.
+     *
+     * @var int|null
+     */
+    public ?int $deleteCommentId = null;
+
+    /**
+     * The number of comment for this article.
+     *
+     * @var int|null
+     */
+    public ?int $blogCommentCount = null;
+
+    /**
+     * The listeners.
+     *
+     * @var array
+     */
+    protected $listeners = [
+        'deleted-event' => '$refresh'
+    ];
+
 
     public function mount(BlogArticle $article): void
     {
         $this->article = $article;
         $this->form->blog_article_id = $article->id;
         $this->blogCommentCount = $article->blog_comment_count;
+        $this->perPage = config('xetaravel.pagination.blog.comment_per_page');
     }
 
     public function render(): View
@@ -132,17 +158,42 @@ class Comment extends Component
 
         $this->validate();
 
-        $this->form->store();
+        if (BlogComment::isFlooding('xetaravel.flood.blog.comment')) {
+            $this->error('Wow, keep calm bro, and try to not flood !');
+
+            return;
+        }
+
+        $comment = $this->form->store();
+
+        // We must find the user else we won't see the updated blog_comment_count.
+        event(new CommentWasCreatedEvent(User::find(Auth::id()), $comment));
 
         $this->form->content = "";
-
-        $this->success('Your comment has been created !');
-
-
-
         $this->blogCommentCount++;
-        //$this->js('window.editor.value = \'\'');
-        //$this->js('alert(window.editor.value())');
-        $this->dispatch('comment-created');
+
+        $this->success('Your comment has been posted successfully !');
+    }
+
+    /**
+     * Delete a comment.
+     *
+     * @return void
+     */
+    public function delete(): void
+    {
+        $comment = BlogComment::findOrFail($this->deleteCommentId);
+
+        $this->authorize('delete', [$comment, $this->article]);
+
+        if ($comment->delete()) {
+            $this->success("Your comment has been deleted successfully !");
+            $this->blogCommentCount--;
+            $this->deleteCommentModal = false;
+            $this->dispatch('deleted-event');
+
+            return;
+        }
+        $this->error('Whoops, looks like something went wrong !');
     }
 }

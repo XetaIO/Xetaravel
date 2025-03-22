@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Policies;
 
+use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\User;
 use Xetaravel\Models\BlogComment;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -30,16 +33,17 @@ class BlogCommentPolicy
      *
      * @param User $user
      * @param BlogComment $comment
-     *
+     * @param BlogArticle $article
      * @return bool
      */
-    public function create(User $user, BlogComment $comment): bool
+    public function create(User $user, BlogComment $comment, BlogArticle $article): bool
     {
-        return $user->hasPermissionTo('create blog comment');
+        return $article->is_display === true &&
+            $user->hasPermissionTo('create blog comment');
     }
 
     /**
-     * Determine whether the user can update the discuss post.
+     * Determine whether the user can update a blog comment.
      *
      * @param User $user
      * @param BlogComment $comment
@@ -48,7 +52,8 @@ class BlogCommentPolicy
      */
     public function update(User $user, BlogComment $comment): bool
     {
-        return $user->id === $comment->user_id;
+        return $user->id === $comment->user_id &&
+            $user->hasPermissionTo('update blog comment');
     }
 
     /**
@@ -56,11 +61,14 @@ class BlogCommentPolicy
      *
      * @param User $user
      * @param BlogComment $comment
+     * @param BlogArticle $article
      *
      * @return bool
      */
-    public function delete(User $user, BlogComment $comment): bool
+    public function delete(User $user, BlogComment $comment, BlogArticle $article): bool
     {
-        return $user->id === $comment->user_id;
+        return $user->id === $comment->user_id &&
+            $article->id === $comment->blog_article_id &&
+            $user->hasPermissionTo('delete blog comment');
     }
 }

@@ -74,12 +74,7 @@
                                 {{-- Edit button --}}
                                 @can('manage blog article')
                                     <span class="text-gray-700"> - </span>
-                                    <a class="btn btn-sm" href="{{ route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]) }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="h-3 w-3 mr-1" viewBox="0 0 16 16">
-                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                        </svg>
-                                        Edit
-                                    </a>
+                                    <x-button link="{{ route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]) }}" icon="fas-pencil" icon-classes="h-4 w-4" label="Edit" class="btn-sm gap-2" />
                                 @endcan
                             </div>
                         </div>
@@ -160,33 +155,4 @@
         </aside>
     </div>
 </section>
-
-@auth
-{{-- Delete BlogComment Modal --}}
-<input type="checkbox" id="deleteCommentModal" class="modal-toggle" />
-<label for="deleteCommentModal" class="modal cursor-pointer">
-    <label class="modal-box relative">
-        <label for="deleteCommentModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <h3 class="font-bold text-lg">
-            Delete the comment
-        </h3>
-        <form class="py-4" id="deleteCommentModalForm" method="POST">
-            @method('DELETE')
-            @csrf
-            <p>
-                    Are you sure you want delete this comment ? <strong>This operation is not reversible.</strong>
-            </p>
-            <div class="modal-action">
-                <button type="submit" class="btn btn-error">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                    </svg>
-                    Yes, I confirm !
-                </button>
-                <label for="deleteCommentModal" class="btn">Close</label>
-            </div>
-        </form>
-    </label>
-</label>
-@endauth
 @endsection

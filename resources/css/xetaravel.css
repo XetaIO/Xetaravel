@@ -25,6 +25,7 @@
 @source "../**/*.vue";
 
 @theme {
+    --font-code: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
     --font-xetaravel: "Miriam Libre";
     --tw-prose-pre-bg: var(--color-base-content);
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -45,9 +46,8 @@ pre {
 /**
  * HighlightJS
  */
-pre,
-code {
-    font-family: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+pre {
+    @apply  dark:bg-base-100 bg-neutral-800 font-code;
 }
 
 pre code {

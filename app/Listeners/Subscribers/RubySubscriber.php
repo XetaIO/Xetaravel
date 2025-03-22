@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Listeners\Subscribers;
 
+use Illuminate\Events\Dispatcher;
 use Xetaravel\Events\Rubies\PostWasSolvedEvent;
 use Xetaravel\Models\Ruby;
 
@@ -12,7 +15,7 @@ class RubySubscriber
      *
      * @var array
      */
-    protected $rubies = [
+    protected array $rubies = [
         PostWasSolvedEvent::class => 100
     ];
 
@@ -21,32 +24,32 @@ class RubySubscriber
      *
      * @var array
      */
-    protected $events = [
+    protected array $events = [
         PostWasSolvedEvent::class => 'postWasSolved',
     ];
 
     /**
      * Register the listeners for the subscriber.
      *
-     * @param Illuminate\Events\Dispatcher $events
+     * @param Dispatcher $events
      *
      * @return void
      */
-    public function subscribe($events)
+    public function subscribe(Dispatcher $events): void
     {
         foreach ($this->events as $event => $action) {
-            $events->listen($event, RubySubscriber::class . '@' . $action);
+            $events->listen($event, self::class . '@' . $action);
         }
     }
 
     /**
      * Handle a PostWasSolved event.
      *
-     * @param \Xetaravel\Events\Rubies\PostWasSolvedEvent $event The event that was fired.
+     * @param PostWasSolvedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function postWasSolved(PostWasSolvedEvent $event)
+    public function postWasSolved(PostWasSolvedEvent $event): bool
     {
         $data = [
             'user_id' => $event->post->user_id,
