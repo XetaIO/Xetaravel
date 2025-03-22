@@ -53,10 +53,6 @@ jobs:
             - name: Generate key
               run: php artisan key:generate
 
-
-            - name: Publish vendors
-              run: php artisan vendor:publish --provider="Xetaio\Editor\EditorServiceProvider"
-
             - name: Install JS
               run: |
                 npm install
