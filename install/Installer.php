@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace XetaravelInstaller;
 
+use Composer\IO\IOInterface;
 use Composer\Script\Event;
 
 /**
@@ -12,7 +13,7 @@ use Composer\Script\Event;
  */
 class Installer
 {
-    public static function postInstall(Event $event)
+    public static function postCreateProjectCmd(Event $event): void
     {
         $io = $event->getIO();
         $io->write("<info>
@@ -48,11 +49,11 @@ class Installer
      * Create the .env.testing file if it does not exist.
      *
      * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @param IOInterface $io IO interface to write to console.
      *
      * @return void
      */
-    public static function createEnvTesting($dir, $io)
+    public static function createEnvTesting(string $dir, IOInterface $io): void
     {
         $env = $dir . '/.env.testing';
         $defaultEnv = $dir . '/.env.testing.exemple';
@@ -67,11 +68,11 @@ class Installer
      * Set the database value in the application's env file.
      *
      * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @param IOInterface $io IO interface to write to console.
      *
      * @return void
      */
-    public static function configDatabase($dir, $io)
+    public static function configDatabase(string $dir, IOInterface $io): void
     {
         $env = $dir . '/.env';
         $content = file_get_contents($env);
