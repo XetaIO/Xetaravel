@@ -5,14 +5,6 @@
   <x-meta title="Discuss" />
 @endpush
 
-@push('style')
-@livewireStyles
-@endpush
-
-@push('scripts')
-@livewireScripts
-@endpush
-
 @section('content')
 <section class="lg:container mx-auto mt-12 mb-5">
     <div class="grid grid-cols-1">
