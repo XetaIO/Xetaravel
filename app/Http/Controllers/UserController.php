@@ -157,7 +157,7 @@ class UserController extends Controller
 
         $level = UserUtility::getLevel($user->experiences_total);
 
-        if ($level['maxLevel'] == true) {
+        if ($level['maxLevel'] === true) {
             $level['currentProgression'] = 100;
         } elseif ($level['matchExactXPLevel'] === true) {
             $level['currentProgression'] = 0;

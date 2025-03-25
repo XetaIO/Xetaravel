@@ -7,7 +7,6 @@ namespace Http\Controllers\Blog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
-use Xetaravel\Livewire\Blog\Comment;
 
 class CategoryControllerTest extends TestCase
 {
