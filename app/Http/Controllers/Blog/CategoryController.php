@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Xetaravel\Http\Controllers\Blog;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\BlogCategory;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -19,11 +20,11 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the article by his id.
+     * Show the category by his id.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
-    public function show(Request $request, $slug, $id)
+    public function show(string $slug, int $id)
     {
         $category = BlogCategory::with('articles')
             ->where('id', $id)
@@ -32,15 +33,15 @@ class CategoryController extends Controller
         if (is_null($category)) {
             return redirect()
                 ->route('blog.article.index')
-                ->with('danger', 'This category doesn\'t exist or has been deleted !');
+                ->error('This category does not exist or has been deleted !');
         }
 
         $articles = $category->articles()->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
-        $this->breadcrumbs->addCrumb("BlogCategory : " . e($category->title), $category->category_url);
+        $this->breadcrumbs->addCrumb("Category : " . e($category->title), $category->category_url);
 
         return view(
-            'Blog::category.show',
+            'Blog.category.show',
             ['articles' => $articles, 'category' => $category, 'breadcrumbs' => $this->breadcrumbs]
         );
     }

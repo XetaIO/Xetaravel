@@ -10,7 +10,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\BlogArticle;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -47,7 +46,7 @@ class ArticleController extends Controller
      *
      * @return Application|Factory|RedirectResponse|\Illuminate\View\View|object|View
      */
-    public function show(Request $request, $slug, $id)
+    public function show(string $slug, int $id)
     {
         $article = BlogArticle::with('category', 'user')
             ->where('id', $id)
@@ -56,7 +55,7 @@ class ArticleController extends Controller
         if (is_null($article)) {
             return redirect()
                 ->route('blog.article.index')
-                ->error('This article doesn\'t exist or has been deleted !');
+                ->error('This article does not exist or has been deleted !');
         }
 
         $breadcrumbs = $this->breadcrumbs->addCrumb('<svg xmlns="http://www.w3.org/2000/svg" fill="none"' .

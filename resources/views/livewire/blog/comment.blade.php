@@ -8,7 +8,7 @@
     </h2>
 
     @forelse ($comments as $comment)
-        @include('Blog::partials._comment', ['comment' => $comment])
+        @include('Blog::partials._comment', ['comment' => $comment, 'article' => $article])
     @empty
         <div class="alert alert-info shadow-lg mb-5">
             <div>

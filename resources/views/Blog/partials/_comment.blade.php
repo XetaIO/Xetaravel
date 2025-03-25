@@ -62,7 +62,7 @@
 
             {{-- BlogComment Actions --}}
             @auth
-                @canany(['update', 'delete'], $comment)
+                @canany(['update', 'delete'], [$comment, $article])
                     <div class="dropdown dropdown-end sm:opacity-0 sm:group-hover:opacity-100">
                         <div tabindex="0" role="button" class="btn btn-link m-1 dark:text-white text-neutral">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
@@ -79,7 +79,7 @@
                                     </a>
                                 </li>
                             @endcan--}}
-                            @can('delete', $comment)
+                            @can('delete', [$comment, $article])
                                 <li class="text-center opacity-70">
                                     Moderation
                                 </li>

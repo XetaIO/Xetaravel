@@ -154,7 +154,7 @@ class Comment extends Component
      */
     public function create(): void
     {
-        $this->authorize('create', BlogComment::class);
+        $this->authorize('create', [BlogComment::class, $this->article]);
 
         $this->validate();
 
@@ -163,7 +163,6 @@ class Comment extends Component
 
             return;
         }
-
         $comment = $this->form->store();
 
         // We must find the user else we won't see the updated blog_comment_count.

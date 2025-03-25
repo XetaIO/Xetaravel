@@ -138,10 +138,10 @@ trait UserPresenter
      *
      * @return string
      */
-    public function getExperiencesTotalAttribute($experiencesTotal): string
+    /*public function getExperiencesTotalAttribute($experiencesTotal): string
     {
         return number_format($experiencesTotal, 0, ".", " ");
-    }
+    }*/
 
     /**
      * Get the account facebook.
@@ -211,16 +211,6 @@ trait UserPresenter
     public function getAvatarBigAttribute(): string
     {
         return $this->parseMedia('thumbnail.big');
-    }
-
-    /**
-     * Get the profile background.
-     *
-     * @return string
-     */
-    public function getProfileBackgroundAttribute(): string
-    {
-        return UserUtility::getProfileBackground();
     }
 
     /**

@@ -59,23 +59,15 @@
     </div>
 </article>
 @empty
-<div class="alert alert-error shadow-lg mb-5">
-    <div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+    <x-alert type="error" class="mb-4">
         <div>
             <h3 class="font-bold">Whoops</h3>
             <div class="text-xs">There's no article yet, come back later !</div>
         </div>
-    </div>
-    <div class="flex-none">
-        <a class="btn btn-sm" href="{{ route('page.index') }}">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            Visit Home
-        </a>
-    </div>
-</div>
+        <div>
+            <x-button link="{{ route('blog.article.index') }}" icon="heroicon-o-newspaper" icon-classes="h-4 w-4" label="Visite Blog" class="btn-primary btn-sm gap-2" />
+        </div>
+    </x-alert>
 @endforelse
 
 <div class="grid grid-cols-1">

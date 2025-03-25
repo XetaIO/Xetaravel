@@ -76,7 +76,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $appends = [
-        'profile_background',
         'profile_url',
 
         // Media Model
@@ -107,9 +106,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected function casts(): array
     {
         return [
+            'experiences_total' => 'integer',
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
             'last_login_date' => 'datetime',
+            'password' => 'hashed',
+            'rubies_total' => 'integer',
         ];
     }
 

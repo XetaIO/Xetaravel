@@ -34,7 +34,7 @@ class ArticleControllerTest extends TestCase
         Toaster::fake();
         $response = $this->get('/blog/article/not-found.5');
 
-        Toaster::assertDispatched('This article doesn\'t exist or has been deleted !');
+        Toaster::assertDispatched('This article does not exist or has been deleted !');
         $response->assertStatus(302);
         $response->assertRedirect('/blog');
     }

@@ -53,6 +53,16 @@ class BlogArticle extends Model implements HasMedia
     ];
 
     /**
+     * The attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_display' => 'boolean'
+        ];
+    }
+
+    /**
      * Return the field to slug.
      *
      * @return string

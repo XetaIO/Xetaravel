@@ -25,10 +25,8 @@
             <div class="col-span-12 mb-3 mx-3 lg:mx-0">
                 @if (Auth::user() && $user->id == Auth::id())
                     <div class="text-right">
-                        <a class="btn btn-primary gap-2" href="{{ route('users.account.index') }}">
-                            <i class="fa-solid fa-pencil"></i>
-                            Edit my profile
-                        </a>
+                        <x-button link="{{ route('users.account.index') }}" icon="fas-pencil" icon-classes="h-4 w-4" label="Edit my profile" class="btn-outline-primary btn-sm gap-2" />
+
                     </div>
                 @endif
             </div>
@@ -41,7 +39,7 @@
 
                     <div class="w-full md:w-1/2">
                         {{--  User Avatar --}}
-                        <div class="relative avatar {{ $user->online ? 'online' : 'offline' }} m-2">
+                        <div class="relative avatar {{ $user->online ? 'avatar-online' : 'avatar-offline' }} m-2">
                             <figure
                                 class="h-24 w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible"
                                 data-tip="{{ $user->username }} is {{ $user->online ? 'online' : 'offline' }}">
@@ -65,7 +63,7 @@
                     <div class="w-full md:w-1/2">
                         <div class="pb-2 mx-5 border-dotted border-b border-slate-500">
                             @foreach ($user->roles as $role)
-                                <span style="{{ $role->css }}">{{ $role->name }}</span>
+                                <span class="font-bold" style="color:{{ $role->color }}">{{ $role->name }}</span>
                             @endforeach
                         </div>
 
@@ -76,18 +74,18 @@
 
                         <ul class="pt-2 flex flex-row gap-2 justify-center w-full">
                             @if ($user->facebook)
-                                <li class="">
-                                    <a class="tooltip" href="{{ url('http://facebook.com/' . e($user->facebook)) }}"
-                                       datat-tip="http://facebook.com/{{ e($user->facebook) }}" title="Facebook">
-                                        <i class="fa-brands fa-square-facebook fa-2xl"></i>
+                                <li>
+                                    <a class="tooltip" href="{{ url('https://facebook.com/' . e($user->facebook)) }}"
+                                       data-tip="https://facebook.com/{{ e($user->facebook) }}" title="Facebook">
+                                        <x-icon name="fab-square-facebook" class="h-6 w-6"></x-icon>
                                     </a>
                                 </li>
                             @endif
                             @if ($user->twitter)
-                                <li class="">
-                                    <a class="tooltip" href="{{ url('http://twitter.com/' . e($user->twitter)) }}"
-                                       datat-tip="http://twitter.com/{{ e($user->twitter) }}" title="Twitter">
-                                        <i class="fa-brands fa-square-twitter fa-2xl"></i>
+                                <li>
+                                    <a class="tooltip" href="{{ url('https://twitter.com/' . e($user->twitter)) }}"
+                                       data-tip="https://twitter.com/{{ e($user->twitter) }}" title="Twitter">
+                                        <x-icon name="fab-square-twitter" class="h-6 w-6"></x-icon>
                                     </a>
                                 </li>
                             @endif
@@ -100,14 +98,14 @@
                 <div class="grid grid-cols-12 gap-4 text-center h-full mx-3 lg:mx-0">
                     <div class="col-span-12 lg:col-span-4 h-full">
                         <div
-                            class="flex flex-col justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full tooltip"
+                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full tooltip"
                             data-tip="{{ $level['experienceNeededNextLevel'] }} experiences to go before next level.">
-                            <i class="fa-solid fa-star text-[color:hsl(var(--wa))] text-8xl"></i>
+                            <x-icon name="fas-star" class="h-26 w-26 text-[color:var(--color-warning)]"></x-icon>
                             <div>
                                 <div class="font-bold text-2xl font-xetaravel">
                                     {{ $user->experiences_total }}
                                 </div>
-                                <p class="text-muted">
+                                <p>
                                     Total Experiences
                                 </p>
                             </div>
@@ -116,13 +114,13 @@
 
                     <div class="col-span-12 lg:col-span-4 h-full">
                         <div
-                            class="flex flex-col justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
-                            <i class="fa-regular fa-gem text-primary text-8xl"></i>
+                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
+                            <x-icon name="far-gem" class="h-26 w-26 text-primary"></x-icon>
                             <div>
                                 <div class="font-bold text-2xl font-xetaravel">
                                     {{ $user->rubies_total }}
                                 </div>
-                                <p class="text-muted">
+                                <p>
                                     Total Rubies
                                 </p>
                             </div>
@@ -131,13 +129,13 @@
 
                     <div class="col-span-12 lg:col-span-4 h-full">
                         <div
-                            class="flex flex-col justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
-                            <i class="fa-regular fa-comments text-[color:#5ccc5c] text-8xl"></i>
+                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
+                            <x-icon name="far-comments" class="h-26 w-26 text-[color:#5ccc5c]"></x-icon>
                             <div>
                                 <div class="font-bold text-2xl font-xetaravel">
                                     {{ $user->discuss_post_count }}
                                 </div>
-                                <p class="text-muted">
+                                <p>
                                     Total Discuss Messages
                                 </p>
                             </div>
@@ -164,14 +162,14 @@
             <div class="col-span-1 mx-3 lg:mx-0">
                 <div
                     class="flex flex-row gap-3 items-center overflow-hidden shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg py-9 px-5">
-                    <div class="">
-                        <i class="fa-solid fa-quote-left text-primary text-5xl"></i>
+                    <div>
+                        <x-icon name="fas-quote-left" class="text-primary h-7 w-7" />
                     </div>
                     <div class="prose min-w-full">
                         @empty($user->biography)
                             @if (Auth::user() && $user->id == Auth::id())
                                 You don't have set a biography.
-                                {!! Html::link(route('users.account.index'), '<i class="fa fa-plus"></i> Add now', ['class' => 'btn btn-outline-primary'], null, false) !!}
+                                <x-button link="{{ route('users.account.index') }}" icon="fas-plus" icon-classes="h-4 w-4" label="Add now" class="btn-outline-primary btn-sm gap-2" />
                             @else
                                 This user hasn't set a biography yet.
                             @endif
@@ -201,11 +199,13 @@
                     <ul class="flex flex-row flex-wrap items-center justify-center gap-3">
                         @foreach ($badges as $badge)
                             @if ($badge->slug !== 'topleaderboard')
-                                <li class="flex items-center w-11 h-11 rounded-full p-1 border-2 border-solid {{ $user->badges->contains($badge->id) ? 'border-[color:rgba(221,221,211,0.5) dark:border-[color:#ffffff]' : 'border-[color:rgba(221,221,211,0.5)]' }} hover:cursor-pointer">
-                                    <div class="dropdown dropdown-hover dropdown-top hover:cursor-pointer">
+                                <li class="flex items-center justify-center w-11 h-11 rounded-full p-1 border-2 border-solid {{ $user->badges->contains($badge->id) ? 'border-[color:rgba(221,221,211,0.5) dark:border-[color:#ffffff]' : 'border-[color:rgba(221,221,211,0.5)]' }} cursor-pointer">
+                                    <div class="dropdown dropdown-hover dropdown-top dropdown-center">
                                         <label tabindex="0" class="m-1">
-                                            <i class="fa-xl {{ $badge->icon }}"
-                                               style="color:{{ $user->badges->contains($badge->id) ? $badge->color : 'rgba(221,221,211,0.5)' }}; {{ $badge->slug == "topleaderboard" ? "border-color: #eefc24;color:#fff;background-color:" . $badge->color : "" }}"></i>
+                                            <x-icon
+                                                class="h-7 w-7"
+                                                name="{{ $badge->icon }}"
+                                                style="color:{{ $user->badges->contains($badge->id) ? $badge->color : 'rgba(221,221,211,0.5)' }};"></x-icon>
                                         </label>
                                         <div tabindex="0"
                                              class="dropdown-content card card-compact bg-base-100 w-96 p-2 shadow">
@@ -216,6 +216,12 @@
                                                 <p>
                                                     {{ $badge->description }}
                                                 </p>
+                                                @if($user->badges->contains($badge->id))
+                                                    <div class="divider"></div>
+                                                    <p class="text-sm">
+                                                        You have unlocked this badge the {{ $badge->created_at->format('Y-m-d H:i:s') }}
+                                                    </p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -225,6 +231,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
     </section>
 
     {{-- Level --}}
@@ -240,14 +247,12 @@
         <div class="grid grid-cols-1">
             <div class="col-span-12 mx-3 lg:mx-0">
                 <div class="flex justify-between">
-                    <div class="font-bold tooltip"
-                         data-tip="{{ $level['currentLevelExperience'] }} XP needed for Level {{ $level['currentLevel'] }}">
+                    <div class="font-bold tooltip" data-tip="{{ $level['currentLevelExperience'] }} XP needed for Level {{ $level['currentLevel'] }}">
                         LEVEL {{ $level['currentLevel'] }}
                     </div>
                     <div class="font-bold">
-                        @if($level['maxLevel'] != true)
-                            <span class="tooltip"
-                                  data-tip="{{ $level['nextLevelExperience'] }} XP needed for Level {{ $level['nextLevel'] }}">
+                        @if($level['maxLevel'] !== true)
+                            <span class="tooltip" data-tip="{{ $level['nextLevelExperience'] }} XP needed for Level {{ $level['nextLevel'] }}">
                             LEVEL {{ $level['nextLevel'] }}
                         </span>
                         @else
@@ -257,8 +262,8 @@
                         @endif
                     </div>
                 </div>
-                <progress class="progress progress-primary h-4" value="{{ $level['currentProgression'] }}"
-                          max="100"></progress>
+                <progress class="progress progress-primary h-4"  value="{{ $level['currentProgression'] }}" max="100"></progress>
+
             </div>
         </div>
     </section>
@@ -287,13 +292,13 @@
 
                         <div class="py-1 px-2.5 z-10">
                             @if(get_class($activity) == \Xetaravel\Models\BlogArticle::class)
-                                <i class="fa-solid fa-newspaper bg-[color:hsla(var(--b1))] text-current border-2 border-current rounded-full p-1.5"></i>
+                                <x-icon name="far-newspaper" class="h-8 w-8 text-current bg-[color:var(--color-base-100)] border-2 border-current rounded-full p-0.5" />
                             @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class && $activity->id === $activity->conversation_first_post_id)
-                                <i class="fa-solid fa-pager bg-[color:hsla(var(--b1))] text-current border-2 border-current rounded-full p-1.5"></i>
+                                <x-icon name="fas-pager" class="h-8 w-8 text-current bg-[color:var(--color-base-100)] border-2 border-current rounded-full p-0.5" />
                             @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class)
-                                <i class="fa-regular fa-comments bg-[color:hsla(var(--b1))] text-current border-2 border-current rounded-full p-1 pt-1.5 h-8 w-8"></i>
+                                <x-icon name="far-comments" class="h-8 w-8 text-current bg-[color:var(--color-base-100)] border-2 border-current rounded-full p-0.5" />
                             @elseif(get_class($activity) == \Xetaravel\Models\BlogComment::class)
-                                <i class="fa-regular fa-message bg-[color:hsla(var(--b1))] text-current border-2 border-current rounded-full p-1.5"></i>
+                                <x-icon name="far-message" class="h-8 w-8 text-current bg-[color:var(--color-base-100)] border-2 border-current rounded-full p-0.5" />
                             @endif
                         </div>
                         <div

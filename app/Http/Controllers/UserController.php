@@ -28,7 +28,7 @@ class UserController extends Controller
 
         $action = Route::getFacadeRoot()->current()->getActionMethod();
 
-        if (in_array($action, ['show'])) {
+        if ($action === 'show') {
             $this->breadcrumbs->addCrumb('<i class="fa-regular fa-id-card mr-2"></i> Profile', route('page.index'));
         }
     }
@@ -107,7 +107,7 @@ class UserController extends Controller
      *
      * @return RedirectResponse|View
      */
-    public function show(Request $request, string $slug)
+    public function show(string $slug)
     {
         $user = User::with('articles', 'comments')
             ->where('slug', Str::lower($slug))
@@ -116,7 +116,7 @@ class UserController extends Controller
         if (is_null($user)) {
             return redirect()
                 ->route('page.index')
-                ->with('danger', 'This user doesn\'t exist or has been deleted !');
+                ->error('This user does not exist or has been deleted !');
         }
         $articles = $user->articles()
             ->latest()
@@ -150,17 +150,14 @@ class UserController extends Controller
 
         $badges = Badge::all();
 
-        //dd($discussPosts);
-
         $articles = collect($articles);
 
         $activities = $articles->merge($comments)->merge($discussPosts)->sortBy('created_at', SORT_NATURAL, true);
         //dd($activities);
 
-        //$level = UserUtility::getLevel($user->experiences_total);
         $level = UserUtility::getLevel($user->experiences_total);
 
-        if ($level['maxLevel'] === true) {
+        if ($level['maxLevel'] == true) {
             $level['currentProgression'] = 100;
         } elseif ($level['matchExactXPLevel'] === true) {
             $level['currentProgression'] = 0;

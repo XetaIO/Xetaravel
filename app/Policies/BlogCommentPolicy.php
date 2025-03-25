@@ -23,7 +23,7 @@ class BlogCommentPolicy
      */
     public function before(User $user, string $ability)
     {
-        if ($user->hasPermissionTo('manage blog article')) {
+        if ($user->hasPermissionTo('manage blog comment')) {
             return true;
         }
     }
@@ -32,11 +32,10 @@ class BlogCommentPolicy
      * Determine whether the user can create a blog comment.
      *
      * @param User $user
-     * @param BlogComment $comment
      * @param BlogArticle $article
      * @return bool
      */
-    public function create(User $user, BlogComment $comment, BlogArticle $article): bool
+    public function create(User $user, BlogArticle $article): bool
     {
         return $article->is_display === true &&
             $user->hasPermissionTo('create blog comment');
@@ -57,7 +56,7 @@ class BlogCommentPolicy
     }
 
     /**
-     * Determine whether the user can delete the discuss post.
+     * Determine whether the user can delete a blog comment.
      *
      * @param User $user
      * @param BlogComment $comment
