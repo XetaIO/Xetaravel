@@ -22,7 +22,7 @@ class CommentTest extends TestCase
     {
         Toaster::fake();
 
-        Livewire::actingAs(User::find(1))
+        Livewire::actingAs(User::find(2))
             ->test(Comment::class, [BlogArticle::find(1)])
             ->set('form.content', 'test comment')
             ->call('create')
@@ -55,9 +55,9 @@ class CommentTest extends TestCase
             ->assertHasErrors('form.content');
     }
 
-    public function test_delete_selected()
+    public function test_delete_comment()
     {
-        Livewire::actingAs(User::find(1))
+        Livewire::actingAs(User::find(2))
             ->test(Comment::class)
             ->set('deleteCommentId', 1)
             ->set('blogCommentCount', 2)
