@@ -44,7 +44,11 @@
             </div>
 
             {{-- Share --}}
-            <x-blog.share :post-id="$comment->getKey()" :post-type="'BlogComment'" :route="route('blog.comment.show', ['id' => $comment->getKey()])" :is-solved="false" />
+            <x-share
+                :post-id="$comment->getKey()"
+                :post-type="'BlogComment'"
+                :route="route('blog.comment.show', ['id' => $comment->getKey()])"
+                :is-solved="false" />
         </header>
 
         {{-- BlogComment Content --}}

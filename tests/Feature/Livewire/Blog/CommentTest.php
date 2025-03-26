@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Livewire;
+namespace Tests\Feature\Livewire\Blog;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Livewire\Blog\Comment;

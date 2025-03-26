@@ -44,12 +44,12 @@
                         <div class="input-group">
                             @if (!$conversation->is_locked)
                                 <a href="#post-reply" class="btn btn-primary gap-2">
-                                    <i class="fa-solid fa-pencil"></i>
+                                    <x-icon name="fas-pencil" />
                                     Reply
                                 </a>
                             @else
                                 <a class="btn btn-primary gap-2" href="{{ route('discuss.index', ['creating' => true]) }}">
-                                    <i class="fa-solid fa-pencil"></i>
+                                    <x-icon name="fas-pencil" />
                                     Start a Discussion
                                 </a>
                             @endif
@@ -71,7 +71,7 @@
                                     @can('update', $conversation)
                                         <li>
                                             <label class="editDiscussConversationModal" for="editDiscussConversationModal">
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                <x-icon name="fas-pen-to-square" />
                                                 Edit
                                             </label>
                                         </li>
@@ -83,7 +83,7 @@
                                         @endcan
                                         <li>
                                             <label class="deleteDiscussConversationModal text-red-500 " for="deleteDiscussConversationModal">
-                                                <i class="fa-solid fa-trash-can"></i>
+                                                <x-icon name="fas-trash-can" />
                                                 Delete
                                             </label>
                                         </li>
@@ -95,7 +95,7 @@
                     </div>
                 @else
                     <a href="{{ route('auth.login') }}" class="btn btn-primary gap-2">
-                        <i class="fa-solid fa-pencil"></i>
+                        <x-icon name="fas-pencil" />
                         Reply
                     </a>
                 @endauth
@@ -115,7 +115,7 @@
                     @if ($conversation->is_pinned)
                         <li class="px-2 first:rounded-l-md last:rounded-r-md bg-cyan-400">
                             <span class="tooltip" data-tip="This conversation is pinned.">
-                                <i class="fa-solid fa-thumbtack"></i>
+                                <x-icon name="fas-thumbtack" />
                             </span>
                         </li>
                     @endif
@@ -123,7 +123,7 @@
                     @if ($conversation->is_locked)
                         <li class="px-2 first:rounded-l-md last:rounded-r-md bg-red-400">
                             <span class="tooltip" data-tip="This conversation is locked.">
-                                <i class="fa-solid fa-lock"></i>
+                                <x-icon name="fas-lock" />
                             </span>
                         </li>
                     @endif
@@ -131,7 +131,7 @@
                     <li class="px-2 first:rounded-l-md last:rounded-r-md" style="background-color: {{ $conversation->category->color }};">
                         <a href="{{ $conversation->category->category_url }}" class="tooltip"  data-tip="Category">
                             @if (!is_null($conversation->category->icon))
-                                <i class="{{ $conversation->category->icon }}"></i>
+                                <x-icon name="{{ $conversation->category->icon }}" />
                             @endif
                             {{ $conversation->category->title }}
                         </a>
@@ -140,7 +140,7 @@
                     @if ($conversation->is_solved)
                     <li class="px-2 first:rounded-l-md last:rounded-r-md bg-green-500">
                         <span class="tooltip" data-tip="This conversation is solved.">
-                            <i class="fa-solid fa-check"></i>
+                                <x-icon name="fas-check" />
                             Solved
                         </span>
                     </li>
@@ -154,14 +154,14 @@
                     [
                         'post' => $post,
                         'conversation' => $conversation,
-                        'isFirstPost' => $conversation->first_post_id == $post->id ? true : false,
-                        'isSolvedPost' => $conversation->solved_post_id == $post->id ? true : false
+                        'isFirstPost' => $conversation->first_post_id == $post->id,
+                        'isSolvedPost' => $conversation->solved_post_id == $post->id
                     ]
                 )
             @empty
                 @if (!$conversation->is_solved && !$conversation->is_locked)
                     <x-alert type="primary" class="dark:bg-base-200 mt-5">
-                        There're no comments yet, post the first reply !
+                        There are no comments yet, post the first reply !
                     </x-alert>
                 @endif
             @endforelse
@@ -176,10 +176,7 @@
                     This discussion is closed, you can not reply !
                 </x-alert>
             @else
-                @if (
-                    $conversation->created_at <= \Carbon\Carbon::now()->subDays(config('xetaravel.discuss.info_message_old_conversation')) &&
-                    !$conversation->is_locked
-                )
+                @if ($conversation->created_at <= \Carbon\Carbon::now()->subDays(config('xetaravel.discuss.info_message_old_conversation')))
                     <x-alert type="info" class="dark:bg-base-200 mt-5">
                         This discussion is not active anymore since at least 3 months !
                     </x-alert>
@@ -188,7 +185,7 @@
                 {{--  Reply --}}
                 @auth
                     <div class="divider text-lg font-bold">
-                        <i class="fa-solid fa-reply"></i>
+                        <x-icon name="fas-reply" class="h-8 w-8" />
                         Reply
                     </div>
                     <div id="post-reply" class="flex flex-col sm:flex-row items-center">
@@ -201,9 +198,9 @@
                             </a>
                         </div>
 
-                        {{-- Reply --}}
+                        {{-- Markdown --}}
                         <div class="self-start ml-3 mt-3 w-full">
-
+                            <livewire:discuss.create-post :discussConversation="$conversation"/>
                         </div>
                     </div>
                 @else

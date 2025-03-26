@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Http\Controllers\Auth;
+namespace Tests\Feature\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;

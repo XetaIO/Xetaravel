@@ -1,13 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 return [
-    Xetaravel\Providers\AppServiceProvider::class,
-    /*
-     * Package Service Providers...
-     */
+    App\Providers\VoltServiceProvider::class,
     Eloquence\EloquenceServiceProvider::class,
     GrahamCampbell\Markdown\MarkdownServiceProvider::class,
     Xetaio\IpTraceable\Providers\IpTraceableServiceProvider::class,
+    Xetaravel\Providers\AppServiceProvider::class,
 ];

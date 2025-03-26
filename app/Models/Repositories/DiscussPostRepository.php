@@ -55,10 +55,10 @@ class DiscussPostRepository
      * Find the previous post related to the given post.
      *
      * @param DiscussPost $post
-     *
+     * @param bool $withSolved
      * @return DiscussPost|null
      */
-    public static function findPreviousPost(DiscussPost $post, bool $withSolved = false)
+    public static function findPreviousPost(DiscussPost $post, bool $withSolved = false): ?DiscussPost
     {
         $previousPost = DiscussPost::where('id', '!=', $post->getKey())
                 ->where('conversation_id', $post->conversation->getKey())

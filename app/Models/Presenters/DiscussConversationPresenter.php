@@ -9,8 +9,6 @@ trait DiscussConversationPresenter
     /**
      * We must decrement the post count due to the first post being counted.
      *
-     * @param int $count The actual post count cache.
-     *
      * @return int
      */
     public function getPostCountFormatedAttribute(): int

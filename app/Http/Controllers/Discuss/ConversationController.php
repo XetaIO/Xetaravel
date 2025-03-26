@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Http\Controllers\Discuss;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +33,7 @@ class ConversationController extends Controller
     /**
      * Show the conversation by its id.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View|Application|\Illuminate\View\View|object
      */
     public function show(Request $request, string $slug, int $id)
     {
@@ -38,6 +41,7 @@ class ConversationController extends Controller
         $categories = DiscussCategory::pluckLocked('title', 'id');
 
         $posts = $conversation->posts()
+            ->with('user')
             ->where('id', '!=', $conversation->solved_post_id)
             ->where('id', '!=', $conversation->first_post_id)
             ->paginate(config('xetaravel.pagination.discuss.post_per_page'));
@@ -47,7 +51,6 @@ class ConversationController extends Controller
             $this->getCurrentPage($request)
         );
 
-        $this->breadcrumbs->setListElementClasses('breadcrumbs');
         $breadcrumbs = $this->breadcrumbs->addCrumb(e($conversation->title), $conversation->conversation_url);
 
         return view(
@@ -56,42 +59,6 @@ class ConversationController extends Controller
         );
     }
 
-    /**
-     * Handle a conversation create request for the application.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function create(Request $request)
-    {
-        DiscussConversationValidator::create($request->all())->validate();
-
-        // Users that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
-        if (DiscussConversation::isFlooding('xetaravel.flood.discuss.conversation') &&
-            !Auth::user()->hasPermission('manage.discuss')
-        ) {
-            return back()
-                ->withInput()
-                ->with('danger', 'Wow, keep calm bro, and try to not flood !');
-        }
-        $conversation = DiscussConversationRepository::create($request->all());
-        $post = $conversation->firstPost;
-
-        $parser = new MentionParser($post, [
-            'regex' => config('mentions.regex')
-        ]);
-        $content = $parser->parse($post->content);
-
-        $post->content = $content;
-        $post->save();
-
-        event(new ConversationWasCreatedEvent($conversation, Auth::user()));
-
-        return redirect()
-            ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])
-            ->with('success', 'Your discussion has been created successfully !');
-    }
 
     /**
      * Handle a conversation update request for the application.

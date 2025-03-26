@@ -12,30 +12,6 @@ use Xetaravel\Models\DiscussCategory;
 class DiscussConversationValidator
 {
     /**
-     * Get a validator for an incoming create request.
-     *
-     * @param array $data The data to validate.
-     *
-     * @return Validator
-     */
-    public static function create(array $data): Validator
-    {
-        $categories = DiscussCategory::pluckLocked('id');
-
-        $rules = [
-            'title' => 'required|min:5',
-            'category_id' => [
-                'required',
-                'integer',
-                Rule::in($categories->toArray())
-            ],
-            'content' => 'required|min:10'
-        ];
-
-        return FacadeValidator::make($data, $rules);
-    }
-
-    /**
      * Get a validator for an incoming update request.
      *
      * @param array $data The data to validate.

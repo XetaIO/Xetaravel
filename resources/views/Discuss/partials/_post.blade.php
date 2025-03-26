@@ -6,7 +6,7 @@
                 @if ($isSolvedPost)
                     <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="This answer helped the author.">
                         <span class="absolute top-0 left-0 bottom-0 right-0 h-full w-full bg-white rounded-full opacity-60"></span>
-                        <i class="absolute fa-solid fa-check text-4xl text-green-500 top-4 left-4"></i>
+                        <x-icon name="fas-check" class="w-10 h-10 absolute text-green-500 top-4 left-4" />
                 @else
                     <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $post->user->username }} is {{ $post->user->online ? 'online' : 'offline' }}">
                 @endif
@@ -19,18 +19,17 @@
         </aside>
 
 
-
         <div class="flex flex-col sm:ml-3 self-start my-5 w-full group">
             {{-- Conversation Meta --}}
             <header class="flex flex-col sm:flex-row justify-between">
                 <div class="flex flex-col sm:flex-row items-center">
                     {{-- User XP --}}
-                    <span class="font-semibold tooltip" data-tip="This user has {{ $post->user->experiences_total }} XP">
-                        <x-icon.star/>
+                    <span class="flex items-center gap-1 font-semibold tooltip" data-tip="This user has {{ $post->user->experiences_total }} XP">
+                        <x-icon name="fas-star" class="h-5 w-5 text-warning" />
                         {{ $post->user->experiences_total }}
                     </span>
 
-                    <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
+                    <span class="mx-2 hidden sm:inline-block"> - </span>
 
                     {{-- User --}}
                     <x-user.user
@@ -41,7 +40,7 @@
                         :user-registered="$post->user->created_at->diffForHumans()"
                     />
 
-                    <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
+                    <span class="mx-2 hidden sm:inline-block"> - </span>
 
                     {{-- Date --}}
                     <span class="tooltip" data-tip="{{ $post->created_at->format('Y-m-d H:i:s') }}">
@@ -55,26 +54,23 @@
                         <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
                         <span class="tooltip" data-tip="{{ $post->editedUser->username }} edited {{ $post->edited_at->diffForHumans() }}">
-                            <i class="fa-solid fa-pencil"></i>
+                        <x-icon name="fas-pencil" />
                             Edited
                         </span>
                     @endif
                 </div>
 
                 {{-- Share --}}
-                <discuss-share
-                    class="sm:opacity-0 sm:group-hover:opacity-100 sm:mr-3"
-                    :is-solved="{{ var_export($isSolvedPost) }}"
-                    :post-id="{{ var_export($post->getKey()) }}"
-                    :post-type="{{ var_export('BlogComment') }}"
-                    :route-input="{{ var_export(route('blog.comment.show', ['id' => $post->getKey()])) }}">
-                </discuss-share>
+                <x-share
+                    :post-id="$post->getKey()"
+                    :post-type="'Post'"
+                    :route="route('discuss.post.show', ['id' => $post->getKey()])"
+                    :is-solved="$isSolvedPost" />
             </header>
-
 
             {{-- Conversation Content --}}
             <div class="prose min-w-full my-4 {{ $isSolvedPost ? 'text-white' : 'text-current'}} discuss-conversation-content">
-                {!! $post->content_markdown !!}
+                {!! Markdown::convert($post->content) !!}
             </div>
 
             {{-- Conversation Edit --}}
@@ -88,7 +84,7 @@
                     @endempty
                 </div>
 
-                {{-- BlogComment Actions --}}
+                {{-- Actions --}}
                 @auth
                     <div class="flex flex-row-reverse items-center gap-2">
                         @canany(['update', 'delete'], $post)
@@ -103,7 +99,7 @@
                                     @can('update', $post)
                                         <li>
                                             <label class="postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}">
-                                                <i class="fa-solid fa-pencil"></i>
+                                                <x-icon name="fas-pencil" />
                                                 Edit
                                             </label>
                                         </li>
@@ -115,7 +111,7 @@
                                             </li>
                                             <li>
                                                 <label class="deleteConversationPostModal text-red-500" for="deleteConversationPostModal" data-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
-                                                    <i class="fa-solid fa-trash-can"></i>
+                                                    <x-icon name="fas-trash-can" />
                                                     Delete
                                                 </label>
                                             </li>
@@ -137,12 +133,12 @@
                             <span class="sm:opacity-0 sm:group-hover:opacity-100">
                                 @auth
                                     <a class="link link-hover link-primary postReplyButton" data-content="{{ '@' . $post->user->username }}#{{ $post->id }}" href="#post-reply">
-                                        <i class="fa fa-reply"></i>
+                                        <x-icon name="fas-reply" />
                                         Reply
                                     </a>
                                 @else
                                     <label href="{{ route('auth.login') }}" class="link link-hover link-primary">
-                                        <i class="fa fa-reply"></i>
+                                        <x-icon name="fas-reply" />
                                         Reply
                                     </label>
                                 @endauth
@@ -154,7 +150,7 @@
                             @can('solved', $conversation)
                                 <span class="sm:opacity-0 sm:group-hover:opacity-100 px-2">
                                     <a href="{{ route('discuss.post.solved', ['id' => $post->id]) }}" class="link link-hover link-success tooltip" data-tip="Mark this response as solved.">
-                                        <i class="fa-solid fa-check fa-lg"></i>
+                                        <x-icon name="fas-check" class="h-5 w-5" />
                                     </a>
                                 </span>
                             @endcan

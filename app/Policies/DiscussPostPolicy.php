@@ -28,6 +28,18 @@ class DiscussPostPolicy
     }
 
     /**
+     * Determine whether the user can create a discuss post.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function create(User $user): bool
+    {
+        return $user->hasPermissionTo('create discuss post');
+    }
+
+    /**
      * Determine whether the user can update the discuss post.
      *
      * @param User $user

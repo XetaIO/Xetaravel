@@ -186,12 +186,10 @@ class DiscussConversation extends Model
             'loggable_id' => $this->getKey(),
         ]);
 
-        if (!$posts->isEmpty()) {
-            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
-        }
-
         // When there are several pages and the current page is not the first and not the last.
         if ($this->lastPage > $page && $page !== 1) {
+            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
+
             $logs = $logs->where('created_at', '<=', $posts->last()->created_at)
                 ->where('created_at', '>=', $previousPost->created_at);
 
@@ -205,6 +203,8 @@ class DiscussConversation extends Model
 
             // When there are several page and the current page is the last page
         } elseif ($page === $this->lastPage) {
+            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
+
             $logs = $logs->where('created_at', '>', $previousPost->created_at);
         }
         $postsWithLogs = $posts->merge($logs->get())->sortBy('created_at');

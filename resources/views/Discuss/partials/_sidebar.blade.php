@@ -1,7 +1,3 @@
-@can('create', \Xetaravel\Models\DiscussConversation::class)
-    <livewire:discuss.create-conversation />
-@endcan
-
 <ol class="mb-3">
     <li class="mb-1">
         <a href="{{ route('discuss.index') }}" class="link link-hover hover:text-primary font-xetaravel">

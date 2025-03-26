@@ -15,8 +15,6 @@ use Xetaravel\Models\DiscussUser;
 
 class DiscussConversationForm extends Form
 {
-    public ?DiscussConversation $discussConversation = null;
-
     /**
      * The category of the conversation
      *

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Http\Controllers;
+namespace Tests\Feature\Http\Controllers;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;

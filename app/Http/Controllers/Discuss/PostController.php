@@ -9,54 +9,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Xetaio\Mentions\Parser\MentionParser;
-use Xetaravel\Events\Discuss\PostWasCreatedEvent;
 use Xetaravel\Events\Discuss\PostWasDeletedEvent;
-use Xetaravel\Events\Experiences\PostWasSolvedEvent;
-use Xetaravel\Events\Rubies\PostWasSolvedEvent as RubiesPostWasSolvedEvent;
+use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
-use Xetaravel\Models\Repositories\DiscussPostRepository;
-use Xetaravel\Models\Repositories\DiscussUserRepository;
 use Xetaravel\Models\Validators\DiscussPostValidator;
 
 class PostController extends Controller
 {
-    /**
-     * Create a post for a conversation.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function create(Request $request): RedirectResponse
-    {
-        $conversation = DiscussConversation::findOrFail($request->conversation_id);
-
-        // Users that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
-        if (DiscussPost::isFlooding('xetaravel.flood.discuss.post') && !Auth::user()->hasPermission('manage.discuss')) {
-            return back()
-                ->withInput()
-                ->with('danger', 'Wow, keep calm bro, and try to not flood !');
-        }
-
-        DiscussPostValidator::create($request->all())->validate();
-        $post = DiscussPostRepository::create($request->all());
-        $user = DiscussUserRepository::create($request->all());
-
-        $parser = new MentionParser($post, [
-            'regex' => config('mentions.regex')
-        ]);
-        $content = $parser->parse($post->content);
-
-        $post->content = $content;
-        $post->save();
-
-        event(new PostWasCreatedEvent($post, Auth::user()));
-
-        return redirect()
-            ->route('discuss.post.show', ['id' => $post->getKey()])
-            ->with('success', 'Your reply has been posted successfully !');
-    }
 
     /**
      * Redirect an user to a conversation, page and post.
@@ -161,9 +121,7 @@ class PostController extends Controller
         $post->is_solved = true;
         $post->save();
 
-        event(new PostWasSolvedEvent($post, Auth::user()));
-
-        event(new RubiesPostWasSolvedEvent($post, Auth::user()));
+        event(new PostWasSolvedEvent(Auth::user(), $post));
 
         return redirect()
             ->route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey()])

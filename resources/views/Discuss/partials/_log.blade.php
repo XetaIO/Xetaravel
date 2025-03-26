@@ -2,15 +2,15 @@
     {{-- Icon --}}
     <span class="mr-2 xl:mr-0">
         @if ($log->type == 'category')
-            <i class="fa-solid fa-tag fa-xl"></i>
+            <x-icon name="fas-tag" class="h-6 w-6" />
         @elseif ($log->type == 'title')
-            <i class="fa-solid fa-pencil fa-xl"></i>
+            <x-icon name="fas-pencil" class="h-6 w-6" />
         @elseif ($log->type == 'locked')
-            <i class="fa-solid fa-lock fa-xl"></i>
+            <x-icon name="fas-lock" class="h-6 w-6" />
         @elseif ($log->type == 'pinned')
-            <i class="fa-solid fa-thumbtack  fa-xl"></i>
+            <x-icon name="fas-thumbtack" class="h-6 w-6" />
         @elseif ($log->type == 'deleted')
-            <i class="fa-solid fa-trash  fa-xl"></i>
+            <x-icon name="fas-trash" class="h-6 w-6" />
         @endif
     </span>
 
@@ -35,16 +35,16 @@
     {{-- BlogCategory Changed --}}
     @if ($log->type == 'category')
         added the
-        <a href="{{ $log->newCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
+        <a href="{{ $log->newCategory->category_url }}" class="flex items-center gap-1 px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
             @if (!is_null($log->newCategory->icon))
-                <i class="{{ $log->newCategory->icon }}"></i>
+                <x-icon name="{{ $log->newCategory->icon }}" />
             @endif
             {{ $log->newCategory->title }}
         </a>
         and removed
-        <a href="{{ $log->oldCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
+        <a href="{{ $log->oldCategory->category_url }}" class="flex items-center gap-1 px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
             @if (!is_null($log->oldCategory->icon))
-                <i class="{{ $log->oldCategory->icon }}"></i>
+                <x-icon name="{{ $log->oldCategory->icon }}" />
             @endif
             {{ $log->oldCategory->title }}
         </a>
@@ -72,16 +72,13 @@
     {{-- Post Deleted --}}
     @elseif ($log->type == 'deleted')
         deleted a comment from
-        <discuss-user
-            :user="{{ json_encode([
-                'avatar_small'=> $log->postUser->avatar_small,
-                'profile_url' => $log->postUser->profile_url,
-                'full_name' => $log->postUser->full_name
-            ]) }}"
-            :created-at="{{ var_export($log->postUser->created_at->diffForHumans()) }}"
-            :last-login="{{ var_export($log->postUser->last_login->diffForHumans()) }}"
-            :background-color="{{ var_export($log->postUser->avatar_primary_color) }}">
-        </discuss-user>
+        <x-user.user
+            :user-name="$log->postUser->full_name"
+            :user-avatar-small="$log->postUser->avatar_small"
+            :user-profile="$log->postUser->profile_url"
+            :user-last-login="$log->postUser->last_login_date->diffForHumans()"
+            :user-registered="$log->postUser->created_at->diffForHumans()"
+        />
 
         {!! $time !!}
     @endif
