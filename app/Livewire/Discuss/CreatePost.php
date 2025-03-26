@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Livewire\Discuss;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

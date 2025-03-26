@@ -17,7 +17,6 @@ use Xetaravel\Models\Validators\DiscussPostValidator;
 
 class PostController extends Controller
 {
-
     /**
      * Redirect an user to a conversation, page and post.
      *
