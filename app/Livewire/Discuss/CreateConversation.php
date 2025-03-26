@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Xetaravel\Livewire\Discuss;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Masmerise\Toaster\Toastable;
-use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Events\Discuss\ConversationWasCreatedEvent;
 use Xetaravel\Livewire\Forms\DiscussConversationForm;
 use Xetaravel\Models\DiscussCategory;

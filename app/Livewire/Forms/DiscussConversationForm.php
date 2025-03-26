@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Xetaio\Mentions\Parser\MentionParser;
-use Xetaravel\Models\BlogComment;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\DiscussUser;

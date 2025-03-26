@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Traits;
 
-use InvalidArgumentException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
