@@ -84,7 +84,7 @@
                                     Moderation
                                 </li>
                                 <li>
-                                    <x-button class="btn-link text-red-500 tooltip" data-tip="Delete this comment"  icon="fas-trash-alt" icon-classes="h-4 w-4" label="Delete" @click="$wire.deleteCommentModal = true; $wire.deleteCommentId = {{ $comment->getKey() }}"/>
+                                    <x-button class="btn-link text-red-500 tooltip" data-tip="Delete this comment"  icon="fas-trash-alt" label="Delete" @click="$wire.deleteCommentModal = true; $wire.deleteCommentId = {{ $comment->getKey() }}"/>
                                 </li>
                             @endcan
                         </ul>

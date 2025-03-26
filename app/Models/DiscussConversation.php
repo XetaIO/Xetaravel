@@ -38,13 +38,9 @@ class DiscussConversation extends Model
         'category_id',
         'title',
         'slug',
-        'post_count',
-        'participants_count',
         'is_locked',
         'is_pinned',
         'is_solved',
-        'is_edited',
-        'edit_count'
     ];
 
     /**

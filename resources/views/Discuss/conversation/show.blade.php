@@ -10,40 +10,17 @@
 @endpush
 
 @push('style')
-    {!! editor_css() !!}
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 @endpush
 
 @push('scripts')
-    {!! editor_js() !!}
-    <script src="{{ asset(config('editor.pluginPath') . '/emoji-dialog/emoji-dialog.js') }}"></script>
+    @vite('resources/js/highlight.js')
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 
-    @php
-        $comment = [
-            'id' => 'editPostEditor'
-        ];
-    @endphp
-
-    @if($conversation->is_locked == false)
-        @php
-            $comment = [
-                'id' => 'commentEditor',
-                'height' => '350'
-            ];
-        @endphp
-    @endif
-    @include('editor/partials/_comment', $comment)
-
-
-    <script src="{{ asset('js/libs/highlight.min.js') }}"></script>
     <script type="text/javascript">
-        // HighlightJS
-        hljs.highlightAll();
-
-        // DarkMode for highlight
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.querySelectorAll('pre code').forEach((el) => {
-                el.classList.add('dark:bg-base-300', 'dark:text-slate-300');
-            });
+        document.addEventListener("DOMContentLoaded", function() {
+            // HighlightJS
+            hljs.highlightAll();
         });
     </script>
 @endpush
@@ -71,14 +48,14 @@
                                     Reply
                                 </a>
                             @else
-                                <a class="btn btn-primary gap-2" href="{{ route('discuss.conversation.create') }}">
+                                <a class="btn btn-primary gap-2" href="{{ route('discuss.index', ['creating' => true]) }}">
                                     <i class="fa-solid fa-pencil"></i>
                                     Start a Discussion
                                 </a>
                             @endif
 
                             @if (
-                                Auth::user()->hasPermission('manage.discuss.conversations') ||
+                                Auth::user()->hasPermissionTo('manage discuss conversation') ||
                                 Auth::user()->can('update', $conversation) ||
                                 Auth::user()->can('delete', $conversation)
                             )
@@ -224,51 +201,9 @@
                             </a>
                         </div>
 
-                        {{-- Editor --}}
+                        {{-- Reply --}}
                         <div class="self-start ml-3 mt-3 w-full">
-                            {!! Form::open(['route' => 'discuss.post.create']) !!}
-                                {!! Form::hidden('conversation_id', $conversation->id) !!}
 
-                                {!! Form::bsTextarea('content', false, old('message'), [
-                                    'placeholder' => 'Your message here...',
-                                    'required' => 'required',
-                                    'editor' => 'commentEditor',
-                                    'style' => 'display:none;'
-                                ]) !!}
-
-                                @permission ('manage.discuss.conversations')
-                                    <h3 class="text-xl py-2">
-                                        Moderation
-                                    </h3>
-
-                                    {!! Form::bsCheckbox(
-                                        'is_locked',
-                                        null,
-                                        $conversation->is_locked,
-                                        'Check to lock this discussion',
-                                        [
-                                            'label' => 'Is Locked ?',
-                                            'labelClass' => 'custom-control custom-checkbox d-block'
-                                        ]
-                                    ) !!}
-
-                                    {!! Form::bsCheckbox(
-                                        'is_pinned',
-                                        null,
-                                        $conversation->is_pinned,
-                                        'Check to pin this discussion',
-                                        [
-                                            'label' => 'Is Pinned ?',
-                                            'labelClass' => 'custom-control custom-checkbox d-block'
-                                        ]
-                                    ) !!}
-                                @endpermission
-
-                                <button type="submit" class="btn btn-primary gap-2">
-                                    <i class="fa-solid fa-pencil"></i>
-                                    Reply
-                                </button>
-                            {!! Form::close() !!}
                         </div>
                     </div>
                 @else
@@ -290,56 +225,7 @@
             Edit the discussion
         </h3>
 
-        {!! Form::model($conversation, [
-            'route' => ['discuss.conversation.update', 'id' => $conversation->id, 'slug' => $conversation->slug],
-            'method' => 'put'
-        ]) !!}
 
-                {!! Form::bsText(
-                    'title',
-                    null,
-                    null,
-                    [
-                        'required' => 'required',
-                        'placeholder' => 'Discussion title...'
-                    ]
-                ) !!}
-
-                {!! Form::bsSelect(
-                    'category_id',
-                    $categories,
-                    'BlogCategory',
-                    null,
-                    ['required' => 'required']
-                ) !!}
-
-                @permission ('manage.discuss.conversations')
-                    <h3 class="text-xl py-2">
-                        Moderation
-                    </h3>
-
-                    {!! Form::bsCheckbox(
-                        'is_locked',
-                        null,
-                        null,
-                        'Check to lock this discussion'
-                    ) !!}
-
-                    {!! Form::bsCheckbox(
-                        'is_pinned',
-                        null,
-                        null,
-                        'Check to pin this discussion'
-                    ) !!}
-                @endpermission
-            <div class="modal-action">
-                <button type="submit" class="btn btn-primary gap-2">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    Edit
-                </button>
-                <label for="editDiscussConversationModal" class="btn">Close</label>
-            </div>
-        {!! Form::close() !!}
     </label>
 </label>
 
@@ -351,18 +237,7 @@
         <h3 class="font-bold text-lg">
             Delete the discussion
         </h3>
-        <x-form.form method="delete" action="{{ route('discuss.conversation.delete', ['slug' => $conversation->slug, 'id' => $conversation->id]) }}">
-            <p>
-                    Are you sure you want delete this discussion ? <strong>This operation is not reversible.</strong>
-            </p>
-            <div class="modal-action">
-                <button type="submit" class="btn btn-error gap-2">
-                    <i class="fa-solid fa-trash-can"></i>
-                    Yes, I confirm !
-                </button>
-                <label for="deleteDiscussConversationModal" class="btn">Close</label>
-            </div>
-        </x-form.form>
+
     </label>
 </label>
 
@@ -374,18 +249,7 @@
         <h3 class="font-bold text-lg">
             Delete the post
         </h3>
-        <x-form.form method="delete" id="deleteConversationPostModalForm">
-            <p>
-                    Are you sure you want delete this discussion ? <strong>This operation is not reversible.</strong>
-            </p>
-            <div class="modal-action">
-                <button type="submit" class="btn btn-error gap-2">
-                    <i class="fa-solid fa-trash-can"></i>
-                    Yes, I confirm !
-                </button>
-                <label for="deleteConversationPostModal" class="btn">Close</label>
-            </div>
-        </x-form.form>
+
     </label>
 </label>
 

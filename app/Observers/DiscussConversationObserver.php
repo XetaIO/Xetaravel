@@ -18,6 +18,7 @@ class DiscussConversationObserver
         if (is_null($discussConversation->user_id)) {
             $discussConversation->user_id = Auth::id();
         }
+        $discussConversation->generateSlug();
     }
 
     /**

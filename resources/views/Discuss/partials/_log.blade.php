@@ -20,16 +20,13 @@
     </figure>
 
     {{-- User --}}
-    <discuss-user
-        :user="{{ json_encode([
-            'avatar_small'=> $log->user->avatar_small,
-            'profile_url' => $log->user->profile_url,
-            'full_name' => $log->user->full_name
-        ]) }}"
-        :created-at="{{ var_export($log->user->created_at->diffForHumans()) }}"
-        :last-login="{{ var_export($log->user->last_login->diffForHumans()) }}"
-        :background-color="{{ var_export($log->user->avatar_primary_color) }}">
-    </discuss-user>
+    <x-user.user
+        :user-name="$log->user->full_name"
+        :user-avatar-small="$log->user->avatar_small"
+        :user-profile="$log->user->profile_url"
+        :user-last-login="$log->user->last_login_date->diffForHumans()"
+        :user-registered="$log->user->created_at->diffForHumans()"
+    />
 
     @php
     $time = "<time datetime=\"{$log->created_at->format('Y-m-d H:i:s')}\" data-toggle=\"tooltip\" title=\"{$log->created_at->format('Y-m-d H:i:s')}\">{$log->created_at->diffForHumans()}</time>";

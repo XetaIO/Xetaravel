@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="text-center mb-3">
-                        <x-button icon="far-paper-plane" icon-classes="h-4 w-4" type="submit" label="Send Password Reset Link" class="btn-primary gap-2" />
+                        <x-button icon="far-paper-plane" type="submit" label="Send Password Reset Link" class="btn-primary gap-2" />
                     </div>
                 </x-form>
             </div>

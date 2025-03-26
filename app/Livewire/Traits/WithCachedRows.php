@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Xetaravel\Livewire\Traits;
 
 use InvalidArgumentException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 trait WithCachedRows
 {
@@ -32,7 +34,8 @@ trait WithCachedRows
      *
      * @return mixed
      *
-     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function cache(mixed $callback): mixed
     {

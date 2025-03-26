@@ -45,8 +45,8 @@ trait DiscussConversationPresenter
             $posts = $posts - 1;
         }
 
-        $page = ceil($posts / config('xetaravel.pagination.discuss.post_per_page'));
+        $page = (int) ceil($posts / config('xetaravel.pagination.discuss.post_per_page'));
 
-        return ($page) ? $page : 1;
+        return $page ?: 1;
     }
 }

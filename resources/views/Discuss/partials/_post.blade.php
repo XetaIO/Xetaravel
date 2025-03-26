@@ -32,18 +32,14 @@
 
                     <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 
-                    {{-- User with Vue --}}
-                    <discuss-user
-                        class="text-xl font-xetaravel ml-0"
-                        :user="{{ json_encode([
-                            'avatar_small'=> $post->user->avatar_small,
-                            'profile_url' => $post->user->profile_url,
-                            'full_name' => $post->user->full_name
-                        ]) }}"
-                        :created-at="{{ var_export($post->user->created_at->diffForHumans()) }}"
-                        :last-login="{{ var_export($post->user->last_login->diffForHumans()) }}"
-                        :background-color="{{ var_export($post->user->avatar_primary_color) }}">
-                    </discuss-user>
+                    {{-- User --}}
+                    <x-user.user
+                        :user-name="$post->user->full_name"
+                        :user-avatar-small="$post->user->avatar_small"
+                        :user-profile="$post->user->profile_url"
+                        :user-last-login="$post->user->last_login_date->diffForHumans()"
+                        :user-registered="$post->user->created_at->diffForHumans()"
+                    />
 
                     <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
 

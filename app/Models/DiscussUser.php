@@ -22,7 +22,8 @@ class DiscussUser extends Model
      */
     protected $fillable = [
         'user_id',
-        'conversation_id'
+        'conversation_id',
+        'is_read'
     ];
 
     /**

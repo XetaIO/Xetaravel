@@ -22,7 +22,7 @@ class DiscussPostPolicy
      */
     public function before(User $user, string $ability)
     {
-        if ($user->hasPermission('manage.discuss.posts')) {
+        if ($user->hasPermissionTo('manage discuss post')) {
             return true;
         }
     }

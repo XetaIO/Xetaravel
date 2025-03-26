@@ -153,7 +153,6 @@ class UserController extends Controller
         $articles = collect($articles);
 
         $activities = $articles->merge($comments)->merge($discussPosts)->sortBy('created_at', SORT_NATURAL, true);
-        //dd($activities);
 
         $level = UserUtility::getLevel($user->experiences_total);
 

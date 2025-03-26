@@ -21,7 +21,7 @@
                     <x-password class="input-primary" name="password_confirmation" label="Confirm Password" placeholder="Confirm your Password..." required inline />
 
                     <div class="text-center mb-3">
-                        <x-button icon="fas-rotate" icon-classes="h-4 w-4" type="submit" label="Reset Password" class="btn-primary gap-2" />
+                        <x-button icon="fas-rotate" type="submit" label="Reset Password" class="btn-primary gap-2" />
                     </div>
                 </x-form>
             </div>

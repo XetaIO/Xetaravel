@@ -65,7 +65,7 @@
             <div class="text-xs">There's no article yet, come back later !</div>
         </div>
         <div>
-            <x-button link="{{ route('blog.article.index') }}" icon="heroicon-o-newspaper" icon-classes="h-4 w-4" label="Visite Blog" class="btn-primary btn-sm gap-2" />
+            <x-button link="{{ route('blog.article.index') }}" icon="heroicon-o-newspaper" label="Visite Blog" class="btn-primary btn-sm gap-2" />
         </div>
     </x-alert>
 @endforelse

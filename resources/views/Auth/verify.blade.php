@@ -34,7 +34,7 @@
                             <x-input type="hidden" class="hidden" name="hash" value="{{ $hash }}" />
 
                             <div class="text-center mb-3">
-                                <x-button icon="far-paper-plane" icon-classes="h-4 w-4" type="submit" label="Resend" class="btn-primary gap-2" />
+                                <x-button icon="far-paper-plane" type="submit" label="Resend" class="btn-primary gap-2" />
                             </div>
                         </x-form>
                     </div>

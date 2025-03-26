@@ -38,10 +38,10 @@
 
                     <div class="text-center">
                         <div class="mb-2">
-                            <x-button icon="fas-user-plus" icon-classes="h-4 w-4" type="submit" label="Register" class="btn-primary gap-2" />
+                            <x-button icon="fas-user-plus" type="submit" label="Register" class="btn-primary gap-2" />
                         </div>
                         <div class="mb-2">
-                            <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" icon-classes="h-4 w-4" label="Register with Github" class="gap-2" />
+                            <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" label="Register with Github" class="gap-2" />
                         </div>
                         <div >
                             <a class="link link-hover link-primary" href="{{ route('auth.login') }}">

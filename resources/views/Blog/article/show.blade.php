@@ -74,7 +74,7 @@
                                 {{-- Edit button --}}
                                 @can('manage blog article')
                                     <span class="text-gray-700"> - </span>
-                                    <x-button link="{{ route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]) }}" icon="fas-pencil" icon-classes="h-4 w-4" label="Edit" class="btn-sm gap-2" />
+                                    <x-button link="{{ route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]) }}" icon="fas-pencil" label="Edit" class="btn-sm gap-2" />
                                 @endcan
                             </div>
                         </div>

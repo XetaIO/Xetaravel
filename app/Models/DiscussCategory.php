@@ -63,7 +63,7 @@ class DiscussCategory extends Model
      */
     public static function pluckLocked(string $value, string $column = null): Collection
     {
-        if (Auth::user() && Auth::user()->hasPermission('manage.discuss.conversations')) {
+        if (Auth::user() && Auth::user()->hasPermissionTo('manage discuss conversation')) {
             return self::pluck($value, $column);
         }
 

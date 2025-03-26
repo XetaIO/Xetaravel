@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Masmerise\Toaster\Toaster;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -27,18 +27,18 @@ class DiscussMaintenance
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        // If the discuss is disabled and the user is not admin.
+        // If discuss is disabled and the user is not admin.
         if ((!Auth::user() && !settings('discuss_enabled')) ||
-            (!settings('discuss_enabled') && Auth::user()->level() < 4)
+            (!settings('discuss_enabled') && !Auth::user()->hasPermissionTo('manage discuss conversation'))
         ) {
             return redirect()
                         ->route('page.index')
-                        ->error('Le système de discussion est temporairement désactivé. ');
+                        ->error('The discuss system is temporarily disabled.');
         }
 
-        // If the discuss is disabled and the user is admin.
-        if (!settings('discuss_enabled') && Auth::user()->level() >= 100) {
-            Session::flash('error', 'Le système de discussion est actuellement désactivé.');
+        // If discuss is disabled and the user is admin.
+        if (!settings('discuss_enabled') && Auth::user()->hasPermissionTo('manage discuss conversation')) {
+            Toaster::error('The discuss system is temporarily disabled.');
         }
 
         return $next($request);

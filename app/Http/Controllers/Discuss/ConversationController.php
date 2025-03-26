@@ -58,23 +58,6 @@ class ConversationController extends Controller
     }
 
     /**
-     * Show the create form.
-     *
-     * @return View
-     */
-    public function showCreateForm(): View
-    {
-        $categories = DiscussCategory::pluckLocked('title', 'id');
-
-        $breadcrumbs = $this->breadcrumbs->addCrumb(
-            '<i class="fa-solid fa-pencil mr-2"></i> Start a discussion',
-            route('discuss.conversation.create')
-        );
-
-        return view('Discuss::conversation.create', compact('breadcrumbs', 'categories'));
-    }
-
-    /**
      * Handle a conversation create request for the application.
      *
      * @param Request $request

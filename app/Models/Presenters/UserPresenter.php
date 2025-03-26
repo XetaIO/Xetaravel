@@ -131,18 +131,6 @@ trait UserPresenter
     }
 
     /**
-     * Get the experiences total formated.
-     *
-     * @param $experiencesTotal
-     *
-     * @return string
-     */
-    /*public function getExperiencesTotalAttribute($experiencesTotal): string
-    {
-        return number_format($experiencesTotal, 0, ".", " ");
-    }*/
-
-    /**
      * Get the account facebook.
      *
      * @return string

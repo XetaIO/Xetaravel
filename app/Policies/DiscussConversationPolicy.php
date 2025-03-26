@@ -22,9 +22,21 @@ class DiscussConversationPolicy
      */
     public function before(User $user, string $ability)
     {
-        if ($user->hasPermission('manage.discuss.conversations')) {
+        if ($user->hasPermissionTo('manage discuss conversation')) {
             return true;
         }
+    }
+
+    /**
+     * Determine whether the user can create a discuss conversation.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function create(User $user): bool
+    {
+        return $user->hasPermissionTo('create discuss conversation');
     }
 
     /**
@@ -35,7 +47,7 @@ class DiscussConversationPolicy
      *
      * @return bool
      */
-    public function update(User $user, DiscussConversation $discussConversation)
+    public function update(User $user, DiscussConversation $discussConversation): bool
     {
         return $user->id === $discussConversation->user_id;
     }
@@ -48,7 +60,7 @@ class DiscussConversationPolicy
      *
      * @return bool
      */
-    public function delete(User $user, DiscussConversation $discussConversation)
+    public function delete(User $user, DiscussConversation $discussConversation): bool
     {
         return $user->id === $discussConversation->user_id;
     }

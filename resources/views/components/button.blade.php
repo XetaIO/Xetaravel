@@ -34,7 +34,7 @@
         <!-- ICON -->
         @if($icon)
             <span class="block" @if($spinner) wire:loading.class="hidden" wire:target="{{ $spinnerTarget() }}" @endif>
-                <x-icon :name="$icon" :class="$iconClasses" />
+                <x-icon :name="$icon" :class="$iconClasses ?: 'h-4 w-4'" />
             </span>
         @endif
 
@@ -53,7 +53,7 @@
         <!-- ICON RIGHT -->
         @if($iconRight)
             <span class="block" @if($spinner) wire:loading.class="hidden" wire:target="{{ $spinnerTarget() }}" @endif>
-                <x-icon :name="$iconRight" :class="$iconClasses" />
+                <x-icon :name="$iconRight" :class="$iconClasses ?: 'h-4 w-4'" />
             </span>
         @endif
 

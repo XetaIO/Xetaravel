@@ -21,12 +21,12 @@
                     <x-checkbox label="Remember me" name="remember" />
 
                     <div class="text-center mb-3">
-                        <x-button icon="fas-right-to-bracket" icon-classes="h-4 w-4" type="submit" label="Login" class="btn-primary gap-2" />
+                        <x-button icon="fas-right-to-bracket" type="submit" label="Login" class="btn-primary gap-2" />
                     </div>
                 </x-form>
 
                 <div class="text-center mb-3">
-                    <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" icon-classes="h-4 w-4" label="Login with Github" class="gap-2" />
+                    <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" label="Login with Github" class="gap-2" />
                 </div>
 
                 <div class="text-center">

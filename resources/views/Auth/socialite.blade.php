@@ -22,7 +22,7 @@
 
                 <div class="text-center mt-3">
                     <div class="mb-2">
-                        <x-button icon="fas-user-plus" icon-classes="h-4 w-4" type="submit" label="Register" class="btn-primary gap-2" />
+                        <x-button icon="fas-user-plus" type="submit" label="Register" class="btn-primary gap-2" />
                     </div>
                     <a class="link link-hover link-primary" href="{{ route('auth.login') }}">
                         Already an account?

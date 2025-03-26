@@ -20,9 +20,9 @@
         @if(!$persistent)
             <form method="dialog" tabindex="-1">
                 @if ($id)
-                    <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark"  icon-classes="h-4 w-4" type="submit" tabindex="-1" />
+                    <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark" type="submit" tabindex="-1" />
                 @else
-                    <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark"  icon-classes="h-4 w-4" @click="$wire.{{ $attributes->wire('model')->value() }} = false" tabindex="-1" />
+                    <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark" @click="$wire.{{ $attributes->wire('model')->value() }} = false" tabindex="-1" />
                 @endif
             </form>
         @endif

@@ -46,7 +46,7 @@
             <div class="self-start ml-3 mt-3 w-full">
                 <x-markdown wire:model.live="form.content" name="form.content" label="Comment" placeholder="Your message here..." />
 
-                <x-button wire:click="create" icon="fas-pencil" icon-classes="h-4 w-4" label="Comment" class="btn-primary gap-2" spinner />
+                <x-button wire:click="create" icon="fas-pencil" label="Comment" class="btn-primary gap-2" spinner />
             </div>
         </div>
     @else
@@ -64,7 +64,7 @@
                 </p>
 
                 <x-slot:actions>
-                    <x-button label="Yes, I confirm !" class="btn-primary" icon="fas-trash-alt" icon-classes="h-4 w-4" wire:click="delete()" spinner />
+                    <x-button label="Yes, I confirm !" class="btn-primary" icon="fas-trash-alt" wire:click="delete()" spinner />
                     <x-button label="Cancel" @click="$wire.deleteCommentModal = false" />
                 </x-slot:actions>
             </x-form>
