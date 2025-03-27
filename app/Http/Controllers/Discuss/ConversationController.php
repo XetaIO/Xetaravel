@@ -38,7 +38,7 @@ class ConversationController extends Controller
         $categories = DiscussCategory::pluckLocked('title', 'id');
 
         $posts = $conversation->posts()
-            ->with('user')
+            ->with(['user', 'editedUser'])
             ->where('id', '!=', $conversation->solved_post_id)
             ->where('id', '!=', $conversation->first_post_id)
             ->paginate(config('xetaravel.pagination.discuss.post_per_page'));

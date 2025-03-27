@@ -74,11 +74,11 @@ class DiscussConversationForm extends Form
             'title',
         ];
 
-        if (Auth::user()->hasPermissionTo('manage discuss conversation')) {
-            $properties += [
-                'is_locked',
-                'is_pinned',
-            ];
+        if (Auth::user()->hasPermissionTo('pin discuss conversation')) {
+            $properties[] = 'is_pinned';
+        }
+        if (Auth::user()->hasPermissionTo('lock discuss conversation')) {
+            $properties[] = 'is_locked';
         }
 
         $discussConversation = DiscussConversation::create($this->only($properties));

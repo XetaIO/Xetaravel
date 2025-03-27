@@ -213,41 +213,6 @@
     </div>
 </section>
 
-{{-- Edit Conversation Modal --}}
-<input type="checkbox" id="editDiscussConversationModal" class="modal-toggle" />
-<label for="editDiscussConversationModal" class="modal cursor-pointer">
-    <label class="modal-box relative">
-        <label for="editDiscussConversationModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <h3 class="font-bold text-lg">
-            Edit the discussion
-        </h3>
-
-
-    </label>
-</label>
-
-{{-- Delete Conversation Modal --}}
-<input type="checkbox" id="deleteDiscussConversationModal" class="modal-toggle" />
-<label for="deleteDiscussConversationModal" class="modal cursor-pointer">
-    <label class="modal-box relative">
-        <label for="deleteDiscussConversationModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <h3 class="font-bold text-lg">
-            Delete the discussion
-        </h3>
-
-    </label>
-</label>
-
-{{-- Delete Post Modal --}}
-<input type="checkbox" id="deleteConversationPostModal" class="modal-toggle" />
-<label for="deleteConversationPostModal" class="modal cursor-pointer">
-    <label class="modal-box relative">
-        <label for="deleteConversationPostModal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <h3 class="font-bold text-lg">
-            Delete the post
-        </h3>
-
-    </label>
-</label>
+<livewire:discuss.update-post />
 
 @endsection

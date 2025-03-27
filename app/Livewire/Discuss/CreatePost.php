@@ -33,7 +33,7 @@ class CreatePost extends Component
     }
 
     /**
-     * Create a blank model and assign it to the model. (Used in create modal)
+     * Create a new post
      *
      * @return void
      */
@@ -49,7 +49,7 @@ class CreatePost extends Component
 
             return;
         }
-        $discussPost = $this->form->store();
+        $discussPost = $this->form->create();
 
         event(new PostWasCreatedEvent(Auth::user(), $discussPost));
 
@@ -64,8 +64,15 @@ class CreatePost extends Component
         return view('livewire.discuss.create-post');
     }
 
+    /**
+     * When a user click on 'Reply' set the content to the username#postId
+     *
+     * @param $content
+     *
+     * @return void
+     */
     #[On('post-reply')]
-    public function updatePostContent($content): void
+    public function updateContent($content): void
     {
         $this->form->content = $content . $this->form->content;
     }

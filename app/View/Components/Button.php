@@ -38,7 +38,7 @@ class Button extends Component
 
     public function spinnerTarget(): ?string
     {
-        if ($this->spinner === 1) {
+        if ($this->spinner === '1') {
             return $this->attributes->whereStartsWith('wire:click')->first();
         }
 

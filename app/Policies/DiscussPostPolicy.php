@@ -47,9 +47,9 @@ class DiscussPostPolicy
      *
      * @return bool
      */
-    public function update(User $user, DiscussPost $discussPost)
+    public function update(User $user, DiscussPost $discussPost): bool
     {
-        return $user->id === $discussPost->user_id;
+        return $user->id === $discussPost->user_id && $user->hasPermissionTo('update discuss post');
     }
 
     /**
@@ -60,8 +60,8 @@ class DiscussPostPolicy
      *
      * @return bool
      */
-    public function delete(User $user, DiscussPost $discussPost)
+    public function delete(User $user, DiscussPost $discussPost): bool
     {
-        return $user->id === $discussPost->user_id;
+        return $user->id === $discussPost->user_id && $user->hasPermissionTo('delete discuss post');
     }
 }

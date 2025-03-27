@@ -100,9 +100,6 @@
                 {!! Markdown::convert($post->content) !!}
             </div>
 
-            {{-- Conversation Edit --}}
-            <div class="discuss-conversation-edit"></div>
-
             <footer class="flex flex-row justify-between border-t border-dashed border-slate-500 mr-2">
                 {{-- User Signature --}}
                 <div class="self-start">
@@ -130,7 +127,7 @@
                                     {{-- Moderation actions --}}
                                     @can('update', $post)
                                         <li>
-                                            <label class="postEditButton" data-id="{{ $post->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $post->getKey()]) }}">
+                                            <label class="postEditButton" data-content="{{ $post->getKey() }}">
                                                 <x-icon name="fas-pencil" />
                                                 Edit
                                             </label>

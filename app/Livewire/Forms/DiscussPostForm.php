@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Forms;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
@@ -17,6 +18,13 @@ use Xetaravel\Models\DiscussUser;
 
 class DiscussPostForm extends Form
 {
+    /**
+     * The post to update.
+     *
+     * @var DiscussPost|null
+     */
+    public ?DiscussPost $discussPost = null;
+
     /**
      * The conversation id where the post belong to.
      *
@@ -89,13 +97,12 @@ class DiscussPostForm extends Form
         );
     }
 
-
     /**
-     * Function to store the model.
+     * Function to create the post.
      *
      * @return DiscussPost
      */
-    public function store(): DiscussPost
+    public function create(): DiscussPost
     {
         $properties = [
             'conversation_id',
@@ -121,5 +128,23 @@ class DiscussPostForm extends Form
         $post->save();
 
         return $post;
+    }
+
+    /**
+     * Function to update the post.
+     *
+     * @return DiscussPost
+     */
+    public function update(): DiscussPost
+    {
+        $parser = new MentionParser($this->discussPost, [
+            'regex' => config('mentions.regex')
+        ]);
+        $content = $parser->parse($this->content);
+
+        $this->discussPost->content = $content;
+        $this->discussPost->save();
+
+        return $this->discussPost;
     }
 }
