@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Xetaravel\Http\Controllers\Discuss;
 
-use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Events\Discuss\PostWasDeletedEvent;
 use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
-use Xetaravel\Models\Validators\DiscussPostValidator;
 
 class PostController extends Controller
 {
