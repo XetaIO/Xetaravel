@@ -55,20 +55,18 @@ class DiscussPostForm extends Form
 
         $conversation = DiscussConversation::find($properties['conversation_id']);
 
-        if (Auth::user()->hasPermissionTo('manage discuss conversation')) {
-            $properties['is_pinned'] = isset($properties['is_pinned']);
-            $properties['is_locked'] = isset($properties['is_locked']);
-
+        if (Auth::user()->hasPermissionTo('pin discuss conversation')) {
             if ($conversation->is_pinned !== $properties['is_pinned'] && $properties['is_pinned'] === true) {
                 event(new ConversationWasPinnedEvent($conversation));
             }
+            $conversation->is_pinned = $properties['is_pinned'];
+        }
 
+        if (Auth::user()->hasPermissionTo('lock discuss conversation')) {
             if ($conversation->is_locked !== $properties['is_locked'] && $properties['is_locked'] === true) {
                 event(new ConversationWasLockedEvent($conversation));
             }
-
             $conversation->is_locked = $properties['is_locked'];
-            $conversation->is_pinned = $properties['is_pinned'];
         }
 
         $conversation->last_post_id = $post->getKey();
@@ -104,11 +102,11 @@ class DiscussPostForm extends Form
             'content'
         ];
 
-        if (Auth::user()->hasPermissionTo('manage discuss conversation')) {
-            $properties += [
-                'is_locked',
-                'is_pinned',
-            ];
+        if (Auth::user()->hasPermissionTo('pin discuss conversation')) {
+            $properties[] = 'is_pinned';
+        }
+        if (Auth::user()->hasPermissionTo('lock discuss conversation')) {
+            $properties[] = 'is_locked';
         }
 
         $post = $this->createPost($this->only($properties));

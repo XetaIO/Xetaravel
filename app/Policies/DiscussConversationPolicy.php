@@ -75,8 +75,32 @@ class DiscussConversationPolicy
      *
      * @return bool
      */
-    public function solved(User $user, DiscussConversation $discussConversation)
+    public function solved(User $user, DiscussConversation $discussConversation): bool
     {
         return $user->id === $discussConversation->user_id;
+    }
+
+    /**
+     * Determine whether the user can pin a conversation.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function pin(User $user): bool
+    {
+        return $user->hasPermissionTo('pin discuss conversation');
+    }
+
+    /**
+     * Determine whether the user can lock a conversation.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function lock(User $user): bool
+    {
+        return $user->hasPermissionTo('lock discuss conversation');
     }
 }

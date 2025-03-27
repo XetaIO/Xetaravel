@@ -37,12 +37,12 @@ class Markdown extends Component
         $setup = array_merge([
             'spellChecker' => false,
             'autoSave' => false,
-            'uploadImage' => true,
+            'uploadImage' => false,
             'imageAccept' => 'image/png, image/jpeg',
             'toolbar' => [
                 'heading', 'bold', 'italic', 'strikethrough', '|',
                 'code', 'quote', 'unordered-list', 'ordered-list', 'horizontal-rule', '|',
-                'link', 'upload-image', 'table', '|',
+                'link', 'table', '|',
                 'preview', 'side-by-side'
             ],
             //'forceSync' => true

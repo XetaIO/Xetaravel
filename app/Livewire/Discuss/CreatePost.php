@@ -6,6 +6,7 @@ namespace Xetaravel\Livewire\Discuss;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Masmerise\Toaster\Toastable;
 use Xetaravel\Events\Discuss\PostWasCreatedEvent;
@@ -28,6 +29,7 @@ class CreatePost extends Component
     public function mount(DiscussConversation $discussConversation): void
     {
         $this->form->conversation_id = $discussConversation->getKey();
+        $this->form->is_pinned = $discussConversation->is_pinned;
     }
 
     /**
@@ -41,7 +43,7 @@ class CreatePost extends Component
 
         $this->validate();
 
-        // Users that have the permission "manage.discuss" can bypass this rule. (Default to Administrator)
+        // Users that have the permission "manage discuss conversation" can bypass this rule. (Default to Developer)
         if (DiscussPost::isFlooding('xetaravel.flood.discuss.post') && !Auth::user()->hasPermissionTo('manage discuss conversation')) {
             $this->error('Wow, keep calm bro, and try to not flood !');
 
@@ -60,5 +62,11 @@ class CreatePost extends Component
     public function render()
     {
         return view('livewire.discuss.create-post');
+    }
+
+    #[On('post-reply')]
+    public function updatePostContent($content): void
+    {
+        $this->form->content = $content . $this->form->content;
     }
 }

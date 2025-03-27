@@ -1,8 +1,8 @@
 @if (get_class($post) !== \Xetaravel\Models\DiscussLog::class)
-    <article id="post-{{ $post->id }}" class="flex flex-col sm:flex-row {{ $isSolvedPost ? 'bg-green-500 text-white rounded' : ''}}">
+    <article id="post-{{ $post->id }}" class="flex flex-col sm:flex-row {{ $isSolvedPost ? 'bg-green-500 rounded' : ''}}">
         <aside class="flex flex-col items-center self-center sm:self-start mt-4">
             {{--  User Avatar --}}
-            <a class="avatar {{ $post->user->online ? 'online' : 'offline' }} m-2" href="{{ $post->user->profile_url }}">
+            <a class="avatar {{ $post->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $post->user->profile_url }}">
                 @if ($isSolvedPost)
                     <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="This answer helped the author.">
                         <span class="absolute top-0 left-0 bottom-0 right-0 h-full w-full bg-white rounded-full opacity-60"></span>
@@ -24,12 +24,21 @@
             <header class="flex flex-col sm:flex-row justify-between">
                 <div class="flex flex-col sm:flex-row items-center">
                     {{-- User XP --}}
-                    <span class="flex items-center gap-1 font-semibold tooltip" data-tip="This user has {{ $post->user->experiences_total }} XP">
+                    <span
+                        @class([
+                            'flex items-center gap-1 font-semibold tooltip',
+                            'text-white' => $isSolvedPost
+                        ])
+                        data-tip="This user has {{ $post->user->experiences_total }} XP">
                         <x-icon name="fas-star" class="h-5 w-5 text-warning" />
                         {{ $post->user->experiences_total }}
                     </span>
 
-                    <span class="mx-2 hidden sm:inline-block"> - </span>
+                    <span
+                        @class([
+                            'mx-2 hidden sm:inline-block',
+                            'text-white' => $isSolvedPost
+                        ])> - </span>
 
                     {{-- User --}}
                     <x-user.user
@@ -40,10 +49,19 @@
                         :user-registered="$post->user->created_at->diffForHumans()"
                     />
 
-                    <span class="mx-2 hidden sm:inline-block"> - </span>
+                    <span
+                        @class([
+                            'mx-2 hidden sm:inline-block',
+                            'text-white' => $isSolvedPost
+                        ])> - </span>
 
                     {{-- Date --}}
-                    <span class="tooltip" data-tip="{{ $post->created_at->format('Y-m-d H:i:s') }}">
+                    <span
+                        @class([
+                            'tooltip',
+                            'text-white' => $isSolvedPost
+                        ])
+                        data-tip="{{ $post->created_at->format('Y-m-d H:i:s') }}">
                         <time datetime="{{ $post->created_at->format('Y-m-d H:i:s') }}">
                             {{ $post->created_at->diffForHumans() }}
                         </time>
@@ -51,9 +69,18 @@
 
                     {{-- Edited --}}
                     @if ($post->is_edited)
-                        <span class="text-gray-700 mx-2 hidden sm:inline-block"> - </span>
+                        <span
+                            @class([
+                                'mx-2 hidden sm:inline-block',
+                                'text-white' => $isSolvedPost
+                            ])> - </span>
 
-                        <span class="tooltip" data-tip="{{ $post->editedUser->username }} edited {{ $post->edited_at->diffForHumans() }}">
+                        <span
+                            @class([
+                                'tooltip',
+                                'text-white' => $isSolvedPost
+                            ])
+                            data-tip="{{ $post->editedUser->username }} edited {{ $post->edited_at->diffForHumans() }}">
                         <x-icon name="fas-pencil" />
                             Edited
                         </span>
@@ -80,7 +107,7 @@
                 {{-- User Signature --}}
                 <div class="self-start">
                     @empty (!$post->user->signature)
-                    {!! Markdown::convert($post->user->signature) !!}
+                        {!! Markdown::convert($post->user->signature) !!}
                     @endempty
                 </div>
 
@@ -89,7 +116,12 @@
                     <div class="flex flex-row-reverse items-center gap-2">
                         @canany(['update', 'delete'], $post)
                             <div class="dropdown dropdown-end self-start sm:opacity-0 sm:group-hover:opacity-100">
-                                <label tabindex="0" class="btn btn-link m-1 text-current">
+                                <label tabindex="0"
+                                       @class([
+                                            'btn btn-link m-1',
+                                            'text-white' => $isSolvedPost,
+                                            'text-current' => !$isSolvedPost
+                                        ])>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5" viewBox="0 0 16 16">
                                         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                                     </svg>

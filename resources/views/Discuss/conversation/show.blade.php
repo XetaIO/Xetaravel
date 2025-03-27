@@ -113,23 +113,23 @@
 
                 <ul class=" flex -flex-row text-white font-bold">
                     @if ($conversation->is_pinned)
-                        <li class="px-2 first:rounded-l-md last:rounded-r-md bg-cyan-400">
-                            <span class="tooltip" data-tip="This conversation is pinned.">
+                        <li class="flex px-2 first:rounded-l-md last:rounded-r-md bg-cyan-400">
+                            <span class="tooltip flex items-center" data-tip="This conversation is pinned.">
                                 <x-icon name="fas-thumbtack" />
                             </span>
                         </li>
                     @endif
 
                     @if ($conversation->is_locked)
-                        <li class="px-2 first:rounded-l-md last:rounded-r-md bg-red-400">
-                            <span class="tooltip" data-tip="This conversation is locked.">
+                        <li class="flex px-2 first:rounded-l-md last:rounded-r-md bg-red-400">
+                            <span class="tooltip flex items-center" data-tip="This conversation is locked.">
                                 <x-icon name="fas-lock" />
                             </span>
                         </li>
                     @endif
 
                     <li class="px-2 first:rounded-l-md last:rounded-r-md" style="background-color: {{ $conversation->category->color }};">
-                        <a href="{{ $conversation->category->category_url }}" class="tooltip"  data-tip="Category">
+                        <a href="{{ $conversation->category->category_url }}" class="tooltip flex items-center gap-1"  data-tip="Category">
                             @if (!is_null($conversation->category->icon))
                                 <x-icon name="{{ $conversation->category->icon }}" />
                             @endif
@@ -138,8 +138,8 @@
                     </li>
 
                     @if ($conversation->is_solved)
-                    <li class="px-2 first:rounded-l-md last:rounded-r-md bg-green-500">
-                        <span class="tooltip" data-tip="This conversation is solved.">
+                    <li class="flex px-2 first:rounded-l-md last:rounded-r-md bg-green-500">
+                        <span class="tooltip flex items-center gap-1" data-tip="This conversation is solved.">
                                 <x-icon name="fas-check" />
                             Solved
                         </span>

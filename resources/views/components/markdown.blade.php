@@ -26,7 +26,7 @@
                                     this.$watch('value', (newValue) => {
                                         if (newValue !== this.editor.value()) {
                                             this.value = newValue || ''
-                                            this.editor.codemirror.setValue('')
+                                            //this.editor.codemirror.setValue('')
                                             this.destroyEditor()
                                             this.initEditor()
 
@@ -59,6 +59,7 @@
                                                    .finally(() => this.uploading = false)
                                             }
                                         })
+                                    window.editor = this.editor;
                                     this.editor.codemirror.on('change', () => this.value = this.editor.value())
                                 }
                             }"
