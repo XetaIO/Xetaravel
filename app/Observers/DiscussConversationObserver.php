@@ -6,7 +6,6 @@ namespace Xetaravel\Observers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 

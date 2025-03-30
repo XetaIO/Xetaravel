@@ -7,12 +7,9 @@ namespace Xetaravel\Http\Controllers\Discuss;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
-use Xetaravel\Models\Repositories\DiscussConversationRepository;
-use Xetaravel\Models\Validators\DiscussConversationValidator;
 
 class ConversationController extends Controller
 {

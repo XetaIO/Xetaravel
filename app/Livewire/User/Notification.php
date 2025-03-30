@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Livewire\User;
 
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -27,6 +29,24 @@ class Notification extends Component
      * @var int
      */
     public int $unreadNotificationsCount = 0;
+
+    /**
+     * Used to refresh the notifications and the unread count.
+     *
+     * @return void
+     */
+    private function fetchData(): void
+    {
+        $this->notifications = auth()->user()->notifications;
+
+        // Filter only the unread notifications
+        $unreadNotifications = $this->notifications->filter(function ($notification) {
+            return $notification->read_at === null;
+        });
+        $this->unreadNotificationsCount = $unreadNotifications->count();
+
+        $this->hasUnreadNotifications = $this->unreadNotificationsCount > 0;
+    }
 
     /**
      * The mount function.
@@ -101,23 +121,5 @@ class Notification extends Component
         $this->notifications = auth()->user()->notifications;
         $this->unreadNotificationsCount = 0;
         $this->hasUnreadNotifications = false;
-    }
-
-    /**
-     * Used to refresh the notifications and the unread count.
-     *
-     * @return void
-     */
-    private function fetchData(): void
-    {
-        $this->notifications = auth()->user()->notifications;
-
-        // Filter only the unread notifications
-        $unreadNotifications = $this->notifications->filter(function($notification) {
-            return $notification->read_at == null;
-        });
-        $this->unreadNotificationsCount = $unreadNotifications->count();
-
-        $this->hasUnreadNotifications = $this->unreadNotificationsCount > 0;
     }
 }

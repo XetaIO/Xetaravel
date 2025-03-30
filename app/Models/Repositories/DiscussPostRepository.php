@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models\Repositories;
 
-use Illuminate\Support\Facades\Auth;
-use Xetaravel\Events\Discuss\ConversationWasLockedEvent;
-use Xetaravel\Events\Discuss\ConversationWasPinnedEvent;
 use Xetaravel\Models\DiscussPost;
-use Xetaravel\Models\DiscussConversation;
 
 class DiscussPostRepository
 {

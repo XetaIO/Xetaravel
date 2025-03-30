@@ -7,7 +7,6 @@ namespace Xetaravel\Http\Controllers\Discuss;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Xetaravel\Events\Discuss\PostWasDeletedEvent;
 use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Masmerise\Toaster\Toastable;
-use Xetaravel\Events\Discuss\PostWasCreatedEvent;
 use Xetaravel\Livewire\Forms\DiscussPostForm;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
