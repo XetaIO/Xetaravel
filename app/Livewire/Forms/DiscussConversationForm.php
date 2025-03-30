@@ -6,21 +6,34 @@ namespace Xetaravel\Livewire\Forms;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\DB;
 use Livewire\Form;
 use Xetaio\Mentions\Parser\MentionParser;
+use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
+use Xetaravel\Events\Discuss\ConversationWasCreatedEvent;
+use Xetaravel\Events\Discuss\ConversationWasLockedEvent;
+use Xetaravel\Events\Discuss\ConversationWasPinnedEvent;
+use Xetaravel\Events\Discuss\TitleWasChangedEvent;
+use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\DiscussUser;
+use Throwable;
 
 class DiscussConversationForm extends Form
 {
+    /**
+     * The conversation to update.
+     *
+     * @var DiscussConversation|null
+     */
+    public ?DiscussConversation $discussConversation = null;
+
     /**
      * The category of the conversation
      *
      * @var int|null
      */
-    #[Validate('required|integer|exists:discuss_categories,id')]
     public ?int $category_id = null;
 
     /**
@@ -28,7 +41,6 @@ class DiscussConversationForm extends Form
      *
      * @var string|null
      */
-    #[Validate('required|min:5')]
     public ?string $title = null;
 
     /**
@@ -36,16 +48,21 @@ class DiscussConversationForm extends Form
      *
      * @var bool|null
      */
-    #[Validate('boolean')]
     public ?bool $is_pinned = false;
 
     /**
-     * Whatever the conversation is locked
+     * Whatever the conversation is locked.
      *
      * @var bool|null
      */
-    #[Validate('boolean')]
     public ?bool $is_locked = false;
+
+    /**
+     * The content of the post, only when creating.
+     *
+     * @var string|null
+     */
+    public ?string $content = null;
 
     /**
      * The categories used in choice.
@@ -55,19 +72,13 @@ class DiscussConversationForm extends Form
     public Collection|array $categoriesSearchable = [];
 
     /**
-     * The content of the post.
-     *
-     * @var string|null
-     */
-    #[Validate('required|min:10')]
-    public ?string $content = null;
-
-    /**
      * Function to store the model.
      *
      * @return DiscussConversation
+     *
+     * @throws Throwable
      */
-    public function store(): DiscussConversation
+    public function create(): DiscussConversation
     {
         $properties = [
             'category_id',
@@ -81,33 +92,99 @@ class DiscussConversationForm extends Form
             $properties[] = 'is_locked';
         }
 
-        $discussConversation = DiscussConversation::create($this->only($properties));
+        return DB::transaction(function () use ($properties) {
+            $discussConversation = DiscussConversation::create($this->only($properties));
 
-        $post = DiscussPost::create([
-            'conversation_id' => $discussConversation->id,
-            'content' => $this->content
-        ]);
+            $discussPost = DiscussPost::create([
+                'conversation_id' => $discussConversation->id,
+                'content' => $this->content
+            ]);
 
-        DiscussUser::create([
-            'conversation_id' => $discussConversation->id,
-            'is_read' => 1
-        ]);
+            DiscussUser::create([
+                'conversation_id' => $discussConversation->id,
+                'is_read' => 1
+            ]);
 
-        $discussConversation->first_post_id = $post->id;
-        $discussConversation->last_post_id = $post->id;
-        $discussConversation->save();
+            $discussConversation->first_post_id = $discussPost->id;
+            $discussConversation->last_post_id = $discussPost->id;
+            $discussConversation->save();
 
-        $discussConversation->category->last_conversation_id = $discussConversation->getKey();
-        $discussConversation->category->save();
+            $discussConversation->category->last_conversation_id = $discussConversation->getKey();
+            $discussConversation->category->save();
 
-        $parser = new MentionParser($post, [
-            'regex' => config('mentions.regex')
-        ]);
-        $content = $parser->parse($post->content);
+            $parser = new MentionParser($discussPost, [
+                'regex' => config('mentions.regex')
+            ]);
+            $content = $parser->parse($discussPost->content);
 
-        $post->content = $content;
-        $post->save();
+            $discussPost->content = $content;
+            $discussPost->save();
 
-        return $discussConversation;
+            event(new ConversationWasCreatedEvent(Auth::user(), $discussConversation));
+
+            return $discussConversation;
+        });
+    }
+
+    /**
+     * Function to update the conversation.
+     *
+     * @return DiscussConversation
+     */
+    public function update(): DiscussConversation
+    {
+        // The title has changed
+        if ($this->discussConversation->title !== $this->title) {
+            event(new TitleWasChangedEvent($this->discussConversation, $this->title, $this->discussConversation->title));
+
+            $this->discussConversation->title = $this->title;
+        }
+
+        // The category has changed
+        if ($this->discussConversation->category_id !== $this->category_id) {
+            event(new CategoryWasChangedEvent($this->discussConversation, $this->category_id, $this->discussConversation->category_id));
+
+            $this->discussConversation->category_id = $this->category_id;
+        }
+
+        // The pinned status has changed
+        if (Auth::user()->hasPermissionTo('pin discuss conversation')) {
+            if ($this->discussConversation->is_pinned !== $this->is_pinned && $this->is_pinned === true) {
+                event(new ConversationWasPinnedEvent($this->discussConversation));
+            }
+            $this->discussConversation->is_pinned = $this->is_pinned;
+        }
+
+        // The locked status has changed
+        if (Auth::user()->hasPermissionTo('lock discuss conversation')) {
+            if ($this->discussConversation->is_locked !== $this->is_locked && $this->is_locked === true) {
+                event(new ConversationWasLockedEvent($this->discussConversation));
+            }
+            $this->discussConversation->is_locked = $this->is_locked;
+        }
+
+        $this->discussConversation->save();
+
+        return $this->discussConversation;
+    }
+
+    /**
+     * Function to search categories.
+     *
+     * @param string $value
+     *
+     * @return void
+     */
+    public function searchCategories(string $value = ''): void
+    {
+        $selectedOption = DiscussCategory::where('id', $this->category_id)->get();
+
+        $categories = DiscussCategory::query()
+            ->where('title', 'like', "%$value%");
+
+        $this->categoriesSearchable = $categories->take(10)
+            ->orderBy('title')
+            ->get()
+            ->merge($selectedOption);
     }
 }

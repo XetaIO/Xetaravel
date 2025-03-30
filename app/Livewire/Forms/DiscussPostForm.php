@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Xetaravel\Livewire\Forms;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Events\Discuss\ConversationWasLockedEvent;
 use Xetaravel\Events\Discuss\ConversationWasPinnedEvent;
+use Xetaravel\Events\Discuss\PostWasCreatedEvent;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\DiscussUser;
+use Throwable;
 
 class DiscussPostForm extends Form
 {
@@ -100,6 +103,8 @@ class DiscussPostForm extends Form
      * Function to create the post.
      *
      * @return DiscussPost
+     *
+     * @throws Throwable
      */
     public function create(): DiscussPost
     {
@@ -115,18 +120,22 @@ class DiscussPostForm extends Form
             $properties[] = 'is_locked';
         }
 
-        $post = $this->createPost($this->only($properties));
-        $this->createUser($this->only($properties));
+        return DB::transaction(function () use ($properties) {
+            $discussPost = $this->createPost($this->only($properties));
+            $this->createUser($this->only($properties));
 
-        $parser = new MentionParser($post, [
-            'regex' => config('mentions.regex')
-        ]);
-        $content = $parser->parse($post->content);
+            $parser = new MentionParser($discussPost, [
+                'regex' => config('mentions.regex')
+            ]);
+            $content = $parser->parse($discussPost->content);
 
-        $post->content = $content;
-        $post->save();
+            $discussPost->content = $content;
+            $discussPost->save();
 
-        return $post;
+            event(new PostWasCreatedEvent(Auth::user(), $discussPost));
+
+            return $discussPost;
+        });
     }
 
     /**

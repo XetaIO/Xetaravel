@@ -1,11 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Xetaravel\Livewire\Discuss;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -13,9 +10,8 @@ use Masmerise\Toaster\Toastable;
 use Xetaravel\Livewire\Forms\DiscussConversationForm;
 use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
-use Throwable;
 
-class CreateConversation extends Component
+class UpdateConversation extends Component
 {
     use AuthorizesRequests;
     use Toastable;
@@ -34,37 +30,44 @@ class CreateConversation extends Component
      */
     public bool $showModal = false;
 
+    public function mount(DiscussConversation $discussConversation): void
+    {
+        $this->form->discussConversation = $discussConversation;
+    }
+
     public function render()
     {
-        return view('livewire.discuss.create-conversation');
+        return view('livewire.discuss.update-conversation');
     }
 
     /**
-     * Create a blank model and assign it to the model. (Used in create modal)
+     * When a user click on 'Edit' open the modal.
      *
      * @return void
      */
-    #[On('create-conversation')]
-    public function createConversation(): void
+    #[On('update-conversation')]
+    public function updateConversation(): void
     {
-        $this->authorize('create', DiscussConversation::class);
+        $this->authorize('update', $this->form->discussConversation);
 
-        $this->form->reset();
+        $this->form->title = $this->form->discussConversation->title;
+        $this->form->category_id = $this->form->discussConversation->category_id;
+        $this->form->is_pinned = $this->form->discussConversation->is_pinned;
+        $this->form->is_locked = $this->form->discussConversation->is_locked;
+
         $this->form->searchCategories();
 
         $this->showModal = true;
     }
 
     /**
-     * Validate and save the model.
+     * Update the conversation.
      *
      * @return void
-     *
-     * @throws Throwable
      */
-    public function create(): void
+    public function update(): void
     {
-        $this->authorize('create', DiscussConversation::class);
+        $this->authorize('update', $this->form->discussConversation);
 
         $categories = DiscussCategory::pluckLocked('id');
 
@@ -76,23 +79,14 @@ class CreateConversation extends Component
                 Rule::in($categories->toArray())
             ],
             'form.is_pinned' => 'boolean',
-            'form.is_locked' => 'boolean',
-            'form.content' => 'required|min:10',
+            'form.is_locked' => 'boolean'
         ]);
 
-        if (DiscussConversation::isFlooding('xetaravel.flood.discuss.conversation') &&
-            !Auth::user()->hasPermissionTo('manage discuss conversation')) {
-            $this->error('Wow, keep calm bro, and try to not flood !');
-
-            return;
-        }
-        $discussConversation = $this->form->create();
-
-        $this->showModal = false;
+        $discussConversation = $this->form->update();
 
         redirect()
             ->route('discuss.conversation.show', ['slug' => $discussConversation->slug, 'id' => $discussConversation->getKey()])
-            ->success('Your discussion has been created successfully !');
+            ->success('Your discussion has been updated successfully !');
     }
 
     /**

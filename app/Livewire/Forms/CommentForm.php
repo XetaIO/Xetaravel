@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Forms;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Models\BlogComment;
+use Throwable;
 
 class CommentForm extends Form
 {
@@ -32,19 +34,23 @@ class CommentForm extends Form
      * Function to store the model.
      *
      * @return BlogComment
+     *
+     * @throws Throwable
      */
     public function store(): BlogComment
     {
-        $comment = BlogComment::create($this->only([
-            'blog_article_id',
-            'content'
-        ]));
+        return DB::transaction(function () {
+            $comment = BlogComment::create($this->only([
+                'blog_article_id',
+                'content'
+            ]));
 
-        $parser = new MentionParser($comment);
-        $content = $parser->parse($this->content);
-        $comment->content = $content;
-        $comment->save();
+            $parser = new MentionParser($comment);
+            $content = $parser->parse($this->content);
+            $comment->content = $content;
+            $comment->save();
 
-        return $comment;
+            return $comment;
+        });
     }
 }

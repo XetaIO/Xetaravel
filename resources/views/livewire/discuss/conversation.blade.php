@@ -223,7 +223,7 @@
                     <p class="flex flex-col">
                         <span class="mb-5">There's no conversations yet !</span>
                         @can('create', \Xetaravel\Models\DiscussConversation::class)
-                            <x-button link="{{ route('discuss.index', ['creating' => true]) }}" icon="fas-pencil" label="Start a Discussion" class="btn-primary gap-2" />
+                            <x-button icon="fas-pencil" label="Start a Discussion" class="btn-primary gap-2 conversationCreateButton" />
                         @endcan
                     </p>
                 @endunless

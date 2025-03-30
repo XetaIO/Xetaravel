@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace Xetaravel\Listeners\Subscribers;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Events\Dispatcher;
-use Xetaravel\Events\Badges\ExperiencesEvent;
+use Xetaravel\Events\Badges\ExperienceEvent;
 use Xetaravel\Events\Badges\LeaderboardEvent;
-use Xetaravel\Events\Badges\PostEvent;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Events\Blog\CommentWasCreatedEvent;
+use Xetaravel\Events\Discuss\PostWasCreatedEvent;
 use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\Badge;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\User;
 use Xetaravel\Notifications\BadgeNotification;
 
-class BadgeSubscriber
+class BadgeSubscriber implements ShouldQueueAfterCommit
 {
     /**
      * The events mapping to the listener function.
@@ -26,12 +27,12 @@ class BadgeSubscriber
      * @var array
      */
     protected array $events = [
-        CommentWasCreatedEvent::class => 'onNewComment',
-        RegisterEvent::class => 'onNewRegister',
-        PostEvent::class => 'onNewPost',
-        PostWasSolvedEvent::class => 'onNewPostSolved',
-        ExperiencesEvent::class => 'onNewExperiences',
-        LeaderboardEvent::class => 'onNewLeaderboard'
+        CommentWasCreatedEvent::class => 'handleNewComment',
+        RegisterEvent::class => 'handleNewRegister',
+        PostWasCreatedEvent::class => 'handleNewPost',
+        PostWasSolvedEvent::class => 'handleNewPostSolved',
+        ExperienceEvent::class => 'handleNewExperiences',
+        LeaderboardEvent::class => 'handleNewLeaderboard'
     ];
 
     /**
@@ -81,7 +82,7 @@ class BadgeSubscriber
      *
      * @return bool
      */
-    public function onNewComment(CommentWasCreatedEvent $event): bool
+    public function handleNewComment(CommentWasCreatedEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'onNewComment')->get();
@@ -98,11 +99,11 @@ class BadgeSubscriber
     /**
      * Listener related to the posts badge.
      *
-     * @param PostEvent $event The event that was fired.
+     * @param PostWasCreatedEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function onNewPost(PostEvent $event): bool
+    public function handleNewPost(PostWasCreatedEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'onNewPost')->get();
@@ -123,7 +124,7 @@ class BadgeSubscriber
      *
      * @return bool
      */
-    public function onNewPostSolved(PostWasSolvedEvent $event): bool
+    public function handleNewPostSolved(PostWasSolvedEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'onNewPostSolved')->get();
@@ -144,14 +145,14 @@ class BadgeSubscriber
     /**
      * Listener related to the experiences badge.
      *
-     * @param ExperiencesEvent $event The event that was fired.
+     * @param ExperienceEvent $event The event that was fired.
      *
      * @return bool
      */
-    public function onNewExperiences(ExperiencesEvent $event): bool
+    public function handleNewExperiences(ExperienceEvent $event): bool
     {
         $user = $event->user;
-        $badges = Badge::where('type', 'onNewExperiences')->get();
+        $badges = Badge::where('type', 'onNewExperience')->get();
 
         $collection = $badges->filter(function ($badge) use ($user) {
             return $badge->rule <= $user->experiences_total;
@@ -169,7 +170,7 @@ class BadgeSubscriber
      *
      * @return bool
      */
-    public function onNewRegister(RegisterEvent $event): bool
+    public function handleNewRegister(RegisterEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'onNewRegister')->get();
@@ -193,7 +194,7 @@ class BadgeSubscriber
      *
      * @return bool
      */
-    public function onNewLeaderboard(LeaderboardEvent $event): bool
+    public function handleNewLeaderboard(LeaderboardEvent $event): bool
     {
         $user = $event->user;
         $badges = Badge::where('type', 'topLeaderboard')->get();

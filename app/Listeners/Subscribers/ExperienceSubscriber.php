@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Xetaravel\Listeners\Subscribers;
 
 use Illuminate\Events\Dispatcher;
+use Xetaravel\Events\Badges\ExperienceEvent;
 use Xetaravel\Events\Blog\CommentWasCreatedEvent;
 use Xetaravel\Events\Discuss\ConversationWasCreatedEvent;
 use Xetaravel\Events\Discuss\PostWasCreatedEvent;
 use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\Experience;
+use Xetaravel\Models\User;
 
 class ExperienceSubscriber
 {
@@ -31,25 +33,27 @@ class ExperienceSubscriber
      * @var array
      */
     protected array $events = [
-        PostWasCreatedEvent::class => 'postWasCreated',
-        PostWasSolvedEvent::class => 'postWasSolved',
-        ConversationWasCreatedEvent::class => 'conversationWasCreated',
-        CommentWasCreatedEvent::class => 'commentWasCreated',
+        PostWasCreatedEvent::class => 'handlePostWasCreated',
+        PostWasSolvedEvent::class => 'handlePostWasSolved',
+        ConversationWasCreatedEvent::class => 'handleConversationWasCreated',
+        CommentWasCreatedEvent::class => 'handleCommentWasCreated',
     ];
 
     /**
      * Create the experience.
      *
      * @param array $data The data used to create the experience.
-     *
+     * @param User $user
      * @return bool
      */
-    protected function create(array $data): bool
+    protected function create(array $data, User $user): bool
     {
         if (!isset($data['data'])) {
             $data['data'] = [];
         }
         $experience = Experience::create($data);
+
+        event(new ExperienceEvent($user));
 
         return !(is_null($experience));
     }
@@ -75,7 +79,7 @@ class ExperienceSubscriber
      *
      * @return bool
      */
-    public function postWasCreated(PostWasCreatedEvent $event): bool
+    public function handlePostWasCreated(PostWasCreatedEvent $event): bool
     {
         $data = [
             'amount' => $this->experiences[PostWasCreatedEvent::class],
@@ -84,7 +88,7 @@ class ExperienceSubscriber
             'event_type' => PostWasCreatedEvent::class
         ];
 
-        return $this->create($data);
+        return $this->create($data, $event->user);
     }
 
     /**
@@ -94,7 +98,7 @@ class ExperienceSubscriber
      *
      * @return bool
      */
-    public function postWasSolved(PostWasSolvedEvent $event): bool
+    public function handlePostWasSolved(PostWasSolvedEvent $event): bool
     {
         $data = [
             'user_id' => $event->discussPost->user_id,
@@ -104,7 +108,7 @@ class ExperienceSubscriber
             'event_type' => PostWasSolvedEvent::class
         ];
 
-        return $this->create($data);
+        return $this->create($data, $event->user);
     }
 
     /**
@@ -114,7 +118,7 @@ class ExperienceSubscriber
      *
      * @return bool
      */
-    public function conversationWasCreated(ConversationWasCreatedEvent $event): bool
+    public function handleConversationWasCreated(ConversationWasCreatedEvent $event): bool
     {
         $data = [
             'amount' => $this->experiences[ConversationWasCreatedEvent::class],
@@ -123,7 +127,7 @@ class ExperienceSubscriber
             'event_type' => ConversationWasCreatedEvent::class
         ];
 
-        return $this->create($data);
+        return $this->create($data, $event->user);
     }
 
     /**
@@ -133,7 +137,7 @@ class ExperienceSubscriber
      *
      * @return bool
      */
-    public function commentWasCreated(CommentWasCreatedEvent $event): bool
+    public function handleCommentWasCreated(CommentWasCreatedEvent $event): bool
     {
         $data = [
             'amount' => $this->experiences[CommentWasCreatedEvent::class],
@@ -142,6 +146,6 @@ class ExperienceSubscriber
             'event_type' => CommentWasCreatedEvent::class
         ];
 
-        return $this->create($data);
+        return $this->create($data, $event->user);
     }
 }

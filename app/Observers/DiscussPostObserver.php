@@ -37,9 +37,9 @@ class DiscussPostObserver
     {
         $conversation = $discussPost->conversation;
 
-        if ($conversation->first_post_id === $discussPost->getKey()) {
+        /*if ($conversation->first_post_id === $discussPost->getKey()) {
             $conversation->delete();
-        }
+        }*/
 
         if ($conversation->last_post_id === $discussPost->getKey()) {
             $previousPost = DiscussPostRepository::findPreviousPost($discussPost, true);

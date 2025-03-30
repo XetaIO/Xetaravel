@@ -54,6 +54,11 @@ class UpdatePost extends Component
         $this->showModal = true;
     }
 
+    /**
+     * Update the post.
+     *
+     * @return void
+     */
     public function update(): void
     {
         $this->authorize('update', $this->form->discussPost);

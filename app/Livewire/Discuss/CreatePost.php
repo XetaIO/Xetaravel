@@ -13,6 +13,7 @@ use Xetaravel\Events\Discuss\PostWasCreatedEvent;
 use Xetaravel\Livewire\Forms\DiscussPostForm;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\DiscussPost;
+use Throwable;
 
 class CreatePost extends Component
 {
@@ -36,6 +37,8 @@ class CreatePost extends Component
      * Create a new post
      *
      * @return void
+     *
+     * @throws Throwable
      */
     public function create(): void
     {
@@ -50,8 +53,6 @@ class CreatePost extends Component
             return;
         }
         $discussPost = $this->form->create();
-
-        event(new PostWasCreatedEvent(Auth::user(), $discussPost));
 
         redirect()
             ->route('discuss.post.show', ['id' => $discussPost->getKey()])

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Observers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\Repositories\DiscussConversationRepository;
 
@@ -15,9 +17,7 @@ class DiscussConversationObserver
      */
     public function creating(DiscussConversation $discussConversation): void
     {
-        if (is_null($discussConversation->user_id)) {
-            $discussConversation->user_id = Auth::id();
-        }
+        $discussConversation->user_id = Auth::id();
         $discussConversation->generateSlug();
     }
 
@@ -27,6 +27,10 @@ class DiscussConversationObserver
     public function updating(DiscussConversation $discussConversation): void
     {
         $discussConversation->generateSlug();
+        $discussConversation->is_edited = true;
+        $discussConversation->edit_count++;
+        $discussConversation->edited_user_id = Auth::id();
+        $discussConversation->edited_at = Carbon::now();
     }
 
     /**

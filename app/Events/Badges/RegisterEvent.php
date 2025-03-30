@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Xetaravel\Events\Badges;
 
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Xetaravel\Models\User;
 
-class RegisterEvent
+class RegisterEvent implements ShouldDispatchAfterCommit
 {
     use Dispatchable;
     use SerializesModels;

@@ -40,58 +40,51 @@
         <div class="lg:col-span-3 col-span-12 px-3">
             <div class="mb-5">
                 @auth
-                    <div class="form-control">
-                        <div class="input-group">
-                            @if (!$conversation->is_locked)
-                                <a href="#post-reply" class="btn btn-primary gap-2">
-                                    <x-icon name="fas-pencil" />
-                                    Reply
-                                </a>
-                            @else
-                                <a class="btn btn-primary gap-2" href="{{ route('discuss.index', ['creating' => true]) }}">
-                                    <x-icon name="fas-pencil" />
-                                    Start a Discussion
-                                </a>
-                            @endif
+                    <div class="join">
+                        @if (!$conversation->is_locked)
+                            <a href="#post-reply" class="btn btn-primary gap-2 join-item">
+                                <x-icon name="fas-pencil" />
+                                Reply
+                            </a>
+                        @else
+                            @can('create', \Xetaravel\Models\DiscussConversation::class)
+                                <livewire:discuss.create-conversation />
+                            @endcan
+                        @endif
 
-                            @if (
-                                Auth::user()->hasPermissionTo('manage discuss conversation') ||
-                                Auth::user()->can('update', $conversation) ||
-                                Auth::user()->can('delete', $conversation)
-                            )
-                            <div class="dropdown btn btn-primary">
-                                <label tabindex="0" class="m-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"/>
-                                    </svg>
-                                </label>
-                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-base-content dark:text-white">
-                                    @can('update', $conversation)
-                                        <li>
-                                            <label class="editDiscussConversationModal" for="editDiscussConversationModal">
-                                                <x-icon name="fas-pen-to-square" />
-                                                Edit
-                                            </label>
-                                        </li>
-                                    @endcan
-
-                                    @can('delete', $conversation)
-                                        @can('update', $conversation)
-                                            <li class="dropdown-divider"></li>
-                                        @endcan
-                                        <li>
-                                            <label class="deleteDiscussConversationModal text-red-500 " for="deleteDiscussConversationModal">
-                                                <x-icon name="fas-trash-can" />
-                                                Delete
-                                            </label>
-                                        </li>
-                                    @endcan
-                                </ul>
+                        @if (
+                            Auth::user()->hasPermissionTo('manage discuss conversation') ||
+                            Auth::user()->can('update', $conversation) ||
+                            Auth::user()->can('delete', $conversation)
+                        )
+                        <div class="dropdown dropdown-end dropdown-bottom btn btn-primary join-item">
+                            <div tabindex="0" role="button" class="m-1">
+                                <x-icon name="fas-chevron-down" />
                             </div>
-                            @endif
+                            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm text-base-content">
+                                @can('update', $conversation)
+                                    <li>
+                                        <a class="conversationUpdateButton tooltip" data-tip="Edit this conversation">
+                                            <x-icon name="fas-pen-to-square" />
+                                            Edit
+                                        </a>
+                                    </li>
+                                @endcan
+
+                                @can('delete', $conversation)
+                                    @can('update', $conversation)
+                                        <li class="dropdown-divider"></li>
+                                    @endcan
+                                    <li>
+                                        <label class="conversationDeleteButton text-red-500 tooltip" data-tip="Delete this conversation">
+                                            <x-icon name="fas-trash-can" />
+                                            Delete
+                                        </label>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
+                        @endif
                     </div>
                 @else
                     <a href="{{ route('auth.login') }}" class="btn btn-primary gap-2">
@@ -214,5 +207,15 @@
 </section>
 
 <livewire:discuss.update-post />
+<livewire:discuss.delete-post />
+
+{{-- Need to sort out of the dropdown menu --}}
+@can('update', $conversation)
+    <livewire:discuss.update-conversation :discussConversation="$conversation" />
+@endcan
+
+@can('delete', $conversation)
+    <livewire:discuss.delete-conversation :discussConversation="$conversation" />
+@endcan
 
 @endsection

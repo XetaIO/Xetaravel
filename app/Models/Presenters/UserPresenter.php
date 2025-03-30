@@ -17,13 +17,6 @@ trait UserPresenter
     protected string $defaultAvatar = '/images/avatar.png';
 
     /**
-     * The default primary color used when there is no primary color defined.
-     *
-     * @var string
-     */
-    protected string $defaultAvatarPrimaryColor = '#B4AEA4';
-
-    /**
      * Get the status of the user : online or offline
      *
      * @return Attribute

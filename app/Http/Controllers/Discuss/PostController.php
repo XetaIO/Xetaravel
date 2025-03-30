@@ -36,7 +36,7 @@ class PostController extends Controller
         $page = floor($postsBefore / $postsPerPage) + 1;
         $page = ($page > 1) ? $page : 1;
 
-        $request->session()->keep(['primary', 'danger', 'warning', 'success', 'info']);
+        $request->session()->keep(['primary', 'error', 'warning', 'success', 'info']);
 
         return redirect()
             ->route(
@@ -48,42 +48,6 @@ class PostController extends Controller
                     '#post-' . $post->getKey()
                 ]
             );
-    }
-
-    /**
-     * Handle a delete action for the post.
-     *
-     * @param Request $request
-     * @param int $id
-     *
-     * @return RedirectResponse
-     */
-    public function delete(int $id): RedirectResponse
-    {
-        $post = DiscussPost::findOrFail($id);
-
-        $this->authorize('delete', $post);
-
-        if ($post->conversation->first_post_id === $post->getKey()) {
-            return redirect()
-                ->route('discuss.post.show', ['id' => $post->getKey()])
-                ->with('danger', 'You can not delete the first post of a discussion !');
-        }
-
-        if ($post->delete()) {
-            event(new PostWasDeletedEvent($post->conversation, $post->user));
-
-            return redirect()
-                ->route(
-                    'discuss.conversation.show',
-                    ['id' => $post->conversation->getKey(), 'slug' => $post->conversation->slug]
-                )
-                ->with('success', 'This post has been deleted successfully !');
-        }
-
-        return redirect()
-            ->route('discuss.post.show', ['id' => $post->getKey()])
-            ->with('danger', 'An error occurred while deleting this post !');
     }
 
     /**

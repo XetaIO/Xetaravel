@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Xetaravel\Listeners\Subscribers;
 
 use Illuminate\Events\Dispatcher;
-use Xetaravel\Events\Rubies\PostWasSolvedEvent;
+use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\Ruby;
 
 class RubySubscriber
@@ -25,7 +25,7 @@ class RubySubscriber
      * @var array
      */
     protected array $events = [
-        PostWasSolvedEvent::class => 'postWasSolved',
+        PostWasSolvedEvent::class => 'handlePostWasSolved',
     ];
 
     /**
@@ -72,12 +72,12 @@ class RubySubscriber
      *
      * @return bool
      */
-    public function postWasSolved(PostWasSolvedEvent $event): bool
+    public function handlePostWasSolved(PostWasSolvedEvent $event): bool
     {
         $data = [
-            'user_id' => $event->post->user_id,
-            'obtainable_id' => $event->post->getKey(),
-            'obtainable_type' => get_class($event->post),
+            'user_id' => $event->discussPost->user_id,
+            'obtainable_id' => $event->discussPost->getKey(),
+            'obtainable_type' => get_class($event->discussPost),
             'event_type' => PostWasSolvedEvent::class
         ];
 

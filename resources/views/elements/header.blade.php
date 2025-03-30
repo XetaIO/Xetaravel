@@ -44,7 +44,7 @@
                 </li>
 
                 @if (settings('discuss_enabled') ||
-                        (!settings('discuss_enabled') && !is_null(Auth::user()) && Auth::user()->level >= 90))
+                        (!settings('discuss_enabled') && !is_null(Auth::user()) && Auth::user()->hasPermissionTo('manage discuss conversation')))
                 <li>
                     <a class="gap-1 pl-4 my-3 flex group overflow-hidden text-lg align-middle" href="{{ route('discuss.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -107,6 +107,7 @@
                 </a>
             @else
                 {{-- User Notifications Menu --}}
+            <livewire:user.notification />
 
 
                 {{-- User Avatar and Menu --}}

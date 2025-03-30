@@ -68,7 +68,6 @@ class RegisterController extends Controller
             ->preservingOriginal()
             ->setName(mb_substr(md5($user->username), 0, 10))
             ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
-            ->withCustomProperties(['primaryColor' => '#B4AEA4'])
             ->toMediaCollection('avatar');
 
         Toaster::success("Your account has been created successfully !");

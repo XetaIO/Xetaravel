@@ -7,6 +7,8 @@ namespace Xetaravel\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
+use Xetaravel\Models\Badge;
+use Xetaravel\Models\User;
 
 class BadgeNotification extends Notification implements ShouldQueue
 {
@@ -15,16 +17,16 @@ class BadgeNotification extends Notification implements ShouldQueue
     /**
      * The badge instance.
      *
-     * @var \Xetaravel\Models\Badge
+     * @var Badge
      */
-    public $badge;
+    public Badge $badge;
 
     /**
      * Create a new notification instance.
      *
-     * @param \Xetaravel\Models\Badge $badge
+     * @param Badge $badge
      */
-    public function __construct($badge)
+    public function __construct(Badge $badge)
     {
         $this->badge = $badge;
     }
@@ -32,11 +34,11 @@ class BadgeNotification extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param User $notifiable
      *
      * @return array
      */
-    public function via($notifiable): array
+    public function via(User $notifiable): array
     {
         return ['database'];
     }
@@ -44,18 +46,18 @@ class BadgeNotification extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param User $notifiable
      *
      * @return array
      */
-    public function toDatabase($notifiable): array
+    public function toDatabase(User $notifiable): array
     {
         return [
-            'message' => 'You have unlock the badge <strong>%s</strong> !',
-            'message_key' => [$this->badge->name],
+            'message' => "You have unlocked the badge <strong>{$this->badge->name}</strong> !",
             'icon' => $this->badge->icon,
             'color' => $this->badge->color,
-            'type' => 'badge'
+            'type' => 'badge',
+            'link' => $notifiable->profile_url
         ];
     }
 }

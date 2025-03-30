@@ -11,7 +11,7 @@
 
         <x-slot:actions>
             <x-button class="btn-success gap-2" label="Update" icon="fas-pencil" type="button" wire:click="update" spinner />
-            <x-button @click="$wire.showModal = false" class="btn-neutral" label="Fermer" />
+            <x-button @click="$wire.showModal = false" class="btn-neutral" label="Close" />
         </x-slot:actions>
     </x-modal>
 
@@ -19,8 +19,8 @@
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
             // Discuss conversation post Reply Button
-            const postEditButton = document.getElementsByClassName('postEditButton');
-            Array.from(postEditButton).forEach(function (button) {
+            const postUpdateButton = document.getElementsByClassName('postUpdateButton');
+            Array.from(postUpdateButton).forEach(function (button) {
                 button.addEventListener('click', function (event) {
 
                     let id = button.getAttribute("data-content");

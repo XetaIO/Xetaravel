@@ -1,7 +1,5 @@
 <div>
-    <x-button icon="fas-pencil" label="Start a Discussion" class="btn-primary gap-2 join-item conversationCreateButton" />
-
-    <x-modal wire:model="showModal" title="Create a Discussion" class="backdrop-blur" box-class="w-11/12 max-w-5xl">
+    <x-modal wire:model="showModal" title="Update this discussion" class="backdrop-blur">
 
         <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Discussion title..." />
 
@@ -37,19 +35,10 @@
 
             {{-- Selection slot--}}
             @scope('selection', $option)
-                <x-icon :name="$option->icon" class="h-4 w-4 inline" style="color:{{ $option->color }};" />
-                <span style="color:{{ $option->color }};">{{ $option->title }}</span>
+            <x-icon :name="$option->icon" class="h-4 w-4 inline" style="color:{{ $option->color }};" />
+            <span style="color:{{ $option->color }};">{{ $option->title }}</span>
             @endscope
         </x-choices>
-
-        @php
-            $config = [
-                'sideBySideFullscreen' => false,
-                'maxHeight' => '200px'
-            ];
-        @endphp
-
-        <x-markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
 
         @canany(['pin', 'lock'], \Xetaravel\Models\DiscussConversation::class)
             <div class="text-sm">
@@ -65,7 +54,7 @@
         @endcanany
 
         <x-slot:actions>
-            <x-button class="btn-success gap-2" label="Create" icon="fas-pencil" type="button" wire:click="create" spinner />
+            <x-button class="btn-success gap-2" label="Update" icon="fas-pencil" type="button" wire:click="update" spinner />
             <x-button @click="$wire.showModal = false" class="btn-neutral" label="Close" />
         </x-slot:actions>
     </x-modal>
@@ -73,11 +62,11 @@
     @script
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
-            // Discuss conversation Create Button
-            const conversationCreateButton = document.getElementsByClassName('conversationCreateButton');
-            Array.from(conversationCreateButton).forEach(function (button) {
+            // Discuss conversation Update Button
+            const conversationUpdateButton = document.getElementsByClassName('conversationUpdateButton');
+            Array.from(conversationUpdateButton).forEach(function (button) {
                 button.addEventListener('click', function (event) {
-                    $wire.dispatch('create-conversation');
+                    $wire.dispatch('update-conversation');
                 }, false);
             });
         });

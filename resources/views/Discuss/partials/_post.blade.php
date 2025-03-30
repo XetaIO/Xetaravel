@@ -127,7 +127,7 @@
                                     {{-- Moderation actions --}}
                                     @can('update', $post)
                                         <li>
-                                            <label class="postEditButton" data-content="{{ $post->getKey() }}">
+                                            <label class="postUpdateButton" data-content="{{ $post->getKey() }}">
                                                 <x-icon name="fas-pencil" />
                                                 Edit
                                             </label>
@@ -139,7 +139,7 @@
                                                 Moderation
                                             </li>
                                             <li>
-                                                <label class="deleteConversationPostModal text-red-500" for="deleteConversationPostModal" data-action="{{ route('discuss.post.delete', ['id' => $post->getKey()]) }}">
+                                                <label class="postDeleteButton text-red-500" data-content="{{ $post->getKey() }}">
                                                     <x-icon name="fas-trash-can" />
                                                     Delete
                                                 </label>
@@ -148,7 +148,7 @@
                                     @endif
                                 </ul>
                             </div>
-                        @endcan
+                        @endcanany
 
                         {{-- Like action --}}
                         <!--<span class="sm:opacity-0 sm:group-hover:opacity-100">

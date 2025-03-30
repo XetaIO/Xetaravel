@@ -19,27 +19,16 @@ trait DiscussLogPresenter
      *
      * @return string
      */
-    public function getTypeAttribute()
+    public function getTypeAttribute(): string
     {
-        switch ($this->event_type) {
-            case CategoryWasChangedEvent::class:
-                return 'category';
-                break;
-            case TitleWasChangedEvent::class:
-                return 'title';
-                break;
-            case ConversationWasLockedEvent::class:
-                return 'locked';
-                break;
-            case ConversationWasPinnedEvent::class:
-                return 'pinned';
-                break;
-            case PostWasDeletedEvent::class:
-                return 'deleted';
-                break;
-            default:
-                return 'unknown';
-        }
+        return match ($this->event_type) {
+            CategoryWasChangedEvent::class => 'category',
+            TitleWasChangedEvent::class => 'title',
+            ConversationWasLockedEvent::class => 'locked',
+            ConversationWasPinnedEvent::class => 'pinned',
+            PostWasDeletedEvent::class => 'deleted',
+            default => 'unknown',
+        };
     }
 
     /**
@@ -47,7 +36,7 @@ trait DiscussLogPresenter
      *
      * @return null|User
      */
-    public function getPostUserAttribute()
+    public function getPostUserAttribute(): ?User
     {
         if ($this->event_type !== PostWasDeletedEvent::class) {
             return null;
@@ -61,7 +50,7 @@ trait DiscussLogPresenter
      *
      * @return null|DiscussCategory
      */
-    public function getOldCategoryAttribute()
+    public function getOldCategoryAttribute(): ?DiscussCategory
     {
         if ($this->event_type !== CategoryWasChangedEvent::class) {
             return null;
@@ -75,7 +64,7 @@ trait DiscussLogPresenter
      *
      * @return null|DiscussCategory
      */
-    public function getNewCategoryAttribute()
+    public function getNewCategoryAttribute(): ?DiscussCategory
     {
         if ($this->event_type !== CategoryWasChangedEvent::class) {
             return null;

@@ -181,31 +181,37 @@ class DiscussConversation extends Model
      */
     public function getPostsWithLogs(Collection $posts, int $page): Collection
     {
-        $logs = DiscussLog::where([
-            'loggable_type' => get_class($this),
-            'loggable_id' => $this->getKey(),
-        ]);
+        $logs = DiscussLog::query()
+            ->with('user.account')
+            ->where([
+                'loggable_type' => get_class($this),
+                'loggable_id' => $this->getKey(),
+            ]);
 
         // When there are several pages and the current page is not the first and not the last.
         if ($this->lastPage > $page && $page !== 1) {
             $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
 
-            $logs = $logs->where('created_at', '<=', $posts->last()->created_at)
+            $logs = $logs
+                ->where('created_at', '<=', $posts->last()->created_at)
                 ->where('created_at', '>=', $previousPost->created_at);
 
             // When there are only one page.
         } elseif ($this->lastPage === 1) {
-            $logs = $logs->where('created_at', '>=', $this->created_at);
+            $logs = $logs
+                ->where('created_at', '>=', $this->created_at);
 
             // When there are several pages and the current page is the first page.
         } elseif ($page === 1) {
-            $logs = $logs->where('created_at', '<=', $posts->last()->created_at);
+            $logs = $logs
+                ->where('created_at', '<=', $posts->last()->created_at);
 
             // When there are several page and the current page is the last page
         } elseif ($page === $this->lastPage) {
             $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
 
-            $logs = $logs->where('created_at', '>', $previousPost->created_at);
+            $logs = $logs
+                ->where('created_at', '>', $previousPost->created_at);
         }
         $postsWithLogs = $posts->merge($logs->get())->sortBy('created_at');
 

@@ -49,7 +49,7 @@ class DiscussConversationPolicy
      */
     public function update(User $user, DiscussConversation $discussConversation): bool
     {
-        return $user->id === $discussConversation->user_id;
+        return $user->id === $discussConversation->user_id && $user->hasPermissionTo('update discuss conversation');
     }
 
     /**
@@ -62,7 +62,7 @@ class DiscussConversationPolicy
      */
     public function delete(User $user, DiscussConversation $discussConversation): bool
     {
-        return $user->id === $discussConversation->user_id;
+        return $user->id === $discussConversation->user_id && $user->hasPermissionTo('delete discuss conversation');
     }
 
     /**

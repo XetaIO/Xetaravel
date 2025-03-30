@@ -77,7 +77,7 @@
                             {{-- Moderation actions --}}
                             {{--  @can('update', $comment)
                                 <li>
-                                    <a class="dropdown-item postEditButton" data-id="{{ $comment->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $comment->getKey()]) }}" href="#">
+                                    <a class="dropdown-item postUpdateButton" data-id="{{ $comment->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $comment->getKey()]) }}" href="#">
                                         <i class="fa fa-pencil"></i>
                                         Edit
                                     </a>

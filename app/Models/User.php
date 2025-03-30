@@ -82,7 +82,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'avatar_small',
         'avatar_medium',
         'avatar_big',
-        'avatar_primary_color',
 
         // Account Model
         'first_name',
@@ -94,10 +93,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'twitter',
 
         // Session Model
-        'online',
+        //'online',
 
         // Role Model
-        'level',
+        //'level',
     ];
 
     /**

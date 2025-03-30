@@ -44,7 +44,7 @@
                 </a>
             </li>
             @if (settings('discuss_enabled') ||
-                        (!settings('discuss_enabled') && !is_null(Auth::user()) && Auth::user()->level >= 90))
+                        (!settings('discuss_enabled') && !is_null(Auth::user()) && Auth::user()->hasPermissionTo('manage discuss conversation')))
                 <li>
                     <a href="{{ route('discuss.index') }}" class="group hover:shadow rounded-[var(--rounded-btn)]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary group-active:text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
