@@ -11,7 +11,6 @@ use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
 use Xetaravel\Events\Discuss\TitleWasChangedEvent;
-use Xetaravel\Livewire\Discuss\CreateConversation;
 use Xetaravel\Livewire\Discuss\UpdateConversation;
 use Xetaravel\Models\DiscussConversation;
 use Xetaravel\Models\User;
