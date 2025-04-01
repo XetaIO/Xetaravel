@@ -34,7 +34,7 @@ class UpdateConversationTest extends TestCase
     public function test_update_modal()
     {
         $old = DiscussConversation::find(1);
-        
+
         Livewire::actingAs(User::find(1))
             ->test(UpdateConversation::class, ['discussConversation' => $old])
             ->call('updateConversation')
