@@ -32,3 +32,6 @@ junit.xml
 _ide_helper.php
 _ide_helper_models.php
 .nvmrc
+.vemto_settings
+.vemto_settings.example
+.vemto/
