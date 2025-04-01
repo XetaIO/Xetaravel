@@ -72,5 +72,4 @@ class UpdateConversationTest extends TestCase
         Event::assertDispatched(TitleWasChangedEvent::class);
         Event::assertDispatched(CategoryWasChangedEvent::class);
     }
-
 }
