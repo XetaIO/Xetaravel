@@ -53,10 +53,9 @@
                     </div>
                 @empty
                     <div class="col-md-12">
-                        <div class="alert alert-primary" role="alert">
-                            <i class="fa fa-exclamation" aria-hidden="true"></i>
+                        <x-alert type="primary">
                             There's no categories yet.
-                        </div>
+                        </x-alert>
                     </div>
                 @endforelse
             </div>
