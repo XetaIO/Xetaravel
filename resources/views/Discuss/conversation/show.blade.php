@@ -48,7 +48,7 @@
                             </a>
                         @else
                             @can('create', \Xetaravel\Models\DiscussConversation::class)
-                                <livewire:discuss.create-conversation />
+                                <x-button icon="fas-pencil" label="Start a Discussion" class="btn-primary gap-2 join-item conversationCreateButton" />
                             @endcan
                         @endif
 
@@ -210,6 +210,10 @@
 <livewire:discuss.delete-post />
 
 {{-- Need to sort out of the dropdown menu --}}
+@if ($conversation->is_locked && Auth::user()?->can('create', \Xetaravel\Models\DiscussConversation::class))
+    <livewire:discuss.create-conversation />
+@endif
+
 @can('update', $conversation)
     <livewire:discuss.update-conversation :discussConversation="$conversation" />
 @endcan

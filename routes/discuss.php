@@ -37,19 +37,7 @@ Route::group([
 
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
-        // Conversation Routes
-        Route::put('conversation/update/{slug}.{id}', [Xetaravel\Http\Controllers\Discuss\ConversationController::class, 'update'])
-            ->name('discuss.conversation.update');
-        Route::delete('conversation/delete/{slug}.{id}', [Xetaravel\Http\Controllers\Discuss\ConversationController::class, 'delete'])
-            ->name('discuss.conversation.delete');
-
         // Post Routes
-        Route::delete('post/delete/{id}', [Xetaravel\Http\Controllers\Discuss\PostController::class, 'delete'])
-            ->name('discuss.post.delete');
-        Route::put('post/edit/{id}', [Xetaravel\Http\Controllers\Discuss\PostController::class, 'edit'])
-            ->name('discuss.post.edit');
-        Route::get('post/edit-template/{id}', [Xetaravel\Http\Controllers\Discuss\PostController::class, 'editTemplate'])
-            ->name('discuss.post.editTemplate');
         Route::get('post/solved/{id}', [Xetaravel\Http\Controllers\Discuss\PostController::class, 'solved'])
             ->name('discuss.post.solved');
     });

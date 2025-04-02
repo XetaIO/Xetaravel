@@ -61,7 +61,13 @@ class DiscussPostForm extends Form
 
     private function createPost(array $properties): DiscussPost
     {
-        $post = DiscussPost::create($this->only(['conversation_id', 'content']));
+        $post = DiscussPost::create([
+            'conversation_id' => $properties['conversation_id'],
+            'content' => $properties['content'],
+            // For unknown reason, DiscussPostObserver is not triggered
+            'user_id' => Auth::id(),
+        ]);
+
 
         $conversation = DiscussConversation::find($properties['conversation_id']);
 

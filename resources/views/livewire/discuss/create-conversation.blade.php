@@ -1,6 +1,4 @@
 <div>
-    <x-button icon="fas-pencil" label="Start a Discussion" class="btn-primary gap-2 join-item conversationCreateButton" />
-
     <x-modal wire:model="showModal" title="Create a Discussion" class="backdrop-blur" box-class="w-11/12 max-w-5xl">
 
         <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Discussion title..." />

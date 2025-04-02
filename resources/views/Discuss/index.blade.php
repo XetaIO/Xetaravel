@@ -34,6 +34,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-3 col-span-12 mx-3 lg:mx-0">
             @can('create', \Xetaravel\Models\DiscussConversation::class)
+                <x-button icon="fas-pencil" label="Start a Discussion" class="btn-primary gap-2 conversationCreateButton mb-5" />
                 <livewire:discuss.create-conversation />
             @endcan
 

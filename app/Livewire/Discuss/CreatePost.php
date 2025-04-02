@@ -58,7 +58,6 @@ class CreatePost extends Component
             ->success('Your reply has been posted successfully !');
     }
 
-
     public function render()
     {
         return view('livewire.discuss.create-post');
