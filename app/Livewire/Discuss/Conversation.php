@@ -97,13 +97,6 @@ class Conversation extends Component
         'created_at'
     ];
 
-    /**
-     * Tell if the categories select menu is open or not.
-     *
-     * @var bool
-     */
-    public $open = false;
-
     public function mount(): void
     {
         // Create the categories list for the select and push the `All Categories` into it at the first position.

@@ -43,7 +43,6 @@ class CreatePostTest extends TestCase
             ->test(CreatePost::class, ['discussConversation' => $discussConversation])
             ->assertSet('form.conversation_id', $discussConversation->getKey())
 
-
             ->set('form.is_pinned', true)
             ->set('form.is_locked', true)
             ->set('form.content', 'This is a post test')
