@@ -20,7 +20,7 @@
 
             {{-- Title --}}
             <div class="text-center mb-4">
-                <h1 class="divider font-xetaravel text-3xl">
+                <h1 class="divider text-3xl">
                     Terms of Service
                 </h1>
             </div>

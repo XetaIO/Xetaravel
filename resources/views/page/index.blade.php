@@ -25,7 +25,7 @@
         new Typed(".terminal-container-code", options);
 
         const options2 = {
-            strings: ["Welcome on <span class=\"text-primary font-xetaravel\">Xetaravel</span> !"],
+            strings: ["Welcome on <span class=\"text-primary\">Xetaravel</span> !"],
             typeSpeed: 100,
             loop: false,
             showCursor: false,
@@ -236,21 +236,21 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
             <div>
                 <img class="h-36 mx-auto" src="{{ asset('images/icons/code.svg') }}" alt="Code Icon">
-                <div class="font-xetaravel text-2xl">Open Source</div>
+                <div class="text-2xl">Open Source</div>
                 <p class="text-gray-500 dark:text-current">
                     The code source of this website is open source and available on <a href="{{ config('xetaravel.site.github_url') }}" target="_blank" class="text-primary">Github</a>. If you want to contribute, feel free to do a PR.
                 </p>
             </div>
             <div>
                 <img class="h-36 mx-auto" src="{{ asset('images/icons/experiences.svg') }}" alt="Experiences Icon">
-                <div class="font-xetaravel text-2xl">Experiences</div>
+                <div class="text-2xl">Experiences</div>
                 <p class="text-gray-500 dark:text-current">
                 I use this site for my personal experiences in development, to try new things like JS libraries, or PHP libraries.
                 </p>
             </div>
             <div>
                 <img class="h-36 mx-auto" src="{{ asset('images/icons/chat.svg') }}" alt="Chat Icon">
-                <div class="font-xetaravel text-2xl">Interact</div>
+                <div class="text-2xl">Interact</div>
                 <p class="text-gray-500 dark:text-current">
                 You can interact with Xetaravel's members in the <a class="text-primary" href="{{ route('blog.article.index') }}">Blog</a>,<a class="text-primary" href="{{ route('discuss.index') }}">Discuss</a> or directly with me via the <a class="text-primary" href="{{ route('page.contact') }}">Contact</a> page.
                 </p>
@@ -301,7 +301,7 @@
                 <div class="mb-7">
                     <img class="h-36 mx-auto" src="{{ asset('images/icons/coding.svg') }}" alt="Coding Icon">
                 </div>
-                <h2 class="font-xetaravel text-3xl dark:text-slate-600 mb-2">Install the application quickly !</h2>
+                <h2 class="text-3xl dark:text-slate-600 mb-2">Install the application quickly !</h2>
                 <p class="text-xl dark:text-slate-600">
                     You want to try my website in local ? No problem just follow theses steps and get it ready in seconds !
                 </p>
@@ -445,7 +445,7 @@
         <img src="{{ asset('images/figures/svg-glass-pot2.svg') }}" alt="SVG Glass Pot 2">
 	</figure>
     <div class="lg:container mx-auto">
-        <h2 class="text-center font-xetaravel text-4xl mb-3">
+        <h2 class="text-center text-4xl mb-3">
             <img class="inline-block" src="{{ asset('images/icons/data-science.svg') }}" alt="Data Science Icon" width="60px" height="60px">
             Used Technologies
         </h2>

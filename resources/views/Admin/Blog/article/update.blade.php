@@ -34,7 +34,7 @@
 
 <section class="m-3 lg:m-10">
     <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl font-xetaravel">
+        <h1 class="text-4xl">
             Update an Article
         </h1>
         <p class="text-gray-400 dark:text-gray-500">

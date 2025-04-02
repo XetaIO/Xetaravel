@@ -1,5 +1,5 @@
 <div class="dropdown dropdown-hover dropdown-top dropdown-middle !aspect-auto">
-    <label tabindex="0" class="text-primary font-xetaravel font-bold cursor-pointer">
+    <label tabindex="0" class="text-primary font-bold cursor-pointer">
         {{ $userName }}
     </label>
     <div tabindex="0" class="dropdown-content card card-compact shadow bg-base-100 rounded-box min-w-fit">
@@ -11,7 +11,7 @@
             </div>
             <div class="flex flex-col justify-around  min-w-[250px] ml-2">
                 <div class="card-title truncate">
-                    <a href="{{ $userProfile }}" class="text-primary font-xetaravel">{{ $userName }}</a>
+                    <a href="{{ $userProfile }}" class="text-primary">{{ $userName }}</a>
                 </div>
                 <ul class="flex">
                     <li data-tip="Last seen" class="tooltip">

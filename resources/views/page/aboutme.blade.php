@@ -98,8 +98,8 @@
     <div class="lg:container mx-auto">
         <div class="grid grid-cols-12 gap-2 mx-3 md:mx-0">
             <div class="col-span-12 md:col-span-5 md:col-start-3 mt-10 md:mt-20 text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-bold font-xetaravel text-white">Emeric Fevre</h1>
-                <h2 class="text-3xl md:text-5xl font-bold font-xetaravel text-white">I'm a <span id="aboutme-typed" class="text-primary" data-typed="Web Application Developer, Web Application Designer, Star Citizen Pilot, Geek"></span></h2>
+                <h1 class="text-4xl md:text-6xl font-bold text-white">Emeric Fevre</h1>
+                <h2 class="text-3xl md:text-5xl font-bold text-white">I'm a <span id="aboutme-typed" class="text-primary" data-typed="Web Application Developer, Web Application Designer, Star Citizen Pilot, Geek"></span></h2>
             </div>
             <div class="col-span-12 md:col-span-3">
                 <div id="parallax-aboutme" class="relative">
@@ -158,7 +158,7 @@
 
 <section id="skills" class="bg-[color:#f4f3ff] pt-20" data-aos-id="skills" data-aos="fade-in">
     <div class="lg:container mx-auto pb-28">
-        <h2 class="text-4xl uppercase font-xetaravel text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
+        <h2 class="text-4xl uppercase text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Skills
         </h2>
         <div class="grid grid-cols-12 gap-2 dark:text-[color:hsl(var(--b1)/0.8)] mx-3 md:mx-0">
@@ -225,7 +225,7 @@
 
 <section id="projects" class="mb-10 -mt-48 lg:-mt-72 relative">
     <div class="lg:container mx-auto">
-        <h2 class="text-4xl uppercase font-xetaravel text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
+        <h2 class="text-4xl uppercase text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Projects
         </h2>
 
@@ -234,7 +234,7 @@
                 <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
                     <img class="min-w-[140px] p-3" src="{{ asset('images/logo.svg') }}" alt="Xetaravel logo">
                     <div class="ml-5 overflow-hidden">
-                        <h3 class="text-3xl font-xetaravel text-primary truncate">Xetaravel</h3>
+                        <h3 class="text-3xl text-primary truncate">Xetaravel</h3>
                         <p class="overflow-hidden break-words">
                             Realization of a Blog, Forum (Discuss), Admin Panel open-source with the Laravel framework.<br/>
                             <span class="font-semibold">Source Code: </span><a class="link link-hover link-primary" href="https://github.com/XetaIO/Xetaravel">XetaIO/Xetaravel</a>

@@ -11,7 +11,7 @@
     <div class="flex flex-col items-center">
         @if (settings('app_login_enabled'))
             <div class="p-8 shadow-lg rounded-lg dark:bg-base-300">
-                <h1 class="text-3xl font-xetaravel text-center mb-2">
+                <h1 class="text-3xl text-center mb-2">
                     Login
                 </h1>
 
@@ -40,7 +40,7 @@
             </div>
         @else
             <div>
-                <h1 class="text-3xl font-xetaravel text-center mb-4">
+                <h1 class="text-3xl text-center mb-4">
                     Whoops
                 </h1>
                 <x-alert type="error" class="max-w-lg mb-4">

@@ -8,7 +8,7 @@
 @section('content')
 <div class="lg:container mx-auto mt-12 mb-5">
     <div class="text-center">
-        <h1 class="text-[14rem] font-xetaravel font-bold text-error mb-7">
+        <h1 class="text-[14rem] font-bold text-error mb-7">
             503
         </h1>
         <div class="text-xl mb-12">

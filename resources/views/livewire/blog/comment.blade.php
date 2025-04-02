@@ -36,7 +36,7 @@
             <div class="self-start mx-auto">
                 {{--  User Avatar --}}
                 <a class="avatar avatar-online m-2" href="{{ Auth::user()->profile_url }}">
-                    <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
+                    <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
                         <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
                     </figure>
                 </a>

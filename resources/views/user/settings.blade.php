@@ -23,7 +23,7 @@
 
         <div class="lg:col-span-9 col-span-12 mx-3 lg:mx-0">
             <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
-                <h2 class="divider text-2xl font-xetaravel">
+                <h2 class="divider text-2xl">
                     Change your E-mail
                 </h2>
 
@@ -52,7 +52,7 @@
 
             <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
             @if (!is_null(Auth::user()->password))
-                <h2 class="divider text-2xl font-xetaravel">
+                <h2 class="divider text-2xl">
                     Change your Password
                 </h2>
 
@@ -78,7 +78,7 @@
                     </div>
                 </x-form.form>
             @else
-                <h2 class="divider text-2xl font-xetaravel">
+                <h2 class="divider text-2xl">
                     Create a Password
                 </h2>
 
@@ -109,7 +109,7 @@
             </section>
 
             <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
-                <h2 class="divider text-2xl font-xetaravel">
+                <h2 class="divider text-2xl">
                     Delete your Account
                 </h2>
 

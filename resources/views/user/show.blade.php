@@ -18,7 +18,7 @@
     <section class="lg:container mx-auto py-6">
         <div class="grid grid-cols-1">
             <div class="col-span-12">
-                <h1 class="text-2xl text-center font-bold font-xetaravel uppercase mb-5">
+                <h1 class="text-2xl text-center font-bold uppercase mb-5">
                     {{ e($user->username) }} profile
                 </h1>
             </div>
@@ -55,7 +55,7 @@
                             @endif
                         </div>
                         {{-- User username --}}
-                        <div class="font-xetaravel font-bold text-xl">
+                        <div class="font-bold text-xl">
                             {{ $user->username }}
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                             data-tip="{{ $level['experienceNeededNextLevel'] }} experiences to go before next level.">
                             <x-icon name="fas-star" class="h-26 w-26 text-[color:var(--color-warning)]"></x-icon>
                             <div>
-                                <div class="font-bold text-2xl font-xetaravel">
+                                <div class="font-bold text-2xl">
                                     {{ $user->experiences_total }}
                                 </div>
                                 <p>
@@ -117,7 +117,7 @@
                             class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
                             <x-icon name="far-gem" class="h-26 w-26 text-primary"></x-icon>
                             <div>
-                                <div class="font-bold text-2xl font-xetaravel">
+                                <div class="font-bold text-2xl">
                                     {{ $user->rubies_total }}
                                 </div>
                                 <p>
@@ -132,7 +132,7 @@
                             class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
                             <x-icon name="far-comments" class="h-26 w-26 text-[color:#5ccc5c]"></x-icon>
                             <div>
-                                <div class="font-bold text-2xl font-xetaravel">
+                                <div class="font-bold text-2xl">
                                     {{ $user->discuss_post_count }}
                                 </div>
                                 <p>
@@ -152,7 +152,7 @@
     <section class="lg:container mx-auto py-6">
         <div class="grid grid-cols-1">
             <div class="col-span-12">
-                <h2 class="text-2xl text-center font-bold font-xetaravel uppercase mb-5">
+                <h2 class="text-2xl text-center font-bold uppercase mb-5">
                     Biography
                 </h2>
             </div>
@@ -186,7 +186,7 @@
     <section class="lg:container mx-auto py-6">
         <div class="grid grid-cols-1">
             <div class="col-span-12">
-                <h2 class="text-2xl text-center font-bold font-xetaravel uppercase mb-5">
+                <h2 class="text-2xl text-center font-bold uppercase mb-5">
                     Badges
                 </h2>
             </div>
@@ -238,7 +238,7 @@
     <section class="lg:container mx-auto py-6">
         <div class="grid grid-cols-1">
             <div class="col-span-12">
-                <h2 class="text-2xl text-center font-bold font-xetaravel uppercase mb-5">
+                <h2 class="text-2xl text-center font-bold uppercase mb-5">
                     Level
                 </h2>
             </div>
@@ -272,7 +272,7 @@
     <section class="lg:container mx-auto py-6 mb-9">
         <div class="grid grid-cols-1">
             <div class="col-span-12">
-                <h2 class="text-2xl text-center font-bold font-xetaravel uppercase mb-5">
+                <h2 class="text-2xl text-center font-bold uppercase mb-5">
                     Activity
                 </h2>
             </div>

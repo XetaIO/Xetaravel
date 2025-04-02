@@ -54,7 +54,7 @@
                             </span>
                             <a class="block" href="{{ $user->profile_url }}" title="{{ $user->username }}">
                                 <div class="avatar relative">
-                                    <div class="w-24 rounded ring ring-offset-base-100 ring-offset-2" style="{{ $i <=3 ? "--tw-ring-color: #f7a925;" : "" }}">
+                                    <div class="w-24 rounded ring-2 ring-offset-base-100 ring-offset-2" style="{{ $i <=3 ? "--tw-ring-color: #f7a925;" : "" }}">
                                         <img class="{{ $badge->icon }}" src="{{ $user->avatar_small }}" alt="{{ $user->username }} avatar" />
                                         @if ($i <= 3)
                                             <span class="absolute -top-3 -right-3">
@@ -72,15 +72,15 @@
                                     <h5 class="text-xl" style="{{ $i <= 3 ? "color:#f7a925" : "" }}">
                                         {{ $user->experiences_total }}
                                     </h5>
-                                    <span class="">
-                                        Experience
+                                    <span>
+                                        Experiences
                                     </span>
                                 </div>
                                 <div class="rounded-md border border-gray-200 dark:border-gray-700 p-4">
                                     <h5 class="text-xl" style="{{ $i <= 3 ? "color:#f7a925" : "" }}">
                                         {{ $user->discuss_post_count }}
                                     </h5>
-                                   <span class="">
+                                   <span>
                                     Posts
                                    </span>
                                 </div>

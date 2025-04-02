@@ -4,11 +4,11 @@
             {{--  User Avatar --}}
             <a class="avatar {{ $post->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $post->user->profile_url }}">
                 @if ($isSolvedPost)
-                    <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="This answer helped the author.">
+                    <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="This answer helped the author.">
                         <span class="absolute top-0 left-0 bottom-0 right-0 h-full w-full bg-white rounded-full opacity-60"></span>
                         <x-icon name="fas-check" class="w-10 h-10 absolute text-green-500 top-4 left-4" />
                 @else
-                    <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $post->user->username }} is {{ $post->user->online ? 'online' : 'offline' }}">
+                    <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $post->user->username }} is {{ $post->user->online ? 'online' : 'offline' }}">
                 @endif
                     <img class="rounded-full" src="{{ $post->user->avatar_small }}"  alt="{{ $post->user->full_name }} avatar" />
                 </figure>

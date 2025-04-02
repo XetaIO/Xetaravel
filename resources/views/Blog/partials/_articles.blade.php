@@ -8,7 +8,7 @@
     </a>
     <div>
         <header>
-            <h3 class="text-2xl lg:text-3xl font-bold font-xetaravel leading-tight mb-2">
+            <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                 <a class="link link-hover link-primary" href="{{ $article->article_url }}">
                     {{ Str::limit($article->title, 150) }}
                 </a>

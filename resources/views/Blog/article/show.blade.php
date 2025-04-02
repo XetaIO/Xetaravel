@@ -47,7 +47,7 @@
                 {{-- BlogArticle Header --}}
                 <header class="mb-6">
                     {{-- BlogArticle title --}}
-                    <h1 class="text-4xl font-xetaravel py-8">
+                    <h1 class="text-4xl py-8">
                         {{ $article->title }}
                     </h1>
 
@@ -119,7 +119,7 @@
 
                             {{--  Author Avatar --}}
                             <a class="avatar {{ $article->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $article->user->profile_url }}">
-                                <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
+                                <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
                                     <img class="rounded-full" src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
                                 </figure>
                             </a>

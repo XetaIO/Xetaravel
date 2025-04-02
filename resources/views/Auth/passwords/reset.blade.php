@@ -10,7 +10,7 @@
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3">
             <div class="flex flex-col items-center">
-                <h1 class="text-3xl font-xetaravel text-center mb-2">
+                <h1 class="text-3xl text-center mb-2">
                     Reset Password
                 </h1>
 

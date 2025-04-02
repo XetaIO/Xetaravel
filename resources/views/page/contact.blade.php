@@ -22,7 +22,7 @@
     <div class="grid grid-cols-1">
         <div class="col-span-12 mx-3 lg:mx-0">
             <div class="border border-gray-200 p-3 rounded-lg dark:bg-base-300 dark:border-gray-700">
-                <h1 class="divider font-xetaravel text-3xl mb-5">
+                <h1 class="divider text-3xl mb-5">
                     Contact
                 </h1>
                 <div class="flex justify-center mb-5">
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="col-span-12 lg:col-span-6 px-3">
-                        <h2 class="font-xetaravel text-xl mb-3">
+                        <h2 class="text-xl mb-3">
                             Contact
                         </h2>
                         <ul class="mb-8">
@@ -83,7 +83,7 @@
                             </li>
                         </ul>
 
-                        <h2 class="font-xetaravel text-xl mb-3">
+                        <h2 class="text-xl mb-3">
                             Social
                         </h2>
                         <ul class="flex flex-rows gap-2">

@@ -12,7 +12,7 @@
             <x-alert type="error" class="max-w-lg mb-4">
                 There are some errors while registering your account. Please fix these errors before to continue.
             </x-alert>
-            <h1 class="text-3xl font-xetaravel text-center mb-2">
+            <h1 class="text-3xl text-center mb-2">
                 Register with {{ Str::title(session('socialite.driver')) }}
             </h1>
 

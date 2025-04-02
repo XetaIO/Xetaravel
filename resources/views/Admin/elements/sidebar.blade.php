@@ -4,7 +4,7 @@
     <div class="menu w-80 bg-base-200 dark:bg-base-300 dark:text-slate-300 ">
         <ul class="p-4">
             <li class="hidden lg:block">
-                <a class="flex items-center justify-center font-bold text-3xl font-xetaravel  hover:bg-transparent focus:bg-transparent active:bg-transparent" href="{{ route('page.index') }}">
+                <a class="flex items-center justify-center font-bold text-3xl hover:bg-transparent focus:bg-transparent active:bg-transparent" href="{{ route('page.index') }}">
                     <img src="{{ asset('images/logo.svg') }}" alt="Xetaravel Logo" class="inline-block ">
                     <span>Xetaravel</span>
                 </a>

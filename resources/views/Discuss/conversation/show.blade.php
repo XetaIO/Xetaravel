@@ -100,7 +100,7 @@
         {{-- Conversation Posts --}}
         <div class="lg:col-span-9 col-span-12 p-6 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg">
             <div class="mb-5">
-                <h1 class="line-clamp-3 md:line-clamp-5 text-4xl font-xetaravel mb-3">
+                <h1 class="line-clamp-3 md:line-clamp-5 text-4xl mb-3">
                     {{ $conversation->title }}
                 </h1>
 
@@ -185,7 +185,7 @@
                         <div class="self-start mx-auto">
                             {{--  User Avatar --}}
                             <a class="avatar online m-2" href="{{ Auth::user()->profile_url }}">
-                                <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
+                                <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
                                     <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
                                 </figure>
                             </a>

@@ -12,7 +12,7 @@
             <div class="flex flex-col items-center">
                 @if (settings('user_email_verification_enabled'))
                     <div class="col-md-8 offset-md-2">
-                        <h1 class="text-3xl font-xetaravel text-center mb-2">
+                        <h1 class="text-3xl text-center mb-2">
                             Verify your Email
                         </h1>
 
@@ -40,7 +40,7 @@
                     </div>
                 @else
                     <div>
-                        <h1 class="text-3xl font-xetaravel text-center mb-4">
+                        <h1 class="text-3xl text-center mb-4">
                             Whoops
                         </h1>
                         <x-alert type="error" class="max-w-lg mb-4">

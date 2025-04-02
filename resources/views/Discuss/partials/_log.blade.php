@@ -15,7 +15,7 @@
     </span>
 
     {{-- User avatar --}}
-    <figure class="inline-block w-5 h-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 mr-2 xl:mr-0">
+    <figure class="inline-block w-5 h-5 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 mr-2 xl:mr-0">
         <img class="w-5 h-5 rounded-full" src="{{ $log->user->avatar_small }}"  alt="{{ $log->user->full_name }} avatar" />
     </figure>
 

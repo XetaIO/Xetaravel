@@ -3,7 +3,7 @@
     <aside class="flex flex-col items-center self-center sm:self-start mt-4">
         {{--  User Avatar --}}
         <a class="avatar {{ $comment->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $comment->user->profile_url }}">
-            <figure class="w-16 h-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $comment->user->username }} is {{ $comment->user->online ? 'online' : 'offline' }}">
+            <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $comment->user->username }} is {{ $comment->user->online ? 'online' : 'offline' }}">
                 <img class="rounded-full" src="{{ $comment->user->avatar_small }}"  alt="{{ $comment->user->full_name }} avatar" />
             </figure>
         </a>

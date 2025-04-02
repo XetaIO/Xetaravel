@@ -9,7 +9,7 @@
             </label>
         </div>
         <div class="navbar-start flex justify-center w-full lg:hidden ">
-            <a class="font-bold text-3xl font-xetaravel" href="{{ route('page.index') }}">
+            <a class="font-bold text-3xl" href="{{ route('page.index') }}">
                 <img src="{{ asset('images/logo.svg') }}" alt="Xetaravel Logo" class="inline-block ">
                 <span>Xetaravel</span>
             </a>
