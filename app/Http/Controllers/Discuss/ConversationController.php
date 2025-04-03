@@ -48,7 +48,7 @@ class ConversationController extends Controller
         $breadcrumbs = $this->breadcrumbs->addCrumb(e($conversation->title), $conversation->conversation_url);
 
         return view(
-            'Discuss::conversation.show',
+            'Discuss.conversation.show',
             compact('conversation', 'posts', 'postsWithLogs', 'breadcrumbs', 'categories')
         );
     }
