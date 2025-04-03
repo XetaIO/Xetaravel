@@ -21,7 +21,6 @@ use Illuminate\Validation\Rules\Password;
 use Xetaravel\Settings\Settings;
 use Xetaravel\View\Composers\Blog\SidebarComposer as BlogSidebarComposer;
 use Xetaravel\View\Composers\Discuss\SidebarComposer as DiscussSidebarComposer;
-use Xetaravel\View\Composers\NotificationsComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
