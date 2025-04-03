@@ -103,9 +103,8 @@ class AppServiceProvider extends ServiceProvider
         View::addNamespace('Blog', base_path() . '/resources/views/Blog');
         View::addNamespace('Auth', base_path() . '/resources/views/Auth');
         View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
-        View::composer('partials._notifications', NotificationsComposer::class);
-        View::composer('Blog::partials._sidebar', BlogSidebarComposer::class);
-        View::composer('Discuss::partials._sidebar', DiscussSidebarComposer::class);
+        View::composer('Blog.partials._sidebar', BlogSidebarComposer::class);
+        View::composer('Discuss.partials._sidebar', DiscussSidebarComposer::class);
 
         // Pagination
         //Paginator::defaultView('vendor.pagination.tailwind');
