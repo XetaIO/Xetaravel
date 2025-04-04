@@ -80,7 +80,6 @@ class Notification extends Component
         if (!$notification) {
             return;
         }
-
         $notification->delete();
 
         $this->fetchData();
