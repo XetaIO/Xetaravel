@@ -130,17 +130,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         $this->addMediaConversion('thumbnail.small')
             ->fit(Fit::Contain, 100, 100)
-            ->keepOriginalImageFormat()
+            //->keepOriginalImageFormat()
             ->nonQueued();
 
         $this->addMediaConversion('thumbnail.medium')
             ->fit(Fit::Contain, 200, 200)
-            ->keepOriginalImageFormat()
+            //->keepOriginalImageFormat()
             ->nonQueued();
 
         $this->addMediaConversion('thumbnail.big')
             ->fit(Fit::Contain, 300, 300)
-            ->keepOriginalImageFormat()
+            //->keepOriginalImageFormat()
             ->nonQueued();
     }
 

@@ -21,7 +21,7 @@ class SecurityController extends Controller
 
         $this->breadcrumbs->addCrumb(
             '<i class="fa-solid fa-user-shield mr-2"></i> Security',
-            route('users.security.index')
+            route('security.index')
         );
     }
 

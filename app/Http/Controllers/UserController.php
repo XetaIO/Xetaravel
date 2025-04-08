@@ -34,73 +34,6 @@ class UserController extends Controller
     }
 
     /**
-     * Handle a E-mail update request for the user.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    protected function updateEmail(Request $request): RedirectResponse
-    {
-        UserValidator::updateEmail($request->all())->validate();
-        UserRepository::updateEmail($request->all(), Auth::user());
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your E-mail has been updated successfully !');
-    }
-
-    /**
-     * Handle a Password update request for the user.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    protected function updatePassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        if (!Hash::check($request->input('oldpassword'), $user->password)) {
-            return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'Your current Password does not match !');
-        }
-
-        UserValidator::updatePassword($request->all())->validate();
-        UserRepository::updatePassword($request->all(), $user);
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your Password has been updated successfully !');
-    }
-
-    /**
-     * Handle a Password create request for the user.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    protected function createPassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        if (!is_null($user->password)) {
-            return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'You have already set a password.');
-        }
-
-        UserValidator::createPassword($request->all())->validate();
-        UserRepository::createPassword($request->all(), $user);
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your password has been created successfully!');
-    }
-
-    /**
      * Show the user profile page.
      *
      * @param string $slug The slug of the user.
@@ -171,49 +104,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the settings form.
-     *
-     * @return View
-     */
-    public function showSettingsForm(): View
-    {
-        $this->breadcrumbs->addCrumb(
-            '<i class="fa-solid fa-user-gear mr-2"></i> Settings',
-            route('users.user.settings')
-        );
-
-        return view('user.settings', ['breadcrumbs' => $this->breadcrumbs]);
-    }
-
-    /**
-     * Handle an update request for the user.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function update(Request $request): RedirectResponse
-    {
-        $type = $request->input('type');
-
-        switch ($type) {
-            case 'email':
-                return $this->updateEmail($request);
-
-            case 'password':
-                return $this->updatePassword($request);
-
-            case 'newpassword':
-                return $this->createPassword($request);
-
-            default:
-                return back()
-                    ->withInput()
-                    ->with('danger', 'Invalid type.');
-        }
-    }
-
-    /**
      * Handle the delete request for the user.
      *
      * @param Request $request
@@ -226,19 +116,19 @@ class UserController extends Controller
 
         if (!Hash::check($request->input('password'), $user->password)) {
             return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'Your Password does not match !');
+                ->route('user.setting.index')
+                ->error('Your Password does not match !');
         }
         Auth::logout();
 
         if ($user->delete()) {
             return redirect()
                 ->route('page.index')
-                ->with('success', 'Your Account has been deleted successfully !');
+                ->success('Your Account has been deleted successfully !');
         }
 
         return redirect()
             ->route('page.index')
-            ->with('danger', 'An error occurred while deleting your account !');
+            ->error('An error occurred while deleting your account !');
     }
 }

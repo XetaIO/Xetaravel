@@ -10,6 +10,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Masmerise\Toaster\Toaster;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Http\Requests\User\CreateRequest;
 use Xetaravel\Models\Repositories\UserRepository;
@@ -55,6 +59,9 @@ class RegisterController extends Controller
      * @param User $user The user that has been registered.
      *
      * @return void
+     *
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     protected function registered(Request $request, User $user)
     {
@@ -89,6 +96,11 @@ class RegisterController extends Controller
      * @param CreateRequest $request
      *
      * @return RedirectResponse
+     *
+     * @throws ContainerExceptionInterface
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws NotFoundExceptionInterface
      */
     public function register(CreateRequest $request): RedirectResponse
     {

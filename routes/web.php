@@ -32,7 +32,8 @@ Route::group(['middleware' => ['display']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'permission:show banished']], function () {
-    Route::get('banished', [Xetaravel\Http\Controllers\PageController::class, 'banished'])->name('page.banished');
+    Route::get('banished', [Xetaravel\Http\Controllers\PageController::class, 'banished'])
+        ->name('page.banished');
 });
 
 /*
@@ -91,32 +92,42 @@ Route::group([
 */
 Route::group(['prefix' => 'users'], function () {
 
-    Route::get('profile/@{slug}', [Xetaravel\Http\Controllers\UserController::class, 'show'])->name('users.user.show');
-    Route::get('/', [Xetaravel\Http\Controllers\UserController::class, 'index'])->name('users.user.index');
+    Route::get('profile/@{slug}', [Xetaravel\Http\Controllers\UserController::class, 'show'])
+        ->name('user.show');
+    Route::get('/', [Xetaravel\Http\Controllers\UserController::class, 'index'])
+        ->name('user.index');
 
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
         // User Routes
-        Route::get('settings', 'UserController@showSettingsForm')->name('users.user.settings');
-        Route::put('settings', 'UserController@update');
-        Route::delete('delete', 'UserController@delete')->name('users.user.delete');
+        Route::get('setting', [Xetaravel\Http\Controllers\User\SettingController::class, 'index'])
+            ->name('user.setting.index');
+        Route::delete('delete', [Xetaravel\Http\Controllers\UserController::class, 'delete'])
+            ->name('user.delete');
+
+        // Email Routes
+        Route::put('email', [Xetaravel\Http\Controllers\User\EmailController::class, 'update'])
+            ->name('user.email.update');
+
+        // Password Routes
+        Route::put('password/create', [Xetaravel\Http\Controllers\User\PasswordController::class, 'create'])
+            ->name('user.password.create');
+        Route::put('password/update', [Xetaravel\Http\Controllers\User\PasswordController::class, 'update'])
+            ->name('user.password.update');
 
         // Account Routes
-        Route::get('account', 'AccountController@index')->name('users.account.index');
-        Route::put('account', 'AccountController@update')->name('users.account.update');
+        Route::get('account', [Xetaravel\Http\Controllers\User\AccountController::class, 'index'])
+            ->name('user.account.index');
+        Route::put('account', [Xetaravel\Http\Controllers\User\AccountController::class, 'update'])
+            ->name('user.account.update');
 
         // Notification Routes
-        Route::get('notification', 'NotificationController@index')
-            ->name('users.notification.index');
-        Route::post('notification/markAsRead', 'NotificationController@markAsRead')
-            ->name('users.notification.markasread');
-        Route::post('notification/markAllAsRead', 'NotificationController@markAllAsRead')
-            ->name('users.notification.markallasread');
-        Route::delete('notification/delete/{slug?}', 'NotificationController@delete')
-            ->name('users.notification.delete');
+        Route::get('notification', [Xetaravel\Http\Controllers\User\NotificationController::class, 'index'])
+            ->name('user.notification.index');
 
         // Security Routes
-        Route::get('security', 'SecurityController@index')->name('users.security.index');
+        Route::get('security', [Xetaravel\Http\Controllers\SecurityController::class, 'index'])
+            ->name('user.security.index');
     });
 });
 

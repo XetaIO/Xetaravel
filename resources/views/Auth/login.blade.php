@@ -16,8 +16,8 @@
                 </h1>
 
                 <x-form method="post" action="{{ route('auth.login') }}">
-                    <x-input class="input-primary" name="email" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
-                    <x-password class="input-primary" name="password" label="Password" placeholder="Your Password..." required inline />
+                    <x-input name="email" label="Email" placeholder="Your E-Mail..." icon="fas-at" required autofocus inline />
+                    <x-password name="password" label="Password" placeholder="Your Password..." required inline />
                     <x-checkbox label="Remember me" name="remember" />
 
                     <div class="text-center mb-3">

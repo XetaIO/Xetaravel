@@ -1,0 +1,23 @@
+<?php
+
+namespace Xetaravel\Http\Requests\User;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
+
+class UpdatePasswordRequest extends FormRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            'current_password' => 'required|password',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password_confirmation' => 'required|same:password'
+        ];
+    }
+}

@@ -25,7 +25,7 @@
             <div class="col-span-12 mb-3 mx-3 lg:mx-0">
                 @if (Auth::user() && $user->id == Auth::id())
                     <div class="text-right">
-                        <x-button link="{{ route('users.account.index') }}" icon="fas-pencil" label="Edit my profile" class="btn-outline-primary btn-sm gap-2" />
+                        <x-button link="{{ route('user.account.index') }}" icon="fas-pencil" label="Edit my profile" class="btn-outline-primary btn-sm gap-2" />
 
                     </div>
                 @endif
@@ -169,7 +169,7 @@
                         @empty($user->biography)
                             @if (Auth::user() && $user->id == Auth::id())
                                 You don't have set a biography.
-                                <x-button link="{{ route('users.account.index') }}" icon="fas-plus" label="Add now" class="btn-outline-primary btn-sm gap-2" />
+                                <x-button link="{{ route('user.account.index') }}" icon="fas-plus" label="Add now" class="btn-outline-primary btn-sm gap-2" />
                             @else
                                 This user hasn't set a biography yet.
                             @endif

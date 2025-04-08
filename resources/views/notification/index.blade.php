@@ -30,7 +30,7 @@
                 @if ($notifications->isNotEmpty())
                     <users-notifications
                         :notifications="{{ json_encode($notifications->items()) }}"
-                        :route-delete-notification="{{ var_export(route('users.notification.delete')) }}">
+                        :route-delete-notification="{{ var_export(route('user.notification.delete')) }}">
                     </users-notifications>
 
                     <div class="col-md 12 text-xs-center">

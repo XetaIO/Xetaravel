@@ -1,7 +1,24 @@
+@props(['method' => 'GET'])
+
+@php
+    $spoofMethod = '';
+    $method = str($method)->upper();
+    if ($method == 'PUT' || $method == 'PATCH' || $method == 'DELETE') {
+        $spoofMethod = $method;
+        $method = 'POST';
+    }
+@endphp
+
 <form
     {{ $attributes->whereDoesntStartWith('class') }}
     {{ $attributes->class(['grid grid-flow-row auto-rows-min gap-3']) }}
+    method="{{ $method }}"
 >
+    <!-- METHOD -->
+    @if ($spoofMethod)
+        @method($spoofMethod)
+    @endif
+
     <!-- CSRF -->
     @csrf
 

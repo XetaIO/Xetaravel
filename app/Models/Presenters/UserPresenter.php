@@ -204,6 +204,6 @@ trait UserPresenter
             return '';
         }
 
-        return route('users.user.show', ['slug' => $this->slug]);
+        return route('user.show', ['slug' => $this->slug]);
     }
 }

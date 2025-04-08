@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\Http\Controllers;
+namespace Xetaravel\Http\Controllers\User;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Models\Newsletter;
 use Xetaravel\Models\User;
 
@@ -22,7 +23,7 @@ class NotificationController extends Controller
 
         $this->breadcrumbs->addCrumb(
             '<i class="fa-solid fa-user-tag mr-2"></i> Notifications',
-            route('users.notification.index')
+            route('user.notification.index')
         );
     }
 

@@ -20,10 +20,10 @@
                 </h1>
 
                 <x-form method="post" action="{{ route('auth.register') }}">
-                    <x-input class="input-primary" name="username" label="Username" value="{{ old('username') }}" placeholder="Your Username..." icon="fas-user" required autofocus inline />
-                    <x-input class="input-primary" name="email" label="Email" value="{{ old('email') }}" placeholder="Your E-Mail..." icon="fas-at" required inline />
-                    <x-password class="input-primary" name="password" label="Password" placeholder="Your Password..." required inline />
-                    <x-password class="input-primary" name="password_confirmation" label="Confirm Password" placeholder="Confirm your Password..." required inline />
+                    <x-input name="username" label="Username" value="{{ old('username') }}" placeholder="Your Username..." icon="fas-user" required autofocus inline />
+                    <x-input name="email" label="Email" value="{{ old('email') }}" placeholder="Your E-Mail..." icon="fas-at" required inline />
+                    <x-password name="password" label="Password" placeholder="Your Password..." required inline />
+                    <x-password name="password_confirmation" label="Confirm Password" placeholder="Confirm your Password..." required inline />
 
                     <div class="form-control mx-auto">
                         {!! NoCaptcha::display() !!}
@@ -43,7 +43,7 @@
                         <div class="mb-2">
                             <x-button link="{{ route('auth.driver.redirect', ['driver' => 'github']) }}" icon-right="fab-github" label="Register with Github" class="gap-2" />
                         </div>
-                        <div >
+                        <div>
                             <a class="link link-hover link-primary" href="{{ route('auth.login') }}">
                                 Already an account?
                             </a>
