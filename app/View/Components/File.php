@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\View\Components;
 
 use Closure;
@@ -28,7 +30,6 @@ class File extends Component
         public ?string $errorClass = 'text-error',
         public ?bool $omitError = false,
         public ?bool $firstErrorOnly = false,
-
     ) {
         $this->uuid = md5(serialize($this)) . $id;
     }

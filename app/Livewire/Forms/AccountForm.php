@@ -110,12 +110,12 @@ class AccountForm extends Form
 
             if (!is_null($this->avatar)) {
                 //if ($file = storage_path($this->avatar->store(path: 'photos'))) {
-                    $user->clearMediaCollection('avatar');
-                    $user->addMediaFromDisk($this->avatar->getRealPath())
-                        //->preservingOriginal()
-                        ->setName(mb_substr(md5($user->username), 0, 10))
-                        ->setFileName(mb_substr(md5($user->username), 0, 10))
-                        ->toMediaCollection('avatar');
+                $user->clearMediaCollection('avatar');
+                $user->addMediaFromDisk($this->avatar->getRealPath())
+                    //->preservingOriginal()
+                    ->setName(mb_substr(md5($user->username), 0, 10))
+                    ->setFileName(mb_substr(md5($user->username), 0, 10))
+                    ->toMediaCollection('avatar');
                 //}
             }
 

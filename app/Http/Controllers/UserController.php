@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaravel\Models\Badge;
-use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\User;
-use Xetaravel\Models\Validators\UserValidator;
 use Xetaravel\Utility\UserUtility;
 
 class UserController extends Controller
