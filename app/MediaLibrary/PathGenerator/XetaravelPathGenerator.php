@@ -33,10 +33,10 @@ class XetaravelPathGenerator implements PathGenerator
         return $this->getPath($media) . 'conversions/';
     }
 
-    /*
+    /**
      * Get the path for responsive images of the given media, relative to the root storage path.
      *
-     * @param \Spatie\MediaLibrary\Models\Media $media
+     * @param Media $media
      *
      * @return string
      */

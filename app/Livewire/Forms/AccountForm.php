@@ -104,19 +104,14 @@ class AccountForm extends Form
             $account->biography = $biography;
             $account->save();
 
-            //$this->avatar->store(path: 'photos');
-
-            //dd(storage_path($this->avatar->store(path: 'private/livewire-tmp')));
-
             if (!is_null($this->avatar)) {
-                //if ($file = storage_path($this->avatar->store(path: 'photos'))) {
                 $user->clearMediaCollection('avatar');
-                $user->addMediaFromDisk($this->avatar->getRealPath())
-                    //->preservingOriginal()
+
+                $user->addMedia($this->avatar->getRealPath())
+                    ->preservingOriginal()
                     ->setName(mb_substr(md5($user->username), 0, 10))
                     ->setFileName(mb_substr(md5($user->username), 0, 10))
                     ->toMediaCollection('avatar');
-                //}
             }
 
             return $account;

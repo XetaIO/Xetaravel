@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 return [
 
     /*
      * The disk on which to store added files and derived images by default. Choose
      * one or more of the disks you've configured in config/filesystems.php.
      */
-    'disk_name' => env('MEDIA_DISK', 'media'),
+    'disk_name' => env('MEDIA_DISK', 'public'),
 
     /*
      * The maximum file size of an item in bytes.
@@ -94,7 +92,7 @@ return [
      * Here you can specify which path generator should be used for the given class.
      */
     'custom_path_generators' => [
-        //Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator::class => Xetaravel\MediaLibrary\PathGenerator\XetaravelPathGenerator::class
+        // Model::class => PathGenerator::class
         // or
         // 'model_morph_alias' => PathGenerator::class
     ],
@@ -178,7 +176,7 @@ return [
      * The path where to store temporary files while performing image conversions.
      * If set to null, storage_path('media-library/temp') will be used.
      */
-    'temporary_directory_path' => storage_path('app/private/media-library-tmp') ,
+    'temporary_directory_path' => storage_path('app/private/media-library-tmp'),
 
     /*
      * The engine that should perform the image conversions.
