@@ -57,7 +57,7 @@ class PasswordController extends Controller
         if (!Hash::check($request->current_password, $user->password)) {
             return redirect()
                 ->route('user.setting.index')
-                ->with('danger', 'Your current Password does not match !');
+                ->error('Your current Password does not match !');
         }
 
         $user->password = Hash::make($request->password);

@@ -67,7 +67,7 @@ trait UserPresenter
      *
      * @return string
      */
-    protected function parse($relation, $attribute): string
+    protected function parse(?object $relation, ?string $attribute): string
     {
         if ($relation === null || $relation->{$attribute} === null) {
             return '';

@@ -75,7 +75,7 @@
                     With a registration via Github, you have the possibility to define a password to <span class="font-bold">connect also with your email and password</span> in addition to the connection via Github!
                 </x-alert>
 
-                <x-form method="put" action="{{ route('user.password.create') }}">
+                <x-form method="post" action="{{ route('user.password.create') }}">
                     <div class="grid grid-cols-12 gap-4 mb-7">
                         <div class="col-span-12 lg:col-span-6">
                             <x-password name="password" label="New Password" placeholder="Your new Password..." required />

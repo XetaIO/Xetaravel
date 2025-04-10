@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature\Http\Controllers\User;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use Xetaravel\Models\User;
+
+class SettingControllerTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected bool $seed = true;
+
+    public function test_show_success()
+    {
+        $this->be(User::find(1));
+
+        $response = $this->get('/users/profile/@admin');
+        $response->assertSuccessful();
+    }
+}

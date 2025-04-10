@@ -110,7 +110,7 @@ Route::group(['prefix' => 'users'], function () {
             ->name('user.email.update');
 
         // Password Routes
-        Route::put('password/create', [Xetaravel\Http\Controllers\User\PasswordController::class, 'create'])
+        Route::post('password/create', [Xetaravel\Http\Controllers\User\PasswordController::class, 'create'])
             ->name('user.password.create');
         Route::put('password/update', [Xetaravel\Http\Controllers\User\PasswordController::class, 'update'])
             ->name('user.password.update');
@@ -118,8 +118,6 @@ Route::group(['prefix' => 'users'], function () {
         // Account Routes
         Route::get('account', [Xetaravel\Http\Controllers\User\AccountController::class, 'index'])
             ->name('user.account.index');
-        Route::put('account', [Xetaravel\Http\Controllers\User\AccountController::class, 'update'])
-            ->name('user.account.update');
 
         // Notification Routes
         Route::get('notification', [Xetaravel\Http\Controllers\User\NotificationController::class, 'index'])

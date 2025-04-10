@@ -63,8 +63,8 @@ class AccountForm extends Form
      *
      * @var TemporaryUploadedFile|null
      */
-    #[Validate('image')]
-    public $avatar;
+    #[Validate('image|max:10240')]
+    public ?TemporaryUploadedFile $avatar = null;
 
     /**
      * Function to create the post.
@@ -106,11 +106,9 @@ class AccountForm extends Form
 
             if (!is_null($this->avatar)) {
                 $user->clearMediaCollection('avatar');
-
                 $user->addMedia($this->avatar->getRealPath())
-                    ->preservingOriginal()
                     ->setName(mb_substr(md5($user->username), 0, 10))
-                    ->setFileName(mb_substr(md5($user->username), 0, 10))
+                    ->setFileName(mb_substr(md5($user->username), 0, 10) . '.' . pathinfo($this->avatar->getRealPath(), PATHINFO_EXTENSION))
                     ->toMediaCollection('avatar');
             }
 
