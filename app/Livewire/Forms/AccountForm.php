@@ -21,6 +21,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
+    #[Validate('max:50')]
     public ?string $last_name = null;
 
     /**
@@ -28,6 +29,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
+    #[Validate('max:50')]
     public ?string $first_name = null;
 
     /**
@@ -35,6 +37,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
+    #[Validate('max:50')]
     public ?string $twitter = null;
 
     /**
@@ -42,6 +45,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
+    #[Validate('max:50')]
     public ?string $facebook = null;
 
     /**
@@ -49,6 +53,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
+    #[Validate('max:50')]
     public ?string $biography = null;
 
     /**
@@ -56,6 +61,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
+    #[Validate('max:50')]
     public ?string $signature = null;
 
     /**
@@ -63,8 +69,25 @@ class AccountForm extends Form
      *
      * @var TemporaryUploadedFile|null
      */
-    #[Validate('image|max:10240')]
+    #[Validate('nullable|image|max:10240')]
     public ?TemporaryUploadedFile $avatar = null;
+
+    /**
+     * Load the fields.
+     *
+     * @return void
+     */
+    public function load(): void
+    {
+        $user = Auth::user();
+
+        $this->first_name = $user->first_name;
+        $this->last_name = $user->last_name;
+        $this->twitter = $user->twitter;
+        $this->facebook = $user->facebook;
+        $this->biography = $user->biography;
+        $this->signature = $user->signature;
+    }
 
     /**
      * Function to create the post.
@@ -83,7 +106,6 @@ class AccountForm extends Form
                     'user_id' => $user->getKey(),
                 ],
                 [
-                    'user_id' => $user->getKey(),
                     'first_name' => $this->first_name,
                     'last_name' => $this->last_name,
                     'facebook' => $this->facebook,
@@ -108,7 +130,7 @@ class AccountForm extends Form
                 $user->clearMediaCollection('avatar');
                 $user->addMedia($this->avatar->getRealPath())
                     ->setName(mb_substr(md5($user->username), 0, 10))
-                    ->setFileName(mb_substr(md5($user->username), 0, 10) . '.' . pathinfo($this->avatar->getRealPath(), PATHINFO_EXTENSION))
+                    ->setFileName(mb_substr(md5($user->username), 0, 10) . '.' . $this->avatar->getClientOriginalExtension())
                     ->toMediaCollection('avatar');
             }
 
