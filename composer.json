@@ -37,6 +37,7 @@
         "laravel/ui": "^4.0",
         "livewire/livewire": "^3.6.1",
         "masmerise/livewire-toaster": "^2.7.0",
+        "mobiledetect/mobiledetectlib": "^4.8",
         "owenvoke/blade-fontawesome": "^2.9.0",
         "rinvex/countries": "^9.0.1",
         "spatie/laravel-analytics": "^5.5.3",

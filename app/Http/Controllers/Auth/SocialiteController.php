@@ -18,6 +18,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as ProviderUser;
 use Masmerise\Toaster\Toaster;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseSF;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
@@ -149,26 +151,49 @@ class SocialiteController extends Controller
     {
         event(new Registered($user = $this->createUser($providerUser)));
 
-        $role = Role::where('name', 'User')->first();
-        $user->assignRole($role);
-
-        if (is_null($providerUser->avatar)) {
-            // Set the default avatar.
-            $user->addMedia(public_path('images/avatar.png'))
-                ->preservingOriginal()
-                ->setName(mb_substr(md5($user->username), 0, 10))
-                ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
-                ->toMediaCollection('avatar');
-        } else {
-            $user->clearMediaCollection('avatar');
-            $user->addMediaFromUrl($providerUser->avatar)
-                ->preservingOriginal()
-                ->setName(mb_substr(md5($user->username), 0, 10))
-                ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
-                ->toMediaCollection('avatar');
-        }
+        $this->assignDefaultRole($user);
+        $this->setUserAvatar($user, $providerUser->avatar);
 
         return $user;
+    }
+
+    /**
+     * Assign the default role to the new user.
+     *
+     * @param User $user
+     *
+     * @return void
+     */
+    protected function assignDefaultRole(User $user): void
+    {
+        $role = Role::firstWhere('name', 'User');
+        $user->assignRole($role);
+    }
+
+    /**
+     * Set the avatar for the new user.
+     *
+     * @param User $user
+     * @param string|null $avatar
+     * @return void
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    protected function setUserAvatar(User $user, ?string $avatar): void
+    {
+        $user->clearMediaCollection('avatar');
+
+        $mediaAdder = $avatar
+            ? $user->addMediaFromUrl($avatar)
+            : $user->addMedia(public_path('images/avatar.png'))->preservingOriginal();
+
+        $hashedName = mb_substr(md5($user->username), 0, 10);
+        $mediaAdder
+            ->setName($hashedName)
+            ->setFileName("{$hashedName}.png")
+            ->toMediaCollection('avatar');
     }
 
     /**
@@ -241,6 +266,7 @@ class SocialiteController extends Controller
      * @param string $driver The driver used.
      *
      * @return RedirectResponse
+     * @throws FileCannotBeAdded
      */
     public function handleProviderCallback(Request $request, string $driver): RedirectResponse
     {
@@ -248,7 +274,7 @@ class SocialiteController extends Controller
 
         try {
             $user = Socialite::driver($driver)->user();
-        } catch (Exception $e) {
+        } catch (Exception) {
             $driver = Str::title($driver);
 
             return redirect()
