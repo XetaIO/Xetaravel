@@ -6,7 +6,6 @@ namespace Xetaravel\Models\Presenters;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\DB;
-use Xetaravel\Models\Session;
 
 trait UserPresenter
 {
