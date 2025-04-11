@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class SocialiteControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_show_registration_form()
     {
         $response = $this->get('/auth/github/register/form');

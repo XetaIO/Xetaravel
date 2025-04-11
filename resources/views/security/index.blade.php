@@ -33,50 +33,49 @@
                <ul>
                 @foreach ($sessions as $session)
                     <li class="flex items-center border border-gray-400  rounded p-5 mb-5 {{ $sessionId == $session->id ? 'current' : '' }}">
-                                <span class=" bg-green-500 rounded-full shadow-[0_0_10px_rgb(34,197,94)] h-2 w-2 mr-3 mt-2"></span>
+                        <span class=" bg-green-500 rounded-full shadow-[0_0_10px_rgb(34,197,94)] h-2 w-2 mr-3 mt-2"></span>
 
-                                <span class="tooltip mr-3 mt-1" data-tip="{{ $session->user_agent }}">
-                                    @if ($session->infos['device_type'] === 'phone')
-                                        <x-icon name="fas-mobile-screen-button" class="w-9 h-9" />
-                                    @elseif ($session->infos['device_type'] === 'tablet')
-                                        <x-icon name="fas-tablet-screen-button" class="w-9 h-9" />
+                        <span class="tooltip mr-3 mt-1" data-tip="{{ $session->user_agent }}">
+                            @if ($session->infos['device_type'] === 'phone')
+                                <x-icon name="fas-mobile-screen-button" class="w-9 h-9" />
+                            @elseif ($session->infos['device_type'] === 'tablet')
+                                <x-icon name="fas-tablet-screen-button" class="w-9 h-9" />
+                            @else
+                                <x-icon name="fas-desktop" class="w-9 h-9" />
+                            @endif
+                        </span>
+
+                        <div class="w-full">
+                            <p class="mb-2 font-bold">
+                                    @if ($sessionId == $session->id)
+                                        Your current session
                                     @else
-                                        <x-icon name="fas-desktop" class="w-9 h-9" />
+                                        Other session
                                     @endif
-                                </span>
+                                    <span>{{ $session->ip_address }}</span>
+                            </p>
 
-                                <div class="w-full">
-                                    <p class="mb-2 font-bold">
-                                            @if ($sessionId == $session->id)
-                                                Your current session
-                                            @else
-                                                Other session
-                                            @endif
-                                            <span>{{ $session->ip_address }}</span>
-                                    </p>
+                            <p class="mb-2">
+                                <span class="font-bold">{{ $session->infos['browser'] }} {{ $session->infos['browser_version'] }}</span>
+                                on {{ $session->infos['platform'] }} {{ $session->infos['platform_version'] }}
+                            </p>
 
-                                    <p class="mb-2">
-                                        <span class="font-bold">{{ $session->infos['browser'] }} {{ $session->infos['browser_version'] }}</span>
-                                        on {{ $session->infos['platform'] }} {{ $session->infos['platform_version'] }}
-                                    </p>
+                            <p class="mb-2">
+                                <span class="font-bold">Last seen on</span>
+                                {{ $session?->url }}
+                            </p>
 
-                                    <p class="mb-2">
-                                        <span class="font-bold">Last seen on</span>
-                                        {{ $session->url }}
-                                    </p>
+                            <p class="mb-2">
+                                <span class="font-bold">Last seen</span>
+                                {{ $session->updated_at }}
+                            </p>
 
-                                    <p class="mb-2">
-                                        <span class="font-bold">Last seen</span>
-                                        {{ $session->updated_at?->isoFormat('lll') }}
-                                    </p class="mb-2">
-
-                                    <p class="mb-2">
-                                        <span class="font-bold">Created</span>
-                                        {{ $session->created_at?->isoFormat('lll') }}
-                                    </p>
-                                </div>
-                            </li>
-
+                            <p class="mb-2">
+                                <span class="font-bold">Created</span>
+                                {{ $session->created_at }}
+                            </p>
+                        </div>
+                    </li>
                 @endforeach
                </ul>
             </section>

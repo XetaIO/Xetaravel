@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 use Xetaravel\Models\User;
 
 class VerificationControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_show()
     {
         $response = $this->get('auth/email/verify/test');

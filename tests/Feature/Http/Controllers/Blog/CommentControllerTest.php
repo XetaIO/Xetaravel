@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Blog;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CommentControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_redirect_to_comment()
     {
         $response = $this->get('/blog/comment/show/1');

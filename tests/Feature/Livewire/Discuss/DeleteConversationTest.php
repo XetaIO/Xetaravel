@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\Discuss;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
@@ -16,10 +15,6 @@ use Xetaravel\Models\User;
 
 class DeleteConversationTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_delete()
     {
         Toaster::fake();

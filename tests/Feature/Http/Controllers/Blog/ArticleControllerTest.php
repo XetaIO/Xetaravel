@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Blog;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Livewire\Blog\Comment;
 
 class ArticleControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_show_articles()
     {
         $response = $this->get('/blog');

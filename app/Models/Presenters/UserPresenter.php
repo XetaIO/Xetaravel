@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Xetaravel\Models\Presenters;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\Session;
 
 trait UserPresenter
@@ -23,7 +24,14 @@ trait UserPresenter
      */
     protected function online(): Attribute
     {
-        $online = Session::expires()->where('user_id', $this->id)->first();
+        $sessionLifetime = config('session.lifetime') * 60;
+
+        $expirationTime = time() - $sessionLifetime;
+
+        $online = DB::table(config('session.table'))
+            ->where('user_id', $this->id)
+            ->where('last_activity', '>=', $expirationTime)
+            ->first();
 
         return Attribute::make(
             get: fn () => !is_null($online)

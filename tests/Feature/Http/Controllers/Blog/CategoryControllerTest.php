@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Blog;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_show_category()
     {
         $response = $this->get('/blog/category/laravel.1');

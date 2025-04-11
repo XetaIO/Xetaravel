@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\DatabaseNotification;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -15,10 +14,6 @@ use Xetaravel\Notifications\BadgeNotification;
 
 class NotificationTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_user_has_notification()
     {
         $user = User::find(1);

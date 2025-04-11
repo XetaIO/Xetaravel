@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\Discuss;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Livewire\Livewire;
 use Masmerise\Toaster\Toaster;
@@ -16,10 +15,6 @@ use Xetaravel\Models\User;
 
 class DeletePostTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_update_modal()
     {
         $discussPost = DiscussPost::find(2);

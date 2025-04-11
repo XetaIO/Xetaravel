@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Models\User;
 
 class UserControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_show_success()
     {
         $user = User::find(1);

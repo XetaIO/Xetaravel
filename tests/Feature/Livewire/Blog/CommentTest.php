@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\Blog;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
@@ -15,10 +14,6 @@ use Xetaravel\Models\User;
 
 class CommentTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_create_comment()
     {
         Toaster::fake();

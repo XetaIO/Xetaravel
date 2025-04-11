@@ -26,8 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
             Xetaio\IpTraceable\Http\Middleware\IpTraceable::class,
-            Xetaravel\Http\Middleware\PackagistVersion::class,
-            Xetaravel\Http\Middleware\SessionLogs::class,
+            Xetaravel\Http\Middleware\PackagistVersion::class
         ]);
 
         $middleware->alias([

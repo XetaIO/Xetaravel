@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
@@ -14,10 +13,6 @@ use Xetaravel\Models\User;
 
 class UpdateAccountTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_page_contains_livewire_component()
     {
         $this->actingAs(User::find(1));

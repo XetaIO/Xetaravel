@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\Discuss;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Xetaravel\Livewire\Discuss\Conversation;
@@ -12,10 +11,6 @@ use Xetaravel\Models\User;
 
 class ConversationTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_page_contains_livewire_component()
     {
         $user = User::find(1);

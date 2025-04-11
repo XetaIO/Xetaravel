@@ -22,7 +22,13 @@ return new class () extends Migration {
             $table->text('payload');
             $table->string('url')->nullable();
             $table->string('method', 10)->nullable();
+            $table->string('platform')->nullable();
+            $table->string('platform_version')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('browser_version')->nullable();
+            $table->string('device_type')->nullable();
             $table->integer('last_activity')->index();
+
             $table->timestamps();
         });
     }

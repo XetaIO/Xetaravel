@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Models\User;
@@ -12,10 +11,6 @@ use Mockery;
 
 class EmailControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_update_the_authenticated_user_email()
     {
         Toaster::fake();

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Services;
 
 use Xetaravel\Services\DeviceDetectorService;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class DeviceDetectorServiceTest extends TestCase
 {
@@ -17,7 +17,7 @@ class DeviceDetectorServiceTest extends TestCase
         $this->deviceDetector = new DeviceDetectorService();
     }
 
-    public function testGetPlatform()
+    public function test_get_platform()
     {
         $userAgents = $this->userAgentProvider();
 
@@ -27,7 +27,7 @@ class DeviceDetectorServiceTest extends TestCase
         }
     }
 
-    public function testGetPlatformVersion()
+    public function test_get_platform_version()
     {
         $userAgents = $this->userAgentProvider();
 
@@ -37,7 +37,7 @@ class DeviceDetectorServiceTest extends TestCase
         }
     }
 
-    public function testGetBrowser()
+    public function test_get_browser()
     {
         $userAgents = $this->userAgentProvider();
 
@@ -47,7 +47,7 @@ class DeviceDetectorServiceTest extends TestCase
         }
     }
 
-    public function testGetBrowserVersion()
+    public function test_get_browser_version()
     {
         $userAgents = $this->userAgentProvider();
 
@@ -57,7 +57,7 @@ class DeviceDetectorServiceTest extends TestCase
         }
     }
 
-    public function testGetDeviceType()
+    public function test_get_device_type()
     {
         $userAgents = $this->deviceTypeProvider();
 
@@ -67,7 +67,7 @@ class DeviceDetectorServiceTest extends TestCase
         }
     }
 
-    public function userAgentProvider(): array
+    protected function userAgentProvider(): array
     {
         return [
             ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'Windows', '10.0', 'Chrome', '91.0.4472.124', 'desktop'],
@@ -76,7 +76,7 @@ class DeviceDetectorServiceTest extends TestCase
         ];
     }
 
-    public function deviceTypeProvider(): array
+    protected function deviceTypeProvider(): array
     {
         return [
             ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 'desktop'],

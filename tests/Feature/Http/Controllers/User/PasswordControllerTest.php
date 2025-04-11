@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Masmerise\Toaster\Toaster;
 use Mockery;
@@ -13,10 +12,6 @@ use Xetaravel\Models\User;
 
 class PasswordControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_create_password_if_not_set()
     {
         Toaster::fake();

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Masmerise\Toaster\Toaster;
 use Tests\TestCase;
 use Xetaravel\Models\Repositories\SettingRepository;
@@ -13,10 +12,6 @@ use Xetaravel\Settings\Settings;
 
 class LoginControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected bool $seed = true;
-
     public function test_login_screen_can_be_rendered(): void
     {
         $response = $this->get('/auth/login');

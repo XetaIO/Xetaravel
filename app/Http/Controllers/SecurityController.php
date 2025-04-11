@@ -6,9 +6,10 @@ namespace Xetaravel\Http\Controllers;
 
 use Detection\Exception\MobileDetectException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Xetaravel\Models\Session;
 use Xetaravel\Services\DeviceDetectorService;
 
 class SecurityController extends Controller
@@ -40,7 +41,7 @@ class SecurityController extends Controller
      */
     public function index(Request $request): View
     {
-        $records = Session::expires()->where('user_id', Auth::id())->get();
+        $records = $this->getActiveSessions();
 
         $sessions = [];
 
@@ -64,5 +65,22 @@ class SecurityController extends Controller
             'sessionId' => $sessionId,
             'breadcrumbs' => $this->breadcrumbs
         ]);
+    }
+
+    /**
+     * Récupère toutes les sessions non expirées de l'utilisateur connecté.
+     *
+     * @return Collection
+     */
+    public function getActiveSessions()
+    {
+        $sessionLifetime = config('session.lifetime') * 60;
+
+        $expirationTime = time() - $sessionLifetime;
+
+        return DB::table(config('session.table'))
+            ->where('user_id', Auth::id())
+            ->where('last_activity', '>', $expirationTime)
+            ->get();
     }
 }
