@@ -2,7 +2,7 @@
     <article id="post-{{ $post->id }}" class="flex flex-col sm:flex-row {{ $isSolvedPost ? 'bg-green-500 rounded' : ''}}">
         <aside class="flex flex-col items-center self-center sm:self-start mt-4">
             {{--  User Avatar --}}
-            <a class="avatar {{ $post->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $post->user->profile_url }}">
+            <a class="avatar {{ $post->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $post->user->show_url }}">
                 @if ($isSolvedPost)
                     <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="This answer helped the author.">
                         <span class="absolute top-0 left-0 bottom-0 right-0 h-full w-full bg-white rounded-full opacity-60"></span>
@@ -44,7 +44,7 @@
                     <x-user.user
                         :user-name="$post->user->full_name"
                         :user-avatar-small="$post->user->avatar_small"
-                        :user-profile="$post->user->profile_url"
+                        :user-profile="$post->user->show_url"
                         :user-last-login="$post->user->last_login_date->diffForHumans()"
                         :user-registered="$post->user->created_at->diffForHumans()"
                     />

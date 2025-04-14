@@ -16,42 +16,6 @@ class ArticleRepository
      */
     public static function sidebar(): Collection
     {
-        return BlogArticle::latest()->take(config('xetaravel.blog.articles_sidebar'))->get();
-    }
-
-    /**
-     * Create the new article and save it.
-     *
-     * @param array $data The data used to create the article.
-     *
-     * @return BlogArticle
-     */
-    public static function create(array $data): BlogArticle
-    {
-        return BlogArticle::create([
-            'title' => $data['title'],
-            'category_id' => $data['category_id'],
-            'is_display' => isset($data['is_display']) ? true : false,
-            'content' => $data['content']
-        ]);
-    }
-
-    /**
-     * Update the article data and save it.
-     *
-     * @param array $data The data used to update the article.
-     * @param BlogArticle $article The article to update.
-     *
-     * @return BlogArticle
-     */
-    public static function update(array $data, BlogArticle $article): BlogArticle
-    {
-        $article->title = $data['title'];
-        $article->category_id = $data['category_id'];
-        $article->is_display = isset($data['is_display']) ? true : false;
-        $article->content = $data['content'];
-        $article->save();
-
-        return $article;
+        return BlogArticle::with('category', 'user')->latest()->take(config('xetaravel.blog.articles_sidebar'))->get();
     }
 }

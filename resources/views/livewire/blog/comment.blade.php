@@ -10,14 +10,9 @@
     @forelse ($comments as $comment)
         @include('Blog::partials._comment', ['comment' => $comment, 'article' => $article])
     @empty
-        <div class="alert alert-info shadow-lg mb-5">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span>
-                    There are no comments yet, post the first reply !
-                </span>
-            </div>
-        </div>
+        <x-alert type="info">
+            There are no comments yet, post the first reply !
+        </x-alert>
     @endforelse
 
     {{-- Comments pagination --}}
@@ -35,7 +30,7 @@
         <div class="flex flex-col sm:flex-row items-center">
             <div class="self-start mx-auto">
                 {{--  User Avatar --}}
-                <a class="avatar avatar-online m-2" href="{{ Auth::user()->profile_url }}">
+                <a class="avatar avatar-online m-2" href="{{ Auth::user()->show_url }}">
                     <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
                         <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
                     </figure>
@@ -44,7 +39,7 @@
 
             {{-- Editor --}}
             <div class="self-start ml-3 mt-3 w-full">
-                <x-markdown wire:model.live="form.content" name="form.content" label="Comment" placeholder="Your message here..." />
+                <x-markdown wire:model="form.content" name="form.content" label="Comment" placeholder="Your message here..." />
 
                 <x-button wire:click="create" icon="fas-pencil" label="Comment" class="btn-primary gap-2" spinner />
             </div>

@@ -14,11 +14,10 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => [
         'auth',
-        'permission:access.administration',
-        'permission:access.site'
+        'permission:access administration'
     ]
 ], function () {
-    Route::get('/', 'PageController@index')->name('admin.page.index');
+    Route::get('/', [Xetaravel\Http\Controllers\Admin\PageController::class, 'index'])->name('admin.page.index');
 
     /*
     |--------------------------------------------------------------------------
@@ -28,25 +27,12 @@ Route::group([
     Route::group([
         'namespace' => 'Blog',
         'prefix' => 'blog',
-        'middleware' => ['permission:manage.blog']
+        'middleware' => ['permission:manage blog article']
     ], function () {
 
         // BlogArticle Routes
-        Route::get('article', 'ArticleController@index')
+        Route::get('article', [Xetaravel\Http\Controllers\Admin\Blog\ArticleController::class, 'index'])
             ->name('admin.blog.article.index');
-
-        Route::get('article/create', 'ArticleController@showCreateForm')
-            ->name('admin.blog.article.create');
-        Route::post('article/create', 'ArticleController@create')
-            ->name('admin.blog.article.create');
-
-        Route::get('article/update/{slug}.{id}', 'ArticleController@showUpdateForm')
-            ->name('admin.blog.article.edit');
-        Route::put('article/update/{id}', 'ArticleController@update')
-            ->name('admin.blog.article.update');
-
-        Route::delete('article/delete/{id}', 'ArticleController@delete')
-            ->name('admin.blog.article.delete');
 
         // BlogCategory Routes
         Route::get('category', 'CategoryController@index')
@@ -61,7 +47,7 @@ Route::group([
     Route::group([
         'namespace' => 'Discuss',
         'prefix' => 'discuss',
-        'middleware' => ['permission:manage.discuss']
+        'middleware' => ['permission:manage discuss category']
     ], function () {
 
         // BlogCategory Routes
@@ -77,92 +63,91 @@ Route::group([
     Route::group([
         'namespace' => 'User',
         'prefix' => 'user',
-        'middleware' => ['permission:manage.users']
+        'middleware' => ['permission:manage user']
     ], function () {
 
         // User Routes
-        Route::get('/', 'UserController@index')->name('admin.user.user.index');
-        Route::get('search', 'UserController@search')->name('admin.user.user.search');
+        Route::get('/', 'UserController@index')->name('admin.user.index');
+        Route::get('search', 'UserController@search')->name('admin.user.search');
 
         Route::get('update/{slug}.{id}', 'UserController@showUpdateForm')
-            ->name('admin.user.user.edit');
+            ->name('admin.user.edit');
         Route::put('update/{id}', 'UserController@update')
-            ->name('admin.user.user.update');
+            ->name('admin.user.update');
 
         Route::delete('delete/{id}', 'UserController@delete')
-            ->name('admin.user.user.delete');
+            ->name('admin.user.delete');
 
         Route::delete('deleteAvatar/{id}', 'UserController@deleteAvatar')
-            ->name('admin.user.user.deleteavatar');
+            ->name('admin.user.deleteavatar');
     });
 
     /*
     |--------------------------------------------------------------------------
-    | Role Routes
+    | Role & Permission Routes
     |--------------------------------------------------------------------------
     */
     Route::group([
         'namespace' => 'Role',
-        'prefix' => 'role',
-        'middleware' => ['permission:manage.roles']
+        'middleware' => ['permission:manage role|manage permission']
     ], function () {
 
         // Role Routes
-        Route::get('role', 'RoleController@index')->name('admin.role.role.index');
+        Route::get('role', 'RoleController@index')->name('admin.role.index');
 
         Route::get('role/create', 'RoleController@showCreateForm')
-            ->name('admin.role.role.create');
+            ->name('admin.role.create');
         Route::post('role/create', 'RoleController@create')
-            ->name('admin.role.role.create');
+            ->name('admin.role.create');
 
         Route::get('role/update/{id}', 'RoleController@showUpdateForm')
-            ->name('admin.role.role.edit');
+            ->name('admin.role.edit');
         Route::put('role/update/{id}', 'RoleController@update')
-            ->name('admin.role.role.update');
+            ->name('admin.role.update');
 
         Route::delete('role/delete/{id}', 'RoleController@delete')
-            ->name('admin.role.role.delete');
+            ->name('admin.role.delete');
 
         // Permission Route
-        Route::get('permission', 'PermissionController@index')->name('admin.role.permission.index');
+        Route::get('permission', 'PermissionController@index')->name('admin.permission.index');
 
         Route::get('permission/create', 'PermissionController@showCreateForm')
-            ->name('admin.role.permission.create');
+            ->name('admin.permission.create');
         Route::post('permission/create', 'PermissionController@create')
-            ->name('admin.role.permission.create');
+            ->name('admin.permission.create');
 
         Route::get('permission/update/{id}', 'PermissionController@showUpdateForm')
-            ->name('admin.role.permission.edit');
+            ->name('admin.permission.edit');
         Route::put('permission/update/{id}', 'PermissionController@update')
-            ->name('admin.role.permission.update');
+            ->name('admin.permission.update');
 
         Route::delete('permission/delete/{id}', 'PermissionController@delete')
-            ->name('admin.role.permission.delete');
+            ->name('admin.permission.delete');
     });
 
     /*
     |--------------------------------------------------------------------------
-    | Settings Routes
+    | Setting Routes
     |--------------------------------------------------------------------------
     */
     Route::group([
-        'middleware' => ['permission:manage.settings']
+        'middleware' => ['permission:manage setting']
     ], function () {
 
         // Settings Routes
-        Route::get('settings', 'SettingController@index')->name('admin.setting.index');
+        Route::get('setting', 'SettingController@index')->name('admin.setting.index');
 
-        Route::get('settings/create', 'SettingController@showCreateForm')
+        Route::get('setting/create', 'SettingController@showCreateForm')
             ->name('admin.setting.create');
-        Route::post('settings/create', 'SettingController@create')
+        Route::post('setting/create', 'SettingController@create')
             ->name('admin.setting.create');
 
-        Route::get('settings/update/{id}', 'SettingController@showUpdateForm')
+        Route::get('setting/update/{id}', 'SettingController@showUpdateForm')
             ->name('admin.setting.edit');
-        Route::put('settings/update/{id}', 'SettingController@update')
+        Route::put('setting/update/{id}', 'SettingController@update')
             ->name('admin.setting.update');
 
-        Route::delete('settings/delete/{id}', 'SettingController@delete')
+        Route::delete('setting/delete/{id}', 'SettingController@delete')
             ->name('admin.setting.delete');
     });
 });

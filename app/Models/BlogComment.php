@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\CommentPresenter;
-use Xetaravel\Observers\CommentObserver;
+use Xetaravel\Observers\BlogCommentObserver;
 
-#[ObservedBy([CommentObserver::class])]
+#[ObservedBy([BlogCommentObserver::class])]
 class BlogComment extends Model
 {
     use CommentPresenter;
@@ -49,7 +49,7 @@ class BlogComment extends Model
     #[CountedBy(as: 'blog_comment_count')]
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     /**

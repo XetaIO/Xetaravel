@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\Notifiable;
@@ -41,6 +42,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use InteractsWithMedia;
     use MustVerifyEmail;
     use Notifiable;
+    use SoftDeletes;
     use UserPresenter;
 
     /**
@@ -76,7 +78,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $appends = [
-        'profile_url',
+        'show_url',
 
         // Media Model
         'avatar_small',

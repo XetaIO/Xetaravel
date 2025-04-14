@@ -16,9 +16,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Presenters\ArticlePresenter;
-use Xetaravel\Observers\ArticleObserver;
+use Xetaravel\Observers\BlogArticleObserver;
 
-#[ObservedBy([ArticleObserver::class])]
+#[ObservedBy([BlogArticleObserver::class])]
 class BlogArticle extends Model implements HasMedia
 {
     use ArticlePresenter;
@@ -36,7 +36,7 @@ class BlogArticle extends Model implements HasMedia
         'title',
         'user_id',
         'blog_category_id',
-        'is_display',
+        'published_at',
         'content'
     ];
 
@@ -46,7 +46,8 @@ class BlogArticle extends Model implements HasMedia
      * @var array
      */
     protected $appends = [
-        'article_url',
+        'show_url',
+        'is_display',
 
         // Media Model
         'article_banner'
@@ -58,7 +59,8 @@ class BlogArticle extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-            'is_display' => 'boolean'
+            'published_at' => 'datetime',
+            'is_display' => 'boolean',
         ];
     }
 
@@ -106,7 +108,7 @@ class BlogArticle extends Model implements HasMedia
     #[CountedBy(as: 'blog_article_count')]
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     /**

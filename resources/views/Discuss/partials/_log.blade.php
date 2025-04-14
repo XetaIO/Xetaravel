@@ -23,7 +23,7 @@
     <x-user.user
         :user-name="$log->user->full_name"
         :user-avatar-small="$log->user->avatar_small"
-        :user-profile="$log->user->profile_url"
+        :user-profile="$log->user->show_url"
         :user-last-login="$log->user->last_login_date->diffForHumans()"
         :user-registered="$log->user->created_at->diffForHumans()"
     />
@@ -35,14 +35,14 @@
     {{-- BlogCategory Changed --}}
     @if ($log->type == 'category')
         added the
-        <a href="{{ $log->newCategory->category_url }}" class="flex items-center gap-1 px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
+        <a href="{{ $log->newCategory->show_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
             @if (!is_null($log->newCategory->icon))
                 <x-icon name="{{ $log->newCategory->icon }}" />
             @endif
             {{ $log->newCategory->title }}
         </a>
         and removed
-        <a href="{{ $log->oldCategory->category_url }}" class="flex items-center gap-1 px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
+        <a href="{{ $log->oldCategory->show_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
             @if (!is_null($log->oldCategory->icon))
                 <x-icon name="{{ $log->oldCategory->icon }}" />
             @endif
@@ -75,7 +75,7 @@
         <x-user.user
             :user-name="$log->postUser->full_name"
             :user-avatar-small="$log->postUser->avatar_small"
-            :user-profile="$log->postUser->profile_url"
+            :user-profile="$log->postUser->show_url"
             :user-last-login="$log->postUser->last_login_date->diffForHumans()"
             :user-registered="$log->postUser->created_at->diffForHumans()"
         />

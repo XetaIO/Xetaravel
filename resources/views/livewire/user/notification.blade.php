@@ -18,7 +18,7 @@
 
                 <ul class="max-h-[350px] overflow-y-scroll">
                     @forelse($notifications as $notification)
-                        <li class="flex items-center rounded mb-3 mr-2 pt-2 hover:bg-slate-200 dark:hover:hover:bg-base-content/10" wire:key="{{ $notification->id }}">
+                        <li class="flex items-center rounded mb-3 mr-2 py-2 hover:bg-slate-200 dark:hover:hover:bg-base-content/10" wire:key="{{ $notification->id }}">
                             <div class="indicator w-full">
                                 <!-- URL -->
                                 <a

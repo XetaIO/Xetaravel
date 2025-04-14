@@ -9,9 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Xetaravel\Models\BlogArticle;
-use Xetaravel\Models\Scopes\DisplayScope;
+use Xetaravel\Models\Scopes\PublishedScope;
 
-class EnableDisplayScopeMiddleware
+class EnablePublishedScopeMiddleware
 {
     /**
      * Handle an incoming request.
@@ -23,7 +23,7 @@ class EnableDisplayScopeMiddleware
      */
     public function handle(Request $request, Closure $next): Response|RedirectResponse
     {
-        BlogArticle::addGlobalScope(new DisplayScope());
+        BlogArticle::addGlobalScope(new PublishedScope());
 
         return $next($request);
     }

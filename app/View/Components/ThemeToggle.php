@@ -13,8 +13,18 @@ class ThemeToggle extends Component
     public string $uuid;
 
     public function __construct(
+        public ?string $id = null,
+        public ?string $value = null,
+        public ?string $light = "Light",
+        public ?string $dark = "Dark",
+        public ?string $lightTheme = "light",
+        public ?string $darkTheme = "dark",
+        public ?string $lightClass = "light",
+        public ?string $darkClass = "dark",
+        public ?bool $withLabel = false,
+
     ) {
-        $this->uuid = md5(serialize($this));
+        $this->uuid = md5(serialize($this)) . $id;
     }
 
     /**

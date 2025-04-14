@@ -57,7 +57,7 @@ class BadgeNotification extends Notification implements ShouldQueue
             'icon' => $this->badge->icon,
             'color' => $this->badge->color,
             'type' => 'badge',
-            'link' => $notifiable->profile_url
+            'link' => $notifiable->show_url
         ];
     }
 }

@@ -115,7 +115,7 @@ class BlogComment extends Model
 }
 ```',
                 'blog_comment_count' => 1,
-                'is_display' => 1,
+                'published_at' => $now,
                 'created_at' => $now,
                 'updated_at' => $now
             ]

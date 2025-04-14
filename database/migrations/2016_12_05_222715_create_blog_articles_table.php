@@ -22,7 +22,7 @@ return new class () extends Migration {
             $table->string('slug')->unique()->index();
             $table->longText('content');
             $table->integer('blog_comment_count')->unsigned()->default(0);
-            $table->boolean('is_display')->default(true);
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
 

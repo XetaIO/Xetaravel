@@ -30,7 +30,7 @@ class BlogCategory extends Model
      * @var array
      */
     protected $appends = [
-        'category_url'
+        'show_url'
     ];
 
     /**

@@ -20,7 +20,7 @@ class Controller extends BaseController
             // Whether to enable or not the `data-position` attribute.
             'position' => false,
             // The divider symbol between the crumbs or `null` to disable it.
-            'divider' => '<i class="fa-solid fa-chevron-right mx-2"></i>',
+            'divider' => '<svg class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg>',
             // The DOM-Element used to generate the divider element.
             'dividerElement' => 'li',
             // Classes applied to the item `dividerElement` element.
@@ -58,6 +58,9 @@ class Controller extends BaseController
                 'text-sm text-gray-400 inline-flex items-center dark:text-gray-500 ml-1 font-medium'
             ]
         ]);
-        $this->breadcrumbs->addCrumb('<i class="fa-solid fa-gauge mr-2"></i> Dashboard', route('admin.page.index'));
+        $this->breadcrumbs->addCrumb(
+            '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg> Dashboard',
+            route('admin.page.index')
+        );
     }
 }

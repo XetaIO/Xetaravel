@@ -37,7 +37,7 @@ class BlogCommentPolicy
      */
     public function create(User $user, BlogArticle $article): bool
     {
-        return $article->is_display === true &&
+        return $article->published_at <= now() &&
             $user->hasPermissionTo('create blog comment');
     }
 

@@ -20,6 +20,7 @@ use Xetaravel\Livewire\Traits\WithSorting;
 use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\BlogComment;
 use Xetaravel\Models\User;
+use Throwable;
 
 class Comment extends Component
 {
@@ -150,7 +151,7 @@ class Comment extends Component
      *
      * @return void
      *
-     * @throws AuthorizationException
+     * @throws AuthorizationException|Throwable
      */
     public function create(): void
     {

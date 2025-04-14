@@ -63,7 +63,7 @@ class DiscussPost extends Model
     #[CountedBy(as: 'discuss_post_count')]
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     /**
@@ -84,6 +84,6 @@ class DiscussPost extends Model
      */
     public function editedUser(): HasOne
     {
-        return $this->hasOne(User::class, 'id', 'edited_user_id');
+        return $this->hasOne(User::class, 'id', 'edited_user_id')->withTrashed();
     }
 }

@@ -17,6 +17,18 @@ trait UserPresenter
     protected string $defaultAvatar = '/images/avatar.png';
 
     /**
+     * Get the user's username.
+     *
+     * @return Attribute
+     */
+    protected function username(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->trashed() ? 'Deleted' : $value
+        );
+    }
+
+    /**
      * Get the status of the user : online or offline
      *
      * @return Attribute
@@ -121,6 +133,10 @@ trait UserPresenter
      */
     public function getFullNameAttribute(): string
     {
+        if ($this->trashed()) {
+            return $this->username;
+        }
+
         $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
 
         if (empty(mb_trim($fullName))) {
@@ -203,14 +219,14 @@ trait UserPresenter
     /**
      * Get the profile url.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getProfileUrlAttribute(): string
+    protected function showUrl(): Attribute
     {
-        if (!isset($this->slug)) {
-            return '';
-        }
+        $slug = $this->trashed() ? mb_strtolower($this->username) : $this->slug;
 
-        return route('user.show', ['slug' => $this->slug]);
+        return Attribute::make(
+            get: fn ($value) => route('user.show', ['slug' => $slug])
+        );
     }
 }

@@ -76,7 +76,7 @@
 
                     {{--  User Avatar --}}
                     <div class="hidden sm:flex flex-col">
-                        <a class="avatar {{ $conversation->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $conversation->user->profile_url }}">
+                        <a class="avatar {{ $conversation->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $conversation->user->show_url }}">
                             <figure class="w-12 h-12 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $conversation->user->username }} is {{ $conversation->user->online ? 'online' : 'offline' }}">
                                 <img class="rounded-full" src="{{ $conversation->user->avatar_small }}"  alt="{{ $conversation->user->full_name }} avatar" />
                             </figure>
@@ -106,7 +106,7 @@
                                     <x-user.user
                                         :user-name="$conversation->lastPost->user->full_name"
                                         :user-avatar-small="$conversation->lastPost->user->avatar_small"
-                                        :user-profile="$conversation->lastPost->user->profile_url"
+                                        :user-profile="$conversation->lastPost->user->show_url"
                                         :user-last-login="$conversation->lastPost->user->last_login_date->diffForHumans()"
                                         :user-registered="$conversation->lastPost->user->created_at->diffForHumans()"
                                     />
@@ -119,7 +119,7 @@
                                     <x-user.user
                                         :user-name="$conversation->user->full_name"
                                         :user-avatar-small="$conversation->user->avatar_small"
-                                        :user-profile="$conversation->user->profile_url"
+                                        :user-profile="$conversation->user->show_url"
                                         :user-last-login="$conversation->user->last_login_date->diffForHumans()"
                                         :user-registered="$conversation->user->created_at->diffForHumans()"
                                     />
@@ -159,7 +159,7 @@
                     {{-- Category & Users avatars --}}
                     <div class="flex flex-col gap-2 items-center">
                         {{-- Category --}}
-                        <a class="badge tooltip inline-flex text-white font-semibold gap-2" href="{{ $conversation->category->category_url }}" data-tip="Category" style="background-color: {{ $conversation->category->color }};">
+                        <a class="badge tooltip inline-flex text-white font-semibold gap-2" href="{{ $conversation->category->show_url }}" data-tip="Category" style="background-color: {{ $conversation->category->color }};">
                             @if (!is_null($conversation->category->icon))
                                 <x-icon name="{{ $conversation->category->icon }}" class="h-3 w-3 inline" />
                             @endif

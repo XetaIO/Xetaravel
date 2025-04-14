@@ -2,7 +2,7 @@
 
     <aside class="flex flex-col items-center self-center sm:self-start mt-4">
         {{--  User Avatar --}}
-        <a class="avatar {{ $comment->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $comment->user->profile_url }}">
+        <a class="avatar {{ $comment->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $comment->user->show_url }}">
             <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $comment->user->username }} is {{ $comment->user->online ? 'online' : 'offline' }}">
                 <img class="rounded-full" src="{{ $comment->user->avatar_small }}"  alt="{{ $comment->user->full_name }} avatar" />
             </figure>
@@ -28,7 +28,7 @@
                 <x-user.user
                     :user-name="$comment->user->full_name"
                     :user-avatar-small="$comment->user->avatar_small"
-                    :user-profile="$comment->user->profile_url"
+                    :user-profile="$comment->user->show_url"
                     :user-last-login="$comment->user->last_login_date->diffForHumans()"
                     :user-registered="$comment->user->created_at->diffForHumans()"
                 />
@@ -75,14 +75,14 @@
                         </div>
                         <ul tabindex="0" class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                             {{-- Moderation actions --}}
-                            {{--  @can('update', $comment)
+                            {{-- @can('update', $comment)
                                 <li>
-                                    <a class="dropdown-item postUpdateButton" data-id="{{ $comment->getKey() }}" data-route="{{ route('discuss.post.editTemplate', ['id' => $comment->getKey()]) }}" href="#">
+                                    <a class="dropdown-item postUpdateButton" data-content="{{ $comment->getKey() }}" href="#">
                                         <i class="fa fa-pencil"></i>
                                         Edit
                                     </a>
                                 </li>
-                            @endcan--}}
+                            @endcan --}}
                             @can('delete', [$comment, $article])
                                 <li class="text-center opacity-70">
                                     Moderation

@@ -30,7 +30,7 @@ class Badge extends Model
      */
     public function users(): BelongsTomany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTrashed();
     }
 
     /**

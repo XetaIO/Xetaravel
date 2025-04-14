@@ -150,11 +150,13 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        if (!$user->hasVerifiedEmail()) {
-            return redirect(route('auth.verification.notice', base64_encode($user->getEmailForVerification())));
-        }
-
         if ($this->attemptLogin($request)) {
+            if (!$request->user()->hasVerifiedEmail()) {
+                $this->logout($request);
+
+                return redirect(route('auth.verification.notice', base64_encode($user->getEmailForVerification())));
+            }
+
             return $this->sendLoginResponse($request);
         }
 

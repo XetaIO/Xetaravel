@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models\Presenters;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait DiscussCategoryPresenter
 {
     /**
      * Get the category url.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getCategoryUrlAttribute(): string
+    protected function showUrl(): Attribute
     {
-        if ($this->getKey() === null) {
-            return '';
-        }
-
-        return route('discuss.index', ['c' => $this->getKey()]);
+        return Attribute::make(
+            get: fn ($value) => route('discuss.index', ['c' => $this->getKey()])
+        );
     }
 }

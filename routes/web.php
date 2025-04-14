@@ -122,9 +122,11 @@ Route::group(['prefix' => 'users'], function () {
         // Notification Routes
         Route::get('notification', [Xetaravel\Http\Controllers\User\NotificationController::class, 'index'])
             ->name('user.notification.index');
+        Route::delete('notification/delete/{slug}', [Xetaravel\Http\Controllers\User\NotificationController::class, 'delete'])
+            ->name('user.notification.delete');
 
         // Security Routes
-        Route::get('security', [Xetaravel\Http\Controllers\SecurityController::class, 'index'])
+        Route::get('security', [Xetaravel\Http\Controllers\User\SecurityController::class, 'index'])
             ->name('user.security.index');
     });
 });
@@ -153,18 +155,6 @@ Route::group([
     // BlogComment Routes
     Route::get('comment/show/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'show'])
         ->name('blog.comment.show');
-
-    Route::group(['middleware' => ['auth']], function () {
-        // BlogComment Routes
-        Route::post('comment/create', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'create'])
-            ->name('blog.comment.create');
-        Route::delete('comment/delete/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'delete'])
-            ->name('blog.comment.delete');
-        Route::put('comment/edit/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'edit'])
-            ->name('blog.comment.edit');
-        Route::get('comment/edit-template/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'editTemplate'])
-            ->name('blog.comment.editTemplate');
-    });
 });
 
 

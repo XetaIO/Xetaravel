@@ -168,7 +168,7 @@
                 <h1 class="xetaravel-typed font-bold font-['ubuntu'] text-4xl"></h1>
                 <p class="mb-4">
                     This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personal website and I have decided to release it to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
-                    Project <i class="fa fa-code text-primary font-bold"></i> with <i class="fa fa-coffee" style="color: #826644"></i> and <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.
+                    Project <x-icon name="fas-code" class="h-5 w-5 font-bold inline text-primary"></x-icon> with <x-icon name="fas-coffee" class="h-5 w-5 inline" style="color: #826644"></x-icon> with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
                 <div>
                     <a class="btn btn-primary btn-primary-shadow" href="{{ route('blog.article.index') }}">
@@ -330,7 +330,7 @@
                 <article class="rounded-lg lg:rounded-tr-none shadow-[0_2px_20px_5px_rgba(19,16,34,0.1)] dark:bg-base-300 bg-base-content">
                     <div class="grid grid-cols-12 gap-4">
                         <div class="col-span-12 lg:col-span-4 rounded-t-lg lg:rounded-l-lg lg:rounded-r-none min-h-[300px] overflow-hidden">
-                            <a class="h-full" href="{{ $article->article_url }}" title="{{ $article->title }}">
+                            <a class="h-full" href="{{ $article->show_url }}" title="{{ $article->title }}">
                                 <img class="object-cover h-full" src="{{ $article->article_banner }}" alt="Article Banner">
                             </a>
                         </div>
@@ -343,7 +343,7 @@
                             <div class="text-slate-300 mb-4">
                                 <ul>
                                     <li class="inline bg-[color:#f3f6ff] text-primary text-md font-semibold rounded py-1 px-2.5 tooltip" data-tip="Category">
-                                        <a href="{{ $article->category->category_url }}">
+                                        <a href="{{ $article->category->show_url }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
@@ -365,7 +365,7 @@
                             </div>
 
                             <h3 class="truncate text-3xl text-primary mb-4" title="{{ $article->title }}">
-                                <a href="{{ $article->article_url }}">
+                                <a href="{{ $article->show_url }}">
                                     {{ $article->title }}
                                 </a>
                             </h3>
@@ -397,7 +397,7 @@
                                                 </div>
                                                 <div class="flex flex-col justify-around  min-w-[250px] ml-2">
                                                     <div class="card-title truncate">
-                                                        <a href="{{ $article->user->profile_url }}" class="text-primary">{{ $article->user->full_name }}</a>
+                                                        <a href="{{ $article->user->show_url }}" class="text-primary">{{ $article->user->full_name }}</a>
                                                     </div>
                                                     <ul class="flex">
                                                         <li data-tip="Last seen" class="tooltip">

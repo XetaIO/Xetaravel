@@ -306,7 +306,7 @@
                             <h3 class="text-2xl font-bold line-clamp-1">
                                 @if(get_class($activity) == \Xetaravel\Models\BlogArticle::class)
                                     Created article <a class="link link-hover link-primary"
-                                                       href="{{ $activity->article_url }}">{{ Str::limit($activity->title, 150) }}</a>
+                                                       href="{{ $activity->show_url }}">{{ Str::limit($activity->title, 150) }}</a>
                                 @elseif(get_class($activity) == \Xetaravel\Models\DiscussPost::class && $activity->id === $activity->conversation_first_post_id)
                                     Created conversation <a class="link link-hover link-primary"
                                                             href="{{ route('discuss.conversation.show', ['slug' => $activity->conversation_slug, 'id' => $activity->conversation_id]) }}">{{ Str::limit($activity->conversation_title, 150) }}</a>
@@ -315,7 +315,7 @@
                                                   href="{{ route('discuss.conversation.show', ['slug' => $activity->conversation_slug, 'id' => $activity->conversation_id]) }}">{{ Str::limit($activity->conversation_title, 150) }}</a>
                                 @elseif(get_class($activity) == \Xetaravel\Models\BlogComment::class)
                                     Replied to article <a class="link link-hover link-primary"
-                                                          href="{{ $activity->article->article_url }}">{{ Str::limit($activity->article->title, 150) }}</a>
+                                                          href="{{ $activity->article->show_url }}">{{ Str::limit($activity->article->title, 150) }}</a>
                                 @endif
                             </h3>
                             <div class="prose min-w-full">

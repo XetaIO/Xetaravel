@@ -122,7 +122,7 @@
                     @endif
 
                     <li class="px-2 first:rounded-l-md last:rounded-r-md" style="background-color: {{ $conversation->category->color }};">
-                        <a href="{{ $conversation->category->category_url }}" class="tooltip flex items-center gap-1"  data-tip="Category">
+                        <a href="{{ $conversation->category->show_url }}" class="tooltip flex items-center gap-1"  data-tip="Category">
                             @if (!is_null($conversation->category->icon))
                                 <x-icon name="{{ $conversation->category->icon }}" />
                             @endif
@@ -153,7 +153,7 @@
                 )
             @empty
                 @if (!$conversation->is_solved && !$conversation->is_locked)
-                    <x-alert type="primary" class="dark:bg-base-200 mt-5">
+                    <x-alert type="info">
                         There are no comments yet, post the first reply !
                     </x-alert>
                 @endif
@@ -184,7 +184,7 @@
                     <div id="post-reply" class="flex flex-col sm:flex-row items-center">
                         <div class="self-start mx-auto">
                             {{--  User Avatar --}}
-                            <a class="avatar online m-2" href="{{ Auth::user()->profile_url }}">
+                            <a class="avatar online m-2" href="{{ Auth::user()->show_url }}">
                                 <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="Connected as {{ Auth::user()->username }}">
                                     <img class="rounded-full" src="{{ Auth::user()->avatar_small }}"  alt="{{ Auth::user()->full_name }} avatar" />
                                 </figure>

@@ -32,7 +32,13 @@ return new class () extends Migration {
             $table->ipAddress('last_login_ip')->nullable();
             $table->dateTime('last_login_date')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('deleted_user_id')->unsigned()->nullable()->index();
             $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('deleted_user_id')->references('id')->on('users')->nullOnDelete();
         });
     }
 

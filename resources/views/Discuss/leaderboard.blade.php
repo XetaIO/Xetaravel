@@ -52,7 +52,7 @@
                             <span class="absolute font-bold left-8 top-8 h-10 w-10 border border-gray-200 dark:border-gray-700  rounded-md p-1.5">
                                 {{ $i }}
                             </span>
-                            <a class="block" href="{{ $user->profile_url }}" title="{{ $user->username }}">
+                            <a class="block" href="{{ $user->show_url }}" title="{{ $user->username }}">
                                 <div class="avatar relative">
                                     <div class="w-24 rounded ring-2 ring-offset-base-100 ring-offset-2" style="{{ $i <=3 ? "--tw-ring-color: #f7a925;" : "" }}">
                                         <img class="{{ $badge->icon }}" src="{{ $user->avatar_small }}" alt="{{ $user->username }} avatar" />

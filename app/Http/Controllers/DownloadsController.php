@@ -15,7 +15,7 @@ class DownloadsController extends Controller
      *
      * @return BinaryFileResponse
      */
-    public function download($fileName)
+    public function download(string $fileName)
     {
         $filePath = public_path('files/'.$fileName);
 

@@ -165,6 +165,13 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'name' => 'manage discuss category',
+                'guard_name' => 'web',
+                'description' => 'The user can manage discuss category.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
 
             // Discuss Conversations
             [
@@ -304,6 +311,13 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'name' => 'manage user',
+                'guard_name' => 'web',
+                'description' => 'The user can manage other users (update/delete other users).',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
 
             // Roles
             [
@@ -338,6 +352,13 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'search role',
                 'guard_name' => 'web',
                 'description' => 'The user can search a role.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'manage role',
+                'guard_name' => 'web',
+                'description' => 'The user can manage roles.',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -378,6 +399,13 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'name' => 'manage permission',
+                'guard_name' => 'web',
+                'description' => 'The user can manage permissions.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
 
             // Settings
             [
@@ -407,7 +435,14 @@ class PermissionsTableSeeder extends Seeder
                 'description' => 'The user can delete a setting.',
                 'created_at' => $now,
                 'updated_at' => $now,
-            ]
+            ],
+            [
+            'name' => 'manage setting',
+            'guard_name' => 'web',
+            'description' => 'The user can manage settings.',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]
         ];
 
         DB::table('permissions')->insert($permissions);

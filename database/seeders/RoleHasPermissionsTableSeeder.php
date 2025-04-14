@@ -35,6 +35,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'update discuss category',
         'delete discuss category',
         'search discuss category',
+        'manage discuss category',
 
         // Discuss Conversations
         'viewAny discuss conversation',
@@ -60,6 +61,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'delete user',
         'assign-direct-permission user',
         'search user',
+        'manage user',
 
         // Roles
         'viewAny role',
@@ -67,6 +69,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'update role',
         'delete role',
         'search role',
+        'manage role',
 
         // Permissions
         'viewAny permission',
@@ -74,12 +77,14 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'update permission',
         'delete permission',
         'search permission',
+        'manage permission',
 
         // Settings
         'viewAny setting',
         'create setting',
         'update setting',
-        'delete setting'
+        'delete setting',
+        'manage setting',
     ];
 
     protected array $administratorPermissions = [
@@ -108,6 +113,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'update discuss category',
         'delete discuss category',
         'search discuss category',
+        'manage discuss category',
 
         // Discuss Conversations
         'viewAny discuss conversation',
@@ -133,6 +139,7 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'delete user',
         'assign-direct-permission user',
         'search user',
+        'manage user',
 
         // Roles
         'viewAny role',
@@ -140,14 +147,17 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'update role',
         'delete role',
         'search role',
+        'manage role',
 
         // Permissions
         'viewAny permission',
         'search permission',
+        'manage permission',
 
         // Settings
         'viewAny setting',
-        'update setting'
+        'update setting',
+        'manage setting',
     ];
 
     protected array $moderatorPermissions = [

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models\Presenters;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait ArticlePresenter
 {
     /**
@@ -11,7 +13,19 @@ trait ArticlePresenter
      *
      * @var string
      */
-    protected $defaultBanner = '/images/articles/default_banner.jpg';
+    protected string $defaultBanner = '/images/articles/default_banner.jpg';
+
+    /**
+     * Get the is_display field.
+     *
+     * @return Attribute
+     */
+    protected function isDisplay(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => !(is_null($this->published_at) || $this->published_at > now())
+        );
+    }
 
     /**
      * Parse a media and return it if isset or return the default banner.
@@ -30,11 +44,11 @@ trait ArticlePresenter
     }
 
     /**
-     * Get the article url.
+     * Get the show url.
      *
      * @return string
      */
-    public function getArticleUrlAttribute(): string
+    public function getShowUrlAttribute(): string
     {
         if (!isset($this->slug) || $this->getKey() === null) {
             return '';

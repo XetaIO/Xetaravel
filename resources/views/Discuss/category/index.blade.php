@@ -27,7 +27,7 @@
                         <div class="flex flex-col justify-between p-2 rounded-md shadow-md text-white h-full" style="background-color: {{ $category->color }};">
                             <div class="mb-3">
                                 <h5 class="text-2xl text-center mb-2">
-                                    <a class="" href="{{ $category->category_url }}">
+                                    <a class="" href="{{ $category->show_url }}">
                                         {{ $category->title }}
                                     </a>
                                 </h5>

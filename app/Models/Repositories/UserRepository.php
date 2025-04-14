@@ -7,7 +7,6 @@ namespace Xetaravel\Models\Repositories;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request as FacadeRequest;
 use Xetaravel\Models\User;
-use DateTimeImmutable;
 
 class UserRepository
 {
@@ -42,7 +41,7 @@ class UserRepository
             'email' => $data['email'],
             'register_ip' => $ip,
             'last_login_ip' => $ip,
-            'last_login_date' => new DateTimeImmutable()
+            'last_login_date' => now()
         ];
 
         if ($provider === false) {

@@ -1,8 +1,11 @@
+<!--
+Conçu et développé par Emeric Fèvre.
+-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -13,16 +16,26 @@
         <!-- Meta -->
         @stack('meta')
 
+        @persist('Flatpickr')
+            <!-- Flatpickr -->
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" id="flatpickrCssFile" />
+        @endpersist
+
         <script type="text/javascript">
             /**
              * Dark Mode
              * On page load or when changing themes, best to add inline in `head` to avoid FOUC
              */
-            if (localStorage.getItem('nightMode') == 'true' ||
-                (!('nightMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-            ) {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
                 document.documentElement.dataset.theme = "dark";
-                localStorage.setItem("nightMode", true);
+                localStorage.setItem('theme', 'dark');
+                // Change the flatpickr theme to dark.
+                document.getElementById('flatpickrCssFile').href = 'https://npmcdn.com/flatpickr/dist/themes/dark.css';
+            } else {
+                localStorage.theme = 'light';
+                document.documentElement.classList.remove('dark');
+                document.documentElement.dataset.theme = 'light';
             }
         </script>
 
@@ -33,24 +46,22 @@
 
         <!-- Embed Styles -->
         @stack('style')
-        @livewireStyles
 
         <!-- Styles -->
-        <link href="{{ mix('css/xetaravel.min.css') }}" rel="stylesheet">
+        @livewireStyles
+        @vite('resources/css/xetaravel.css')
 
+        <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <!-- Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('xetaravel.site.analytics_tracker_code') }}"></script>
-        <script type="text/javascript">
-            /**
-             * Gogole Analytics
-             */
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-97W18J74QL"></script>
+        <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '{{ config('xetaravel.site.analytics_tracker_code') }}');
 
+            gtag('config', 'G-97W18J74QL');
         </script>
 
         <!-- Embed Scripts -->
@@ -58,32 +69,26 @@
     </head>
     <body>
 
-        <div id="xetaravel-vue">
+        <div class="drawer lg:drawer-open">
+            <!-- Toggle Responsive-->
+            <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
 
-            <div class="drawer drawer-mobile">
-                <!-- Toggle Responsive-->
-                <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col overflow-hidden min-h-screen">
+                <!-- Header -->
+                @include('Admin::elements.header')
 
-                <div class="drawer-content flex flex-col">
-                    <!-- Header -->
-                    @include('Admin::elements.header')
+                <main>
+                    <!-- Content -->
+                    @yield('content')
+                </main>
 
-                    <!-- Flash Messages -->
-                    @include('elements.flash')
+                <!-- Footer -->
+                @include('Admin::elements.footer')
 
-                    <main>
-                        <!-- Content -->
-                        @yield('content')
-                    </main>
-
-                    <!-- Footer -->
-                    @include('Admin::elements.footer')
-
-                </div>
-
-                <!-- Sidebar -->
-                @include('Admin::elements.sidebar')
             </div>
+
+            <!-- Sidebar -->
+            @include('Admin::elements.sidebar')
         </div>
 
         <!-- Scroll to Top button -->
@@ -94,12 +99,12 @@
             window.Xetaravel = {!! json_encode(['csrfToken' => csrf_token()]) !!}
         </script>
 
-        <!-- Scripts -->
-        <script src="https://kit.fontawesome.com/e3046f3b08.js" crossorigin="anonymous"></script>
-        <script src="{{ mix('js/xetaravel.admin.min.js') }}"></script>
-        @livewireScripts
+        @vite('resources/js/xetaravel.js')
+        @livewireScriptConfig
 
         <!-- Embed Scripts -->
         @stack('scripts')
+
+        <x-toaster-hub />
     </body>
 </html>

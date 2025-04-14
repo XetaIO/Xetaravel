@@ -59,7 +59,7 @@ class MentionNotification extends Notification implements ShouldQueue
 
             case $model instanceof BlogArticle:
                 $data['message'] = '<strong>@%s</strong> has mentioned your name in his article !';
-                $data['link'] = $model->article_url;
+                $data['link'] = $model->show_url;
 
                 break;
         }

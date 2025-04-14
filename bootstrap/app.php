@@ -9,6 +9,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Session\TokenMismatchException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -32,7 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth' => Xetaravel\Http\Middleware\Authenticate::class,
             'discuss.maintenance' => Xetaravel\Http\Middleware\DiscussMaintenance::class,
-            'display' => Xetaravel\Http\Middleware\EnableDisplayScopeMiddleware::class,
+            'display' => Xetaravel\Http\Middleware\EnablePublishedScopeMiddleware::class,
 
             // Packages Middleware
             'role' => Spatie\Permission\Middleware\RoleMiddleware::class,
@@ -41,6 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
+
         $exceptions->renderable(function (Exception $e) {
             // Error 404 model not found
             if ($e->getPrevious() instanceof ModelNotFoundException) {
@@ -59,7 +61,7 @@ return Application::configure(basePath: dirname(__DIR__))
             };
 
             // Error 403 Access unauthorized
-            if ($e->getPrevious() instanceof AuthorizationException) {
+            if ($e->getPrevious() instanceof AuthorizationException || $e instanceof UnauthorizedException) {
                 if (Auth::check() && Auth::user()->hasRole('banished')) {
                     return redirect()
                         ->route('page.banished');

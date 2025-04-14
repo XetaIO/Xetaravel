@@ -6,7 +6,7 @@
         title="{{ $article->title }}"
         author="{{ $article->user->username }}"
         description="{!! Markdown::convert($article->content) !!}"
-        url="{{ $article->article_url }}"
+        url="{{ $article->show_url }}"
     />
 @endpush
 
@@ -55,7 +55,7 @@
                     <div class="flex justify-between items-center mt-2">
                         <div class="flex justify-center items-center">
                             {{-- Author avatar --}}
-                            <a href="{{ $article->user->profile_url }}">
+                            <a href="{{ $article->user->show_url }}">
                                 <img class="w-12 h-12 rounded-full mr-2" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
                             </a>
 
@@ -72,9 +72,9 @@
                                 </span>
 
                                 {{-- Edit button --}}
-                                @can('manage blog article')
+                                @can('update', $article)
                                     <span class="text-gray-700"> - </span>
-                                    <x-button link="{{ route('admin.blog.article.edit', ['slug' => $article->slug, 'id' => $article->id]) }}" icon="fas-pencil" label="Edit" class="btn-sm gap-2" />
+                                    <x-button link="{{ route('admin.blog.article.index') }}" icon="fas-pencil" label="Edit" class="btn-sm gap-2" />
                                 @endcan
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                         <div class="flex justify-center">
                             <ul class="flex flex-wrap">
                                 <li class="m-1">
-                                    <a class="badge badge-outline badge-lg tooltip inline-flex" href="{{ $article->category->category_url }}" data-tip="Category">
+                                    <a class="badge badge-outline badge-primary badge-lg tooltip inline-flex" href="{{ $article->category->show_url }}" data-tip="Category">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
@@ -96,8 +96,8 @@
                 </header>
 
                 {{-- BlogArticle Banner --}}
-                <figure class="max-h-[350px] min-h-[100px] xs:min-h-[250px] max-w-[870px] mx-auto mb-6 overflow-hidden">
-                    <img class="w-full h-full object-cover" src="{{ $article->article_banner }}" alt="Article image">
+                <figure class="flex items-center justify-center max-h-[350px] min-h-[100px] xs:min-h-[250px] max-w-[870px] mx-auto mb-6 overflow-hidden">
+                    <img class="object-cover" src="{{ $article->article_banner }}" alt="Article image">
                 </figure>
 
                 {{-- BlogArticle content --}}
@@ -118,7 +118,7 @@
                         <div class="flex flex-col items-center">
 
                             {{--  Author Avatar --}}
-                            <a class="avatar {{ $article->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $article->user->profile_url }}">
+                            <a class="avatar {{ $article->user->online ? 'avatar-online' : 'avatar-offline' }} m-2" href="{{ $article->user->show_url }}">
                                 <figure class="w-16 h-16 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 tooltip !overflow-visible" data-tip="{{ $article->user->username }} is {{ $article->user->online ? 'online' : 'offline' }}">
                                     <img class="rounded-full" src="{{ $article->user->avatar_small }}"  alt="{{ $article->user->full_name }} avatar" />
                                 </figure>
@@ -134,7 +134,7 @@
                             <x-user.user
                                 :user-name="$article->user->full_name"
                                 :user-avatar-small="$article->user->avatar_small"
-                                :user-profile="$article->user->profile_url"
+                                :user-profile="$article->user->show_url"
                                 :user-last-login="$article->user->last_login_date->diffForHumans()"
                                 :user-registered="$article->user->created_at->diffForHumans()"
                             />

@@ -26,6 +26,8 @@ Conçu et développé par Emeric Fèvre.
                 document.documentElement.classList.add('dark')
                 document.documentElement.dataset.theme = "dark";
                 localStorage.setItem('theme', 'dark');
+                // Change the flatpickr theme to dark.
+                document.getElementById('flatpickrCssFile').href = 'https://npmcdn.com/flatpickr/dist/themes/dark.css';
             } else {
                 localStorage.theme = 'light';
                 document.documentElement.classList.remove('dark');
@@ -47,6 +49,16 @@ Conçu et développé par Emeric Fèvre.
 
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-97W18J74QL"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-97W18J74QL');
+        </script>
 
         <!-- Embed Scripts -->
         @stack('scriptsTop')

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\Http\Controllers;
+namespace Xetaravel\Http\Controllers\User;
 
 use Detection\Exception\MobileDetectException;
 use Illuminate\Http\Request;
@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Xetaravel\Http\Controllers\Controller;
 use Xetaravel\Services\DeviceDetectorService;
 
 class SecurityController extends Controller

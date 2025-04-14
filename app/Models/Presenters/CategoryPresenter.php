@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models\Presenters;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait CategoryPresenter
 {
     /**
      * Get the category url.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getCategoryUrlAttribute(): string
+    protected function showUrl(): Attribute
     {
-        if (!isset($this->slug) || $this->getKey() === null) {
-            return '';
-        }
-
-        return route('blog.category.show', ['slug' => $this->slug, 'id' => $this->getKey()]);
+        return Attribute::make(
+            get: fn ($value) => route('blog.category.show', ['slug' => $this?->slug, 'id' => $this?->getKey()])
+        );
     }
 }
