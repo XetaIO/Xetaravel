@@ -22,7 +22,6 @@ class ThemeToggle extends Component
         public ?string $lightClass = "light",
         public ?string $darkClass = "dark",
         public ?bool $withLabel = false,
-
     ) {
         $this->uuid = md5(serialize($this)) . $id;
     }

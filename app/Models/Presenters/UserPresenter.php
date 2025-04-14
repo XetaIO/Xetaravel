@@ -96,6 +96,20 @@ trait UserPresenter
     }
 
     /**
+     * Get the profile url.
+     *
+     * @return Attribute
+     */
+    protected function showUrl(): Attribute
+    {
+        $slug = $this->trashed() ? mb_strtolower($this->username) : $this->slug;
+
+        return Attribute::make(
+            get: fn ($value) => route('user.show', ['slug' => $slug])
+        );
+    }
+
+    /**
      * Get the account first name.
      *
      * @return string
@@ -214,19 +228,5 @@ trait UserPresenter
     public function getAvatarBigAttribute(): string
     {
         return $this->parseMedia('thumbnail.big');
-    }
-
-    /**
-     * Get the profile url.
-     *
-     * @return Attribute
-     */
-    protected function showUrl(): Attribute
-    {
-        $slug = $this->trashed() ? mb_strtolower($this->username) : $this->slug;
-
-        return Attribute::make(
-            get: fn ($value) => route('user.show', ['slug' => $slug])
-        );
     }
 }

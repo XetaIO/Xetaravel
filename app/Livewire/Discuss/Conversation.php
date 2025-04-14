@@ -24,8 +24,8 @@ class Conversation extends Component
     use AuthorizesRequests;
     use Toastable;
     use WithCachedRows;
-    use WithSorting;
     use WithPagination;
+    use WithSorting;
 
     /**
      * Categories used for sorting.

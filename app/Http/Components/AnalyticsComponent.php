@@ -1,10 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Components;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
+use Google_Service_Analytics_GaData;
 
 trait AnalyticsComponent
 {
@@ -45,9 +49,9 @@ trait AnalyticsComponent
      *
      * @codeCoverageIgnore
      *
-     * @return \Google_Service_Analytics_GaData
+     * @return Google_Service_Analytics_GaData
      */
-    public function buildVisitorsGraph(): \Google_Service_Analytics_GaData
+    public function buildVisitorsGraph(): Google_Service_Analytics_GaData
     {
         $startDate = Carbon::now()->subDays(7);
 
@@ -64,7 +68,7 @@ trait AnalyticsComponent
         foreach ($visitorsData->rows as $row) {
             $row[0] = Carbon::createFromFormat('Ymd', $row[0]);
 
-            array_push($visitorsGraph, $row);
+            $visitorsGraph[] = $row;
         }
         $visitorsData->rows = array_reverse($visitorsGraph);
 
@@ -76,9 +80,9 @@ trait AnalyticsComponent
      *
      * @codeCoverageIgnore
      *
-     * @return \Google_Service_Analytics_GaData
+     * @return Google_Service_Analytics_GaData
      */
-    public function buildBrowsersGraph(): \Google_Service_Analytics_GaData
+    public function buildBrowsersGraph(): Google_Service_Analytics_GaData
     {
         $startDate = Carbon::createFromFormat('Y-m-d', config('analytics.start_date'));
 
@@ -101,7 +105,7 @@ trait AnalyticsComponent
             $browser[] = $this->getPercentage($browser[1], $browsersData->totalsForAllResults['ga:pageviews']);
             $browser[] = $this->getBrowserColor($browser[0]);
 
-            array_push($browsersGraph, $browser);
+            $browsersGraph[] = $browser;
         }
         $browsersData->rows = array_reverse($browsersGraph);
 
