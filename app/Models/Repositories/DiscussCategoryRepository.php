@@ -12,7 +12,7 @@ class DiscussCategoryRepository
     /**
      * Find the categories for the sidebar.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return Collection
      */
     public static function sidebar(): Collection
     {

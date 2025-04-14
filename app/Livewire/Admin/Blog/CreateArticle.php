@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Admin\Blog;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -71,7 +74,7 @@ class CreateArticle extends Component
             ->success('Your article has been created successfully !');
     }
 
-    public function render()
+    public function render(): View|Application|Factory|\Illuminate\View\View
     {
         return view('livewire.admin.blog.create-article');
     }
