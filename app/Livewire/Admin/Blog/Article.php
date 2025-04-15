@@ -81,6 +81,11 @@ class Article extends Component
         'created_at'
     ];
 
+    public function mount(): void
+    {
+        $this->perPage = config('xetaravel.pagination.blog.article_per_page', $this->perPage);
+    }
+
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
         return view('livewire.admin.blog.article', [

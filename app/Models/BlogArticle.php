@@ -34,6 +34,7 @@ class BlogArticle extends Model implements HasMedia
      */
     protected $fillable = [
         'title',
+        'slug',
         'user_id',
         'blog_category_id',
         'published_at',

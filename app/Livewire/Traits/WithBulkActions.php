@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Xetaravel\Livewire\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Masmerise\Toaster\Toastable;
 use Throwable;
+use Xetaravel\Models\BlogArticle;
 
 trait WithBulkActions
 {
@@ -131,37 +133,25 @@ trait WithBulkActions
      */
     public function deleteSelected(): bool
     {
-        $models = collect(
-            $this->selectedRowsQuery
-                ->get()
-                ->pluck('id')
-                ->toArray()
+        $models = new EloquentCollection(
+            $this->selectedRowsQuery->with('comments')->get()->map(function ($model) {
+                $this->authorize('delete', $model);
+                return $model;
+            })->all()
         );
 
-        if ($models->count() <= 0) {
+        if ($models->isEmpty()) {
             return false;
         }
 
-        // For each id, we fetch the model and check the permission related to the model.
-        // If one fail, then they all won't be deleted.
-        $models->each(function ($id) {
-            $model = app($this->model)->where('id', $id)->first();
-
-            $this->authorize('delete', $model);
+        DB::transaction(function () use ($models) {
+            foreach ($models as $model) {
+                $model->delete();
+            }
         });
 
-        $model = $this->model;
+        $this->selected = collect();
 
-        $result = DB::transaction(function () use ($model, $models) {
-            return app($model)->destroy($models->toArray());
-        });
-
-        if ($result) {
-            $this->selected = collect();
-
-            return true;
-        }
-
-        return false;
+        return true;
     }
 }
