@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Masmerise\Toaster\Toastable;
 use Throwable;
-use Xetaravel\Models\BlogArticle;
 
 trait WithBulkActions
 {
