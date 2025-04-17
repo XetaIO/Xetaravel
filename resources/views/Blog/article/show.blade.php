@@ -42,48 +42,48 @@
         <div class="lg:col-span-9 col-span-12 px-3">
 
             {{-- BlogArticle --}}
-            <article class="bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg px-6 pb-6 mb-10">
+            <article class="bg-base-200 dark:bg-base-300 dark:border-gray-700 shadow-md rounded-lg pb-6 mb-10">
 
                 {{-- BlogArticle Header --}}
                 <header class="mb-6">
-                    {{-- BlogArticle title --}}
-                    <h1 class="text-4xl py-8">
-                        {{ $article->title }}
-                    </h1>
+                    <div class="relative mb-8">
+                        {{-- BlogArticle Banner --}}
+                        <figure>
+                            <img class="object-cover rounded-t-lg w-full" src="{{ $article->article_banner }}" alt="Article image">
+                        </figure>
+
+                        {{-- Author avatar --}}
+                        <a class="absolute -bottom-6 left-6" href="{{ $article->user->show_url }}">
+                            <img class="w-12 h-12 rounded-full ring-2 ring-primary" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
+                        </a>
+                    </div>
 
                     {{-- BlogArticle meta --}}
-                    <div class="flex justify-between items-center mt-2">
+                    <div class="flex justify-between items-center mt-2 px-6">
                         <div class="flex justify-center items-center">
-                            {{-- Author avatar --}}
-                            <a href="{{ $article->user->show_url }}">
-                                <img class="w-12 h-12 rounded-full mr-2" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
-                            </a>
+                            <time class="tooltip" datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-tip="{{ $article->created_at->format('Y-m-d H:i:s') }}">
+                                {{ $article->created_at->isoFormat('ll') }}
+                            </time>
+                            <span class="text-gray-700 mx-2"> - </span>
+                            <span class="font-semibold tooltip" data-tip="Comments">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                                </svg>
+                                {{ $article->blog_comment_count }}
+                            </span>
 
-                            <div>
-                                <time class="tooltip" datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-tip="{{ $article->created_at->format('Y-m-d H:i:s') }}">
-                                    {{ $article->created_at->isoFormat('ll') }}
-                                </time>
-                                <span class="text-gray-700"> - </span>
-                                <span class="font-semibold tooltip" data-tip="Comments">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                                    </svg>
-                                    {{ $article->blog_comment_count }}
-                                </span>
-
-                                {{-- Edit button --}}
-                                @can('update', $article)
-                                    <span class="text-gray-700"> - </span>
-                                    <x-button link="{{ route('admin.blog.article.index') }}" icon="fas-pencil" label="Edit" class="btn-sm gap-2" />
-                                @endcan
-                            </div>
+                            {{-- Edit button --}}
+                            @can('update', $article)
+                                <span class="text-gray-700 mx-2"> - </span>
+                                <x-button link="{{ route('admin.blog.article.index') }}" icon="fas-pencil" label="Edit" class="btn-sm gap-2" />
+                            @endcan
                         </div>
 
                         <div class="flex justify-center">
                             <ul class="flex flex-wrap">
                                 <li class="m-1">
-                                    <a class="badge badge-outline badge-primary badge-lg tooltip inline-flex" href="{{ $article->category->show_url }}" data-tip="Category">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-top">
+                                    <a class="badge badge-sm badge-primary tooltip inline-flex" href="{{ $article->category->show_url }}" data-tip="Category">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block align-text-top">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                                         </svg>
@@ -93,20 +93,20 @@
                             </ul>
                         </div>
                     </div>
+
+                    {{-- BlogArticle title --}}
+                    <h1 class="text-4xl py-8 px-6">
+                        {{ $article->title }}
+                    </h1>
                 </header>
 
-                {{-- BlogArticle Banner --}}
-                <figure class="flex items-center justify-center max-h-[350px] min-h-[100px] xs:min-h-[250px] max-w-[870px] mx-auto mb-6 overflow-hidden">
-                    <img class="object-cover" src="{{ $article->article_banner }}" alt="Article image">
-                </figure>
-
                 {{-- BlogArticle content --}}
-                <div class="prose min-w-full">
+                <div class="prose min-w-full px-6">
                     {!! Markdown::convert($article->content) !!}
                 </div>
 
                 {{-- Author --}}
-                <footer class="my-10">
+                <footer class="my-10 px-6">
                     <h3 class="divider mb-4 text-xl font-bold">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-14 w-14" viewBox="0 0 16 16">
                             <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
