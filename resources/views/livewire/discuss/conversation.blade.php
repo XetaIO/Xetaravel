@@ -45,7 +45,7 @@
 
     <ul class="mb-4">
         @forelse($conversations as $conversation)
-            <li class="flex flex-col sm:flex-row border border-gray-200 p-3 px-5 rounded dark:bg-base-300 dark:border-gray-700 hover:bg-base-200 dark:hover:bg-base-200 {{ !$loop->first ? 'mt-3' : '' }}" wire:loading.class.delay="opacity-50">
+            <li class="flex flex-col sm:flex-row p-3 px-5 rounded bg-base-100 dark:bg-base-300 hover:bg-base-300 shadow-md dark:hover:bg-base-200 {{ !$loop->first ? 'mt-3' : '' }}" wire:loading.class.delay="opacity-50">
 
                 <div class="flex flex-row justify-between w-full relative">
                     {{--  Locked & Pinned --}}

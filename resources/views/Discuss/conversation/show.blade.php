@@ -98,7 +98,7 @@
         </div>
 
         {{-- Conversation Posts --}}
-        <div class="lg:col-span-9 col-span-12 mr-3 p-6 bg-base-200 dark:bg-base-300 shadow-md rounded-lg">
+        <div class="lg:col-span-9 col-span-12 mr-3 p-6 bg-base-100 dark:bg-base-300 shadow-md rounded-lg">
             <div class="mb-5">
                 <h1 class="line-clamp-3 md:line-clamp-5 text-4xl mb-3">
                     {{ $conversation->title }}

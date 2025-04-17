@@ -5,7 +5,7 @@
     </h2>
 
     @foreach ($articles as $article)
-    <div class="flex flex-col bg-base-200 dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
+    <div class="flex flex-col bg-base-100  dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
         <a href="{{ $article->show_url }}" class="text-lg font-medium link link-hover link-primary">
             {{ Str::limit($article->title, 50) }}
         </a>
@@ -33,7 +33,7 @@
     <h2 class="mb-4 text-xl font-bold">
         Categories
     </h2>
-    <div class="flex flex-col bg-base-200 dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
+    <div class="flex flex-col bg-base-100  dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
         <ul>
         @foreach ($categories as $category)
             <li class="mb-2">
@@ -52,7 +52,7 @@
         <h2 class="mb-4 text-xl font-bold">
             Authors
         </h2>
-        <div class="flex flex-col bg-base-200 dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
+        <div class="flex flex-col bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
             <ul>
                 @foreach ($users as $user)
                     <li class="flex items-center">

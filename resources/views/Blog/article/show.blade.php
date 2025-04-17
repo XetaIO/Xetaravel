@@ -42,7 +42,7 @@
         <div class="lg:col-span-9 col-span-12 px-3">
 
             {{-- BlogArticle --}}
-            <article class="bg-base-200 dark:bg-base-300 dark:border-gray-700 shadow-md rounded-lg pb-6 mb-10">
+            <article class="bg-base-100 dark:bg-base-300 shadow-md rounded-lg pb-6 mb-10">
 
                 {{-- BlogArticle Header --}}
                 <header class="mb-6">

@@ -1,6 +1,6 @@
 <div>
     <div class="grid grid-cols-12 gap-6 mb-7">
-        <div class="col-span-12 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-5">
+        <div class="col-span-12 bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-5">
             <div class="flex flex-col lg:flex-row gap-4 justify-between">
                 {{-- Search input --}}
                 <div class="w-full lg:w-auto md:min-w-[300px]">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="grid grid-cols-12 gap-6 mb-7">
-        <div class="col-span-12 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+        <div class="col-span-12 bg-base-100 dark:bg-base-300 shadow-md  rounded-lg p-3">
             <x-table.table class="mb-6">
                 <x-slot name="head">
                     <x-table.heading>
@@ -42,7 +42,7 @@
                 <x-slot name="body">
                     @if ($selectPage)
                         <x-table.row wire:key="row-message">
-                            <x-table.cell colspan="8">
+                            <x-table.cell colspan="10">
                                 @unless ($selectAll)
                                     <div>
                                         <span>You have selected <strong>{{ $articles->count() }}</strong> article(s), do you want to select all <strong>{{ $articles->total() }}</strong> article(s)?</span>

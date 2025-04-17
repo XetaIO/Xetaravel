@@ -63,7 +63,7 @@ Conçu et développé par Emeric Fèvre.
         <!-- Embed Scripts -->
         @stack('scriptsTop')
     </head>
-    <body>
+    <body class="bg-base-200 dark:bg-base-100">
 
         <div class="drawer h-full">
             <!-- Toggle Responsive-->

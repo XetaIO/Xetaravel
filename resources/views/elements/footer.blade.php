@@ -1,4 +1,4 @@
-<footer class="footer sm:footer-horizontal md:justify-items-center p-10 bg-base-200 dark:bg-base-300 text-base-content">
+<footer class="footer sm:footer-horizontal md:justify-items-center p-10 bg-base-100 dark:bg-base-300">
 
         <nav>
             <h6 class="footer-title">Utils</h6>
@@ -63,7 +63,7 @@
             </fieldset>
         </nav>
 </footer>
-<footer class="footer footer-horizontal footer-center p-10 bg-base-200 dark:bg-base-300 text-base-content">
+<footer class="footer footer-horizontal footer-center p-10 bg-base-100 dark:bg-base-300">
     <hr class=" border-gray-200 sm:mx-auto dark:border-gray-700 my-2 h-0.5 w-full" />
 
     <div class="w-full mx-auto">

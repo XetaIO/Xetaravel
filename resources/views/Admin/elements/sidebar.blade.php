@@ -1,6 +1,6 @@
 <aside class="drawer-side z-1">
     <label for="xetaravel-drawer" class="drawer-overlay"></label>
-    <div class="menu w-80 bg-base-200 dark:bg-base-300 min-h-full">
+    <div class="menu w-80 bg-base-100 dark:bg-base-300 min-h-full shadow-md">
         <div class="p-4">
             <a class="flex gap-1 items-center justify-center font-bold text-3xl hover:bg-transparent focus:bg-transparent active:bg-transparent" href="{{ route('page.index') }}">
                 <img src="{{ asset('images/logo.svg') }}" alt="Xetaravel Logo" class="inline-block ">

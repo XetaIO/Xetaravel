@@ -43,7 +43,7 @@ class Controller extends BaseController
             'listRootElement' => 'nav',
             // Classes applied to the main `listElement` container element.
             'listRootElementClasses' => [
-                'flex p-3 px-5 rounded-lg dark:bg-base-300 shadow-md mb-3 truncate'
+                'flex p-3 px-5 rounded-lg bg-base-100 dark:bg-base-300 shadow-md mb-3 truncate'
             ],
             // The DOM-Element used to generate the container element.
             'listElement' => 'ol',

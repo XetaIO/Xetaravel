@@ -1,5 +1,5 @@
 @forelse ($articles as $article)
-<article class="md:max-w-none grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center bg-base-200 dark:bg-base-300 showdow-md rounded-lg p-4 mb-10">
+<article class="md:max-w-none grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-4 mb-10">
     <a class="relative block group" href="{{ $article->show_url }}">
         <div class="absolute inset-0 bg-gray-600 dark:bg-gray-700 hidden lg:block transform lg:translate-y-2 md:translate-x-3 xl:translate-y-3 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none" aria-hidden="true"></div>
         <figure class="relative h-0 pb-[56.25%] overflow-hidden transform lg:-translate-y-2 xl:-translate-y-3 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
