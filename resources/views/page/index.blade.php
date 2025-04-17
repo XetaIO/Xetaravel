@@ -311,7 +311,7 @@
 </section>
 
 @if ($article)
-<section class="relative shadow-md py-20 overflow-hidden">
+<section class="relative bg-base-100 dark:bg-base-200 shadow-md py-20 overflow-hidden">
     <figure class="hidden lg:absolute right-[10%] top-1/3 -z-10">
         <img src="{{ asset('images/figures/svg-ruler.svg') }}" alt="SVG Ruler">
 	</figure>

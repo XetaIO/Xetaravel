@@ -10,7 +10,7 @@
     <div class="sm:h-[110px] h-[130px] md:h-[160px]"></div>
     <div class="flex flex-col items-center">
         @if (settings('app_login_enabled'))
-            <div class="p-8 shadow-lg rounded-lg dark:bg-base-300">
+            <div class="p-8 shadow-lg rounded-lg bg-base-100 dark:bg-base-300">
                 <h1 class="text-3xl text-center mb-2">
                     Login
                 </h1>

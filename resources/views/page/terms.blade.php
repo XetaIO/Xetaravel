@@ -16,7 +16,7 @@
 
 <section class="lg:container mx-auto py-6">
     <div class="col-span-12">
-        <div class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-3 px-5">
+        <div class="bg-base-100 dark:bg-base-300 rounded-lg shadow-md py-3 px-5">
 
             {{-- Title --}}
             <div class="text-center mb-4">
@@ -27,7 +27,7 @@
 
             {{-- Last Update --}}
             <p class="mb-4">
-                Last update : February 11, 2023
+                Last update : April 17, 2025
             </p>
 
             {{-- Menu List --}}
