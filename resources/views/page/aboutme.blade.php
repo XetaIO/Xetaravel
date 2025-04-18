@@ -6,89 +6,90 @@
 @endpush
 
 @push('scripts')
-<script src="{{ asset('js/libs/typed.min.js') }}"></script>
-<script src="{{ asset('js/libs/parallax.min.js') }}"></script>
-<script src="{{ asset('js/libs/jarallax.min.js') }}"></script>
-<script src="{{ asset('js/libs/noframework.waypoints.min.js') }}"></script>
+    @vite('resources/js/typed.js')
+    @vite('resources/js/parallax.js')
+    @vite('resources/js/jarallax.js')
+    @vite('resources/js/waypoints.js')
 <script type="text/javascript">
-    /**
-     * Typed
-     */
-    const typed = document.getElementById('aboutme-typed');
-    let typed_strings = typed.dataset.typed;
-    typed_strings = typed_strings.split(',');
+    document.addEventListener("DOMContentLoaded", function() {
+        /**
+         * Typed
+         */
+        const typed = document.getElementById('aboutme-typed');
+        let typed_strings = typed.dataset.typed;
+        typed_strings = typed_strings.split(',');
 
-    new Typed('#aboutme-typed', {
-        strings: typed_strings,
-        loop: true,
-        typeSpeed: 100,
-        backSpeed: 50,
-        backDelay: 3000
-    });
+        new Typed('#aboutme-typed', {
+            strings: typed_strings,
+            loop: true,
+            typeSpeed: 100,
+            backSpeed: 50,
+            backDelay: 3000
+        });
 
-    var scene = document.getElementById('parallax-aboutme');
-    var parallaxInstance = new Parallax(scene);
+        var scene = document.getElementById('parallax-aboutme');
+        var parallaxInstance = new Parallax(scene);
 
-    /**
-     *  Skills
-     */
-    new Waypoint({
-        element: document.getElementById('skills'),
-        offset: '50%',
-        handler: function(direction) {
-            const progress = document.getElementsByClassName('progress-bar');
+        /**
+         *  Skills
+         */
+        new Waypoint({
+            element: document.getElementById('skills'),
+            offset: '50%',
+            handler: function(direction) {
+                const progress = document.getElementsByClassName('progress-bar');
 
-            for (let i = 0; i < progress.length; i++) {
-                progress[i].style.width = progress[i].getAttribute('aria-valuenow') + '%';
+                for (let i = 0; i < progress.length; i++) {
+                    progress[i].style.width = progress[i].getAttribute('aria-valuenow') + '%';
+                }
             }
-        }
-    });
+        });
 
-    /**
-     *  Projetcs
-     */
-    new Waypoint({
-        element: document.getElementById('projects'),
-        offset: '50%',
-        handler: function(direction) {
-            const project = document.getElementsByClassName('project');
+        /**
+         *  Projetcs
+         */
+        new Waypoint({
+            element: document.getElementById('projects'),
+            offset: '50%',
+            handler: function(direction) {
+                const project = document.getElementsByClassName('project');
 
-            for (let i = 0; i < project.length; i++) {
-                project[i].style.opacity = 1;
+                for (let i = 0; i < project.length; i++) {
+                    project[i].style.opacity = 1;
+                }
             }
-        }
-    });
+        });
 
-    /**
-     *  Resume
-     */
-    new Waypoint({
-        element: document.getElementById('resume'),
-        offset: '50%',
-        handler: function(direction) {
-            const items = document.getElementsByClassName('resume-item');
+        /**
+         *  Resume
+         */
+        new Waypoint({
+            element: document.getElementById('resume'),
+            offset: '50%',
+            handler: function(direction) {
+                const items = document.getElementsByClassName('resume-item');
 
-            for (let i = 0; i < items.length; i++) {
-                items[i].style.opacity = 1;
+                for (let i = 0; i < items.length; i++) {
+                    items[i].style.opacity = 1;
+                }
             }
-        }
-    });
+        });
 
-    /**
-     *  CV
-     */
-    new Waypoint({
-        element: document.getElementById('cv'),
-        offset: '50%',
-        handler: function(direction) {
-            const items = document.getElementsByClassName('cv-item');
+        /**
+         *  CV
+         */
+        new Waypoint({
+            element: document.getElementById('cv'),
+            offset: '50%',
+            handler: function(direction) {
+                const items = document.getElementsByClassName('cv-item');
 
-            for (let i = 0; i < items.length; i++) {
-                items[i].style.opacity = 1;
+                for (let i = 0; i < items.length; i++) {
+                    items[i].style.opacity = 1;
+                }
             }
-        }
+        });
     });
-
 </script>
 @endpush
 
@@ -217,7 +218,7 @@
         </div>
     </div>
     <figure class="pt-36 relative -bottom-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="hsl(var(--b1))">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="var(--color-base-100)">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
@@ -231,7 +232,7 @@
 
         <div class="grid grid-cols-12 gap-4 mx-3 lg:mx-0">
             <div class="col-span-12 lg:col-span-5 lg:col-start-2 mb-6">
-                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
+                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
                     <img class="min-w-[140px] p-3" src="{{ asset('images/logo.svg') }}" alt="Xetaravel logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl text-primary truncate">Xetaravel</h3>
@@ -243,7 +244,7 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-7 mb-6">
-                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
+                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
                     <img class="w-[140px] p-3" src="{{ asset('images/aboutme/xeta.png') }}" alt="Xeta logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl font-xetaravel text-primary truncate">Xeta</h3>
@@ -255,7 +256,7 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-2 mb-6">
-                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
                     <img class="w-[140px] p-3" src="{{ asset('images/aboutme/fmt.png') }}" alt="FrenchModdingTeam logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl font-xetaravel text-primary truncate">FrenchModdingTeam</h3>
@@ -267,7 +268,7 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-7 mb-6">
-                <div class="project flex items-center bg-[color:hsl(var(--b1))] shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
                     <img class="w-[140px] p-3" src="{{ asset('images/aboutme/division.png') }}" alt="FrenchModdingTeam logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl font-xetaravel text-primary truncate">ARK Division</h3>
