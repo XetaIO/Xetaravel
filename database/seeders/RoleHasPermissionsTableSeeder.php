@@ -22,6 +22,14 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'search blog article',
         'manage blog article',
 
+        // Blog Categories
+        'viewAny blog category',
+        'view blog category',
+        'create blog category',
+        'update blog category',
+        'delete blog category',
+        'search blog category',
+
         // Blog Comments
         'create blog comment',
         'update blog comment',
@@ -100,6 +108,14 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'search blog article',
         'manage blog article',
 
+        // Blog Categories
+        'viewAny blog category',
+        'view blog category',
+        'create blog category',
+        'update blog category',
+        'delete blog category',
+        'search blog category',
+
         // Blog Comments
         'create blog comment',
         'update blog comment',
@@ -172,6 +188,14 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'search blog article',
         'manage blog article',
 
+        // Blog Categories
+        'viewAny blog category',
+        'view blog category',
+        'create blog category',
+        'update blog category',
+        'delete blog category',
+        'search blog category',
+
         // Blog Comments
         'create blog comment',
         'update blog comment',
@@ -212,6 +236,10 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'viewAny blog article',
         'view blog article',
         'search blog article',
+
+        // Blog Categories
+        'viewAny blog category',
+        'view blog category',
 
         // Blog Comments
         'create blog comment',

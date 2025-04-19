@@ -133,7 +133,7 @@ trait WithBulkActions
     public function deleteSelected(): bool
     {
         $models = new EloquentCollection(
-            $this->selectedRowsQuery->with('comments')->get()->map(function ($model) {
+            $this->selectedRowsQuery->get()->map(function ($model) {
                 $this->authorize('delete', $model);
                 return $model;
             })->all()

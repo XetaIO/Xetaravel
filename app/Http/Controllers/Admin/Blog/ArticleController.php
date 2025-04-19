@@ -27,7 +27,6 @@ class ArticleController extends Controller
 
     /**
      * Display all articles.
-     * Handled by Livewire.
      *
      * @return View
      */

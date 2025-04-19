@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->integer('user_id')->unsigned()->index();
             $table->integer('blog_category_id')->unsigned()->index();
             $table->string('title');
-            $table->string('slug')->unique()->index();
+            $table->string('slug')->index();
             $table->longText('content');
             $table->integer('blog_comment_count')->unsigned()->default(0);
             $table->timestamp('published_at')->nullable();

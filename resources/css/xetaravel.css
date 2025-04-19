@@ -55,6 +55,10 @@ pre {
     @apply  dark:bg-base-100 bg-neutral-800;
 }
 
+.overlay:after {
+    @apply absolute top-0 left-0 w-full h-full bg-[url('/images/articles/overlay.png')] bg-repeat opacity-20;
+}
+
 /**
  * Offline
  */

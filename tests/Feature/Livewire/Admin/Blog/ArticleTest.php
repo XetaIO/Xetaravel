@@ -7,7 +7,6 @@ namespace Tests\Feature\Livewire\Admin\Blog;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Xetaravel\Livewire\Admin\Blog\Article;
-use Xetaravel\Livewire\Admin\Blog\CreateArticle;
 use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\User;
 
@@ -17,7 +16,7 @@ class ArticleTest extends TestCase
     {
         $this->actingAs(User::find(1));
         $this->get('/admin/blog/article')
-            ->assertSeeLivewire(CreateArticle::class);
+            ->assertSeeLivewire(Article::class);
     }
 
     public function test_articles_are_paginated()

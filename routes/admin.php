@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::group([
-    'namespace' => 'Admin',
     'prefix' => 'admin',
     'middleware' => [
         'auth',
@@ -25,7 +24,6 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::group([
-        'namespace' => 'Blog',
         'prefix' => 'blog',
         'middleware' => ['permission:manage blog article']
     ], function () {
@@ -35,7 +33,7 @@ Route::group([
             ->name('admin.blog.article.index');
 
         // BlogCategory Routes
-        Route::get('category', 'CategoryController@index')
+        Route::get('category', [Xetaravel\Http\Controllers\Admin\Blog\CategoryController::class, 'index'])
             ->name('admin.blog.category.index');
     });
 
@@ -45,7 +43,6 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::group([
-        'namespace' => 'Discuss',
         'prefix' => 'discuss',
         'middleware' => ['permission:manage discuss category']
     ], function () {

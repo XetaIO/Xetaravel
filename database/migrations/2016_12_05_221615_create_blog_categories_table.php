@@ -17,7 +17,7 @@ return new class () extends Migration {
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('title');
-            $table->string('slug')->unique()->index();
+            $table->string('slug')->index();
             $table->text('description');
             $table->integer('blog_article_count')->unsigned()->default(0);
             $table->timestamps();

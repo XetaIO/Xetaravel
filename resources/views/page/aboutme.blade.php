@@ -151,18 +151,18 @@
         </div>
     </div>
     <figure>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="#f4f3ff">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="#37384d">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
 </section>
 
-<section id="skills" class="bg-[color:#f4f3ff] pt-20" data-aos-id="skills" data-aos="fade-in">
+<section id="skills" class="bg-[color:#37384d] pt-20 text-white" data-aos-id="skills" data-aos="fade-in">
     <div class="lg:container mx-auto pb-28">
-        <h2 class="text-4xl uppercase text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
+        <h2 class="text-4xl uppercase text-center relative before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Skills
         </h2>
-        <div class="grid grid-cols-12 gap-2 dark:text-[color:hsl(var(--b1)/0.8)] mx-3 md:mx-0">
+        <div class="grid grid-cols-12 gap-2 mx-3 md:mx-0">
             <div class="col-span-12 md:col-span-5 md:col-start-2">
                 <div class="font-semibold text-md uppercase mb-5">
                     <span class="flex justify-between">
@@ -218,7 +218,7 @@
         </div>
     </div>
     <figure class="pt-36 relative -bottom-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="var(--color-base-100)">
+        <svg class="fill-base-200 dark:fill-base-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
@@ -226,7 +226,7 @@
 
 <section id="projects" class="mb-10 -mt-48 lg:-mt-72 relative">
     <div class="lg:container mx-auto">
-        <h2 class="text-4xl uppercase text-center relative text-current dark:text-[color:hsl(var(--b1)/0.8)] before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
+        <h2 class="text-4xl uppercase text-center relative text-white before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
             Projects
         </h2>
 
@@ -283,7 +283,7 @@
     </div>
 </section>
 
-<section class="section-resume jarallax pt-16 mb-6"data-jarallax data-speed="0.2" >
+<section class="section-resume jarallax pt-16 mb-6" data-jarallax data-speed="0.2" >
     <div class="jarallax-img" style="background-image: url({{ asset('images/aboutme/cubes-bg.jpg') }});"></div>
     <div class="lg:container mx-auto">
         <h2 class="text-4xl uppercase font-xetaravel text-center relative text-white before:bg-[color:#cccccc] before:bottom-[1px] before:content-[''] before:block before:h-[1px] before:left-[calc(50%-60px)] before:absolute before:w-[120px] after:bg-primary after:bottom-0 after:content-[''] after:block after:h-[3px] after:left-[calc(50%-20px)] after:absolute after:w-[40px] mb-9">
@@ -292,7 +292,7 @@
 
         <div id="resume" class="grid grid-cols-12 gap-4 mx-3 lg:mx-0 text-white">
             <div class="col-span-12 lg:col-span-6">
-                <h3 class="text-3xl font-bold mb-4 mt-4">Sumary</h3>
+                <h3 class="text-3xl font-bold mb-4 mt-4">Summary</h3>
                 <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
                     <h4 class="uppercase text-lg font-semibold text-primary leading-none">Emeric Fevre</h4>
                     <p class="mb-4">
@@ -308,7 +308,7 @@
 
                 <h3 class="text-3xl font-bold mb-4 mt-4">Education</h3>
                 <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
-                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Professionnal Certification Level 5  Developer & Integrator Web</h4>
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Professional Certification Level 5  Developer & Integrator Web</h4>
                     <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2022</span>
                     <p>
                         <em>Online formation with <a class="link link-hover link-primary" href="https://openclassrooms.com">OpenClassRoom</a>.</em>
@@ -336,13 +336,13 @@
                             Creation of a member section (with account management), donation system (Paypal API) & administration panel with the Laravel framework.
                         </li>
                         <li>
-                            Creation of an application for managing the status of the game servers and players connected, with scheldule tasks (CRON), and persistence of datas with MySQL.
+                            Creation of an application for managing the status of the game servers and players connected, with schedule tasks (CRON), and persistence of datas with MySQL.
                         </li>
                         <li>
                             Creation of an automated rewards system for donations, and collecting rewards directly in the game.
                         </li>
                         <li>
-                            Continious Integration with GitHub and GitHub actions, Unit Tests with PHPUnit, Continious Deployment with Laravel Forge.
+                            Continuous Integration with GitHub and GitHub actions, Unit Tests with PHPUnit, Continuous Deployment with Laravel Forge.
                         </li>
                     </ul>
                 </div>
@@ -354,7 +354,7 @@
                     </p>
                     <ul class="list-disc pl-10">
                         <li>
-                            Creation of my personnal website with the Laravel framework : <a class="link link-hover link-primary" href="https://xetaravel.com">https://xetaravel.com</a>.
+                            Creation of my personal website with the Laravel framework : <a class="link link-hover link-primary" href="https://xetaravel.com">https://xetaravel.com</a>.
                         </li>
                         <li>
                             Creation of many Laravel and CakePHP plugins open-source.
@@ -388,7 +388,7 @@
         </div>
     </div>
     <figure>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4" fill="hsl(var(--b1))">
+        <svg class="fill-base-200 dark:fill-base-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
     </figure>
@@ -405,18 +405,12 @@
                 <h3 class="text-2xl font-semibold mb-6">
                     Curriculum Vitae
                 </h3>
-                <a class="btn btn-lg gap-2 mb-9" href="{{ route('downloads.show', 'Fevre_Emeric_CV.pdf') }}">
-                    <i class="fa-solid fa-cloud-arrow-down"></i>
-                    Download CV
-                </a>
+                <x-button link="{{ route('downloads.show', 'Fevre_Emeric_CV.pdf') }}" class="btn-primary btn-lg mb-9" label="Download CV" icon="fas-cloud-arrow-down" />
 
                 <h3 class="text-2xl font-semibold mb-6">
                     Contact Me
                 </h3>
-                <a class="btn btn-lg gap-2 mb-9" href="mailto:{{ config('xetaravel.site.contact_email') }}">
-                    <i class="fa-regular fa-paper-plane"></i>
-                    Contact
-                </a>
+                <x-button link="mailto:{{ config('xetaravel.site.contact_email') }}" class="btn-primary btn-lg mb-9" label="Contact" icon="fas-paper-plane" />
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-7 cv-item transition duration-500 ease-in-out opacity-0">
                 <figure>

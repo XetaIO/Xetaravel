@@ -8,6 +8,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Date;
@@ -104,6 +105,7 @@ class AppServiceProvider extends ServiceProvider
         View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
         View::composer('Blog::partials._sidebar', BlogSidebarComposer::class);
         View::composer('Discuss::partials._sidebar', DiscussSidebarComposer::class);
+        Paginator::defaultView('vendor.pagination.tailwind');
 
         // Pagination
         //Paginator::defaultView('vendor.pagination.tailwind');

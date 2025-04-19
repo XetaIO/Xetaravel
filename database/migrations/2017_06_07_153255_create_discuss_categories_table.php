@@ -17,7 +17,7 @@ return new class () extends Migration {
         Schema::create('discuss_categories', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('title');
-            $table->string('slug')->unique()->index();
+            $table->string('slug')->index();
             $table->text('description');
             $table->string('color', 7)->default('#e7edf3');
             $table->string('icon')->nullable();

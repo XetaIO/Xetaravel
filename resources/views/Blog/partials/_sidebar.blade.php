@@ -33,10 +33,10 @@
     <h2 class="mb-4 text-xl font-bold">
         Categories
     </h2>
-    <div class="flex flex-col bg-base-100  dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
-        <ul>
+    <div class="bg-base-100  dark:bg-base-300 shadow-md rounded-lg p-6 mb-3">
+        <ul class="flex flex-col gap-2">
         @foreach ($categories as $category)
-            <li class="mb-2">
+            <li>
                 <a href="{{ $category->show_url }}" class="font-bold mx-1 link link-hover">
                     - {{ $category->title }} ({{ $category->blog_article_count }})
                 </a>

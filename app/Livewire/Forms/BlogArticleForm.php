@@ -118,7 +118,7 @@ class BlogArticleForm extends Form
     }
 
     /**
-     * Function to update the article.
+     * Function to update the model.
      *
      * @return BlogArticle
      *
@@ -150,8 +150,6 @@ class BlogArticleForm extends Form
 
             return $this->blogArticle;
         });
-
-
     }
 
     /**

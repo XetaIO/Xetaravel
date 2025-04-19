@@ -5,7 +5,7 @@
             <img src="{{ asset('images/articles/default_banner.jpg') }}" class="h-40 rounded-lg ring-2 ring-base-content ring-offset-base-100 ring-offset-2"  alt="Default banner" />
         </x-file>
 
-        <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Discussion title..." />
+        <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Article title..." />
 
         <x-choices
             label="Category"

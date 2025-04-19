@@ -92,6 +92,50 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => $now,
             ],
 
+            // Blog Categories
+            [
+                'name' => 'viewAny blog category',
+                'guard_name' => 'web',
+                'description' => 'The user can see the categories.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'view blog category',
+                'guard_name' => 'web',
+                'description' => 'The user can see an category.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'create blog category',
+                'guard_name' => 'web',
+                'description' => 'The user can create categories.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'update blog category',
+                'guard_name' => 'web',
+                'description' => 'The user can update categories.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'delete blog category',
+                'guard_name' => 'web',
+                'description' => 'The user can delete categories.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'search blog category',
+                'guard_name' => 'web',
+                'description' => 'The user can search categories.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+
             // Blog Comments
             [
                 'name' => 'create blog comment',

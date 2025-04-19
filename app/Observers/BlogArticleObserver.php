@@ -31,6 +31,7 @@ class BlogArticleObserver
     public function deleting(BlogArticle $blogArticle): void
     {
         // We need to do this to refresh the countable cache `blog_comment_count` of the user.
+        $blogArticle->loadMissing('comments');
         foreach ($blogArticle->comments as $comment) {
             $comment->delete();
         }

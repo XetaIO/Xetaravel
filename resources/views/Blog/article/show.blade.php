@@ -48,7 +48,7 @@
                 <header class="mb-6">
                     <div class="relative mb-8">
                         {{-- BlogArticle Banner --}}
-                        <figure>
+                        <figure class="overlay after:rounded-t-lg">
                             <img class="object-cover rounded-t-lg w-full" src="{{ $article->article_banner }}" alt="Article image">
                         </figure>
 
