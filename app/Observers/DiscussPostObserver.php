@@ -35,6 +35,7 @@ class DiscussPostObserver
      */
     public function deleting(DiscussPost $discussPost): void
     {
+        $discussPost->loadMissing('conversation');
         $conversation = $discussPost->conversation;
 
         /*if ($conversation->first_post_id === $discussPost->getKey()) {

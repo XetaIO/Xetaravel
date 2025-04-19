@@ -45,6 +45,7 @@ return [
             'posts_profile_page' => 10
         ],
         'discuss' => [
+            'category_per_page' => 15,
             'conversation_per_page' => 15,
             'post_per_page' => 10
         ]

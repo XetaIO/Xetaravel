@@ -48,7 +48,7 @@ Route::group([
     ], function () {
 
         // BlogCategory Routes
-        Route::get('category', 'CategoryController@index')
+        Route::get('category', [Xetaravel\Http\Controllers\Admin\Discuss\CategoryController::class, 'index'])
             ->name('admin.discuss.category.index');
     });
 

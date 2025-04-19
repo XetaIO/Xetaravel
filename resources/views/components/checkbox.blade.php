@@ -1,5 +1,9 @@
 <div>
     <fieldset class="fieldset">
+        {{-- LABEL --}}
+        <legend class="fieldset-legend">
+            {!! $label !!}
+        </legend>
         <div class="w-full">
             <label @class(["flex gap-3 items-center cursor-pointer", "justify-between" => $right, "!items-start" => $hint])>
 
@@ -17,7 +21,7 @@
                 {{-- LABEL --}}
                 <div @class(["order-1" => $right])>
                     <div class="text-sm font-medium">
-                        {!! $label !!}
+                        {!! $text !!}
 
                         @if($attributes->get('required'))
                             <span class="text-error">*</span>
