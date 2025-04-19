@@ -41,9 +41,9 @@ class DiscussCategoryForm extends Form
     /**
      * The level of the category.
      *
-     * @var string|null
+     * @var int|null
      */
-    public ?string $level = null;
+    public ?int $level = null;
 
     /**
      * Whatever the category is locked.
@@ -67,7 +67,7 @@ class DiscussCategoryForm extends Form
             'icon' => 'required|min:3',
             'level' => [
                 'required',
-                'integer',
+                'int',
                 Rule::unique('discuss_categories')->ignore($this->discussCategory)
             ],
             'is_locked' => 'required|bool',
