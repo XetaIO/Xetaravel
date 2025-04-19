@@ -36,7 +36,6 @@ class CreateCategoryTest extends TestCase
             ->set('form.icon', '')
             ->set('form.color', '')
             ->set('form.level', '')
-            ->set('form.is_locked', '')
             ->set('form.description', '')
             ->call('create')
             ->assertHasErrors([
@@ -44,7 +43,6 @@ class CreateCategoryTest extends TestCase
                 'form.icon' => 'required',
                 'form.color' => 'required',
                 'form.level' => 'required',
-                'form.is_locked' => 'required',
                 'form.description' => 'required',
             ]);
     }
