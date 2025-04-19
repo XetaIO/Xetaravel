@@ -8,7 +8,6 @@ use Xetaravel\Models\BlogCategory;
 
 class BlogCategoryObserver
 {
-
     /**
      * Handle the "deleting" event.
      */

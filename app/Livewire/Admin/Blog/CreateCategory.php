@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Livewire\Admin\Blog;
 
 use Illuminate\Contracts\View\Factory;
