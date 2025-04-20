@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Xetaravel\Http\Controllers\Admin;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Xetaravel\Models\User;
 
 class UserController extends Controller
 {
@@ -24,28 +22,5 @@ class UserController extends Controller
         );
 
         return view('Admin::User.index', compact('breadcrumbs'));
-    }
-
-    /**
-     * Delete the avatar for the specified user.
-     *
-     * @param int $id The id of the user.
-     *
-     * @return RedirectResponse
-     */
-    public function deleteAvatar(int $id): RedirectResponse
-    {
-        $user = User::findOrFail($id);
-
-        $user->clearMediaCollection('avatar');
-        $user->addMedia(public_path('images/avatar.png'))
-            ->preservingOriginal()
-            ->setName(mb_substr(md5($user->username), 0, 10))
-            ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
-            ->toMediaCollection('avatar');
-
-        return redirect()
-            ->back()
-            ->with('success', 'The avatar has been deleted successfully !');
     }
 }

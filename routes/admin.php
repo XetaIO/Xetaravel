@@ -78,36 +78,12 @@ Route::group([
     ], function () {
 
         // Role Routes
-        Route::get('role', 'RoleController@index')->name('admin.role.index');
-
-        Route::get('role/create', 'RoleController@showCreateForm')
-            ->name('admin.role.create');
-        Route::post('role/create', 'RoleController@create')
-            ->name('admin.role.create');
-
-        Route::get('role/update/{id}', 'RoleController@showUpdateForm')
-            ->name('admin.role.edit');
-        Route::put('role/update/{id}', 'RoleController@update')
-            ->name('admin.role.update');
-
-        Route::delete('role/delete/{id}', 'RoleController@delete')
-            ->name('admin.role.delete');
+        Route::get('role', [Xetaravel\Http\Controllers\Admin\RoleController::class, 'index'])
+            ->name('admin.role.index');
 
         // Permission Route
-        Route::get('permission', 'PermissionController@index')->name('admin.permission.index');
-
-        Route::get('permission/create', 'PermissionController@showCreateForm')
-            ->name('admin.permission.create');
-        Route::post('permission/create', 'PermissionController@create')
-            ->name('admin.permission.create');
-
-        Route::get('permission/update/{id}', 'PermissionController@showUpdateForm')
-            ->name('admin.permission.edit');
-        Route::put('permission/update/{id}', 'PermissionController@update')
-            ->name('admin.permission.update');
-
-        Route::delete('permission/delete/{id}', 'PermissionController@delete')
-            ->name('admin.permission.delete');
+        Route::get('permission', [Xetaravel\Http\Controllers\Admin\PermissionController::class, 'index'])
+            ->name('admin.permission.index');
     });
 
     /*
