@@ -5,15 +5,8 @@ declare(strict_types=1);
 namespace Xetaravel\Http\Controllers\Admin;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
-use Xetaio\Mentions\Parser\MentionParser;
-use Xetaravel\Models\Repositories\UserRepository;
-use Xetaravel\Models\Role;
 use Xetaravel\Models\User;
-use Xetaravel\Models\Validators\UserValidator;
 
 class UserController extends Controller
 {
