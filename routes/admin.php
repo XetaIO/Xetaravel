@@ -58,25 +58,13 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::group([
-        'namespace' => 'User',
         'prefix' => 'user',
         'middleware' => ['permission:manage user']
     ], function () {
 
         // User Routes
-        Route::get('/', 'UserController@index')->name('admin.user.index');
-        Route::get('search', 'UserController@search')->name('admin.user.search');
-
-        Route::get('update/{slug}.{id}', 'UserController@showUpdateForm')
-            ->name('admin.user.edit');
-        Route::put('update/{id}', 'UserController@update')
-            ->name('admin.user.update');
-
-        Route::delete('delete/{id}', 'UserController@delete')
-            ->name('admin.user.delete');
-
-        Route::delete('deleteAvatar/{id}', 'UserController@deleteAvatar')
-            ->name('admin.user.deleteavatar');
+        Route::get('/', [Xetaravel\Http\Controllers\Admin\UserController::class, 'index'])
+            ->name('admin.user.index');
     });
 
     /*

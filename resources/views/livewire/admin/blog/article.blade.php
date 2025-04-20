@@ -110,7 +110,7 @@
                         </x-table.row>
                     @empty
                         <x-table.row>
-                            <x-table.cell colspan="8">
+                            <x-table.cell colspan="10">
                                 <div class="text-center p-2">
                                     <span class="text-muted">No articles found...</span>
                                 </div>

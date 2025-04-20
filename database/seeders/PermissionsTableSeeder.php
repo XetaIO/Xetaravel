@@ -342,6 +342,13 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
+                'name' => 'restore user',
+                'guard_name' => 'web',
+                'description' => 'The user can restore an user.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
                 'name' => 'assign-direct-permission user',
                 'guard_name' => 'web',
                 'description' => 'The user can assign directs permissions to an user.',

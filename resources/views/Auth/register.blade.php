@@ -34,7 +34,7 @@
                         @endif
                     </div>
 
-                    <x-checkbox label="By clicking on 'Register', you accept that you have read and understand the <a class='link link-primary' href='{{ route('page.terms') }}'>Terms</a>." name="terms" />
+                    <x-checkbox text="By clicking on 'Register', you accept that you have read and understand the <a class='link link-primary' href='{{ route('page.terms') }}'>Terms</a>." name="terms" />
 
                     <div class="text-center">
                         <div class="mb-2">

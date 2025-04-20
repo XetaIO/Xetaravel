@@ -54,11 +54,11 @@
                 Moderation
             </div>
             @can('pin', \Xetaravel\Models\DiscussConversation::class)
-                <x-checkbox wire:model="form.is_pinned" name="form.is_pinned" label="Check to pin this discussion" />
+                <x-checkbox wire:model="form.is_pinned" name="form.is_pinned" text="Check to pin this discussion" />
             @endcan
 
             @can('lock', \Xetaravel\Models\DiscussConversation::class)
-                <x-checkbox wire:model="form.is_locked" name="form.is_locked" label="Check to lock this discussion" />
+                <x-checkbox wire:model="form.is_locked" name="form.is_locked" text="Check to lock this discussion" />
             @endcan
         @endcanany
 

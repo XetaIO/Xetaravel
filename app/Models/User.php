@@ -259,6 +259,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     /**
+     * Get the setting for the user.
+     *
+     * @return MorphMany
+     */
+    public function settings(): MorphMany
+    {
+        return $this->morphMany(Setting::class, 'model');
+    }
+
+    /**
+     * Get the user that deleted the user.
+     *
+     * @return HasOne
+     */
+    public function deletedUser(): HasOne
+    {
+        return $this->hasOne(self::class, 'id', 'deleted_user_id')->withTrashed();
+    }
+
+    /**
      * Send the password reset notification.
      *
      * @param string $token
@@ -278,15 +298,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new VerifyEmail());
-    }
-
-    /**
-     * Get the setting for the user.
-     *
-     * @return MorphMany
-     */
-    public function settings(): MorphMany
-    {
-        return $this->morphMany(Setting::class, 'model');
     }
 }

@@ -38,7 +38,7 @@ return new class () extends Migration {
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('deleted_user_id')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('deleted_user_id')->references('id')->on('users');
         });
     }
 
