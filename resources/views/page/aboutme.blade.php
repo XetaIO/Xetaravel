@@ -296,7 +296,12 @@
                 <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
                     <h4 class="uppercase text-lg font-semibold text-primary leading-none">Emeric Fevre</h4>
                     <p class="mb-4">
-                        <em>Web Application Developer & Designer, learning since 10+ years in autodidact. Mainly back-end developer with PHP and the frameworks Laravel, Symfony & CakePHP.  I have also worked/work with JavaScript, TypeScript, SASS, VueJS, WebPack, Redis... I’m currently in formation at <a class="link link-hover link-primary" href="https://openclassrooms.com">OpenClassRoom</a>.</em>
+                        <em>
+                            Web Application Developer & Designer, learning since 10+ years in autodidact.
+                            Mainly back-end developer with PHP and the frameworks Laravel, Symfony & CakePHP.
+                            I have also worked/work with JavaScript, TypeScript, SASS, VueJS, WebPack, Redis, ViteJS, Livewire...
+                            I like to work with TALL (Tailwind, Alpine.js, Laravel, Livewire) stack.
+                        </em>
                     </p>
                     <ul class="list-disc pl-10">
                         <li>St Marcel, 71380</li>
@@ -327,7 +332,7 @@
                 <h3 class="text-3xl font-bold mb-4 mt-4">Professional Experience</h3>
                 <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
                     <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Full-stack Developer & Network Administrator</h4>
-                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2020 - Present</span>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2020 - 2023</span>
                     <p>
                         <em>Volunteer at the association <a class="link link-hover link-primary" href="https://ark-division.fr">Division Gaming France</a> (RNA : W863010817).</em>
                     </p>
@@ -357,9 +362,6 @@
                             Creation of my personal website with the Laravel framework : <a class="link link-hover link-primary" href="https://xetaravel.com">https://xetaravel.com</a>.
                         </li>
                         <li>
-                            Creation of many Laravel and CakePHP plugins open-source.
-                        </li>
-                        <li>
                             Creation of a Discuss forum with <a class="link link-hover link-primary" href="https://github.com/XetaIO/Xetaravel#features">many features</a> (<a class="link link-hover link-primary" href="https://xetaravel.com/discuss">see it in live</a>):
                             <ul class="list-disc pl-10">
                                 <li>
@@ -382,12 +384,78 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            Creation of many Laravel and CakePHP plugins open-source. You can see them <a class="link link-hover link-primary" href="https://github.com/XetaIO">here</a> and <a class="link link-hover link-primary" href="https://github.com/Xety?tab=repositories">there</a>.
+                        </li>
+                    </ul>
+
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2024</span>
+                    <p>
+                        <em>Professional Project</em>
+                    </p>
+                    <ul class="list-disc pl-10">
+                        <li class="font-bold">
+                            Designed and sold a custom web application to my current company for managing spare parts and equipment.
+                        </li>
+                        <li>
+                            Included features for planning management, maintenance and incident tracking, and user/permission control.
+                        </li>
+                        <li>
+                            Built with a focus on improving operational efficiency and centralizing resource management.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Deputy Production Manager</h4>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2023 - Present</span>
+                    <p>
+                        <em>Unlimited Duration Contract</em>
+                    </p>
+                    <ul class="list-disc pl-10">
+                        <li>
+                            Promoted after joining as a Production Line Operator in 2018.
+                        </li>
+                        <li>
+                            Supervise and coordinate a team to ensure efficient production operations.
+                        </li>
+                        <li>
+                            Develop and manage daily and weekly production schedules.
+                        </li>
+                        <li>
+                            Oversee truck dispatching and logistics.
+                        </li>
+                        <li>
+                            Handle spare parts inventory and ensure availability of critical components.
+                        </li>
+                        <li>
+                            Conduct onboarding and training of new employees.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resume-item transition duration-500 ease-in-out opacity-0 relative pl-5 pb-5 -mt-[2px] border-l-2 border-solid border-primary before:bg-[color:#37384d] before:border-2 before:border-solid before:border-primary before:rounded-full before:content[''] before:h-4 before:w-4 before:absolute before:-left-[9px] before:top-0">
+                    <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Production Line Operator</h4>
+                    <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2018 - 2023</span>
+                    <p>
+                        <em>Unlimited Duration Contract</em>
+                    </p>
+                    <ul class="list-disc pl-10">
+                        <li>
+                            Operated and monitored production line equipment.
+                        </li>
+                        <li>
+                            Ensured compliance with quality and safety standards.
+                        </li>
+                        <li>
+                            Contributed to process improvement initiatives and supported team efficiency.
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <figure>
+    <figure class="relative -bottom-1">
         <svg class="fill-base-200 dark:fill-base-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
             <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
         </svg>
