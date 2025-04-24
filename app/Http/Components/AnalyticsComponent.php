@@ -15,6 +15,40 @@ use Spatie\Analytics\Period;
 trait AnalyticsComponent
 {
     /**
+     * Get the percentage relative to the total page views.
+     *
+     * @param int $pageviews The page views.
+     * @param int $total The total page views.
+     *
+     * @return float
+     */
+    protected function getPercentage(int $pageviews, int $total): float
+    {
+        $percentage = ($pageviews * 100) / $total;
+
+        return round($percentage, 1);
+    }
+
+    /**
+     * Get the browser color by his name
+     *
+     * @param string $browser The name of the browser.
+     *
+     * @return string
+     */
+    protected function getBrowserColor(string $browser): string
+    {
+        return match ($browser) {
+            'Chrome' => '#00acac',
+            'Firefox' => '#f4645f',
+            'Safari' => '#727cb6',
+            'Opera' => '#348fe2',
+            'Edge' => '#75e376',
+            'Brave' => '#ff3a01',
+            default => '#ddd',
+        };
+    }
+    /**
      * Build the yesterday visitors metric.
      *
      * @return Collection
@@ -210,40 +244,5 @@ trait AnalyticsComponent
         });
 
         return $operatingSystemGraph->reverse();
-    }
-
-    /**
-     * Get the percentage relative to the total page views.
-     *
-     * @param int $pageviews The page views.
-     * @param int $total The total page views.
-     *
-     * @return float
-     */
-    protected function getPercentage(int $pageviews, int $total): float
-    {
-        $percentage = ($pageviews * 100) / $total;
-
-        return round($percentage, 1);
-    }
-
-    /**
-     * Get the browser color by his name
-     *
-     * @param string $browser The name of the browser.
-     *
-     * @return string
-     */
-    protected function getBrowserColor(string $browser): string
-    {
-        return match ($browser) {
-            'Chrome' => '#00acac',
-            'Firefox' => '#f4645f',
-            'Safari' => '#727cb6',
-            'Opera' => '#348fe2',
-            'Edge' => '#75e376',
-            'Brave' => '#ff3a01',
-            default => '#ddd',
-        };
     }
 }

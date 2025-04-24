@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xetaravel\Livewire\Admin\Permission;
 
 use Livewire\Component;
