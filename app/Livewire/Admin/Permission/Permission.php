@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\Livewire\Admin\Blog;
+namespace Xetaravel\Livewire\Admin\Permission;
 
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -10,16 +10,17 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Masmerise\Toaster\Toastable;
+use Spatie\Permission\Models\Permission as ModelPermission;
 use Xetaravel\Livewire\Traits\WithBulkActions;
 use Xetaravel\Livewire\Traits\WithPerPagePagination;
 use Xetaravel\Livewire\Traits\WithSorting;
-use Xetaravel\Models\BlogCategory;
 
-class Category extends Component
+class Permission extends Component
 {
     use AuthorizesRequests;
     use Toastable;
@@ -33,7 +34,7 @@ class Category extends Component
      *
      * @var string
      */
-    public string $model = BlogCategory::class;
+    public string $model = ModelPermission::class;
 
     /**
      * The field to sort by.
@@ -60,7 +61,7 @@ class Category extends Component
     public string $search = '';
 
     /**
-     * The number of category limited per page.
+     * The number of permission limited per page.
      *
      * @var int
      */
@@ -73,21 +74,15 @@ class Category extends Component
      */
     public array $allowedFields = [
         'id',
-        'title',
+        'name',
         'description',
-        'blog_article_count',
         'created_at'
     ];
 
-    public function mount(): void
-    {
-        $this->perPage = config('xetaravel.pagination.blog.article_per_page', $this->perPage);
-    }
-
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
-        return view('livewire.admin.blog.category', [
-            'categories' => $this->rows
+        return view('livewire.admin.permission.permission', [
+            'permissions' => $this->rows
         ]);
     }
 
@@ -98,12 +93,15 @@ class Category extends Component
      */
     public function getRowsQueryProperty(): Builder
     {
-        $query = BlogCategory::query()
-            ->when($this->search, function ($query, $search) {
+        $query = ModelPermission::query();
+
+        if (Gate::allows('search', ModelPermission::class)) {
+            $query ->when($this->search, function ($query, $search) {
                 return $query
-                    ->where('title', 'LIKE', '%' . $search . '%')
+                    ->where('name', 'LIKE', '%' . $search . '%')
                     ->orWhere('description', 'LIKE', '%' . $search . '%');
             });
+        }
 
         return $this->applySorting($query);
     }

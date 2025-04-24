@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Spatie\Permission\Models\Permission;
+use Xetaravel\Policies\PermissionPolicy;
 use Xetaravel\Settings\Settings;
 use Xetaravel\View\Composers\Blog\SidebarComposer as BlogSidebarComposer;
 use Xetaravel\View\Composers\Discuss\SidebarComposer as DiscussSidebarComposer;
@@ -49,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
     private function configureModels(): void
     {
         Model::shouldBeStrict();
+        Gate::policy(Permission::class, PermissionPolicy::class);
     }
 
     /**

@@ -46,7 +46,7 @@
                                 @unless ($selectAll)
                                     <div>
                                         <span>You have selected <strong>{{ $articles->count() }}</strong> article(s), do you want to select all <strong>{{ $articles->total() }}</strong> article(s)?</span>
-                                        <x-button type="button" icon="fas-check" label="Tout sélectionner" wire:click='setSelectAll' class="btn-sm" spinner />
+                                        <x-button type="button" icon="fas-check" label="Select all" wire:click='setSelectAll' class="btn-sm" spinner />
                                     </div>
                                 @else
                                     <span>You have selected actually <strong>{{ $articles->total() }}</strong> article(s).</span>

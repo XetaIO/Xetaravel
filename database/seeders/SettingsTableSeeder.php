@@ -85,5 +85,13 @@ class SettingsTableSeeder extends Seeder
             'text' => 'Enable/Disable the permission management system.'
         ]);
 
+        // Google Analytics
+        Setting::create([
+            'key' => 'analytics_enabled',
+            'value' => true,
+            'label' => 'Activation of the Google Analytics system.',
+            'text' => 'Enable/Disable the Google Analytics  system.'
+        ]);
+
     }
 }

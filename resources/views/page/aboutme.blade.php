@@ -232,7 +232,7 @@
 
         <div class="grid grid-cols-12 gap-4 mx-3 lg:mx-0">
             <div class="col-span-12 lg:col-span-5 lg:col-start-2 mb-6">
-                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
+                <div class="project flex flex-col lg:flex-row items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
                     <img class="min-w-[140px] p-3" src="{{ asset('images/logo.svg') }}" alt="Xetaravel logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl text-primary truncate">Xetaravel</h3>
@@ -244,7 +244,7 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-7 mb-6">
-                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
+                <div class="project flex flex-col lg:flex-row items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-500 ease-in-out opacity-0">
                     <img class="w-[140px] p-3" src="{{ asset('images/aboutme/xeta.png') }}" alt="Xeta logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl font-xetaravel text-primary truncate">Xeta</h3>
@@ -256,7 +256,7 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-2 mb-6">
-                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                <div class="project flex flex-col lg:flex-row items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
                     <img class="w-[140px] p-3" src="{{ asset('images/aboutme/fmt.png') }}" alt="FrenchModdingTeam logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl font-xetaravel text-primary truncate">FrenchModdingTeam</h3>
@@ -268,13 +268,28 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-5 lg:col-start-7 mb-6">
-                <div class="project flex items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                <div class="project flex flex-col lg:flex-row items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
                     <img class="w-[140px] p-3" src="{{ asset('images/aboutme/division.png') }}" alt="FrenchModdingTeam logo">
                     <div class="ml-5 overflow-hidden">
                         <h3 class="text-3xl font-xetaravel text-primary truncate">ARK Division</h3>
                         <p class="overflow-hidden break-words">
                             Realization of a donation system with members account, serveurs status update with the Laravel framework.<br/>
                             <span class="font-semibold">Site : </span><a class="link link-hover link-primary" href="https://discuss.ark-division.fr">https://discuss.ark-division.fr</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 lg:col-span-10 lg:col-start-2 mb-6">
+                <div class="project flex flex-col lg:flex-row items-center bg-base-100 shadow-[0_5px_15px_5px_rgba(0,0,0,0.2)] rounded-md p-5 h-full transition duration-700 ease-in-out opacity-0">
+                    <img class="w-[140px] p-3" src="{{ asset('images/aboutme/selvah.png') }}" alt="Selvah logo">
+                    <div class="ml-5 overflow-hidden">
+                        <h3 class="text-3xl font-xetaravel text-primary truncate">Selvah</h3>
+                        <p class="overflow-hidden break-words">
+                            Designed, developed and sold a custom web application for managing spare parts and equipment with the Laravel framework.<br/>
+                            Included features for planning management, maintenance and incident tracking, and user/permission control.<br/>
+                            Built with a focus on improving operational efficiency and centralizing resource management.<br/>
+                            Build with TALL stack : Tailwind, Alpine.js, Laravel, Livewire.<br/>
+                            <span class="font-semibold">Site : Confidential</span>
                         </p>
                     </div>
                 </div>
@@ -391,7 +406,7 @@
 
                     <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2024</span>
                     <p>
-                        <em>Professional Project</em>
+                        <em>Professional Project - Selvah</em>
                     </p>
                     <ul class="list-disc pl-10">
                         <li class="font-bold">
@@ -410,7 +425,7 @@
                     <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Deputy Production Manager</h4>
                     <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2023 - Present</span>
                     <p>
-                        <em>Unlimited Duration Contract</em>
+                        <em>Unlimited Duration Contract - Selvah</em>
                     </p>
                     <ul class="list-disc pl-10">
                         <li>
@@ -438,7 +453,7 @@
                     <h4 class="uppercase text-lg font-semibold text-primary leading-none mb-2">Production Line Operator</h4>
                     <span class="bg-[color:rgba(247,248,249,.1)] rounded inline-block font-semibold px-1 mb-2">2018 - 2023</span>
                     <p>
-                        <em>Unlimited Duration Contract</em>
+                        <em>Unlimited Duration Contract - Selvah</em>
                     </p>
                     <ul class="list-disc pl-10">
                         <li>

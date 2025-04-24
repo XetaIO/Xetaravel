@@ -78,11 +78,11 @@ Route::group([
     ], function () {
 
         // Role Routes
-        Route::get('role', [Xetaravel\Http\Controllers\Admin\RoleController::class, 'index'])
+        Route::get('role', [Xetaravel\Http\Controllers\Admin\Permission\PermissionController::class, 'index'])
             ->name('admin.role.index');
 
         // Permission Route
-        Route::get('permission', [Xetaravel\Http\Controllers\Admin\PermissionController::class, 'index'])
+        Route::get('permission', [Xetaravel\Http\Controllers\Admin\Permission\PermissionController::class, 'index'])
             ->name('admin.permission.index');
     });
 

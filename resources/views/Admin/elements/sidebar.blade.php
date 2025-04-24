@@ -1,6 +1,6 @@
 <aside class="drawer-side z-1">
     <label for="xetaravel-drawer" class="drawer-overlay"></label>
-    <div class="menu w-80 bg-base-100 dark:bg-base-300 min-h-full shadow-md">
+    <div class="menu w-70 bg-base-100 dark:bg-base-300 min-h-full shadow-md">
         <div class="p-4">
             <a class="flex gap-1 items-center justify-center font-bold text-3xl hover:bg-transparent focus:bg-transparent active:bg-transparent" href="{{ route('page.index') }}">
                 <img src="{{ asset('images/logo.svg') }}" alt="Xetaravel Logo" class="inline-block ">
@@ -110,7 +110,7 @@
                               'menu-active' => request()->route()->getName() === 'admin.permission.index'])
                                href="{{ route('admin.permission.index') }}">
                                 <x-icon name="fas-user-shield" />
-                                Manage Permission
+                                Manage Permissions
                             </a>
                         </li>
                     @endcan

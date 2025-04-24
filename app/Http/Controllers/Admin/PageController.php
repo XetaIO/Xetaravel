@@ -9,6 +9,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Xetaravel\Http\Components\AnalyticsComponent;
 use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\BlogComment;
@@ -22,6 +24,9 @@ class PageController extends Controller
      * Show the application dashboard.
      *
      * @return Factory|View|Application|\Illuminate\View\View|object
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function index()
     {
@@ -29,9 +34,9 @@ class PageController extends Controller
 
         $viewDatas = [];
 
-        if (!App::environment('testing')) {
+        if (!App::environment('testing') && settings('analytics_enabled')) {
 
-            /*$visitorsData = Cache::remember('Analytics.visitors', $minutes, function () {
+            $visitorsData = Cache::remember('Analytics.visitors', $minutes, function () {
                 return $this->buildVisitorsGraph();
             });
             $viewDatas[] = 'visitorsData';
@@ -49,12 +54,12 @@ class PageController extends Controller
             $operatingSystemGraph = Cache::remember('Analytics.operatingsystem', $minutes, function () {
                 return $this->buildOperatingSystemGraph();
             });
-            $viewDatas[] = 'operatingSystemGraph';*/
+            $viewDatas[] = 'operatingSystemGraph';
 
-            $todayVisitors = Cache::remember('Analytics.todayvisitors', $minutes, function () {
-                return $this->buildTodayVisitors();
+            $yesterdayVisitors = Cache::remember('Analytics.yesterdayvisitors', $minutes, function () {
+                return $this->buildYesterdayVisitors();
             });
-            $viewDatas[] = 'todayVisitors';
+            $viewDatas[] = 'yesterdayVisitors';
         }
 
         $usersCount = Cache::remember('Analytics.users.count', $minutes, function () {

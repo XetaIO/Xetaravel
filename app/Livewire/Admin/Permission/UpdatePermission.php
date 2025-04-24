@@ -1,0 +1,13 @@
+<?php
+
+namespace Xetaravel\Livewire\Admin\Permission;
+
+use Livewire\Component;
+
+class UpdatePermission extends Component
+{
+    public function render()
+    {
+        return view('livewire.admin.permission.update-permission');
+    }
+}
