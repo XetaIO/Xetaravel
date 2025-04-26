@@ -6,12 +6,10 @@ namespace Xetaravel\Livewire\Discuss;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Masmerise\Toaster\Toastable;
 use Xetaravel\Livewire\Forms\DiscussConversationForm;
-use Xetaravel\Models\DiscussCategory;
 use Xetaravel\Models\DiscussConversation;
 use Throwable;
 

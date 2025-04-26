@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Xetaravel\Livewire\Forms;
 
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Xetaravel\Models\BlogCategory;
 
