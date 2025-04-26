@@ -24,6 +24,22 @@
 @source "../**/*.js";
 @source "../**/*.vue";
 
+@font-face {
+    font-family: 'Miriam Libre';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../../resources/css/fonts/miriam_libre.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Miriam Libre';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../../resources/css/fonts/miriam_libre.woff2') format('woff2');
+}
+
 @theme {
     --font-code: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
     --tw-prose-pre-bg: var(--color-base-content);

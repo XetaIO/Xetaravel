@@ -66,19 +66,7 @@ class CreateConversation extends Component
     {
         $this->authorize('create', DiscussConversation::class);
 
-        $categories = DiscussCategory::pluckLocked('id');
-
-        $this->validate([
-            'form.title' => 'required|min:5',
-            'form.category_id' => [
-                'required',
-                'integer',
-                Rule::in($categories->toArray())
-            ],
-            'form.is_pinned' => 'boolean',
-            'form.is_locked' => 'boolean',
-            'form.content' => 'required|min:10',
-        ]);
+        $this->validate();
 
         if (DiscussConversation::isFlooding('xetaravel.flood.discuss.conversation') &&
             !Auth::user()->hasPermissionTo('manage discuss conversation')) {

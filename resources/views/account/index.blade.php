@@ -5,13 +5,9 @@
     <x-meta title="My account" />
 @endpush
 
-@push('style')
-    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-@endpush
-
-@push('scripts')
+@push('scriptsTop')
     @vite('resources/js/highlight.js')
-    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    @vite('resources/js/easymde.js')
 
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {

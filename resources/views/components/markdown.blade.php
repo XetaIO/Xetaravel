@@ -38,7 +38,7 @@
                                     this.editor = null
                                 },
                                 initEditor() {
-                                    this.editor = new EasyMDE({
+                                    this.editor = new window.EasyMDE({
                                             {{ $setup() }},
                                             element: $refs.markdown{{ $uuid }},
                                             initialValue: this.value ?? '',

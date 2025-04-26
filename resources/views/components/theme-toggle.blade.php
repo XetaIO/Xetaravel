@@ -50,10 +50,13 @@
 
                         document.documentElement.setAttribute('data-theme', this.theme);
                         document.documentElement.setAttribute('class', this.class);
-                        document.getElementById('flatpickrCssFile').href =
-                            this.theme === lightTheme
-                                ? 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css'
-                                : 'https://npmcdn.com/flatpickr/dist/themes/dark.css';
+                        const flatpickrCssFile = document.getElementById('flatpickrCssFile');
+                        if (flatpickrCssFile) {
+                            flatpickrCssFile.href =
+                                this.theme === lightTheme
+                                    ? '{{ Vite::asset('resources/css/flatpickr.css') }}'
+                                    : '{{ Vite::asset('resources/css/flatpickr_dark.css') }}';
+                        }
 
                         this.updateIcons();
                     },

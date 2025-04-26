@@ -7,6 +7,7 @@ namespace Xetaravel\Livewire\Forms;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 use Xetaio\Mentions\Parser\MentionParser;
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
@@ -70,6 +71,26 @@ class DiscussConversationForm extends Form
      * @var Collection|array
      */
     public Collection|array $categoriesSearchable = [];
+
+    protected function rules(): array
+    {
+        $rules =  [
+            'title' => 'required|min:5',
+            'category_id' => [
+                'required',
+                'integer',
+                Rule::in(DiscussCategory::pluckLocked('id')->toArray())
+            ],
+            'is_pinned' => 'boolean',
+            'is_locked' => 'boolean'
+        ];
+
+        if (!$this->discussConversation?->exists) {
+            $rules['content'] = 'required|min:10';
+        }
+
+        return $rules;
+    }
 
     /**
      * Function to store the model.

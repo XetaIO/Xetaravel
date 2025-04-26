@@ -77,8 +77,8 @@ Route::group([
         'middleware' => ['permission:manage role|manage permission']
     ], function () {
 
-        // Role Routes
-        Route::get('role', [Xetaravel\Http\Controllers\Admin\Permission\PermissionController::class, 'index'])
+        // Role Route
+        Route::get('role', [Xetaravel\Http\Controllers\Admin\Permission\RoleController::class, 'index'])
             ->name('admin.role.index');
 
         // Permission Route

@@ -55,7 +55,7 @@
                             instance: undefined,
                             date: $wire.{{ $modelName() }} ? $wire.{{ $modelName() }} : new Date()
                         }"
-                        x-init="instance = flatpickr($refs.input, {{ $setup() }}).setDate(date);"
+                        x-init="instance = window.flatpickr($refs.input, {{ $setup() }}).setDate(date);"
                         @if(isset($config["mode"]) && $config["mode"] == "range" && $attributes->get('live'))
                             @change="const value = $event.target.value; if(value.split('to').length == 2) { $wire.set('{{ $modelName() }}', value) };"
                         @endif

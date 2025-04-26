@@ -5,21 +5,8 @@
     <x-meta title="Manage Users" />
 @endpush
 
-@push('style')
-    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-@endpush
-
-@push('scripts')
-    @vite('resources/js/highlight.js')
-    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function() {
-            // HighlightJS
-            hljs.highlightAll();
-        });
-    </script>
+@push('scriptsTop')
+    @vite('resources/js/easymde.js')
 @endpush
 
 @section('content')

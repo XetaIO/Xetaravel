@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Xetaravel\Policies\PermissionPolicy;
+use Xetaravel\Policies\RolePolicy;
 use Xetaravel\Settings\Settings;
 use Xetaravel\View\Composers\Blog\SidebarComposer as BlogSidebarComposer;
 use Xetaravel\View\Composers\Discuss\SidebarComposer as DiscussSidebarComposer;
@@ -53,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::shouldBeStrict();
         Gate::policy(Permission::class, PermissionPolicy::class);
+        Gate::policy(Role::class, RolePolicy::class);
     }
 
     /**

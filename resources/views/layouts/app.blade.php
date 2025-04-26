@@ -26,19 +26,12 @@ Conçu et développé par Emeric Fèvre.
                 document.documentElement.classList.add('dark')
                 document.documentElement.dataset.theme = "dark";
                 localStorage.setItem('theme', 'dark');
-                // Change the flatpickr theme to dark.
-                document.getElementById('flatpickrCssFile').href = 'https://npmcdn.com/flatpickr/dist/themes/dark.css';
             } else {
                 localStorage.theme = 'light';
                 document.documentElement.classList.remove('dark');
                 document.documentElement.dataset.theme = 'light';
             }
         </script>
-
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Miriam+Libre:wght@400;700&display=swap" rel="stylesheet">
 
         <!-- Embed Styles -->
         @stack('style')

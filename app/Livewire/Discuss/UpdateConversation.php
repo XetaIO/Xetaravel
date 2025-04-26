@@ -71,18 +71,7 @@ class UpdateConversation extends Component
     {
         $this->authorize('update', $this->form->discussConversation);
 
-        $categories = DiscussCategory::pluckLocked('id');
-
-        $this->validate([
-            'form.title' => 'required|min:5',
-            'form.category_id' => [
-                'required',
-                'integer',
-                Rule::in($categories->toArray())
-            ],
-            'form.is_pinned' => 'boolean',
-            'form.is_locked' => 'boolean'
-        ]);
+        $this->validate();
 
         $discussConversation = $this->form->update();
 

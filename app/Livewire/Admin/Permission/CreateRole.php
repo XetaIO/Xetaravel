@@ -11,10 +11,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Masmerise\Toaster\Toastable;
-use Spatie\Permission\Models\Permission as PermissionModel;
-use Xetaravel\Livewire\Forms\PermissionForm;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role as RoleModel;
+use Xetaravel\Livewire\Forms\RoleForm;
 
-class CreatePermission extends Component
+class CreateRole extends Component
 {
     use AuthorizesRequests;
     use Toastable;
@@ -22,9 +23,9 @@ class CreatePermission extends Component
     /**
      * The form used to create/update a model.
      *
-     * @var PermissionForm
+     * @var RoleForm
      */
-    public PermissionForm $form;
+    public RoleForm $form;
 
     /**
      * Used to show the create modal.
@@ -38,10 +39,10 @@ class CreatePermission extends Component
      *
      * @return void
      */
-    #[On('create-permission')]
+    #[On('create-role')]
     public function createPermission(): void
     {
-        $this->authorize('create', PermissionModel::class);
+        $this->authorize('create', RoleModel::class);
 
         $this->form->reset();
 
@@ -55,21 +56,30 @@ class CreatePermission extends Component
      */
     public function create(): void
     {
-        $this->authorize('create', PermissionModel::class);
+        $this->authorize('create', RoleModel::class);
 
         $this->validate();
 
-        $this->form->create();
+        $role = $this->form->create();
 
         $this->showModal = false;
 
         redirect()
-            ->route('admin.permission.index')
-            ->success('Your permission has been created successfully !');
+            ->route('admin.role.index')
+            ->success("The role $role->name has been created successfully !");
     }
 
     public function render(): View|Application|Factory|\Illuminate\View\View
     {
-        return view('livewire.admin.permission.create-permission');
+        // Select all permissions except `bypass login` which is handled by a checkbox.
+        $permissions = Permission::where('name', '<>', 'bypass login')
+            ->select(['name', 'description'])
+            ->orderBy('name')
+            ->get()
+            ->toArray();
+
+        return view('livewire.admin.permission.create-role', [
+            'permissions' => $permissions,
+        ]);
     }
 }
