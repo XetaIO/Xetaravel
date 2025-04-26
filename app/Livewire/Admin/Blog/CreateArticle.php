@@ -67,8 +67,6 @@ class CreateArticle extends Component
 
         $this->form->create();
 
-        $this->showModal = false;
-
         redirect()
             ->route('admin.blog.article.index')
             ->success('Your article has been created successfully !');

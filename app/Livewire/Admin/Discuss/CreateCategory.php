@@ -61,8 +61,6 @@ class CreateCategory extends Component
 
         $this->form->create();
 
-        $this->showModal = false;
-
         redirect()
             ->route('admin.discuss.category.index')
             ->success('Your category has been created successfully !');

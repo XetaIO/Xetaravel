@@ -15,7 +15,7 @@ use Throwable;
 class UserForm extends Form
 {
     /**
-     * The category to update.
+     * The user to update.
      *
      * @var User|null
      */

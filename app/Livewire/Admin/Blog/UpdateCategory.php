@@ -51,9 +51,11 @@ class UpdateCategory extends Component
         $this->authorize('update', $blogCategory);
 
         $this->form->reset();
-        $this->form->blogCategory = $blogCategory;
-        $this->form->title = $blogCategory->title;
-        $this->form->description = $blogCategory->description;
+        $this->form->fill([
+            'blogCategory' => $blogCategory,
+            'title' => $blogCategory->title,
+            'description' => $blogCategory->description,
+        ]);
 
         $this->showModal = true;
     }

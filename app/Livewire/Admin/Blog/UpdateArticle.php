@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Admin\Blog;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,7 +36,7 @@ class UpdateArticle extends Component
      */
     public bool $showModal = false;
 
-    public function render()
+    public function render(): Factory|Application|View|\Illuminate\View\View
     {
         return view('livewire.admin.blog.update-article');
     }
@@ -51,11 +54,13 @@ class UpdateArticle extends Component
         $this->authorize('update', $blogArticle);
 
         $this->form->reset();
-        $this->form->blogArticle = $blogArticle;
-        $this->form->title = $blogArticle->title;
-        $this->form->blog_category_id = $blogArticle->blog_category_id;
-        $this->form->content = $blogArticle->content;
-        $this->form->published_at = $blogArticle->published_at?->format('Y-m-d H:i');
+        $this->form->fill([
+            'blogArticle' => $blogArticle,
+            'title' => $blogArticle->title,
+            'blog_category_id' => $blogArticle->blog_category_id,
+            'content' => $blogArticle->content,
+            'published_at' => $blogArticle->published_at?->format('Y-m-d H:i'),
+        ]);
         $this->form->searchCategories();
 
         $this->showModal = true;

@@ -51,13 +51,15 @@ class UpdateCategory extends Component
         $this->authorize('update', $discussCategory);
 
         $this->form->reset();
-        $this->form->discussCategory = $discussCategory;
-        $this->form->title = $discussCategory->title;
-        $this->form->color = $discussCategory->color;
-        $this->form->icon = $discussCategory->icon;
-        $this->form->level = $discussCategory->level;
-        $this->form->is_locked = $discussCategory->is_locked;
-        $this->form->description = $discussCategory->description;
+        $this->form->fill([
+            'discussCategory' => $discussCategory,
+            'title' => $discussCategory->title,
+            'color' => $discussCategory->color,
+            'icon' => $discussCategory->icon,
+            'level' => $discussCategory->level,
+            'is_locked' => $discussCategory->is_locked,
+            'description' => $discussCategory->description,
+        ]);
 
         $this->showModal = true;
     }

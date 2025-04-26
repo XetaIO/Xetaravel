@@ -65,10 +65,11 @@ class BlogCategoryForm extends Form
      */
     public function update(): BlogCategory
     {
-        $this->blogCategory->title = $this->title;
-        $this->blogCategory->description = $this->description;
-        $this->blogCategory->save();
+        $this->blogCategory->update($this->only([
+            'title',
+            'description'
+        ]));
 
-        return $this->blogCategory;
+        return $this->blogCategory->fresh();
     }
 }

@@ -74,8 +74,6 @@ class CreateConversation extends Component
         }
         $discussConversation = $this->form->create();
 
-        $this->showModal = false;
-
         redirect()
             ->route('discuss.conversation.show', ['slug' => $discussConversation->slug, 'id' => $discussConversation->getKey()])
             ->success('Your discussion has been created successfully !');

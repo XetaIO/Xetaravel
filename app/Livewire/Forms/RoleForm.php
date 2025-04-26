@@ -106,8 +106,7 @@ class RoleForm extends Form
             'description'
         ]));
         $this->role->syncPermissions($this->permissions);
-        $this->role->fresh();
 
-        return $this->role;
+        return $this->role->fresh();
     }
 }

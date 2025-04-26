@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Discuss;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +41,7 @@ class DeleteConversation extends Component
         $this->discussConversation = $discussConversation;
     }
 
-    public function render()
+    public function render(): Factory|Application|View|\Illuminate\View\View
     {
         return view('livewire.discuss.delete-conversation');
     }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\User;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Livewire\Component;
 
@@ -58,7 +61,7 @@ class Notification extends Component
         $this->fetchData();
     }
 
-    public function render()
+    public function render(): Factory|Application|View|\Illuminate\View\View
     {
         return view('livewire.user.notification');
     }

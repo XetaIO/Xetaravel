@@ -164,7 +164,7 @@ class Comment extends Component
 
             return;
         }
-        $comment = $this->form->store();
+        $comment = $this->form->create();
 
         // We must find the user else we won't see the updated blog_comment_count.
         event(new CommentWasCreatedEvent(User::find(Auth::id()), $comment));

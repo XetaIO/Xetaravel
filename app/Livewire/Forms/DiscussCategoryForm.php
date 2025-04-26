@@ -101,14 +101,15 @@ class DiscussCategoryForm extends Form
      */
     public function update(): DiscussCategory
     {
-        $this->discussCategory->title = $this->title;
-        $this->discussCategory->color = $this->color;
-        $this->discussCategory->icon = $this->icon;
-        $this->discussCategory->level = $this->level;
-        $this->discussCategory->is_locked = $this->is_locked;
-        $this->discussCategory->description = $this->description;
-        $this->discussCategory->save();
+        $this->discussCategory->update($this->only([
+            'title',
+            'color',
+            'icon;',
+            'level',
+            'is_locked',
+            'description'
+        ]));
 
-        return $this->discussCategory;
+        return $this->discussCategory->fresh();
     }
 }

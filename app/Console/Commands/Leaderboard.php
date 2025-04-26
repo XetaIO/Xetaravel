@@ -38,9 +38,9 @@ class Leaderboard extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         // Fetch the first 3 users that have the most experience and NOT the role banished.
         $users = User::whereDoesntHave('roles', function (Builder $query) {

@@ -76,18 +76,20 @@ class UpdateUser extends Component
         $this->authorize('update', $user);
 
         $this->form->reset();
-        $this->form->user = $user;
-        $this->form->username = $user->username;
-        $this->form->email = $user->email;
-        $this->form->first_name = $user->account?->first_name;
-        $this->form->last_name = $user->account?->last_name;
-        $this->form->facebook = $user->account?->facebook;
-        $this->form->twitter = $user->account?->twitter;
-        $this->form->biography = $user->account?->biography;
-        $this->form->signature = $user->account?->signature;
-        $this->form->roles = $user->roles()->pluck('name')->toArray();
-        $this->form->permissions = $user->permissions()->pluck('name')->toArray();
-        $this->form->can_bypass = $user->hasPermissionTo('bypass login');
+        $this->form->fill([
+            'user' => $user,
+            'username' => $user->username,
+            'email' => $user->email,
+            'first_name' => $user->account?->first_name,
+            'last_name' => $user->account?->last_name,
+            'facebook' => $user->account?->facebook,
+            'twitter' => $user->account?->twitter,
+            'biography' => $user->account?->biography,
+            'signature' => $user->account?->signature,
+            'roles' => $user->roles()->pluck('name')->toArray(),
+            'permissions' => $user->permissions()->pluck('name')->toArray(),
+            'can_bypass' => $user->hasPermissionTo('bypass login'),
+        ]);
 
         $this->showModal = true;
     }
@@ -119,7 +121,7 @@ class UpdateUser extends Component
      */
     public function restore(): void
     {
-        $this->authorize('restore', User::class);
+        $this->authorize('restore', $this->form->user);
 
         $this->form->user->restore();
 

@@ -46,9 +46,11 @@ class UpdatePermission extends Component
         $this->authorize('update', $permission);
 
         $this->form->reset();
-        $this->form->permission = $permission;
-        $this->form->name = $permission->name;
-        $this->form->description = $permission->description;
+        $this->form->fill([
+            'permission' => $permission,
+            'name' => $permission->name,
+            'description' => $permission->description,
+        ]);
 
         $this->showModal = true;
     }

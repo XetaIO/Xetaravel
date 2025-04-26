@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\User;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -29,7 +32,7 @@ class UpdateAccount extends Component
         $this->form->load();
     }
 
-    public function render()
+    public function render(): Factory|Application|View|\Illuminate\View\View
     {
         return view('livewire.user.update-account');
     }

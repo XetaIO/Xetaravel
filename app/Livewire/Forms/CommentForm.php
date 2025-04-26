@@ -37,7 +37,7 @@ class CommentForm extends Form
      *
      * @throws Throwable
      */
-    public function store(): BlogComment
+    public function create(): BlogComment
     {
         return DB::transaction(function () {
             $comment = BlogComment::create($this->only([

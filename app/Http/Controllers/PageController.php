@@ -35,7 +35,7 @@ class PageController extends Controller
     /**
      * Display the terms page.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View|object|View
      */
     public function terms()
     {
@@ -54,7 +54,8 @@ class PageController extends Controller
      */
     public function showContact(): View
     {
-        $this->breadcrumbs->addCrumb('<i class="fa-regular fa-envelope mr-2"></i> Contact', route('page.contact'));
+        $this->breadcrumbs->addCrumb('<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                      Contact', route('page.contact'));
 
         return view('page.contact', ['breadcrumbs' => $this->breadcrumbs]);
     }
@@ -74,7 +75,7 @@ class PageController extends Controller
             'message' => 'required|min:10',
         ];
 
-        // Bipass the captcha for the unit testing.
+        // Bypass the captcha for the unit testing.
         if (App::environment() !== 'testing') {
             $rules = array_merge($rules, ['g-recaptcha-response' => 'required|captcha']);
         }
@@ -93,13 +94,13 @@ class PageController extends Controller
 
         return redirect()
            ->route('page.contact')
-           ->with('success', 'Thanks for contacting me ! I will answer you as fast as I can !');
+           ->success('Thanks for contacting me ! I will answer you as fast as I can !');
     }
 
     /**
      * Display the banished page.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View|object|View
      */
     public function banished()
     {
@@ -114,7 +115,7 @@ class PageController extends Controller
     /**
      *  Display my custom page.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View|object|View
      */
     public function aboutme()
     {

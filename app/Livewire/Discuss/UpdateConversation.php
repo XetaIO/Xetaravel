@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Xetaravel\Livewire\Discuss;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -32,10 +35,16 @@ class UpdateConversation extends Component
 
     public function mount(DiscussConversation $discussConversation): void
     {
-        $this->form->discussConversation = $discussConversation;
+        $this->form->fill([
+            'discussConversation' => $discussConversation,
+            'title' => $discussConversation->title,
+            'category_id' => $discussConversation->category_id,
+            'is_pinned' => $discussConversation->is_pinned,
+            'is_locked' => $discussConversation->is_locked,
+        ]);
     }
 
-    public function render()
+    public function render(): Factory|Application|View|\Illuminate\View\View
     {
         return view('livewire.discuss.update-conversation');
     }
@@ -49,11 +58,6 @@ class UpdateConversation extends Component
     public function updateConversation(): void
     {
         $this->authorize('update', $this->form->discussConversation);
-
-        $this->form->title = $this->form->discussConversation->title;
-        $this->form->category_id = $this->form->discussConversation->category_id;
-        $this->form->is_pinned = $this->form->discussConversation->is_pinned;
-        $this->form->is_locked = $this->form->discussConversation->is_locked;
 
         $this->form->searchCategories();
 

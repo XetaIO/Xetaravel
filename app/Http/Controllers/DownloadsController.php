@@ -19,6 +19,10 @@ class DownloadsController extends Controller
     {
         $filePath = public_path('files/'.$fileName);
 
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found.');
+        }
+
         return response()->download($filePath);
     }
 }

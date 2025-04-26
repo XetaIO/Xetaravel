@@ -65,10 +65,11 @@ class PermissionForm extends Form
      */
     public function update(): Permission
     {
-        $this->permission->name = $this->name;
-        $this->permission->description = $this->description;
-        $this->permission->save();
+        $this->permission->update($this->only([
+            'name',
+            'description'
+        ]));
 
-        return $this->permission;
+        return $this->permission->fresh();
     }
 }
