@@ -104,7 +104,7 @@ class DiscussCategoryForm extends Form
         $this->discussCategory->update($this->only([
             'title',
             'color',
-            'icon;',
+            'icon',
             'level',
             'is_locked',
             'description'

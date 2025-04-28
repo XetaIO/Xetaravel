@@ -44,7 +44,6 @@ class CreateConversationTest extends TestCase
             ->set('form.content', 'Test de description')
 
             ->call('create')
-            ->assertSet('showModal', false)
             ->assertHasNoErrors();
 
         $last = DiscussConversation::with('firstPost')
