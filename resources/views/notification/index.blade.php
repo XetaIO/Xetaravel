@@ -22,7 +22,7 @@
         </div>
 
         <div class="lg:col-span-9 col-span-12 mx-3 lg:mx-0">
-            <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
+            <section class="rounded-lg bg-base-100 dark:bg-base-300 shadow-md py-4 px-8 mb-10">
                 <h2 class="divider text-2xl">
                     Notifications
                 </h2>

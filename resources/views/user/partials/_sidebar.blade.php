@@ -1,4 +1,4 @@
-<ul class="flex flex-col w-full border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700">
+<ul class="flex flex-col w-full rounded-lg bg-base-100 dark:bg-base-300 shadow-md">
     <li>
         <a @class([
             'block border-l-4 gap-2 px-4 py-3 hover:border-primary rounded-t-lg',

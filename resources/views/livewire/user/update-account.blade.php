@@ -1,5 +1,5 @@
 <div>
-    <section class="border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 py-4 px-8 mb-10">
+    <section class="rounded-lg bg-base-100 dark:bg-base-300 shadow-md py-4 px-8 mb-10">
         <h2 class="divider text-2xl mb-6">
             My Account
         </h2>
