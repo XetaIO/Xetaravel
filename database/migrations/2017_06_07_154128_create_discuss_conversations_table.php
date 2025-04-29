@@ -31,7 +31,6 @@ return new class () extends Migration {
             $table->integer('last_post_id')->unsigned()->nullable()->index();
             $table->integer('edit_count')->unsigned()->default(0);
             $table->integer('edited_user_id')->unsigned()->nullable()->index();
-            $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
 

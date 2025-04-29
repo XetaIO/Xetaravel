@@ -21,7 +21,14 @@ class NewsletterController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        NewsletterValidator::create($request->all())->validate();
+        $validator = NewsletterValidator::create($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->error('There are errors while subscribing to the Newsletter !');
+        }
         NewsletterRepository::create($request->all());
 
         return back()

@@ -50,8 +50,7 @@ class DiscussPost extends Model
     protected function casts(): array
     {
         return [
-            'is_edited' => 'boolean',
-            'edited_at' => 'datetime'
+            'is_edited' => 'boolean'
         ];
     }
 

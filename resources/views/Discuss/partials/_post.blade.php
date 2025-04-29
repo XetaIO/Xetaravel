@@ -80,7 +80,7 @@
                                 'tooltip',
                                 'text-white' => $isSolvedPost
                             ])
-                            data-tip="{{ $post->editedUser->username }} edited {{ $post->edited_at->diffForHumans() }}">
+                            data-tip="{{ $post->editedUser->username }} edited {{ $post->updated_at->diffForHumans() }}">
                         <x-icon name="fas-pencil" />
                             Edited
                         </span>

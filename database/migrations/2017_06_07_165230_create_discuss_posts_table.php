@@ -23,7 +23,6 @@ return new class () extends Migration {
             $table->integer('edit_count')->unsigned()->default(0);
             $table->boolean('is_edited')->default(false);
             $table->integer('edited_user_id')->unsigned()->nullable()->index();
-            $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
 

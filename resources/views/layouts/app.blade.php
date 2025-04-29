@@ -53,6 +53,8 @@ Conçu et développé par Emeric Fèvre.
             gtag('config', 'G-97W18J74QL');
         </script>
 
+        {!! NoCaptcha::renderJs() !!}
+
         <!-- Embed Scripts -->
         @stack('scriptsTop')
     </head>

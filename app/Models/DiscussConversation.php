@@ -59,7 +59,6 @@ class DiscussConversation extends Model
     protected function casts(): array
     {
         return [
-            'edited_at' => 'datetime',
             'is_locked' => 'boolean',
             'is_pinned' => 'boolean',
             'is_solved' => 'boolean',

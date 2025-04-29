@@ -28,7 +28,6 @@ class DiscussPostsTableSeeder extends Seeder
                 'edit_count' => 1,
                 'is_edited' => true,
                 'edited_user_id' => 1,
-                'edited_at' => $now,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -40,7 +39,6 @@ class DiscussPostsTableSeeder extends Seeder
                 'edit_count' => 0,
                 'is_edited' => false,
                 'edited_user_id' => null,
-                'edited_at' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
             ]

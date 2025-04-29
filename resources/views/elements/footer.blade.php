@@ -1,5 +1,4 @@
 <footer class="footer sm:footer-horizontal md:justify-items-center p-10 bg-base-100 dark:bg-base-300">
-
         <nav>
             <h6 class="footer-title">Utils</h6>
             @guest
@@ -44,23 +43,66 @@
 
         <nav>
             <h6 class="footer-title">Newsletter</h6>
+                <fieldset class="w-80">
+                    <label>Enter your email address</label>
 
-            <fieldset class="w-80">
-                <label>Enter your email address</label>
 
-                <x-form method="post" action="{{ route('newsletter.subscribe') }}">
-                    <div class="join">
-                        <input
-                            name="email"
-                            type="email"
-                            value="{{ old('email') }}"
-                            placeholder="email@gmail.com"
-                            class="input input-bordered join-item"
-                            required />
-                        <button type="submit" class="btn btn-primary join-item">Subscribe</button>
+                        <div class="join">
+                            <input
+                                id="newsletterEmailPublic"
+                                name="email"
+                                type="email"
+                                value="{{ old('email') }}"
+                                placeholder="email@gmail.com"
+                                class="input input-bordered join-item"
+                                required />
+                            <x-button class="btn btn-primary join-item" label="Subscribe" onclick="subscribeNewsletter.showModal();document.getElementById('newsletterEmail').value =  document.getElementById('newsletterEmailPublic').value" />
+                        </div>
+                </fieldset>
+
+                <dialog id="subscribeNewsletter" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog" tabindex="-1">
+                            <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark" type="submit" tabindex="-1" />
+                        </form>
+                        <h3 class="font-bold text-lg mb-4">
+                            Subscribe to Newsletter
+                        </h3>
+
+                        <x-form method="post" action="{{ route('newsletter.subscribe') }}">
+                            <div class="flex flex-col items-center">
+                                <input
+                                    id="newsletterEmail"
+                                    name="email"
+                                    icon="fas-at"
+                                    type="email"
+                                    value="{{ old('email') }}"
+                                    placeholder="email@gmail.com"
+                                    class="input input-bordered mb-4"
+                                    required />
+                                @if ($errors->has('email'))
+                                    <label class="label mb-4">
+                                        <span class="label-text-alt text-error">{{ $errors->first('email') }}</span>
+                                    </label>
+                                @endif
+
+                                {!! NoCaptcha::display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <label class="label">
+                                        <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
+                                    </label>
+                                @endif
+                            </div>
+
+                            <div class="modal-action">
+                                <x-button type="submit" label="Subscribe" class="btn-primary gap-2" />
+                            </div>
+                        </x-form>
                     </div>
-                </x-form>
-            </fieldset>
+                    <form class="modal-backdrop" method="dialog">
+                        <button type="submit">close</button>
+                    </form>
+                </dialog>
         </nav>
 </footer>
 <footer class="footer footer-horizontal footer-center p-10 bg-base-100 dark:bg-base-300">

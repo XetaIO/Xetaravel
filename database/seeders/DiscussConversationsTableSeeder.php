@@ -35,7 +35,6 @@ class DiscussConversationsTableSeeder extends Seeder
                 'solved_post_id' => null,
                 'last_post_id' => null,
                 'edited_user_id' => null,
-                'edited_at' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
             ]

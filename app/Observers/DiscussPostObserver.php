@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Xetaravel\Observers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
@@ -27,7 +26,6 @@ class DiscussPostObserver
         $discussPost->edited_user_id = Auth::id();
         $discussPost->is_edited = true;
         $discussPost->edit_count++;
-        $discussPost->edited_at = Carbon::now();
     }
 
     /**
