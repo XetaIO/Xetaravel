@@ -12,7 +12,7 @@ class Markdown extends Component
 {
     public string $uuid;
 
-    public string $uploadUrl;
+    public string $uploadUrl = '';
 
     public function __construct(
         public ?string $value = null,
@@ -29,7 +29,7 @@ class Markdown extends Component
         public ?bool $firstErrorOnly = false,
     ) {
         $this->uuid = md5(serialize($this));
-        $this->uploadUrl = route('upload', absolute: false);
+        //$this->uploadUrl = route('upload', absolute: false);
     }
 
     public function setup(): string

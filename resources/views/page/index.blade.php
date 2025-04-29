@@ -167,7 +167,7 @@
             <div class="flex flex-col items-center justify-center text-center lg:px-8">
                 <h1 class="xetaravel-typed font-bold font-['ubuntu'] text-4xl"></h1>
                 <p class="mb-4">
-                    This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personal website and I have decided to release it to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
+                    This website was made to try <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a> and to do my personal website. I have decided to make it open-source to help people starting with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.<br/>
                     Project <x-icon name="fas-code" class="h-5 w-5 font-bold inline text-primary"></x-icon> with <x-icon name="fas-coffee" class="h-5 w-5 inline" style="color: #826644"></x-icon> with <a class="font-bold text-primary" href="https://laravel.com" target="_blank">Laravel</a>.
                 </p>
                 <div>

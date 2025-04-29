@@ -41,27 +41,7 @@ class Installer
         </info>");
         $rootDir = base_path();
 
-        static::createEnvTesting($rootDir, $io);
         static::configDatabase($rootDir, $io);
-    }
-
-    /**
-     * Create the .env.testing file if it does not exist.
-     *
-     * @param string $dir The application's root directory.
-     * @param IOInterface $io IO interface to write to console.
-     *
-     * @return void
-     */
-    public static function createEnvTesting(string $dir, IOInterface $io): void
-    {
-        $env = $dir . '/.env.testing';
-        $defaultEnv = $dir . '/.env.testing.exemple';
-
-        if (!file_exists($env)) {
-            copy($defaultEnv, $env);
-            $io->write('<info>Created `.env.testing` file.</info>');
-        }
     }
 
     /**

@@ -156,14 +156,3 @@ Route::group([
     Route::get('comment/show/{id}', [Xetaravel\Http\Controllers\Blog\CommentController::class, 'show'])
         ->name('blog.comment.show');
 });
-
-
-Route::middleware(['web', 'auth'])->post('/upload', function (Request $request) {
-    $disk = $request->disk ?? 'public';
-    $folder = $request->folder ?? 'editor';
-
-    $file = Storage::disk($disk)->put($folder, $request->file('file'), 'public');
-    $url = Storage::disk($disk)->url($file);
-
-    return ['location' => $url];
-})->name('upload');
