@@ -94,21 +94,10 @@ Route::group([
     Route::group([
         'middleware' => ['permission:manage setting']
     ], function () {
+        Route::get('setting', [Xetaravel\Http\Controllers\Admin\SettingController::class, 'index'])
+            ->name('admin.setting.index');
 
-        // Settings Routes
-        Route::get('setting', 'SettingController@index')->name('admin.setting.index');
-
-        Route::get('setting/create', 'SettingController@showCreateForm')
-            ->name('admin.setting.create');
-        Route::post('setting/create', 'SettingController@create')
-            ->name('admin.setting.create');
-
-        Route::get('setting/update/{id}', 'SettingController@showUpdateForm')
-            ->name('admin.setting.edit');
-        Route::put('setting/update/{id}', 'SettingController@update')
+        Route::put('setting', [Xetaravel\Http\Controllers\Admin\SettingController::class, 'update'])
             ->name('admin.setting.update');
-
-        Route::delete('setting/delete/{id}', 'SettingController@delete')
-            ->name('admin.setting.delete');
     });
 });

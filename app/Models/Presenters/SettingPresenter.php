@@ -13,7 +13,7 @@ trait SettingPresenter
      *
      * @return Attribute
      */
-    public function value(): Attribute
+    protected function value(): Attribute
     {
         return Attribute::make(
             get: fn (string $value) => unserialize($value),

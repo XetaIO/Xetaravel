@@ -7,12 +7,13 @@ namespace Xetaravel\Models\Presenters;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-trait DiscussPostPresenter
+trait BlogCommentPresenter
 {
     /**
      * Get the content parsed in HTML.
      *
      * @return Attribute
+     *
      */
     protected function contentMarkdown(): Attribute
     {
@@ -22,14 +23,14 @@ trait DiscussPostPresenter
     }
 
     /**
-     * Get the post url.
+     * Get the comment url.
      *
      * @return Attribute
      */
-    protected function postUrl(): Attribute
+    protected function commentUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => route('discuss.post.show', ['id' => $this->getKey()])
+            get: fn () => route('blog.comment.show', ['id' => $this->getKey()])
         );
     }
 }

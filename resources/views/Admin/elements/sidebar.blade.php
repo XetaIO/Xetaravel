@@ -128,7 +128,7 @@
                       'menu-active' => request()->route()->getName() === 'admin.setting.index'])
                        href="{{ route('admin.setting.index') }}">
                         <x-icon name="fas-wrench" />
-                        Manage Setting
+                        Manage Settings
                     </a>
                 </li>
             @endcan

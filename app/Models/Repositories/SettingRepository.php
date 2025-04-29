@@ -48,7 +48,7 @@ class SettingRepository
             $setting->value = $value;
             $saved = $setting->save();
 
-            // If the save fail, return directly.
+            // If the save fails, return directly.
             if ($saved === false) {
                 return false;
             }

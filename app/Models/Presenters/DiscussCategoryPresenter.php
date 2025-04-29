@@ -16,7 +16,7 @@ trait DiscussCategoryPresenter
     protected function showUrl(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => route('discuss.index', ['c' => $this->getKey()])
+            get: fn () => route('discuss.index', ['c' => $this->getKey()])
         );
     }
 }

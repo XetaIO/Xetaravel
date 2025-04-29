@@ -6,7 +6,7 @@ namespace Xetaravel\Models\Presenters;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-trait ArticlePresenter
+trait BlogArticlePresenter
 {
     /**
      * The default banner used when there is no banner for the article.
@@ -23,7 +23,7 @@ trait ArticlePresenter
     protected function isDisplay(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => !(is_null($this->published_at) || $this->published_at > now())
+            get: fn () => !(is_null($this->published_at) || $this->published_at > now())
         );
     }
 
@@ -46,24 +46,24 @@ trait ArticlePresenter
     /**
      * Get the show url.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getShowUrlAttribute(): string
+    protected function showUrl(): Attribute
     {
-        if (!isset($this->slug) || $this->getKey() === null) {
-            return '';
-        }
-
-        return route('blog.article.show', ['slug' => $this->slug, 'id' => $this->getKey()]);
+        return Attribute::make(
+            get: fn () => route('blog.article.show', ['slug' => $this->slug, 'id' => $this->getKey()])
+        );
     }
 
     /**
-     * Get the small avatar.
+     * Get the article banner.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getArticleBannerAttribute(): string
+    public function articleBanner(): Attribute
     {
-        return $this->parseMedia('article.banner');
+        return Attribute::make(
+            get: fn () => $this->parseMedia('article.banner')
+        );
     }
 }

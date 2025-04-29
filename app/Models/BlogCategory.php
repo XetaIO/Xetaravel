@@ -7,13 +7,13 @@ namespace Xetaravel\Models;
 use Eloquence\Behaviours\HasSlugs;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Xetaravel\Models\Presenters\CategoryPresenter;
+use Xetaravel\Models\Presenters\BlogCategoryPresenter;
 use Xetaravel\Observers\BlogCategoryObserver;
 
 #[ObservedBy([BlogCategoryObserver::class])]
 class BlogCategory extends Model
 {
-    use CategoryPresenter;
+    use BlogCategoryPresenter;
     use HasSlugs;
 
     /**

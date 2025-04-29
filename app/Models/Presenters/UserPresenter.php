@@ -105,128 +105,148 @@ trait UserPresenter
         $slug = $this->trashed() ? mb_strtolower($this->username) : $this->slug;
 
         return Attribute::make(
-            get: fn ($value) => route('user.show', ['slug' => $slug])
+            get: fn () => route('user.show', ['slug' => $slug])
+        );
+    }
+
+    /**
+     * Get the account facebook.
+     *
+     * @return Attribute
+     */
+    protected function facebook(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'facebook')
+        );
+    }
+
+    /**
+     * Get the account twitter.
+     *
+     * @return Attribute
+     */
+    protected function twitter(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'twitter')
+        );
+    }
+
+    /**
+     * Get the account biography.
+     *
+     * @return Attribute
+     */
+    protected function biography(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'biography')
+        );
+    }
+
+    /**
+     * Get the account signature.
+     *
+     * @return Attribute
+     */
+    protected function signature(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'signature')
+        );
+    }
+
+    /**
+     * Get the small avatar.
+     *
+     * @return Attribute
+     */
+    protected function avatarSmall(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parseMedia('thumbnail.small')
+        );
+    }
+
+    /**
+     * Get the medium avatar.
+     *
+     * @return Attribute
+     */
+    protected function avatarMedium(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parseMedia('thumbnail.medium')
+        );
+    }
+
+    /**
+     * Get the big avatar.
+     *
+     * @return Attribute
+     */
+    protected function avatarBig(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parseMedia('thumbnail.big')
         );
     }
 
     /**
      * Get the account first name.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getFirstNameAttribute(): string
+    protected function firstName(): Attribute
     {
-        return $this->parse($this->account, 'first_name');
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'first_name')
+        );
     }
 
     /**
      * Get the account last name.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getLastNameAttribute(): string
+    protected function lastName(): Attribute
     {
-        return $this->parse($this->account, 'last_name');
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'last_name')
+        );
     }
 
     /**
      * Get whatever the user has rubies or not.
      *
-     * @return boolean
+     * @return Attribute
      */
-    public function getHasRubiesAttribute(): bool
+    protected function hasRubies(): Attribute
     {
-        return $this->rubies_total > 0;
+        return Attribute::make(
+            get: fn () => $this->rubies_total > 0
+        );
     }
 
     /**
      * Get the account full name. Return the username if the user
      * has not set his first name and last name.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getFullNameAttribute(): string
+    protected function fullName(): Attribute
     {
-        if ($this->trashed()) {
-            return $this->username;
-        }
+        return Attribute::make(
+            get: function () {
+                if ($this->trashed()) {
+                    return $this->username;
+                }
 
-        $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
+                $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
 
-        if (empty(mb_trim($fullName))) {
-            return $this->username;
-        }
-
-        return $fullName;
-    }
-
-    /**
-     * Get the account facebook.
-     *
-     * @return string
-     */
-    public function getFacebookAttribute(): string
-    {
-        return $this->parse($this->account, 'facebook');
-    }
-
-    /**
-     * Get the account twitter.
-     *
-     * @return string
-     */
-    public function getTwitterAttribute(): string
-    {
-        return $this->parse($this->account, 'twitter');
-    }
-
-    /**
-     * Get the account biography.
-     *
-     * @return string
-     */
-    public function getBiographyAttribute(): string
-    {
-        return $this->parse($this->account, 'biography');
-    }
-
-    /**
-     * Get the account signature.
-     *
-     * @return string
-     */
-    public function getSignatureAttribute(): string
-    {
-        return $this->parse($this->account, 'signature');
-    }
-
-    /**
-     * Get the small avatar.
-     *
-     * @return string
-     */
-    public function getAvatarSmallAttribute(): string
-    {
-        return $this->parseMedia('thumbnail.small');
-    }
-
-    /**
-     * Get the medium avatar.
-     *
-     * @return string
-     */
-    public function getAvatarMediumAttribute(): string
-    {
-        return $this->parseMedia('thumbnail.medium');
-    }
-
-    /**
-     * Get the big avatar.
-     *
-     * @return string
-     */
-    public function getAvatarBigAttribute(): string
-    {
-        return $this->parseMedia('thumbnail.big');
+                return empty(mb_trim($fullName)) ? $this->username : $fullName;
+            }
+        );
     }
 }

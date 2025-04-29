@@ -7,7 +7,7 @@ namespace Xetaravel\Models\Repositories;
 use Illuminate\Support\Collection;
 use Xetaravel\Models\BlogCategory;
 
-class CategoryRepository
+class BlogCategoryRepository
 {
     /**
      * Find the categories for the sidebar.

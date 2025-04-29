@@ -15,13 +15,13 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
-use Xetaravel\Models\Presenters\ArticlePresenter;
+use Xetaravel\Models\Presenters\BlogArticlePresenter;
 use Xetaravel\Observers\BlogArticleObserver;
 
 #[ObservedBy([BlogArticleObserver::class])]
 class BlogArticle extends Model implements HasMedia
 {
-    use ArticlePresenter;
+    use BlogArticlePresenter;
     use HasCounts;
     use HasMentionsTrait;
     use HasSlugs;

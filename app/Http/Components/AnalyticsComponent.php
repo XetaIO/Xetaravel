@@ -49,14 +49,14 @@ trait AnalyticsComponent
         };
     }
     /**
-     * Build the today visitors metric.
+     * Build the yesterday visitors metric.
      *
      * @return Collection
      */
-    public function buildTodayVisitors(): Collection
+    public function buildYesterdayVisitors(): Collection
     {
-        $startDate = Carbon::today()->startOfDay();
-        $endDate = Carbon::now();
+        $startDate = Carbon::yesterday()->startOfDay();
+        $endDate = Carbon::yesterday()->endOfDay();
 
         return Analytics::get(Period::create($startDate, $endDate), ['screenPageViews'], ['year']);
     }

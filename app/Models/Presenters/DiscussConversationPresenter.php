@@ -4,47 +4,53 @@ declare(strict_types=1);
 
 namespace Xetaravel\Models\Presenters;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 trait DiscussConversationPresenter
 {
     /**
      * We must decrement the post count due to the first post being counted.
      *
-     * @return int
+     * @return Attribute
      */
-    public function getPostCountFormatedAttribute(): int
+    protected function postCountFormated(): Attribute
     {
-        return $this->post_count - 1;
+        return Attribute::make(
+            get: fn () => $this->post_count - 1
+        );
     }
 
     /**
      * Get the conversation url.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getConversationUrlAttribute(): string
+    protected function conversationUrl(): Attribute
     {
-        if (!isset($this->slug)) {
-            return '';
-        }
-
-        return route('discuss.conversation.show', ['slug' => $this->slug, 'id' => $this->getKey()]);
+        return Attribute::make(
+            get: fn () => route('discuss.conversation.show', ['slug' => $this->slug, 'id' => $this->getKey()])
+        );
     }
 
     /**
      * Get the last page number for the conversation.
      *
-     * @return int
+     * @return Attribute
      */
-    public function getLastPageAttribute(): int
+    protected function lastPage(): Attribute
     {
-        $posts = $this->post_count_formated;
+        return Attribute::make(
+            get: function () {
+                $posts = $this->post_count_formated;
 
-        if ($this->is_solved) {
-            $posts = $posts - 1;
-        }
+                if ($this->is_solved) {
+                    $posts = $posts - 1;
+                }
 
-        $page = (int) ceil($posts / config('xetaravel.pagination.discuss.post_per_page'));
+                $page = (int) ceil($posts / config('xetaravel.pagination.discuss.post_per_page'));
 
-        return $page ?: 1;
+                return $page ?: 1;
+            }
+        );
     }
 }

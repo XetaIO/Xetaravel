@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Xetaravel\Models\Validators;
 
 use Illuminate\Support\Facades\Validator as FacadeValidator;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 class UserValidator
@@ -22,40 +21,6 @@ class UserValidator
         $rules = [
             'username' => 'required|alpha_num|min:4|max:20|unique:users',
             'email' => 'required|email|max:50|unique:users'
-        ];
-
-        return FacadeValidator::make($data, $rules);
-    }
-
-    /**
-     * Get a validator for an incoming update request. (Administration)
-     *
-     * @param array $data The data to validate.
-     * @param int $id The actual user id to ignore the username rule.
-     *
-     * @return Validator
-     */
-    public static function update(array $data, int $id): Validator
-    {
-        $rules = [
-            'username' => [
-                'required',
-                'alpha_num',
-                'min:4',
-                'max:20',
-                Rule::unique('users')->ignore($id)
-            ],
-            'email' => [
-                'required',
-                'email',
-                'max:50',
-                Rule::unique('users')->ignore($id)
-            ],
-            'account.first_name' => 'max:100',
-            'account.last_name' => 'max:100',
-            'account.facebook' => 'max:50',
-            'account.twitter' => 'max:50',
-            'roles' => 'required'
         ];
 
         return FacadeValidator::make($data, $rules);

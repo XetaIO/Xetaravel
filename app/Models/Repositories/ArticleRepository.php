@@ -16,6 +16,9 @@ class ArticleRepository
      */
     public static function sidebar(): Collection
     {
-        return BlogArticle::with('category', 'user')->latest()->take(config('xetaravel.blog.articles_sidebar'))->get();
+        return BlogArticle::with('category', 'user')
+            ->latest()
+            ->take(config('xetaravel.blog.articles_sidebar'))
+            ->get();
     }
 }

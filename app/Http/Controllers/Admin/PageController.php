@@ -57,7 +57,7 @@ class PageController extends Controller
             $viewDatas[] = 'operatingSystemGraph';
 
             $yesterdayVisitors = Cache::remember('Analytics.yesterdayvisitors', $minutes, function () {
-                return $this->buildTodayVisitors();
+                return $this->buildYesterdayVisitors();
             });
             $viewDatas[] = 'yesterdayVisitors';
         }

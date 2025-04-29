@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
-use Xetaravel\Models\Presenters\CommentPresenter;
+use Xetaravel\Models\Presenters\BlogCommentPresenter;
 use Xetaravel\Observers\BlogCommentObserver;
 
 #[ObservedBy([BlogCommentObserver::class])]
 class BlogComment extends Model
 {
-    use CommentPresenter;
+    use BlogCommentPresenter;
     use FloodGate;
     use HasCounts;
     use HasMentionsTrait;
