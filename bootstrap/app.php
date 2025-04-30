@@ -26,6 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
+            Xetaravel\Http\Middleware\RedirectIfBanished::class,
             Xetaio\IpTraceable\Http\Middleware\IpTraceable::class,
             Xetaravel\Http\Middleware\PackagistVersion::class
         ]);

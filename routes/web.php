@@ -31,7 +31,7 @@ Route::group(['middleware' => ['display']], function () {
         ->name('downloads.show');
 });
 
-Route::group(['middleware' => ['auth', 'permission:show banished']], function () {
+Route::group(['middleware' => ['auth', 'role:Banished']], function () {
     Route::get('banished', [Xetaravel\Http\Controllers\PageController::class, 'banished'])
         ->name('page.banished');
 });
