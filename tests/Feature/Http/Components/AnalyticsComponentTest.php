@@ -7,8 +7,10 @@ namespace Tests\Feature\Http\Components;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Analytics as SpatieAnalytics;
 use Spatie\Analytics\Period;
 use Tests\TestCase;
+use Mockery;
 
 class AnalyticsComponentTest extends TestCase
 {
@@ -17,6 +19,12 @@ class AnalyticsComponentTest extends TestCase
         parent::setUp();
 
         Carbon::setTestNow(Carbon::create(2024, 4, 30));
+
+        $mock = Mockery::mock(SpatieAnalytics::class);
+        $mock->shouldIgnoreMissing();
+
+        $this->app->instance(SpatieAnalytics::class, $mock);
+        Analytics::swap($mock);
     }
 
     public function test_build_browsers_graph()
