@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Livewire\User;
 
-use Illuminate\Notifications\DatabaseNotification;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Xetaravel\Livewire\User\Notification;
 use Xetaravel\Models\Badge;
+use Xetaravel\Models\DatabaseNotification;
 use Xetaravel\Models\User;
 use Xetaravel\Notifications\BadgeNotification;
 

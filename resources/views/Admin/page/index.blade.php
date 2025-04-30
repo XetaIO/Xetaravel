@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        @if (settings('analytics_enabled'))
+        @if (!App::environment('testing') && settings('analytics_enabled'))
             <div class="col-span-12 lg:col-span-6 xl:col-span-3">
                 <div class="p-6 rounded-lg bg-[color:#348fe2] text-white shadow-md h-full">
                     <div class="flex justify-between">
@@ -92,7 +92,7 @@
         @endif
     </div>
 
-    @if (settings('analytics_enabled'))
+    @if (!App::environment('testing') && settings('analytics_enabled'))
         @include('Admin::partials.page._analytics')
 
         @include('Admin::partials.page._analytics-scripts')
