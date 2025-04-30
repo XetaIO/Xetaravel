@@ -31,6 +31,7 @@ class DiscussPost extends Model
         'user_id',
         'conversation_id',
         'content',
+        'is_solved',
         'is_edited'
     ];
 

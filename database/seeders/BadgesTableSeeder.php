@@ -40,7 +40,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Earned when you have been registered on Xetaravel for 1 year.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#2ec5ff',
-                'type' => 'onNewRegister',
+                'type' => 'onRegister',
                 'rule' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -51,7 +51,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Earned when you have been registered on Xetaravel for 2 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#2eff51',
-                'type' => 'onNewRegister',
+                'type' => 'onRegister',
                 'rule' => 2,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -62,7 +62,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Earned when you have been registered on Xetaravel for 3 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#dfff2e',
-                'type' => 'onNewRegister',
+                'type' => 'onRegister',
                 'rule' => 3,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -73,7 +73,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Earned when you have been registered on Xetaravel for 5 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#ffbf2e',
-                'type' => 'onNewRegister',
+                'type' => 'onRegister',
                 'rule' => 5,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -84,7 +84,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Earned when you have been registered on Xetaravel for 7 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#ff412e',
-                'type' => 'onNewRegister',
+                'type' => 'onRegister',
                 'rule' => 7,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -97,7 +97,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained after your first message on the Xetaravel discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#2ec5ff',
-                'type' => 'onNewPost',
+                'type' => 'onPost',
                 'rule' => 1,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -108,7 +108,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have posted 10 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#2effcf',
-                'type' => 'onNewPost',
+                'type' => 'onPost',
                 'rule' => 10,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -119,7 +119,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have posted 50 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#2eff51',
-                'type' => 'onNewPost',
+                'type' => 'onPost',
                 'rule' => 50,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -130,7 +130,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have posted 100 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#dfff2e',
-                'type' => 'onNewPost',
+                'type' => 'onPost',
                 'rule' => 100,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -141,7 +141,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have posted 500 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#ffbf2e',
-                'type' => 'onNewPost',
+                'type' => 'onPost',
                 'rule' => 500,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -152,13 +152,13 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have posted 1000 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#ff412e',
-                'type' => 'onNewPost',
+                'type' => 'onPost',
                 'rule' => 1000,
                 'created_at' => $now,
                 'updated_at' => $now
             ],
 
-            // Posts Résolus
+            // Solved Posts
             [
                 'name' => 'You helped a member!',
                 'slug' => 'postsolved1',
@@ -204,14 +204,14 @@ class BadgesTableSeeder extends Seeder
                 'updated_at' => $now
             ],
 
-            //  Expériences
+            //  Experiences
             [
                 'name' => 'The first hundred!',
                 'slug' => 'newexperience100',
                 'description' => 'Obtained once you have earned your first 100 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#2ec5ff',
-                'type' => 'onNewExperience',
+                'type' => 'onExperience',
                 'rule' => 100,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -222,7 +222,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have earned your first 1000 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#2eff51',
-                'type' => 'onNewExperience',
+                'type' => 'onExperience',
                 'rule' => 1000,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -233,7 +233,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have earned your first 10000 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#dfff2e',
-                'type' => 'onNewExperience',
+                'type' => 'onExperience',
                 'rule' => 10000,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -244,7 +244,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have earned your first 100000 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#ffbf2e',
-                'type' => 'onNewExperience',
+                'type' => 'onExperience',
                 'rule' => 100000,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -255,7 +255,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once your experience points exceed one million.',
                 'icon' => 'fas-star',
                 'color' => '#ff412e',
-                'type' => 'onNewExperience',
+                'type' => 'onExperience',
                 'rule' => 1000000,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -268,7 +268,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once you have earned your first 50 rubies.',
                 'icon' => 'far-gem',
                 'color' => '#2ec5ff',
-                'type' => 'onNewRuby',
+                'type' => 'onRuby',
                 'rule' => 50,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -279,7 +279,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once your rubies reach 100.',
                 'icon' => 'far-gem',
                 'color' => '#2eff51',
-                'type' => 'onNewRuby',
+                'type' => 'onRuby',
                 'rule' => 100,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -290,7 +290,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once your rubies reach 500.',
                 'icon' => 'far-gem',
                 'color' => '#dfff2e',
-                'type' => 'onNewRuby',
+                'type' => 'onRuby',
                 'rule' => 500,
                 'created_at' => $now,
                 'updated_at' => $now
@@ -301,7 +301,7 @@ class BadgesTableSeeder extends Seeder
                 'description' => 'Obtained once your rubies reach 1000.',
                 'icon' => 'far-gem',
                 'color' => '#ff412e',
-                'type' => 'onNewRuby',
+                'type' => 'onRuby',
                 'rule' => 1000,
                 'created_at' => $now,
                 'updated_at' => $now

@@ -85,7 +85,7 @@ class BadgeSubscriber implements ShouldQueueAfterCommit
     public function handleNewComment(CommentWasCreatedEvent $event): bool
     {
         $user = $event->user;
-        $badges = Badge::where('type', 'onNewComment')->get();
+        $badges = Badge::where('type', 'onComment')->get();
 
         $collection = $badges->filter(function ($badge) use ($user) {
             return $badge->rule <= $user->blog_comment_count;
@@ -106,7 +106,7 @@ class BadgeSubscriber implements ShouldQueueAfterCommit
     public function handleNewPost(PostWasCreatedEvent $event): bool
     {
         $user = $event->user;
-        $badges = Badge::where('type', 'onNewPost')->get();
+        $badges = Badge::where('type', 'onPost')->get();
 
         $collection = $badges->filter(function ($badge) use ($user) {
             return $badge->rule <= $user->discuss_post_count;
@@ -127,7 +127,7 @@ class BadgeSubscriber implements ShouldQueueAfterCommit
     public function handleNewPostSolved(PostWasSolvedEvent $event): bool
     {
         $user = $event->user;
-        $badges = Badge::where('type', 'onNewPostSolved')->get();
+        $badges = Badge::where('type', 'onPostSolved')->get();
 
         $collection = $badges->filter(function ($badge) use ($user) {
             $postsSolved = DiscussPost::where('user_id', $user->id)
@@ -152,7 +152,7 @@ class BadgeSubscriber implements ShouldQueueAfterCommit
     public function handleNewExperiences(ExperienceEvent $event): bool
     {
         $user = $event->user;
-        $badges = Badge::where('type', 'onNewExperience')->get();
+        $badges = Badge::where('type', 'onExperience')->get();
 
         $collection = $badges->filter(function ($badge) use ($user) {
             return $badge->rule <= $user->experiences_total;
@@ -173,7 +173,7 @@ class BadgeSubscriber implements ShouldQueueAfterCommit
     public function handleNewRegister(RegisterEvent $event): bool
     {
         $user = $event->user;
-        $badges = Badge::where('type', 'onNewRegister')->get();
+        $badges = Badge::where('type', 'onRegister')->get();
 
         $today = new Carbon();
         $diff = $today->diff($user->created_at)->y;
