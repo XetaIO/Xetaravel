@@ -184,6 +184,10 @@ class DiscussConversationForm extends Form
             $this->discussConversation->is_locked = $this->is_locked;
         }
 
+        $this->discussConversation->is_edited = true;
+        $this->discussConversation->edit_count++;
+        $this->discussConversation->edited_user_id = Auth::id();
+
         $this->discussConversation->save();
 
         return $this->discussConversation;

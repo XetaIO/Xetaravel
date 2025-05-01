@@ -25,9 +25,6 @@ class DiscussConversationObserver
     public function updating(DiscussConversation $discussConversation): void
     {
         $discussConversation->generateSlug();
-        $discussConversation->is_edited = true;
-        $discussConversation->edit_count++;
-        $discussConversation->edited_user_id = Auth::id();
     }
 
     /**
