@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Auth\Events\Registered;
@@ -6,11 +9,16 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Masmerise\Toaster\Toaster;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Xetaravel\Http\Controllers\Controller;
-use Xetaravel\Models\User;
+use Xetaravel\Http\Requests\User\CreateRequest;
 use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\Role;
-use Xetaravel\Models\Validators\UserValidator;
+use Xetaravel\Models\User;
 
 class RegisterController extends Controller
 {
@@ -32,20 +40,50 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected string $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param Request $request The request object.
+     * @param User $user The user that has been registered.
+     *
+     * @return void
+     *
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    protected function registered(Request $request, User $user)
+    {
+        // Set the user role.
+        $role = Role::where('name', 'User')->first();
+        $user->assignRole($role);
+
+        // Set the default avatar.
+        $user->clearMediaCollection('avatar');
+        $user->addMedia(public_path('images/avatar.png'))
+            ->preservingOriginal()
+            ->setName(mb_substr(md5($user->username), 0, 10))
+            ->setFileName(mb_substr(md5($user->username), 0, 10) . '.png')
+            ->toMediaCollection('avatar');
+
+        Toaster::success("Your account has been created successfully !");
     }
 
     /**
      * Show the application registration form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showRegistrationForm(): View
     {
@@ -55,44 +93,29 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param CreateRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
+     *
+     * @throws ContainerExceptionInterface
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws NotFoundExceptionInterface
      */
-    public function register(Request $request): RedirectResponse
+    public function register(CreateRequest $request): RedirectResponse
     {
-        UserValidator::create($request->all())->validate();
+        if (!settings('app_register_enabled')) {
+            return redirect('/')
+                ->error('The register system is currently disabled, please try again later.');
+        }
+        $validated = $request->validated();
 
-        event(new Registered($user = UserRepository::create($request->all())));
+        event(new Registered($user = UserRepository::create($validated)));
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
-    }
+        $this->registered($request, $user);
 
-    /**
-     * The user has been registered.
-     *
-     * @param \Illuminate\Http\Request $request The request object.
-     * @param \Xetaravel\Models\User $user The user that has been registered.
-     *
-     * @return void
-     */
-    protected function registered(Request $request, $user)
-    {
-        // Set the user role.
-        $role = Role::where('slug', 'user')->first();
-        $user->attachRole($role);
-
-        // Set the default avatar.
-        $user->clearMediaCollection('avatar');
-        $user->addMedia(public_path('images/avatar.png'))
-            ->preservingOriginal()
-            ->setName(substr(md5($user->username), 0, 10))
-            ->setFileName(substr(md5($user->username), 0, 10) . '.png')
-            ->withCustomProperties(['primaryColor' => '#B4AEA4'])
-            ->toMediaCollection('avatar');
-
-        $request->session()->flash('success', 'Your account has been created successfully !');
+        return redirect($this->redirectPath());
     }
 }

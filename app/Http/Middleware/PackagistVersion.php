@@ -1,8 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Middleware;
 
 use Closure;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class PackagistVersion
@@ -10,25 +14,24 @@ class PackagistVersion
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  Request  $request
+     * @param  Closure  $next
+     * @param string|null $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, string $guard = null): mixed
     {
-        $client = new Client();
-
         $version = Cache::remember(
             'Packagist.version',
-            config('xetaravel.site.packagist_cache'),
-            function () use ($client) {
+            config('xetaravel.site.packagist_cache_timeout'),
+            function () {
+                $client = new Client();
                 $res = $client->request('GET', config('xetaravel.site.packagist_url'));
                 if ($res->getStatusCode() !== 200) {
                     return false;
                 }
 
-                $array = json_decode($res->getBody(), true);
+                $array = json_decode($res->getBody()->getContents(), true);
 
                 return $array['packages']['xetaio/xetaravel'][0]['version'];
             }

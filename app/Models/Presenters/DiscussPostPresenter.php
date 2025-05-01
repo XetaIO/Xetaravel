@@ -1,27 +1,35 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Presenters;
 
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait DiscussPostPresenter
 {
     /**
      * Get the content parsed in HTML.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getContentMarkdownAttribute(): string
+    protected function contentMarkdown(): Attribute
     {
-        return Markdown::convert($this->content);
+        return Attribute::make(
+            get: fn () => Markdown::convert($this->content)
+        );
     }
 
     /**
      * Get the post url.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getPostUrlAttribute(): string
+    protected function postUrl(): Attribute
     {
-        return route('discuss.post.show', ['id' => $this->getKey()]);
+        return Attribute::make(
+            get: fn () => route('discuss.post.show', ['id' => $this->getKey()])
+        );
     }
 }

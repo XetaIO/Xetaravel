@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -9,9 +12,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Xetaravel\Models\Badge;
-use Xetaravel\Models\Repositories\UserRepository;
 use Xetaravel\Models\User;
-use Xetaravel\Models\Validators\UserValidator;
 use Xetaravel\Utility\UserUtility;
 
 class UserController extends Controller
@@ -25,8 +26,12 @@ class UserController extends Controller
 
         $action = Route::getFacadeRoot()->current()->getActionMethod();
 
-        if (in_array($action, ['show'])) {
-            $this->breadcrumbs->addCrumb('<i class="fa-regular fa-id-card mr-2"></i> Profile', route('page.index'));
+        if ($action === 'show') {
+            $this->breadcrumbs->addCrumb(
+                '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Profile',
+                route('page.index')
+            );
         }
     }
 
@@ -35,9 +40,9 @@ class UserController extends Controller
      *
      * @param string $slug The slug of the user.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
-    public function show(Request $request, string $slug)
+    public function show(string $slug)
     {
         $user = User::with('articles', 'comments')
             ->where('slug', Str::lower($slug))
@@ -46,7 +51,7 @@ class UserController extends Controller
         if (is_null($user)) {
             return redirect()
                 ->route('page.index')
-                ->with('danger', 'This user doesn\'t exist or has been deleted !');
+                ->error('This user does not exist or has been deleted !');
         }
         $articles = $user->articles()
             ->latest()
@@ -75,27 +80,23 @@ class UserController extends Controller
 
         $breadcrumbs = $this->breadcrumbs->addCrumb(
             e($user->username),
-            $user->profile_url
+            $user->show_url
         );
 
         $badges = Badge::all();
 
-        //dd($discussPosts);
-
         $articles = collect($articles);
 
         $activities = $articles->merge($comments)->merge($discussPosts)->sortBy('created_at', SORT_NATURAL, true);
-        //dd($activities);
 
-        //$level = UserUtility::getLevel($user->experiences_total);
         $level = UserUtility::getLevel($user->experiences_total);
 
-        if ($level['maxLevel'] == true) {
+        if ($level['maxLevel'] === true) {
             $level['currentProgression'] = 100;
-        } elseif ($level['matchExactXPLevel'] == true) {
+        } elseif ($level['matchExactXPLevel'] === true) {
             $level['currentProgression'] = 0;
         } else {
-            $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience'])*100;
+            $level['currentProgression'] = ($level['currentUserExperience'] / $level['nextLevelExperience']) * 100;
         }
 
         return view(
@@ -105,54 +106,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the settings form.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function showSettingsForm(): View
-    {
-        $this->breadcrumbs->addCrumb(
-            '<i class="fa-solid fa-user-gear mr-2"></i> Settings',
-            route('users.user.settings')
-        );
-
-        return view('user.settings', ['breadcrumbs' => $this->breadcrumbs]);
-    }
-
-    /**
-     * Handle an update request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request): RedirectResponse
-    {
-        $type = $request->input('type');
-
-        switch ($type) {
-            case 'email':
-                return $this->updateEmail($request);
-
-            case 'password':
-                return $this->updatePassword($request);
-
-            case 'newpassword':
-                return $this->createPassword($request);
-
-            default:
-                return back()
-                    ->withInput()
-                    ->with('danger', 'Invalid type.');
-        }
-    }
-
-    /**
      * Handle the delete request for the user.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(Request $request): RedirectResponse
     {
@@ -160,86 +118,19 @@ class UserController extends Controller
 
         if (!Hash::check($request->input('password'), $user->password)) {
             return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'Your Password does not match !');
+                ->route('user.setting.index')
+                ->error('Your Password does not match !');
         }
         Auth::logout();
 
         if ($user->delete()) {
             return redirect()
                 ->route('page.index')
-                ->with('success', 'Your Account has been deleted successfully !');
+                ->success('Your account has been deleted successfully !');
         }
 
         return redirect()
             ->route('page.index')
-            ->with('danger', 'An error occurred while deleting your account !');
-    }
-
-    /**
-     * Handle a E-mail update request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function updateEmail(Request $request): RedirectResponse
-    {
-        UserValidator::updateEmail($request->all())->validate();
-        UserRepository::updateEmail($request->all(), Auth::user());
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your E-mail has been updated successfully !');
-    }
-
-    /**
-     * Handle a Password update request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function updatePassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        if (!Hash::check($request->input('oldpassword'), $user->password)) {
-            return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'Your current Password does not match !');
-        }
-
-        UserValidator::updatePassword($request->all())->validate();
-        UserRepository::updatePassword($request->all(), $user);
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your Password has been updated successfully !');
-    }
-
-    /**
-     * Handle a Password create request for the user.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function createPassword(Request $request): RedirectResponse
-    {
-        $user = Auth::user();
-
-        if (!is_null($user->password)) {
-            return redirect()
-                ->route('users.user.settings')
-                ->with('danger', 'You have already set a password.');
-        }
-
-        UserValidator::createPassword($request->all())->validate();
-        UserRepository::createPassword($request->all(), $user);
-
-        return redirect()
-            ->route('users.user.settings')
-            ->with('success', 'Your password has been created successfully!');
+            ->error('An error occurred while deleting your account !');
     }
 }

@@ -1,24 +1,32 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\CountCache\Countable;
-use Eloquence\Behaviours\Sluggable;
+use Eloquence\Behaviours\CountCache\CountedBy;
+use Eloquence\Behaviours\CountCache\HasCounts;
+use Eloquence\Behaviours\HasSlugs;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussConversationPresenter;
-use Xetaravel\Models\Repositories\DiscussConversationRepository;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
-use Xetaravel\Models\User;
+use Xetaravel\Observers\DiscussConversationObserver;
 
+#[ObservedBy([DiscussConversationObserver::class])]
 class DiscussConversation extends Model
 {
-    use Countable,
-        Sluggable,
-        FloodGate,
-        DiscussConversationPresenter,
-        HasMentionsTrait;
+    use DiscussConversationPresenter;
+    use FloodGate;
+    use HasCounts;
+    use HasMentionsTrait;
+    use HasSlugs;
 
     /**
      * The attributes that are mass assignable.
@@ -30,13 +38,9 @@ class DiscussConversation extends Model
         'category_id',
         'title',
         'slug',
-        'post_count',
-        'participants_count',
         'is_locked',
         'is_pinned',
         'is_solved',
-        'is_edited',
-        'edit_count'
     ];
 
     /**
@@ -50,80 +54,16 @@ class DiscussConversation extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'edited_at'
-    ];
-
-    /**
      * The attributes that should be cast.
-     *
-     * @var array
      */
-    protected $casts = [
-        'is_locked' => 'boolean',
-        'is_pinned' => 'boolean',
-        'is_solved' => 'boolean',
-        'is_edited' => 'boolean',
-    ];
-
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
+    protected function casts(): array
     {
-        parent::boot();
-
-        // Set the user id to the new conversation before saving it.
-        static::creating(function ($model) {
-            $model->user_id = Auth::id();
-        });
-
-        // Generated the slug before updating.
-        static::updating(function ($model) {
-            $model->generateSlug();
-        });
-
-        // Handle the before deleting the conversation.
-        static::deleting(function ($model) {
-            $category = $model->category;
-
-            // If the conversation is the last_conversation of the category,
-            // find the new last_conversation and update the category.
-            if ($category->last_conversation_id == $model->getKey()) {
-                $previousConversation = DiscussConversationRepository::findPreviousConversation($model);
-
-                if (is_null($previousConversation)) {
-                    $category->last_conversation_id = null;
-                } else {
-                    $category->last_conversation_id = $previousConversation->getKey();
-                }
-
-                $category->save();
-            }
-
-            // Set the foreign keys to null, else it won't delete since it delete
-            // the posts before the conversation.
-            $model->first_post_id = null;
-            $model->last_post_id = null;
-            $model->solved_post_id = null;
-            $model->save();
-
-            // We need to do this to refresh the countable cache `discuss_post_count` of the user.
-            foreach ($model->posts as $post) {
-                $post->delete();
-            }
-
-            // It don't delete the logs, so we need to do it manually.
-            foreach ($model->discussLogs as $log) {
-                $log->delete();
-            }
-        });
+        return [
+            'is_locked' => 'boolean',
+            'is_pinned' => 'boolean',
+            'is_solved' => 'boolean',
+            'is_edited' => 'boolean',
+        ];
     }
 
     /**
@@ -137,24 +77,12 @@ class DiscussConversation extends Model
     }
 
     /**
-     * Return the count cache configuration.
-     *
-     * @return array
-     */
-    public function countCaches(): array
-    {
-        return [
-            'discuss_conversation_count' => [User::class, 'user_id', 'id'],
-            'conversation_count' => [DiscussCategory::class, 'category_id', 'id']
-        ];
-    }
-
-    /**
      * Get the category that owns the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function category()
+    #[CountedBy(as: 'conversation_count')]
+    public function category(): BelongsTo
     {
         return $this->belongsTo(DiscussCategory::class);
     }
@@ -162,9 +90,10 @@ class DiscussConversation extends Model
     /**
      * Get the user that owns the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    #[CountedBy(as: 'discuss_conversation_count')]
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
     }
@@ -172,9 +101,9 @@ class DiscussConversation extends Model
     /**
      * Get the posts for the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(DiscussPost::class, 'conversation_id', 'id');
     }
@@ -182,19 +111,19 @@ class DiscussConversation extends Model
     /**
      * Get the users for the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function users()
+    public function users(): HasMany
     {
-        return $this->hasMany(DiscussUser::class, 'conversation_id', 'id')->withTrashed();
+        return $this->hasMany(DiscussUser::class, 'conversation_id', 'id');
     }
 
     /**
      * Get the first post of the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function firstPost()
+    public function firstPost(): HasOne
     {
         return $this->hasOne(DiscussPost::class, 'id', 'first_post_id');
     }
@@ -202,9 +131,9 @@ class DiscussConversation extends Model
     /**
      * Get the solved post of the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function solvedPost()
+    public function solvedPost(): HasOne
     {
         return $this->hasOne(DiscussPost::class, 'id', 'solved_post_id');
     }
@@ -212,9 +141,9 @@ class DiscussConversation extends Model
     /**
      * Get the last post of the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function lastPost()
+    public function lastPost(): HasOne
     {
         return $this->hasOne(DiscussPost::class, 'id', 'last_post_id');
     }
@@ -222,9 +151,9 @@ class DiscussConversation extends Model
     /**
      * Get the user that edited the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function editedUser()
+    public function editedUser(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'edited_user_id')->withTrashed();
     }
@@ -232,56 +161,62 @@ class DiscussConversation extends Model
     /**
      * Get the discuss logs for the conversation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
-    public function discussLogs()
+    public function discussLogs(): MorphMany
     {
         return $this->morphMany(DiscussLog::class, 'loggable');
     }
 
     /**
      * Get the logs and posts related to the current conversation
-     * for the given the pagination posts and return the data
+     * for the given pagination posts and return the data
      * ordered by `created_at` as a Collection.
      *
-     * @param \Illuminate\Support\Collection $posts
+     * @param Collection $posts
      * @param int $page
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getPostsWithLogs(Collection $posts, int $page): Collection
     {
-        $logs = DiscussLog::where([
-            'loggable_type' => get_class($this),
-            'loggable_id' => $this->getKey(),
-        ]);
+        $logs = DiscussLog::query()
+            ->with('user.account')
+            ->where([
+                'loggable_type' => get_class($this),
+                'loggable_id' => $this->getKey(),
+            ]);
 
-        if (!$posts->isEmpty()) {
-            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
-        }
-
-        // When there're several pages and the current page is not the first and not the last.
+        // When there are several pages and the current page is not the first and not the last.
         if ($this->lastPage > $page && $page !== 1) {
-            $logs = $logs->where('created_at', '<=', $posts->last()->created_at)
+            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
+
+            $logs = $logs
+                ->where('created_at', '<=', $posts->last()->created_at)
                 ->where('created_at', '>=', $previousPost->created_at);
 
-        // When there're only one page.
-        } elseif ($this->lastPage == 1) {
-            $logs = $logs->where('created_at', '>=', $this->created_at);
+            // When there are only one page.
+        } elseif ($this->lastPage === 1) {
+            $logs = $logs
+                ->where('created_at', '>=', $this->created_at);
 
-        // When there're several pages and the current page is the first page.
-        } elseif ($page == 1) {
-            $logs = $logs->where('created_at', '<=', $posts->last()->created_at);
+            // When there are several pages and the current page is the first page.
+        } elseif ($page === 1) {
+            $logs = $logs
+                ->where('created_at', '<=', $posts->last()->created_at);
 
-        // When there're several page and the current page is the last page
-        } elseif ($page == $this->lastPage) {
-            $logs = $logs->where('created_at', '>', $previousPost->created_at);
+            // When there are several page and the current page is the last page
+        } elseif ($page === $this->lastPage) {
+            $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
+
+            $logs = $logs
+                ->where('created_at', '>', $previousPost->created_at);
         }
         $postsWithLogs = $posts->merge($logs->get())->sortBy('created_at');
 
         // If the conversation has a solved post, prepend it
         // then prepend the first post to the collection
-        if ($this->lastPage == 1 || $page == 1) {
+        if ($this->lastPage === 1 || $page === 1) {
             if (!is_null($this->solved_post_id)) {
                 $postsWithLogs->prepend(DiscussPost::findOrFail($this->solved_post_id));
             }

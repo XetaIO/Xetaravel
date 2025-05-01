@@ -1,14 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Markdown\GithubPullRequest;
 
 use League\CommonMark\Parser\Inline\InlineParserInterface;
 use League\CommonMark\Parser\Inline\InlineParserMatch;
 use League\CommonMark\Parser\InlineParserContext;
 
+use function mb_strlen;
+
 final class GithubPullRequestParser implements InlineParserInterface
 {
     // Regex used to match Github pull request link.
-    const REGEXP_PURLLREQUEST = '\bhttps?:\/\/github\.com\/(?<repo>[\w-]+\/[\w-]+)\/'.
+    public const REGEXP_PURLLREQUEST = '\bhttps?:\/\/github\.com\/(?<repo>[\w-]+\/[\w-]+)\/'.
         '(?<type>issues|pull)\/(?<issue>\d+)';
 
     public function getMatchDefinition(): InlineParserMatch
@@ -21,7 +26,7 @@ final class GithubPullRequestParser implements InlineParserInterface
         $route = $inlineContext->getFullMatch();
 
         // Push the cursor to the lenght of the full match.
-        $inlineContext->getCursor()->advanceBy(\strlen($route));
+        $inlineContext->getCursor()->advanceBy(mb_strlen($route));
 
         $content = "{$inlineContext->getMatches()[1]}#{$inlineContext->getMatches()[5]}";
 

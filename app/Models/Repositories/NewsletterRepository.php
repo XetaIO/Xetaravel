@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Xetaravel\Models\Newsletter;
@@ -10,7 +13,7 @@ class NewsletterRepository
      *
      * @param array $data The data used to create the newsletter.
      *
-     * @return \Xetaravel\Models\Newsletter
+     * @return Newsletter
      */
     public static function create(array $data): Newsletter
     {

@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace XetaravelInstaller;
 
+use Composer\IO\IOInterface;
 use Composer\Script\Event;
-use Exception;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Provides installation hooks for when Xetaravel is installed via
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class Installer
 {
-    public static function postInstall(Event $event)
+    public static function postCreateProjectCmd(Event $event): void
     {
         $io = $event->getIO();
         $io->write("<info>
@@ -39,38 +41,18 @@ class Installer
         </info>");
         $rootDir = base_path();
 
-        static::createEnvTesting($rootDir, $io);
         static::configDatabase($rootDir, $io);
-    }
-
-    /**
-     * Create the .env.testing file if it does not exist.
-     *
-     * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
-     *
-     * @return void
-     */
-    public static function createEnvTesting($dir, $io)
-    {
-        $env = $dir . '/.env.testing';
-        $defaultEnv = $dir . '/.env.testing.exemple';
-
-        if (!file_exists($env)) {
-            copy($defaultEnv, $env);
-            $io->write('<info>Created `.env.testing` file.</info>');
-        }
     }
 
     /**
      * Set the database value in the application's env file.
      *
      * @param string $dir The application's root directory.
-     * @param \Composer\IO\IOInterface $io IO interface to write to console.
+     * @param IOInterface $io IO interface to write to console.
      *
      * @return void
      */
-    public static function configDatabase($dir, $io)
+    public static function configDatabase(string $dir, IOInterface $io): void
     {
         $env = $dir . '/.env';
         $content = file_get_contents($env);
@@ -87,7 +69,7 @@ class Installer
         $databaseName = $io->ask('What is the database password ? ', 'secret');
         $content = str_replace('__XETARAVEL_DATABASE_PASSWORD__', $databaseName, $content, $count);
 
-        if ($count == 0) {
+        if ($count === 0) {
             $io->writeError('<warning>No database placeholder to replace in the `.env` file.</warning>');
 
             return;

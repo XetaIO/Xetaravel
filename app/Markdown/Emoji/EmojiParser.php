@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Markdown\Emoji;
 
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
@@ -87,7 +90,7 @@ class EmojiParser implements InlineParserInterface
             return false;
         }
 
-        $key = substr($handle, 0, -1);
+        $key = mb_substr($handle, 0, -1);
 
         if (!in_array($key, $this->map)) {
             $cursor->restoreState($saved);

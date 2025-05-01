@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -8,159 +10,94 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::group([
-    'namespace' => 'Admin',
     'prefix' => 'admin',
     'middleware' => [
         'auth',
-        'permission:access.administration',
-        'permission:access.site'
+        'permission:access administration'
     ]
 ], function () {
-        Route::get('/', 'PageController@index')->name('admin.page.index');
+    Route::get('/', [Xetaravel\Http\Controllers\Admin\PageController::class, 'index'])->name('admin.page.index');
 
-        /*
-        |--------------------------------------------------------------------------
-        | Blog Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group([
-            'namespace' => 'Blog',
-            'prefix' => 'blog',
-            'middleware' => ['permission:manage.blog']
-        ], function () {
+    /*
+    |--------------------------------------------------------------------------
+    | Blog Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'prefix' => 'blog',
+        'middleware' => ['permission:manage blog article']
+    ], function () {
 
-            // Article Routes
-            Route::get('article', 'ArticleController@index')
-                ->name('admin.blog.article.index');
+        // BlogArticle Routes
+        Route::get('article', [Xetaravel\Http\Controllers\Admin\Blog\ArticleController::class, 'index'])
+            ->name('admin.blog.article.index');
 
-            Route::get('article/create', 'ArticleController@showCreateForm')
-                ->name('admin.blog.article.create');
-            Route::post('article/create', 'ArticleController@create')
-                ->name('admin.blog.article.create');
+        // BlogCategory Routes
+        Route::get('category', [Xetaravel\Http\Controllers\Admin\Blog\CategoryController::class, 'index'])
+            ->name('admin.blog.category.index');
+    });
 
-            Route::get('article/update/{slug}.{id}', 'ArticleController@showUpdateForm')
-                ->name('admin.blog.article.edit');
-            Route::put('article/update/{id}', 'ArticleController@update')
-                ->name('admin.blog.article.update');
+    /*
+    |--------------------------------------------------------------------------
+    | Discuss Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'prefix' => 'discuss',
+        'middleware' => ['permission:manage discuss category']
+    ], function () {
 
-            Route::delete('article/delete/{id}', 'ArticleController@delete')
-                ->name('admin.blog.article.delete');
+        // BlogCategory Routes
+        Route::get('category', [Xetaravel\Http\Controllers\Admin\Discuss\CategoryController::class, 'index'])
+            ->name('admin.discuss.category.index');
+    });
 
-            // Category Routes
-            Route::get('category', 'CategoryController@index')
-                ->name('admin.blog.category.index');
-        });
+    /*
+    |--------------------------------------------------------------------------
+    | User Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'prefix' => 'user',
+        'middleware' => ['permission:manage user']
+    ], function () {
 
-        /*
-        |--------------------------------------------------------------------------
-        | Discuss Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group([
-            'namespace' => 'Discuss',
-            'prefix' => 'discuss',
-            'middleware' => ['permission:manage.discuss']
-        ], function () {
+        // User Routes
+        Route::get('/', [Xetaravel\Http\Controllers\Admin\UserController::class, 'index'])
+            ->name('admin.user.index');
+    });
 
-                // Category Routes
-            Route::get('category', 'CategoryController@index')
-                ->name('admin.discuss.category.index');
-        });
+    /*
+    |--------------------------------------------------------------------------
+    | Role & Permission Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'namespace' => 'Role',
+        'middleware' => ['permission:manage role|manage permission']
+    ], function () {
 
-        /*
-        |--------------------------------------------------------------------------
-        | User Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group([
-            'namespace' => 'User',
-            'prefix' => 'user',
-            'middleware' => ['permission:manage.users']
-        ], function () {
+        // Role Route
+        Route::get('role', [Xetaravel\Http\Controllers\Admin\Permission\RoleController::class, 'index'])
+            ->name('admin.role.index');
 
-            // User Routes
-            Route::get('/', 'UserController@index')->name('admin.user.user.index');
-            Route::get('search', 'UserController@search')->name('admin.user.user.search');
+        // Permission Route
+        Route::get('permission', [Xetaravel\Http\Controllers\Admin\Permission\PermissionController::class, 'index'])
+            ->name('admin.permission.index');
+    });
 
-            Route::get('update/{slug}.{id}', 'UserController@showUpdateForm')
-                ->name('admin.user.user.edit');
-            Route::put('update/{id}', 'UserController@update')
-                ->name('admin.user.user.update');
+    /*
+    |--------------------------------------------------------------------------
+    | Setting Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'middleware' => ['permission:manage setting']
+    ], function () {
+        Route::get('setting', [Xetaravel\Http\Controllers\Admin\SettingController::class, 'index'])
+            ->name('admin.setting.index');
 
-            Route::delete('delete/{id}', 'UserController@delete')
-                ->name('admin.user.user.delete');
-
-            Route::delete('deleteAvatar/{id}', 'UserController@deleteAvatar')
-                ->name('admin.user.user.deleteavatar');
-        });
-
-        /*
-        |--------------------------------------------------------------------------
-        | Role Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group([
-            'namespace' => 'Role',
-            'prefix' => 'role',
-            'middleware' => ['permission:manage.roles']
-        ], function () {
-
-            // Role Routes
-            Route::get('role', 'RoleController@index')->name('admin.role.role.index');
-
-            Route::get('role/create', 'RoleController@showCreateForm')
-                ->name('admin.role.role.create');
-            Route::post('role/create', 'RoleController@create')
-                ->name('admin.role.role.create');
-
-            Route::get('role/update/{id}', 'RoleController@showUpdateForm')
-                ->name('admin.role.role.edit');
-            Route::put('role/update/{id}', 'RoleController@update')
-                ->name('admin.role.role.update');
-
-            Route::delete('role/delete/{id}', 'RoleController@delete')
-                ->name('admin.role.role.delete');
-
-            // Permission Route
-            Route::get('permission', 'PermissionController@index')->name('admin.role.permission.index');
-
-            Route::get('permission/create', 'PermissionController@showCreateForm')
-                ->name('admin.role.permission.create');
-            Route::post('permission/create', 'PermissionController@create')
-                ->name('admin.role.permission.create');
-
-            Route::get('permission/update/{id}', 'PermissionController@showUpdateForm')
-                ->name('admin.role.permission.edit');
-            Route::put('permission/update/{id}', 'PermissionController@update')
-                ->name('admin.role.permission.update');
-
-            Route::delete('permission/delete/{id}', 'PermissionController@delete')
-                ->name('admin.role.permission.delete');
-        });
-
-        /*
-        |--------------------------------------------------------------------------
-        | Settings Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group([
-            'middleware' => ['permission:manage.settings']
-        ], function () {
-
-            // Settings Routes
-            Route::get('settings', 'SettingController@index')->name('admin.setting.index');
-
-            Route::get('settings/create', 'SettingController@showCreateForm')
-                ->name('admin.setting.create');
-            Route::post('settings/create', 'SettingController@create')
-                ->name('admin.setting.create');
-
-            Route::get('settings/update/{id}', 'SettingController@showUpdateForm')
-                ->name('admin.setting.edit');
-            Route::put('settings/update/{id}', 'SettingController@update')
-                ->name('admin.setting.update');
-
-            Route::delete('settings/delete/{id}', 'SettingController@delete')
-                ->name('admin.setting.delete');
-        });
+        Route::put('setting', [Xetaravel\Http\Controllers\Admin\SettingController::class, 'update'])
+            ->name('admin.setting.update');
+    });
 });

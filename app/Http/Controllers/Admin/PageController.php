@@ -1,12 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Admin;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Xetaravel\Http\Components\AnalyticsComponent;
-use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
+use Xetaravel\Models\BlogArticle;
+use Xetaravel\Models\BlogComment;
 use Xetaravel\Models\User;
 
 class PageController extends Controller
@@ -14,75 +21,67 @@ class PageController extends Controller
     use AnalyticsComponent;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->endDate = Carbon::now()->subDay();
-    }
-
-    /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View|Application|\Illuminate\View\View|object
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function index()
     {
-        $secondes = config('analytics.cache_lifetime_in_secondes');
+        $minutes = config('analytics.cache_lifetime_in_minutes');
 
         $viewDatas = [];
 
-        if (config('analytics.enabled')) {
-            // @codeCoverageIgnoreStart
-            $visitorsData = Cache::remember('Analytics.visitors', $secondes, function () {
+        if (!App::environment('testing') && settings('analytics_enabled')) {
+
+            $visitorsData = Cache::remember('Analytics.visitors', $minutes, function () {
                 return $this->buildVisitorsGraph();
             });
-            array_push($viewDatas, 'visitorsData');
+            $viewDatas[] = 'visitorsData';
 
-            $browsersData = Cache::remember('Analytics.browsers', $secondes, function () {
+            $browsersData = Cache::remember('Analytics.browsers', $minutes, function () {
                 return $this->buildBrowsersGraph();
             });
-            array_push($viewDatas, 'browsersData');
+            $viewDatas[] = 'browsersData';
 
-            $devicesGraph = Cache::remember('Analytics.devices', $secondes, function () {
+            $devicesGraph = Cache::remember('Analytics.devices', $minutes, function () {
                 return $this->buildDevicesGraph();
             });
-            array_push($viewDatas, 'devicesGraph');
+            $viewDatas[] = 'devicesGraph';
 
-            $operatingSystemGraph = Cache::remember('Analytics.operatingsystem', $secondes, function () {
+            $operatingSystemGraph = Cache::remember('Analytics.operatingsystem', $minutes, function () {
                 return $this->buildOperatingSystemGraph();
             });
-            array_push($viewDatas, 'operatingSystemGraph');
+            $viewDatas[] = 'operatingSystemGraph';
 
-            $todayVisitors = Cache::remember('Analytics.todayvisitors', $secondes, function () {
-                return $this->buildTodayVisitors();
+            $yesterdayVisitors = Cache::remember('Analytics.yesterdayvisitors', $minutes, function () {
+                return $this->buildYesterdayVisitors();
             });
-            array_push($viewDatas, 'todayVisitors');
-            // @codeCoverageIgnoreEnd
+            $viewDatas[] = 'yesterdayVisitors';
         }
 
-        $usersCount = Cache::remember('Analytics.users.count', $secondes, function () {
+        $usersCount = Cache::remember('Analytics.users.count', $minutes, function () {
             return User::count();
         });
-        array_push($viewDatas, 'usersCount');
+        $viewDatas[] = 'usersCount';
 
-        $articlesCount = Cache::remember('Analytics.articles.count', $secondes, function () {
-            return Article::count();
+        $articlesCount = Cache::remember('Analytics.articles.count', $minutes, function () {
+            return BlogArticle::count();
         });
-        array_push($viewDatas, 'articlesCount');
+        $viewDatas[] = 'articlesCount';
 
-        $commentsCount = Cache::remember('Analytics.comments.count', $secondes, function () {
-            return Comment::count();
+        $commentsCount = Cache::remember('Analytics.comments.count', $minutes, function () {
+            return BlogComment::count();
         });
-        array_push($viewDatas, 'commentsCount');
+        $viewDatas[] = 'commentsCount';
 
         $breadcrumbs = $this->breadcrumbs;
-        array_push($viewDatas, 'breadcrumbs');
+        $viewDatas[] = 'breadcrumbs';
 
         return view(
-            'Admin::page.index',
+            'Admin.page.index',
             compact($viewDatas)
         );
     }

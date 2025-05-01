@@ -1,24 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('discuss_conversations', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('user_id')->unsigned()->nullable()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->index();
             $table->integer('post_count')->unsigned()->default(0);
             $table->integer('user_count')->unsigned()->default(0);
             $table->boolean('is_locked')->default(false);
@@ -30,8 +31,17 @@ return new class extends Migration
             $table->integer('last_post_id')->unsigned()->nullable()->index();
             $table->integer('edit_count')->unsigned()->default(0);
             $table->integer('edited_user_id')->unsigned()->nullable()->index();
-            $table->timestamp('edited_at')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('discuss_conversations', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('discuss_categories')->onDelete('cascade');
+            $table->foreign('edited_user_id')->references('id')->on('users')->nullOnDelete();
+        });
+
+        Schema::table('discuss_categories', function (Blueprint $table) {
+            $table->foreign('last_conversation_id')->references('id')->on('discuss_conversations')->nullOnDelete();
         });
     }
 
@@ -40,7 +50,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('discuss_conversations');
     }

@@ -1,211 +1,19 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Components;
 
 use Carbon\Carbon;
-use Spatie\Analytics\AnalyticsFacade;
+use Google\Analytics\Data\V1beta\Filter;
+use Google\Analytics\Data\V1beta\FilterExpression;
+use Illuminate\Support\Collection;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\OrderBy;
 use Spatie\Analytics\Period;
 
 trait AnalyticsComponent
 {
-    /**
-     * The and date used in Analytics requests.
-     *
-     * @var \Carbon\Carbon
-     */
-    protected $endDate;
-
-    /**
-     * Build the today visitors metric.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return string
-     */
-    public function buildTodayVisitors(): string
-    {
-        $startDate = Carbon::today();
-        $endDate = Carbon::now();
-
-        $visitorsData = AnalyticsFacade::performQuery(Period::create($startDate, $endDate), 'ga:users');
-
-        return $visitorsData->totalsForAllResults['ga:users'];
-    }
-
-    /**
-     * Build the today visitors metric.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return string
-     */
-    public function buildAllTimeVisitors(): string
-    {
-        $startDate = Carbon::createFromFormat('Y-m-d', config('analytics.start_date'));
-        $endDate = Carbon::now();
-
-        $visitorsData = AnalyticsFacade::performQuery(Period::create($startDate, $endDate), 'ga:sessions');
-
-        return $visitorsData->totalsForAllResults['ga:sessions'];
-    }
-
-    /**
-     * Build the visitors graph for the last 7 days.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return \Google_Service_Analytics_GaData
-     */
-    public function buildVisitorsGraph(): \Google_Service_Analytics_GaData
-    {
-        $startDate = Carbon::now()->subDays(7);
-
-        $visitorsData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $this->endDate),
-            'ga:sessions,ga:pageviews',
-            [
-                'dimensions' => 'ga:date',
-                'sort' => 'ga:date'
-            ]
-        );
-
-        $visitorsGraph = [];
-        foreach ($visitorsData->rows as $row) {
-            $row[0] = Carbon::createFromFormat('Ymd', $row[0]);
-
-            array_push($visitorsGraph, $row);
-        }
-        $visitorsData->rows = array_reverse($visitorsGraph);
-
-        return $visitorsData;
-    }
-
-    /**
-     * Build the browsers graph from the beginning.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return \Google_Service_Analytics_GaData
-     */
-    public function buildBrowsersGraph(): \Google_Service_Analytics_GaData
-    {
-        $startDate = Carbon::createFromFormat('Y-m-d', config('analytics.start_date'));
-
-        $browsersData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $this->endDate),
-            'ga:pageviews',
-            [
-                'dimensions' => 'ga:browser',
-                'sort' => 'ga:pageviews',
-                'filters' => 'ga:browser==Chrome,'
-                    .'ga:browser==Firefox,'
-                    .'ga:browser==Internet Explorer,'
-                    .'ga:browser==Safari,'
-                    .'ga:browser==Opera'
-            ]
-        );
-
-        $browsersGraph = [];
-        foreach ($browsersData->rows as $browser) {
-            $browser[] = $this->getPercentage($browser[1], $browsersData->totalsForAllResults['ga:pageviews']);
-            $browser[] = $this->getBrowserColor($browser[0]);
-
-            array_push($browsersGraph, $browser);
-        }
-        $browsersData->rows = array_reverse($browsersGraph);
-
-        return $browsersData;
-    }
-
-    /**
-     * Build the devices graph from the last 7 months.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return array
-     */
-    public function buildDevicesGraph(): array
-    {
-        $startDate = Carbon::now()->subMonths(7);
-
-        $devicesData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $this->endDate),
-            'ga:pageviews',
-            [
-                'dimensions' => 'ga:mobileDeviceBranding,ga:yearMonth',
-                'sort' => '-ga:mobileDeviceBranding',
-                'filters' => 'ga:mobileDeviceBranding==Apple,'
-                    .'ga:mobileDeviceBranding==Samsung,'
-                    .'ga:mobileDeviceBranding==Google,'
-                    .'ga:mobileDeviceBranding==HTC,'
-                    .'ga:mobileDeviceBranding==Microsoft'
-            ]
-        );
-
-        $devicesGraph = [];
-        for ($i = 0; $i < 8; $i++) {
-            $date = Carbon::now()->subMonths($i);
-
-            $devicesGraph[$date->format('Ym')] = [
-                'period' => $date->format('Y-m-d'),
-                'Apple' => 0,
-                'Samsung' => 0,
-                'Google' => 0,
-                'HTC' => 0,
-                'Microsoft' => 0
-            ];
-        }
-
-        foreach ($devicesData->rows as $device) {
-            $devicesGraph[$device[1]][$device[0]] = $device[2];
-        }
-        $devicesGraph = array_reverse($devicesGraph);
-
-        return $devicesGraph;
-    }
-
-    /**
-     * Build the operating system graph from the last 7 months.
-     *
-     * @codeCoverageIgnore
-     *
-     * @return array
-     */
-    public function buildOperatingSystemGraph(): array
-    {
-        $startDate = Carbon::now()->subMonths(7);
-
-        $operatingSystemData = AnalyticsFacade::performQuery(
-            Period::create($startDate, $this->endDate),
-            'ga:pageviews',
-            [
-                'dimensions' => 'ga:operatingSystem,ga:yearMonth',
-                'sort' => '-ga:operatingSystem',
-                'filters' => 'ga:operatingSystem==Windows,'
-                    .'ga:operatingSystem==Macintosh,'
-                    .'ga:operatingSystem==Linux'
-            ]
-        );
-
-        $operatingSystemGraph = [];
-        for ($i = 0; $i < 8; $i++) {
-            $date = Carbon::now()->subMonths($i);
-
-            $operatingSystemGraph[$date->format('Ym')] = [
-                'period' => $date->format('Y-m-d'),
-                'Windows' => 0,
-                'Macintosh' => 0,
-                'Linux' => 0
-            ];
-        }
-
-        foreach ($operatingSystemData->rows as $os) {
-            $operatingSystemGraph[$os[1]][$os[0]] = $os[2];
-        }
-        $operatingSystemGraph = array_reverse($operatingSystemGraph);
-
-        return $operatingSystemGraph;
-    }
-
     /**
      * Get the percentage relative to the total page views.
      *
@@ -214,7 +22,7 @@ trait AnalyticsComponent
      *
      * @return float
      */
-    public function getPercentage($pageviews, $total): float
+    protected function getPercentage(int $pageviews, int $total): float
     {
         $percentage = ($pageviews * 100) / $total;
 
@@ -228,28 +36,213 @@ trait AnalyticsComponent
      *
      * @return string
      */
-    public function getBrowserColor(string $browser): string
+    protected function getBrowserColor(string $browser): string
     {
-        switch ($browser) {
-            case 'Chrome':
-                $color = '#00acac';
-                break;
-            case 'Firefox':
-                $color = '#f4645f';
-                break;
-            case 'Safari':
-                $color = '#727cb6';
-                break;
-            case 'Opera':
-                $color = '#348fe2';
-                break;
-            case 'Internet Explorer':
-                $color = '#75e376';
-                break;
-            default:
-                $color = '#ddd';
+        return match ($browser) {
+            'Chrome' => '#00acac',
+            'Firefox' => '#f4645f',
+            'Safari' => '#727cb6',
+            'Opera' => '#348fe2',
+            'Edge' => '#75e376',
+            'Brave' => '#ff3a01',
+            default => '#ddd',
+        };
+    }
+    /**
+     * Build the yesterday visitors metric.
+     *
+     * @return Collection
+     */
+    public function buildYesterdayVisitors(): Collection
+    {
+        $startDate = Carbon::yesterday()->startOfDay();
+        $endDate = Carbon::yesterday()->endOfDay();
+
+        return Analytics::get(Period::create($startDate, $endDate), ['screenPageViews'], ['year']);
+    }
+
+    /**
+     * Build the visitors graph for the last 7 days.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return Collection
+     */
+    public function buildVisitorsGraph(): Collection
+    {
+        $startDate = Carbon::now()->subDays(7);
+
+        $visitorsData = Analytics::get(
+            Period::create($startDate, Carbon::now()),
+            ['sessions', 'screenPageViews'],
+            ['date'],
+            10,
+            [OrderBy::dimension('date', true)]
+        );
+
+        $visitorsData = $visitorsData->map(function ($item) {
+            $item['date'] = $item['date']->format('Y-m-d');
+            return $item;
+        });
+
+        return $visitorsData->reverse();
+    }
+
+    /**
+     * Build the browser graph from the beginning.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return Collection
+     */
+    public function buildBrowsersGraph(): Collection
+    {
+        $startDate = Carbon::createFromFormat('Y-m-d', config('analytics.start_date'));
+
+        $browsers = ['Chrome', 'Firefox', 'Edge', 'Safari', 'Opera', 'Brave'];
+
+        $dimensionFilter = new FilterExpression([
+            'filter' => new Filter([
+                'field_name' => 'browser',
+                'in_list_filter' => new Filter\InListFilter([
+                    'values' => $browsers,
+                ]),
+            ]),
+        ]);
+
+        $browsersData = collect(Analytics::get(
+            Period::create($startDate, Carbon::now()),
+            ['screenPageViews'],
+            ['browser'],
+            10,
+            [],
+            0,
+            $dimensionFilter,
+            true
+        ))->keyBy('browser');
+
+        $totalViews = $browsersData->sum('screenPageViews');
+
+        return collect($browsers)->map(function ($browser) use ($browsersData, $totalViews) {
+            $screenPageViews = $browsersData[$browser]['screenPageViews'] ?? 0;
+
+            return [
+                'browser' => $browser,
+                'color' => $this->getBrowserColor($browser),
+                'percentage' => $this->getPercentage($screenPageViews, $totalViews),
+                'screenPageViews' => $screenPageViews,
+            ];
+        });
+    }
+
+    /**
+     * Build the devices graph from the last 7 months.
+     *
+     * @return Collection
+     */
+    public function buildDevicesGraph(): Collection
+    {
+        $startDate = Carbon::now()->subMonths(7);
+
+        $devices = ['Apple', 'Samsung', 'HTC', 'Huawei', 'Microsoft'];
+
+        $dimensionFilter = new FilterExpression([
+            'filter' => new Filter([
+                'field_name' => 'mobileDeviceBranding',
+                'in_list_filter' => new Filter\InListFilter([
+                    'values' => $devices,
+                ]),
+            ]),
+        ]);
+
+        $devicesData = Analytics::get(
+            Period::create($startDate, Carbon::now()),
+            ['screenPageViews'],
+            ['mobileDeviceBranding', 'yearMonth'],
+            10,
+            [OrderBy::dimension('mobileDeviceBranding', true)],
+            0,
+            $dimensionFilter,
+            true
+        )->keyBy(fn ($item) => $item['yearMonth'] . '-' . $item['mobileDeviceBranding']);
+
+        $devicesGraph = collect();
+        foreach (range(0, 7) as $i) {
+            $date = Carbon::now()->subMonths($i);
+
+            $devicesGraph->put($date->format('Ym'), [
+                'period' => $date->format('Y-m'),
+                'Apple' => 0,
+                'Samsung' => 0,
+                'Google' => 0,
+                'HTC' => 0,
+                'Huawei' => 0,
+                'Microsoft' => 0
+            ]);
         }
 
-        return $color;
+        $devicesGraph = $devicesGraph->map(function ($row, $yearMonth) use ($devicesData, $devices) {
+            foreach ($devices as $device) {
+                $key = $yearMonth . '-' . $device;
+                $row[$device] = $devicesData[$key]['screenPageViews'] ?? 0;
+            }
+            return $row;
+        });
+
+        return $devicesGraph->reverse();
+    }
+
+    /**
+     * Build the operating system graph from the last 7 months.
+     *
+     * @return Collection
+     */
+    public function buildOperatingSystemGraph(): Collection
+    {
+        $startDate = Carbon::now()->subMonths(7);
+
+        $operatingSystems = ['Windows', 'Linux', 'Macintosh'];
+
+        $dimensionFilter = new FilterExpression([
+            'filter' => new Filter([
+                'field_name' => 'operatingSystem',
+                'in_list_filter' => new Filter\InListFilter([
+                    'values' => $operatingSystems,
+                ]),
+            ]),
+        ]);
+
+        $operatingSystemData = Analytics::get(
+            Period::create($startDate, Carbon::now()),
+            ['screenPageViews'],
+            ['operatingSystem', 'yearMonth'],
+            10,
+            [OrderBy::dimension('operatingSystem', true)],
+            0,
+            $dimensionFilter,
+            true
+        )->keyBy(fn ($item) => $item['yearMonth'] . '-' . $item['operatingSystem']);
+
+        $operatingSystemGraph = collect();
+        foreach (range(0, 7) as $i) {
+            $date = Carbon::now()->subMonths($i);
+
+            $operatingSystemGraph->put($date->format('Ym'), [
+                'period' => $date->format('Y-m'),
+                'Windows' => 0,
+                'Macintosh' => 0,
+                'Linux' => 0,
+            ]);
+        }
+
+        $operatingSystemGraph = $operatingSystemGraph->map(function ($row, $yearMonth) use ($operatingSystemData, $operatingSystems) {
+            foreach ($operatingSystems as $os) {
+                $key = $yearMonth . '-' . $os;
+                $row[$os] = $operatingSystemData[$key]['screenPageViews'] ?? 0;
+            }
+            return $row;
+        });
+
+        return $operatingSystemGraph->reverse();
     }
 }

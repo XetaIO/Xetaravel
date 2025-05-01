@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -12,9 +15,13 @@ class DownloadsController extends Controller
      *
      * @return BinaryFileResponse
      */
-    public function download($fileName)
+    public function download(string $fileName)
     {
         $filePath = public_path('files/'.$fileName);
+
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found.');
+        }
 
         return response()->download($filePath);
     }

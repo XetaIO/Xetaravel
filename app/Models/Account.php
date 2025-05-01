@@ -1,5 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Account extends Model
 {
@@ -21,9 +26,9 @@ class Account extends Model
     /**
      * Get the user that owns the account.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

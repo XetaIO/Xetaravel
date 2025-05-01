@@ -5,10 +5,16 @@
     <x-meta title="Manage Articles" />
 @endpush
 
+
+@push('scriptsTop')
+    @vite('resources/js/flatpickr.js')
+    @vite('resources/js/easymde.js')
+@endpush
+
 @section('content')
 <section class="m-3 lg:m-10">
     <div class="grid grid-cols-1">
-        <div class="col-span-12 mx-3 ">
+        <div class="col-span-12">
             {!! $breadcrumbs->render() !!}
         </div>
     </div>
@@ -16,7 +22,8 @@
 
 <section class="m-3 lg:m-10">
     <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl font-xetaravel">
+        <h1 class="text-4xl">
+            <x-icon name="far-newspaper" class="h-9 w-9" />
             Manage Articles
         </h1>
         <p class="text-gray-400 dark:text-gray-500">
@@ -24,10 +31,10 @@
         </p>
     </hgroup>
 
-    <div class="grid grid-cols-12 gap-6 mb-7">
-        <div class="col-span-12 bg-base-200 dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-3">
-            <livewire:admin.blog.articles />
-        </div>
-    </div>
+    <livewire:admin.blog.article />
+
+    <livewire:admin.blog.create-article />
+
+    <livewire:admin.blog.update-article />
 </section>
 @endsection

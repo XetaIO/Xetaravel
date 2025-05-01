@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -26,31 +29,16 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected string $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-        $this->middleware('guest');
-    }
+        parent::__construct();
 
-    /**
-     * Display the password reset view for the given token.
-     *
-     * If no token is present, display the link request form.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param string|null $token
-     *
-     * @return \Illuminate\View\View
-     */
-    public function showResetForm(Request $request, $token = null): View
-    {
-        return view('Auth.passwords.reset')->with(
-            ['token' => $token, 'email' => $request->email]
-        );
+        $this->middleware('guest');
     }
 
     /**
@@ -58,11 +46,28 @@ class ResetPasswordController extends Controller
      *
      * @param string $response
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    protected function sendResetResponse($response): RedirectResponse
+    protected function sendResetResponse(string $response): RedirectResponse
     {
         return redirect($this->redirectPath())
-            ->with('success', 'Your password has been reset!');
+            ->success('Your password has been reset!');
+    }
+
+    /**
+     * Display the password reset view for the given token.
+     *
+     * If no token is present, display the link request form.
+     *
+     * @param Request $request
+     * @param string|null $token
+     *
+     * @return View
+     */
+    public function showResetForm(Request $request, string $token = null): View
+    {
+        return view('Auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
     }
 }

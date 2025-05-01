@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -10,27 +13,34 @@ use Xetaravel\Models\Validators\NewsletterValidator;
 class NewsletterController extends Controller
 {
     /**
-     * Subcribe to the Newsletter
+     * Subscribe to the Newsletter
      *
-     * @param \Illuminate\Http\Request $request The request object.
+     * @param Request $request The request object.
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
-        NewsletterValidator::create($request->all())->validate();
+        $validator = NewsletterValidator::create($request->all());
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->error('There are errors while subscribing to the Newsletter !');
+        }
         NewsletterRepository::create($request->all());
 
         return back()
-            ->with('success', 'You have successfuly subscribed to our Newsletter !');
+            ->success('You have successfully subscribed to our Newsletter !');
     }
 
     /**
-     * Unsubcribe to the Newsletter.
+     * Unsubscribe to the Newsletter.
      *
      * @param string $email The email that should be used to unsubscribe to the Newsletter.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function delete(string $email): RedirectResponse
     {
@@ -38,10 +48,10 @@ class NewsletterController extends Controller
 
         if ($newsletter && $newsletter->delete()) {
             return back()
-                ->with('success', 'You have successfully unsubscribed to the Newsletter !');
+                ->success('You have successfully unsubscribed to the Newsletter !');
         }
 
         return back()
-            ->with('danger', 'An error occurred while unsubscribed to the Newsletter !');
+            ->error('An error occurred while unsubscribed to the Newsletter !');
     }
 }

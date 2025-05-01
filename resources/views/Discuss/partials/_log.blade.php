@@ -2,52 +2,49 @@
     {{-- Icon --}}
     <span class="mr-2 xl:mr-0">
         @if ($log->type == 'category')
-            <i class="fa-solid fa-tag fa-xl"></i>
+            <x-icon name="fas-tag" class="h-6 w-6" />
         @elseif ($log->type == 'title')
-            <i class="fa-solid fa-pencil fa-xl"></i>
+            <x-icon name="fas-pencil" class="h-6 w-6" />
         @elseif ($log->type == 'locked')
-            <i class="fa-solid fa-lock fa-xl"></i>
+            <x-icon name="fas-lock" class="h-6 w-6" />
         @elseif ($log->type == 'pinned')
-            <i class="fa-solid fa-thumbtack  fa-xl"></i>
+            <x-icon name="fas-thumbtack" class="h-6 w-6" />
         @elseif ($log->type == 'deleted')
-            <i class="fa-solid fa-trash  fa-xl"></i>
+            <x-icon name="fas-trash" class="h-6 w-6" />
         @endif
     </span>
 
     {{-- User avatar --}}
-    <figure class="inline-block w-5 h-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-1 mr-2 xl:mr-0">
-        <img class="w-5 h-5 rounded-full" src="{{ $post->user->avatar_small }}"  alt="{{ $post->user->full_name }} avatar" />
+    <figure class="inline-block w-5 h-5 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-1 mr-2 xl:mr-0">
+        <img class="w-5 h-5 rounded-full" src="{{ $log->user->avatar_small }}"  alt="{{ $log->user->full_name }} avatar" />
     </figure>
 
     {{-- User --}}
-    <discuss-user
-        :user="{{ json_encode([
-            'avatar_small'=> $log->user->avatar_small,
-            'profile_url' => $log->user->profile_url,
-            'full_name' => $log->user->full_name
-        ]) }}"
-        :created-at="{{ var_export($log->user->created_at->diffForHumans()) }}"
-        :last-login="{{ var_export($log->user->last_login->diffForHumans()) }}"
-        :background-color="{{ var_export($log->user->avatar_primary_color) }}">
-    </discuss-user>
+    <x-user.user
+        :user-name="$log->user->full_name"
+        :user-avatar-small="$log->user->avatar_small"
+        :user-profile="$log->user->show_url"
+        :user-last-login="$log->user->last_login_date->diffForHumans()"
+        :user-registered="$log->user->created_at->diffForHumans()"
+    />
 
     @php
     $time = "<time datetime=\"{$log->created_at->format('Y-m-d H:i:s')}\" data-toggle=\"tooltip\" title=\"{$log->created_at->format('Y-m-d H:i:s')}\">{$log->created_at->diffForHumans()}</time>";
     @endphp
 
-    {{-- Category Changed --}}
+    {{-- BlogCategory Changed --}}
     @if ($log->type == 'category')
         added the
-        <a href="{{ $log->newCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
+        <a href="{{ $log->newCategory->show_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->newCategory->color }};">
             @if (!is_null($log->newCategory->icon))
-                <i class="{{ $log->newCategory->icon }}"></i>
+                <x-icon name="{{ $log->newCategory->icon }}" />
             @endif
             {{ $log->newCategory->title }}
         </a>
         and removed
-        <a href="{{ $log->oldCategory->category_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
+        <a href="{{ $log->oldCategory->show_url }}" class="px-1 rounded text-white" style="background-color: {{ $log->oldCategory->color }};">
             @if (!is_null($log->oldCategory->icon))
-                <i class="{{ $log->oldCategory->icon }}"></i>
+                <x-icon name="{{ $log->oldCategory->icon }}" />
             @endif
             {{ $log->oldCategory->title }}
         </a>
@@ -75,16 +72,13 @@
     {{-- Post Deleted --}}
     @elseif ($log->type == 'deleted')
         deleted a comment from
-        <discuss-user
-            :user="{{ json_encode([
-                'avatar_small'=> $log->postUser->avatar_small,
-                'profile_url' => $log->postUser->profile_url,
-                'full_name' => $log->postUser->full_name
-            ]) }}"
-            :created-at="{{ var_export($log->postUser->created_at->diffForHumans()) }}"
-            :last-login="{{ var_export($log->postUser->last_login->diffForHumans()) }}"
-            :background-color="{{ var_export($log->postUser->avatar_primary_color) }}">
-        </discuss-user>
+        <x-user.user
+            :user-name="$log->postUser->full_name"
+            :user-avatar-small="$log->postUser->avatar_small"
+            :user-profile="$log->postUser->show_url"
+            :user-last-login="$log->postUser->last_login_date->diffForHumans()"
+            :user-registered="$log->postUser->created_at->diffForHumans()"
+        />
 
         {!! $time !!}
     @endif

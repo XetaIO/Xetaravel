@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -9,14 +12,16 @@ use Xety\Breadcrumbs\Breadcrumbs;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * The current Breadcrumbs instance.
      *
-     * @var \Xety\Breadcrumbs\Breadcrumbs
+     * @var Breadcrumbs
      */
-    protected $breadcrumbs;
+    protected Breadcrumbs $breadcrumbs;
 
     /**
      * Constructor.
@@ -27,7 +32,7 @@ class Controller extends BaseController
             // Whether to enable or not the `data-position` attribute.
             'position' => false,
             // The divider symbol between the crumbs or `null` to disable it.
-            'divider' => '<i class="fa-solid fa-chevron-right mx-2"></i>',
+            'divider' => '<svg class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg>',
             // The DOM-Element used to generate the divider element.
             'dividerElement' => 'li',
             // Classes applied to the item `dividerElement` element.
@@ -38,7 +43,7 @@ class Controller extends BaseController
             'listRootElement' => 'nav',
             // Classes applied to the main `listElement` container element.
             'listRootElementClasses' => [
-                'flex border border-gray-200 p-3 px-5 rounded-lg dark:bg-base-300 dark:border-gray-700 truncate'
+                'flex p-3 px-5 rounded-lg bg-base-100 dark:bg-base-300 shadow-md mb-3 truncate'
             ],
             // The DOM-Element used to generate the container element.
             'listElement' => 'ol',
@@ -62,9 +67,12 @@ class Controller extends BaseController
             'listActiveElement' => 'li',
             // Classes applied to the active item `listActiveElement` element.
             'listActiveElementClasses' => [
-                'text-sm text-gray-400 inline-flex items-center dark:text-gray-500 ml-1 font-medium'
+                'text-sm text-gray-400 inline-flex items-center ml-1 font-medium'
             ]
         ]);
-        $this->breadcrumbs->addCrumb('<i class="fa-solid fa-house-chimney mr-2"></i> Home', route('page.index'));
+        $this->breadcrumbs->addCrumb(
+            '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> Home',
+            route('page.index')
+        );
     }
 }

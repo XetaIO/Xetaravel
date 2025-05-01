@@ -16,7 +16,7 @@
 
 <section class="lg:container mx-auto  overflow-hidden">
     <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl font-xetaravel">
+        <h1 class="text-4xl">
             {{ $category->title }}
         </h1>
         <p class="text-gray-400 dark:text-gray-500">

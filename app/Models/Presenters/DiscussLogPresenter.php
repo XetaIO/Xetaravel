@@ -1,6 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Presenters;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Xetaravel\Events\Discuss\CategoryWasChangedEvent;
 use Xetaravel\Events\Discuss\ConversationWasLockedEvent;
 use Xetaravel\Events\Discuss\ConversationWasPinnedEvent;
@@ -14,70 +18,55 @@ trait DiscussLogPresenter
     /**
      * Get the type related to the Event.
      *
-     * @return string
+     * @return Attribute
      */
-    public function getTypeAttribute()
+    protected function type(): Attribute
     {
-        switch ($this->event_type) {
-            case CategoryWasChangedEvent::class:
-                return 'category';
-                break;
-            case TitleWasChangedEvent::class:
-                return 'title';
-                break;
-            case ConversationWasLockedEvent::class:
-                return 'locked';
-                break;
-            case ConversationWasPinnedEvent::class:
-                return 'pinned';
-                break;
-            case PostWasDeletedEvent::class:
-                return 'deleted';
-                break;
-            default:
-                return 'unknown';
-        }
+        return Attribute::make(
+            get: fn () => match ($this->event_type) {
+                CategoryWasChangedEvent::class => 'category',
+                TitleWasChangedEvent::class => 'title',
+                ConversationWasLockedEvent::class => 'locked',
+                ConversationWasPinnedEvent::class => 'pinned',
+                PostWasDeletedEvent::class => 'deleted',
+                default => 'unknown',
+            }
+        );
     }
 
     /**
      * Get the user related to the deleted post.
      *
-     * @return null|\Xetaravel\Models\User
+     * @return Attribute
      */
-    public function getPostUserAttribute()
+    protected function postUser(): Attribute
     {
-        if ($this->event_type !== PostWasDeletedEvent::class) {
-            return null;
-        }
-
-        return User::find($this->data['post_user_id']);
+        return Attribute::make(
+            get: fn () => $this->event_type !== PostWasDeletedEvent::class ? null : User::find($this->data['post_user_id'])
+        );
     }
 
     /**
      * Get the old category.
      *
-     * @return null|\Xetaravel\Models\DiscussCategory
+     * @return Attribute
      */
-    public function getOldCategoryAttribute()
+    protected function oldCategory(): Attribute
     {
-        if ($this->event_type !== CategoryWasChangedEvent::class) {
-            return null;
-        }
-
-        return DiscussCategory::find($this->data['old']);
+        return Attribute::make(
+            get: fn () => $this->event_type !== CategoryWasChangedEvent::class ? null : DiscussCategory::find($this->data['old'])
+        );
     }
 
     /**
      * Get the new category.
      *
-     * @return null|\Xetaravel\Models\DiscussCategory
+     * @return Attribute
      */
-    public function getNewCategoryAttribute()
+    protected function newCategory(): Attribute
     {
-        if ($this->event_type !== CategoryWasChangedEvent::class) {
-            return null;
-        }
-
-        return DiscussCategory::find($this->data['new']);
+        return Attribute::make(
+            get: fn () => $this->event_type !== CategoryWasChangedEvent::class ? null : DiscussCategory::find($this->data['new'])
+        );
     }
 }

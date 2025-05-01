@@ -1,9 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Blog;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Xetaravel\Http\Controllers\Controller;
-use Xetaravel\Models\Article;
-use Illuminate\Http\Request;
+use Xetaravel\Models\BlogArticle;
 
 class ArticleController extends Controller
 {
@@ -24,44 +30,41 @@ class ArticleController extends Controller
     /**
      * Show the list of all articles.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View|Application|\Illuminate\View\View|object
      */
     public function index()
     {
-        $articles = Article::with('category', 'user')
+        $articles = BlogArticle::with('category', 'user')
             ->orderByDesc('created_at')
             ->paginate(config('xetaravel.pagination.blog.article_per_page'));
 
-        return view('Blog::article.index', ['articles' => $articles, 'breadcrumbs' => $this->breadcrumbs]);
+        return view('Blog.article.index', ['articles' => $articles, 'breadcrumbs' => $this->breadcrumbs]);
     }
 
     /**
      * Show the article by his id.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|RedirectResponse|\Illuminate\View\View|object|View
      */
-    public function show(Request $request, $slug, $id)
+    public function show(string $slug, int $id)
     {
-        $article = Article::with('category', 'user', 'comments')
+        $article = BlogArticle::with('category', 'user')
             ->where('id', $id)
             ->first();
 
         if (is_null($article)) {
             return redirect()
                 ->route('blog.article.index')
-                ->with('danger', 'This article doesn\'t exist or has been deleted !');
+                ->error('This article does not exist or has been deleted !');
         }
-
-        $comments = $article->comments()->paginate(config('xetaravel.pagination.blog.comment_per_page'));
-        $comments->load('user');
 
         $breadcrumbs = $this->breadcrumbs->addCrumb('<svg xmlns="http://www.w3.org/2000/svg" fill="none"' .
         ' viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2"><path ' .
         'stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125' .
         ' 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621' .
         ' 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0' .
-        ' 00-9-9z" /></svg> Article : ' . e($article->title), $article->article_url);
+        ' 00-9-9z" /></svg> Article : ' . e($article->title), $article->show_url);
 
-        return view('Blog::article.show', compact('article', 'comments', 'breadcrumbs'));
+        return view('Blog.article.show', compact('article', 'breadcrumbs'));
     }
 }

@@ -1,42 +1,23 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Events\Discuss;
 
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Xetaravel\Models\DiscussConversation;
 
-class TitleWasChangedEvent
+class TitleWasChangedEvent implements ShouldDispatchAfterCommit
 {
-    /**
-     * The conversation instance.
-     *
-     * @var \Xetaravel\Models\DiscussConversation
-     */
-    public $conversation;
+    use Dispatchable;
+    use SerializesModels;
 
-    /**
-     * The new title.
-     *
-     * @var string
-     */
-    public $title;
-
-    /**
-     * The old title.
-     *
-     * @var string
-     */
-    public $oldTitle;
-
-    /**
-     * Create a new event instance.
-     *
-     * @param \Xetaravel\Models\DiscussConversation $conversation
-     * @param string $title
-     * @param string $oldTitle
-     */
-    public function __construct(DiscussConversation $conversation, string $title, string $oldTitle)
-    {
-        $this->conversation = $conversation;
-        $this->title = $title;
-        $this->oldTitle = $oldTitle;
+    public function __construct(
+        public DiscussConversation $discussConversation,
+        public string $title,
+        public string $oldTitle
+    ) {
     }
 }

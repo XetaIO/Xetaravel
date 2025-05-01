@@ -1,55 +1,79 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
-|
-*/
+declare(strict_types=1);
 
-$app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Session\TokenMismatchException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
-/*
-|--------------------------------------------------------------------------
-| Bind Important Interfaces
-|--------------------------------------------------------------------------
-|
-| Next, we need to bind some important interfaces into the container so
-| we will be able to resolve them when needed. The kernels serve the
-| incoming requests to this application from both the web and CLI.
-|
-*/
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        using: function () {
+            Route::middleware('web')
+                ->group(function () {
+                    require base_path('routes/web.php');
+                    require base_path('routes/admin.php');
+                    require base_path('routes/discuss.php');
+                });
+        },
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            Xetaravel\Http\Middleware\RedirectIfBanished::class,
+            Xetaio\IpTraceable\Http\Middleware\IpTraceable::class,
+            Xetaravel\Http\Middleware\PackagistVersion::class
+        ]);
 
-$app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    Xetaravel\Http\Kernel::class
-);
+        $middleware->alias([
+            'auth' => Xetaravel\Http\Middleware\Authenticate::class,
+            'discuss.maintenance' => Xetaravel\Http\Middleware\DiscussMaintenance::class,
+            'display' => Xetaravel\Http\Middleware\EnablePublishedScopeMiddleware::class,
 
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    Xetaravel\Console\Kernel::class
-);
+            // Packages Middleware
+            'role' => Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
 
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Xetaravel\Exceptions\Handler::class
-);
+        $exceptions->renderable(function (Exception $e) {
+            // Error 404 model not found
+            if ($e->getPrevious() instanceof ModelNotFoundException) {
+                return Redirect::route('page.index')
+                    ->with('toasts', [[
+                        'type' => 'error',
+                        'duration' => 4000,
+                        'message' => "This data does not exist or has been deleted!"
+                    ]]);
+            };
 
-/*
-|--------------------------------------------------------------------------
-| Return The Application
-|--------------------------------------------------------------------------
-|
-| This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
-| from the actual running of the application and sending responses.
-|
-*/
+            // Error 419 csrf token expiration error
+            if ($e->getPrevious() instanceof TokenMismatchException) {
+                return Redirect::back()
+                    ->error("It took you too long to validate the form! It's time for a coffee!");
+            };
 
-return $app;
+            // Error 403 Access unauthorized
+            if ($e->getPrevious() instanceof AuthorizationException || $e instanceof UnauthorizedException) {
+                if (Auth::check() && Auth::user()->hasRole('banished')) {
+                    return redirect()
+                        ->route('page.banished');
+                }
+
+                return Redirect::route('page.index')
+                    ->error("You are not authorized to access this page!");
+            }
+        });
+    })
+    ->withSchedule(function (Schedule $schedule) {
+        // Leaderboard Update
+        $schedule->command('leaderboard:update')->weekly()->runInBackground();
+    })->create();

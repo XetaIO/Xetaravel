@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12 gap-6 mb-7">
-    <div class="col-span-12 lg:col-span-6 mb-2">
+    <div class="col-span-12 lg:col-span-6 mb-2 bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-5">
         <div class="text-2xl">
             Visitors Analytics
         </div>
@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 lg:col-span-6 mb-2">
+    <div class="col-span-12 lg:col-span-6 mb-2 bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-5">
         <div class="text-2xl">
             Browsers
         </div>
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 lg:col-span-6 mb-2">
+    <div class="col-span-12 lg:col-span-6 mb-2 bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-5">
         <div class="text-2xl">
             Mobile Branding Analytics
         </div>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="col-span-12 lg:col-span-6 mb-2">
+    <div class="col-span-12 lg:col-span-6 mb-2 bg-base-100 dark:bg-base-300 shadow-md rounded-lg p-5">
         <div class="text-2xl">
             Operating System Analytics
         </div>

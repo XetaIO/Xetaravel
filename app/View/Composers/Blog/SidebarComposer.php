@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\View\Composers\Blog;
 
 use Illuminate\View\View;
 use Xetaravel\Models\Repositories\ArticleRepository;
-use Xetaravel\Models\Repositories\CategoryRepository;
+use Xetaravel\Models\Repositories\BlogCategoryRepository;
 use Xetaravel\Models\Repositories\UserRepository;
 
 class SidebarComposer
@@ -11,13 +14,14 @@ class SidebarComposer
     /**
      * Bind data to the view.
      *
-     * @param  \Illuminate\View\View  $view
+     * @param View $view
+     *
      * @return void
      */
-    public function compose(View $view)
+    public function compose(View $view): void
     {
         $articles = ArticleRepository::sidebar();
-        $categories = CategoryRepository::sidebar();
+        $categories = BlogCategoryRepository::sidebar();
         $users = UserRepository::sidebar();
 
         $view->with(['articles' => $articles, 'categories' => $categories, 'users' => $users]);

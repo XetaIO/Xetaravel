@@ -1,12 +1,16 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
-use Xetaravel\Models\Article;
-use Xetaravel\Models\Comment;
+use Xetaravel\Models\BlogArticle;
+use Xetaravel\Models\BlogComment;
 use Xetaravel\Models\DiscussPost;
+use Xetaravel\Models\Model;
 
 class MentionNotification extends Notification implements ShouldQueue
 {
@@ -15,18 +19,53 @@ class MentionNotification extends Notification implements ShouldQueue
     /**
      * The model instance.
      *
-     * @var \Xetaravel\Models\Model
+     * @var Model
      */
-    public $model;
+    public Model $model;
 
     /**
      * Create a new notification instance.
      *
-     * @param \Xetaravel\Models\Model $model
+     * @param Model $model
      */
-    public function __construct($model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Parse the instance of the model and build the array.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function parseInstance(array $data = []): array
+    {
+        $model = $this->model;
+
+        switch (true) {
+            case $model instanceof DiscussPost:
+                $data['message'] = '<strong>@%s</strong> has mentioned your name in his post !';
+                $data['link'] = $model->post_url;
+
+                break;
+
+            case $model instanceof BlogComment:
+                $data['message'] = '<strong>@%s</strong> has mentioned your name in his comment !';
+                $data['link'] = $model->comment_url;
+
+                break;
+
+            case $model instanceof BlogArticle:
+                $data['message'] = '<strong>@%s</strong> has mentioned your name in his article !';
+                $data['link'] = $model->show_url;
+
+                break;
+        }
+        $data['message'] = sprintf($data['message'], $model->user->username);
+
+        return $data;
     }
 
     /**
@@ -36,7 +75,7 @@ class MentionNotification extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function via($notifiable): array
+    public function via(mixed $notifiable): array
     {
         return ['database'];
     }
@@ -48,49 +87,8 @@ class MentionNotification extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function toDatabase($notifiable): array
+    public function toDatabase(mixed $notifiable): array
     {
         return $this->parseInstance(['type' => 'mention']);
-    }
-
-    /**
-     * Parse the instance of the model and build the array.
-     *
-     * @param array $data
-     *
-     * @return array
-     */
-    protected function parseInstance(array $data = [])
-    {
-        $model = $this->model;
-
-        switch (true) {
-            case $model instanceof DiscussPost:
-                $data['message'] = '<strong>@%s</strong> has mentionned your name in his post !';
-                $data['link'] = $model->post_url;
-
-                break;
-
-            case $model instanceof Comment:
-                $data['message'] = '<strong>@%s</strong> has mentionned your name in his comment !';
-                $data['link'] = $model->comment_url;
-
-                break;
-
-            case $model instanceof Article:
-                $data['message'] = '<strong>@%s</strong> has mentionned your name in his article !';
-                $data['link'] = $model->article_url;
-
-                break;
-
-            default:
-                $data['message'] = 'Unknown mention.';
-                $data['link'] = route('users.notification.index');
-
-                break;
-        }
-        $data['message'] = sprintf($data['message'], $model->user->username);
-
-        return $data;
     }
 }

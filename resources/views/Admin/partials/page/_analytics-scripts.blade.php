@@ -1,171 +1,133 @@
 @push('scripts')
-<script type="text/javascript">
+    @vite('resources/js/chart.js')
 
-    // Visitors
-    var visitorsData = [];
-    var dataset1 = [];
-    var dataset2 = [];
-    @foreach($visitorsData->rows as $row)
-        visitorsData.push("{{ $row[0]->toDateString() }}");
-        dataset1.push("{{ $row[1] }}");
-        dataset2.push("{{ $row[2] }}");
-    @endforeach
-
-    new Chart(
-        document.getElementById('visitors'),
-        {
-        type: 'line',
-        data: {
-            labels: visitorsData,
-            datasets: [
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Visitors
+            new Chart(
+                document.getElementById('visitors'),
                 {
-                    label: 'Visitors',
-                    data: dataset1
-                },
-                {
-                    label: 'Page Views',
-                    data: dataset2
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-        }
-    );
-
-    // Browsers
-    var browsersLabels = [];
-    var browsersData = [];
-    var browsersColors = [];
-    @foreach ($browsersData->rows as $browser)
-        browsersLabels.push("{{ $browser[0] }}");
-        browsersData.push("{{ $browser[1] }}");
-        browsersColors.push("{{ $browser[3] }}");
-    @endforeach
-
-    new Chart(
-        document.getElementById('browsers'),
-        {
-        type: 'doughnut',
-        data: {
-            labels: browsersLabels,
-            datasets: [
-                {
-                    label: 'Browsers',
-                    data: browsersData,
-                    backgroundColor: browsersColors
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-        }
-    );
-
-    // Mobiles Devices
-    var devicesLabels = [];
-    var devicesApple = [];
-    var devicesSamsung = [];
-    var devicesGoogle = [];
-    var devicesHTC = [];
-    var devicesMicrosoft = [];
-
-    @foreach ($devicesGraph as $row)
-        devicesLabels.push("{{ $row['period'] }}");
-        devicesApple.push("{{ $row['Apple'] }}");
-        devicesSamsung.push("{{ $row['Samsung'] }}");
-        devicesGoogle.push("{{ $row['Google'] }}");
-        devicesHTC.push("{{ $row['HTC'] }}");
-        devicesMicrosoft.push("{{ $row['Microsoft'] }}");
-    @endforeach
-
-    new Chart(
-        document.getElementById('mobilesbranding'),
-        {
-        type: 'line',
-        data: {
-            labels: devicesLabels,
-            datasets: [
-                {
-                    label: 'Apple',
-                    data: devicesApple
-                },
-                {
-                    label: 'Samsung',
-                    data: devicesSamsung
-                },
-                {
-                    label: 'Google',
-                    data: devicesGoogle
-                },
-                {
-                    label: 'HTC',
-                    data: devicesHTC
-                },
-                {
-                    label: 'Microsoft',
-                    data: devicesMicrosoft
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-        }
-    );
-
-    // Operating system
-    var operatingLabels = [];
-    var operatingWindows = [];
-    var operatingMacintosh = [];
-    var operatingLinux = [];
-
-    @foreach ($operatingSystemGraph as $row)
-        operatingLabels.push("{{ $row['period'] }}");
-        operatingWindows.push("{{ $row['Windows'] }}");
-        operatingMacintosh.push("{{ $row['Macintosh'] }}");
-        operatingLinux.push("{{ $row['Linux'] }}");
-    @endforeach
-
-    new Chart(
-        document.getElementById('operatingsystem'),
-        {
-            type: 'bar',
-            data: {
-                labels: operatingLabels,
-                datasets: [
-                    {
-                        label: 'Windows',
-                        data: operatingWindows
+                    type: 'line',
+                    data: {
+                        labels: @json($visitorsData->pluck('date')),
+                        datasets: [
+                            {
+                                label: 'Visitors',
+                                data: @json($visitorsData->pluck('sessions'))
+                            },
+                            {
+                                label: 'Page Views',
+                                data: @json($visitorsData->pluck('screenPageViews'))
+                            }
+                        ]
                     },
-                    {
-                        label: 'Macintosh',
-                        data: operatingMacintosh
-                    },
-                    {
-                        label: 'Linux',
-                        data: operatingLinux
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
                     }
                 }
-            }
-        }
-    );
-</script>
+            );
+
+            // Mobiles Devices
+            new Chart(
+                document.getElementById('mobilesbranding'),
+                {
+                    type: 'line',
+                    data: {
+                        labels: @json($devicesGraph->pluck('period')),
+                        datasets: [
+                            {
+                                label: 'Apple',
+                                data: @json($devicesGraph->pluck('Apple'))
+                            },
+                            {
+                                label: 'Samsung',
+                                data: @json($devicesGraph->pluck('Samsung'))
+                            },
+                            {
+                                label: 'Google',
+                                data: @json($devicesGraph->pluck('Google'))
+                            },
+                            {
+                                label: 'HTC',
+                                data: @json($devicesGraph->pluck('HTC'))
+                            },
+                            {
+                                label: 'Huawei',
+                                data: @json($devicesGraph->pluck('Huawei'))
+                            },
+                            {
+                                label: 'Microsoft',
+                                data: @json($devicesGraph->pluck('Microsoft'))
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+            );
+
+            // Browsers
+            new Chart(
+                document.getElementById('browsers'),
+                {
+                    type: 'doughnut',
+                    data: {
+                        labels: @json($browsersData->map(fn ($data) => $data['browser'])),
+                        datasets: [
+                            {
+                                label: 'Browsers',
+                                data: @json($browsersData->map(fn ($data) => $data['screenPageViews'])),
+                                backgroundColor: @json($browsersData->map(fn ($data) => $data['color']))
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+            );
+
+            // Operating system
+            new Chart(
+                document.getElementById('operatingsystem'),
+                {
+                    type: 'bar',
+                    data: {
+                        labels: @json($operatingSystemGraph->pluck('period')),
+                        datasets: [
+                            {
+                                label: 'Windows',
+                                data: @json($operatingSystemGraph->pluck('Windows'))
+                            },
+                            {
+                                label: 'Macintosh',
+                                data: @json($operatingSystemGraph->pluck('Macintosh'))
+                            },
+                            {
+                                label: 'Linux',
+                                data: @json($operatingSystemGraph->pluck('Linux'))
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                stacked: true,
+                            },
+                            y: {
+                                stacked: true
+                            }
+                        }
+                    }
+                }
+            );
+
+        });
+    </script>
 @endpush

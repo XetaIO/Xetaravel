@@ -1,14 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\View\View;
+use Masmerise\Toaster\Toaster;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Xetaravel\Events\Badges\RegisterEvent;
 use Xetaravel\Http\Controllers\Controller;
+use Xetaravel\Models\User;
 
 class LoginController extends Controller
 {
@@ -29,34 +35,83 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected string $redirectTo = '/';
 
     /**
      * The maximum number of attempts to allow.
      *
      * @return int
      */
-    protected $maxAttempts = 5;
+    protected int $maxAttempts = 5;
 
     /**
      * The number of minutes to throttle for.
      *
      * @return int
      */
-    protected $decayMinutes = 10;
+    protected int $decayMinutes = 10;
 
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->only('logout');
+    }
+
+    /**
+     * Get the failed login response instance.
+     *
+     * @param Request $request The request object.
+     *
+     * @return RedirectResponse
+     */
+    protected function sendFailedLoginResponse(Request $request): RedirectResponse
+    {
+        return redirect()
+            ->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([
+                $this->username() => trans('auth.failed'),
+                'password' => trans('auth.failed')
+            ]);
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param Request $request The request object.
+     * @param User $user The user that has been logged in.
+     *
+     * @return void
+     */
+    protected function authenticated(Request $request, User $user)
+    {
+        event(new RegisterEvent($user));
+
+        Toaster::success("Welcome back <b>{$user->username}</b> !  You're successfully connected !");
+    }
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/')
+            ->success('Thanks for your visit. See you soon !');
     }
 
     /**
      * Show the application's login form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showLoginForm(): View
     {
@@ -66,14 +121,24 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @param Request $request
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @return Response
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function login(Request $request)
     {
         $this->validateLogin($request);
+
+        // Check if the login is not disabled, if yes check if the user is allowed to bypass it.
+        $user = User::where($this->username(), $request->{$this->username()})->first();
+
+        if (!settings('app_login_enabled') && !$user->hasPermissionTo('bypass login')) {
+            return redirect('/')
+                ->error('The login system is currently disabled, please try again later.');
+        }
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -86,17 +151,13 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            if ($request->user()->hasVerifiedEmail()) {
-                return $this->sendLoginResponse($request);
+            if (!$request->user()->hasVerifiedEmail()) {
+                $this->logout($request);
+
+                return redirect(route('auth.verification.notice', base64_encode($user->getEmailForVerification())));
             }
 
-            $user = $request->user()->getKey();
-
-            $this->logout($request, true);
-
-            return redirect(route('users.auth.verification.notice', base64_encode($user)));
-
-            //return $this->sendLoginResponse($request);
+            return $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -105,59 +166,5 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-    }
-
-    /**
-     * Get the failed login response instance.
-     *
-     * @param \Illuminate\Http\Request $request The request object.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function sendFailedLoginResponse(Request $request): RedirectResponse
-    {
-        return redirect()
-            ->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors([
-                $this->username() => Lang::get('auth.failed'),
-                'password' => Lang::get('auth.failed')
-            ]);
-    }
-
-    /**
-     * Log the user out of the application.
-     *
-     * @param \Illuminate\Http\Request $request The request object.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function logout(Request $request): RedirectResponse
-    {
-        $this->guard()->logout();
-
-        $request->session()->flush();
-        $request->session()->regenerate();
-
-        return redirect('/')
-            ->with('success', 'Thanks for your visit. See you soon !');
-    }
-
-    /**
-     * The user has been authenticated.
-     *
-     * @param \Illuminate\Http\Request $request The request object.
-     * @param \Xetaravel\Models\User $user The user that has been logged in.
-     *
-     * @return void
-     */
-    protected function authenticated(Request $request, $user)
-    {
-        event(new RegisterEvent($user));
-
-        $request->session()->flash(
-            'success',
-            'Welcome back <strong>' . e($user->username) . '</strong>! You\'re successfully connected !'
-        );
     }
 }

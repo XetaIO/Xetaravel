@@ -1,13 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 use Xetaravel\Http\Controllers\Controller;
-use Xetaravel\Models\Validators\PasswordResetValidator;
+use Xetaravel\Http\Requests\Password\ResetRequest;
 
 class ForgotPasswordController extends Controller
 {
@@ -28,13 +30,27 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware('guest');
+    }
+
+    /**
+     * Get the response for a successful password reset link.
+     *
+     * @return RedirectResponse
+     */
+    protected function sendResetLinkResponse(): RedirectResponse
+    {
+        return redirect()
+            ->route('auth.login')
+            ->success('We have e-mailed your password reset link!');
     }
 
     /**
      * Display the form to request a password reset link.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showLinkRequestForm(): View
     {
@@ -44,37 +60,23 @@ class ForgotPasswordController extends Controller
     /**
      * Send a reset link to the given user.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ResetRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function sendResetLinkEmail(Request $request): RedirectResponse
+    public function sendResetLinkEmail(ResetRequest $request): RedirectResponse
     {
-        PasswordResetValidator::validateEmail($request->all())->validate();
+        $request->validated();
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
         // need to show to the user. Finally, we'll send out a proper response.
         $response = $this->broker()->sendResetLink(
-            $request->only('email')
+            $this->credentials($request)
         );
 
-        return $response == Password::RESET_LINK_SENT
-                    ? $this->sendResetLinkResponse($response)
+        return $response === Password::RESET_LINK_SENT
+                    ? $this->sendResetLinkResponse()
                     : $this->sendResetLinkFailedResponse($request, $response);
-    }
-
-    /**
-     * Get the response for a successful password reset link.
-     *
-     * @param string $response
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function sendResetLinkResponse($response): RedirectResponse
-    {
-        return redirect()
-            ->route('page.index')
-            ->with('success', 'We have e-mailed your password reset link!');
     }
 }

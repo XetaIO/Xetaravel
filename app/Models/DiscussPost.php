@@ -1,19 +1,26 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
-use Eloquence\Behaviours\CountCache\Countable;
-use Illuminate\Support\Facades\Auth;
+use Eloquence\Behaviours\CountCache\CountedBy;
+use Eloquence\Behaviours\CountCache\HasCounts;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Xetaio\Mentions\Models\Traits\HasMentionsTrait;
 use Xetaravel\Models\Gates\FloodGate;
 use Xetaravel\Models\Presenters\DiscussPostPresenter;
-use Xetaravel\Models\Repositories\DiscussPostRepository;
+use Xetaravel\Observers\DiscussPostObserver;
 
+#[ObservedBy([DiscussPostObserver::class])]
 class DiscussPost extends Model
 {
-    use Countable,
-        DiscussPostPresenter,
-        FloodGate,
-        HasMentionsTrait;
+    use DiscussPostPresenter;
+    use FloodGate;
+    use HasCounts;
+    use HasMentionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +31,7 @@ class DiscussPost extends Model
         'user_id',
         'conversation_id',
         'content',
+        'is_solved',
         'is_edited'
     ];
 
@@ -38,69 +46,22 @@ class DiscussPost extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * The attributes that should be cast.
      */
-    protected $dates = [
-        'edited_at'
-    ];
-
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        // Set the user id to the new post before saving it.
-        static::creating(function ($model) {
-            $model->user_id = Auth::id();
-        });
-
-        static::deleting(function ($model) {
-            $conversation = $model->conversation;
-
-            if ($conversation->first_post_id == $model->getKey()) {
-                $conversation->delete();
-            }
-
-            if ($conversation->last_post_id == $model->getKey()) {
-                $previousPost = DiscussPostRepository::findPreviousPost($model, true);
-
-                $conversation->last_post_id = !is_null($previousPost) ? $previousPost->getKey() : null;
-            }
-
-            if ($conversation->solved_post_id == $model->getKey()) {
-                $conversation->solved_post_id = null;
-                $conversation->is_solved = false;
-            }
-
-            $conversation->save();
-        });
-    }
-
-    /**
-     * Return the count cache configuration.
-     *
-     * @return array
-     */
-    public function countCaches(): array
+    protected function casts(): array
     {
         return [
-            'discuss_post_count' => [User::class, 'user_id', 'id'],
-            'post_count' => [DiscussConversation::class, 'conversation_id', 'id']
+            'is_edited' => 'boolean'
         ];
     }
 
     /**
      * Get the user that owns the post.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user()
+    #[CountedBy(as: 'discuss_post_count')]
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)->withTrashed();
     }
@@ -108,9 +69,10 @@ class DiscussPost extends Model
     /**
      * Get the conversation that owns the post.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function conversation()
+    #[CountedBy(as: 'post_count')]
+    public function conversation(): BelongsTo
     {
         return $this->belongsTo(DiscussConversation::class);
     }
@@ -118,9 +80,9 @@ class DiscussPost extends Model
     /**
      * Get the user that edited the post.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function editedUser()
+    public function editedUser(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'edited_user_id')->withTrashed();
     }

@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Listeners\Subscribers;
 
-use Xetaravel\Events\Rubies\PostWasSolvedEvent;
+use Illuminate\Events\Dispatcher;
+use Xetaravel\Events\Discuss\PostWasSolvedEvent;
 use Xetaravel\Models\Ruby;
-use Xetaravel\Models\User;
 
 class RubySubscriber
 {
@@ -12,7 +15,7 @@ class RubySubscriber
      *
      * @var array
      */
-    protected $rubies = [
+    protected array $rubies = [
         PostWasSolvedEvent::class => 100
     ];
 
@@ -21,42 +24,9 @@ class RubySubscriber
      *
      * @var array
      */
-    protected $events = [
-        PostWasSolvedEvent::class => 'postWasSolved',
+    protected array $events = [
+        PostWasSolvedEvent::class => 'handlePostWasSolved',
     ];
-
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param Illuminate\Events\Dispatcher $events
-     *
-     * @return void
-     */
-    public function subscribe($events)
-    {
-        foreach ($this->events as $event => $action) {
-            $events->listen($event, RubySubscriber::class . '@' . $action);
-        }
-    }
-
-    /**
-     * Handle a PostWasSolved event.
-     *
-     * @param \Xetaravel\Events\Rubies\PostWasSolvedEvent $event The event that was fired.
-     *
-     * @return bool
-     */
-    public function postWasSolved(PostWasSolvedEvent $event)
-    {
-        $data = [
-            'user_id' => $event->post->user_id,
-            'obtainable_id' => $event->post->getKey(),
-            'obtainable_type' => get_class($event->post),
-            'event_type' => PostWasSolvedEvent::class
-        ];
-
-        return $this->create($data);
-    }
 
     /**
      * Create the ruby.
@@ -65,7 +35,7 @@ class RubySubscriber
      *
      * @return bool
      */
-    protected function create(array $data) : bool
+    protected function create(array $data): bool
     {
         if (!isset($data['data'])) {
             $data['data'] = [];
@@ -74,10 +44,43 @@ class RubySubscriber
 
         switch ($ruby->event_type) {
             case PostWasSolvedEvent::class:
-                    $ruby->user->increment('rubies_total', $this->rubies[PostWasSolvedEvent::class]);
+                $ruby->user->increment('rubies_total', $this->rubies[PostWasSolvedEvent::class]);
                 break;
         }
 
         return !(is_null($ruby));
+    }
+
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param Dispatcher $events
+     *
+     * @return void
+     */
+    public function subscribe(Dispatcher $events): void
+    {
+        foreach ($this->events as $event => $action) {
+            $events->listen($event, self::class . '@' . $action);
+        }
+    }
+
+    /**
+     * Handle a PostWasSolved event.
+     *
+     * @param PostWasSolvedEvent $event The event that was fired.
+     *
+     * @return bool
+     */
+    public function handlePostWasSolved(PostWasSolvedEvent $event): bool
+    {
+        $data = [
+            'user_id' => $event->discussPost->user_id,
+            'obtainable_id' => $event->discussPost->getKey(),
+            'obtainable_type' => get_class($event->discussPost),
+            'event_type' => PostWasSolvedEvent::class
+        ];
+
+        return $this->create($data);
     }
 }

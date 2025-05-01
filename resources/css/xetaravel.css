@@ -1,0 +1,331 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@plugin "daisyui" {
+    themes: light --default, dark;
+}
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-primary: #f4645f;
+    --color-base-content: #48566a;
+    --color-primary-content: #ffffff;
+}
+@plugin "daisyui/theme" {
+    name: "dark";
+    --color-primary: #f4645f;
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@font-face {
+    font-family: 'Miriam Libre';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../../resources/css/fonts/miriam_libre.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Miriam Libre';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../../resources/css/fonts/miriam_libre.woff2') format('woff2');
+}
+
+@theme {
+    --font-code: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+    --tw-prose-pre-bg: var(--color-base-content);
+    --font-sans: "Miriam Libre";
+}
+
+@theme {
+    --animate-ringing: ringing 2s ease 1s infinite;
+
+    @keyframes ringing {
+        0% { transform: rotate(-15deg); }
+        2% { transform: rotate(15deg); }
+        4%, 12% { transform: rotate(-18deg); }
+        6%, 14% { transform: rotate(18deg); }
+        8% { transform: rotate(-22deg); }
+        10% { transform: rotate(22deg); }
+        16% { transform: rotate(-12deg); }
+        18% { transform: rotate(12deg); }
+        20% { transform: rotate(0deg); }
+    }
+}
+
+.menu {
+    --menu-active-fg: var(--color-white);
+    --menu-active-bg: var(--color-primary);
+}
+
+pre {
+    @apply  dark:bg-base-100 bg-neutral-800;
+}
+
+.overlay:after {
+    @apply absolute top-0 left-0 w-full h-full bg-[url('/images/articles/overlay.png')] bg-repeat opacity-20;
+}
+
+/**
+ * Offline
+ */
+.avatar-offline:before {
+    @apply bg-[color:var(--color-error)]
+}
+
+/**
+ * HighlightJS
+ */
+pre {
+    @apply  dark:bg-base-100 bg-neutral-800 font-code;
+}
+
+pre code {
+    font-size: 1.07em;
+    padding: 1em .5em !important;
+    font-weight: 300;
+    border-radius: 3px;
+}
+
+.hljs {
+    color: #686f79;
+    display: block;
+    overflow-x: auto;
+    padding: .5em;
+}
+
+.hljs-comment,
+.hljs-quote {
+    color: #aaa;
+    font-style: italic;
+}
+
+.token.punctuation .hljs-function .hljs-params {
+    color: inherit;
+}
+
+.hljs-params {
+    color: #e5c07b;
+}
+
+.token.variable,
+.token.variable .hljs-function .hljs-params,
+.token.this .hljs-keyword,
+.hljs-variable {
+    color: #e06c75;
+}
+
+.token.keyword,
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+    color: #c678dd;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+    color: #007698;
+}
+
+.hljs-string {
+    color: #abc306;
+}
+
+.token.keyword .hljs-function .hljs-title,
+.hljs-doctag {
+    color: #c678dd;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+    color: #26A6A6;
+}
+
+.token.function {
+    color: #26A6A6;
+}
+
+.hljs-subst {
+    font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title,
+.token.class-name,
+.token.scope {
+    color: #FF5D38;
+}
+
+.token.punctuation {
+    color: #686f79;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+    color: #22a4c9;
+    font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+    color: #aaad00;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+    color: #e83134;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+    color: #22a4c9;
+}
+
+.hljs-meta {
+    color: #db4957;
+    font-weight: bold;
+}
+
+.hljs-deletion {
+    background: #fcebec;
+}
+
+.hljs-addition {
+    background: #e5e4d1;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
+
+/**
+ * EasyMDE
+ */
+.EasyMDEContainer h1 {
+    @apply text-4xl font-bold mb-5
+}
+
+.EasyMDEContainer h2 {
+    @apply text-2xl font-bold mb-3
+}
+
+.EasyMDEContainer h3 {
+    @apply text-lg font-bold mb-3
+}
+
+.EasyMDEContainer .CodeMirror {
+    @apply bg-base-100 text-base-content
+}
+
+.EasyMDEContainer .CodeMirror {
+    @apply bg-base-100 text-base-content
+}
+
+.EasyMDEContainer .CodeMirror-cursor {
+    @apply border border-b-base-100
+}
+
+.EasyMDEContainer .editor-toolbar > button:hover, .EasyMDEContainer .editor-toolbar > .active {
+    @apply bg-base-100 text-base-content
+}
+
+/**
+ * Flatpickr
+ */
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+    @apply text-primary-content bg-primary border-primary;
+}
+
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus,
+.flatpickr-day.today:hover,
+.flatpickr-day.today:focus {
+    @apply text-primary-content bg-primary/70 border-transparent;
+}
+
+.flatpickr-day,
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.selected.startRange,
+.flatpickr-day.startRange.startRange,
+.flatpickr-day.endRange.startRange,
+.flatpickr-day.selected.endRange,
+.flatpickr-day.startRange.endRange,
+.flatpickr-day.endRange.endRange,
+.flatpickr-day.selected.startRange.endRange,
+.flatpickr-day.startRange.startRange.endRange,
+.flatpickr-day.endRange.startRange.endRange {
+    @apply rounded-sm w-[43px] h-[43px];
+}
+
+.flatpickr-months .flatpickr-prev-month svg,
+.flatpickr-months .flatpickr-next-month svg,
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    @apply fill-primary-content;
+}
+.flatpickr-current-month span.cur-month {
+    @apply font-bold text-primary-content;
+}
+
+.flatpickr-time input.flatpickr-hour,
+.flatpickr-time input.flatpickr-minute,
+.flatpickr-time input.flatpickr-second {
+    @apply font-bold;
+}
+
+.flatpickr-months .flatpickr-month,
+.flatpickr-weekdays,
+.flatpickr-current-month .flatpickr-monthDropdown-months,
+span.flatpickr-weekday {
+    @apply bg-primary text-primary-content;
+}
+
+.flatpickr-months .flatpickr-month {
+    @apply rounded-t-md;
+}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -13,6 +15,6 @@ return [
     */
     'fields' => [
         'last_login_ip' => 'last_login_ip',
-        'last_login_date' => 'last_login'
+        'last_login_date' => 'last_login_date'
     ]
 ];

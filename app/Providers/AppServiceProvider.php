@@ -1,74 +1,173 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Providers;
 
-use Illuminate\Database\Query\Builder;
+use Carbon\CarbonImmutable;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
-use Xetaravel\Models\Setting;
+use Illuminate\Validation\Rules\Password;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Xetaravel\Policies\PermissionPolicy;
+use Xetaravel\Policies\RolePolicy;
+use Xetaravel\Settings\Settings;
+use Xetaravel\View\Composers\Blog\SidebarComposer as BlogSidebarComposer;
+use Xetaravel\View\Composers\Discuss\SidebarComposer as DiscussSidebarComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Configure the application's commands.
+     */
+    private function configureCommands(): void
+    {
+        DB::prohibitDestructiveCommands(
+            $this->app->isProduction(),
+        );
+    }
+
+    /**
+     * Configure the application's dates.
+     */
+    private function configureDates(): void
+    {
+        Date::use(CarbonImmutable::class);
+    }
+
+    /**
+     * Configure the application's models.
+     */
+    private function configureModels(): void
+    {
+        Model::shouldBeStrict();
+        Gate::policy(Permission::class, PermissionPolicy::class);
+        Gate::policy(Role::class, RolePolicy::class);
+    }
+
+    /**
+     * Configure the application's passwords.
+     */
+    private function configurePasswords(): void
+    {
+        // Set default password rule for the application.
+        Password::defaults(function () {
+            $rule = Password::min(8);
+
+            return App::isProduction() || App::isLocal()
+                ? $rule->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                : $rule;
+        });
+
+        // ResetPassword
+        ResetPassword::createUrlUsing(function ($notifiable, $token) {
+            // Add `auth.` to the route to respect the namespace.
+            return url(route('auth.password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+        });
+    }
+
+    /**
+     * Configure the application's routes.
+     */
+    private function configureRoutes(): void
+    {
+        Route::pattern('id', '[0-9]+');
+    }
+
+    /**
+     * Configure the application's URLs.
+     */
+    private function configureUrls(): void
+    {
+        URL::forceScheme('https');
+    }
+
+    /**
+     * Configure the application's views.
+     */
+    private function configureViews(): void
+    {
+        View::addNamespace('Admin', base_path() . '/resources/views/Admin');
+        View::addNamespace('Blog', base_path() . '/resources/views/Blog');
+        View::addNamespace('Auth', base_path() . '/resources/views/Auth');
+        View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
+        View::composer('Blog::partials._sidebar', BlogSidebarComposer::class);
+        View::composer('Discuss::partials._sidebar', DiscussSidebarComposer::class);
+        Paginator::defaultView('vendor.pagination.tailwind');
+
+        // Pagination
+        //Paginator::defaultView('vendor.pagination.tailwind');
+
+        /**
+         * All credits from this blade directive goes to Konrad Kalemba.
+         * Just copied and modified for my very specifc use case.
+         *
+         * https://github.com/konradkalemba/blade-components-scoped-slots
+         */
+        Blade::directive('scope', function ($expression) {
+            // Split the expression by `top-level` commas (not in parentheses)
+            $directiveArguments = preg_split("/,(?![^\(\(]*[\)\)])/", $expression);
+            $directiveArguments = array_map('trim', $directiveArguments);
+
+            [$name, $functionArguments] = $directiveArguments;
+
+            /**
+             *  Slot names can`t contains dot , eg: `user.city`.
+             *  So we convert `user.city` to `user___city`
+             *
+             *  Later, on component you must replace it back.
+             */
+            $name = str_replace('.', '___', $name);
+
+            return "<?php \$__env->slot({$name}, function({$functionArguments}) use (\$__env) { ?>";
+        });
+
+        Blade::directive('endscope', function () {
+            return '<?php }); ?>';
+        });
+    }
+
+    /**
+     * Configure the application's Vite instance.
+     */
+    private function configureVite(): void
+    {
+        Vite::useAggressivePrefetching();
+    }
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        // Builder
-        Builder::macro('search', function ($field, $string) {
-            return $string ? $this->where($field, 'like', '%' . $string . '%') : $this;
-        });
-
-        // View
-        View::addNamespace('Admin', base_path() . '/resources/views/Admin');
-        View::addNamespace('Blog', base_path() . '/resources/views/Blog');
-        View::addNamespace('Auth', base_path() . '/resources/views/Auth');
-        View::addNamespace('Discuss', base_path() . '/resources/views/Discuss');
-
-        // Pagination
-        Paginator::defaultView('vendor.pagination.tailwind');
-
-        // Blade
-        Blade::directive('auth', function () {
-            return "<?php if (Auth::check()): ?>";
-        });
-        Blade::directive('endauth', function () {
-            return "<?php endif; ?>";
-        });
-
-        Blade::directive('notauth', function () {
-            return "<?php if (!Auth::check()): ?>";
-        });
-        Blade::directive('endnotauth', function () {
-            return "<?php endif; ?>";
-        });
-
-        if (App::environment() !== 'testing' && Schema::hasTable('settings')) {
-            // Set the all Settings in the config array.
-            $settings = Setting::all([
-                'name',
-                'value_int',
-                'value_str',
-                'value_bool',
-            ])
-            ->keyBy('name') // key every setting by its name
-            ->transform(function ($setting) {
-                return $setting->value; // return only the value
-            })
-            ->toArray();
-
-            $array = [];
-            // Convert the `dot` syntax to array.
-            foreach ($settings as $setting => $value) {
-                data_set($array, $setting, $value);
-            }
-            config(['settings' => $array]);
-        }
+        $this->configureCommands();
+        $this->configureDates();
+        $this->configureModels();
+        $this->configurePasswords();
+        $this->configureRoutes();
+        $this->configureUrls();
+        $this->configureViews();
+        $this->configureVite();
     }
 
     /**
@@ -76,8 +175,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        // Register the Settings class
+        $this->app->singleton(Settings::class, function (Application $app) {
+            return new Settings($app['cache.store']);
+        });
     }
 }

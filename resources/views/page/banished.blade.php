@@ -8,7 +8,7 @@
 @section('content')
 <section class="lg:container mx-auto mt-12 mb-5">
     <div class="text-center">
-        <h1 class="text-5xl font-bold font-xetaravel text-error">
+        <h1 class="text-5xl font-bold text-error">
             You're banished !
         </h1>
     </div>

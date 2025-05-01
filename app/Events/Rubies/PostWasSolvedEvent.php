@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Events\Rubies;
 
 use Xetaravel\Models\DiscussPost;
@@ -9,22 +12,22 @@ class PostWasSolvedEvent
     /**
      * The post instance.
      *
-     * @var \Xetaravel\Models\DiscussPost
+     * @var DiscussPost
      */
     public $post;
 
     /**
      * The user instance.
      *
-     * @var \Xetaravel\Models\User
+     * @var User
      */
     public $user;
 
     /**
      * Create a new event instance.
      *
-     * @param \Xetaravel\Models\DiscussPost $post
-     * @param \Xetaravel\Models\User $user
+     * @param DiscussPost $post
+     * @param User $user
      */
     public function __construct(DiscussPost $post, User $user)
     {

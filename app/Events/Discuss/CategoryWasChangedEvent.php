@@ -1,43 +1,23 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Events\Discuss;
 
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Xetaravel\Models\DiscussConversation;
 
-class CategoryWasChangedEvent
+class CategoryWasChangedEvent implements ShouldDispatchAfterCommit
 {
-    /**
-     * The conversation instance.
-     *
-     * @var \Xetaravel\Models\DiscussConversation
-     */
-    public $conversation;
+    use Dispatchable;
+    use SerializesModels;
 
-    /**
-     * The new category id.
-     *
-     * @var int
-     */
-    public $category;
-
-    /**
-     * The old category id.
-     *
-     * @var int
-     */
-    public $oldCategory;
-
-    /**
-     * Create a new event instance.
-     *
-     * @param \Xetaravel\Models\DiscussConversation $conversation
-     * @param int $category
-     * @param int $oldCategory
-     *
-     */
-    public function __construct(DiscussConversation $conversation, int $category, int $oldCategory)
-    {
-        $this->conversation = $conversation;
-        $this->category = $category;
-        $this->oldCategory = $oldCategory;
+    public function __construct(
+        public DiscussConversation $discussConversation,
+        public int $category,
+        public int $oldCategory
+    ) {
     }
 }

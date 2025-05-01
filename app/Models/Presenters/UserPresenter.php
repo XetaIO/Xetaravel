@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Presenters;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Xetaravel\Models\Session;
-use Xetaravel\Utility\UserUtility;
+use Illuminate\Support\Facades\DB;
 
 trait UserPresenter
 {
@@ -12,19 +14,12 @@ trait UserPresenter
      *
      * @var string
      */
-    protected $defaultAvatar = '/images/avatar.png';
-
-    /**
-     * The default primary color used when there is no primary color defined.
-     *
-     * @var string
-     */
-    protected $defaultAvatarPrimaryColor = '#B4AEA4';
+    protected string $defaultAvatar = '/images/avatar.png';
 
     /**
      * Get the user's username.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     * @return Attribute
      */
     protected function username(): Attribute
     {
@@ -34,200 +29,36 @@ trait UserPresenter
     }
 
     /**
-     * Get the account first name.
-     *
-     * @return string
-     */
-    public function getFirstNameAttribute(): string
-    {
-        return $this->parse($this->account, 'first_name');
-    }
-
-    /**
-     * Get the account last name.
-     *
-     * @return string
-     */
-    public function getLastNameAttribute(): string
-    {
-        return $this->parse($this->account, 'last_name');
-    }
-
-    /**
-     * Get whatever the user has rubies or not.
-     *
-     * @return boolean
-     */
-    public function getHasRubiesAttribute(): bool
-    {
-        return $this->rubies_total > 0 ? true : false;
-    }
-
-    /**
-     * Get the account full name. Return the username if the user
-     * has not set his first name and last name.
-     *
-     * @return string
-     */
-    public function getFullNameAttribute(): string
-    {
-        if ($this->trashed()) {
-            return $this->username;
-        }
-
-        $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
-
-        if (empty(trim($fullName))) {
-            return $this->username;
-        }
-
-        return $fullName;
-    }
-
-    /**
-     * Get the experiences total formated.
-     *
-     * @return integer
-     */
-    public function getExperiencesTotalAttribute($experiencesTotal): int
-    {
-        return number_format($experiencesTotal, 0, ".", " ");
-    }
-
-    /**
-     * Get the account facebook.
-     *
-     * @return string
-     */
-    public function getFacebookAttribute(): string
-    {
-        return $this->parse($this->account, 'facebook');
-    }
-
-    /**
-     * Get the account twitter.
-     *
-     * @return string
-     */
-    public function getTwitterAttribute(): string
-    {
-        return $this->parse($this->account, 'twitter');
-    }
-
-    /**
-     * Get the account biography.
-     *
-     * @return string
-     */
-    public function getBiographyAttribute(): string
-    {
-        return $this->parse($this->account, 'biography');
-    }
-
-    /**
-     * Get the account signature.
-     *
-     * @return string
-     */
-    public function getSignatureAttribute(): string
-    {
-        return $this->parse($this->account, 'signature');
-    }
-
-    /**
-     * Get the small avatar.
-     *
-     * @return string
-     */
-    public function getAvatarSmallAttribute(): string
-    {
-        return $this->parseMedia('thumbnail.small');
-    }
-
-    /**
-     * Get the medium avatar.
-     *
-     * @return string
-     */
-    public function getAvatarMediumAttribute(): string
-    {
-        return $this->parseMedia('thumbnail.medium');
-    }
-
-    /**
-     * Get the big avatar.
-     *
-     * @return string
-     */
-    public function getAvatarBigAttribute(): string
-    {
-        return $this->parseMedia('thumbnail.big');
-    }
-
-    /**
-     * Get the profile background.
-     *
-     * @return string
-     */
-    public function getProfileBackgroundAttribute(): string
-    {
-        return UserUtility::getProfileBackground();
-    }
-
-    /**
-     * Get the profile url.
-     *
-     * @return string
-     */
-    public function getProfileUrlAttribute(): string
-    {
-        if (!isset($this->slug)) {
-            return '';
-        }
-
-        if ($this->trashed()) {
-            return route('users.user.show', ['slug' => strtolower($this->username)]);
-        }
-
-        return route('users.user.show', ['slug' => $this->slug]);
-    }
-
-    /**
-     * Get the primary color detected in the avatar.
-     *
-     * @return string
-     */
-    public function getAvatarPrimaryColorAttribute(): string
-    {
-        if (isset($this->getMedia('avatar')[0]) && $this->getMedia('avatar')[0]->hasCustomProperty('primaryColor')) {
-            return $this->getMedia('avatar')[0]->getCustomProperty('primaryColor');
-        }
-
-        return $this->defaultAvatarPrimaryColor;
-    }
-
-    /**
-     * We must decrement the post count due to the first post being counted.
-     *
-     * @param int $count The actual post count cache.
-     *
-     * @return int
-     */
-    public function getDiscussPostCountAttribute($count): int
-    {
-        return $count - $this->discuss_conversation_count;
-    }
-
-    /**
      * Get the status of the user : online or offline
      *
-     * @return string
+     * @return Attribute
      */
-    public function getOnlineAttribute(): string
+    protected function online(): Attribute
     {
-        $online = Session::expires()->where('user_id', $this->id)->first();
+        $sessionLifetime = config('session.lifetime') * 60;
 
-        return is_null($online) ? false : true;
+        $expirationTime = time() - $sessionLifetime;
+
+        $online = DB::table(config('session.table'))
+            ->where('user_id', $this->id)
+            ->where('last_activity', '>=', $expirationTime)
+            ->first();
+
+        return Attribute::make(
+            get: fn () => !is_null($online)
+        );
+    }
+
+    /**
+     * Get the max role level of the user.
+     *
+     * @return Attribute
+     */
+    protected function level(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ($role = $this->roles->sortByDesc('level')->first()) ? $role->level : 0
+        );
     }
 
     /**
@@ -255,12 +86,167 @@ trait UserPresenter
      *
      * @return string
      */
-    protected function parse($relation, $attribute): string
+    protected function parse(?object $relation, ?string $attribute): string
     {
         if ($relation === null || $relation->{$attribute} === null) {
             return '';
         }
 
         return $relation->{$attribute};
+    }
+
+    /**
+     * Get the profile url.
+     *
+     * @return Attribute
+     */
+    protected function showUrl(): Attribute
+    {
+        $slug = $this->trashed() ? mb_strtolower($this->username) : $this->slug;
+
+        return Attribute::make(
+            get: fn () => route('user.show', ['slug' => $slug])
+        );
+    }
+
+    /**
+     * Get the account facebook.
+     *
+     * @return Attribute
+     */
+    protected function facebook(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'facebook')
+        );
+    }
+
+    /**
+     * Get the account twitter.
+     *
+     * @return Attribute
+     */
+    protected function twitter(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'twitter')
+        );
+    }
+
+    /**
+     * Get the account biography.
+     *
+     * @return Attribute
+     */
+    protected function biography(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'biography')
+        );
+    }
+
+    /**
+     * Get the account signature.
+     *
+     * @return Attribute
+     */
+    protected function signature(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'signature')
+        );
+    }
+
+    /**
+     * Get the small avatar.
+     *
+     * @return Attribute
+     */
+    protected function avatarSmall(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parseMedia('thumbnail.small')
+        );
+    }
+
+    /**
+     * Get the medium avatar.
+     *
+     * @return Attribute
+     */
+    protected function avatarMedium(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parseMedia('thumbnail.medium')
+        );
+    }
+
+    /**
+     * Get the big avatar.
+     *
+     * @return Attribute
+     */
+    protected function avatarBig(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parseMedia('thumbnail.big')
+        );
+    }
+
+    /**
+     * Get the account first name.
+     *
+     * @return Attribute
+     */
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'first_name')
+        );
+    }
+
+    /**
+     * Get the account last name.
+     *
+     * @return Attribute
+     */
+    protected function lastName(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->parse($this->account, 'last_name')
+        );
+    }
+
+    /**
+     * Get whatever the user has rubies or not.
+     *
+     * @return Attribute
+     */
+    protected function hasRubies(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->rubies_total > 0
+        );
+    }
+
+    /**
+     * Get the account full name. Return the username if the user
+     * has not set his first name and last name.
+     *
+     * @return Attribute
+     */
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->trashed()) {
+                    return $this->username;
+                }
+
+                $fullName = $this->parse($this->account, 'first_name') . ' ' . $this->parse($this->account, 'last_name');
+
+                return empty(mb_trim($fullName)) ? $this->username : $fullName;
+            }
+        );
     }
 }

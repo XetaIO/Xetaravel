@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -10,54 +12,33 @@ use Illuminate\Support\Facades\Route;
 Route::group([
         'namespace' => 'Discuss',
         'prefix' => 'discuss',
-        'middleware' => ['permission:access.site,allowGuest', 'discuss.maintenance']
+        'middleware' => ['discuss.maintenance']
 ], function () {
     // Discuss Routes
-    Route::get('/', 'DiscussController@index')
+    Route::get('/', [Xetaravel\Http\Controllers\Discuss\DiscussController::class, 'index'])
         ->name('discuss.index');
 
     //  Leaderboard Route
-    Route::get('leaderboard', 'DiscussController@leaderboard')
+    Route::get('leaderboard', [Xetaravel\Http\Controllers\Discuss\DiscussController::class, 'leaderboard'])
         ->name('discuss.leaderboard');
 
     // Conversation Routes
-    Route::get('conversation/{slug}.{id}', 'ConversationController@show')
+    Route::get('conversation/{slug}.{id}', [Xetaravel\Http\Controllers\Discuss\ConversationController::class, 'show'])
         ->name('discuss.conversation.show');
 
-    // Category Routes
-    Route::get('categories', 'CategoryController@index')
+    // BlogCategory Routes
+    Route::get('categories', [Xetaravel\Http\Controllers\Discuss\CategoryController::class, 'index'])
         ->name('discuss.category.index');
 
     // Post Routes
-    Route::get('post/show/{id}', 'PostController@show')
+    Route::get('post/show/{id}', [Xetaravel\Http\Controllers\Discuss\PostController::class, 'show'])
         ->name('discuss.post.show');
 
-    // Search Route
-    Route::post('search', 'SearchController@index')
-        ->name('discuss.search.index');
 
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
-        // Conversation Routes
-        Route::get('conversation/create', 'ConversationController@showCreateForm')
-            ->name('discuss.conversation.create');
-        Route::post('conversation/create', 'ConversationController@create')
-            ->name('discuss.conversation.create');
-        Route::put('conversation/update/{slug}.{id}', 'ConversationController@update')
-            ->name('discuss.conversation.update');
-        Route::delete('conversation/delete/{slug}.{id}', 'ConversationController@delete')
-            ->name('discuss.conversation.delete');
-
         // Post Routes
-        Route::post('post/create', 'PostController@create')
-            ->name('discuss.post.create');
-        Route::delete('post/delete/{id}', 'PostController@delete')
-            ->name('discuss.post.delete');
-        Route::put('post/edit/{id}', 'PostController@edit')
-            ->name('discuss.post.edit');
-        Route::get('post/edit-template/{id}', 'PostController@editTemplate')
-            ->name('discuss.post.editTemplate');
-        Route::get('post/solved/{id}', 'PostController@solved')
+        Route::get('post/solved/{id}', [Xetaravel\Http\Controllers\Discuss\PostController::class, 'solved'])
             ->name('discuss.post.solved');
     });
 });

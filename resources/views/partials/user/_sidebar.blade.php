@@ -1,1 +1,0 @@
-{!! Menu::{'user.profile'}() !!}

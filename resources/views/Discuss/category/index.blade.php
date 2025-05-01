@@ -17,12 +17,6 @@
 <section class="lg:container mx-auto pt-4 mb-5">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="lg:col-span-3 col-span-12 px-3">
-            <div class="mb-5">
-                <a href="{{ route('discuss.conversation.create') }}" class="btn btn-primary gap-2">
-                    <i class="fa-solid fa-pencil"></i>
-                    Start a Discussion
-                </a>
-            </div>
             @include('Discuss::partials._sidebar')
         </div>
 
@@ -33,7 +27,7 @@
                         <div class="flex flex-col justify-between p-2 rounded-md shadow-md text-white h-full" style="background-color: {{ $category->color }};">
                             <div class="mb-3">
                                 <h5 class="text-2xl text-center mb-2">
-                                    <a class="" href="{{ $category->category_url }}">
+                                    <a class="" href="{{ $category->show_url }}">
                                         {{ $category->title }}
                                     </a>
                                 </h5>
@@ -59,10 +53,9 @@
                     </div>
                 @empty
                     <div class="col-md-12">
-                        <div class="alert alert-primary" role="alert">
-                            <i class="fa fa-exclamation" aria-hidden="true"></i>
+                        <x-alert type="primary">
                             There's no categories yet.
-                        </div>
+                        </x-alert>
                     </div>
                 @endforelse
             </div>

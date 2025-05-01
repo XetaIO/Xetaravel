@@ -1,43 +1,23 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models;
 
-use Ultraware\Roles\Contracts\RoleHasRelations as RoleHasRelationsContract;
-use Ultraware\Roles\Traits\RoleHasRelations;
+use Xetaravel\Models\Presenters\RolePresenter;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-class Role extends Model implements RoleHasRelationsContract
+class Role extends SpatieRole
 {
-    use RoleHasRelations;
+    use RolePresenter;
 
     /**
-     * The attributes that are mass assignable.
+     * The accessors to append to the model's array form.
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'slug',
-        'description',
-        'css',
-        'level',
-        'is_deletable'
+    protected $appends = [
+        'formatted_color',
     ];
 
-    /**
-     * The attributes that should be cast has a certain type.
-     *
-     * @var array
-     */
-    protected $cast = [
-        'is_deletable' => 'boolean'
-    ];
-
-    /**
-     * Return the field to slug.
-     *
-     * @return string
-     */
-    public function slugStrategy(): string
-    {
-        return 'name';
-    }
 }

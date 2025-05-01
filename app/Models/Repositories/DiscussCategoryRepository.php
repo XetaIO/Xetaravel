@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Xetaravel\Models\Repositories;
 
 use Illuminate\Support\Collection;
@@ -9,7 +12,7 @@ class DiscussCategoryRepository
     /**
      * Find the categories for the sidebar.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     * @return Collection
      */
     public static function sidebar(): Collection
     {
