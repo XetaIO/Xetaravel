@@ -83,6 +83,13 @@ pre {
 }
 
 /**
+ * Emoji
+ */
+.emoji {
+    @apply m-0 inline;
+}
+
+/**
  * HighlightJS
  */
 pre {
