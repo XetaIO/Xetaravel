@@ -53,7 +53,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
-    #[Validate('max:50')]
+    #[Validate('max:2500')]
     public ?string $biography = null;
 
     /**
@@ -61,7 +61,7 @@ class AccountForm extends Form
      *
      * @var string|null
      */
-    #[Validate('max:50')]
+    #[Validate('max:350')]
     public ?string $signature = null;
 
     /**
