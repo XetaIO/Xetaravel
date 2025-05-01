@@ -33,7 +33,7 @@
 
                 <div class="grid grid-cols-12">
                     <div class="col-span-12 lg:col-span-6 px-3">
-                        @if ((!config('settings.contact.enabled')))
+                        @if (settings('contact_enabled'))
                             <x-form method="post" action="{{ route('page.contact') }}">
                                 <x-input name="name" label="Name" placeholder="Your name..." required autofocus />
                                 <x-input name="email" label="E-mail" placeholder="Your E-mail..." required />
@@ -58,7 +58,6 @@
                                 The contact page is actually disabled, please try again later.
                             </x-alert>
                         @endif
-
                     </div>
 
                     <div class="col-span-12 lg:col-span-6 px-3">

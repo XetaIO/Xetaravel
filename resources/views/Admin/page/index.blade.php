@@ -81,7 +81,11 @@
                         </div>
                     </div>
                     <div class="text-4xl font-bold">
+                    @if($yesterdayVisitors->first())
                         {{ $yesterdayVisitors->first()['screenPageViews'] }}
+                    @else
+                        0
+                    @endif
                     </div>
                     <div class="divider"></div>
                     <span class="opacity-70">
