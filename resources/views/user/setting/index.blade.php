@@ -97,34 +97,40 @@
                     Delete your Account
                 </h2>
 
-                <div class="text-center">
-                    <x-button class="btn-error" label="Delete my Account" icon="fas-trash-can" onclick="deleteAccountModal.showModal()" />
-                </div>
-
-                <dialog id="deleteAccountModal" class="modal">
-                    <div class="modal-box">
-                        <form method="dialog" tabindex="-1">
-                            <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark" type="submit" tabindex="-1" />
-                        </form>
-                        <h3 class="font-bold text-lg mb-4">
-                            Delete my Account
-                        </h3>
-
-                        <x-form method="delete" action="{{ route('user.delete') }}">
-                            <p class="mb-4">
-                                Are you sure you want delete your account ? <span class="font-bold">This operation is not reversible.</span>
-                            </p>
-                            <x-password name="password" label="Password" placeholder="Your Password..." required />
-
-                            <div class="modal-action">
-                                <x-button icon="fas-trash-can" type="submit" label="Yes, I confirm !" class="btn-error gap-2" />
-                            </div>
-                        </x-form>
+                @if (!is_null(Auth::user()->password))
+                    <div class="text-center">
+                        <x-button class="btn-error" label="Delete my Account" icon="fas-trash-can" onclick="deleteAccountModal.showModal()" />
                     </div>
-                    <form class="modal-backdrop" method="dialog">
-                        <button type="submit">close</button>
-                    </form>
-                </dialog>
+
+                    <dialog id="deleteAccountModal" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog" tabindex="-1">
+                                <x-button class="btn-circle btn-sm btn-ghost absolute end-2 top-2 z-[999]" icon="fas-xmark" type="submit" tabindex="-1" />
+                            </form>
+                            <h3 class="font-bold text-lg mb-4">
+                                Delete my Account
+                            </h3>
+
+                            <x-form method="delete" action="{{ route('user.delete') }}">
+                                <p class="mb-4">
+                                    Are you sure you want delete your account ? <span class="font-bold">This operation is not reversible.</span>
+                                </p>
+                                <x-password name="password" label="Password" placeholder="Your Password..." required />
+
+                                <div class="modal-action">
+                                    <x-button icon="fas-trash-can" type="submit" label="Yes, I confirm !" class="btn-error gap-2" />
+                                </div>
+                            </x-form>
+                        </div>
+                        <form class="modal-backdrop" method="dialog">
+                            <button type="submit">close</button>
+                        </form>
+                    </dialog>
+                @else
+                    <x-alert type="error" class="max-w-3xl bg-base-200 dark:bg-base-200 mx-auto mb-7">
+                        You need to set a password before deleting your account.
+                    </x-alert>
+                @endif
             </section>
 
         </div>
