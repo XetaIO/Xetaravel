@@ -49,13 +49,13 @@
                         </figure>
 
                         {{-- Author avatar --}}
-                        <a class="absolute -bottom-6 left-6" href="{{ $article->user->show_url }}">
+                        <a class="absolute -bottom-6 left-6 tooltip" href="{{ $article->user->show_url }}" data-tip="{{ $article->user->full_name }}">
                             <img class="w-12 h-12 rounded-full ring-2 ring-primary" src="{{ asset($article->user->avatar_small) }}" alt="{{ $article->user->username }} Avatar">
                         </a>
                     </div>
 
                     {{-- BlogArticle meta --}}
-                    <div class="flex justify-between items-center mt-2 px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center mt-2 px-6">
                         <div class="flex justify-center items-center">
                             <time class="tooltip" datetime="{{ $article->created_at->format('Y-m-d H:i:s') }}" data-tip="{{ $article->created_at->format('Y-m-d H:i:s') }}">
                                 {{ $article->created_at->isoFormat('ll') }}
@@ -67,6 +67,22 @@
                                 </svg>
                                 {{ $article->blog_comment_count }}
                             </span>
+
+                            <span class="text-gray-700 mx-2"> - </span>
+
+                            {{-- Share links --}}
+                            <div class="flex gap-2">
+                                <span class="hidden md:block">Share this Post : </span>
+                                <a href="{{ $shareLinks['facebook'] }}" target="_blank" class="link">
+                                    <x-icon name="fab-square-facebook" class="h-6 w-6 text-blue-600" />
+                                </a>
+                                <a href="{{ $shareLinks['twitter'] }}" target="_blank" class="link">
+                                    <x-icon name="fab-square-twitter" class="h-6 w-6 text-sky-400" />
+                                </a>
+                                <a href="{{ $shareLinks['linkedin'] }}" target="_blank" class="link">
+                                    <x-icon name="fab-linkedin" class="h-6 w-6 text-blue-800" />
+                                </a>
+                            </div>
 
                             {{-- Edit button --}}
                             @can('update', $article)
