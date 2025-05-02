@@ -253,7 +253,6 @@ class SocialiteController extends Controller
     public function redirectToProvider(Request $request, string $driver): RedirectResponseSF
     {
         return Socialite::driver($driver)
-                ->setScopes(['identify', 'email'])
                 ->redirectUrl(route('auth.driver.callback', ['driver' => $driver]))
                 ->redirect();
     }
