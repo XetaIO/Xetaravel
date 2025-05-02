@@ -59,8 +59,8 @@
                         <a href="{{ $article->user->show_url }}">
                             <img src="{{ $user->avatar_small }}" alt="{{ $article->user->full_name }} avatar" class="w-10 h-10 object-cover rounded-full mr-4">
                         </a>
-                        <p class="flex flex-col items-center">
-                            <a href="{{ $article->user->show_url }}" class="font-semibold mx-1 link link-hover truncate">
+                        <p class="flex flex-col items-left">
+                            <a href="{{ $article->user->show_url }}" class="font-semibold link link-hover truncate">
                                 {{ $article->user->full_name }}
                             </a>
                             <span class="text-sm font-light">
