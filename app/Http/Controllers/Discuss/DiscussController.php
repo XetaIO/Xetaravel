@@ -37,7 +37,7 @@ class DiscussController extends Controller
         $users = Cache::remember('Badges.users.pillarofcommunity', $secondes, function () {
             return User::with('account')
                 ->whereDoesntHave('roles', function (Builder $query) {
-                    $query->where('slug', 'banished'); // Select all user that does not have the role "banished"
+                    $query->where('name', 'Banished'); // Select all user that does not have the role "banished"
                 })
                 ->orderBy('experiences_total', 'desc')
                 ->limit(15)
@@ -50,7 +50,7 @@ class DiscussController extends Controller
             route('discuss.leaderboard')
         );
 
-        $badge = Badge::where('slug', 'topleaderboard')->first();
+        $badge = Badge::where('type', 'topLeaderboard')->first();
 
         return view('Discuss::leaderboard', compact('breadcrumbs', 'users', 'badge'));
     }

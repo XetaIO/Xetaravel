@@ -18,7 +18,6 @@ class BadgeFactory extends Factory
 
         return [
             'name' => ucfirst($name),
-            'slug' => Str::slug($name),
             'description' => $this->faker->optional()->sentence(),
             'icon' => 'fas-check',
             'color' => $this->faker->optional()->hexColor(),

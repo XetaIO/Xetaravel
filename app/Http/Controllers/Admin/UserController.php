@@ -21,6 +21,6 @@ class UserController extends Controller
             route('admin.user.index')
         );
 
-        return view('Admin::User.index', compact('breadcrumbs'));
+        return view('Admin::user.index', compact('breadcrumbs'));
     }
 }

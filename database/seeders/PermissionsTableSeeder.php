@@ -488,12 +488,56 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
-            'name' => 'manage setting',
-            'guard_name' => 'web',
-            'description' => 'The user can manage settings.',
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]
+                'name' => 'manage setting',
+                'guard_name' => 'web',
+                'description' => 'The user can manage settings.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+
+            // Badges
+            [
+                'name' => 'viewAny badge',
+                'guard_name' => 'web',
+                'description' => 'The user can see the badges.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'create badge',
+                'guard_name' => 'web',
+                'description' => 'The user can create a badge.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'update badge',
+                'guard_name' => 'web',
+                'description' => 'The user can update a badge.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'delete badge',
+                'guard_name' => 'web',
+                'description' => 'The user can delete a badge.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'search badge',
+                'guard_name' => 'web',
+                'description' => 'The user can search badges.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'manage badge',
+                'guard_name' => 'web',
+                'description' => 'The user can manage badges.',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ];
 
         DB::table('permissions')->insert($permissions);

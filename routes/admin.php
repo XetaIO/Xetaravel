@@ -100,4 +100,16 @@ Route::group([
         Route::put('setting', [Xetaravel\Http\Controllers\Admin\SettingController::class, 'update'])
             ->name('admin.setting.update');
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Badge Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::group([
+        'middleware' => ['permission:manage badge']
+    ], function () {
+        Route::get('badge', [Xetaravel\Http\Controllers\Admin\BadgeController::class, 'index'])
+            ->name('admin.badge.index');
+    });
 });

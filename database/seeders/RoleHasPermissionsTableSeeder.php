@@ -94,6 +94,14 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'update setting',
         'delete setting',
         'manage setting',
+
+        // Badges
+        'viewAny badge',
+        'create badge',
+        'update badge',
+        'delete badge',
+        'search badge',
+        'manage badge',
     ];
 
     protected array $administratorPermissions = [
@@ -176,6 +184,13 @@ class RoleHasPermissionsTableSeeder extends Seeder
         'viewAny setting',
         'update setting',
         'manage setting',
+
+        // Badges
+        'viewAny badge',
+        'create badge',
+        'update badge',
+        'search badge',
+        'manage badge',
     ];
 
     protected array $moderatorPermissions = [
