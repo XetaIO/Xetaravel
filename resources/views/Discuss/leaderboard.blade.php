@@ -23,7 +23,7 @@
         <div class="lg:col-span-9 col-span-12 px-3">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div class="col-span-12">
-                    <div class="flex border border-gray-200 p-3 px-5 rounded-lg dark:bg-base-300 dark:border-gray-700">
+                    <div class="flex p-3 px-5 rounded-lg bg-white dark:bg-base-300 shadow-md">
                         <h5 class="text-2xl text-center mb-0 w-full">
                                 Community Pillar
                         </h5>
@@ -40,7 +40,7 @@
 
                     @if ($i == 4)
                         <div class="col-span-12">
-                            <div class="flex border border-gray-200 p-3 px-5 rounded-lg dark:bg-base-300 dark:border-gray-700">
+                            <div class="flex p-3 px-5 rounded-lg bg-white dark:bg-base-300 shadow-md">
                                 <h5 class="text-2xl text-center mb-0 w-full">
                                         The most active in the Community
                                 </h5>
@@ -48,7 +48,7 @@
                         </div>
                     @endif
                     <div class="lg:col-span-4 col-span-12">
-                        <div class="relative text-center border border-gray-200 rounded-lg dark:bg-base-300 dark:border-gray-700 p-3 pt-4 w-full">
+                        <div class="relative text-center rounded-lg bg-white dark:bg-base-300 shadow-md p-3 pt-4 w-full">
                             <span class="absolute font-bold left-8 top-8 h-10 w-10 border border-gray-200 dark:border-gray-700  rounded-md p-1.5">
                                 {{ $i }}
                             </span>

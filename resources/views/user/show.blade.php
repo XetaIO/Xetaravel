@@ -35,7 +35,7 @@
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 lg:col-span-4 mx-3 lg:mx-0">
                 <div
-                    class="flex flex-col sm:flex-row text-center shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 w-full h-full">
+                    class="flex flex-col sm:flex-row text-center shadow-md bg-white dark:bg-base-300 rounded-lg p-6 w-full h-full">
 
                     <div class="w-full md:w-1/2">
                         {{--  User Avatar --}}
@@ -98,7 +98,7 @@
                 <div class="grid grid-cols-12 gap-4 text-center h-full mx-3 lg:mx-0">
                     <div class="col-span-12 lg:col-span-4 h-full">
                         <div
-                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full tooltip"
+                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 rounded-lg p-6 h-full tooltip"
                             data-tip="{{ $level['experienceNeededNextLevel'] }} experiences to go before next level.">
                             <x-icon name="fas-star" class="h-26 w-26 text-[color:var(--color-warning)]"></x-icon>
                             <div>
@@ -114,7 +114,7 @@
 
                     <div class="col-span-12 lg:col-span-4 h-full">
                         <div
-                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
+                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 rounded-lg p-6 h-full">
                             <x-icon name="far-gem" class="h-26 w-26 text-primary"></x-icon>
                             <div>
                                 <div class="font-bold text-2xl">
@@ -129,7 +129,7 @@
 
                     <div class="col-span-12 lg:col-span-4 h-full">
                         <div
-                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg p-6 h-full">
+                            class="flex flex-col items-center justify-between shadow-md bg-white dark:bg-base-300 rounded-lg p-6 h-full">
                             <x-icon name="far-comments" class="h-26 w-26 text-[color:#5ccc5c]"></x-icon>
                             <div>
                                 <div class="font-bold text-2xl">
@@ -161,7 +161,7 @@
         <div class="grid grid-cols-1 gap-4">
             <div class="col-span-1 mx-3 lg:mx-0">
                 <div
-                    class="flex flex-row gap-3 items-center overflow-hidden shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg py-9 px-5">
+                    class="flex flex-row gap-3 items-center overflow-hidden shadow-md bg-white dark:bg-base-300 rounded-lg py-9 px-5">
                     <div>
                         <x-icon name="fas-quote-left" class="text-primary h-7 w-7" />
                     </div>
@@ -195,7 +195,7 @@
         <div class="grid grid-cols-1">
             <div class="col-span-12 mx-3 lg:mx-0">
                 <div
-                    class="shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg py-9 px-5">
+                    class="shadow-md bg-white dark:bg-base-300 rounded-lg py-9 px-5">
                     <ul class="flex flex-row flex-wrap items-center justify-center gap-3">
                         @foreach ($badges as $badge)
                             @if ($badge->type !== 'topLeaderboard')
