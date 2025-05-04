@@ -47,8 +47,8 @@
                                      alt="{{ $user->full_name }} avatar" />
                             </figure>
                             {{-- Badge Pillar of cummunity --}}
-                            @if ($user->badges()->where('slug', 'topleaderboard')->exists())
-                                    <?php $badge = $user->badges()->where('slug', 'topleaderboard')->first(); ?>
+                            @if ($user->badges()->where('type', 'topLeaderboard')->exists())
+                                    <?php $badge = $user->badges()->where('type', 'topLeaderboard')->first(); ?>
                                 <span class="absolute top-1 left-1">
                                 <x-badge.icon.pillarofcommunity />
                             </span>
@@ -198,7 +198,7 @@
                     class="shadow-md bg-white dark:bg-base-300 border border-gray-200 dark:border-gray-700 rounded-lg py-9 px-5">
                     <ul class="flex flex-row flex-wrap items-center justify-center gap-3">
                         @foreach ($badges as $badge)
-                            @if ($badge->slug !== 'topleaderboard')
+                            @if ($badge->type !== 'topLeaderboard')
                                 <li class="flex items-center justify-center w-11 h-11 rounded-full p-1 border-2 border-solid {{ $user->badges->contains($badge->id) ? 'border-[color:rgba(221,221,211,0.5) dark:border-[color:#ffffff]' : 'border-[color:rgba(221,221,211,0.5)]' }} cursor-pointer">
                                     <div class="dropdown dropdown-hover dropdown-top dropdown-center">
                                         <label tabindex="0" class="m-1">

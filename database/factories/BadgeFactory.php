@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Xetaravel\Models\Badge;
 
 class BadgeFactory extends Factory
@@ -18,7 +17,6 @@ class BadgeFactory extends Factory
 
         return [
             'name' => ucfirst($name),
-            'slug' => Str::slug($name),
             'description' => $this->faker->optional()->sentence(),
             'icon' => 'fas-check',
             'color' => $this->faker->optional()->hexColor(),

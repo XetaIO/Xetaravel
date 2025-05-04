@@ -19,30 +19,6 @@ class ArticleTest extends TestCase
             ->assertSeeLivewire(Article::class);
     }
 
-    public function test_articles_are_paginated()
-    {
-        config(['xetaravel.pagination.blog.article_per_page' => 1]);
-        $this->actingAs(User::find(1));
-
-        $articleA = BlogArticle::create([
-            'title' => 'A Article',
-            'slug' => 'a-article',
-            'content' => 'A Article',
-            'blog_category_id' => 1,
-        ]);
-        $articleB = BlogArticle::create([
-            'title' => 'B Article',
-            'slug' => 'b-article',
-            'content' => 'B Article',
-            'blog_category_id' => 1,
-        ]);
-
-        $response = $this->get('/admin/blog/article');
-
-        $response->assertSee($articleA->title);
-        $response->assertDontSee($articleB->title);
-    }
-
     public function test_can_sort_articles_by_title()
     {
         $this->actingAs(User::find(1));

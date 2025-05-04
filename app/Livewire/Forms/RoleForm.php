@@ -25,14 +25,14 @@ class RoleForm extends Form
     public ?string $name = null;
 
     /**
-     * The color of the category.
+     * The color of the role.
      *
      * @var string|null
      */
     public ?string $color = null;
 
     /**
-     * The level of the category.
+     * The level of the role.
      *
      * @var int|null
      */

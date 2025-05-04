@@ -23,7 +23,6 @@ class BadgesTableSeeder extends Seeder
             // Leaderboard
             [
                 'name' => 'Pillar of the Community',
-                'slug' => 'topleaderboard',
                 'description' => 'Unlocked when your experience points are in the top 3 of all Xetaravel members.',
                 'icon' => 'fas-medal',
                 'color' => '#f7a925',
@@ -36,7 +35,6 @@ class BadgesTableSeeder extends Seeder
             // Inscription
             [
                 'name' => 'Registered for 1 year!',
-                'slug' => 'newregister1',
                 'description' => 'Earned when you have been registered on Xetaravel for 1 year.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#2ec5ff',
@@ -47,7 +45,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Young teenager !',
-                'slug' => 'newregister2',
                 'description' => 'Earned when you have been registered on Xetaravel for 2 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#2eff51',
@@ -58,7 +55,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'You are getting old!',
-                'slug' => 'newregister3',
                 'description' => 'Earned when you have been registered on Xetaravel for 3 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#dfff2e',
@@ -69,7 +65,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => '3rd age club!',
-                'slug' => 'newregister5',
                 'description' => 'Earned when you have been registered on Xetaravel for 5 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#ffbf2e',
@@ -80,7 +75,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'This is the retirement home!',
-                'slug' => 'newregister7',
                 'description' => 'Earned when you have been registered on Xetaravel for 7 years.',
                 'icon' => 'fas-sign-in-alt',
                 'color' => '#ff412e',
@@ -93,7 +87,6 @@ class BadgesTableSeeder extends Seeder
             // Posts
             [
                 'name' => 'Welcome in the community !',
-                'slug' => 'newpost1',
                 'description' => 'Obtained after your first message on the Xetaravel discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#2ec5ff',
@@ -104,7 +97,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Talkative!',
-                'slug' => 'newpost10',
                 'description' => 'Obtained once you have posted 10 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#2effcf',
@@ -115,7 +107,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A real chatterbox !',
-                'slug' => 'newpost50',
                 'description' => 'Obtained once you have posted 50 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#2eff51',
@@ -126,7 +117,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'You don\'t stop yelling!',
-                'slug' => 'newpost100',
                 'description' => 'Obtained once you have posted 100 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#dfff2e',
@@ -137,7 +127,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A real spammer!',
-                'slug' => 'newpost500',
                 'description' => 'Obtained once you have posted 500 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#ffbf2e',
@@ -148,7 +137,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Time to change your keyboard!',
-                'slug' => 'newpost1000',
                 'description' => 'Obtained once you have posted 1000 replies to the discuss.',
                 'icon' => 'far-comment-dots',
                 'color' => '#ff412e',
@@ -161,7 +149,6 @@ class BadgesTableSeeder extends Seeder
             // Solved Posts
             [
                 'name' => 'You helped a member!',
-                'slug' => 'postsolved1',
                 'description' => 'Obtained once you receive your first « Resolved Response » on the Xetaravel discuss.',
                 'icon' => 'fas-check',
                 'color' => '#2ec5ff',
@@ -172,7 +159,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'You are really smart!',
-                'slug' => 'postsolved10',
                 'description' => 'Obtained once you have received 10 or more « Resolved Response » on the discuss.',
                 'icon' => 'fas-check',
                 'color' => '#2eff51',
@@ -183,7 +169,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A real tutor!',
-                'slug' => 'postsolved20',
                 'description' => 'Obtained once you have received 20 or more « Resolved Response » on the discuss.',
                 'icon' => 'fas-check',
                 'color' => '#dfff2e',
@@ -194,7 +179,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'An encyclopedia !',
-                'slug' => 'postsolved50',
                 'description' => 'Obtained once you have received 50 or more « Resolved Response » on the discuss.',
                 'icon' => 'fas-check',
                 'color' => '#ff412e',
@@ -207,7 +191,6 @@ class BadgesTableSeeder extends Seeder
             //  Experiences
             [
                 'name' => 'The first hundred!',
-                'slug' => 'newexperience100',
                 'description' => 'Obtained once you have earned your first 100 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#2ec5ff',
@@ -218,7 +201,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'The first thousand!',
-                'slug' => 'newexperience1000',
                 'description' => 'Obtained once you have earned your first 1000 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#2eff51',
@@ -229,7 +211,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A real soldier!',
-                'slug' => 'newexperience10000',
                 'description' => 'Obtained once you have earned your first 10000 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#dfff2e',
@@ -240,7 +221,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A Xetaravel veteran!',
-                'slug' => 'newexperience100000',
                 'description' => 'Obtained once you have earned your first 100000 experience points.',
                 'icon' => 'fas-star',
                 'color' => '#ffbf2e',
@@ -251,7 +231,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'The million!',
-                'slug' => 'newexperience1000000',
                 'description' => 'Obtained once your experience points exceed one million.',
                 'icon' => 'fas-star',
                 'color' => '#ff412e',
@@ -264,7 +243,6 @@ class BadgesTableSeeder extends Seeder
             //  Rubies
             [
                 'name' => 'It shines !',
-                'slug' => 'newrubies50',
                 'description' => 'Obtained once you have earned your first 50 rubies.',
                 'icon' => 'far-gem',
                 'color' => '#2ec5ff',
@@ -275,7 +253,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'As if it rained !',
-                'slug' => 'newrubies100',
                 'description' => 'Obtained once your rubies reach 100.',
                 'icon' => 'far-gem',
                 'color' => '#2eff51',
@@ -286,7 +263,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A real miner!',
-                'slug' => 'newrubies500',
                 'description' => 'Obtained once your rubies reach 500.',
                 'icon' => 'far-gem',
                 'color' => '#dfff2e',
@@ -297,7 +273,6 @@ class BadgesTableSeeder extends Seeder
             ],
             [
                 'name' => 'A real jeweller!',
-                'slug' => 'newrubies1000',
                 'description' => 'Obtained once your rubies reach 1000.',
                 'icon' => 'far-gem',
                 'color' => '#ff412e',

@@ -28,6 +28,21 @@
                 </a>
             </li>
 
+            @can('manage badge')
+                <li class="menu-title">
+                    <span>Badge</span>
+                </li>
+                <li>
+                    <a @class([
+                      'py-3',
+                      'menu-active' => request()->route()->getName() === 'admin.badge.index'])
+                       href="{{ route('admin.badge.index') }}">
+                        <x-icon name="far-id-badge" />
+                        Manage Badges
+                    </a>
+                </li>
+            @endcan
+
             @can('manage blog article')
                 <li class="menu-title">
                     <span>Blog</span>
