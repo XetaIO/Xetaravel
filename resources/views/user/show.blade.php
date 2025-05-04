@@ -219,7 +219,7 @@
                                                 @if($user->badges->contains($badge->id))
                                                     <div class="divider"></div>
                                                     <p class="text-sm">
-                                                        You have unlocked this badge the {{ $badge->created_at->format('Y-m-d H:i:s') }}
+                                                        You have unlocked this badge the {{ $userBadges[$badge->id]->pivot->created_at->format('Y-m-d H:i:s') }}
                                                     </p>
                                                 @endif
                                             </div>

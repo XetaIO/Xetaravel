@@ -84,6 +84,7 @@ class UserController extends Controller
         );
 
         $badges = Badge::all();
+        $userBadges = $user->badges->keyBy('id');
 
         $articles = collect($articles);
 
@@ -101,7 +102,7 @@ class UserController extends Controller
 
         return view(
             'user.show',
-            compact('user', 'activities', 'articles', 'comments', 'breadcrumbs', 'level', 'badges')
+            compact('user', 'activities', 'articles', 'comments', 'breadcrumbs', 'level', 'badges', 'userBadges')
         );
     }
 
