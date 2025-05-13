@@ -44,7 +44,7 @@ class Leaderboard extends Command
     {
         // Fetch the first 3 users that have the most experience and NOT the role banished.
         $users = User::whereDoesntHave('roles', function (Builder $query) {
-            $query->where('slug', 'banished');
+            $query->where('name', 'Banished');
         })
         ->orderBy('experiences_total', 'desc')
         ->limit(3)
