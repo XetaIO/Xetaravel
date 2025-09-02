@@ -36,7 +36,7 @@ class BlogCategoryForm extends Form
         return [
             'title' => [
                 'required',
-                'min:5',
+                'min:3',
                 Rule::unique('blog_categories')->ignore($this->blogCategory)
             ],
             'description' => 'required|min:10',
