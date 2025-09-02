@@ -66,15 +66,15 @@
                         </h2>
                         <ul class="mb-8">
                             <li class="mb-2">
-                                <i class="fa-solid fa-location-dot"></i>
+                                <x-icon name="fas-location-dot" class="h-5 w-5"></x-icon>
                                 Chalon sur Saône, 71100 France
                             </li>
                             <li class="mb-2">
-                                <i class="fa-solid fa-phone"></i>
+                                <x-icon name="fas-phone" class="h-5 w-5"></x-icon>
                                 Secret
                             </li>
                             <li class="mb-2">
-                                <i class="fa-solid fa-at"></i>
+                                <x-icon name="fas-at" class="h-5 w-5"></x-icon>
                                 <a class="link link-hover link-primary" href="mailto:{{ config('xetaravel.site.contact_email') }}">{{ config('xetaravel.site.contact_email') }}</a>
                             </li>
                         </ul>
@@ -85,12 +85,12 @@
                         <ul class="flex flex-rows gap-2">
                             <li>
                                 <a href="https://facebook.com/emeric.fevre.37" target="_blank">
-                                    <i class="fa-brands fa-square-facebook fa-2xl"></i>
+                                    <x-icon name="fab-square-facebook" class="h-7 w-7"></x-icon>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/FMT_ZoRo" target="_blank">
-                                    <i class="fa-brands fa-square-twitter fa-2xl"></i>
+                                <a href="https://x.com/FMT_ZoRo" target="_blank">
+                                    <x-icon name="fab-square-twitter" class="h-7 w-7"></x-icon>
                                 </a>
                             </li>
                         </ul>
