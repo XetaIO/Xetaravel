@@ -82,16 +82,14 @@ class DiscussCategoryForm extends Form
      */
     public function create(): DiscussCategory
     {
-        $properties = [
+        return DiscussCategory::create($this->only([
             'title',
             'color',
             'icon',
             'level',
             'is_locked',
             'description'
-        ];
-
-        return DiscussCategory::create($this->only($properties));
+        ]));
     }
 
     /**

@@ -38,13 +38,13 @@ class DeviceDetectorService
         if ($this->detect->isWindowsMobileOS()) {
             return 'Windows Phone';
         }
-        if (mb_stripos($userAgent, 'Windows NT') !== false) {
+        if ($userAgent && mb_stripos($userAgent, 'Windows NT') !== false) {
             return 'Windows';
         }
-        if (mb_stripos($userAgent, 'Macintosh') !== false) {
+        if ($userAgent && mb_stripos($userAgent, 'Macintosh') !== false) {
             return 'macOS';
         }
-        if (mb_stripos($userAgent, 'Linux') !== false) {
+        if ($userAgent && mb_stripos($userAgent, 'Linux') !== false) {
             return 'Linux';
         }
         return 'Unknown OS';
