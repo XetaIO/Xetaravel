@@ -16,7 +16,6 @@ Conçu et développé par Emeric Fèvre.
         <!-- Meta -->
         @stack('meta')
 
-
         <script type="text/javascript">
             /**
              * Dark Mode

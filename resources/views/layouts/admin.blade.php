@@ -16,11 +16,6 @@ Conçu et développé par Emeric Fèvre.
         <!-- Meta -->
         @stack('meta')
 
-        @persist('Flatpickr')
-            <!-- Flatpickr -->
-            <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/flatpickr.css') }}" id="flatpickrCssFile" />
-        @endpersist
-
         <script type="text/javascript">
             /**
              * Dark Mode
@@ -61,6 +56,11 @@ Conçu et développé par Emeric Fèvre.
 
         <!-- Embed Scripts -->
         @stack('scriptsTop')
+
+        @persist('Flatpickr')
+        <!-- Flatpickr -->
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/flatpickr.css') }}" id="flatpickrCssFile" />
+        @endpersist
     </head>
     <body class="bg-base-200 dark:bg-base-100">
 
