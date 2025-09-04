@@ -32,7 +32,7 @@ class DiscussController extends Controller
      */
     public function leaderboard(): View
     {
-        $secondes = 1; //config('badges.users.pillarofcommunity.cache_lifetime_in_secondes'); // 86400 -> 24H
+        $secondes = config('xetaravel.discuss.pillar_of_community_cache_in_secondes');
 
         $users = Cache::remember('Badges.users.pillarofcommunity', $secondes, function () {
             return User::with('account')

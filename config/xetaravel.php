@@ -91,6 +91,8 @@ return [
     'discuss' => [
         'categories_sidebar' => 15,
         // The number in days.
-        'info_message_old_conversation' => 92
+        'info_message_old_conversation' => 92,
+
+        'pillar_of_community_cache_in_secondes' => 60 * 60 * 24,
     ]
 ];

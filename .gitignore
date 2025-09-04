@@ -25,6 +25,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/.junie
 composer.lock
 package-lock.json
 junit.xml
