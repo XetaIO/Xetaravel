@@ -94,8 +94,6 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('profile/@{slug}', [Xetaravel\Http\Controllers\UserController::class, 'show'])
         ->name('user.show');
-    Route::get('/', [Xetaravel\Http\Controllers\UserController::class, 'index'])
-        ->name('user.index');
 
     // Auth Middleware
     Route::group(['middleware' => ['auth']], function () {
