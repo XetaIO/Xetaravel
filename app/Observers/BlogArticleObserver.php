@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Xetaravel\Observers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\BlogArticle;
 
 class BlogArticleObserver
@@ -22,7 +23,9 @@ class BlogArticleObserver
      */
     public function updating(BlogArticle $blogArticle): void
     {
-        $blogArticle->generateSlug();
+        if ($blogArticle->isDirty('title')) {
+            $blogArticle->generateSlug();
+        }
     }
 
     /**
@@ -30,10 +33,12 @@ class BlogArticleObserver
      */
     public function deleting(BlogArticle $blogArticle): void
     {
-        // We need to do this to refresh the countable cache `blog_comment_count` of the user.
-        $blogArticle->loadMissing('comments');
-        foreach ($blogArticle->comments as $comment) {
-            $comment->delete();
-        }
+        DB::transaction(function () use ($blogArticle) {
+            // We need to do this to refresh the countable cache `blog_comment_count` of the user.
+            $blogArticle->loadMissing('comments');
+            foreach ($blogArticle->comments as $comment) {
+                $comment->delete();
+            }
+        });
     }
 }

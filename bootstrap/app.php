@@ -76,4 +76,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
         // Leaderboard Update
         $schedule->command('leaderboard:update')->weekly()->runInBackground();
+
+        // Sitemap Generator
+        $schedule->command('sitemap:generator')->daily()->runInBackground();
     })->create();

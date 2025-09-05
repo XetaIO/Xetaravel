@@ -43,6 +43,7 @@
         "spatie/laravel-analytics": "^5.5",
         "spatie/laravel-medialibrary": "^11.12.7",
         "spatie/laravel-permission": "^6.16.0",
+        "spatie/laravel-sitemap": "^7.3",
         "xetaio/xetaravel-iptraceable": "^12.0",
         "xetaio/xetaravel-mentions": "^12.0",
         "xety/breadcrumbs": "^1.0"
@@ -66,6 +67,7 @@
         "psr-4": {
             "Xetaravel\\": "app/",
             "XetaravelInstaller\\": "install/",
+            "Scripts\\": "scripts/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
@@ -88,6 +90,13 @@
             "XetaravelInstaller\\Installer::postCreateProjectCmd",
             "@php artisan key:generate --ansi"
         ],
+        "post-install-cmd": [
+            "Scripts\\EnsureRobotsSitemap::runComposerScript"
+        ],
+        "post-update-cmd": [
+            "Scripts\\EnsureRobotsSitemap::runComposerScript"
+        ],
+
         "dev": [
             "Composer\\Config::disableProcessTimeout"
         ]

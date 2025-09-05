@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Xetaravel\Observers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\Repositories\DiscussPostRepository;
 
@@ -33,24 +34,26 @@ class DiscussPostObserver
      */
     public function deleting(DiscussPost $discussPost): void
     {
-        $discussPost->loadMissing('conversation');
-        $conversation = $discussPost->conversation;
+        DB::transaction(function () use ($discussPost) {
+            $discussPost->loadMissing('conversation');
+            $conversation = $discussPost->conversation;
 
-        /*if ($conversation->first_post_id === $discussPost->getKey()) {
-            $conversation->delete();
-        }*/
+            /*if ($conversation->first_post_id === $discussPost->getKey()) {
+                $conversation->delete();
+            }*/
 
-        if ($conversation->last_post_id === $discussPost->getKey()) {
-            $previousPost = DiscussPostRepository::findPreviousPost($discussPost, true);
+            if ($conversation->last_post_id === $discussPost->getKey()) {
+                $previousPost = DiscussPostRepository::findPreviousPost($discussPost, true);
 
-            $conversation->last_post_id = !is_null($previousPost) ? $previousPost->getKey() : null;
-        }
+                $conversation->last_post_id = !is_null($previousPost) ? $previousPost->getKey() : null;
+            }
 
-        if ($conversation->solved_post_id === $discussPost->getKey()) {
-            $conversation->solved_post_id = null;
-            $conversation->is_solved = false;
-        }
+            if ($conversation->solved_post_id === $discussPost->getKey()) {
+                $conversation->solved_post_id = null;
+                $conversation->is_solved = false;
+            }
 
-        $conversation->save();
+            $conversation->save();
+        });
     }
 }
