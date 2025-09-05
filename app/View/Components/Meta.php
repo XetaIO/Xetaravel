@@ -12,46 +12,81 @@ use Closure;
 class Meta extends Component
 {
     /**
-     * The meta title.
+     * The title.
      *
      * @var string
      */
-    public $title;
+    public string $title;
 
     /**
-     * The meta author.
+     * The author.
      *
      * @var string
      */
-    public $author;
+    public string $author;
 
     /**
-     * The meta description.
+     * The description.
      *
      * @var string
      */
-    public $description;
+    public string $description;
 
     /**
-     * The meta url.
+     * The url.
      *
      * @var string
      */
-    public $url;
+    public string $url;
 
     /**
-     * The meta image.
+     * The image.
      *
      * @var string
      */
-    public $image;
+    public string $image;
 
     /**
-     * The meta copyright.
+     * The copyright.
      *
      * @var string
      */
-    public $copyright;
+    public string $copyright;
+
+    /**
+     * The type of content.
+     *
+     * @var string
+     */
+    public string $type;
+
+    /**
+     * The published time of the article.
+     *
+     * @var null|string
+     */
+    public null|string $publishedTime;
+
+    /**
+     * The last modified time of the article.
+     *
+     * @var null|string
+     */
+    public null|string $modifiedTime;
+
+    /**
+     * The author of the article.
+     *
+     * @var null|string
+     */
+    public null|string $articleAuthorUrl;
+
+    /**
+     * The section of the article.
+     *
+     * @var null|string
+     */
+    public null|string $articleSection;
 
     /**
      * Create a new meta component instance.
@@ -62,15 +97,26 @@ class Meta extends Component
         string $title = null,
         string $author = null,
         string $url = null,
-        string $description = null
+        string $description = null,
+        string $image = null,
+        string $type = null,
+        string $publishedTime = null,
+        string $modifiedTime = null,
+        string $articleAuthorUrl = null,
+        string $articleSection = null
     ) {
         $this->title = $title ? Str::of($title)->limit(60, '...') . ' - Xetaravel' : config('xetaravel.site.title');
         $this->author = $author ?? config('xetaravel.site.copyright');
         $this->url = $url ?? URL::full();
         $this->description =
-            $description ? Str::of(strip_tags($description))->limit(150, '...') : config('xetaravel.site.description');
+            $description ? Str::of(strip_tags($description))->limit(150, '...')->toString() : config('xetaravel.site.description');
         $this->copyright = config('xetaravel.site.copyright');
-        $this->image = URL::asset('images/logo300x300.png');
+        $this->image = $image ?? URL::asset('images/logo300x300.png');
+        $this->type = $type ?? 'website';
+        $this->publishedTime = $publishedTime;
+        $this->modifiedTime = $modifiedTime;
+        $this->articleAuthorUrl = $articleAuthorUrl;
+        $this->articleSection = $articleSection;
     }
 
     /**
