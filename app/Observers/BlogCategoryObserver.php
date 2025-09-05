@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Xetaravel\Observers;
 
+use Illuminate\Support\Facades\DB;
 use Xetaravel\Models\BlogCategory;
 
 class BlogCategoryObserver
@@ -13,10 +14,12 @@ class BlogCategoryObserver
      */
     public function deleting(BlogCategory $blogCategory): void
     {
-        // We need to do this to refresh the countable cache `blog_comment_count` of the user.
-        $blogCategory->loadMissing('articles');
-        foreach ($blogCategory->articles as $article) {
-            $article->delete();
-        }
+        DB::transaction(function () use ($blogCategory) {
+            // We need to do this to refresh the countable cache `blog_comment_count` of the user.
+            $blogCategory->loadMissing('articles');
+            foreach ($blogCategory->articles as $article) {
+                $article->delete();
+            }
+        });
     }
 }
