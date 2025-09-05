@@ -35,7 +35,6 @@ class SitemapGeneratorCommandTest extends TestCase
         Config::set('app.url', $baseUrl);
 
         // Mock static call SitemapGenerator::create(...) via alias mocking
-        // Assumption: the command uses Spatie\Sitemap\SitemapGenerator FQCN
         $alias = 'alias:Spatie\\Sitemap\\SitemapGenerator';
         $sitemapGeneratorStatic = Mockery::mock($alias);
 
@@ -51,7 +50,6 @@ class SitemapGeneratorCommandTest extends TestCase
             ->shouldReceive('configureCrawler')
             ->once()
             ->with(Mockery::on(function ($arg) {
-                // Just ensure it's callable
                 return is_callable($arg);
             }))
             ->andReturnSelf();
