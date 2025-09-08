@@ -53,12 +53,16 @@ class DeviceDetectorService
     /**
      * Get the platform version.
      *
-     * @param string $userAgent
+     * @param string|null $userAgent
      *
      * @return string
      */
-    public function getPlatformVersion(string $userAgent): string
+    public function getPlatformVersion(?string $userAgent = null): string
     {
+        if (is_null($userAgent)) {
+            $userAgent = '';
+        }
+
         preg_match('/(Windows NT|Android|CPU (iPhone )?OS|Mac OS X|Linux) ([0-9_\.]+)/i', $userAgent, $matches);
 
         return isset($matches[3]) ? str_replace('_', '.', $matches[3]) : 'Unknown Version';
