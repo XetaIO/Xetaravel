@@ -7,6 +7,13 @@
         author="{{ $article->user->username }}"
         description="{!! Markdown::convert($article->content) !!}"
         url="{{ $article->show_url }}"
+        image="{{ $article->article_banner }}"
+        type="article"
+        article_author_url="{{ $article->user->show_url }}"
+        article_tags="{{ $article->category->title }}"
+        article_section="Blog"
+        published_time="{{ $article->created_at->format('Y-m-d\TH:i:sP') }}"
+        modified_time="{{ $article->updated_at->format('Y-m-d\TH:i:sP') }}"
     />
 @endpush
 

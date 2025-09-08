@@ -2,11 +2,21 @@
 {!! config(['app.title' => e($conversation->title)]) !!}
 
 @push('meta')
-  <x-meta
-    title="{{ e($conversation->title) }}"
-    author="{{ $conversation->user->username }}"
-    description="{!! Markdown::convert($conversation->firstPost->content) !!}"
-/>
+    <x-meta
+        title="{{ $conversation->title }}"
+        author="{{ $conversation->user->username }}"
+        description="{!! Markdown::convert($conversation->firstPost->content) !!}"
+        url="{{ route('discuss.conversation.show', ['slug' => $conversation->slug, 'id' => $conversation->getKey(), 'page' => $conversation->last_page]) }}"
+        type="article"
+        article_author_url="{{ $conversation->user->show_url }}"
+        article_tags="{{ $conversation->category->title }}"
+        article_section="Discuss"
+        image_width="200"
+        image_height="200"
+        image="{{ $conversation->firstPost->user->avatar_medium }}"
+        published_time="{{ $conversation->created_at->format('Y-m-d\TH:i:sP') }}"
+        modified_time="{{ $conversation->updated_at->format('Y-m-d\TH:i:sP') }}"
+    />
 @endpush
 
 @push('scriptsTop')
