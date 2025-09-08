@@ -47,6 +47,20 @@ class Meta extends Component
     public string $image;
 
     /**
+     * The image width.
+     *
+     * @var int
+     */
+    public int $imageWidth = 870;
+
+    /**
+     * The image height.
+     *
+     * @var int
+     */
+    public int $imageHeight = 350;
+
+    /**
      * The copyright.
      *
      * @var string
@@ -99,6 +113,8 @@ class Meta extends Component
         string $url = null,
         string $description = null,
         string $image = null,
+        int $imageWidth = null,
+        int $imageHeight = null,
         string $type = null,
         string $publishedTime = null,
         string $modifiedTime = null,
@@ -112,6 +128,8 @@ class Meta extends Component
             $description ? Str::of(strip_tags($description))->limit(150, '...')->toString() : config('xetaravel.site.description');
         $this->copyright = config('xetaravel.site.copyright');
         $this->image = $image ?? URL::asset('images/logo300x300.png');
+        $this->imageWidth = $imageWidth ?? $this->imageWidth;
+        $this->imageHeight = $imageHeight ?? $this->imageHeight;
         $this->type = $type ?? 'website';
         $this->publishedTime = $publishedTime;
         $this->modifiedTime = $modifiedTime;
