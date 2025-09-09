@@ -25,6 +25,10 @@ class DeviceDetectorService
      */
     public function getPlatform(string $userAgent): string
     {
+        if ($userAgent) {
+            $this->detect->setUserAgent($userAgent);
+        }
+
         if ($this->detect->isiOS()) {
             return 'iOS';
         }
@@ -34,13 +38,13 @@ class DeviceDetectorService
         if ($this->detect->isWindowsMobileOS()) {
             return 'Windows Phone';
         }
-        if ($userAgent && mb_stripos($userAgent, 'Windows NT') !== false) {
+        if (mb_stripos($userAgent, 'Windows NT') !== false) {
             return 'Windows';
         }
-        if ($userAgent && mb_stripos($userAgent, 'Macintosh') !== false) {
+        if (mb_stripos($userAgent, 'Macintosh') !== false) {
             return 'macOS';
         }
-        if ($userAgent && mb_stripos($userAgent, 'Linux') !== false) {
+        if (mb_stripos($userAgent, 'Linux') !== false) {
             return 'Linux';
         }
         return 'Unknown OS';
