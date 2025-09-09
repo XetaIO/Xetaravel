@@ -30,6 +30,10 @@ class CustomDatabaseSessionHandler extends DatabaseSessionHandler
 
         $userAgent = request()->userAgent();
 
+        if (is_null($userAgent)) {
+            $userAgent = '';
+        }
+
         $payload = [
             'payload' => base64_encode($data),
             'last_activity' => time(),

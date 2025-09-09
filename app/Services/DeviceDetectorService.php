@@ -19,16 +19,12 @@ class DeviceDetectorService
     /**
      * Get the platform.
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      *
      * @return string
      */
-    public function getPlatform(?string $userAgent = null): string
+    public function getPlatform(string $userAgent): string
     {
-        if ($userAgent) {
-            $this->detect->setUserAgent($userAgent);
-        }
-
         if ($this->detect->isiOS()) {
             return 'iOS';
         }
@@ -53,16 +49,12 @@ class DeviceDetectorService
     /**
      * Get the platform version.
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      *
      * @return string
      */
-    public function getPlatformVersion(?string $userAgent = null): string
+    public function getPlatformVersion(string $userAgent): string
     {
-        if (is_null($userAgent)) {
-            $userAgent = '';
-        }
-
         preg_match('/(Windows NT|Android|CPU (iPhone )?OS|Mac OS X|Linux) ([0-9_\.]+)/i', $userAgent, $matches);
 
         return isset($matches[3]) ? str_replace('_', '.', $matches[3]) : 'Unknown Version';
@@ -130,13 +122,13 @@ class DeviceDetectorService
     /**
      * Return the type of device (desktop, phone, tablet)
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      *
      * @return string
      *
      * @throws MobileDetectException
      */
-    public function getDeviceType(?string $userAgent = null): string
+    public function getDeviceType(string $userAgent): string
     {
         if ($userAgent) {
             $this->detect->setUserAgent($userAgent);
