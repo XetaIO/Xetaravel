@@ -26,7 +26,11 @@ class PackagistVersion
             config('xetaravel.site.packagist_cache_timeout'),
             function () {
                 $client = new Client();
-                $res = $client->request('GET', config('xetaravel.site.packagist_url'));
+                try {
+                    $res = $client->request('GET', config('xetaravel.site.packagist_url'));
+                } catch (\GuzzleHttp\Exception\ConnectException) {
+                    return false;
+                }
                 if ($res->getStatusCode() !== 200) {
                     return false;
                 }
