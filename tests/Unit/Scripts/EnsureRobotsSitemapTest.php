@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Scripts\Unit;
+namespace Tests\Unit\Scripts;
 
 use PHPUnit\Framework\TestCase;
 use Scripts\EnsureRobotsSitemap;
