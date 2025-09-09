@@ -19,11 +19,11 @@ class DeviceDetectorService
     /**
      * Get the platform.
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      *
      * @return string
      */
-    public function getPlatform(?string $userAgent = null): string
+    public function getPlatform(string $userAgent): string
     {
         if ($userAgent) {
             $this->detect->setUserAgent($userAgent);
@@ -38,13 +38,13 @@ class DeviceDetectorService
         if ($this->detect->isWindowsMobileOS()) {
             return 'Windows Phone';
         }
-        if ($userAgent && mb_stripos($userAgent, 'Windows NT') !== false) {
+        if (mb_stripos($userAgent, 'Windows NT') !== false) {
             return 'Windows';
         }
-        if ($userAgent && mb_stripos($userAgent, 'Macintosh') !== false) {
+        if (mb_stripos($userAgent, 'Macintosh') !== false) {
             return 'macOS';
         }
-        if ($userAgent && mb_stripos($userAgent, 'Linux') !== false) {
+        if (mb_stripos($userAgent, 'Linux') !== false) {
             return 'Linux';
         }
         return 'Unknown OS';
@@ -53,16 +53,12 @@ class DeviceDetectorService
     /**
      * Get the platform version.
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      *
      * @return string
      */
-    public function getPlatformVersion(?string $userAgent = null): string
+    public function getPlatformVersion(string $userAgent): string
     {
-        if (is_null($userAgent)) {
-            $userAgent = '';
-        }
-
         preg_match('/(Windows NT|Android|CPU (iPhone )?OS|Mac OS X|Linux) ([0-9_\.]+)/i', $userAgent, $matches);
 
         return isset($matches[3]) ? str_replace('_', '.', $matches[3]) : 'Unknown Version';
@@ -130,13 +126,13 @@ class DeviceDetectorService
     /**
      * Return the type of device (desktop, phone, tablet)
      *
-     * @param string|null $userAgent
+     * @param string $userAgent
      *
      * @return string
      *
      * @throws MobileDetectException
      */
-    public function getDeviceType(?string $userAgent = null): string
+    public function getDeviceType(string $userAgent): string
     {
         if ($userAgent) {
             $this->detect->setUserAgent($userAgent);
