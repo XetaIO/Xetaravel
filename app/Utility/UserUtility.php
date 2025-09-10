@@ -96,7 +96,9 @@ class UserUtility
             return $infos;
         }
 
-        for ($i = 0; $i < count(static::$levels); $i++) {
+        $levelsNumber = count(static::$levels);
+
+        for ($i = 0; $i < $levelsNumber; $i++) {
             // The XP of the user match the exact XP of the rank and there's another rank after this one.
             if ($userXP === static::$levels[$i] && isset(static::$levels[$i + 1])) {
                 return array_merge($infos, [

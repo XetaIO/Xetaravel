@@ -96,9 +96,13 @@
         "post-update-cmd": [
             "Scripts\\EnsureRobotsSitemap::runComposerScript"
         ],
-
         "dev": [
             "Composer\\Config::disableProcessTimeout"
+        ],
+        "ide": [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models ",
+            "@php artisan ide-helper:meta"
         ]
     },
     "extra": {
