@@ -28,9 +28,9 @@
 > # Installation
 > ## Requirements
 >
-> | PHP                                                                         |PHP Extension|DBMS|NodeJS|npm|Others (optional)
-> |-----------------------------------------------------------------------------|---|---|---|---|---|
-> | ![PHP](https://img.shields.io/badge/PHP->=8.2-0e7fbf.svg?style=flat-square) |![OpenSSL](https://img.shields.io/badge/PHP%20ext-OpenSSL-44CB12.svg?style=flat-square)<br>![PDO](https://img.shields.io/badge/PHP%20ext-PDO-44CB12.svg?style=flat-square)<br>![Mbstring](https://img.shields.io/badge/PHP%20ext-Mbstring-44CB12.svg?style=flat-square)<br>![Tokenizer](https://img.shields.io/badge/PHP%20ext-Tokenizer-44CB12.svg?style=flat-square)<br>![XML](https://img.shields.io/badge/PHP%20ext-XML-44CB12.svg?style=flat-square)<br>![Ctype](https://img.shields.io/badge/PHP%20ext-Ctype-44CB12.svg?style=flat-square)<br>![JSON](https://img.shields.io/badge/PHP%20ext-JSON-44CB12.svg?style=flat-square)<br>![GD](https://img.shields.io/badge/PHP%20ext-GD-44CB12.svg?style=flat-square)<br>![CURL](https://img.shields.io/badge/PHP%20ext-CURL-44CB12.svg?style=flat-square)|![MySQL](https://img.shields.io/badge/MySQL->=8.0-44CB12.svg?style=flat-square)|![NodeJS](https://img.shields.io/badge/NodeJS->=8-44CB12.svg?style=flat-square)|![npm](https://img.shields.io/badge/npm->=5.6-44CB12.svg?style=flat-square)|![Analytics](https://img.shields.io/badge/Google-Analytics-44CB12.svg?style=flat-square)<br>![Redis](https://img.shields.io/badge/Redis-Server-44CB12.svg?style=flat-square)<br>![Redis](https://img.shields.io/badge/Redis-PHPRedis-44CB12.svg?style=flat-square)
+> | PHP                                                                         |PHP Extension|DBMS| NodeJS                                                                                | npm                                                                           |Others (optional)
+> |-----------------------------------------------------------------------------|---|---|---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|---|
+> | ![PHP](https://img.shields.io/badge/PHP->=8.2-0e7fbf.svg?style=flat-square) |![OpenSSL](https://img.shields.io/badge/PHP%20ext-OpenSSL-44CB12.svg?style=flat-square)<br>![PDO](https://img.shields.io/badge/PHP%20ext-PDO-44CB12.svg?style=flat-square)<br>![CURL](https://img.shields.io/badge/PHP%20ext-CURL-44CB12.svg?style=flat-square)|![MySQL](https://img.shields.io/badge/MySQL->=8.0-44CB12.svg?style=flat-square)| ![NodeJS](https://img.shields.io/badge/NodeJS->=20.19.0-44CB12.svg?style=flat-square) | ![npm](https://img.shields.io/badge/npm->=5.0.0-44CB12.svg?style=flat-square) |![Analytics](https://img.shields.io/badge/Google-Analytics-44CB12.svg?style=flat-square)<br>![Redis](https://img.shields.io/badge/Redis-Server-44CB12.svg?style=flat-square)<br>![Redis](https://img.shields.io/badge/Redis-PHPRedis-44CB12.svg?style=flat-square)
 >
 > ## Install
 > While Redis is optional, it is **recommended** to use Redis with this application.
@@ -45,7 +45,7 @@
 > Finally, you need to install and build the JS, CSS etc :
 > ```bash
 > npm install
-> vite build
+> npm run build
 > ```
 >
 >
