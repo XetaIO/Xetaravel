@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         $tableName = config('request-analytics.database.table', 'request_analytics');
         $connection = config('request-analytics.database.connection');
-        
+
         Schema::connection($connection)->create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('path');
