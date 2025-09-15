@@ -88,7 +88,7 @@ class SettingsTableSeeder extends Seeder
         // Google Analytics
         Setting::create([
             'key' => 'analytics_enabled',
-            'value' => true,
+            'value' => false,
             'label' => 'Activation of the Google Analytics system.',
             'text' => 'Enable/Disable the Google Analytics  system.'
         ]);

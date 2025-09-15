@@ -7,18 +7,26 @@ namespace Xetaravel\Http\Controllers\Admin;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use MeShaon\RequestAnalytics\Services\DashboardAnalyticsService;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Xetaravel\Http\Components\AnalyticsComponent;
 use Xetaravel\Models\BlogArticle;
 use Xetaravel\Models\BlogComment;
+use Xetaravel\Models\DiscussPost;
 use Xetaravel\Models\User;
 
 class PageController extends Controller
 {
     use AnalyticsComponent;
+
+    public function __construct(protected DashboardAnalyticsService $dashboardService)
+    {
+        parent::__construct();
+    }
 
     /**
      * Show the application dashboard.
@@ -28,33 +36,17 @@ class PageController extends Controller
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function index()
+    public function index(Request $request)
     {
         $minutes = config('analytics.cache_lifetime_in_minutes');
 
         $viewDatas = [];
 
         if (!App::environment('testing') && settings('analytics_enabled')) {
-
-            $visitorsData = Cache::remember('Analytics.visitors', $minutes, function () {
-                return $this->buildVisitorsGraph();
-            });
-            $viewDatas[] = 'visitorsData';
-
-            $browsersData = Cache::remember('Analytics.browsers', $minutes, function () {
-                return $this->buildBrowsersGraph();
-            });
-            $viewDatas[] = 'browsersData';
-
             $devicesGraph = Cache::remember('Analytics.devices', $minutes, function () {
                 return $this->buildDevicesGraph();
             });
             $viewDatas[] = 'devicesGraph';
-
-            $operatingSystemGraph = Cache::remember('Analytics.operatingsystem', $minutes, function () {
-                return $this->buildOperatingSystemGraph();
-            });
-            $viewDatas[] = 'operatingSystemGraph';
 
             $yesterdayVisitors = Cache::remember('Analytics.yesterdayvisitors', $minutes, function () {
                 return $this->buildYesterdayVisitors();
@@ -67,22 +59,44 @@ class PageController extends Controller
         });
         $viewDatas[] = 'usersCount';
 
-        $articlesCount = Cache::remember('Analytics.articles.count', $minutes, function () {
+        $blogArticlesCount = Cache::remember('Analytics.blog_articles.count', $minutes, function () {
             return BlogArticle::count();
         });
-        $viewDatas[] = 'articlesCount';
+        $viewDatas[] = 'blogArticlesCount';
 
-        $commentsCount = Cache::remember('Analytics.comments.count', $minutes, function () {
+        $blogCommentsCount = Cache::remember('Analytics.blog_comments.count', $minutes, function () {
             return BlogComment::count();
         });
-        $viewDatas[] = 'commentsCount';
+        $viewDatas[] = 'blogCommentsCount';
+
+        $discussPostsCount = Cache::remember('Analytics.discuss_posts.count', $minutes, function () {
+            return DiscussPost::count();
+        });
+        $viewDatas[] = 'discussPostsCount';
 
         $breadcrumbs = $this->breadcrumbs;
         $viewDatas[] = 'breadcrumbs';
 
+        $params = [];
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $params['start_date'] = $request->input('start_date');
+            $params['end_date'] = $request->input('end_date');
+        } else {
+            $dateRangeInput = $request->input('date_range', 30);
+            $dateRange = is_numeric($dateRangeInput) && (int) $dateRangeInput > 0
+                ? (int) $dateRangeInput
+                : 30;
+            $params['date_range'] = $dateRange;
+        }
+
+        $params['request_category'] = $request->input('request_category', null);
+        $data = $this->dashboardService->getDashboardData($params);
+
         return view(
             'Admin.page.index',
-            compact($viewDatas)
+            compact($viewDatas),
+            $data
         );
     }
 }
