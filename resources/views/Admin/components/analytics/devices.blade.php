@@ -8,9 +8,8 @@
             return match(strtolower($device)){
                 'mobile' => asset('vendor/request-analytics/devices/smartphone.png'),
                 'tablet' => asset('vendor/request-analytics/devices/ipad.png'),
-                'desktop' => asset('vendor/request-analytics/devices/laptop.png'),
                 'tv' => asset('vendor/request-analytics/devices/tv.png'),
-                default => asset('vendor/request-analytics/devices/unknown.png'),
+                default => asset('vendor/request-analytics/devices/laptop.png'),
             };
         }
     }
