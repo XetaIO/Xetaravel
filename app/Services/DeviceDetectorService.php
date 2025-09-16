@@ -19,11 +19,11 @@ class DeviceDetectorService
     /**
      * Get the platform.
      *
-     * @param string $userAgent
+     * @param string|null $userAgent
      *
      * @return string
      */
-    public function getPlatform(string $userAgent): string
+    public function getPlatform(?string $userAgent = null): string
     {
         if ($userAgent) {
             $this->detect->setUserAgent($userAgent);
@@ -67,12 +67,15 @@ class DeviceDetectorService
     /**
      * Get the browser.
      *
-     * @param string $userAgent
+     * @param string|null $userAgent
      *
      * @return string
      */
-    public function getBrowser(string $userAgent): string
+    public function getBrowser(?string $userAgent = null): string
     {
+        if (is_null($userAgent)) {
+            $userAgent = '';
+        }
         if (mb_stripos($userAgent, 'Chrome') !== false) {
             return 'Chrome';
         }
@@ -97,11 +100,11 @@ class DeviceDetectorService
     /**
      * Get the version of the browser.
      *
-     * @param string $userAgent
+     * @param string|null $userAgent
      *
      * @return string
      */
-    public function getBrowserVersion(string $userAgent): string
+    public function getBrowserVersion(?string $userAgent = null): string
     {
         $browser = $this->getBrowser($userAgent);
         $version = 'Unknown Version';
@@ -126,13 +129,13 @@ class DeviceDetectorService
     /**
      * Return the type of device (desktop, phone, tablet)
      *
-     * @param string $userAgent
+     * @param string|null $userAgent
      *
      * @return string
      *
      * @throws MobileDetectException
      */
-    public function getDeviceType(string $userAgent): string
+    public function getDeviceType(?string $userAgent = null): string
     {
         if ($userAgent) {
             $this->detect->setUserAgent($userAgent);

@@ -6,9 +6,11 @@
     if (!function_exists('getOperatingSystemImage')) {
         function getOperatingSystemImage($os): string {
             $os = str_replace(' ', '', strtolower($os));
+            $os = str_starts_with($os, 'windows') ? 'windows' : $os;
+
             return match($os){
                 'windows' => asset('vendor/request-analytics/operating-systems/windows-logo.png'),
-                'linux' => asset('vendor/request-analytics/operating-systems/linux.png'),
+                'linux', 'ubuntu',  => asset('vendor/request-analytics/operating-systems/linux.png'),
                 'macos', 'macosx' => asset('vendor/request-analytics/operating-systems/mac-logo.png'),
                 'android' => asset('vendor/request-analytics/operating-systems/android-os.png'),
                 'ios' => asset('vendor/request-analytics/operating-systems/iphone.png'),
