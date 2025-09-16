@@ -6,8 +6,8 @@
     if (!function_exists('getDeviceImage')) {
         function getDeviceImage($device): string {
             return match(strtolower($device)){
-                'mobile' => asset('vendor/request-analytics/devices/smartphone.png'),
-                'tablet' => asset('vendor/request-analytics/devices/ipad.png'),
+                'mobile', 'iphone', 'ipod', 'android', 'blackberry', 'windows phone' => asset('vendor/request-analytics/devices/smartphone.png'),
+                'tablet', 'ipad',  => asset('vendor/request-analytics/devices/ipad.png'),
                 'tv' => asset('vendor/request-analytics/devices/tv.png'),
                 default => asset('vendor/request-analytics/devices/laptop.png'),
             };
