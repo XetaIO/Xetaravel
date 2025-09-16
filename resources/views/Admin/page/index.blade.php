@@ -17,13 +17,13 @@
         </div>
         <div class="w-full sm:w-auto">
             <form method="GET" action="{{ route('admin.page.index') }}" class="flex items-center gap-2 flex-wrap">
-                <select name="date_range" class="bg-white border border-gray-300 rounded-lg px-3 py-2.5 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 h-10">
+                <select name="date_range" class="bg-base-100 dark:bg-base-300 rounded-lg shadow-md px-3 py-2.5 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-primary h-10">
                     <option value="7" {{ $dateRange == 7 ? 'selected' : '' }}>Last 7 days</option>
                     <option value="30" {{ $dateRange == 30 ? 'selected' : '' }}>Last 30 days</option>
                     <option value="90" {{ $dateRange == 90 ? 'selected' : '' }}>Last 90 days</option>
                     <option value="365" {{ $dateRange == 365 ? 'selected' : '' }}>Last year</option>
                 </select>
-                <select name="request_category" class="bg-white border border-gray-300 rounded-lg px-3 py-2.5 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 h-10">
+                <select name="request_category" class="bg-base-100 dark:bg-base-300 rounded-lg shadow-md px-3 py-2.5 pr-6 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-primary h-10">
                     <option value="" {{ !request('request_category') ? 'selected' : '' }}>All Requests</option>
                     <option value="web" {{ request('request_category') == 'web' ? 'selected' : '' }}>Web Only</option>
                     <option value="api" {{ request('request_category') == 'api' ? 'selected' : '' }}>API Only</option>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-            <div class="p-6 rounded-lg bg-white shadow-md h-full">
+            <div class="p-6 rounded-lg bg-base-100 dark:bg-base-300 shadow-md h-full">
                 <div class="flex justify-between">
                     <div class="text-1xl uppercase">
                         Average Views
@@ -116,7 +116,7 @@
 
         @if (!App::environment('testing') && settings('analytics_enabled'))
             <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-                <div class="p-6 rounded-lg bg-white shadow-md h-full">
+                <div class="p-6 rounded-lg bg-base-100 dark:bg-base-300 shadow-md h-full">
                     <div class="flex justify-between">
                         <div class="text-1xl uppercase">
                             Yesterday's visits
@@ -136,7 +136,7 @@
             </div>
         @else
             <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-                <div class="p-6 rounded-lg bg-white shadow-md h-full">
+                <div class="p-6 rounded-lg bg-base-100 dark:bg-base-300 shadow-md h-full">
                     <div class="flex justify-between">
                         <div class="text-1xl uppercase">
                             Average Visitors
@@ -153,7 +153,7 @@
         @endif
 
         <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-            <div class="p-6 rounded-lg bg-white shadow-md h-full">
+            <div class="p-6 rounded-lg bg-base-100 dark:bg-base-300 shadow-md h-full">
                 <div class="flex justify-between">
                     <div class="text-1xl uppercase">
                         Bounce Rate
@@ -169,7 +169,7 @@
         </div>
 
         <div class="col-span-12 lg:col-span-6 xl:col-span-3">
-            <div class="p-6 rounded-lg bg-white shadow-md h-full">
+            <div class="p-6 rounded-lg bg-base-100 dark:bg-base-300 shadow-md h-full">
                 <div class="flex justify-between">
                     <div class="text-1xl uppercase">
                         Average Visit Time

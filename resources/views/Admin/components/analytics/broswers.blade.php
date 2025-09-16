@@ -18,7 +18,7 @@
 
 <x-Admin::analytics.stats.list primaryLabel="Browser" secondaryLabel="Which Browsers is used">
     @forelse($browsers as $browser)
-        <x-request-analytics::stats.item
+        <x-Admin::analytics.stats.item
             label="{{ $browser['browser'] }}"
             count="{{ $browser['count'] }}"
             percentage="{{ $browser['percentage'] }}"
