@@ -38,6 +38,7 @@
         "laravel/ui": "^4.0",
         "livewire/livewire": "^3.6.1",
         "masmerise/livewire-toaster": "^2.7.0",
+        "me-shaon/laravel-request-analytics": "^1.2",
         "mobiledetect/mobiledetectlib": "^4.8",
         "owenvoke/blade-fontawesome": "^2.9.0",
         "spatie/laravel-analytics": "^5.5",
