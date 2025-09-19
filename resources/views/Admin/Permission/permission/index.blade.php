@@ -1,34 +1,21 @@
-@extends('layouts.admin')
-{!! config(['app.title' => 'Manage Permissions']) !!}
+<x-Admin::layouts.admin>
+    <x-slot:title>
+        Manage Permissions
+    </x-slot:title>
 
-@push('meta')
-    <x-meta title="Manage Permissions" />
-@endpush
+    <x-slot:meta>
+        <x-meta title="Manage Permissions" />
+    </x-slot:meta>
 
-@section('content')
-<section class="m-3 lg:m-10">
-    <div class="grid grid-cols-1">
-        <div class="col-span-12">
-            {!! $breadcrumbs->render() !!}
-        </div>
-    </div>
-</section>
+    <x-Admin::breadcrumbs :breadcrumbs="$breadcrumbs" />
 
-<section class="m-3 lg:m-10">
-    <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl">
-            <x-icon name="fas-user-shield" class="h-9 w-9" />
-            Manage Permissions
-        </h1>
-        <p class="text-gray-400 dark:text-gray-500">
-            Manage the permissions.
-        </p>
-    </hgroup>
+    <section class="m-3 lg:m-10">
+        <x-Admin::heading icon="fas-user-shield" title="Manage Permissions" description="Manage the permissions." />
 
-    <livewire:admin.permission.permission />
+        <livewire:admin.permission.permission />
 
-    <livewire:admin.permission.create-permission />
+        <livewire:admin.permission.create-permission />
 
-    <livewire:admin.permission.update-permission />
-</section>
-@endsection
+        <livewire:admin.permission.update-permission />
+    </section>
+</x-Admin::layouts.admin>

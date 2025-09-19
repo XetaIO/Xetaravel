@@ -1,37 +1,24 @@
-@extends('layouts.admin')
-{!! config(['app.title' => 'Manage Settings']) !!}
+<x-Admin::layouts.admin>
+    <x-slot:title>
+        Manage Settings
+    </x-slot:title>
 
-@push('meta')
-    <x-meta title="Manage Settings" />
-@endpush
+    <x-slot:meta>
+        <x-meta title="Manage Settings" />
+    </x-slot:meta>
 
-@push('scriptsTop')
-    @vite('resources/js/easymde.js')
-@endpush
+    @push('scriptsTop')
+        @vite('resources/js/easymde.js')
+    @endpush
 
-@section('content')
-    <section class="m-3 lg:m-10">
-        <div class="grid grid-cols-1">
-            <div class="col-span-12">
-                {!! $breadcrumbs->render() !!}
-            </div>
-        </div>
-    </section>
+    <x-Admin::breadcrumbs :breadcrumbs="$breadcrumbs" />
 
     <section class="m-3 lg:m-10">
-        <hgroup class="text-center px-5 pb-5">
-            <h1 class="text-4xl">
-                <x-icon name="fas-wrench" class="h-9 w-9" />
-                Manage Settings
-            </h1>
-            <p class="text-gray-400 dark:text-gray-500">
-                Manage the settings of the website.
-            </p>
-        </hgroup>
+        <x-Admin::heading icon="fas-wrench" title="Manage Settings" description="Manage the settings of the website." />
 
         <div class="grid grid-cols-12 gap-6 mb-7">
             <div class="col-span-12 bg-base-100 dark:bg-base-300 shadow-md  rounded-lg p-3">
-                <x-form method="put" action="{{ route('admin.setting.update') }}" class="w-full">
+                <x-form.form method="put" action="{{ route('admin.setting.update') }}" class="w-full">
                     @forelse($settings as $setting)
                         @include('Admin.setting.partials.setting-template')
                     @empty
@@ -45,9 +32,8 @@
                             <x-button label="Save" class="btn btn-primary gap-2" type="submit" icon="fas-floppy-disk" />
                         </div>
                     @endif
-                </x-form>
+                </x-form.form>
             </div>
         </div>
-
     </section>
-@endsection
+</x-Admin::layouts.admin>

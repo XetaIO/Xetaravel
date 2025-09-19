@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\View\Components;
+namespace Xetaravel\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -27,6 +27,6 @@ class Form extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.form');
+        return view('components.form.form');
     }
 }

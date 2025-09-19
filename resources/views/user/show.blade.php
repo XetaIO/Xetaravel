@@ -1,11 +1,12 @@
-@extends('layouts.app')
-{!! config(['app.title' => e($user->username) . ' profile']) !!}
+<x-layouts.app>
+    <x-slot:title>
+        {{ $user->username }}  profile
+    </x-slot:title>
 
-@push('meta')
-    <x-meta title="{{ e($user->username) }}  profile" />
-@endpush
+    <x-slot:meta>
+        <x-meta title="{{ $user->username }}  profile" />
+    </x-slot:meta>
 
-@section('content')
     <section class="lg:container mx-auto mt-12 mb-5">
         <div class="grid grid-cols-1">
             <div class="col-span-12 mx-3 lg:mx-0">
@@ -339,4 +340,4 @@
             </div>
         </div>
     </section>
-@endsection
+</x-layouts.app>

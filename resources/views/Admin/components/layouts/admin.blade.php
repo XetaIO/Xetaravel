@@ -11,10 +11,10 @@ Conçu et développé par Emeric Fèvre.
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Title -->
-        <title>{{ config('app.title') . ' - ' . config('app.name') }}</title>
+        <title>{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
 
         <!-- Meta -->
-        @stack('meta')
+        {{ $meta }}
 
         <script type="text/javascript">
             /**
@@ -25,6 +25,8 @@ Conçu et développé par Emeric Fèvre.
                 document.documentElement.classList.add('dark')
                 document.documentElement.dataset.theme = "dark";
                 localStorage.setItem('theme', 'dark');
+                // Change the flatpickr theme to dark.
+                document.getElementById('flatpickrCssFile').href = '{{ Vite::asset('resources/css/flatpickr_dark.css') }}';
             } else {
                 localStorage.theme = 'light';
                 document.documentElement.classList.remove('dark');
@@ -52,33 +54,36 @@ Conçu et développé par Emeric Fèvre.
             gtag('config', 'G-97W18J74QL');
         </script>
 
-        {!! NoCaptcha::renderJs() !!}
-
         <!-- Embed Scripts -->
         @stack('scriptsTop')
+
+        @persist('Flatpickr')
+        <!-- Flatpickr -->
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/flatpickr.css') }}" id="flatpickrCssFile" />
+        @endpersist
     </head>
     <body class="bg-base-200 dark:bg-base-100">
 
-        <div class="drawer h-full">
+        <div class="drawer lg:drawer-open">
             <!-- Toggle Responsive-->
             <input id="xetaravel-drawer" type="checkbox" class="drawer-toggle" />
 
             <div class="drawer-content flex flex-col overflow-hidden min-h-screen">
                 <!-- Header -->
-                @include('elements.header')
+                <x-Admin::layouts.elements.header />
 
                 <main>
                     <!-- Content -->
-                    @yield('content')
+                    {{ $slot }}
                 </main>
 
                 <!-- Footer -->
-                @include('elements.footer')
+                <x-Admin::layouts.elements.footer />
 
             </div>
 
             <!-- Sidebar -->
-            @include('elements.sidebar')
+            <x-Admin::layouts.elements.sidebar />
         </div>
 
         <!-- Scroll to Top button -->

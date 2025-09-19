@@ -69,7 +69,7 @@
                             Subscribe to Newsletter
                         </h3>
 
-                        <x-form method="post" action="{{ route('newsletter.subscribe') }}">
+                        <x-form.form method="post" action="{{ route('newsletter.subscribe') }}">
                             <div class="flex flex-col items-center">
                                 <input
                                     id="newsletterEmail"
@@ -97,7 +97,7 @@
                             <div class="modal-action">
                                 <x-button type="submit" label="Subscribe" class="btn-primary gap-2" />
                             </div>
-                        </x-form>
+                        </x-form.form>
                     </div>
                     <form class="modal-backdrop" method="dialog">
                         <button type="submit">close</button>

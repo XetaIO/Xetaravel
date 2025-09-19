@@ -43,12 +43,12 @@ class PageController extends Controller
         $viewDatas = [];
 
         if (!App::environment('testing') && settings('analytics_enabled')) {
-            $devicesGraph = Cache::remember('Analytics.devices', $minutes, function () {
+            $mobileDevices = Cache::remember('Analytics.mobiles', $minutes, function () {
                 return $this->buildDevicesGraph();
             });
-            $viewDatas[] = 'devicesGraph';
+            $viewDatas[] = 'mobileDevices';
 
-            $yesterdayVisitors = Cache::remember('Analytics.yesterdayvisitors', $minutes, function () {
+            $yesterdayVisitors = Cache::remember('Analytics.yesterdayVisitors', $minutes, function () {
                 return $this->buildYesterdayVisitors();
             });
             $viewDatas[] = 'yesterdayVisitors';

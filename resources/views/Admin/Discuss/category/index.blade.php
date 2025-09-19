@@ -1,34 +1,21 @@
-@extends('layouts.admin')
-{!! config(['app.title' => 'Manage Categories']) !!}
+<x-Admin::layouts.admin>
+    <x-slot:title>
+        Manage Categories
+    </x-slot:title>
 
-@push('meta')
-    <x-meta title="Manage Categories" />
-@endpush
+    <x-slot:meta>
+        <x-meta title="Manage Categories" />
+    </x-slot:meta>
 
-@section('content')
-<section class="m-3 lg:m-10">
-    <div class="grid grid-cols-1">
-        <div class="col-span-12">
-            {!! $breadcrumbs->render() !!}
-        </div>
-    </div>
-</section>
+    <x-Admin::breadcrumbs :breadcrumbs="$breadcrumbs" />
 
-<section class="m-3 lg:m-10">
-    <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl">
-            <x-icon name="fas-tags" class="h-9 w-9" />
-            Manage Categories
-        </h1>
-        <p class="text-gray-400 dark:text-gray-500">
-            Manage the discuss categories.
-        </p>
-    </hgroup>
+    <section class="m-3 lg:m-10">
+        <x-Admin::heading icon="fas-tags" title="Manage Categories" description="Manage the discuss categories." />
 
-    <livewire:admin.discuss.category />
+        <livewire:admin.discuss.category />
 
-    <livewire:admin.discuss.create-category />
+        <livewire:admin.discuss.create-category />
 
-    <livewire:admin.discuss.update-category />
-</section>
-@endsection
+        <livewire:admin.discuss.update-category />
+    </section>
+</x-Admin::layouts.admin>

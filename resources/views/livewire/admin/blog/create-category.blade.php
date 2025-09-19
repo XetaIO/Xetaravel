@@ -1,9 +1,9 @@
 <div>
     <x-modal wire:model="showModal" title="Create a Category" class="backdrop-blur" box-class="w-11/12 max-w-5xl">
 
-        <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Category title..." />
+        <x-form.input wire:model="form.title" name="form.title" label="Title" placeholder="Category title..." />
 
-        <x-textarea wire:model="form.description" name="form.description" label="Description"  placeholder="Category description..." />
+        <x-form.textarea wire:model="form.description" name="form.description" label="Description"  placeholder="Category description..." />
 
         <x-slot:actions>
             <x-button class="btn-success gap-2" label="Create" icon="fas-pencil" type="button" wire:click="create" spinner />

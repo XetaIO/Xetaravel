@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\View\Components;
+namespace Xetaravel\View\Components\Form;
 
 use Closure;
 use Exception;
@@ -102,6 +102,6 @@ class Choices extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.choices');
+        return view('components.form.choices');
     }
 }

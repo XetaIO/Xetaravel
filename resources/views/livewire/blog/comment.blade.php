@@ -37,7 +37,7 @@
 
             {{-- Editor --}}
             <div class="self-start ml-3 mt-3 w-full">
-                <x-markdown wire:model="form.content" name="form.content" label="Comment" placeholder="Your message here..." />
+                <x-form.markdown wire:model="form.content" name="form.content" label="Comment" placeholder="Your message here..." />
 
                 <x-button wire:click="create" icon="fas-pencil" label="Comment" class="btn-primary gap-2" spinner />
             </div>
@@ -51,7 +51,7 @@
     @auth
         {{-- Delete BlogComment Modal --}}
         <x-modal wire:model="deleteCommentModal" title="Delete the comment">
-            <x-form no-separator>
+            <x-form.form no-separator>
                 <p>
                     Are you sure you want delete this comment ? <strong>This operation is not reversible.</strong>
                 </p>
@@ -60,7 +60,7 @@
                     <x-button label="Yes, I confirm !" class="btn-primary" icon="fas-trash-alt" wire:click="delete()" spinner />
                     <x-button label="Cancel" @click="$wire.deleteCommentModal = false" />
                 </x-slot:actions>
-            </x-form>
+            </x-form.form>
         </x-modal>
     @endauth
 </section>

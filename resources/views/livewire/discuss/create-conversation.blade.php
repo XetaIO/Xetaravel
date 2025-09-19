@@ -1,9 +1,9 @@
 <div>
     <x-modal wire:model="showModal" title="Create a Discussion" class="backdrop-blur" box-class="w-11/12 max-w-5xl">
 
-        <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Discussion title..." />
+        <x-form.input wire:model="form.title" name="form.title" label="Title" placeholder="Discussion title..." />
 
-        <x-choices
+        <x-form.choices
             label="Category"
             wire:model="form.category_id"
             :options="$form->categoriesSearchable"
@@ -38,7 +38,7 @@
                 <x-icon :name="$option->icon" class="h-4 w-4 inline" style="color:{{ $option->color }};" />
                 <span style="color:{{ $option->color }};">{{ $option->title }}</span>
             @endscope
-        </x-choices>
+        </x-form.choices>
 
         @php
             $config = [
@@ -47,18 +47,18 @@
             ];
         @endphp
 
-        <x-markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
+        <x-form.markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
 
         @canany(['pin', 'lock'], \Xetaravel\Models\DiscussConversation::class)
             <div class="text-sm">
                 Moderation
             </div>
             @can('pin', \Xetaravel\Models\DiscussConversation::class)
-                <x-checkbox wire:model="form.is_pinned" name="form.is_pinned" text="Check to pin this discussion" />
+                <x-form.checkbox wire:model="form.is_pinned" name="form.is_pinned" text="Check to pin this discussion" />
             @endcan
 
             @can('lock', \Xetaravel\Models\DiscussConversation::class)
-                <x-checkbox wire:model="form.is_locked" name="form.is_locked" text="Check to lock this discussion" />
+                <x-form.checkbox wire:model="form.is_locked" name="form.is_locked" text="Check to lock this discussion" />
             @endcan
         @endcanany
 

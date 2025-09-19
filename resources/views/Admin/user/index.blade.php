@@ -1,37 +1,24 @@
-@extends('layouts.admin')
-{!! config(['app.title' => 'Manage Users']) !!}
+<x-Admin::layouts.admin>
+    <x-slot:title>
+        Manage Users
+    </x-slot:title>
 
-@push('meta')
-    <x-meta title="Manage Users" />
-@endpush
+    <x-slot:meta>
+        <x-meta title="Manage Users" />
+    </x-slot:meta>
 
-@push('scriptsTop')
-    @vite('resources/js/easymde.js')
-@endpush
+    @push('scriptsTop')
+        @vite('resources/js/easymde.js')
+    @endpush
 
-@section('content')
-<section class="m-3 lg:m-10">
-    <div class="grid grid-cols-1">
-        <div class="col-span-12">
-            {!! $breadcrumbs->render() !!}
-        </div>
-    </div>
-</section>
+    <x-Admin::breadcrumbs :breadcrumbs="$breadcrumbs" />
 
-<section class="m-3 lg:m-10">
-    <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl">
-            <x-icon name="fas-users" class="h-9 w-9" />
-            Manage Users
-        </h1>
-        <p class="text-gray-400 dark:text-gray-500">
-            Manage the users of the website.
-        </p>
-    </hgroup>
+    <section class="m-3 lg:m-10">
+        <x-Admin::heading icon="fas-users" title="Manage Users" description="Manage the users of the website." />
 
-    <livewire:admin.user.user />
+        <livewire:admin.user.user />
 
-    <livewire:admin.user.update-user />
+        <livewire:admin.user.update-user />
 
-</section>
-@endsection
+    </section>
+</x-Admin::layouts.admin>

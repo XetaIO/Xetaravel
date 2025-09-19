@@ -1,34 +1,21 @@
-@extends('layouts.admin')
-{!! config(['app.title' => 'Manage Roles']) !!}
+<x-Admin::layouts.admin>
+    <x-slot:title>
+        Manage Roles
+    </x-slot:title>
 
-@push('meta')
-    <x-meta title="Manage Roles" />
-@endpush
+    <x-slot:meta>
+        <x-meta title="Manage Roles" />
+    </x-slot:meta>
 
-@section('content')
-<section class="m-3 lg:m-10">
-    <div class="grid grid-cols-1">
-        <div class="col-span-12">
-            {!! $breadcrumbs->render() !!}
-        </div>
-    </div>
-</section>
+    <x-Admin::breadcrumbs :breadcrumbs="$breadcrumbs" />
 
-<section class="m-3 lg:m-10">
-    <hgroup class="text-center px-5 pb-5">
-        <h1 class="text-4xl">
-            <x-icon name="fas-user-tie" class="h-9 w-9" />
-            Manage Roles
-        </h1>
-        <p class="text-gray-400 dark:text-gray-500">
-            Manage the roles.
-        </p>
-    </hgroup>
+    <section class="m-3 lg:m-10">
+        <x-Admin::heading icon="fas-user-tie" title="Manage Roles" description="Manage the roles." />
 
-    <livewire:admin.permission.role />
+        <livewire:admin.permission.role />
 
-    <livewire:admin.permission.create-role />
+        <livewire:admin.permission.create-role />
 
-    <livewire:admin.permission.update-role />
-</section>
-@endsection
+        <livewire:admin.permission.update-role />
+    </section>
+</x-Admin::layouts.admin>
