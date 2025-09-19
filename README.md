@@ -1,6 +1,7 @@
 
 > <p align="center">
->   <img src="https://user-images.githubusercontent.com/8210023/166291618-ee2e2cca-3501-4f29-892f-de946e927f0f.png" alt="Xeta Logo" height="230"/>
+>   <img src="./public/images/logo-brand-light-mode.png#gh-light-mode-only" alt="Xetaravel Logo" height="230"/>
+>   <img src="./public/images/logo-brand-dark-mode.png#gh-dark-mode-only" alt="Xetaravel Logo" height="230"/>
 > </p>
 >
 >
