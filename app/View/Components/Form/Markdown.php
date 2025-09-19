@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\View\Components;
+namespace Xetaravel\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -74,6 +74,6 @@ class Markdown extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.markdown');
+        return view('components.form.markdown');
     }
 }

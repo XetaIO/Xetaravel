@@ -7,7 +7,7 @@
             ];
         @endphp
 
-        <x-markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
+        <x-form.markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
 
         <x-slot:actions>
             <x-button class="btn-success gap-2" label="Update" icon="fas-pencil" type="button" wire:click="update" spinner />

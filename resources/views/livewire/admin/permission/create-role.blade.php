@@ -1,13 +1,13 @@
 <div>
     <x-modal wire:model="showModal" title="Create a Role" class="backdrop-blur" box-class="w-11/12 max-w-5xl">
 
-        <x-input wire:model="form.name" name="form.name" label="Name" placeholder="Role title..." />
+        <x-form.input wire:model="form.name" name="form.name" label="Name" placeholder="Role title..." />
 
-        <x-color-picker wire:model="form.color" label="Color" icon="fas-swatchbook" placeholder="#FF00FF" />
+        <x-form.color-picker wire:model="form.color" label="Color" icon="fas-swatchbook" placeholder="#FF00FF" />
 
-        <x-input wire:model="form.level" name="form.level" label="Level" type="number" />
+        <x-form.input wire:model="form.level" name="form.level" label="Level" type="number" />
 
-        <x-select
+        <x-form.select
             class="min-h-[150px]"
             :options="$permissions"
             wire:model="form.permissions"
@@ -18,7 +18,7 @@
             multiple
         />
 
-        <x-textarea wire:model="form.description" name="form.description" label="Description"  placeholder="Role description..." />
+        <x-form.textarea wire:model="form.description" name="form.description" label="Description"  placeholder="Role description..." />
 
         <x-slot:actions>
             <x-button class="btn-success gap-2" label="Create" icon="fas-pencil" type="button" wire:click="create" spinner />

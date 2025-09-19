@@ -11,19 +11,19 @@
             </div>
         @endif
 
-        <x-input wire:model="form.username" name="form.username" label="Username" />
+        <x-form.input wire:model="form.username" name="form.username" label="Username" />
 
-        <x-input wire:model="form.email" name="form.email" label="Email" type="email" />
+        <x-form.input wire:model="form.email" name="form.email" label="Email" type="email" />
 
-        <x-input wire:model="form.first_name" name="form.first_name" label="First Name" />
+        <x-form.input wire:model="form.first_name" name="form.first_name" label="First Name" />
 
-        <x-input wire:model="form.last_name" name="form.last_name" label="Last Name" />
+        <x-form.input wire:model="form.last_name" name="form.last_name" label="Last Name" />
 
-        <x-input wire:model="form.twitter" name="form.twitter" label="Twitter" />
+        <x-form.input wire:model="form.twitter" name="form.twitter" label="Twitter" />
 
-        <x-input wire:model="form.facebook" name="form.facebook" label="Facebook" />
+        <x-form.input wire:model="form.facebook" name="form.facebook" label="Facebook" />
 
-        <x-select
+        <x-form.select
             class="min-h-[100px]"
             :options="$roles"
             wire:model="form.roles"
@@ -34,14 +34,14 @@
             multiple
         />
 
-        <x-checkbox wire:model="form.can_bypass" name="form.can_bypass" label="Bypass permission" text="Check to enable the bypass permission" />
+        <x-form.checkbox wire:model="form.can_bypass" name="form.can_bypass" label="Bypass permission" text="Check to enable the bypass permission" />
 
         @can('assignDirectPermission', \Xetaravel\Models\User::class)
             <x-alert type="info">
                 Tips: Always favor roles over direct permissions whenever possible.
             </x-alert>
 
-            <x-select
+            <x-form.select
                 class="min-h-[250px]"
                 :options="$permissions"
                 wire:model="form.permissions"
@@ -59,9 +59,9 @@
                 'maxHeight' => '200px'
             ];
         @endphp
-        <x-markdown :config="$config" wire:model="form.biography" name="form.biography" label="Biography" />
+        <x-form.markdown :config="$config" wire:model="form.biography" name="form.biography" label="Biography" />
 
-        <x-markdown :config="$config" wire:model="form.signature" name="form.signature" label="Signature" />
+        <x-form.markdown :config="$config" wire:model="form.signature" name="form.signature" label="Signature" />
 
         <x-slot:actions>
             <x-button class="btn-warning tooltip" label="Delete avatar" icon="fas-rotate" type="button" wire:click="deleteAvatar({{ $form->user?->getKey() }})"  data-tip="Delete the avatar of the user" spinner />

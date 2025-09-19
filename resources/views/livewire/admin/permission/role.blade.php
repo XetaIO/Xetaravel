@@ -5,7 +5,7 @@
                 @can('search', \Spatie\Permission\Models\Role::class)
                     {{-- Search input --}}
                     <div class="w-full lg:w-auto md:min-w-[300px]">
-                        <x-input icon="fas-search" wire:model.live.debounce="search" placeholder="Search Roles..." class="lg:max-w-lg" />
+                        <x-form.input icon="fas-search" wire:model.live.debounce="search" placeholder="Search Roles..." class="lg:max-w-lg" />
                     </div>
                 @endcan
                 {{-- Create/Delete buttons --}}

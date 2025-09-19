@@ -5,7 +5,7 @@
                 @can('search', \Xetaravel\Models\Badge::class)
                     {{-- Search input --}}
                     <div class="w-full lg:w-auto md:min-w-[300px]">
-                        <x-input icon="fas-search" wire:model.live.debounce="search" placeholder="Search Badges..." class="lg:max-w-lg" />
+                        <x-form.input icon="fas-search" wire:model.live.debounce="search" placeholder="Search Badges..." class="lg:max-w-lg" />
                     </div>
                 @endcan
                 {{-- Create/Delete buttons --}}

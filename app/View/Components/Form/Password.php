@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\View\Components;
+namespace Xetaravel\View\Components\Form;
 
 use Closure;
 use Exception;
@@ -77,6 +77,6 @@ class Password extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.password');
+        return view('components.form.password');
     }
 }

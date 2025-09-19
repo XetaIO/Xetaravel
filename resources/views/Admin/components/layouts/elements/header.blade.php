@@ -101,7 +101,7 @@
                                 </svg>
                                 <span>Logout</span>
                             </a>
-                            <x-form method="post" action="{{ route('auth.logout') }}" id="logout-form" class="hidden"></x-form>
+                            <x-form.form method="post" action="{{ route('auth.logout') }}" id="logout-form" class="hidden"></x-form.form>
                         </div>
                     </li>
                 </ul>

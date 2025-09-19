@@ -1,7 +1,7 @@
 @if(is_bool($setting->value))
     {{-- Trick to get all time the input name in the request input even when not checked --}}
     <input type="hidden" name="{{ $setting->key }}" value="0" />
-    <x-checkbox
+    <x-form.checkbox
         :name="$setting->key"
         :label="$setting->label"
         :text="$setting->text"
@@ -10,7 +10,7 @@
 @endif
 
 @if(is_int($setting->value))
-    <x-input
+    <x-form.input
         type="number"
         :name="$setting->key"
         :label="$setting->label"
@@ -19,7 +19,7 @@
 @endif
 
 @if(is_float($setting->value))
-    <x-input
+    <x-form.input
         type="number"
         :name="$setting->key"
         :label="$setting->label"
@@ -29,10 +29,10 @@
 @endif
 
 @if(is_string($setting->value))
-    <x-textarea
+    <x-form.textarea
         type="text"
         :name="$setting->key"
         :label="$setting->label"
         :value="$setting->value"
-    >{{ $setting->value }}</x-textarea>
+    >{{ $setting->value }}</x-form.textarea>
 @endif

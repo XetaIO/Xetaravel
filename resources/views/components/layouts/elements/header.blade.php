@@ -1,5 +1,4 @@
 <header>
-
 <!-- Navbar -->
 <nav class="shadow-md bg-base-100 dark:bg-base-300 dark:text-slate-300">
     <div class="navbar lg:container mx-auto">
@@ -179,7 +178,7 @@
                                     </svg>
                                     <span>Logout</span>
                                 </a>
-                                <x-form method="post" action="{{ route('auth.logout') }}" id="logout-form" class="hidden"></x-form>
+                                <x-form.form method="post" action="{{ route('auth.logout') }}" id="logout-form" class="hidden"></x-form.form>
                             </div>
                         </li>
                     </ul>

@@ -1,13 +1,13 @@
 <div>
     <x-modal wire:model="showModal" title="Create an Article" class="backdrop-blur" box-class="w-11/12 max-w-5xl">
 
-        <x-file wire:model="form.banner" label="Article Banner" hint="Recommended size: 870x350px" accept="image/png, image/jpeg">
+        <x-form.file wire:model="form.banner" label="Article Banner" hint="Recommended size: 870x350px" accept="image/png, image/jpeg">
             <img src="{{ asset('images/articles/default_banner.jpg') }}" class="h-40 rounded-lg ring-2 ring-base-content ring-offset-base-100 ring-offset-2"  alt="Default banner" />
-        </x-file>
+        </x-form.file>
 
-        <x-input wire:model="form.title" name="form.title" label="Title" placeholder="Article title..." />
+        <x-form.input wire:model="form.title" name="form.title" label="Title" placeholder="Article title..." />
 
-        <x-choices
+        <x-form.choices
             label="Category"
             wire:model="form.blog_category_id"
             :options="$form->categoriesSearchable"
@@ -41,9 +41,9 @@
                 <x-icon name="fas-tags" class="h-4 w-4 inline" />
                 {{ $option->title }}
             @endscope
-        </x-choices>
+        </x-form.choices>
 
-        <x-date-picker label="Published date" wire:model="form.published_at" icon="far-calendar" hint="This article will be published at this date & time." />
+        <x-form.date-picker label="Published date" wire:model="form.published_at" icon="far-calendar" hint="This article will be published at this date & time." />
 
         @php
             $config = [
@@ -52,7 +52,7 @@
             ];
         @endphp
 
-        <x-markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
+        <x-form.markdown :config="$config" wire:model="form.content" name="form.content" label="Content" placeholder="Your message here..." />
 
         <x-slot:actions>
             <x-button class="btn-success gap-2" label="Create" icon="fas-pencil" type="button" wire:click="create" spinner />

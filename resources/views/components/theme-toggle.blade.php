@@ -14,64 +14,62 @@
     </label>
 </div>
 
-@once
-    @push('scripts')
-        <script>
-            function themeToggleComponent(uuid, lightTheme, darkTheme, lightClass, darkClass) {
-                return {
-                    uuid,
-                    theme: localStorage.theme || lightTheme,
-                    class: localStorage.class || lightClass,
+@pushonce('scripts')
+    <script type="text/javascript">
+        function themeToggleComponent(uuid, lightTheme, darkTheme, lightClass, darkClass) {
+            return {
+                uuid,
+                theme: localStorage.theme || lightTheme,
+                class: localStorage.class || lightClass,
 
-                    init() {
-                        this.updateIcons();
-                        this.applyTheme();
-                    },
+                init() {
+                    this.updateIcons();
+                    this.applyTheme();
+                },
 
-                    toggle() {
-                        this.theme = this.theme === lightTheme ? darkTheme : lightTheme;
-                        this.class = this.theme === lightTheme ? lightClass : darkClass;
-                        this.applyTheme();
-                        window.dispatchEvent(new CustomEvent('toggle-theme', {
-                            detail: this.uuid
-                        }));
-                    },
+                toggle() {
+                    this.theme = this.theme === lightTheme ? darkTheme : lightTheme;
+                    this.class = this.theme === lightTheme ? lightClass : darkClass;
+                    this.applyTheme();
+                    window.dispatchEvent(new CustomEvent('toggle-theme', {
+                        detail: this.uuid
+                    }));
+                },
 
-                    toggleFromEvent(sourceUuid) {
-                        if (sourceUuid === this.uuid) return;
-                        this.theme = localStorage.theme;
-                        this.class = localStorage.class;
-                        this.applyTheme();
-                    },
+                toggleFromEvent(sourceUuid) {
+                    if (sourceUuid === this.uuid) return;
+                    this.theme = localStorage.theme;
+                    this.class = localStorage.class;
+                    this.applyTheme();
+                },
 
-                    applyTheme() {
-                        localStorage.theme = this.theme;
-                        localStorage.class = this.class;
+                applyTheme() {
+                    localStorage.theme = this.theme;
+                    localStorage.class = this.class;
 
-                        document.documentElement.setAttribute('data-theme', this.theme);
-                        document.documentElement.setAttribute('class', this.class);
-                        const flatpickrCssFile = document.getElementById('flatpickrCssFile');
-                        if (flatpickrCssFile) {
-                            flatpickrCssFile.href =
-                                this.theme === lightTheme
-                                    ? '{{ Vite::asset('resources/css/flatpickr.css') }}'
-                                    : '{{ Vite::asset('resources/css/flatpickr_dark.css') }}';
-                        }
-
-                        this.updateIcons();
-                    },
-
-                    updateIcons() {
-                        if (!this.$refs.sun || !this.$refs.moon) return;
-
-                        const isLight = this.theme === lightTheme;
-                        this.$refs.sun.classList.toggle('swap-on', isLight);
-                        this.$refs.sun.classList.toggle('swap-off', !isLight);
-                        this.$refs.moon.classList.toggle('swap-on', !isLight);
-                        this.$refs.moon.classList.toggle('swap-off', isLight);
+                    document.documentElement.setAttribute('data-theme', this.theme);
+                    document.documentElement.setAttribute('class', this.class);
+                    const flatpickrCssFile = document.getElementById('flatpickrCssFile');
+                    if (flatpickrCssFile) {
+                        flatpickrCssFile.href =
+                            this.theme === lightTheme
+                                ? '{{ Vite::asset('resources/css/flatpickr.css') }}'
+                                : '{{ Vite::asset('resources/css/flatpickr_dark.css') }}';
                     }
-                };
-            }
-        </script>
-    @endpush
-@endonce
+
+                    this.updateIcons();
+                },
+
+                updateIcons() {
+                    if (!this.$refs.sun || !this.$refs.moon) return;
+
+                    const isLight = this.theme === lightTheme;
+                    this.$refs.sun.classList.toggle('swap-on', isLight);
+                    this.$refs.sun.classList.toggle('swap-off', !isLight);
+                    this.$refs.moon.classList.toggle('swap-on', !isLight);
+                    this.$refs.moon.classList.toggle('swap-off', isLight);
+                }
+            };
+        }
+    </script>
+@endpushonce

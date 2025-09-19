@@ -2,25 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Xetaravel\View\Components;
+namespace Xetaravel\View\Components\Form;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Checkbox extends Component
+class ColorPicker extends Component
 {
     public string $uuid;
 
     public function __construct(
         public ?string $id = null,
         public ?string $label = null,
-        public ?string $text = null,
-        public ?bool $right = false,
+        public ?string $icon = '',
+        public ?string $iconRight = null,
         public ?string $hint = null,
         public ?string $hintClass = 'fieldset-label',
+        public ?string $prefix = null,
+        public ?string $suffix = null,
+        public ?bool $inline = false,
+        public ?bool $clearable = false,
 
         // Validations
+        public ?string $errorField = null,
         public ?string $errorClass = 'text-error',
         public ?bool $omitError = false,
         public ?bool $firstErrorOnly = false,
@@ -35,7 +40,17 @@ class Checkbox extends Component
 
     public function errorFieldName(): ?string
     {
-        return $this->modelName() ?? $this->attributes->whereStartsWith('name')->first();
+        return $this->errorField ?? $this->modelName();
+    }
+
+    public function isReadonly(): bool
+    {
+        return $this->attributes->has('readonly') && $this->attributes->get('readonly') === true;
+    }
+
+    public function isDisabled(): bool
+    {
+        return $this->attributes->has('disabled') && $this->attributes->get('disabled') === true;
     }
 
     /**
@@ -43,6 +58,6 @@ class Checkbox extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.checkbox');
+        return view('components.form.color-picker');
     }
 }

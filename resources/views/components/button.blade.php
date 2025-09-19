@@ -62,8 +62,8 @@
             <span wire:loading wire:target="{{ $spinnerTarget() }}" class="loading loading-spinner w-5 h-5"></span>
         @endif
 
-@if(!$link)
-    </button>
-@else
+@if($link)
     </a>
+@else
+    </button>
 @endif

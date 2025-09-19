@@ -4,7 +4,7 @@
             <div class="flex flex-col lg:flex-row gap-4 justify-between">
                 {{-- Search input --}}
                 <div class="w-full lg:w-auto md:min-w-[300px]">
-                    <x-input icon="fas-search" wire:model.live.debounce="search" placeholder="Search Articles..." class="lg:max-w-lg" />
+                    <x-form.input icon="fas-search" wire:model.live.debounce="search" placeholder="Search Articles..." class="lg:max-w-lg" />
                 </div>
                 {{-- Create/Delete buttons --}}
                 <div class="flex flex-col md:flex-row gap-2">
