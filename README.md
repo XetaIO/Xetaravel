@@ -9,19 +9,17 @@
 > |:------:|:-------:|:------:|:-------:|:------:|:-------------------------------------------------------------------------------------------------------------:|:-------:|
 > |[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/XetaIO/Xetaravel/tests.yml?style=flat-square)](https://github.com/XetaIO/Xetaravel/actions/workflows/tests.yml)|[![Coverage Status](https://img.shields.io/codecov/c/github/XetaIO/Xetaravel?style=flat-square)](https://app.codecov.io/gh/XetaIO/Xetaravel)|[![Scrutinizer](https://img.shields.io/scrutinizer/g/XetaIO/Xetaravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/XetaIO/Xetaravel)|[![Latest Stable Version](https://img.shields.io/packagist/v/XetaIO/Xetaravel.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel)|[![Total Downloads](https://img.shields.io/packagist/dt/xetaio/xetaravel.svg?style=flat-square)](https://packagist.org/packages/xetaio/xetaravel)| [![Laravel 12.0](https://img.shields.io/badge/Laravel-12.0-f4645f.svg?style=flat-square)](http://laravel.com) |[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/XetaIO/Xetaravel/blob/master/LICENSE)|
 >
-> Xetaravel is a resource to help people starting with Laravel.
->
-> Actually, I have developed this blog to try Laravel, and I have decided to release it to help people starting with Laravel, so there is probably some custom configurations/functions that only fit my needs.
+> I have developed this site to try Laravel and to do my personal website. And I have decided to release it to help people starting with Laravel, so there is probably some custom configurations/functions that only fit my needs.
 >
 > ## Demo
-> Note : All installed accounts won't work on the demo site, you will need to create a new one. (Sadly, we can't trust internet people :frowning_face:)
+> Note : All installed accounts won't work on the demo site, you will need to create a new one.
 >
 > [xetaravel.com](https://xetaravel.com)
 >
 > ## Administration Preview
-> ![Admin](https://user-images.githubusercontent.com/8210023/220206696-98c7d503-0a87-47cb-9a5d-8f704c709010.png)
->
-> ![Admin2](https://user-images.githubusercontent.com/8210023/220206856-297b15ce-a067-4eec-8deb-9fa09988b8bd.png)
+> <img width="1890" height="915" alt="Capture d'écran 2025-09-19 102530" src="https://private-user-images.githubusercontent.com/8210023/491491910-1c94ebce-9b5e-418f-9c2b-3499f38551b2.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTgyNzM1NDYsIm5iZiI6MTc1ODI3MzI0NiwicGF0aCI6Ii84MjEwMDIzLzQ5MTQ5MTkxMC0xYzk0ZWJjZS05YjVlLTQxOGYtOWMyYi0zNDk5ZjM4NTUxYjIucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDkxOSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTA5MTlUMDkxNDA2WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9Y2RkYmQwZDJlNGI5NTBjM2QyZDFlOWRkN2U0OTM2MWMzYWJmZGYzNTk3ODQzYmI2MzFmYWJlMjRiMjYyYzI0MiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.k-5EpR01YCVf0iK9fD81BAsWhgYkOnUGqOgiM_a9KyM" />
+> <img width="1891" height="919" alt="Capture d'écran 2025-09-19 102544" src="https://private-user-images.githubusercontent.com/8210023/491491920-0e47cba8-6671-4071-b0e4-743724da7b04.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTgyNzM1NDYsIm5iZiI6MTc1ODI3MzI0NiwicGF0aCI6Ii84MjEwMDIzLzQ5MTQ5MTkyMC0wZTQ3Y2JhOC02NjcxLTQwNzEtYjBlNC03NDM3MjRkYTdiMDQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDkxOSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTA5MTlUMDkxNDA2WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MDM0NjU0N2M2NmE0NjllYTdmY2M0ZmU0YWE3YjVkY2UzNjY4YzYzMTQ3MGQwYTY2YTBhZjA2ODg2ODhmOTAwOCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.MObJBSkzKtJMbKwTtSLNoM3qqLY70vqGUmVvciBxMxo" />
+> <img width="1882" height="919" alt="Capture d'écran 2025-09-19 102604" src="https://private-user-images.githubusercontent.com/8210023/491491924-2ee872df-6f3d-4ded-8c63-17ac43dcd6f2.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTgyNzM1NDYsIm5iZiI6MTc1ODI3MzI0NiwicGF0aCI6Ii84MjEwMDIzLzQ5MTQ5MTkyNC0yZWU4NzJkZi02ZjNkLTRkZWQtOGM2My0xN2FjNDNkY2Q2ZjIucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDkxOSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTA5MTlUMDkxNDA2WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZWMyYmIzNjBlYWNmODJlOWRmOGJhZDVkZTVjNzMxOWJhNTAyODQ5ODBiZTM0MWEzNmRjYTVhYWE5OWM3MTlkYyZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.8dy6fS6beXT4HNj63gZobAJQwMO_7iwd3HhQ_HpidgQ" />
 >
 > ## Discuss Preview
 > ![Discuss](https://user-images.githubusercontent.com/8210023/220207034-0c6b01dc-8257-4a36-91a2-c54d9cc40798.png)
@@ -55,7 +53,7 @@
 >   * User : **admin@xetaravel.io**
 >   * Password : **admin**
 > * **Moderator**
->   * User : **Moderator@xetaravel.io**
+>   * User : **moderator@xetaravel.io**
 >   * Password : **moderator**
 > * **Member**
 >   * User : **member@xetaravel.io**
@@ -93,6 +91,7 @@
 >     * Roles Management
 >     * Permissions Management
 >     * Settings Management
+>     * Badges Management
 >
 > * ###### Others
 >     * Experiences system (based on posts, comments etc)
