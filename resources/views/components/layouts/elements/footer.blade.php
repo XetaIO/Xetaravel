@@ -80,14 +80,14 @@
                                     placeholder="email@gmail.com"
                                     class="input input-bordered mb-4"
                                     required />
-                                @if ($errors->has('email'))
+                                @if (isset($errors) & $errors->has('email'))
                                     <label class="label mb-4">
                                         <span class="label-text-alt text-error">{{ $errors->first('email') }}</span>
                                     </label>
                                 @endif
 
                                 {!! NoCaptcha::display() !!}
-                                @if ($errors->has('g-recaptcha-response'))
+                                @if (isset($errors) & $errors->has('g-recaptcha-response'))
                                     <label class="label">
                                         <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
                                     </label>
