@@ -1,3 +1,4 @@
+@props(['errors' => null])
 <footer class="footer sm:footer-horizontal md:justify-items-center p-10 bg-base-100 dark:bg-base-300">
         <nav>
             <h6 class="footer-title">Utils</h6>
@@ -80,17 +81,21 @@
                                     placeholder="email@gmail.com"
                                     class="input input-bordered mb-4"
                                     required />
-                                @if (isset($errors) & $errors->has('email'))
-                                    <label class="label mb-4">
-                                        <span class="label-text-alt text-error">{{ $errors->first('email') }}</span>
-                                    </label>
+                                @if (isset($errors))
+                                    @if($errors->has('email'))
+                                        <label class="label mb-4">
+                                            <span class="label-text-alt text-error">{{ $errors->first('email') }}</span>
+                                        </label>
+                                    @endif
                                 @endif
 
                                 {!! NoCaptcha::display() !!}
-                                @if (isset($errors) & $errors->has('g-recaptcha-response'))
-                                    <label class="label">
-                                        <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
-                                    </label>
+                                @if (isset($errors))
+                                    @if($errors->has('g-recaptcha-response'))
+                                        <label class="label">
+                                            <span class="label-text-alt text-error">{{ $errors->first('g-recaptcha-response') }}</span>
+                                        </label>
+                                    @endif
                                 @endif
                             </div>
 

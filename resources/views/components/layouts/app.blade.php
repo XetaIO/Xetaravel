@@ -73,7 +73,7 @@ Conçu et développé par Emeric Fèvre.
                 </main>
 
                 <!-- Footer -->
-                <x-layouts.elements.footer :errors="$errors" />
+                <x-layouts.elements.footer />
 
             </div>
 
