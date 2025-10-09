@@ -188,7 +188,7 @@ class DiscussConversation extends Model
             ]);
 
         // When there are several pages and the current page is not the first and not the last.
-        if ($this->lastPage > $page && $page !== 1) {
+        if ($this->lastPage > $page && $page !== 1 && !is_null($posts->first())) {
             $previousPost = DiscussPostRepository::findPreviousPost($posts->first());
 
             $logs = $logs
